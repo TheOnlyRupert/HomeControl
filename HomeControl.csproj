@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{A8AAB6E4-8B96-4171-A46A-2650B7118841}</ProjectGuid>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <RootNamespace>HomeControl</RootNamespace>
         <AssemblyName>HomeControl</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -34,29 +34,63 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Data" />
-        <Reference Include="System.Xml" />
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
         <Reference Include="System.Xaml">
             <RequiredTargetFramework>4.0</RequiredTargetFramework>
         </Reference>
-        <Reference Include="WindowsBase" />
-        <Reference Include="PresentationCore" />
-        <Reference Include="PresentationFramework" />
+        <Reference Include="WindowsBase"/>
+        <Reference Include="PresentationCore"/>
+        <Reference Include="PresentationFramework"/>
     </ItemGroup>
     <ItemGroup>
         <ApplicationDefinition Include="App.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="Source\Control\DisableNavigation.cs" />
-        <Compile Include="Source\Reference\ReferenceValues.cs" />
-        <Compile Include="Source\Reference\VerifyInput.cs" />
-        <Compile Include="Source\ViewModel\Base\BaseViewModel.cs" />
-        <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs" />
-        <Compile Include="Source\ViewModel\Base\DelegateCommand.cs" />
-        <Compile Include="Source\ViewModel\MainWindowVM.cs" />
+        <Compile Include="Source\Control\DisableNavigation.cs"/>
+        <Compile Include="Source\FinanceBlock.cs"/>
+        <Compile Include="Source\IO\CsvParser.cs"/>
+        <Compile Include="Source\Modules\Alarms.xaml.cs">
+            <DependentUpon>Alarms.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Calender.xaml.cs">
+            <DependentUpon>Calender.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Chores.xaml.cs">
+            <DependentUpon>Chores.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Finances\Finances.xaml.cs">
+            <DependentUpon>Finances.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Finances\FinancesAdd.xaml.cs">
+            <DependentUpon>FinancesAdd.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Function.xaml.cs">
+            <DependentUpon>Function.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Games.xaml.cs">
+            <DependentUpon>Games.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Weather.xaml.cs">
+            <DependentUpon>Weather.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Reference\ReferenceValues.cs"/>
+        <Compile Include="Source\Reference\VerifyInput.cs"/>
+        <Compile Include="Source\ViewModel\AlarmsVM.cs"/>
+        <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
+        <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs"/>
+        <Compile Include="Source\ViewModel\Base\DelegateCommand.cs"/>
+        <Compile Include="Source\ViewModel\CalenderVM.cs"/>
+        <Compile Include="Source\ViewModel\ChoresVM.cs"/>
+        <Compile Include="Source\ViewModel\Finances\FinancesAddVM.cs"/>
+        <Compile Include="Source\ViewModel\Finances\FinancesVM.cs"/>
+        <Compile Include="Source\ViewModel\FunctionVM.cs"/>
+        <Compile Include="Source\ViewModel\GamesVM.cs"/>
+        <Compile Include="Source\ViewModel\MainWindowVM.cs"/>
+        <Compile Include="Source\ViewModel\WeatherVM.cs"/>
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -69,6 +103,14 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="Source\Modules\Alarms.xaml"/>
+        <Page Include="Source\Modules\Calender.xaml"/>
+        <Page Include="Source\Modules\Chores.xaml"/>
+        <Page Include="Source\Modules\Finances\Finances.xaml"/>
+        <Page Include="Source\Modules\Finances\FinancesAdd.xaml"/>
+        <Page Include="Source\Modules\Function.xaml"/>
+        <Page Include="Source\Modules\Games.xaml"/>
+        <Page Include="Source\Modules\Weather.xaml"/>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">
@@ -85,16 +127,51 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config" />
+        <None Include="App.config"/>
     </ItemGroup>
     <ItemGroup>
-      <Resource Include="Resources\Images\icon.png" />
+        <Resource Include="Resources\Images\icon.png"/>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Resources\Text" />
-      <Folder Include="Source\Groups" />
-      <Folder Include="Source\IO" />
-      <Folder Include="Source\Modules" />
+        <Folder Include="Resources\Text"/>
     </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\alarms.png"/>
+        <Resource Include="Resources\Images\icons\calender.png"/>
+        <Resource Include="Resources\Images\icons\chores.png"/>
+        <Resource Include="Resources\Images\icons\coin_flip.png"/>
+        <Resource Include="Resources\Images\icons\games.png"/>
+        <Resource Include="Resources\Images\icons\key.png"/>
+        <Resource Include="Resources\Images\icons\money.png"/>
+        <Resource Include="Resources\Images\icons\panic.png"/>
+        <Resource Include="Resources\Images\icons\tamagotchi.png"/>
+        <Resource Include="Resources\Images\icons\temperature.png"/>
+        <Resource Include="Resources\Images\icons\tic_tac_toe.png"/>
+        <Resource Include="Resources\Images\icons\wifi.png"/>
+        <Resource Include="Resources\Images\weather\weather_clear.png"/>
+        <Resource Include="Resources\Images\weather\weather_clear_night.png"/>
+        <Resource Include="Resources\Images\weather\weather_cloudy.png"/>
+        <Resource Include="Resources\Images\weather\weather_cloudy_night.png"/>
+        <Resource Include="Resources\Images\weather\weather_dust.png"/>
+        <Resource Include="Resources\Images\weather\weather_fog.png"/>
+        <Resource Include="Resources\Images\weather\weather_haze.png"/>
+        <Resource Include="Resources\Images\weather\weather_part_cloudy.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_hail.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_heavy.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_light.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_medium.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_tornado.png"/>
+        <Resource Include="Resources\Images\weather\weather_smoke.png"/>
+        <Resource Include="Resources\Images\weather\weather_snow_heavy.png"/>
+        <Resource Include="Resources\Images\weather\weather_snow_light.png"/>
+        <Resource Include="Resources\Images\weather\weather_snow_rain_mixed.png"/>
+        <Resource Include="Resources\Images\weather\weather_snow_windy.png"/>
+        <Resource Include="Resources\Images\weather\weather_storm.png"/>
+        <Resource Include="Resources\Images\weather\weather_sunrise.png"/>
+        <Resource Include="Resources\Images\weather\weather_sunset.png"/>
+        <Resource Include="Resources\Images\weather\weather_windy.png"/>
+        <Resource Include="Resources\Images\weather\wind_compass.png"/>
+        <Resource Include="Resources\Images\weather\wind_direction.png"/>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

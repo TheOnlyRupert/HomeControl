@@ -1,12 +1,50 @@
 ﻿<Window x:Class="HomeControl.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-        Icon="{Binding IconImage}" WindowStartupLocation="CenterScreen" Title="Home Control - Development Version" WindowState="Maximized" MinHeight="512" MinWidth="512"
-        Background="{Binding ColorBorder}">
+        Icon="{Binding IconImage}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Title="Home Control - Development Version" WindowState="Maximized" MinHeight="512"
+        MinWidth="512">
     <Grid Focusable="False">
         <Grid.Resources>
             <Style TargetType="Frame">
                 <Setter Property="NavigationUIVisibility" Value="Hidden"/>
             </Style>
         </Grid.Resources>
+
+        <Grid Focusable="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
+                <Frame Grid.Column="0" Grid.Row="1" Source="Source/Modules/Calender.xaml" Focusable="False"/>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Weather.xaml" Focusable="False"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Column="0" Source="Source/Modules/Games.xaml" Focusable="False"/>
+                    <Frame Grid.Column="1" Source="Source/Modules/Chores.xaml" Focusable="False"/>
+                    <Frame Grid.Column="2" Source="Source/Modules/Function.xaml" Focusable="False"/>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

@@ -1,0 +1,82 @@
+﻿<Page x:Class="HomeControl.Source.Modules.Finances.Finances" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
+    <Border BorderBrush="Black" BorderThickness="1" Margin="4">
+        <Grid Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Budget" FontSize="48"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Ellipse Grid.Column="0" Fill="Blue" Width="100" Height="100"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding CashIncome}" Grid.Row="0"/>
+                        <TextBlock Text="{Binding CashExpenses}" Grid.Row="1"/>
+                        <TextBlock Text="{Binding CashAvailable}" Grid.Row="2"/>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Brittany Fund&#10;&#10;Current Month&#10;January&#10;&#10;Available Cash&#10;$200"/>
+
+                    <ListView Grid.Column="1" ItemsSource="{Binding ChoreFundList}" SelectedItem="{Binding ChoreFundSelected}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="24"/>
+                </Grid.RowDefinitions>
+
+                <ListView Grid.Row="0" ItemsSource="{Binding FinanceList}">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Item"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                    <Button Content="ADD" Command="{Binding ButtonCommand}" CommandParameter="add"/>
+                    <Button Content="EDIT" Command="{Binding ButtonCommand}" CommandParameter="edit"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>
