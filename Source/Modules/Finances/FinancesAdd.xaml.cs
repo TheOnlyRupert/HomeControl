@@ -8,6 +8,9 @@ namespace HomeControl.Source.Modules.Finances {
             if (FinancesAddVM.CloseAction == null) {
                 FinancesAddVM.CloseAction = Close;
             }
+            //Loaded += (s, e) => {
+            //    Window.GetWindow(this).Closing += (s1, e1) => HERE;
+            //};
         }
     }
 }

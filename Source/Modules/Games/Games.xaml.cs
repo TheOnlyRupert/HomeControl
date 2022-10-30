@@ -1,6 +1,6 @@
-﻿using HomeControl.Source.ViewModel;
+﻿using HomeControl.Source.ViewModel.Games;
 
-namespace HomeControl.Source.Modules {
+namespace HomeControl.Source.Modules.Games {
     public partial class Games {
         public Games() {
             InitializeComponent();
