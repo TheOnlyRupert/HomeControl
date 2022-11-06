@@ -1,22 +1,33 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Finances {
     public class FinancesVM : BaseViewModel {
-        private string _cashIncome, _cashExpenses, _cashAvailable;
-        private ObservableCollection<FinanceBlock> _financeList = new ObservableCollection<FinanceBlock>();
-        private FinanceBlock _financeSelected = new FinanceBlock();
+        private string _cashIncomeText, _cashExpenseText, _cashAvailableText, _cashAvailableTextColor;
+        private ObservableCollection<FinanceBlock> _financeList;
+        private FinanceBlock _financeSelected;
+        private int expense, income, available;
 
         public FinancesVM() {
-            CashIncome = "Income";
-            CashExpenses = "Expenses";
-            CashAvailable = "Available";
+            CashIncomeText = "";
+            CashExpenseText = "";
+            CashAvailableText = "";
+            expense = 0;
+            income = 0;
+            available = 0;
+            CashAvailableTextColor = "Blue";
 
             /* CSV to list */
+            _financeList = new ObservableCollection<FinanceBlock>();
+            _financeSelected = new FinanceBlock();
             FinanceList = CsvParser.GetFinanceList();
+            RefreshFinances();
 
             CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
             simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -27,7 +38,7 @@ namespace HomeControl.Source.ViewModel.Finances {
         private void ButtonCommandLogic(object param) {
             switch (param) {
             case "add":
-                FinancesAdd financesAdd = new FinancesAdd();
+                FinancesAdd financesAdd = new();
                 financesAdd.ShowDialog();
                 financesAdd.Close();
                 break;
@@ -38,35 +49,74 @@ namespace HomeControl.Source.ViewModel.Finances {
 
         private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
             if (e.PropertyName == "RefreshFinances") {
-                /* Refresh list */
-                FinanceList.Clear();
-                FinanceList = CsvParser.GetFinanceList();
+                RefreshFinances();
             }
+        }
+
+        private void RefreshFinances() {
+            /* Refresh list */
+            FinanceList.Clear();
+            FinanceList = CsvParser.GetFinanceList();
+
+            /* Calculate income, expense, and available cash */
+            for (int i = 0; i < FinanceList.Count; i++) {
+                if (FinanceList[i].AddSub == "SUB") {
+                    try {
+                        expense += int.Parse(FinanceList[i].Cost);
+                    } catch (Exception) { }
+                }
+            }
+
+            for (int i = 0; i < FinanceList.Count; i++) {
+                if (FinanceList[i].AddSub == "ADD") {
+                    try {
+                        income += int.Parse(FinanceList[i].Cost);
+                    } catch (Exception) { }
+                }
+            }
+
+            available = income - expense;
+
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+            culture.NumberFormat.CurrencyNegativePattern = 1;
+            CashExpenseText = string.Format(culture, "{0:C}", expense);
+            CashIncomeText = string.Format(culture, "{0:C}", income);
+            CashAvailableText = string.Format(culture, "{0:C}", available);
+
+            CashAvailableTextColor = CashAvailableText.StartsWith("-") ? "Red" : "Blue";
         }
 
         #region Fields
 
-        public string CashIncome {
-            get => _cashIncome;
+        public string CashIncomeText {
+            get => _cashIncomeText;
             set {
-                _cashIncome = value;
-                RaisePropertyChangedEvent("CashIncome");
+                _cashIncomeText = value;
+                RaisePropertyChangedEvent("CashIncomeText");
             }
         }
 
-        public string CashExpenses {
-            get => _cashExpenses;
+        public string CashExpenseText {
+            get => _cashExpenseText;
             set {
-                _cashExpenses = value;
-                RaisePropertyChangedEvent("CashExpenses");
+                _cashExpenseText = value;
+                RaisePropertyChangedEvent("CashExpenseText");
             }
         }
 
-        public string CashAvailable {
-            get => _cashAvailable;
+        public string CashAvailableText {
+            get => _cashAvailableText;
             set {
-                _cashAvailable = value;
-                RaisePropertyChangedEvent("CashAvailable");
+                _cashAvailableText = value;
+                RaisePropertyChangedEvent("CashAvailableText");
+            }
+        }
+
+        public string CashAvailableTextColor {
+            get => _cashAvailableTextColor;
+            set {
+                _cashAvailableTextColor = value;
+                RaisePropertyChangedEvent("CashAvailableTextColor");
             }
         }
 

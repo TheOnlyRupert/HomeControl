@@ -10,7 +10,8 @@ namespace HomeControl.Source.ViewModel.Finances {
     public class FinancesAddVM : BaseViewModel {
         private readonly CrossViewMessenger _crossViewMessenger;
         private ObservableCollection<string> _categoryList;
-        private string _categorySelected, _descriptionText, _amountText, _dateText, _switchModeButtonText;
+        private string _categorySelected, _descriptionText, _amountText, _dateText, _switchModeButtonText, _switchModeButtonColor;
+        private bool isExpense;
 
         public FinancesAddVM() {
             _crossViewMessenger = CrossViewMessenger.Instance;
@@ -19,7 +20,8 @@ namespace HomeControl.Source.ViewModel.Finances {
 
             DateText = dateTime.ToShortDateString();
 
-            SwitchModeButtonText = "Current Mode:\nAdd Expense :(";
+            SwitchModeButtonText = "Current Mode:\nAdd Expense";
+            isExpense = true;
 
             /* Populate drop down box with spending categories and set default */
             CategoryList = new ObservableCollection<string>();
@@ -34,7 +36,6 @@ namespace HomeControl.Source.ViewModel.Finances {
 
         public static Action CloseAction { get; set; }
 
-
         public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
         private void ButtonCommandLogic(object param) {
@@ -42,6 +43,9 @@ namespace HomeControl.Source.ViewModel.Finances {
             case "save":
                 string missingItemsText = "";
                 bool isMissingItems = false;
+                string expenseType;
+
+                expenseType = isExpense ? "SUB" : "ADD";
 
                 if (string.IsNullOrEmpty(DescriptionText)) {
                     missingItemsText += "Description, ";
@@ -64,9 +68,21 @@ namespace HomeControl.Source.ViewModel.Finances {
                     missingItemsText = missingItemsText.Substring(0, missingItemsText.Length - 2).Trim();
                     MessageBox.Show(missingItemsText, "Missing Required Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
                 } else {
-                    CsvParser.AddFiance(DateText.Trim() + ',' + DescriptionText.Trim() + ',' + AmountText.Trim() + ',' + CategorySelected + ',' + "Person");
+                    CsvParser.AddFiance(expenseType + ',' + DateText.Trim() + ',' + DescriptionText.Trim() + ',' + AmountText.Trim() + ',' + CategorySelected + ',' + "Person");
                     _crossViewMessenger.PushMessage("RefreshFinances", null);
                     CloseAction();
+                }
+
+                break;
+            case "switchMode":
+                if (isExpense) {
+                    SwitchModeButtonText = "Current Mode:\nAdd Income";
+                    SwitchModeButtonColor = "Green";
+                    isExpense = false;
+                } else {
+                    SwitchModeButtonText = "Current Mode:\nAdd Expense";
+                    SwitchModeButtonColor = "Red";
+                    isExpense = true;
                 }
 
                 break;
@@ -120,6 +136,14 @@ namespace HomeControl.Source.ViewModel.Finances {
             set {
                 _categorySelected = value;
                 RaisePropertyChangedEvent("CategorySelected");
+            }
+        }
+
+        public string SwitchModeButtonColor {
+            get => _switchModeButtonColor;
+            set {
+                _switchModeButtonColor = value;
+                RaisePropertyChangedEvent("SwitchModeButtonColor");
             }
         }
 

@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.ViewModel.Base;
-using HomeControl.Source.ViewModel.Games;
 
 namespace HomeControl.Source.ViewModel.Games {
     public class PictionaryVM : BaseViewModel {
+        private static bool isTimerActive, isGameActive;
+
+        private static DispatcherTimer dispatcherTimer;
         private readonly PlaySound soundBuzzer, soundDing, soundTap;
 
         private string _progressBarValue, _progressBarValueMaster, _progressBarVisibility, _menuVisibility, _timerAmountText, _wordsAmountText, _wordsEasyColor, _wordsMediumColor,
             _wordsHardColor, _wordsAdultColor, _realTime, _gameVisibility, _outputText;
 
-        private static bool isTimerActive, isGameActive;
         private bool includeEasyWords, includeMediumWords, includeHardWords, includeAdultWords;
+        private List<string> playableWords;
         private double progressBarAdditive, progressBarRate, progressBarAdditiveMaster, progressBarRateMaster;
         private int timerCountdownNum, wordsAmountInt;
-        private List<string> playableWords;
-
-        private static DispatcherTimer dispatcherTimer;
 
         public PictionaryVM() {
             soundBuzzer = new PlaySound("buzzer");
@@ -52,12 +50,14 @@ namespace HomeControl.Source.ViewModel.Games {
             dispatcherTimer.Start();
         }
 
+        public ICommand GlobalKeyboardListener => new DelegateCommand(GlobalKeyboardListenerLogic, true);
+
+        public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+
         public static void DisposeWindow() {
             isTimerActive = false;
             dispatcherTimer.Stop();
         }
-
-        public ICommand GlobalKeyboardListener => new DelegateCommand(GlobalKeyboardListenerLogic, true);
 
         private void GlobalKeyboardListenerLogic(object obj) {
             switch (obj) { }
@@ -84,8 +84,6 @@ namespace HomeControl.Source.ViewModel.Games {
                 }
             }
         }
-
-        public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
         private void ButtonCommandLogic(object param) {
             switch (param) {
@@ -141,6 +139,7 @@ namespace HomeControl.Source.ViewModel.Games {
                     GeneratePlayableWords();
                     NextWord();
                 }
+
                 break;
             case "nextWord":
                 NextWord();
@@ -153,11 +152,11 @@ namespace HomeControl.Source.ViewModel.Games {
             int i = 4;
             try {
                 i = int.Parse(WordsAmountText);
-            } catch (Exception) {}
+            } catch (Exception) { }
 
             try {
                 for (int i2 = 0; i2 < i; i2++) {
-                    OutputText += (i2 + 1) + ":  " + playableWords[i2] + "\n";
+                    OutputText += i2 + 1 + ":  " + playableWords[i2] + "\n";
                     playableWords.RemoveAt(i2);
                 }
             } catch (ArgumentOutOfRangeException) {
@@ -168,7 +167,7 @@ namespace HomeControl.Source.ViewModel.Games {
 
         private void GeneratePlayableWords() {
             playableWords.Clear();
-            
+
             if (WordsEasyColor == "Green") {
                 foreach (string word in WordList.PictionaryEasyList) {
                     playableWords.Add(word);
@@ -192,9 +191,9 @@ namespace HomeControl.Source.ViewModel.Games {
                     playableWords.Add(word);
                 }
             }
-                    
+
             /* Randomize the list */
-            playableWords = Helpers.ListHelpers.RandomizeList(playableWords);
+            playableWords = ListHelpers.RandomizeList(playableWords);
         }
 
         #region Fields
@@ -230,7 +229,7 @@ namespace HomeControl.Source.ViewModel.Games {
                 RaisePropertyChangedEvent("MenuVisibility");
             }
         }
-        
+
         public string GameVisibility {
             get => _gameVisibility;
             set {
@@ -294,7 +293,7 @@ namespace HomeControl.Source.ViewModel.Games {
                 RaisePropertyChangedEvent("RealTime");
             }
         }
-        
+
         public string OutputText {
             get => _outputText;
             set {

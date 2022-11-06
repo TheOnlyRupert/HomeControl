@@ -3,79 +3,54 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
     <Border BorderBrush="Black" BorderThickness="1" Margin="4">
         <Grid Margin="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="68"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Budget" FontSize="48"/>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="../../../Resources/Images/icons/money.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" Height="24"/>
 
-                    <Ellipse Grid.Column="0" Fill="Blue" Width="100" Height="100"/>
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" HorizontalAlignment="Right">
+                    <TextBlock Text="Income" FontSize="24"/>
+                    <TextBlock Text="{Binding CashIncomeText}" FontSize="24"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                    <TextBlock Text="Expenses" FontSize="24"/>
+                    <TextBlock Text="{Binding CashExpenseText}" FontSize="24"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                    <TextBlock Text="Available" FontSize="24"/>
+                    <TextBlock Text="{Binding CashAvailableText}" FontSize="24" Foreground="{Binding CashAvailableTextColor}"/>
+                </StackPanel>
 
-                        <TextBlock Text="{Binding CashIncome}" Grid.Row="0"/>
-                        <TextBlock Text="{Binding CashExpenses}" Grid.Row="1"/>
-                        <TextBlock Text="{Binding CashAvailable}" Grid.Row="2"/>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="0" Text="Brittany Fund&#10;&#10;Current Month&#10;January&#10;&#10;Available Cash&#10;$200"/>
-
-                    <ListView Grid.Column="1" ItemsSource="{Binding ChoreFundList}" SelectedItem="{Binding ChoreFundSelected}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding}"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
+                <StackPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Width="100">
+                    <Button Content="ADD" Command="{Binding ButtonCommand}" CommandParameter="add" FontSize="16" Height="32"/>
+                    <Button Content="EDIT" Command="{Binding ButtonCommand}" CommandParameter="edit" FontSize="16" Height="32"/>
+                </StackPanel>
             </Grid>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="24"/>
-                </Grid.RowDefinitions>
+            <Grid Grid.Row="2">
 
                 <ListView Grid.Row="0" ItemsSource="{Binding FinanceList}">
                     <ListView.View>
                         <GridView AllowsColumnReorder="false">
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Item"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=AddSub}" Header="+/-" Width="24"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="96"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Item" Width="96"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="24"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="96"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person" Width="96"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
-
-                <StackPanel Orientation="Horizontal" Grid.Row="1">
-                    <Button Content="ADD" Command="{Binding ButtonCommand}" CommandParameter="add"/>
-                    <Button Content="EDIT" Command="{Binding ButtonCommand}" CommandParameter="edit"/>
-                </StackPanel>
             </Grid>
         </Grid>
     </Border>

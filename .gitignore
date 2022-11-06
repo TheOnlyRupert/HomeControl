@@ -2,6 +2,7 @@
 /.git
 /.idea
 /bin
+/packages
 /obj
 /Versions
 

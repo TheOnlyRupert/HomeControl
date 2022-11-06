@@ -9,7 +9,7 @@ namespace HomeControl.Source.ViewModel.Games {
         private void ButtonCommandLogic(object param) {
             switch (param) {
             case "pictionary":
-                Pictionary pictionary = new Pictionary();
+                Pictionary pictionary = new();
                 pictionary.ShowDialog();
                 pictionary.Close();
                 break;

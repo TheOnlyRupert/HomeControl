@@ -17,7 +17,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="24" Margin="16"/>
+        <Button Grid.Row="0" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="24" Margin="16"
+                Background="{Binding SwitchModeButtonColor}"/>
 
         <StackPanel Grid.Row="1">
             <TextBlock Text="Description" FontSize="24"/>

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HomeControl.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-        Icon="{Binding IconImage}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Title="Home Control - Development Version" WindowState="Maximized" MinHeight="512"
-        MinWidth="512">
+        Icon="{Binding IconImage}" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Title="Home Control - Development Version" WindowState="Maximized" MinHeight="720"
+        MinWidth="1280">
     <Grid Focusable="False">
         <Grid.Resources>
             <Style TargetType="Frame">
@@ -17,8 +17,8 @@
 
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>

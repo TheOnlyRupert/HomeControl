@@ -6,7 +6,7 @@ namespace HomeControl.Source.Reference {
         public const string COPYRIGHT = "Copyright © 2022  Robert Higgins";
         public const string VERSION = "1.0.0";
 
-        public static readonly List<string> CategorySpendingList = new List<string> {
+        public static readonly List<string> CategorySpendingList = new() {
             "Billing",
             "Grocery",
             "Petrol",
@@ -25,12 +25,14 @@ namespace HomeControl.Source.Reference {
             "Other"
         };
 
-        public static readonly List<string> CategoryProfitList = new List<string> {
+        public static readonly List<string> CategoryProfitList = new() {
             "Paycheck",
             "Gift",
             "Government",
             "Child Support"
         };
+
+        public static string UserAgent;
 
         public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
     }

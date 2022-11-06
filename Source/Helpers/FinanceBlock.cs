@@ -1,5 +1,6 @@
-﻿namespace HomeControl.Source {
+﻿namespace HomeControl.Source.Helpers {
     public class FinanceBlock {
+        public string AddSub { get; set; }
         public string Date { get; set; }
         public string Item { get; set; }
         public string Cost { get; set; }
