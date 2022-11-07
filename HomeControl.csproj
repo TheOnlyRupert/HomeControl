@@ -8,7 +8,7 @@
         <OutputType>Exe</OutputType>
         <RootNamespace>HomeControl</RootNamespace>
         <AssemblyName>HomeControl</AssemblyName>
-        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
         <WarningLevel>4</WarningLevel>
@@ -47,9 +47,8 @@
         </Reference>
         <Reference Include="System.Core"/>
         <Reference Include="System.Data"/>
-        <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-            <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-            <Private>True</Private>
+        <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
         </Reference>
         <Reference Include="System.Numerics"/>
         <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -92,6 +91,7 @@
         <Compile Include="Source\Control\DisableNavigation.cs"/>
         <Compile Include="Source\Control\PlaySound.cs"/>
         <Compile Include="Source\Helpers\FinanceBlock.cs"/>
+        <Compile Include="Source\Helpers\JsonCalendar.cs"/>
         <Compile Include="Source\Helpers\JsonWeatherForecast.cs"/>
         <Compile Include="Source\Helpers\JsonWeatherForecastHourly.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
@@ -99,8 +99,11 @@
         <Compile Include="Source\Modules\Alarms.xaml.cs">
             <DependentUpon>Alarms.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Calender.xaml.cs">
-            <DependentUpon>Calender.xaml</DependentUpon>
+        <Compile Include="Source\Modules\Calendar\Calendar.xaml.cs">
+            <DependentUpon>Calendar.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Calendar\CalendarEvent.xaml.cs">
+            <DependentUpon>CalendarEvent.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Chores.xaml.cs">
             <DependentUpon>Chores.xaml</DependentUpon>
@@ -128,7 +131,8 @@
         <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
         <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs"/>
         <Compile Include="Source\ViewModel\Base\DelegateCommand.cs"/>
-        <Compile Include="Source\ViewModel\CalenderVM.cs"/>
+        <Compile Include="Source\ViewModel\Calendar\CalendarEventVM.cs"/>
+        <Compile Include="Source\ViewModel\Calendar\CalendarVM.cs"/>
         <Compile Include="Source\ViewModel\ChoresVM.cs"/>
         <Compile Include="Source\ViewModel\Finances\FinancesAddVM.cs"/>
         <Compile Include="Source\ViewModel\Finances\FinancesVM.cs"/>
@@ -152,7 +156,8 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Source\Modules\Alarms.xaml"/>
-        <Page Include="Source\Modules\Calender.xaml"/>
+        <Page Include="Source\Modules\Calendar\Calendar.xaml"/>
+        <Page Include="Source\Modules\Calendar\CalendarEvent.xaml"/>
         <Page Include="Source\Modules\Chores.xaml"/>
         <Page Include="Source\Modules\Settings.xaml"/>
         <Page Include="Source\Modules\Finances\Finances.xaml"/>
@@ -185,7 +190,7 @@
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\icons\alarms.png"/>
-        <Resource Include="Resources\Images\icons\calender.png"/>
+        <Resource Include="Resources\Images\icons\calendar.png"/>
         <Resource Include="Resources\Images\icons\chores.png"/>
         <Resource Include="Resources\Images\icons\coin_flip.png"/>
         <Resource Include="Resources\Images\icons\games.png"/>

@@ -3,27 +3,27 @@ using System.Media;
 using System.Windows;
 using System.Windows.Resources;
 
-namespace HomeControl.Source.Control {
-    public class PlaySound {
-        private readonly SoundPlayer _audio;
-        private readonly bool _canPlay;
+namespace HomeControl.Source.Control; 
 
-        public PlaySound(string name) {
-            StreamResourceInfo sri = Application.GetResourceStream(new Uri("pack://application:,,,/HomeControl;component/Resources/Sounds/" + name + ".wav"));
+public class PlaySound {
+    private readonly SoundPlayer _audio;
+    private readonly bool _canPlay;
 
-            if (sri != null) {
-                _audio = new SoundPlayer(sri.Stream);
-                _audio.Load();
-                _canPlay = true;
-            } else {
-                _canPlay = false;
-            }
+    public PlaySound(string name) {
+        StreamResourceInfo sri = Application.GetResourceStream(new Uri("pack://application:,,,/HomeControl;component/Resources/Sounds/" + name + ".wav"));
+
+        if (sri != null) {
+            _audio = new SoundPlayer(sri.Stream);
+            _audio.Load();
+            _canPlay = true;
+        } else {
+            _canPlay = false;
         }
+    }
 
-        public void Play() {
-            if (_canPlay) {
-                _audio.Play();
-            }
+    public void Play() {
+        if (_canPlay) {
+            _audio.Play();
         }
     }
 }

@@ -1,3 +1,3 @@
-﻿namespace HomeControl {
-    public partial class App { }
-}
+﻿namespace HomeControl; 
+
+public partial class App { }

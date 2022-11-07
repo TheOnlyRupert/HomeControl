@@ -22,7 +22,7 @@
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
-                <Frame Grid.Column="0" Grid.Row="1" Source="Source/Modules/Calender.xaml" Focusable="False"/>
+                <Frame Grid.Column="0" Grid.Row="1" Source="Source/Modules/Calendar/Calendar.xaml" Focusable="False"/>
             </Grid>
 
             <Grid Grid.Column="1">

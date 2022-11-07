@@ -1,24 +1,24 @@
 using System;
 using System.Windows.Input;
 
-namespace HomeControl.Source.ViewModel.Base {
-    public class DelegateCommand : ICommand {
-        private readonly Action<object> _action;
-        private readonly bool _canExecute;
+namespace HomeControl.Source.ViewModel.Base; 
 
-        public DelegateCommand(Action<object> action, bool canExecute) {
-            _action = action;
-            _canExecute = canExecute;
-        }
+public class DelegateCommand : ICommand {
+    private readonly Action<object> _action;
+    private readonly bool _canExecute;
 
-        public event EventHandler CanExecuteChanged;
+    public DelegateCommand(Action<object> action, bool canExecute) {
+        _action = action;
+        _canExecute = canExecute;
+    }
 
-        public void Execute(object parameter) {
-            _action(parameter);
-        }
+    public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter) {
-            return _canExecute;
-        }
+    public void Execute(object parameter) {
+        _action(parameter);
+    }
+
+    public bool CanExecute(object parameter) {
+        return _canExecute;
     }
 }
