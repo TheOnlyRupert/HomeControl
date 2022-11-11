@@ -458,9 +458,12 @@ public class WeatherVM : BaseViewModel {
         case "Areas Of Fog":
             return "../../Resources/Images/weather/weather_fog.png";
         case "Slight Chance Very Light Rain":
+        case "Slight Chance Light Rain":
         case "Chance Very Light Rain":
+        case "Chance Light Rain":
             return "../../Resources/Images/weather/weather_rain_light.png";
         case "Rain Showers Likely":
+        case "Rain Likely":
         case "Rain Showers":
         case "Chance Rain Showers":
         case "Slight Chance Rain Showers":

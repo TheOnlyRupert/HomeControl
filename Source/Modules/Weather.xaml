@@ -135,7 +135,6 @@
                                 <Image Source="{Binding HourlyForecastRainIcon3}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
                                 <TextBlock Text="{Binding HourlyForecastRainChance3}" FontSize="16" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding HourlyForecastWindSpeed3}" FontSize="16" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="4" Grid.Row="2" Text="{Binding HourlyForecastWindSpeed3}" FontSize="16" VerticalAlignment="Center"/>
                             <Image Grid.Column="5" Grid.Row="2" Source="../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
                                    RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
@@ -151,7 +150,6 @@
                                 <Image Source="{Binding HourlyForecastRainIcon4}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
                                 <TextBlock Text="{Binding HourlyForecastRainChance4}" FontSize="16" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding HourlyForecastWindSpeed2}" FontSize="16" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="4" Grid.Row="3" Text="{Binding HourlyForecastWindSpeed4}" FontSize="16" VerticalAlignment="Center"/>
                             <Image Grid.Column="5" Grid.Row="3" Source="../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
                                    RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
@@ -167,7 +165,6 @@
                                 <Image Source="{Binding HourlyForecastRainIcon5}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
                                 <TextBlock Text="{Binding HourlyForecastRainChance5}" FontSize="16" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding HourlyForecastWindSpeed2}" FontSize="16" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="4" Grid.Row="4" Text="{Binding HourlyForecastWindSpeed5}" FontSize="16" VerticalAlignment="Center"/>
                             <Image Grid.Column="5" Grid.Row="4" Source="../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
                                    RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
@@ -183,7 +180,6 @@
                                 <Image Source="{Binding HourlyForecastRainIcon6}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
                                 <TextBlock Text="{Binding HourlyForecastRainChance6}" FontSize="16" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding HourlyForecastWindSpeed2}" FontSize="16" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="4" Grid.Row="5" Text="{Binding HourlyForecastWindSpeed6}" FontSize="16" VerticalAlignment="Center"/>
                             <Image Grid.Column="5" Grid.Row="5" Source="../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
                                    RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
@@ -199,7 +195,6 @@
                                 <Image Source="{Binding HourlyForecastRainIcon7}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
                                 <TextBlock Text="{Binding HourlyForecastRainChance7}" FontSize="16" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding HourlyForecastWindSpeed2}" FontSize="16" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="4" Grid.Row="6" Text="{Binding HourlyForecastWindSpeed7}" FontSize="16" VerticalAlignment="Center"/>
                             <Image Grid.Column="5" Grid.Row="6" Source="../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
                                    RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
@@ -215,7 +210,6 @@
                                 <Image Source="{Binding HourlyForecastRainIcon8}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
                                 <TextBlock Text="{Binding HourlyForecastRainChance8}" FontSize="16" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding HourlyForecastWindSpeed2}" FontSize="16" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="4" Grid.Row="7" Text="{Binding HourlyForecastWindSpeed8}" FontSize="16" VerticalAlignment="Center"/>
                             <Image Grid.Column="5" Grid.Row="7" Source="../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
                                    RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
@@ -231,7 +225,6 @@
                                 <Image Source="{Binding HourlyForecastRainIcon9}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
                                 <TextBlock Text="{Binding HourlyForecastRainChance9}" FontSize="16" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding HourlyForecastWindSpeed2}" FontSize="16" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="4" Grid.Row="8" Text="{Binding HourlyForecastWindSpeed9}" FontSize="16" VerticalAlignment="Center"/>
                             <Image Grid.Column="5" Grid.Row="8" Source="../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
                                    RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">

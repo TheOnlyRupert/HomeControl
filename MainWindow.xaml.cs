@@ -12,16 +12,16 @@ public partial class MainWindow {
         InitializeComponent();
         DataContext = new MainWindowVM();
 
-        snow = new SnowEngine(canvas, 25, "pack://application:,,,/Resources/Images/snowflakes/snow1.png",
-            "pack://application:,,,/Resources/Images/snowflakes/snow2.png",
-            "pack://application:,,,/Resources/Images/snowflakes/snow3.png",
-            "pack://application:,,,/Resources/Images/snowflakes/snow4.png",
-            "pack://application:,,,/Resources/Images/snowflakes/snow5.png",
-            "pack://application:,,,/Resources/Images/snowflakes/snow6.png",
-            "pack://application:,,,/Resources/Images/snowflakes/snow7.png",
-            "pack://application:,,,/Resources/Images/snowflakes/snow8.png",
-            "pack://application:,,,/Resources/Images/snowflakes/snow9.png");
-        snow.Start();
+        //snow = new SnowEngine(canvas, 25, "pack://application:,,,/Resources/Images/snowflakes/snow1.png",
+        //    "pack://application:,,,/Resources/Images/snowflakes/snow2.png",
+        //    "pack://application:,,,/Resources/Images/snowflakes/snow3.png",
+        //    "pack://application:,,,/Resources/Images/snowflakes/snow4.png",
+        //    "pack://application:,,,/Resources/Images/snowflakes/snow5.png",
+        //    "pack://application:,,,/Resources/Images/snowflakes/snow6.png",
+        //    "pack://application:,,,/Resources/Images/snowflakes/snow7.png",
+        //    "pack://application:,,,/Resources/Images/snowflakes/snow8.png",
+        //    "pack://application:,,,/Resources/Images/snowflakes/snow9.png");
+        //snow.Start();
 
         //leaves = new SnowEngine(canvas, 10, "pack://application:,,,/Resources/Images/leaves/leaf1.png",
         //    "pack://application:,,,/Resources/Images/leaves/leaf2.png",
