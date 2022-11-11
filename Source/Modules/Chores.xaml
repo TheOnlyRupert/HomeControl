@@ -31,7 +31,7 @@
 
             <Grid>
                 <Image Source="../../Resources/Images/icons/chores.png" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock Text="January Chores" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <TextBlock Text="Brittany January Chores" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center"/>
             </Grid>
 
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 24 0 0">
@@ -39,8 +39,8 @@
                 <TextBlock Text="Jan 1 - 7" FontSize="16"/>
                 <TextBlock Text="Completed:" FontSize="16" Margin="0 6 0 0"/>
                 <TextBlock Text="4 / 16   25%" FontSize="16" Margin="0 0 0 6"/>
-                <ProgressBar Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="10" IsIndeterminate="False" Foreground="Blue" Background="DarkSlateGray"
-                             BorderThickness="0" MinWidth="256"/>
+                <ProgressBar Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="50" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+                             BorderThickness="1" MinWidth="256"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">

@@ -55,16 +55,16 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Robert" Command="{Binding ButtonCommand}" CommandParameter="robert"/>
-            <Button Grid.Column="1" Content="Brittany" Command="{Binding ButtonCommand}" CommandParameter="brittany"/>
-            <Button Grid.Column="2" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children"/>
-            <Button Grid.Column="3" Content="Home" Command="{Binding ButtonCommand}" CommandParameter="home"/>
-            <Button Grid.Column="4" Content="Other" Command="{Binding ButtonCommand}" CommandParameter="other"/>
+            <Button Grid.Column="0" Content="Robert" Command="{Binding ButtonCommand}" CommandParameter="robert" Background="Transparent"/>
+            <Button Grid.Column="1" Content="Brittany" Command="{Binding ButtonCommand}" CommandParameter="brittany" Background="Transparent"/>
+            <Button Grid.Column="2" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children" Background="Transparent"/>
+            <Button Grid.Column="3" Content="Home" Command="{Binding ButtonCommand}" CommandParameter="home" Background="Transparent"/>
+            <Button Grid.Column="4" Content="Other" Command="{Binding ButtonCommand}" CommandParameter="other" Background="Transparent"/>
         </Grid>
 
         <StackPanel Grid.Row="6" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Save" FontSize="24" Margin="10" Width="150" Command="{Binding ButtonCommand}" CommandParameter="save"/>
-            <Button Content="Exit" FontSize="24" Margin="10" Width="150" IsCancel="True"/>
+            <Button Content="Save" FontSize="24" Margin="10" Width="150" Command="{Binding ButtonCommand}" CommandParameter="save" Background="Transparent"/>
+            <Button Content="Exit" FontSize="24" Margin="10" Width="150" IsCancel="True" Background="Transparent"/>
         </StackPanel>
     </Grid>
 </Window>

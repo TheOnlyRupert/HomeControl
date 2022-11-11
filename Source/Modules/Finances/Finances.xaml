@@ -118,11 +118,11 @@
                     <ListView.View>
                         <GridView AllowsColumnReorder="false">
                             <GridViewColumn DisplayMemberBinding="{Binding Path=AddSub}" Header="+/-" Width="48"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="96"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Item" Width="128"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="48"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="96"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person" Width="96"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="72"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Item" Width="256"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="64"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="128"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person" Width="72"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

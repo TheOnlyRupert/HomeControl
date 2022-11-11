@@ -22,6 +22,7 @@ public class FinancesAddVM : BaseViewModel {
         DateText = dateTime.ToShortDateString();
 
         SwitchModeButtonText = "Current Mode:\nAdd Expense";
+        SwitchModeButtonColor = "Red";
         isExpense = true;
 
         /* Populate drop down box with spending categories and set default */

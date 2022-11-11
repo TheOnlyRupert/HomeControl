@@ -22,7 +22,7 @@ public class FinancesVM : BaseViewModel {
         expense = 0;
         income = 0;
         available = 0;
-        CashAvailableTextColor = "Blue";
+        CashAvailableTextColor = "CornflowerBlue";
 
         /* CSV to list */
         _financeList = new ObservableCollection<FinanceBlock>();
@@ -84,7 +84,7 @@ public class FinancesVM : BaseViewModel {
         CashIncomeText = string.Format(culture, "{0:C}", income);
         CashAvailableText = string.Format(culture, "{0:C}", available);
 
-        CashAvailableTextColor = CashAvailableText.StartsWith("-") ? "Red" : "Blue";
+        CashAvailableTextColor = CashAvailableText.StartsWith("-") ? "Red" : "CornflowerBlue";
     }
 
     #region Fields

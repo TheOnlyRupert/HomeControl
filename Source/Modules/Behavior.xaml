@@ -52,8 +52,8 @@
                         <Image Grid.Column="4" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
                     </Grid>
 
-                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="25" IsIndeterminate="False" Foreground="Blue"
-                                 Background="DarkSlateGray" BorderThickness="0" MinWidth="256"/>
+                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="25" IsIndeterminate="False" Foreground="CornflowerBlue"
+                                 Background="Transparent" BorderThickness="1" MinWidth="256"/>
 
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
@@ -96,8 +96,8 @@
                         <Image Grid.Column="4" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
                     </Grid>
 
-                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="25" IsIndeterminate="False" Foreground="Blue"
-                                 Background="DarkSlateGray" BorderThickness="0" MinWidth="256"/>
+                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="0" IsIndeterminate="False" Foreground="CornflowerBlue"
+                                 Background="Transparent" BorderThickness="1" MinWidth="256"/>
 
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
@@ -140,8 +140,8 @@
                         <Image Grid.Column="4" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
                     </Grid>
 
-                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="25" IsIndeterminate="False" Foreground="Blue"
-                                 Background="DarkSlateGray" BorderThickness="0" MinWidth="256"/>
+                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="75" IsIndeterminate="False" Foreground="CornflowerBlue"
+                                 Background="Transparent" BorderThickness="1" MinWidth="256"/>
 
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>

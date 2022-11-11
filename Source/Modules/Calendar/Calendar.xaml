@@ -20,17 +20,24 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="0" Source="../../../Resources/Images/icons/calendar.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" Height="24"/>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <Button Content="-" Command="{Binding ButtonCommand}" CommandParameter="subMonth" Margin="6, 0" FontSize="18" Background="Transparent"/>
-                    <TextBlock Text="{Binding CurrentMonthAndYear}" FontSize="18" HorizontalAlignment="Center"/>
-                    <Button Content="+" Command="{Binding ButtonCommand}" CommandParameter="addMonth" Margin="6, 0" FontSize="18" Background="Transparent"/>
-                </StackPanel>
+                <Grid Grid.Column="1" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="32"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="&lt;" Command="{Binding ButtonCommand}" CommandParameter="subMonth" FontSize="18" Background="Transparent"
+                            HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Top" MinWidth="32"/>
+                    <TextBlock Grid.Column="1" Text="{Binding CurrentMonthAndYear}" FontSize="18" HorizontalAlignment="Center"/>
+                    <Button Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addMonth" FontSize="18" Background="Transparent"
+                            HorizontalAlignment="Right" VerticalAlignment="Center" VerticalContentAlignment="Top" MinWidth="32"/>
+                </Grid>
                 <Button Grid.Column="2" Content="TODAY" Width="100" Command="{Binding ButtonCommand}" CommandParameter="today" Background="Transparent" HorizontalAlignment="Right"/>
             </Grid>
 

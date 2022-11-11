@@ -408,8 +408,8 @@ public class WeatherVM : BaseViewModel {
 
         /* Add Thermometer if needed */
         if (forecastHourly.properties.periods[0].temperature < 20) {
-            //WeatherOverlay = "../../Resources/Images/weather/cold_border.png";
             ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_freezing.png";
+            WeatherOverlay = "../../Resources/Images/weather/cold_border.png";
         } else if (forecastHourly.properties.periods[0].temperature >= 20 && forecastHourly.properties.periods[0].temperature < 35) {
             ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_cold.png";
         } else if (forecastHourly.properties.periods[0].temperature >= 35 && forecastHourly.properties.periods[0].temperature < 60) {
@@ -420,6 +420,7 @@ public class WeatherVM : BaseViewModel {
             ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_hot.png";
         } else {
             ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_burning.png";
+            WeatherOverlay = "../../Resources/Images/weather/fire_border.png";
         }
     }
 
@@ -445,17 +446,19 @@ public class WeatherVM : BaseViewModel {
             return isDayTime
                 ? "../../Resources/Images/weather/weather_clear.png"
                 : "../../Resources/Images/weather/weather_clear_night.png";
-        case "Cloudy":
         case "Partly Cloudy":
-        case "Mostly Cloudy":
         case "Partly Sunny":
             return isDayTime
                 ? "../../Resources/Images/weather/weather_part_cloudy.png"
                 : "../../Resources/Images/weather/weather_cloudy_night.png";
+        case "Cloudy":
+        case "Mostly Cloudy":
+            return "../../Resources/Images/weather/weather_cloudy.png";
         case "Patchy Fog":
         case "Areas Of Fog":
             return "../../Resources/Images/weather/weather_fog.png";
         case "Slight Chance Very Light Rain":
+        case "Chance Very Light Rain":
             return "../../Resources/Images/weather/weather_rain_light.png";
         case "Rain Showers Likely":
         case "Rain Showers":
