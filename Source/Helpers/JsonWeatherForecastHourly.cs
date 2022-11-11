@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HomeControl.Source.Helpers; 
+namespace HomeControl.Source.Helpers;
 
 public class JsonWeatherForecastHourly {
     public Properties properties { get; set; }

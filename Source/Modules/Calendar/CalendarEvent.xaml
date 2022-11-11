@@ -1,53 +1,84 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Calendar.CalendarEvent" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="View Events" Height="600" Width="400" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="View Events" Height="600" Width="800" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" Background="DarkSlateGray">
     <Window.Resources>
-        <Style x:Key="styleCalendar" TargetType="Calendar"/>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
     </Window.Resources>
 
     <Grid Margin="8">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="Title and Time" FontSize="24"/>
-            <TextBox Text="{Binding EventText}" FontSize="24" MaxLength="24"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="Description" FontSize="24"/>
-            <TextBox Text="{Binding DescriptionText}" FontSize="24"/>
-        </StackPanel>
-
-        <Viewbox Grid.Row="2" Height="64">
-            <DatePicker CalendarStyle="{StaticResource styleCalendar}" Text="{Binding DateText}"/>
-        </Viewbox>
-
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Content="Robert" Command="{Binding ButtonCommand}" CommandParameter="robert"/>
-            <Button Grid.Column="1" Content="Brittany" Command="{Binding ButtonCommand}" CommandParameter="brittany"/>
-            <Button Grid.Column="2" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children"/>
-            <Button Grid.Column="3" Content="Home" Command="{Binding ButtonCommand}" CommandParameter="home"/>
-            <Button Grid.Column="4" Content="Other" Command="{Binding ButtonCommand}" CommandParameter="other"/>
+        <Grid Grid.Column="0" Margin="0 0 8 0">
+            <ListView Grid.Row="0" ItemsSource="{Binding EventList}" SelectedItem="{Binding EventSelected}" SelectionMode="Single" IsSelected="{Binding IsSelected}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="false">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=date}" Header="Date" Width="16"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Header="Event Name" Width="96"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=location}" Header="Location" Width="96"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=description}" Header="Description" Width="48"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Header="Person" Width="48"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
 
-        <StackPanel Grid.Row="4" HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Content="Save" FontSize="24" Margin="10" Width="150" Command="{Binding ButtonCommand}" CommandParameter="save"/>
-            <Button Content="Exit" FontSize="24" Margin="10" Width="150" IsCancel="True"/>
-        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding EventDate}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Title and Time" FontSize="24"/>
+                <TextBox Text="{Binding EventText}" FontSize="24" MaxLength="24"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <TextBlock Text="Location" FontSize="24"/>
+                <TextBox Text="{Binding LocationText}" FontSize="24" MaxLength="24"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3">
+                <TextBlock Text="Description" FontSize="24"/>
+                <TextBox Text="{Binding DescriptionText}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"/>
+            </StackPanel>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Robert" Command="{Binding ButtonCommand}" CommandParameter="robert"/>
+                <Button Grid.Column="1" Content="Brittany" Command="{Binding ButtonCommand}" CommandParameter="brittany"/>
+                <Button Grid.Column="2" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children"/>
+                <Button Grid.Column="3" Content="Home" Command="{Binding ButtonCommand}" CommandParameter="home"/>
+                <Button Grid.Column="4" Content="Other" Command="{Binding ButtonCommand}" CommandParameter="other"/>
+            </Grid>
+
+            <StackPanel Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="{Binding SaveButtonText}" FontSize="24" Margin="10" Command="{Binding ButtonCommand}" CommandParameter="save"/>
+                <Button Content="Delete" FontSize="24" Margin="10" Command="{Binding ButtonCommand}" CommandParameter="delete"/>
+                <Button Content="Exit" FontSize="24" Margin="10" IsCancel="True"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

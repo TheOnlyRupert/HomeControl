@@ -3,7 +3,7 @@ using System.Media;
 using System.Windows;
 using System.Windows.Resources;
 
-namespace HomeControl.Source.Control; 
+namespace HomeControl.Source.Control;
 
 public class PlaySound {
     private readonly SoundPlayer _audio;

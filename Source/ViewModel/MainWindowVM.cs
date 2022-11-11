@@ -4,7 +4,7 @@ using HomeControl.Source.Modules;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel; 
+namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
     private string _iconImage;

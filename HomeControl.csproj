@@ -90,6 +90,8 @@
         </ApplicationDefinition>
         <Compile Include="Source\Control\DisableNavigation.cs"/>
         <Compile Include="Source\Control\PlaySound.cs"/>
+        <Compile Include="Source\Control\SnowEngine.cs"/>
+        <Compile Include="Source\Control\SnowInfo.cs"/>
         <Compile Include="Source\Helpers\FinanceBlock.cs"/>
         <Compile Include="Source\Helpers\JsonCalendar.cs"/>
         <Compile Include="Source\Helpers\JsonWeatherForecast.cs"/>
@@ -99,14 +101,23 @@
         <Compile Include="Source\Modules\Alarms.xaml.cs">
             <DependentUpon>Alarms.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Behavior.xaml.cs">
+            <DependentUpon>Behavior.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Calendar\Calendar.xaml.cs">
             <DependentUpon>Calendar.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Calendar\CalendarEvent.xaml.cs">
             <DependentUpon>CalendarEvent.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Calendar\TodayCalendar.xaml.cs">
+            <DependentUpon>TodayCalendar.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Chores.xaml.cs">
             <DependentUpon>Chores.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Notes.xaml.cs">
+            <DependentUpon>Notes.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Settings.xaml.cs">
             <DependentUpon>Settings.xaml</DependentUpon>
@@ -131,8 +142,10 @@
         <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
         <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs"/>
         <Compile Include="Source\ViewModel\Base\DelegateCommand.cs"/>
+        <Compile Include="Source\ViewModel\BehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\CalendarEventVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\CalendarVM.cs"/>
+        <Compile Include="Source\ViewModel\Calendar\TodayCalendarVM.cs"/>
         <Compile Include="Source\ViewModel\ChoresVM.cs"/>
         <Compile Include="Source\ViewModel\Finances\FinancesAddVM.cs"/>
         <Compile Include="Source\ViewModel\Finances\FinancesVM.cs"/>
@@ -141,6 +154,7 @@
         <Compile Include="Source\ViewModel\Games\PictionaryVM.cs"/>
         <Compile Include="Source\ViewModel\Games\WordList.cs"/>
         <Compile Include="Source\ViewModel\MainWindowVM.cs"/>
+        <Compile Include="Source\ViewModel\NotesVM.cs"/>
         <Compile Include="Source\ViewModel\SettingsVM.cs"/>
         <Compile Include="Source\ViewModel\WeatherVM.cs"/>
         <Page Include="MainWindow.xaml">
@@ -156,9 +170,12 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Source\Modules\Alarms.xaml"/>
+        <Page Include="Source\Modules\Behavior.xaml"/>
         <Page Include="Source\Modules\Calendar\Calendar.xaml"/>
         <Page Include="Source\Modules\Calendar\CalendarEvent.xaml"/>
+        <Page Include="Source\Modules\Calendar\TodayCalendar.xaml"/>
         <Page Include="Source\Modules\Chores.xaml"/>
+        <Page Include="Source\Modules\Notes.xaml"/>
         <Page Include="Source\Modules\Settings.xaml"/>
         <Page Include="Source\Modules\Finances\Finances.xaml"/>
         <Page Include="Source\Modules\Finances\FinancesAdd.xaml"/>
@@ -194,13 +211,12 @@
         <Resource Include="Resources\Images\icons\chores.png"/>
         <Resource Include="Resources\Images\icons\coin_flip.png"/>
         <Resource Include="Resources\Images\icons\games.png"/>
-        <Resource Include="Resources\Images\icons\key.png"/>
         <Resource Include="Resources\Images\icons\money.png"/>
         <Resource Include="Resources\Images\icons\panic.png"/>
         <Resource Include="Resources\Images\icons\tamagotchi.png"/>
-        <Resource Include="Resources\Images\icons\temperature.png"/>
         <Resource Include="Resources\Images\icons\tic_tac_toe.png"/>
         <Resource Include="Resources\Images\icons\wifi.png"/>
+        <Resource Include="Resources\Images\weather\rain_drop.png"/>
         <Resource Include="Resources\Images\weather\weather_clear.png"/>
         <Resource Include="Resources\Images\weather\weather_clear_night.png"/>
         <Resource Include="Resources\Images\weather\weather_cloudy.png"/>
@@ -230,6 +246,81 @@
         <Resource Include="Resources\Sounds\buzzer.wav"/>
         <Resource Include="Resources\Sounds\ding.wav"/>
         <Resource Include="Resources\Sounds\tap.wav"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\pictionary.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\notes.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\groceries.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\todo.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\recipes.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\contact.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\vacation.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\snowflakes\snow1.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow2.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow3.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow4.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow5.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow6.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow7.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow8.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow9.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\weather\cold_border.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\leaves\leaf1.png"/>
+        <Resource Include="Resources\Images\leaves\leaf2.png"/>
+        <Resource Include="Resources\Images\leaves\leaf3.png"/>
+        <Resource Include="Resources\Images\leaves\leaf4.png"/>
+        <Resource Include="Resources\Images\leaves\leaf5.png"/>
+        <Resource Include="Resources\Images\leaves\leaf6.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\weather\weather_frost.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\meal.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\weather\fire_border.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\behavior\star_black.png"/>
+        <Resource Include="Resources\Images\behavior\star_gold.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\behavior\strike.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\behavior.png"/>
+        <Resource Include="Resources\Images\icons\events.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\key_locked.png"/>
+        <Resource Include="Resources\Images\icons\key_unlocked.png"/>
+        <Resource Include="Resources\Images\icons\temp_cold.png"/>
+        <Resource Include="Resources\Images\icons\temp_hot.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\temp_burning.png"/>
+        <Resource Include="Resources\Images\icons\temp_cool.png"/>
+        <Resource Include="Resources\Images\icons\temp_freezing.png"/>
+        <Resource Include="Resources\Images\icons\temp_warm.png"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')"/>

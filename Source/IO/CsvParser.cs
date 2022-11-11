@@ -5,7 +5,7 @@ using System.Windows;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
 
-namespace HomeControl.Source.IO; 
+namespace HomeControl.Source.IO;
 
 public static class CsvParser {
     private static readonly ObservableCollection<FinanceBlock> _list = new();

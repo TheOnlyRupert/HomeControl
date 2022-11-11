@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace HomeControl.Source.Control; 
+namespace HomeControl.Source.Control;
 
 public static class DisableNavigation {
     public static readonly DependencyProperty DisableProperty = DependencyProperty.RegisterAttached(

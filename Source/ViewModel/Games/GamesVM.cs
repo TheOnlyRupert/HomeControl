@@ -2,7 +2,7 @@
 using HomeControl.Source.Modules.Games;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel.Games; 
+namespace HomeControl.Source.ViewModel.Games;
 
 public class GamesVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);

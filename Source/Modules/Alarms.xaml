@@ -1,6 +1,42 @@
 ﻿<Page x:Class="HomeControl.Source.Modules.Alarms" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
-    <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-        <Grid Margin="4"/>
+    <Page.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+
+    <Border BorderBrush="Black" BorderThickness="1" Margin="0 0 4 4">
+        <Grid Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Image Source="../../Resources/Images/icons/alarms.png" HorizontalAlignment="Left" Height="24"/>
+                <TextBlock Text="Alarms" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" Content="00:05:49" FontSize="18" Background="Transparent" Margin="4 0 2 2"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="00:24:21" FontSize="18" Background="Transparent" Margin="2 0 4 2"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="NONE" FontSize="18" Background="Transparent" Margin="4 2 2 4"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="NONE" FontSize="18" Background="Transparent" Margin="2 2 4 4"/>
+
+            </Grid>
+        </Grid>
     </Border>
 </Page>

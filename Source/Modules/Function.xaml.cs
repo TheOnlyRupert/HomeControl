@@ -1,6 +1,6 @@
 ﻿using HomeControl.Source.ViewModel;
 
-namespace HomeControl.Source.Modules; 
+namespace HomeControl.Source.Modules;
 
 public partial class Function {
     public Function() {

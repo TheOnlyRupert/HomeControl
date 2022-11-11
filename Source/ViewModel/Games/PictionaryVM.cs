@@ -8,7 +8,7 @@ using HomeControl.Source.Control;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel.Games; 
+namespace HomeControl.Source.ViewModel.Games;
 
 public class PictionaryVM : BaseViewModel {
     private static bool isTimerActive, isGameActive;

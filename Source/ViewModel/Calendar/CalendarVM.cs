@@ -8,7 +8,7 @@ using HomeControl.Source.Modules.Calendar;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel.Calendar; 
+namespace HomeControl.Source.ViewModel.Calendar;
 
 public class CalendarVM : BaseViewModel {
     private string _button1Date, _button1HolidayText, _button1EventText1, _button1EventText2, _button1EventText3, _button2Date, _button2HolidayText, _button2EventText1,
@@ -39,21 +39,12 @@ public class CalendarVM : BaseViewModel {
         _button41HolidayText, _button41EventText1, _button41EventText2, _button41EventText3, _button42Date, _button42HolidayText, _button42EventText1, _button42EventText2,
         _button42EventText3, _currentMonthAndYear, eventsListString, _button1EventColor1, _button1EventColor2, _button1EventColor3;
 
-    private DateTime button1DateTime, button2DateTime, button3DateTime, button4DateTime, button5DateTime, button6DateTime, button7DateTime, button8DateTime, button9DateTime,
-        button10DateTime, button11DateTime, button12DateTime, button13DateTime, button14DateTime, button15DateTime, button16DateTime, button17DateTime, button18DateTime,
-        button19DateTime, button20DateTime, button21DateTime, button22DateTime, button23DateTime, button24DateTime, button25DateTime, button26DateTime, button27DateTime,
-        button28DateTime, button29DateTime, button30DateTime, button31DateTime, button32DateTime, button33DateTime, button34DateTime, button35DateTime, button36DateTime,
-        button37DateTime, button38DateTime, button39DateTime, button40DateTime, button41DateTime, button42DateTime;
-
-    private DateTime currentDateTime, calendarStartDateTime;
-
-    private List<Events> eventsList;
+    private DateTime currentDateTime, calendarStartDateTime, button1DateTime;
 
     public CalendarVM() {
         currentDateTime = DateTime.Now;
         CurrentMonthAndYear = currentDateTime.ToString("MMMM, yyyy");
         PopulateCalendar(currentDateTime);
-        eventsList = new List<Events>();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -76,6 +67,7 @@ public class CalendarVM : BaseViewModel {
             PopulateCalendar(currentDateTime);
             break;
         case "button1":
+            ReferenceValues.CalendarEventDate = button1DateTime;
             CalendarEvent calendarEvent = new();
             calendarEvent.ShowDialog();
             calendarEvent.Close();
@@ -330,7 +322,8 @@ public class CalendarVM : BaseViewModel {
             if (!File.Exists(ReferenceValues.FILE_DIRECTORY + "events.json")) {
                 Console.WriteLine("events.json does not exist. Restoring default settings");
                 StreamWriter file = new(ReferenceValues.FILE_DIRECTORY + "events.json", true);
-                file.WriteLine("{\"eventsList\": [{\"date\": \"2022-11-06T13:00:00-06:00\",\"eventName\": \"F\",\"description\": \"n/a\",\"person\": \"5 mph\"}]}");
+                file.WriteLine(
+                    "{\"eventsList\":[{\"date\":\"2022-10-30T13:00:00-06:00\",\"name\":\"Event Name\",\"location\":\"Event Location\",\"description\":\"Event Description\",\"person\":\"Robert\"}]}");
                 file.Close();
             }
         } catch (Exception) {
@@ -349,8 +342,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         JsonCalendar jsonCalendar = JsonSerializer.Deserialize<JsonCalendar>(eventsListString, options);
+        ReferenceValues.MasterEventsList = new List<Events>();
         if (jsonCalendar != null) {
-            eventsList = jsonCalendar.eventsList;
+            ReferenceValues.MasterEventsList = jsonCalendar.eventsList;
         }
 
         if (!errored) {
@@ -360,19 +354,19 @@ public class CalendarVM : BaseViewModel {
 
     private void PopulateEvents() {
         int[] currentButtonEvents = new int[42];
-        for (int i = 0; i < eventsList.Count; i++) {
-            if (eventsList[i].date.Date == calendarStartDateTime.Date) {
+        for (int i = 0; i < ReferenceValues.MasterEventsList.Count; i++) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.Date) {
                 switch (currentButtonEvents[0]) {
                 case 0:
-                    Button1EventText1 = eventsList[i].eventName;
-                    switch (eventsList[i].personID) {
-                    case 1:
+                    Button1EventText1 = ReferenceValues.MasterEventsList[i].name;
+                    switch (ReferenceValues.MasterEventsList[i].person) {
+                    case "Robert":
                         Button1EventColor1 = "Blue";
                         break;
-                    case 2:
+                    case "Brittany":
                         Button1EventColor1 = "Green";
                         break;
-                    case 3:
+                    case "Children":
                         Button1EventColor1 = "Gray";
                         break;
                     default:
@@ -382,15 +376,15 @@ public class CalendarVM : BaseViewModel {
 
                     break;
                 case 1:
-                    Button1EventText2 = eventsList[i].eventName;
-                    switch (eventsList[i].personID) {
-                    case 1:
+                    Button1EventText2 = ReferenceValues.MasterEventsList[i].name;
+                    switch (ReferenceValues.MasterEventsList[i].person) {
+                    case "Robert":
                         Button1EventColor2 = "Blue";
                         break;
-                    case 2:
+                    case "Brittany":
                         Button1EventColor2 = "Green";
                         break;
-                    case 3:
+                    case "Children":
                         Button1EventColor2 = "Gray";
                         break;
                     default:
@@ -400,15 +394,15 @@ public class CalendarVM : BaseViewModel {
 
                     break;
                 case 2:
-                    Button1EventText3 = eventsList[i].eventName;
-                    switch (eventsList[i].personID) {
-                    case 1:
+                    Button1EventText3 = ReferenceValues.MasterEventsList[i].name;
+                    switch (ReferenceValues.MasterEventsList[i].person) {
+                    case "Robert":
                         Button1EventColor3 = "Blue";
                         break;
-                    case 2:
+                    case "Brittany":
                         Button1EventColor3 = "Green";
                         break;
-                    case 3:
+                    case "Children":
                         Button1EventColor3 = "Gray";
                         break;
                     default:
@@ -426,16 +420,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[0]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(1).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(1).Date) {
                 switch (currentButtonEvents[1]) {
                 case 0:
-                    Button2EventText1 = eventsList[i].eventName;
+                    Button2EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button2EventText2 = eventsList[i].eventName;
+                    Button2EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button2EventText3 = eventsList[i].eventName;
+                    Button2EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button2EventText3 = "+" + (currentButtonEvents[1] - 2) + "...";
@@ -445,16 +439,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[1]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(2).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(2).Date) {
                 switch (currentButtonEvents[2]) {
                 case 0:
-                    Button3EventText1 = eventsList[i].eventName;
+                    Button3EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button3EventText2 = eventsList[i].eventName;
+                    Button3EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button3EventText3 = eventsList[i].eventName;
+                    Button3EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button3EventText3 = "+" + (currentButtonEvents[2] - 2) + "...";
@@ -464,16 +458,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[2]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(3).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(3).Date) {
                 switch (currentButtonEvents[3]) {
                 case 0:
-                    Button4EventText1 = eventsList[i].eventName;
+                    Button4EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button4EventText2 = eventsList[i].eventName;
+                    Button4EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button4EventText3 = eventsList[i].eventName;
+                    Button4EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button4EventText3 = "+" + (currentButtonEvents[3] - 2) + "...";
@@ -483,16 +477,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[3]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(4).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(4).Date) {
                 switch (currentButtonEvents[4]) {
                 case 0:
-                    Button5EventText1 = eventsList[i].eventName;
+                    Button5EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button5EventText2 = eventsList[i].eventName;
+                    Button5EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button5EventText3 = eventsList[i].eventName;
+                    Button5EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button5EventText3 = "+" + (currentButtonEvents[4] - 2) + "...";
@@ -502,16 +496,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[4]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(5).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(5).Date) {
                 switch (currentButtonEvents[5]) {
                 case 0:
-                    Button6EventText1 = eventsList[i].eventName;
+                    Button6EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button6EventText2 = eventsList[i].eventName;
+                    Button6EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button6EventText3 = eventsList[i].eventName;
+                    Button6EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button6EventText3 = "+" + (currentButtonEvents[5] - 2) + "...";
@@ -521,16 +515,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[5]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(6).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(6).Date) {
                 switch (currentButtonEvents[6]) {
                 case 0:
-                    Button7EventText1 = eventsList[i].eventName;
+                    Button7EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button7EventText2 = eventsList[i].eventName;
+                    Button7EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button7EventText3 = eventsList[i].eventName;
+                    Button7EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button7EventText3 = "+" + (currentButtonEvents[6] - 2) + "...";
@@ -540,16 +534,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[6]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(7).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(7).Date) {
                 switch (currentButtonEvents[7]) {
                 case 0:
-                    Button8EventText1 = eventsList[i].eventName;
+                    Button8EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button8EventText2 = eventsList[i].eventName;
+                    Button8EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button8EventText3 = eventsList[i].eventName;
+                    Button8EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button8EventText3 = "+" + (currentButtonEvents[7] - 2) + "...";
@@ -559,16 +553,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[7]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(8).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(8).Date) {
                 switch (currentButtonEvents[8]) {
                 case 0:
-                    Button9EventText1 = eventsList[i].eventName;
+                    Button9EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button9EventText2 = eventsList[i].eventName;
+                    Button9EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button9EventText3 = eventsList[i].eventName;
+                    Button9EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button9EventText3 = "+" + (currentButtonEvents[8] - 2) + "...";
@@ -578,16 +572,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[8]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(9).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(9).Date) {
                 switch (currentButtonEvents[9]) {
                 case 0:
-                    Button10EventText1 = eventsList[i].eventName;
+                    Button10EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button10EventText2 = eventsList[i].eventName;
+                    Button10EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button10EventText3 = eventsList[i].eventName;
+                    Button10EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button10EventText3 = "+" + (currentButtonEvents[9] - 2) + "...";
@@ -597,16 +591,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[9]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(10).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(10).Date) {
                 switch (currentButtonEvents[10]) {
                 case 0:
-                    Button11EventText1 = eventsList[i].eventName;
+                    Button11EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button11EventText2 = eventsList[i].eventName;
+                    Button11EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button11EventText3 = eventsList[i].eventName;
+                    Button11EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button11EventText3 = "+" + (currentButtonEvents[10] - 2) + "...";
@@ -616,16 +610,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[10]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(11).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(11).Date) {
                 switch (currentButtonEvents[11]) {
                 case 0:
-                    Button12EventText1 = eventsList[i].eventName;
+                    Button12EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button12EventText2 = eventsList[i].eventName;
+                    Button12EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button12EventText3 = eventsList[i].eventName;
+                    Button12EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button12EventText3 = "+" + (currentButtonEvents[11] - 2) + "...";
@@ -635,16 +629,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[11]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(12).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(12).Date) {
                 switch (currentButtonEvents[12]) {
                 case 0:
-                    Button13EventText1 = eventsList[i].eventName;
+                    Button13EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button13EventText2 = eventsList[i].eventName;
+                    Button13EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button13EventText3 = eventsList[i].eventName;
+                    Button13EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button13EventText3 = "+" + (currentButtonEvents[12] - 2) + "...";
@@ -654,16 +648,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[12]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(13).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(13).Date) {
                 switch (currentButtonEvents[13]) {
                 case 0:
-                    Button14EventText1 = eventsList[i].eventName;
+                    Button14EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button14EventText2 = eventsList[i].eventName;
+                    Button14EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button14EventText3 = eventsList[i].eventName;
+                    Button14EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button14EventText3 = "+" + (currentButtonEvents[13] - 2) + "...";
@@ -673,16 +667,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[13]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(14).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(14).Date) {
                 switch (currentButtonEvents[14]) {
                 case 0:
-                    Button15EventText1 = eventsList[i].eventName;
+                    Button15EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button15EventText2 = eventsList[i].eventName;
+                    Button15EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button15EventText3 = eventsList[i].eventName;
+                    Button15EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button15EventText3 = "+" + (currentButtonEvents[14] - 2) + "...";
@@ -692,16 +686,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[14]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(15).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(15).Date) {
                 switch (currentButtonEvents[15]) {
                 case 0:
-                    Button16EventText1 = eventsList[i].eventName;
+                    Button16EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button16EventText2 = eventsList[i].eventName;
+                    Button16EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button16EventText3 = eventsList[i].eventName;
+                    Button16EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button16EventText3 = "+" + (currentButtonEvents[15] - 2) + "...";
@@ -711,16 +705,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[15]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(16).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(16).Date) {
                 switch (currentButtonEvents[16]) {
                 case 0:
-                    Button17EventText1 = eventsList[i].eventName;
+                    Button17EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button17EventText2 = eventsList[i].eventName;
+                    Button17EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button17EventText3 = eventsList[i].eventName;
+                    Button17EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button17EventText3 = "+" + (currentButtonEvents[16] - 2) + "...";
@@ -730,16 +724,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[16]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(17).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(17).Date) {
                 switch (currentButtonEvents[17]) {
                 case 0:
-                    Button18EventText1 = eventsList[i].eventName;
+                    Button18EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button18EventText2 = eventsList[i].eventName;
+                    Button18EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button18EventText3 = eventsList[i].eventName;
+                    Button18EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button18EventText3 = "+" + (currentButtonEvents[17] - 2) + "...";
@@ -749,16 +743,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[17]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(18).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(18).Date) {
                 switch (currentButtonEvents[18]) {
                 case 0:
-                    Button19EventText1 = eventsList[i].eventName;
+                    Button19EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button19EventText2 = eventsList[i].eventName;
+                    Button19EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button19EventText3 = eventsList[i].eventName;
+                    Button19EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button19EventText3 = "+" + (currentButtonEvents[18] - 2) + "...";
@@ -768,16 +762,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[18]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(20).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(20).Date) {
                 switch (currentButtonEvents[20]) {
                 case 0:
-                    Button21EventText1 = eventsList[i].eventName;
+                    Button21EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button21EventText2 = eventsList[i].eventName;
+                    Button21EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button21EventText3 = eventsList[i].eventName;
+                    Button21EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button21EventText3 = "+" + (currentButtonEvents[20] - 2) + "...";
@@ -787,16 +781,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[20]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(21).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(21).Date) {
                 switch (currentButtonEvents[21]) {
                 case 0:
-                    Button22EventText1 = eventsList[i].eventName;
+                    Button22EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button22EventText2 = eventsList[i].eventName;
+                    Button22EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button22EventText3 = eventsList[i].eventName;
+                    Button22EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button22EventText3 = "+" + (currentButtonEvents[21] - 2) + "...";
@@ -806,16 +800,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[21]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(22).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(22).Date) {
                 switch (currentButtonEvents[22]) {
                 case 0:
-                    Button23EventText1 = eventsList[i].eventName;
+                    Button23EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button23EventText2 = eventsList[i].eventName;
+                    Button23EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button23EventText3 = eventsList[i].eventName;
+                    Button23EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button23EventText3 = "+" + (currentButtonEvents[22] - 2) + "...";
@@ -825,16 +819,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[22]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(23).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(23).Date) {
                 switch (currentButtonEvents[23]) {
                 case 0:
-                    Button24EventText1 = eventsList[i].eventName;
+                    Button24EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button24EventText2 = eventsList[i].eventName;
+                    Button24EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button24EventText3 = eventsList[i].eventName;
+                    Button24EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button24EventText3 = "+" + (currentButtonEvents[23] - 2) + "...";
@@ -844,16 +838,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[23]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(24).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(24).Date) {
                 switch (currentButtonEvents[24]) {
                 case 0:
-                    Button25EventText1 = eventsList[i].eventName;
+                    Button25EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button25EventText2 = eventsList[i].eventName;
+                    Button25EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button25EventText3 = eventsList[i].eventName;
+                    Button25EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button25EventText3 = "+" + (currentButtonEvents[24] - 2) + "...";
@@ -863,16 +857,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[24]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(25).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(25).Date) {
                 switch (currentButtonEvents[25]) {
                 case 0:
-                    Button26EventText1 = eventsList[i].eventName;
+                    Button26EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button26EventText2 = eventsList[i].eventName;
+                    Button26EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button26EventText3 = eventsList[i].eventName;
+                    Button26EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button26EventText3 = "+" + (currentButtonEvents[25] - 2) + "...";
@@ -882,16 +876,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[25]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(26).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(26).Date) {
                 switch (currentButtonEvents[26]) {
                 case 0:
-                    Button27EventText1 = eventsList[i].eventName;
+                    Button27EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button27EventText2 = eventsList[i].eventName;
+                    Button27EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button27EventText3 = eventsList[i].eventName;
+                    Button27EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button27EventText3 = "+" + (currentButtonEvents[26] - 2) + "...";
@@ -901,16 +895,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[26]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(27).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(27).Date) {
                 switch (currentButtonEvents[27]) {
                 case 0:
-                    Button28EventText1 = eventsList[i].eventName;
+                    Button28EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button28EventText2 = eventsList[i].eventName;
+                    Button28EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button28EventText3 = eventsList[i].eventName;
+                    Button28EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button28EventText3 = "+" + (currentButtonEvents[27] - 2) + "...";
@@ -920,16 +914,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[27]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(28).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(28).Date) {
                 switch (currentButtonEvents[28]) {
                 case 0:
-                    Button29EventText1 = eventsList[i].eventName;
+                    Button29EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button29EventText2 = eventsList[i].eventName;
+                    Button29EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button29EventText3 = eventsList[i].eventName;
+                    Button29EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button29EventText3 = "+" + (currentButtonEvents[28] - 2) + "...";
@@ -939,16 +933,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[28]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(29).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(29).Date) {
                 switch (currentButtonEvents[29]) {
                 case 0:
-                    Button30EventText1 = eventsList[i].eventName;
+                    Button30EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button30EventText2 = eventsList[i].eventName;
+                    Button30EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button30EventText3 = eventsList[i].eventName;
+                    Button30EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button30EventText3 = "+" + (currentButtonEvents[29] - 2) + "...";
@@ -958,16 +952,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[29]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(30).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(30).Date) {
                 switch (currentButtonEvents[30]) {
                 case 0:
-                    Button31EventText1 = eventsList[i].eventName;
+                    Button31EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button31EventText2 = eventsList[i].eventName;
+                    Button31EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button31EventText3 = eventsList[i].eventName;
+                    Button31EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button31EventText3 = "+" + (currentButtonEvents[30] - 2) + "...";
@@ -977,16 +971,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[30]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(31).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(31).Date) {
                 switch (currentButtonEvents[31]) {
                 case 0:
-                    Button32EventText1 = eventsList[i].eventName;
+                    Button32EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button32EventText2 = eventsList[i].eventName;
+                    Button32EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button32EventText3 = eventsList[i].eventName;
+                    Button32EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button32EventText3 = "+" + (currentButtonEvents[31] - 2) + "...";
@@ -996,16 +990,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[31]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(32).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(32).Date) {
                 switch (currentButtonEvents[32]) {
                 case 0:
-                    Button33EventText1 = eventsList[i].eventName;
+                    Button33EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button33EventText2 = eventsList[i].eventName;
+                    Button33EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button33EventText3 = eventsList[i].eventName;
+                    Button33EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button33EventText3 = "+" + (currentButtonEvents[32] - 2) + "...";
@@ -1015,16 +1009,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[32]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(33).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(33).Date) {
                 switch (currentButtonEvents[33]) {
                 case 0:
-                    Button34EventText1 = eventsList[i].eventName;
+                    Button34EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button34EventText2 = eventsList[i].eventName;
+                    Button34EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button34EventText3 = eventsList[i].eventName;
+                    Button34EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button34EventText3 = "+" + (currentButtonEvents[33] - 2) + "...";
@@ -1034,16 +1028,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[33]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(34).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(34).Date) {
                 switch (currentButtonEvents[34]) {
                 case 0:
-                    Button35EventText1 = eventsList[i].eventName;
+                    Button35EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button35EventText2 = eventsList[i].eventName;
+                    Button35EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button35EventText3 = eventsList[i].eventName;
+                    Button35EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button35EventText3 = "+" + (currentButtonEvents[34] - 2) + "...";
@@ -1053,16 +1047,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[34]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(35).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(35).Date) {
                 switch (currentButtonEvents[35]) {
                 case 0:
-                    Button36EventText1 = eventsList[i].eventName;
+                    Button36EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button36EventText2 = eventsList[i].eventName;
+                    Button36EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button36EventText3 = eventsList[i].eventName;
+                    Button36EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button36EventText3 = "+" + (currentButtonEvents[35] - 2) + "...";
@@ -1072,16 +1066,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[35]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(36).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(36).Date) {
                 switch (currentButtonEvents[36]) {
                 case 0:
-                    Button37EventText1 = eventsList[i].eventName;
+                    Button37EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button37EventText2 = eventsList[i].eventName;
+                    Button37EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button37EventText3 = eventsList[i].eventName;
+                    Button37EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button37EventText3 = "+" + (currentButtonEvents[36] - 2) + "...";
@@ -1091,16 +1085,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[36]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(37).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(37).Date) {
                 switch (currentButtonEvents[37]) {
                 case 0:
-                    Button38EventText1 = eventsList[i].eventName;
+                    Button38EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button38EventText2 = eventsList[i].eventName;
+                    Button38EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button38EventText3 = eventsList[i].eventName;
+                    Button38EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button38EventText3 = "+" + (currentButtonEvents[37] - 2) + "...";
@@ -1110,16 +1104,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[37]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(38).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(38).Date) {
                 switch (currentButtonEvents[38]) {
                 case 0:
-                    Button39EventText1 = eventsList[i].eventName;
+                    Button39EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button39EventText2 = eventsList[i].eventName;
+                    Button39EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button39EventText3 = eventsList[i].eventName;
+                    Button39EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button39EventText3 = "+" + (currentButtonEvents[38] - 2) + "...";
@@ -1129,16 +1123,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[38]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(39).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(39).Date) {
                 switch (currentButtonEvents[39]) {
                 case 0:
-                    Button40EventText1 = eventsList[i].eventName;
+                    Button40EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button40EventText2 = eventsList[i].eventName;
+                    Button40EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button40EventText3 = eventsList[i].eventName;
+                    Button40EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button40EventText3 = "+" + (currentButtonEvents[39] - 2) + "...";
@@ -1148,16 +1142,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[39]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(40).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(40).Date) {
                 switch (currentButtonEvents[40]) {
                 case 0:
-                    Button41EventText1 = eventsList[i].eventName;
+                    Button41EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button41EventText2 = eventsList[i].eventName;
+                    Button41EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button41EventText3 = eventsList[i].eventName;
+                    Button41EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button41EventText3 = "+" + (currentButtonEvents[40] - 2) + "...";
@@ -1167,16 +1161,16 @@ public class CalendarVM : BaseViewModel {
                 currentButtonEvents[40]++;
             }
 
-            if (eventsList[i].date.Date == calendarStartDateTime.AddDays(41).Date) {
+            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(41).Date) {
                 switch (currentButtonEvents[41]) {
                 case 0:
-                    Button42EventText1 = eventsList[i].eventName;
+                    Button42EventText1 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 1:
-                    Button42EventText2 = eventsList[i].eventName;
+                    Button42EventText2 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 case 2:
-                    Button42EventText3 = eventsList[i].eventName;
+                    Button42EventText3 = ReferenceValues.MasterEventsList[i].name;
                     break;
                 default:
                     Button42EventText3 = "+" + (currentButtonEvents[41] - 2) + "...";

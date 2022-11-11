@@ -1,6 +1,6 @@
 ﻿using HomeControl.Source.ViewModel.Finances;
 
-namespace HomeControl.Source.Modules.Finances; 
+namespace HomeControl.Source.Modules.Finances;
 
 public partial class FinancesAdd {
     public FinancesAdd() {

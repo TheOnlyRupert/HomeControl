@@ -1,7 +1,15 @@
 ﻿<Page x:Class="HomeControl.Source.Modules.Calendar.Calendar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
-    <Border BorderBrush="Black" BorderThickness="1" Margin="4">
+    <Page.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+    <Border BorderBrush="Black" BorderThickness="1" Margin="4 4 0 4">
         <Grid Margin="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
@@ -19,11 +27,11 @@
                 <Image Grid.Column="0" Source="../../../Resources/Images/icons/calendar.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" Height="24"/>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <Button Content="-" Command="{Binding ButtonCommand}" CommandParameter="subMonth" Padding="6, 0" FontSize="18"/>
-                    <TextBlock Text="{Binding CurrentMonthAndYear}" FontSize="18" Width="256" HorizontalAlignment="Center"/>
-                    <Button Content="+" Command="{Binding ButtonCommand}" CommandParameter="addMonth" Padding="6, 0" FontSize="18"/>
+                    <Button Content="-" Command="{Binding ButtonCommand}" CommandParameter="subMonth" Margin="6, 0" FontSize="18" Background="Transparent"/>
+                    <TextBlock Text="{Binding CurrentMonthAndYear}" FontSize="18" HorizontalAlignment="Center"/>
+                    <Button Content="+" Command="{Binding ButtonCommand}" CommandParameter="addMonth" Margin="6, 0" FontSize="18" Background="Transparent"/>
                 </StackPanel>
-                <Button Grid.Column="2" Content="TODAY" Width="100" Command="{Binding ButtonCommand}" CommandParameter="today"/>
+                <Button Grid.Column="2" Content="TODAY" Width="100" Command="{Binding ButtonCommand}" CommandParameter="today" Background="Transparent" HorizontalAlignment="Right"/>
             </Grid>
 
             <Grid Grid.Row="1">

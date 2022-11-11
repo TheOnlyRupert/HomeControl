@@ -1,43 +1,58 @@
 ﻿using System;
 using System.Net;
 using System.Text.Json;
+using System.Text.RegularExpressions;
+using System.Windows.Threading;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel; 
+namespace HomeControl.Source.ViewModel;
 
 public class WeatherVM : BaseViewModel {
-    public string _currentDateText, _currentTimeText, _currentTimeSecondsText, _currentWeatherLocationText,
-        _currentWeatherTempText, _currentWeatherCloudIcon, _sunRiseText,
-        _sunSetText, _sunRiseIcon, _sunSetIcon;
+    public int _currentWindDirectionRotation, _hourlyForecastWindDirectionRotation1, _hourlyForecastWindDirectionRotation2, _hourlyForecastWindDirectionRotation3,
+        _hourlyForecastWindDirectionRotation4,
+        _hourlyForecastWindDirectionRotation5, _hourlyForecastWindDirectionRotation6, _hourlyForecastWindDirectionRotation7, _hourlyForecastWindDirectionRotation8,
+        _hourlyForecastWindDirectionRotation9;
 
-    public int _currentWindDirectionRotation;
-
-    public string _currentWindSpeedText, _currentWeatherDescription,
-        _sevenDayForecastDescription1, _sevenDayForecastWindSpeed1, _sevenDayForecastWindDirectionRotation1, _sevenDayForecastWeatherIcon1, _sevenDayForecastTemp1,
-        _sevenDayForecastName1, _sevenDayForecastDescription2, _sevenDayForecastWindSpeed2, _sevenDayForecastWindDirectionRotation2, _sevenDayForecastWeatherIcon2,
+    public string _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText, _currentTimeSecondsText, _currentWeatherLocationText,
+        _currentWeatherTempText, _currentWeatherCloudIcon, _sunRiseText, _sunSetText, _sunRiseIcon, _sunSetIcon, _hourlyForecastRainIcon1,
+        _sevenDayForecastDescription1, _sevenDayForecastWindSpeed1, _sevenDayForecastWindDirectionRotation1, _sevenDayForecastWeatherIcon1a, _sevenDayForecastWeatherIcon1b,
+        _sevenDayForecastTemp1,
+        _sevenDayForecastName1, _sevenDayForecastDescription2, _sevenDayForecastWindSpeed2, _sevenDayForecastWindDirectionRotation2, _sevenDayForecastWeatherIcon2a,
+        _sevenDayForecastWeatherIcon2b,
         _sevenDayForecastTemp2, _sevenDayForecastName2, _sevenDayForecastDescription3, _sevenDayForecastWindSpeed3, _sevenDayForecastWindDirectionRotation3,
-        _sevenDayForecastWeatherIcon3, _sevenDayForecastTemp3, _sevenDayForecastName3, _sevenDayForecastDescription4, _sevenDayForecastWindSpeed4,
-        _sevenDayForecastWindDirectionRotation4, _sevenDayForecastWeatherIcon4, _sevenDayForecastTemp4, _sevenDayForecastName4, _sevenDayForecastDescription5,
-        _sevenDayForecastWindSpeed5, _sevenDayForecastWindDirectionRotation5, _sevenDayForecastWeatherIcon5, _sevenDayForecastTemp5, _sevenDayForecastName5,
-        _sevenDayForecastDescription6, _sevenDayForecastWindSpeed6, _sevenDayForecastWindDirectionRotation6, _sevenDayForecastWeatherIcon6, _sevenDayForecastTemp6,
+        _sevenDayForecastWeatherIcon3a, _sevenDayForecastWeatherIcon3b, _sevenDayForecastTemp3, _sevenDayForecastName3, _sevenDayForecastDescription4, _sevenDayForecastWindSpeed4,
+        _sevenDayForecastWindDirectionRotation4, _sevenDayForecastWeatherIcon4a, _sevenDayForecastWeatherIcon4b, _sevenDayForecastTemp4, _sevenDayForecastName4,
+        _sevenDayForecastDescription5,
+        _sevenDayForecastWindSpeed5, _sevenDayForecastWindDirectionRotation5, _sevenDayForecastWeatherIcon5a, _sevenDayForecastWeatherIcon5b, _sevenDayForecastTemp5,
+        _sevenDayForecastName5,
+        _sevenDayForecastDescription6, _sevenDayForecastWindSpeed6, _sevenDayForecastWindDirectionRotation6, _sevenDayForecastWeatherIcon6a, _sevenDayForecastWeatherIcon6b,
+        _sevenDayForecastTemp6,
         _sevenDayForecastName6,
-        _sevenDayForecastDescription7, _sevenDayForecastWindSpeed7, _sevenDayForecastWindDirectionRotation7, _sevenDayForecastWeatherIcon7, _sevenDayForecastTemp7,
+        _sevenDayForecastDescription7, _sevenDayForecastWindSpeed7, _sevenDayForecastWindDirectionRotation7, _sevenDayForecastWeatherIcon7a, _sevenDayForecastWeatherIcon7b,
+        _sevenDayForecastTemp7,
         _sevenDayForecastName7,
-        _sevenDayForecastDescription8, _sevenDayForecastWindSpeed8, _sevenDayForecastWindDirectionRotation8, _sevenDayForecastWeatherIcon8, _sevenDayForecastTemp8,
+        _sevenDayForecastDescription8, _sevenDayForecastWindSpeed8, _sevenDayForecastWindDirectionRotation8, _sevenDayForecastWeatherIcon8a, _sevenDayForecastWeatherIcon8b,
+        _sevenDayForecastTemp8,
         _sevenDayForecastName8,
-        _sevenDayForecastDescription9, _sevenDayForecastWindSpeed9, _sevenDayForecastWindDirectionRotation9, _sevenDayForecastWeatherIcon9, _sevenDayForecastTemp9,
+        _sevenDayForecastDescription9, _sevenDayForecastWindSpeed9, _sevenDayForecastWindDirectionRotation9, _sevenDayForecastWeatherIcon9a, _sevenDayForecastWeatherIcon9b,
+        _sevenDayForecastTemp9,
         _sevenDayForecastName9,
-        _sevenDayForecastDescription10, _sevenDayForecastWindSpeed10, _sevenDayForecastWindDirectionRotation10, _sevenDayForecastWeatherIcon10, _sevenDayForecastTemp10,
+        _sevenDayForecastDescription10, _sevenDayForecastWindSpeed10, _sevenDayForecastWindDirectionRotation10, _sevenDayForecastWeatherIcon10a, _sevenDayForecastWeatherIcon10b,
+        _sevenDayForecastTemp10,
         _sevenDayForecastName10,
-        _sevenDayForecastDescription11, _sevenDayForecastWindSpeed11, _sevenDayForecastWindDirectionRotation11, _sevenDayForecastWeatherIcon11, _sevenDayForecastTemp11,
+        _sevenDayForecastDescription11, _sevenDayForecastWindSpeed11, _sevenDayForecastWindDirectionRotation11, _sevenDayForecastWeatherIcon11a, _sevenDayForecastWeatherIcon11b,
+        _sevenDayForecastTemp11,
         _sevenDayForecastName11,
-        _sevenDayForecastDescription12, _sevenDayForecastWindSpeed12, _sevenDayForecastWindDirectionRotation12, _sevenDayForecastWeatherIcon12, _sevenDayForecastTemp12,
+        _sevenDayForecastDescription12, _sevenDayForecastWindSpeed12, _sevenDayForecastWindDirectionRotation12, _sevenDayForecastWeatherIcon12a, _sevenDayForecastWeatherIcon12b,
+        _sevenDayForecastTemp12,
         _sevenDayForecastName12,
-        _sevenDayForecastDescription13, _sevenDayForecastWindSpeed13, _sevenDayForecastWindDirectionRotation13, _sevenDayForecastWeatherIcon13, _sevenDayForecastTemp13,
+        _sevenDayForecastDescription13, _sevenDayForecastWindSpeed13, _sevenDayForecastWindDirectionRotation13, _sevenDayForecastWeatherIcon13a, _sevenDayForecastWeatherIcon13b,
+        _sevenDayForecastTemp13,
         _sevenDayForecastName13,
-        _sevenDayForecastDescription14, _sevenDayForecastWindSpeed14, _sevenDayForecastWindDirectionRotation14, _sevenDayForecastWeatherIcon14, _sevenDayForecastTemp14,
+        _sevenDayForecastDescription14, _sevenDayForecastWindSpeed14, _sevenDayForecastWindDirectionRotation14, _sevenDayForecastWeatherIcon14a, _sevenDayForecastWeatherIcon14b,
+        _sevenDayForecastTemp14,
         _sevenDayForecastName14, _hourlyForecastTime1, _hourlyForecastWeatherIcon1, _hourlyForecastTemp1, _hourlyForecastRainChance1, _hourlyForecastWindSpeed1,
         _hourlyForecastTime2, _hourlyForecastWeatherIcon2, _hourlyForecastTemp2, _hourlyForecastRainChance2, _hourlyForecastWindSpeed2,
         _hourlyForecastTime3, _hourlyForecastWeatherIcon3, _hourlyForecastTemp3, _hourlyForecastRainChance3, _hourlyForecastWindSpeed3,
@@ -46,7 +61,9 @@ public class WeatherVM : BaseViewModel {
         _hourlyForecastTime6, _hourlyForecastWeatherIcon6, _hourlyForecastTemp6, _hourlyForecastRainChance6, _hourlyForecastWindSpeed6,
         _hourlyForecastTime7, _hourlyForecastWeatherIcon7, _hourlyForecastTemp7, _hourlyForecastRainChance7, _hourlyForecastWindSpeed7,
         _hourlyForecastTime8, _hourlyForecastWeatherIcon8, _hourlyForecastTemp8, _hourlyForecastRainChance8, _hourlyForecastWindSpeed8,
-        _hourlyForecastTime9, _hourlyForecastWeatherIcon9, _hourlyForecastTemp9, _hourlyForecastRainChance9, _hourlyForecastWindSpeed9;
+        _hourlyForecastTime9, _hourlyForecastWeatherIcon9, _hourlyForecastTemp9, _hourlyForecastRainChance9, _hourlyForecastWindSpeed9,
+        _weatherOverlay, _thermometerDisplayIcon, _hourlyForecastRainIcon2, _hourlyForecastRainIcon3, _hourlyForecastRainIcon4, _hourlyForecastRainIcon5,
+        _hourlyForecastRainIcon6, _hourlyForecastRainIcon7, _hourlyForecastRainIcon8, _hourlyForecastRainIcon9;
 
     private DateTime currentTime;
     private JsonWeatherForecast forecast;
@@ -63,16 +80,18 @@ public class WeatherVM : BaseViewModel {
         /* Timer used to update time and weather.
          * It also pushes a crossViewMessage to update calendar, finances, etc.. when the date changes.
          */
-        //DispatcherTimer dispatcherTimer = new();
-        //dispatcherTimer.Tick += dispatcherTimer_Tick;
-        //dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-        //dispatcherTimer.Start();
+        if (ReferenceValues.EnableWeather) {
+            DispatcherTimer dispatcherTimer = new();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+        }
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
         CurrentDateText = DateTime.Now.ToLongDateString();
-        CurrentTimeText = DateTime.Now.ToShortTimeString();
-        CurrentTimeSecondsText = DateTime.Now.Second.ToString();
+        CurrentTimeText = DateTime.Now.ToString("HHmm");
+        CurrentTimeSecondsText = DateTime.Now.ToString("ss");
         poolWeather++;
 
         if (!currentTime.Day.Equals(DateTime.Now.Day)) {
@@ -119,6 +138,8 @@ public class WeatherVM : BaseViewModel {
     }
 
     public void UpdateWeatherForecast() {
+        string[] weatherIcons = new string[2];
+
         //TODO: Add more places
         CurrentWeatherLocationText = "Ashland City, TN";
         CurrentWeatherTempText = forecastHourly.properties.periods[0].temperature.ToString() + '°';
@@ -130,7 +151,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName1 = forecast.properties.periods[0].name;
             SevenDayForecastTemp1 = forecast.properties.periods[0].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon1 = GetWeatherIcon(forecast.properties.periods[0].shortForecast, forecast.properties.periods[0].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[0].shortForecast);
+            SevenDayForecastWeatherIcon1a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime);
+            SevenDayForecastWeatherIcon1b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime) : "null";
+
             SevenDayForecastWindSpeed1 = forecast.properties.periods[0].windSpeed;
             SevenDayForecastDescription1 = forecast.properties.periods[0].shortForecast;
         } catch (Exception) { }
@@ -138,7 +163,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName2 = forecast.properties.periods[1].name;
             SevenDayForecastTemp2 = forecast.properties.periods[1].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon2 = GetWeatherIcon(forecast.properties.periods[1].shortForecast, forecast.properties.periods[1].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[1].shortForecast);
+            SevenDayForecastWeatherIcon2a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[1].isDaytime);
+            SevenDayForecastWeatherIcon2b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[1].isDaytime) : "null";
+
             SevenDayForecastWindSpeed2 = forecast.properties.periods[1].windSpeed;
             SevenDayForecastDescription2 = forecast.properties.periods[1].shortForecast;
         } catch (Exception) { }
@@ -146,7 +175,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName3 = forecast.properties.periods[2].name;
             SevenDayForecastTemp3 = forecast.properties.periods[2].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon3 = GetWeatherIcon(forecast.properties.periods[2].shortForecast, forecast.properties.periods[2].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[2].shortForecast);
+            SevenDayForecastWeatherIcon3a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[2].isDaytime);
+            SevenDayForecastWeatherIcon3b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[2].isDaytime) : "null";
+
             SevenDayForecastWindSpeed3 = forecast.properties.periods[2].windSpeed;
             SevenDayForecastDescription3 = forecast.properties.periods[2].shortForecast;
         } catch (Exception) { }
@@ -154,7 +187,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName4 = forecast.properties.periods[3].name;
             SevenDayForecastTemp4 = forecast.properties.periods[3].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon4 = GetWeatherIcon(forecast.properties.periods[3].shortForecast, forecast.properties.periods[3].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[3].shortForecast);
+            SevenDayForecastWeatherIcon4a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[3].isDaytime);
+            SevenDayForecastWeatherIcon4b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[3].isDaytime) : "null";
+
             SevenDayForecastWindSpeed4 = forecast.properties.periods[3].windSpeed;
             SevenDayForecastDescription4 = forecast.properties.periods[3].shortForecast;
         } catch (Exception) { }
@@ -162,7 +199,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName5 = forecast.properties.periods[4].name;
             SevenDayForecastTemp5 = forecast.properties.periods[4].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon5 = GetWeatherIcon(forecast.properties.periods[4].shortForecast, forecast.properties.periods[4].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[4].shortForecast);
+            SevenDayForecastWeatherIcon5a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[4].isDaytime);
+            SevenDayForecastWeatherIcon5b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[4].isDaytime) : "null";
+
             SevenDayForecastWindSpeed5 = forecast.properties.periods[4].windSpeed;
             SevenDayForecastDescription5 = forecast.properties.periods[4].shortForecast;
         } catch (Exception) { }
@@ -170,7 +211,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName6 = forecast.properties.periods[5].name;
             SevenDayForecastTemp6 = forecast.properties.periods[5].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon6 = GetWeatherIcon(forecast.properties.periods[5].shortForecast, forecast.properties.periods[5].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[5].shortForecast);
+            SevenDayForecastWeatherIcon6a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[5].isDaytime);
+            SevenDayForecastWeatherIcon6b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[5].isDaytime) : "null";
+
             SevenDayForecastWindSpeed6 = forecast.properties.periods[5].windSpeed;
             SevenDayForecastDescription6 = forecast.properties.periods[5].shortForecast;
         } catch (Exception) { }
@@ -178,7 +223,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName7 = forecast.properties.periods[6].name;
             SevenDayForecastTemp7 = forecast.properties.periods[6].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon7 = GetWeatherIcon(forecast.properties.periods[6].shortForecast, forecast.properties.periods[6].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[6].shortForecast);
+            SevenDayForecastWeatherIcon7a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[6].isDaytime);
+            SevenDayForecastWeatherIcon7b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[6].isDaytime) : "null";
+
             SevenDayForecastWindSpeed7 = forecast.properties.periods[6].windSpeed;
             SevenDayForecastDescription7 = forecast.properties.periods[6].shortForecast;
         } catch (Exception) { }
@@ -186,7 +235,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName8 = forecast.properties.periods[7].name;
             SevenDayForecastTemp8 = forecast.properties.periods[7].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon8 = GetWeatherIcon(forecast.properties.periods[7].shortForecast, forecast.properties.periods[7].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[7].shortForecast);
+            SevenDayForecastWeatherIcon8a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[7].isDaytime);
+            SevenDayForecastWeatherIcon8b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[7].isDaytime) : "null";
+
             SevenDayForecastWindSpeed8 = forecast.properties.periods[7].windSpeed;
             SevenDayForecastDescription8 = forecast.properties.periods[7].shortForecast;
         } catch (Exception) { }
@@ -194,7 +247,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName9 = forecast.properties.periods[8].name;
             SevenDayForecastTemp9 = forecast.properties.periods[8].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon9 = GetWeatherIcon(forecast.properties.periods[8].shortForecast, forecast.properties.periods[8].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[8].shortForecast);
+            SevenDayForecastWeatherIcon9a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[8].isDaytime);
+            SevenDayForecastWeatherIcon9b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[8].isDaytime) : "null";
+
             SevenDayForecastWindSpeed9 = forecast.properties.periods[8].windSpeed;
             SevenDayForecastDescription9 = forecast.properties.periods[8].shortForecast;
         } catch (Exception) { }
@@ -202,7 +259,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName10 = forecast.properties.periods[9].name;
             SevenDayForecastTemp10 = forecast.properties.periods[9].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon10 = GetWeatherIcon(forecast.properties.periods[9].shortForecast, forecast.properties.periods[9].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[9].shortForecast);
+            SevenDayForecastWeatherIcon10a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[9].isDaytime);
+            SevenDayForecastWeatherIcon10b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[9].isDaytime) : "null";
+
             SevenDayForecastWindSpeed10 = forecast.properties.periods[9].windSpeed;
             SevenDayForecastDescription10 = forecast.properties.periods[9].shortForecast;
         } catch (Exception) { }
@@ -210,7 +271,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName11 = forecast.properties.periods[10].name;
             SevenDayForecastTemp11 = forecast.properties.periods[10].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon11 = GetWeatherIcon(forecast.properties.periods[10].shortForecast, forecast.properties.periods[10].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[10].shortForecast);
+            SevenDayForecastWeatherIcon11a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[10].isDaytime);
+            SevenDayForecastWeatherIcon11b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[10].isDaytime) : "null";
+
             SevenDayForecastWindSpeed11 = forecast.properties.periods[10].windSpeed;
             SevenDayForecastDescription11 = forecast.properties.periods[10].shortForecast;
         } catch (Exception) { }
@@ -218,7 +283,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName12 = forecast.properties.periods[11].name;
             SevenDayForecastTemp12 = forecast.properties.periods[11].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon12 = GetWeatherIcon(forecast.properties.periods[11].shortForecast, forecast.properties.periods[11].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[11].shortForecast);
+            SevenDayForecastWeatherIcon12a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[11].isDaytime);
+            SevenDayForecastWeatherIcon12b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[11].isDaytime) : "null";
+
             SevenDayForecastWindSpeed12 = forecast.properties.periods[11].windSpeed;
             SevenDayForecastDescription12 = forecast.properties.periods[11].shortForecast;
         } catch (Exception) { }
@@ -226,7 +295,11 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName13 = forecast.properties.periods[12].name;
             SevenDayForecastTemp13 = forecast.properties.periods[12].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon13 = GetWeatherIcon(forecast.properties.periods[12].shortForecast, forecast.properties.periods[12].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[12].shortForecast);
+            SevenDayForecastWeatherIcon13a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[12].isDaytime);
+            SevenDayForecastWeatherIcon13b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[12].isDaytime) : "null";
+
             SevenDayForecastWindSpeed13 = forecast.properties.periods[12].windSpeed;
             SevenDayForecastDescription13 = forecast.properties.periods[12].shortForecast;
         } catch (Exception) { }
@@ -234,82 +307,133 @@ public class WeatherVM : BaseViewModel {
         try {
             SevenDayForecastName14 = forecast.properties.periods[13].name;
             SevenDayForecastTemp14 = forecast.properties.periods[13].temperature.ToString() + '°';
-            SevenDayForecastWeatherIcon14 = GetWeatherIcon(forecast.properties.periods[13].shortForecast, forecast.properties.periods[13].isDaytime);
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[13].shortForecast);
+            SevenDayForecastWeatherIcon14a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[13].isDaytime);
+            SevenDayForecastWeatherIcon14b = weatherIcons.Length > 1 ? GetWeatherIcon(weatherIcons[1], forecast.properties.periods[13].isDaytime) : "null";
+
             SevenDayForecastWindSpeed14 = forecast.properties.periods[13].windSpeed;
             SevenDayForecastDescription14 = forecast.properties.periods[13].shortForecast;
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime1 = forecastHourly.properties.periods[1].startTime.Hour + "00";
+            HourlyForecastTime1 = forecastHourly.properties.periods[1].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon1 = GetWeatherIcon(forecastHourly.properties.periods[1].shortForecast, forecastHourly.properties.periods[1].isDaytime);
             HourlyForecastTemp1 = forecastHourly.properties.periods[1].temperature.ToString() + '°';
             HourlyForecastRainChance1 = GetRainChance(forecastHourly.properties.periods[1].icon);
+            HourlyForecastRainIcon1 = GetRainIcon(forecastHourly.properties.periods[1].shortForecast);
             HourlyForecastWindSpeed1 = forecastHourly.properties.periods[1].windSpeed;
+            HourlyForecastWindDirectionRotation1 = GetWindRotation(forecastHourly.properties.periods[1].windDirection);
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime2 = forecastHourly.properties.periods[2].startTime.Hour + "00";
+            HourlyForecastTime2 = forecastHourly.properties.periods[2].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon2 = GetWeatherIcon(forecastHourly.properties.periods[2].shortForecast, forecastHourly.properties.periods[2].isDaytime);
             HourlyForecastTemp2 = forecastHourly.properties.periods[2].temperature.ToString() + '°';
             HourlyForecastRainChance2 = GetRainChance(forecastHourly.properties.periods[2].icon);
+            HourlyForecastRainIcon2 = GetRainIcon(forecastHourly.properties.periods[2].shortForecast);
             HourlyForecastWindSpeed2 = forecastHourly.properties.periods[2].windSpeed;
+            HourlyForecastWindDirectionRotation2 = GetWindRotation(forecastHourly.properties.periods[2].windDirection);
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime3 = forecastHourly.properties.periods[3].startTime.Hour + "00";
+            HourlyForecastTime3 = forecastHourly.properties.periods[3].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon3 = GetWeatherIcon(forecastHourly.properties.periods[3].shortForecast, forecastHourly.properties.periods[3].isDaytime);
             HourlyForecastTemp3 = forecastHourly.properties.periods[3].temperature.ToString() + '°';
             HourlyForecastRainChance3 = GetRainChance(forecastHourly.properties.periods[3].icon);
+            HourlyForecastRainIcon3 = GetRainIcon(forecastHourly.properties.periods[3].shortForecast);
             HourlyForecastWindSpeed3 = forecastHourly.properties.periods[3].windSpeed;
+            HourlyForecastWindDirectionRotation3 = GetWindRotation(forecastHourly.properties.periods[3].windDirection);
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime4 = forecastHourly.properties.periods[4].startTime.Hour + "00";
+            HourlyForecastTime4 = forecastHourly.properties.periods[4].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon4 = GetWeatherIcon(forecastHourly.properties.periods[4].shortForecast, forecastHourly.properties.periods[4].isDaytime);
             HourlyForecastTemp4 = forecastHourly.properties.periods[4].temperature.ToString() + '°';
             HourlyForecastRainChance4 = GetRainChance(forecastHourly.properties.periods[4].icon);
+            HourlyForecastRainIcon4 = GetRainIcon(forecastHourly.properties.periods[4].shortForecast);
             HourlyForecastWindSpeed4 = forecastHourly.properties.periods[4].windSpeed;
+            HourlyForecastWindDirectionRotation4 = GetWindRotation(forecastHourly.properties.periods[4].windDirection);
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime5 = forecastHourly.properties.periods[5].startTime.Hour + "00";
+            HourlyForecastTime5 = forecastHourly.properties.periods[5].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon5 = GetWeatherIcon(forecastHourly.properties.periods[5].shortForecast, forecastHourly.properties.periods[5].isDaytime);
             HourlyForecastTemp5 = forecastHourly.properties.periods[5].temperature.ToString() + '°';
             HourlyForecastRainChance5 = GetRainChance(forecastHourly.properties.periods[5].icon);
+            HourlyForecastRainIcon5 = GetRainIcon(forecastHourly.properties.periods[5].shortForecast);
             HourlyForecastWindSpeed5 = forecastHourly.properties.periods[5].windSpeed;
+            HourlyForecastWindDirectionRotation5 = GetWindRotation(forecastHourly.properties.periods[5].windDirection);
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime6 = forecastHourly.properties.periods[6].startTime.Hour + "00";
+            HourlyForecastTime6 = forecastHourly.properties.periods[6].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon6 = GetWeatherIcon(forecastHourly.properties.periods[6].shortForecast, forecastHourly.properties.periods[6].isDaytime);
             HourlyForecastTemp6 = forecastHourly.properties.periods[6].temperature.ToString() + '°';
             HourlyForecastRainChance6 = GetRainChance(forecastHourly.properties.periods[6].icon);
+            HourlyForecastRainIcon6 = GetRainIcon(forecastHourly.properties.periods[6].shortForecast);
             HourlyForecastWindSpeed6 = forecastHourly.properties.periods[6].windSpeed;
+            HourlyForecastWindDirectionRotation6 = GetWindRotation(forecastHourly.properties.periods[6].windDirection);
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime7 = forecastHourly.properties.periods[7].startTime.Hour + "00";
+            HourlyForecastTime7 = forecastHourly.properties.periods[7].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon7 = GetWeatherIcon(forecastHourly.properties.periods[7].shortForecast, forecastHourly.properties.periods[7].isDaytime);
             HourlyForecastTemp7 = forecastHourly.properties.periods[7].temperature.ToString() + '°';
             HourlyForecastRainChance7 = GetRainChance(forecastHourly.properties.periods[7].icon);
+            HourlyForecastRainIcon7 = GetRainIcon(forecastHourly.properties.periods[7].shortForecast);
             HourlyForecastWindSpeed7 = forecastHourly.properties.periods[7].windSpeed;
+            HourlyForecastWindDirectionRotation7 = GetWindRotation(forecastHourly.properties.periods[7].windDirection);
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime8 = forecastHourly.properties.periods[8].startTime.Hour + "00";
+            HourlyForecastTime8 = forecastHourly.properties.periods[8].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon8 = GetWeatherIcon(forecastHourly.properties.periods[8].shortForecast, forecastHourly.properties.periods[8].isDaytime);
             HourlyForecastTemp8 = forecastHourly.properties.periods[8].temperature.ToString() + '°';
             HourlyForecastRainChance8 = GetRainChance(forecastHourly.properties.periods[8].icon);
+            HourlyForecastRainIcon8 = GetRainIcon(forecastHourly.properties.periods[8].icon);
             HourlyForecastWindSpeed8 = forecastHourly.properties.periods[8].windSpeed;
+            HourlyForecastWindDirectionRotation8 = GetWindRotation(forecastHourly.properties.periods[8].windDirection);
         } catch (Exception) { }
 
         try {
-            HourlyForecastTime9 = forecastHourly.properties.periods[9].startTime.Hour + "00";
+            HourlyForecastTime9 = forecastHourly.properties.periods[9].startTime.ToString("HHmm");
             HourlyForecastWeatherIcon9 = GetWeatherIcon(forecastHourly.properties.periods[9].shortForecast, forecastHourly.properties.periods[9].isDaytime);
             HourlyForecastTemp9 = forecastHourly.properties.periods[9].temperature.ToString() + '°';
             HourlyForecastRainChance9 = GetRainChance(forecastHourly.properties.periods[9].icon);
+            HourlyForecastRainIcon9 = GetRainIcon(forecastHourly.properties.periods[9].shortForecast);
             HourlyForecastWindSpeed9 = forecastHourly.properties.periods[9].windSpeed;
+            HourlyForecastWindDirectionRotation9 = GetWindRotation(forecastHourly.properties.periods[9].windDirection);
         } catch (Exception) { }
+
+        /* Add Thermometer if needed */
+        if (forecastHourly.properties.periods[0].temperature < 20) {
+            //WeatherOverlay = "../../Resources/Images/weather/cold_border.png";
+            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_freezing.png";
+        } else if (forecastHourly.properties.periods[0].temperature >= 20 && forecastHourly.properties.periods[0].temperature < 35) {
+            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_cold.png";
+        } else if (forecastHourly.properties.periods[0].temperature >= 35 && forecastHourly.properties.periods[0].temperature < 60) {
+            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_cool.png";
+        } else if (forecastHourly.properties.periods[0].temperature >= 60 && forecastHourly.properties.periods[0].temperature < 85) {
+            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_warm.png";
+        } else if (forecastHourly.properties.periods[0].temperature >= 85 && forecastHourly.properties.periods[0].temperature < 100) {
+            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_hot.png";
+        } else {
+            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_burning.png";
+        }
+    }
+
+    private string[] RegexWeatherForecast(string input) {
+        return input.Split(new[] { " then " }, StringSplitOptions.None);
+    }
+
+    private string GetRainIcon(string input) {
+        switch (input) {
+        case "Snow":
+            return "./../Resources/Images/weather/snow_drop.png";
+        default:
+            return "../../Resources/Images/weather/rain_drop.png";
+        }
     }
 
     private string GetWeatherIcon(string weather, bool isDayTime) {
@@ -321,32 +445,43 @@ public class WeatherVM : BaseViewModel {
             return isDayTime
                 ? "../../Resources/Images/weather/weather_clear.png"
                 : "../../Resources/Images/weather/weather_clear_night.png";
+        case "Cloudy":
         case "Partly Cloudy":
-        case "Partly Cloudy then Slight Chance Rain Showers":
+        case "Mostly Cloudy":
+        case "Partly Sunny":
             return isDayTime
                 ? "../../Resources/Images/weather/weather_part_cloudy.png"
                 : "../../Resources/Images/weather/weather_cloudy_night.png";
         case "Patchy Fog":
         case "Areas Of Fog":
             return "../../Resources/Images/weather/weather_fog.png";
-        case "Chance Rain Showers":
-        case "Rain Showers Likely":
-        case "Chance Rain Showers then Mostly Cloudy":
+        case "Slight Chance Very Light Rain":
             return "../../Resources/Images/weather/weather_rain_light.png";
+        case "Rain Showers Likely":
         case "Rain Showers":
-            return "../../Resources/Images/weather/weather_rain_medium.png";
-        case "Chance Showers And Thunderstorms":
+        case "Chance Rain Showers":
         case "Slight Chance Rain Showers":
+            return "../../Resources/Images/weather/weather_rain_medium.png";
+        case "Showers And Thunderstorms":
+        case "Showers And Thunderstorms Likely":
+        case "Chance Showers And Thunderstorms":
+        case "Slight Chance Showers And Thunderstorms":
             return "../../Resources/Images/weather/weather_storm.png";
+        case "Widespread Frost":
+            return "../../Resources/Images/weather/weather_frost.png";
         default:
-            return isDayTime
-                ? "../../Resources/Images/weather/weather_part_cloudy.png"
-                : "../../Resources/Images/weather/weather_cloudy_night.png";
+            return "null";
         }
     }
 
     private string GetRainChance(string icon) {
-        return "0%";
+        Regex rg = new(@"[,]\d[0-9]");
+        icon = rg.Match(icon).Value;
+        if (string.IsNullOrEmpty(icon)) {
+            return "0%";
+        }
+
+        return icon.Substring(1) + '%';
     }
 
     private int GetWindRotation(string direction) {
@@ -510,11 +645,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon1 {
-        get => _sevenDayForecastWeatherIcon1;
+    public string SevenDayForecastWeatherIcon1a {
+        get => _sevenDayForecastWeatherIcon1a;
         set {
-            _sevenDayForecastWeatherIcon1 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon1");
+            _sevenDayForecastWeatherIcon1a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon1a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon1b {
+        get => _sevenDayForecastWeatherIcon1b;
+        set {
+            _sevenDayForecastWeatherIcon1b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon1b");
         }
     }
 
@@ -558,11 +701,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon2 {
-        get => _sevenDayForecastWeatherIcon2;
+    public string SevenDayForecastWeatherIcon2a {
+        get => _sevenDayForecastWeatherIcon2a;
         set {
-            _sevenDayForecastWeatherIcon2 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon2");
+            _sevenDayForecastWeatherIcon2a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon2a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon2b {
+        get => _sevenDayForecastWeatherIcon2b;
+        set {
+            _sevenDayForecastWeatherIcon2b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon2b");
         }
     }
 
@@ -606,11 +757,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon3 {
-        get => _sevenDayForecastWeatherIcon3;
+    public string SevenDayForecastWeatherIcon3a {
+        get => _sevenDayForecastWeatherIcon3a;
         set {
-            _sevenDayForecastWeatherIcon3 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon3");
+            _sevenDayForecastWeatherIcon3a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon3a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon3b {
+        get => _sevenDayForecastWeatherIcon3b;
+        set {
+            _sevenDayForecastWeatherIcon3b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon3b");
         }
     }
 
@@ -654,11 +813,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon4 {
-        get => _sevenDayForecastWeatherIcon4;
+    public string SevenDayForecastWeatherIcon4a {
+        get => _sevenDayForecastWeatherIcon4a;
         set {
-            _sevenDayForecastWeatherIcon4 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon4");
+            _sevenDayForecastWeatherIcon4a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon4a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon4b {
+        get => _sevenDayForecastWeatherIcon4b;
+        set {
+            _sevenDayForecastWeatherIcon4b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon4b");
         }
     }
 
@@ -702,11 +869,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon5 {
-        get => _sevenDayForecastWeatherIcon5;
+    public string SevenDayForecastWeatherIcon5a {
+        get => _sevenDayForecastWeatherIcon5a;
         set {
-            _sevenDayForecastWeatherIcon5 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon5");
+            _sevenDayForecastWeatherIcon5a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon5a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon5b {
+        get => _sevenDayForecastWeatherIcon5b;
+        set {
+            _sevenDayForecastWeatherIcon5b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon5b");
         }
     }
 
@@ -750,11 +925,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon6 {
-        get => _sevenDayForecastWeatherIcon6;
+    public string SevenDayForecastWeatherIcon6a {
+        get => _sevenDayForecastWeatherIcon6a;
         set {
-            _sevenDayForecastWeatherIcon6 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon6");
+            _sevenDayForecastWeatherIcon6a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon6a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon6b {
+        get => _sevenDayForecastWeatherIcon6b;
+        set {
+            _sevenDayForecastWeatherIcon6b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon6b");
         }
     }
 
@@ -798,11 +981,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon7 {
-        get => _sevenDayForecastWeatherIcon7;
+    public string SevenDayForecastWeatherIcon7a {
+        get => _sevenDayForecastWeatherIcon7a;
         set {
-            _sevenDayForecastWeatherIcon7 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon7");
+            _sevenDayForecastWeatherIcon7a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon7a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon7b {
+        get => _sevenDayForecastWeatherIcon7b;
+        set {
+            _sevenDayForecastWeatherIcon7b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon7b");
         }
     }
 
@@ -846,11 +1037,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon8 {
-        get => _sevenDayForecastWeatherIcon8;
+    public string SevenDayForecastWeatherIcon8a {
+        get => _sevenDayForecastWeatherIcon8a;
         set {
-            _sevenDayForecastWeatherIcon8 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon8");
+            _sevenDayForecastWeatherIcon8a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon8a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon8b {
+        get => _sevenDayForecastWeatherIcon8b;
+        set {
+            _sevenDayForecastWeatherIcon8b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon8b");
         }
     }
 
@@ -894,11 +1093,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon9 {
-        get => _sevenDayForecastWeatherIcon9;
+    public string SevenDayForecastWeatherIcon9a {
+        get => _sevenDayForecastWeatherIcon9a;
         set {
-            _sevenDayForecastWeatherIcon9 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon9");
+            _sevenDayForecastWeatherIcon9a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon9a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon9b {
+        get => _sevenDayForecastWeatherIcon9b;
+        set {
+            _sevenDayForecastWeatherIcon9b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon9b");
         }
     }
 
@@ -942,11 +1149,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon10 {
-        get => _sevenDayForecastWeatherIcon10;
+    public string SevenDayForecastWeatherIcon10a {
+        get => _sevenDayForecastWeatherIcon10a;
         set {
-            _sevenDayForecastWeatherIcon10 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon10");
+            _sevenDayForecastWeatherIcon10a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon10a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon10b {
+        get => _sevenDayForecastWeatherIcon10b;
+        set {
+            _sevenDayForecastWeatherIcon10b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon10b");
         }
     }
 
@@ -990,11 +1205,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon11 {
-        get => _sevenDayForecastWeatherIcon11;
+    public string SevenDayForecastWeatherIcon11a {
+        get => _sevenDayForecastWeatherIcon11a;
         set {
-            _sevenDayForecastWeatherIcon11 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon11");
+            _sevenDayForecastWeatherIcon11a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon11a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon11b {
+        get => _sevenDayForecastWeatherIcon11b;
+        set {
+            _sevenDayForecastWeatherIcon11b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon11b");
         }
     }
 
@@ -1038,11 +1261,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon12 {
-        get => _sevenDayForecastWeatherIcon12;
+    public string SevenDayForecastWeatherIcon12a {
+        get => _sevenDayForecastWeatherIcon12a;
         set {
-            _sevenDayForecastWeatherIcon12 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon12");
+            _sevenDayForecastWeatherIcon12a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon12a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon12b {
+        get => _sevenDayForecastWeatherIcon12b;
+        set {
+            _sevenDayForecastWeatherIcon12b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon12b");
         }
     }
 
@@ -1086,11 +1317,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon13 {
-        get => _sevenDayForecastWeatherIcon13;
+    public string SevenDayForecastWeatherIcon13a {
+        get => _sevenDayForecastWeatherIcon13a;
         set {
-            _sevenDayForecastWeatherIcon13 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon13");
+            _sevenDayForecastWeatherIcon13a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon13a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon13b {
+        get => _sevenDayForecastWeatherIcon13b;
+        set {
+            _sevenDayForecastWeatherIcon13b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon13b");
         }
     }
 
@@ -1134,11 +1373,19 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon14 {
-        get => _sevenDayForecastWeatherIcon14;
+    public string SevenDayForecastWeatherIcon14a {
+        get => _sevenDayForecastWeatherIcon14a;
         set {
-            _sevenDayForecastWeatherIcon14 = value;
-            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon14");
+            _sevenDayForecastWeatherIcon14a = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon14a");
+        }
+    }
+
+    public string SevenDayForecastWeatherIcon14b {
+        get => _sevenDayForecastWeatherIcon14b;
+        set {
+            _sevenDayForecastWeatherIcon14b = value;
+            RaisePropertyChangedEvent("SevenDayForecastWeatherIcon14b");
         }
     }
 
@@ -1524,6 +1771,166 @@ public class WeatherVM : BaseViewModel {
         set {
             _hourlyForecastWindSpeed9 = value;
             RaisePropertyChangedEvent("HourlyForecastWindSpeed9");
+        }
+    }
+
+    public string WeatherOverlay {
+        get => _weatherOverlay;
+        set {
+            _weatherOverlay = value;
+            RaisePropertyChangedEvent("WeatherOverlay");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation1 {
+        get => _hourlyForecastWindDirectionRotation1;
+        set {
+            _hourlyForecastWindDirectionRotation1 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation1");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation2 {
+        get => _hourlyForecastWindDirectionRotation2;
+        set {
+            _hourlyForecastWindDirectionRotation2 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation2");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation3 {
+        get => _hourlyForecastWindDirectionRotation3;
+        set {
+            _hourlyForecastWindDirectionRotation3 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation3");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation4 {
+        get => _hourlyForecastWindDirectionRotation4;
+        set {
+            _hourlyForecastWindDirectionRotation4 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation4");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation5 {
+        get => _hourlyForecastWindDirectionRotation5;
+        set {
+            _hourlyForecastWindDirectionRotation5 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation5");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation6 {
+        get => _hourlyForecastWindDirectionRotation6;
+        set {
+            _hourlyForecastWindDirectionRotation6 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation6");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation7 {
+        get => _hourlyForecastWindDirectionRotation7;
+        set {
+            _hourlyForecastWindDirectionRotation7 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation7");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation8 {
+        get => _hourlyForecastWindDirectionRotation8;
+        set {
+            _hourlyForecastWindDirectionRotation8 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation8");
+        }
+    }
+
+    public int HourlyForecastWindDirectionRotation9 {
+        get => _hourlyForecastWindDirectionRotation9;
+        set {
+            _hourlyForecastWindDirectionRotation9 = value;
+            RaisePropertyChangedEvent("HourlyForecastWindDirectionRotation9");
+        }
+    }
+
+    public string ThermometerDisplayIcon {
+        get => _thermometerDisplayIcon;
+        set {
+            _thermometerDisplayIcon = value;
+            RaisePropertyChangedEvent("ThermometerDisplayIcon");
+        }
+    }
+
+    public string HourlyForecastRainIcon1 {
+        get => _hourlyForecastRainIcon1;
+        set {
+            _hourlyForecastRainIcon1 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon1");
+        }
+    }
+
+    public string HourlyForecastRainIcon2 {
+        get => _hourlyForecastRainIcon2;
+        set {
+            _hourlyForecastRainIcon2 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon2");
+        }
+    }
+
+    public string HourlyForecastRainIcon3 {
+        get => _hourlyForecastRainIcon3;
+        set {
+            _hourlyForecastRainIcon3 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon3");
+        }
+    }
+
+    public string HourlyForecastRainIcon4 {
+        get => _hourlyForecastRainIcon4;
+        set {
+            _hourlyForecastRainIcon4 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon4");
+        }
+    }
+
+    public string HourlyForecastRainIcon5 {
+        get => _hourlyForecastRainIcon5;
+        set {
+            _hourlyForecastRainIcon5 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon5");
+        }
+    }
+
+    public string HourlyForecastRainIcon6 {
+        get => _hourlyForecastRainIcon6;
+        set {
+            _hourlyForecastRainIcon6 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon6");
+        }
+    }
+
+    public string HourlyForecastRainIcon7 {
+        get => _hourlyForecastRainIcon7;
+        set {
+            _hourlyForecastRainIcon7 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon7");
+        }
+    }
+
+    public string HourlyForecastRainIcon8 {
+        get => _hourlyForecastRainIcon8;
+        set {
+            _hourlyForecastRainIcon8 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon8");
+        }
+    }
+
+    public string HourlyForecastRainIcon9 {
+        get => _hourlyForecastRainIcon9;
+        set {
+            _hourlyForecastRainIcon9 = value;
+            RaisePropertyChangedEvent("HourlyForecastRainIcon9");
         }
     }
 

@@ -4,7 +4,7 @@ using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel; 
+namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
     private string _userAgentText;

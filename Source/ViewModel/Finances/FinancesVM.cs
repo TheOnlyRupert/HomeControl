@@ -7,7 +7,7 @@ using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel.Finances; 
+namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesVM : BaseViewModel {
     private string _cashIncomeText, _cashExpenseText, _cashAvailableText, _cashAvailableTextColor;

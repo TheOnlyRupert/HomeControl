@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace HomeControl.Source.ViewModel.Base; 
+namespace HomeControl.Source.ViewModel.Base;
 
 public class DelegateCommand : ICommand {
     private readonly Action<object> _action;

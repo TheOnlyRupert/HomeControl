@@ -6,7 +6,7 @@ using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel.Finances; 
+namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesAddVM : BaseViewModel {
     private readonly CrossViewMessenger _crossViewMessenger;

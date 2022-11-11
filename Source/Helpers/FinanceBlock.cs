@@ -1,4 +1,4 @@
-﻿namespace HomeControl.Source.Helpers; 
+﻿namespace HomeControl.Source.Helpers;
 
 public class FinanceBlock {
     public string AddSub { get; set; }

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using HomeControl.Source.Helpers;
 
-namespace HomeControl.Source.Reference; 
+namespace HomeControl.Source.Reference;
 
 public static class ReferenceValues {
     public const string COPYRIGHT = "Copyright © 2022  Robert Higgins";
     public const string VERSION = "1.0.0";
+
+    public const bool EnableWeather = true;
 
     public static readonly List<string> CategorySpendingList = new() {
         "Billing",
@@ -36,4 +39,8 @@ public static class ReferenceValues {
     public static string UserAgent;
 
     public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
+
+    public static DateTime CalendarEventDate { get; set; }
+
+    public static List<Events> MasterEventsList { get; set; }
 }
