@@ -12,7 +12,7 @@ public static class CsvParser {
 
     static CsvParser() {
         try {
-            Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY);
+            Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "events/");
 
             if (!File.Exists(ReferenceValues.FILE_DIRECTORY + "settings.csv")) {
                 Console.WriteLine("settings.csv does not exist. Restoring default settings");
@@ -27,9 +27,17 @@ public static class CsvParser {
                 file.WriteLine("!ADDSUB,DATE,ITEM,AMOUNT,CATEGORY,PERSON");
                 file.Close();
             }
+
+            if (!File.Exists(ReferenceValues.FILE_DIRECTORY + "behavior.csv")) {
+                Console.WriteLine("behavior.csv does not exist. Restoring default settings");
+                StreamWriter file = new(ReferenceValues.FILE_DIRECTORY + "behavior.csv", true);
+                file.WriteLine("!KEY,VALUE");
+                file.Close();
+            }
         } catch (Exception) {
             MessageBox.Show("Error! Unable to create program files in directory.\n" +
-                            "Using default settings with saving disabled.", "Error");
+                            "You must correct this issue and try running the program again.", "Fatal Error");
+            Environment.Exit(0);
         }
     }
 
@@ -97,10 +105,69 @@ public static class CsvParser {
     }
 
     public static void SaveSettings() {
-        ReferenceValues.UserAgent = ReferenceValues.UserAgent.Trim();
-
         try {
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "settings.csv", "!KEY,!VALUE\nUserAgent," + ReferenceValues.UserAgent);
+            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "settings.csv", "!KEY,!VALUE\nUserAgent," + ReferenceValues.UserAgent.Trim());
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save settings.csv... " + e.Message);
+        }
+    }
+
+    public static string[] GetBehavior() {
+        StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "behavior.csv");
+        string[] values = new string[1];
+
+        while (!streamReader.EndOfStream) {
+            string str = streamReader.ReadLine();
+
+            if (str != null && str[0] != '!') {
+                string[] strArray = str.Split(',');
+                switch (strArray[0]) {
+                case "UserAgent":
+                    try {
+                        values[0] = strArray[1];
+                    } catch (Exception) {
+                        values[0] = "null";
+                        Console.WriteLine("Error when reading value of \"UserAgent\" in settings.csv, using default settings");
+                    }
+
+                    break;
+                case "Child1Name":
+                    try {
+                        values[1] = strArray[1];
+                    } catch (Exception) {
+                        values[1] = "null";
+                        Console.WriteLine("Error when reading value of \"Child1Name\" in settings.csv, using default settings");
+                    }
+
+                    break;
+                case "Child2Name":
+                    try {
+                        values[2] = strArray[2];
+                    } catch (Exception) {
+                        values[2] = "null";
+                        Console.WriteLine("Error when reading value of \"Child2Name\" in settings.csv, using default settings");
+                    }
+
+                    break;
+                case "Child3Name":
+                    try {
+                        values[3] = strArray[3];
+                    } catch (Exception) {
+                        values[3] = "null";
+                        Console.WriteLine("Error when reading value of \"Child3Name\" in settings.csv, using default settings");
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return values;
+    }
+
+    public static void SaveBehavior() {
+        try {
+            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "behavior.csv", "!KEY,!VALUE\nChild1Name," + ReferenceValues.Child1Name.Trim());
         } catch (Exception e) {
             Console.WriteLine("Unable to save settings.csv... " + e.Message);
         }

@@ -1,6 +1,6 @@
 ﻿using HomeControl.Source.ViewModel;
 
-namespace HomeControl.Source.Modules;
+namespace HomeControl.Source.Modules.Behavior;
 
 public partial class Behavior {
     public Behavior() {

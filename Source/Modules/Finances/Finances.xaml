@@ -117,12 +117,12 @@
                     </ListView.Resources>
                     <ListView.View>
                         <GridView AllowsColumnReorder="false">
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=AddSub}" Header="+/-" Width="48"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="72"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Item" Width="256"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="64"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="128"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person" Width="72"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=AddSub}" Header="+/-" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Item" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person" Width="Auto"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

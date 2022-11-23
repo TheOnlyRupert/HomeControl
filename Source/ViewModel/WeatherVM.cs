@@ -86,6 +86,8 @@ public class WeatherVM : BaseViewModel {
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
         }
+
+        Console.WriteLine("Weather Disabled in Debug");
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
@@ -430,7 +432,10 @@ public class WeatherVM : BaseViewModel {
 
     private string GetRainIcon(string input) {
         switch (input) {
-        case "Snow":
+        case "Snow Showers":
+        case "Chance Snow Showers":
+        case "Scattered Snow Showers":
+        case "Isolated Snow Showers":
             return "./../Resources/Images/weather/snow_drop.png";
         default:
             return "../../Resources/Images/weather/rain_drop.png";
@@ -475,6 +480,11 @@ public class WeatherVM : BaseViewModel {
             return "../../Resources/Images/weather/weather_storm.png";
         case "Widespread Frost":
             return "../../Resources/Images/weather/weather_frost.png";
+        case "Snow Showers":
+        case "Scattered Snow Showers":
+        case "Chance Snow Showers":
+        case "Isolated Snow Showers":
+            return "../../Resources/Images/weather/weather_snow.png";
         default:
             return "null";
         }

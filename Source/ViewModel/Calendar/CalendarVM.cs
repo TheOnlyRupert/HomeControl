@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Windows.Input;
-using HomeControl.Source.Helpers;
+using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Calendar;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -37,7 +34,24 @@ public class CalendarVM : BaseViewModel {
         _button38Date, _button38HolidayText, _button38EventText1, _button38EventText2, _button38EventText3, _button39Date, _button39HolidayText, _button39EventText1,
         _button39EventText2, _button39EventText3, _button40Date, _button40HolidayText, _button40EventText1, _button40EventText2, _button40EventText3, _button41Date,
         _button41HolidayText, _button41EventText1, _button41EventText2, _button41EventText3, _button42Date, _button42HolidayText, _button42EventText1, _button42EventText2,
-        _button42EventText3, _currentMonthAndYear, eventsListString, _button1EventColor1, _button1EventColor2, _button1EventColor3;
+        _button42EventText3, _currentMonthAndYear, _button1EventColor1, _button1EventColor2, _button1EventColor3, _button2EventColor1, _button2EventColor2, _button2EventColor3,
+        _button3EventColor1, _button3EventColor2, _button3EventColor3, _button4EventColor1, _button4EventColor2, _button4EventColor3, _button5EventColor1, _button5EventColor2,
+        _button5EventColor3, _button6EventColor1, _button6EventColor2, _button6EventColor3, _button7EventColor1, _button7EventColor2, _button7EventColor3, _button8EventColor1,
+        _button8EventColor2, _button8EventColor3, _button9EventColor1, _button9EventColor2, _button9EventColor3, _button10EventColor1, _button10EventColor2, _button10EventColor3,
+        _button11EventColor1, _button11EventColor2, _button11EventColor3, _button12EventColor1, _button12EventColor2, _button12EventColor3, _button13EventColor1,
+        _button13EventColor2, _button13EventColor3, _button14EventColor1, _button14EventColor2, _button14EventColor3, _button15EventColor1, _button15EventColor2,
+        _button15EventColor3, _button16EventColor1, _button16EventColor2, _button16EventColor3, _button17EventColor1, _button17EventColor2, _button17EventColor3,
+        _button18EventColor1, _button18EventColor2, _button18EventColor3, _button19EventColor1, _button19EventColor2, _button19EventColor3, _button20EventColor1,
+        _button20EventColor2, _button20EventColor3, _button21EventColor1, _button21EventColor2, _button21EventColor3, _button22EventColor1, _button22EventColor2,
+        _button22EventColor3, _button23EventColor1, _button23EventColor2, _button23EventColor3, _button24EventColor1, _button24EventColor2, _button24EventColor3,
+        _button25EventColor1, _button25EventColor2, _button25EventColor3, _button26EventColor1, _button26EventColor2, _button26EventColor3, _button27EventColor1,
+        _button27EventColor2, _button27EventColor3, _button28EventColor1, _button28EventColor2, _button28EventColor3, _button29EventColor1, _button29EventColor2,
+        _button29EventColor3, _button30EventColor1, _button30EventColor2, _button30EventColor3, _button31EventColor1, _button31EventColor2, _button31EventColor3,
+        _button32EventColor1, _button32EventColor2, _button32EventColor3, _button33EventColor1, _button33EventColor2, _button33EventColor3, _button34EventColor1,
+        _button34EventColor2, _button34EventColor3, _button35EventColor1, _button35EventColor2, _button35EventColor3, _button36EventColor1, _button36EventColor2,
+        _button36EventColor3, _button37EventColor1, _button37EventColor2, _button37EventColor3, _button38EventColor1, _button38EventColor2, _button38EventColor3,
+        _button39EventColor1, _button39EventColor2, _button39EventColor3, _button40EventColor1, _button40EventColor2, _button40EventColor3, _button41EventColor1,
+        _button41EventColor2, _button41EventColor3;
 
     private DateTime currentDateTime, calendarStartDateTime, button1DateTime;
 
@@ -310,878 +324,89 @@ public class CalendarVM : BaseViewModel {
         /* Probably only need this first button. All other buttons can just add days */
         button1DateTime = dateTime;
 
-        /* Get Holidays */
+        /* Get Holidays (hardcoded) */
 
         /* Get Calendar Events */
-        bool errored = false;
-        JsonSerializerOptions options = new() {
-            IncludeFields = true
-        };
-
-        try {
-            if (!File.Exists(ReferenceValues.FILE_DIRECTORY + "events.json")) {
-                Console.WriteLine("events.json does not exist. Restoring default settings");
-                StreamWriter file = new(ReferenceValues.FILE_DIRECTORY + "events.json", true);
-                file.WriteLine(
-                    "{\"eventsList\":[{\"date\":\"2022-10-30T13:00:00-06:00\",\"name\":\"Event Name\",\"location\":\"Event Location\",\"description\":\"Event Description\",\"person\":\"Robert\"}]}");
-                file.Close();
-            }
-        } catch (Exception) {
-            Console.WriteLine("events.json Errored");
-            errored = true;
-        }
-
-        try {
-            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "events.json");
-            while (!streamReader.EndOfStream) {
-                eventsListString = streamReader.ReadToEnd();
-            }
-        } catch (Exception) {
-            Console.WriteLine("events.json Errored");
-            errored = true;
-        }
-
-        JsonCalendar jsonCalendar = JsonSerializer.Deserialize<JsonCalendar>(eventsListString, options);
-        ReferenceValues.MasterEventsList = new List<Events>();
-        if (jsonCalendar != null) {
-            ReferenceValues.MasterEventsList = jsonCalendar.eventsList;
-        }
-
-        if (!errored) {
-            PopulateEvents();
-        }
+        new CalenderEventsFromJson(button1DateTime);
+        PopulateEvents();
     }
+
 
     private void PopulateEvents() {
-        int[] currentButtonEvents = new int[42];
-        for (int i = 0; i < ReferenceValues.MasterEventsList.Count; i++) {
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.Date) {
-                switch (currentButtonEvents[0]) {
-                case 0:
-                    Button1EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    switch (ReferenceValues.MasterEventsList[i].person) {
-                    case "Robert":
-                        Button1EventColor1 = "Blue";
-                        break;
-                    case "Brittany":
-                        Button1EventColor1 = "Green";
-                        break;
-                    case "Children":
-                        Button1EventColor1 = "Gray";
-                        break;
-                    default:
-                        Button1EventColor1 = "Black";
-                        break;
-                    }
+        /* Button 1 */
+        try {
+            Button1EventText1 = ReferenceValues.JsonCalendarMasterEventList[0].eventsList[0].name;
+            Button1EventText2 = ReferenceValues.JsonCalendarMasterEventList[0].eventsList[1].name;
+            Button1EventText3 = ReferenceValues.JsonCalendarMasterEventList[0].eventsList[2].name;
+        } catch (Exception) { }
 
-                    break;
-                case 1:
-                    Button1EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    switch (ReferenceValues.MasterEventsList[i].person) {
-                    case "Robert":
-                        Button1EventColor2 = "Blue";
-                        break;
-                    case "Brittany":
-                        Button1EventColor2 = "Green";
-                        break;
-                    case "Children":
-                        Button1EventColor2 = "Gray";
-                        break;
-                    default:
-                        Button1EventColor2 = "Black";
-                        break;
-                    }
+        try {
+            Button1EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[0].eventsList[0].person);
+            Button1EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[0].eventsList[1].person);
+            Button1EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[0].eventsList[2].person);
+        } catch (Exception) { }
 
-                    break;
-                case 2:
-                    Button1EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    switch (ReferenceValues.MasterEventsList[i].person) {
-                    case "Robert":
-                        Button1EventColor3 = "Blue";
-                        break;
-                    case "Brittany":
-                        Button1EventColor3 = "Green";
-                        break;
-                    case "Children":
-                        Button1EventColor3 = "Gray";
-                        break;
-                    default:
-                        Button1EventColor3 = "Black";
-                        break;
-                    }
-
-                    break;
-                default:
-                    Button1EventText3 = "+" + (currentButtonEvents[0] - 2) + "...";
-                    Button1EventColor3 = "Black";
-                    break;
-                }
-
-                currentButtonEvents[0]++;
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[0].eventsList.Count > 3) {
+                Button1EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[0].eventsList.Count - 2) + " More Events...";
+                Button1EventColor3 = "White";
             }
+        } catch (Exception) { }
 
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(1).Date) {
-                switch (currentButtonEvents[1]) {
-                case 0:
-                    Button2EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button2EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button2EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button2EventText3 = "+" + (currentButtonEvents[1] - 2) + "...";
-                    break;
-                }
+        /* Button 2 */
+        try {
+            Button2EventText1 = ReferenceValues.JsonCalendarMasterEventList[1].eventsList[0].name;
+            Button2EventText2 = ReferenceValues.JsonCalendarMasterEventList[1].eventsList[1].name;
+            Button2EventText3 = ReferenceValues.JsonCalendarMasterEventList[1].eventsList[2].name;
+        } catch (Exception) { }
 
-                currentButtonEvents[1]++;
+        try {
+            Button2EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[1].eventsList[0].person);
+            Button2EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[1].eventsList[1].person);
+            Button2EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[1].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[1].eventsList.Count > 3) {
+                Button2EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[1].eventsList.Count - 2) + " More Events...";
+                Button2EventColor3 = "White";
             }
+        } catch (Exception) { }
 
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(2).Date) {
-                switch (currentButtonEvents[2]) {
-                case 0:
-                    Button3EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button3EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button3EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button3EventText3 = "+" + (currentButtonEvents[2] - 2) + "...";
-                    break;
-                }
+        /* Button 3 */
+        try {
+            Button3EventText1 = ReferenceValues.JsonCalendarMasterEventList[2].eventsList[0].name;
+            Button3EventText2 = ReferenceValues.JsonCalendarMasterEventList[2].eventsList[1].name;
+            Button3EventText3 = ReferenceValues.JsonCalendarMasterEventList[2].eventsList[2].name;
+        } catch (Exception) { }
 
-                currentButtonEvents[2]++;
+        try {
+            Button3EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[2].eventsList[0].person);
+            Button3EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[2].eventsList[1].person);
+            Button3EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[2].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[2].eventsList.Count > 3) {
+                Button3EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[2].eventsList.Count - 2) + " More Events...";
+                Button3EventColor3 = "White";
             }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(3).Date) {
-                switch (currentButtonEvents[3]) {
-                case 0:
-                    Button4EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button4EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button4EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button4EventText3 = "+" + (currentButtonEvents[3] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[3]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(4).Date) {
-                switch (currentButtonEvents[4]) {
-                case 0:
-                    Button5EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button5EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button5EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button5EventText3 = "+" + (currentButtonEvents[4] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[4]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(5).Date) {
-                switch (currentButtonEvents[5]) {
-                case 0:
-                    Button6EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button6EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button6EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button6EventText3 = "+" + (currentButtonEvents[5] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[5]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(6).Date) {
-                switch (currentButtonEvents[6]) {
-                case 0:
-                    Button7EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button7EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button7EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button7EventText3 = "+" + (currentButtonEvents[6] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[6]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(7).Date) {
-                switch (currentButtonEvents[7]) {
-                case 0:
-                    Button8EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button8EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button8EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button8EventText3 = "+" + (currentButtonEvents[7] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[7]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(8).Date) {
-                switch (currentButtonEvents[8]) {
-                case 0:
-                    Button9EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button9EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button9EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button9EventText3 = "+" + (currentButtonEvents[8] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[8]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(9).Date) {
-                switch (currentButtonEvents[9]) {
-                case 0:
-                    Button10EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button10EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button10EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button10EventText3 = "+" + (currentButtonEvents[9] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[9]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(10).Date) {
-                switch (currentButtonEvents[10]) {
-                case 0:
-                    Button11EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button11EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button11EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button11EventText3 = "+" + (currentButtonEvents[10] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[10]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(11).Date) {
-                switch (currentButtonEvents[11]) {
-                case 0:
-                    Button12EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button12EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button12EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button12EventText3 = "+" + (currentButtonEvents[11] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[11]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(12).Date) {
-                switch (currentButtonEvents[12]) {
-                case 0:
-                    Button13EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button13EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button13EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button13EventText3 = "+" + (currentButtonEvents[12] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[12]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(13).Date) {
-                switch (currentButtonEvents[13]) {
-                case 0:
-                    Button14EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button14EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button14EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button14EventText3 = "+" + (currentButtonEvents[13] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[13]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(14).Date) {
-                switch (currentButtonEvents[14]) {
-                case 0:
-                    Button15EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button15EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button15EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button15EventText3 = "+" + (currentButtonEvents[14] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[14]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(15).Date) {
-                switch (currentButtonEvents[15]) {
-                case 0:
-                    Button16EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button16EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button16EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button16EventText3 = "+" + (currentButtonEvents[15] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[15]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(16).Date) {
-                switch (currentButtonEvents[16]) {
-                case 0:
-                    Button17EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button17EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button17EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button17EventText3 = "+" + (currentButtonEvents[16] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[16]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(17).Date) {
-                switch (currentButtonEvents[17]) {
-                case 0:
-                    Button18EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button18EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button18EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button18EventText3 = "+" + (currentButtonEvents[17] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[17]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(18).Date) {
-                switch (currentButtonEvents[18]) {
-                case 0:
-                    Button19EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button19EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button19EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button19EventText3 = "+" + (currentButtonEvents[18] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[18]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(20).Date) {
-                switch (currentButtonEvents[20]) {
-                case 0:
-                    Button21EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button21EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button21EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button21EventText3 = "+" + (currentButtonEvents[20] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[20]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(21).Date) {
-                switch (currentButtonEvents[21]) {
-                case 0:
-                    Button22EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button22EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button22EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button22EventText3 = "+" + (currentButtonEvents[21] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[21]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(22).Date) {
-                switch (currentButtonEvents[22]) {
-                case 0:
-                    Button23EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button23EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button23EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button23EventText3 = "+" + (currentButtonEvents[22] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[22]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(23).Date) {
-                switch (currentButtonEvents[23]) {
-                case 0:
-                    Button24EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button24EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button24EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button24EventText3 = "+" + (currentButtonEvents[23] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[23]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(24).Date) {
-                switch (currentButtonEvents[24]) {
-                case 0:
-                    Button25EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button25EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button25EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button25EventText3 = "+" + (currentButtonEvents[24] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[24]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(25).Date) {
-                switch (currentButtonEvents[25]) {
-                case 0:
-                    Button26EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button26EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button26EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button26EventText3 = "+" + (currentButtonEvents[25] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[25]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(26).Date) {
-                switch (currentButtonEvents[26]) {
-                case 0:
-                    Button27EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button27EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button27EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button27EventText3 = "+" + (currentButtonEvents[26] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[26]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(27).Date) {
-                switch (currentButtonEvents[27]) {
-                case 0:
-                    Button28EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button28EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button28EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button28EventText3 = "+" + (currentButtonEvents[27] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[27]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(28).Date) {
-                switch (currentButtonEvents[28]) {
-                case 0:
-                    Button29EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button29EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button29EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button29EventText3 = "+" + (currentButtonEvents[28] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[28]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(29).Date) {
-                switch (currentButtonEvents[29]) {
-                case 0:
-                    Button30EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button30EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button30EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button30EventText3 = "+" + (currentButtonEvents[29] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[29]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(30).Date) {
-                switch (currentButtonEvents[30]) {
-                case 0:
-                    Button31EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button31EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button31EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button31EventText3 = "+" + (currentButtonEvents[30] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[30]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(31).Date) {
-                switch (currentButtonEvents[31]) {
-                case 0:
-                    Button32EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button32EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button32EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button32EventText3 = "+" + (currentButtonEvents[31] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[31]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(32).Date) {
-                switch (currentButtonEvents[32]) {
-                case 0:
-                    Button33EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button33EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button33EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button33EventText3 = "+" + (currentButtonEvents[32] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[32]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(33).Date) {
-                switch (currentButtonEvents[33]) {
-                case 0:
-                    Button34EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button34EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button34EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button34EventText3 = "+" + (currentButtonEvents[33] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[33]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(34).Date) {
-                switch (currentButtonEvents[34]) {
-                case 0:
-                    Button35EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button35EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button35EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button35EventText3 = "+" + (currentButtonEvents[34] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[34]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(35).Date) {
-                switch (currentButtonEvents[35]) {
-                case 0:
-                    Button36EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button36EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button36EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button36EventText3 = "+" + (currentButtonEvents[35] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[35]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(36).Date) {
-                switch (currentButtonEvents[36]) {
-                case 0:
-                    Button37EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button37EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button37EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button37EventText3 = "+" + (currentButtonEvents[36] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[36]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(37).Date) {
-                switch (currentButtonEvents[37]) {
-                case 0:
-                    Button38EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button38EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button38EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button38EventText3 = "+" + (currentButtonEvents[37] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[37]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(38).Date) {
-                switch (currentButtonEvents[38]) {
-                case 0:
-                    Button39EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button39EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button39EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button39EventText3 = "+" + (currentButtonEvents[38] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[38]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(39).Date) {
-                switch (currentButtonEvents[39]) {
-                case 0:
-                    Button40EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button40EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button40EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button40EventText3 = "+" + (currentButtonEvents[39] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[39]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(40).Date) {
-                switch (currentButtonEvents[40]) {
-                case 0:
-                    Button41EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button41EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button41EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button41EventText3 = "+" + (currentButtonEvents[40] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[40]++;
-            }
-
-            if (ReferenceValues.MasterEventsList[i].date.Date == calendarStartDateTime.AddDays(41).Date) {
-                switch (currentButtonEvents[41]) {
-                case 0:
-                    Button42EventText1 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 1:
-                    Button42EventText2 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                case 2:
-                    Button42EventText3 = ReferenceValues.MasterEventsList[i].name;
-                    break;
-                default:
-                    Button42EventText3 = "+" + (currentButtonEvents[41] - 2) + "...";
-                    break;
-                }
-
-                currentButtonEvents[41]++;
-            }
-        }
+        } catch (Exception) { }
     }
 
+    //TODO: hardcoded the names for now, add these as config options in the future.
+    private string GetColorByName(string name) {
+        switch (name) {
+        case "Robert":
+            return "CornflowerBlue";
+        case "Brittany":
+            return "LightGreen";
+        case "Children":
+            return "LightGray";
+        default:
+            return "White";
+        }
+    }
 
     #region Fields
 
@@ -2896,6 +2121,966 @@ public class CalendarVM : BaseViewModel {
         set {
             _button1EventColor3 = value;
             RaisePropertyChangedEvent("Button1EventColor3");
+        }
+    }
+
+    public string Button2EventColor1 {
+        get => _button2EventColor1;
+        set {
+            _button2EventColor1 = value;
+            RaisePropertyChangedEvent("Button2EventColor1");
+        }
+    }
+
+    public string Button2EventColor2 {
+        get => _button2EventColor2;
+        set {
+            _button2EventColor2 = value;
+            RaisePropertyChangedEvent("Button2EventColor2");
+        }
+    }
+
+    public string Button2EventColor3 {
+        get => _button2EventColor3;
+        set {
+            _button2EventColor3 = value;
+            RaisePropertyChangedEvent("Button2EventColor3");
+        }
+    }
+
+    public string Button3EventColor1 {
+        get => _button3EventColor1;
+        set {
+            _button3EventColor1 = value;
+            RaisePropertyChangedEvent("Button3EventColor1");
+        }
+    }
+
+    public string Button3EventColor2 {
+        get => _button3EventColor2;
+        set {
+            _button3EventColor2 = value;
+            RaisePropertyChangedEvent("Button3EventColor2");
+        }
+    }
+
+    public string Button3EventColor3 {
+        get => _button3EventColor3;
+        set {
+            _button3EventColor3 = value;
+            RaisePropertyChangedEvent("Button3EventColor3");
+        }
+    }
+
+    public string Button4EventColor1 {
+        get => _button4EventColor1;
+        set {
+            _button4EventColor1 = value;
+            RaisePropertyChangedEvent("Button4EventColor1");
+        }
+    }
+
+    public string Button4EventColor2 {
+        get => _button4EventColor2;
+        set {
+            _button4EventColor2 = value;
+            RaisePropertyChangedEvent("Button4EventColor2");
+        }
+    }
+
+    public string Button4EventColor3 {
+        get => _button4EventColor3;
+        set {
+            _button4EventColor3 = value;
+            RaisePropertyChangedEvent("Button4EventColor3");
+        }
+    }
+
+    public string Button5EventColor1 {
+        get => _button5EventColor1;
+        set {
+            _button5EventColor1 = value;
+            RaisePropertyChangedEvent("Button5EventColor1");
+        }
+    }
+
+    public string Button5EventColor2 {
+        get => _button5EventColor2;
+        set {
+            _button5EventColor2 = value;
+            RaisePropertyChangedEvent("Button5EventColor2");
+        }
+    }
+
+    public string Button5EventColor3 {
+        get => _button5EventColor3;
+        set {
+            _button5EventColor3 = value;
+            RaisePropertyChangedEvent("Button5EventColor3");
+        }
+    }
+
+    public string Button6EventColor1 {
+        get => _button6EventColor1;
+        set {
+            _button6EventColor1 = value;
+            RaisePropertyChangedEvent("Button6EventColor1");
+        }
+    }
+
+    public string Button6EventColor2 {
+        get => _button6EventColor2;
+        set {
+            _button6EventColor2 = value;
+            RaisePropertyChangedEvent("Button6EventColor2");
+        }
+    }
+
+    public string Button6EventColor3 {
+        get => _button6EventColor3;
+        set {
+            _button6EventColor3 = value;
+            RaisePropertyChangedEvent("Button6EventColor3");
+        }
+    }
+
+    public string Button7EventColor1 {
+        get => _button7EventColor1;
+        set {
+            _button7EventColor1 = value;
+            RaisePropertyChangedEvent("Button7EventColor1");
+        }
+    }
+
+    public string Button7EventColor2 {
+        get => _button7EventColor2;
+        set {
+            _button7EventColor2 = value;
+            RaisePropertyChangedEvent("Button7EventColor2");
+        }
+    }
+
+    public string Button7EventColor3 {
+        get => _button7EventColor3;
+        set {
+            _button7EventColor3 = value;
+            RaisePropertyChangedEvent("Button7EventColor3");
+        }
+    }
+
+    public string Button8EventColor1 {
+        get => _button8EventColor1;
+        set {
+            _button8EventColor1 = value;
+            RaisePropertyChangedEvent("Button8EventColor1");
+        }
+    }
+
+    public string Button8EventColor2 {
+        get => _button8EventColor2;
+        set {
+            _button8EventColor2 = value;
+            RaisePropertyChangedEvent("Button8EventColor2");
+        }
+    }
+
+    public string Button8EventColor3 {
+        get => _button8EventColor3;
+        set {
+            _button8EventColor3 = value;
+            RaisePropertyChangedEvent("Button8EventColor3");
+        }
+    }
+
+    public string Button9EventColor1 {
+        get => _button9EventColor1;
+        set {
+            _button9EventColor1 = value;
+            RaisePropertyChangedEvent("Button9EventColor1");
+        }
+    }
+
+    public string Button9EventColor2 {
+        get => _button9EventColor2;
+        set {
+            _button9EventColor2 = value;
+            RaisePropertyChangedEvent("Button9EventColor2");
+        }
+    }
+
+    public string Button9EventColor3 {
+        get => _button9EventColor3;
+        set {
+            _button9EventColor3 = value;
+            RaisePropertyChangedEvent("Button9EventColor3");
+        }
+    }
+
+    public string Button10EventColor1 {
+        get => _button10EventColor1;
+        set {
+            _button10EventColor1 = value;
+            RaisePropertyChangedEvent("Button10EventColor1");
+        }
+    }
+
+    public string Button10EventColor2 {
+        get => _button10EventColor2;
+        set {
+            _button10EventColor2 = value;
+            RaisePropertyChangedEvent("Button10EventColor2");
+        }
+    }
+
+    public string Button10EventColor3 {
+        get => _button10EventColor3;
+        set {
+            _button10EventColor3 = value;
+            RaisePropertyChangedEvent("Button10EventColor3");
+        }
+    }
+
+    public string Button11EventColor1 {
+        get => _button11EventColor1;
+        set {
+            _button11EventColor1 = value;
+            RaisePropertyChangedEvent("Button11EventColor1");
+        }
+    }
+
+    public string Button11EventColor2 {
+        get => _button11EventColor2;
+        set {
+            _button11EventColor2 = value;
+            RaisePropertyChangedEvent("Button11EventColor2");
+        }
+    }
+
+    public string Button11EventColor3 {
+        get => _button11EventColor3;
+        set {
+            _button11EventColor3 = value;
+            RaisePropertyChangedEvent("Button11EventColor3");
+        }
+    }
+
+    public string Button12EventColor1 {
+        get => _button12EventColor1;
+        set {
+            _button12EventColor1 = value;
+            RaisePropertyChangedEvent("Button12EventColor1");
+        }
+    }
+
+    public string Button12EventColor2 {
+        get => _button12EventColor2;
+        set {
+            _button12EventColor2 = value;
+            RaisePropertyChangedEvent("Button12EventColor2");
+        }
+    }
+
+    public string Button12EventColor3 {
+        get => _button12EventColor3;
+        set {
+            _button12EventColor3 = value;
+            RaisePropertyChangedEvent("Button12EventColor3");
+        }
+    }
+
+    public string Button13EventColor1 {
+        get => _button13EventColor1;
+        set {
+            _button13EventColor1 = value;
+            RaisePropertyChangedEvent("Button13EventColor1");
+        }
+    }
+
+    public string Button13EventColor2 {
+        get => _button13EventColor2;
+        set {
+            _button13EventColor2 = value;
+            RaisePropertyChangedEvent("Button13EventColor2");
+        }
+    }
+
+    public string Button13EventColor3 {
+        get => _button13EventColor3;
+        set {
+            _button13EventColor3 = value;
+            RaisePropertyChangedEvent("Button13EventColor3");
+        }
+    }
+
+    public string Button14EventColor1 {
+        get => _button14EventColor1;
+        set {
+            _button14EventColor1 = value;
+            RaisePropertyChangedEvent("Button14EventColor1");
+        }
+    }
+
+    public string Button14EventColor2 {
+        get => _button14EventColor2;
+        set {
+            _button14EventColor2 = value;
+            RaisePropertyChangedEvent("Button14EventColor2");
+        }
+    }
+
+    public string Button14EventColor3 {
+        get => _button14EventColor3;
+        set {
+            _button14EventColor3 = value;
+            RaisePropertyChangedEvent("Button14EventColor3");
+        }
+    }
+
+    public string Button15EventColor1 {
+        get => _button15EventColor1;
+        set {
+            _button15EventColor1 = value;
+            RaisePropertyChangedEvent("Button15EventColor1");
+        }
+    }
+
+    public string Button15EventColor2 {
+        get => _button15EventColor2;
+        set {
+            _button15EventColor2 = value;
+            RaisePropertyChangedEvent("Button15EventColor2");
+        }
+    }
+
+    public string Button15EventColor3 {
+        get => _button15EventColor3;
+        set {
+            _button15EventColor3 = value;
+            RaisePropertyChangedEvent("Button15EventColor3");
+        }
+    }
+
+    public string Button16EventColor1 {
+        get => _button16EventColor1;
+        set {
+            _button16EventColor1 = value;
+            RaisePropertyChangedEvent("Button16EventColor1");
+        }
+    }
+
+    public string Button16EventColor2 {
+        get => _button16EventColor2;
+        set {
+            _button16EventColor2 = value;
+            RaisePropertyChangedEvent("Button16EventColor2");
+        }
+    }
+
+    public string Button16EventColor3 {
+        get => _button16EventColor3;
+        set {
+            _button16EventColor3 = value;
+            RaisePropertyChangedEvent("Button16EventColor3");
+        }
+    }
+
+    public string Button17EventColor1 {
+        get => _button17EventColor1;
+        set {
+            _button17EventColor1 = value;
+            RaisePropertyChangedEvent("Button17EventColor1");
+        }
+    }
+
+    public string Button17EventColor2 {
+        get => _button17EventColor2;
+        set {
+            _button17EventColor2 = value;
+            RaisePropertyChangedEvent("Button17EventColor2");
+        }
+    }
+
+    public string Button17EventColor3 {
+        get => _button17EventColor3;
+        set {
+            _button17EventColor3 = value;
+            RaisePropertyChangedEvent("Button17EventColor3");
+        }
+    }
+
+    public string Button18EventColor1 {
+        get => _button18EventColor1;
+        set {
+            _button18EventColor1 = value;
+            RaisePropertyChangedEvent("Button18EventColor1");
+        }
+    }
+
+    public string Button18EventColor2 {
+        get => _button18EventColor2;
+        set {
+            _button18EventColor2 = value;
+            RaisePropertyChangedEvent("Button18EventColor2");
+        }
+    }
+
+    public string Button18EventColor3 {
+        get => _button18EventColor3;
+        set {
+            _button18EventColor3 = value;
+            RaisePropertyChangedEvent("Button18EventColor3");
+        }
+    }
+
+    public string Button19EventColor1 {
+        get => _button19EventColor1;
+        set {
+            _button19EventColor1 = value;
+            RaisePropertyChangedEvent("Button19EventColor1");
+        }
+    }
+
+    public string Button19EventColor2 {
+        get => _button19EventColor2;
+        set {
+            _button19EventColor2 = value;
+            RaisePropertyChangedEvent("Button19EventColor2");
+        }
+    }
+
+    public string Button19EventColor3 {
+        get => _button19EventColor3;
+        set {
+            _button19EventColor3 = value;
+            RaisePropertyChangedEvent("Button19EventColor3");
+        }
+    }
+
+    public string Button20EventColor1 {
+        get => _button20EventColor1;
+        set {
+            _button20EventColor1 = value;
+            RaisePropertyChangedEvent("Button20EventColor1");
+        }
+    }
+
+    public string Button20EventColor2 {
+        get => _button20EventColor2;
+        set {
+            _button20EventColor2 = value;
+            RaisePropertyChangedEvent("Button20EventColor2");
+        }
+    }
+
+    public string Button20EventColor3 {
+        get => _button20EventColor3;
+        set {
+            _button20EventColor3 = value;
+            RaisePropertyChangedEvent("Button20EventColor3");
+        }
+    }
+
+    public string Button21EventColor1 {
+        get => _button21EventColor1;
+        set {
+            _button21EventColor1 = value;
+            RaisePropertyChangedEvent("Button21EventColor1");
+        }
+    }
+
+    public string Button21EventColor2 {
+        get => _button21EventColor2;
+        set {
+            _button21EventColor2 = value;
+            RaisePropertyChangedEvent("Button21EventColor2");
+        }
+    }
+
+    public string Button21EventColor3 {
+        get => _button21EventColor3;
+        set {
+            _button21EventColor3 = value;
+            RaisePropertyChangedEvent("Button21EventColor3");
+        }
+    }
+
+    public string Button22EventColor1 {
+        get => _button22EventColor1;
+        set {
+            _button22EventColor1 = value;
+            RaisePropertyChangedEvent("Button22EventColor1");
+        }
+    }
+
+    public string Button22EventColor2 {
+        get => _button22EventColor2;
+        set {
+            _button22EventColor2 = value;
+            RaisePropertyChangedEvent("Button22EventColor2");
+        }
+    }
+
+    public string Button22EventColor3 {
+        get => _button22EventColor3;
+        set {
+            _button22EventColor3 = value;
+            RaisePropertyChangedEvent("Button22EventColor3");
+        }
+    }
+
+    public string Button23EventColor1 {
+        get => _button23EventColor1;
+        set {
+            _button23EventColor1 = value;
+            RaisePropertyChangedEvent("Button23EventColor1");
+        }
+    }
+
+    public string Button23EventColor2 {
+        get => _button23EventColor2;
+        set {
+            _button23EventColor2 = value;
+            RaisePropertyChangedEvent("Button23EventColor2");
+        }
+    }
+
+    public string Button23EventColor3 {
+        get => _button23EventColor3;
+        set {
+            _button23EventColor3 = value;
+            RaisePropertyChangedEvent("Button23EventColor3");
+        }
+    }
+
+    public string Button24EventColor1 {
+        get => _button24EventColor1;
+        set {
+            _button24EventColor1 = value;
+            RaisePropertyChangedEvent("Button24EventColor1");
+        }
+    }
+
+    public string Button24EventColor2 {
+        get => _button24EventColor2;
+        set {
+            _button24EventColor2 = value;
+            RaisePropertyChangedEvent("Button24EventColor2");
+        }
+    }
+
+    public string Button24EventColor3 {
+        get => _button24EventColor3;
+        set {
+            _button24EventColor3 = value;
+            RaisePropertyChangedEvent("Button24EventColor3");
+        }
+    }
+
+    public string Button25EventColor1 {
+        get => _button25EventColor1;
+        set {
+            _button25EventColor1 = value;
+            RaisePropertyChangedEvent("Button25EventColor1");
+        }
+    }
+
+    public string Button25EventColor2 {
+        get => _button25EventColor2;
+        set {
+            _button25EventColor2 = value;
+            RaisePropertyChangedEvent("Button25EventColor2");
+        }
+    }
+
+    public string Button25EventColor3 {
+        get => _button25EventColor3;
+        set {
+            _button25EventColor3 = value;
+            RaisePropertyChangedEvent("Button25EventColor3");
+        }
+    }
+
+    public string Button26EventColor1 {
+        get => _button26EventColor1;
+        set {
+            _button26EventColor1 = value;
+            RaisePropertyChangedEvent("Button26EventColor1");
+        }
+    }
+
+    public string Button26EventColor2 {
+        get => _button26EventColor2;
+        set {
+            _button26EventColor2 = value;
+            RaisePropertyChangedEvent("Button26EventColor2");
+        }
+    }
+
+    public string Button26EventColor3 {
+        get => _button26EventColor3;
+        set {
+            _button26EventColor3 = value;
+            RaisePropertyChangedEvent("Button26EventColor3");
+        }
+    }
+
+    public string Button27EventColor1 {
+        get => _button27EventColor1;
+        set {
+            _button27EventColor1 = value;
+            RaisePropertyChangedEvent("Button27EventColor1");
+        }
+    }
+
+    public string Button27EventColor2 {
+        get => _button27EventColor2;
+        set {
+            _button27EventColor2 = value;
+            RaisePropertyChangedEvent("Button27EventColor2");
+        }
+    }
+
+    public string Button27EventColor3 {
+        get => _button27EventColor3;
+        set {
+            _button27EventColor3 = value;
+            RaisePropertyChangedEvent("Button27EventColor3");
+        }
+    }
+
+    public string Button28EventColor1 {
+        get => _button28EventColor1;
+        set {
+            _button28EventColor1 = value;
+            RaisePropertyChangedEvent("Button28EventColor1");
+        }
+    }
+
+    public string Button28EventColor2 {
+        get => _button28EventColor2;
+        set {
+            _button28EventColor2 = value;
+            RaisePropertyChangedEvent("Button28EventColor2");
+        }
+    }
+
+    public string Button28EventColor3 {
+        get => _button28EventColor3;
+        set {
+            _button28EventColor3 = value;
+            RaisePropertyChangedEvent("Button28EventColor3");
+        }
+    }
+
+    public string Button29EventColor1 {
+        get => _button29EventColor1;
+        set {
+            _button29EventColor1 = value;
+            RaisePropertyChangedEvent("Button29EventColor1");
+        }
+    }
+
+    public string Button29EventColor2 {
+        get => _button29EventColor2;
+        set {
+            _button29EventColor2 = value;
+            RaisePropertyChangedEvent("Button29EventColor2");
+        }
+    }
+
+    public string Button29EventColor3 {
+        get => _button29EventColor3;
+        set {
+            _button29EventColor3 = value;
+            RaisePropertyChangedEvent("Button29EventColor3");
+        }
+    }
+
+    public string Button30EventColor1 {
+        get => _button30EventColor1;
+        set {
+            _button30EventColor1 = value;
+            RaisePropertyChangedEvent("Button30EventColor1");
+        }
+    }
+
+    public string Button30EventColor2 {
+        get => _button30EventColor2;
+        set {
+            _button30EventColor2 = value;
+            RaisePropertyChangedEvent("Button30EventColor2");
+        }
+    }
+
+    public string Button30EventColor3 {
+        get => _button30EventColor3;
+        set {
+            _button30EventColor3 = value;
+            RaisePropertyChangedEvent("Button30EventColor3");
+        }
+    }
+
+    public string Button31EventColor1 {
+        get => _button31EventColor1;
+        set {
+            _button31EventColor1 = value;
+            RaisePropertyChangedEvent("Button31EventColor1");
+        }
+    }
+
+    public string Button31EventColor2 {
+        get => _button31EventColor2;
+        set {
+            _button31EventColor2 = value;
+            RaisePropertyChangedEvent("Button31EventColor2");
+        }
+    }
+
+    public string Button31EventColor3 {
+        get => _button31EventColor3;
+        set {
+            _button31EventColor3 = value;
+            RaisePropertyChangedEvent("Button31EventColor3");
+        }
+    }
+
+    public string Button32EventColor1 {
+        get => _button32EventColor1;
+        set {
+            _button32EventColor1 = value;
+            RaisePropertyChangedEvent("Button32EventColor1");
+        }
+    }
+
+    public string Button32EventColor2 {
+        get => _button32EventColor2;
+        set {
+            _button32EventColor2 = value;
+            RaisePropertyChangedEvent("Button32EventColor2");
+        }
+    }
+
+    public string Button32EventColor3 {
+        get => _button32EventColor3;
+        set {
+            _button32EventColor3 = value;
+            RaisePropertyChangedEvent("Button32EventColor3");
+        }
+    }
+
+    public string Button33EventColor1 {
+        get => _button33EventColor1;
+        set {
+            _button33EventColor1 = value;
+            RaisePropertyChangedEvent("Button33EventColor1");
+        }
+    }
+
+    public string Button33EventColor2 {
+        get => _button33EventColor2;
+        set {
+            _button33EventColor2 = value;
+            RaisePropertyChangedEvent("Button33EventColor2");
+        }
+    }
+
+    public string Button33EventColor3 {
+        get => _button33EventColor3;
+        set {
+            _button33EventColor3 = value;
+            RaisePropertyChangedEvent("Button33EventColor3");
+        }
+    }
+
+    public string Button34EventColor1 {
+        get => _button34EventColor1;
+        set {
+            _button34EventColor1 = value;
+            RaisePropertyChangedEvent("Button34EventColor1");
+        }
+    }
+
+    public string Button34EventColor2 {
+        get => _button34EventColor2;
+        set {
+            _button34EventColor2 = value;
+            RaisePropertyChangedEvent("Button34EventColor2");
+        }
+    }
+
+    public string Button34EventColor3 {
+        get => _button34EventColor3;
+        set {
+            _button34EventColor3 = value;
+            RaisePropertyChangedEvent("Button34EventColor3");
+        }
+    }
+
+    public string Button35EventColor1 {
+        get => _button35EventColor1;
+        set {
+            _button35EventColor1 = value;
+            RaisePropertyChangedEvent("Button35EventColor1");
+        }
+    }
+
+    public string Button35EventColor2 {
+        get => _button35EventColor2;
+        set {
+            _button35EventColor2 = value;
+            RaisePropertyChangedEvent("Button35EventColor2");
+        }
+    }
+
+    public string Button35EventColor3 {
+        get => _button35EventColor3;
+        set {
+            _button35EventColor3 = value;
+            RaisePropertyChangedEvent("Button35EventColor3");
+        }
+    }
+
+    public string Button36EventColor1 {
+        get => _button36EventColor1;
+        set {
+            _button36EventColor1 = value;
+            RaisePropertyChangedEvent("Button36EventColor1");
+        }
+    }
+
+    public string Button36EventColor2 {
+        get => _button36EventColor2;
+        set {
+            _button36EventColor2 = value;
+            RaisePropertyChangedEvent("Button36EventColor2");
+        }
+    }
+
+    public string Button36EventColor3 {
+        get => _button36EventColor3;
+        set {
+            _button36EventColor3 = value;
+            RaisePropertyChangedEvent("Button36EventColor3");
+        }
+    }
+
+    public string Button37EventColor1 {
+        get => _button37EventColor1;
+        set {
+            _button37EventColor1 = value;
+            RaisePropertyChangedEvent("Button37EventColor1");
+        }
+    }
+
+    public string Button37EventColor2 {
+        get => _button37EventColor2;
+        set {
+            _button37EventColor2 = value;
+            RaisePropertyChangedEvent("Button37EventColor2");
+        }
+    }
+
+    public string Button37EventColor3 {
+        get => _button37EventColor3;
+        set {
+            _button37EventColor3 = value;
+            RaisePropertyChangedEvent("Button37EventColor3");
+        }
+    }
+
+    public string Button38EventColor1 {
+        get => _button38EventColor1;
+        set {
+            _button38EventColor1 = value;
+            RaisePropertyChangedEvent("Button38EventColor1");
+        }
+    }
+
+    public string Button38EventColor2 {
+        get => _button38EventColor2;
+        set {
+            _button38EventColor2 = value;
+            RaisePropertyChangedEvent("Button38EventColor2");
+        }
+    }
+
+    public string Button38EventColor3 {
+        get => _button38EventColor3;
+        set {
+            _button38EventColor3 = value;
+            RaisePropertyChangedEvent("Button38EventColor3");
+        }
+    }
+
+    public string Button39EventColor1 {
+        get => _button39EventColor1;
+        set {
+            _button39EventColor1 = value;
+            RaisePropertyChangedEvent("Button39EventColor1");
+        }
+    }
+
+    public string Button39EventColor2 {
+        get => _button39EventColor2;
+        set {
+            _button39EventColor2 = value;
+            RaisePropertyChangedEvent("Button39EventColor2");
+        }
+    }
+
+    public string Button39EventColor3 {
+        get => _button39EventColor3;
+        set {
+            _button39EventColor3 = value;
+            RaisePropertyChangedEvent("Button39EventColor3");
+        }
+    }
+
+    public string Button40EventColor1 {
+        get => _button40EventColor1;
+        set {
+            _button40EventColor1 = value;
+            RaisePropertyChangedEvent("Button40EventColor1");
+        }
+    }
+
+    public string Button40EventColor2 {
+        get => _button40EventColor2;
+        set {
+            _button40EventColor2 = value;
+            RaisePropertyChangedEvent("Button40EventColor2");
+        }
+    }
+
+    public string Button40EventColor3 {
+        get => _button40EventColor3;
+        set {
+            _button40EventColor3 = value;
+            RaisePropertyChangedEvent("Button40EventColor3");
+        }
+    }
+
+    public string Button41EventColor1 {
+        get => _button41EventColor1;
+        set {
+            _button41EventColor1 = value;
+            RaisePropertyChangedEvent("Button41EventColor1");
+        }
+    }
+
+    public string Button41EventColor2 {
+        get => _button41EventColor2;
+        set {
+            _button41EventColor2 = value;
+            RaisePropertyChangedEvent("Button41EventColor2");
+        }
+    }
+
+    public string Button41EventColor3 {
+        get => _button41EventColor3;
+        set {
+            _button41EventColor3 = value;
+            RaisePropertyChangedEvent("Button41EventColor3");
         }
     }
 

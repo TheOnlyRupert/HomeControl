@@ -1,5 +1,6 @@
-﻿<Page x:Class="HomeControl.Source.Modules.Behavior" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
+﻿<Page x:Class="HomeControl.Source.Modules.Behavior.Behavior" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
     <Page.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="White"/>
@@ -34,7 +35,7 @@
                         <RowDefinition Height="32"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Mac Mac" FontSize="18" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Text="{Binding Child1Name}" FontSize="18" HorizontalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -45,15 +46,15 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="1" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="2" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="3" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
-                        <Image Grid.Column="4" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
+                        <Image Grid.Column="0" Source="{Binding Child1Star1}" Height="48"/>
+                        <Image Grid.Column="1" Source="{Binding Child1Star2}" Height="48"/>
+                        <Image Grid.Column="2" Source="{Binding Child1Star3}" Height="48"/>
+                        <Image Grid.Column="3" Source="{Binding Child1Star4}" Height="48"/>
+                        <Image Grid.Column="4" Source="{Binding Child1Star5}" Height="48"/>
                     </Grid>
 
-                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="25" IsIndeterminate="False" Foreground="CornflowerBlue"
-                                 Background="Transparent" BorderThickness="1" MinWidth="256"/>
+                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ProgressBarChild1Value}" IsIndeterminate="False"
+                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" MinWidth="256" Margin="4 0"/>
 
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
@@ -62,9 +63,9 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../Resources/Images/behavior/strike.png"/>
-                        <Image Grid.Column="1" Source="../../Resources/Images/behavior/strike.png"/>
-                        <Image Grid.Column="2" Source="../../Resources/Images/behavior/strike.png"/>
+                        <Image Grid.Column="0" Source="{Binding Child1Strike1}"/>
+                        <Image Grid.Column="1" Source="{Binding Child1Strike2}"/>
+                        <Image Grid.Column="2" Source="{Binding Child1Strike3}"/>
                     </Grid>
                 </Grid>
             </Button>
@@ -78,7 +79,7 @@
                         <RowDefinition Height="32"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Lexi" FontSize="18" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Text="{Binding Child2Name}" FontSize="18" HorizontalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -89,11 +90,11 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="1" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="2" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="3" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
-                        <Image Grid.Column="4" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
+                        <Image Grid.Column="0" Source="{Binding Child2Star1}" Height="48"/>
+                        <Image Grid.Column="1" Source="{Binding Child2Star2}" Height="48"/>
+                        <Image Grid.Column="2" Source="{Binding Child2Star3}" Height="48"/>
+                        <Image Grid.Column="3" Source="{Binding Child2Star4}" Height="48"/>
+                        <Image Grid.Column="4" Source="{Binding Child2Star5}" Height="48"/>
                     </Grid>
 
                     <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="0" IsIndeterminate="False" Foreground="CornflowerBlue"
@@ -106,9 +107,9 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../Resources/Images/behavior/strike.png"/>
-                        <Image Grid.Column="1" Source="../../Resources/Images/behavior/strike.png"/>
-                        <Image Grid.Column="2" Source="../../Resources/Images/behavior/strike.png"/>
+                        <Image Grid.Column="0" Source="{Binding Child2Strike1}"/>
+                        <Image Grid.Column="1" Source="{Binding Child2Strike2}"/>
+                        <Image Grid.Column="2" Source="{Binding Child2Strike3}"/>
                     </Grid>
                 </Grid>
             </Button>
@@ -133,11 +134,11 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="1" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="2" Source="../../Resources/Images/behavior/star_gold.png" Height="48"/>
-                        <Image Grid.Column="3" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
-                        <Image Grid.Column="4" Source="../../Resources/Images/behavior/star_black.png" Height="48"/>
+                        <Image Grid.Column="0" Source="{Binding Child3Star1}" Height="48"/>
+                        <Image Grid.Column="1" Source="{Binding Child3Star2}" Height="48"/>
+                        <Image Grid.Column="2" Source="{Binding Child3Star3}" Height="48"/>
+                        <Image Grid.Column="3" Source="{Binding Child3Star4}" Height="48"/>
+                        <Image Grid.Column="4" Source="{Binding Child3Star5}" Height="48"/>
                     </Grid>
 
                     <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="75" IsIndeterminate="False" Foreground="CornflowerBlue"
@@ -150,9 +151,9 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../Resources/Images/behavior/strike.png"/>
-                        <Image Grid.Column="1" Source="../../Resources/Images/behavior/strike.png"/>
-                        <Image Grid.Column="2" Source="../../Resources/Images/behavior/strike.png"/>
+                        <Image Grid.Column="0" Source="{Binding Child3Strike1}"/>
+                        <Image Grid.Column="1" Source="{Binding Child3Strike2}"/>
+                        <Image Grid.Column="2" Source="{Binding Child3Strike3}"/>
                     </Grid>
                 </Grid>
             </Button>

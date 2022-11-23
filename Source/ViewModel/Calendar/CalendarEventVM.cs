@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
@@ -7,20 +10,48 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Calendar;
 
 public class CalendarEventVM : BaseViewModel {
+    private CalendarEvents _calendarEventSelected;
     private string _eventDate, _eventText, _locationText, _descriptionText, _saveButtonText;
-    private ObservableCollection<Events> _eventList;
-    private Events _eventSelected;
+    private ObservableCollection<CalendarEvents> _eventList;
 
     public CalendarEventVM() {
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
-        EventList = new ObservableCollection<Events>();
-
         SaveButtonText = "Save";
+        string fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
+        Console.WriteLine(fileName);
+
+        if (File.Exists(fileName)) {
+            JsonSerializerOptions options = new() {
+                IncludeFields = true
+            };
+
+            try {
+                StreamReader streamReader = new(fileName);
+                string eventsListString = null;
+                while (!streamReader.EndOfStream) {
+                    eventsListString = streamReader.ReadToEnd();
+                }
+
+                if (eventsListString != null) {
+                    try {
+                        JsonCalendar currentJsonCalendar = JsonSerializer.Deserialize<JsonCalendar>(eventsListString, options);
+
+                        if (currentJsonCalendar != null) {
+                            EventList = currentJsonCalendar.eventsList;
+                        }
+                    } catch (Exception e) {
+                        Console.WriteLine(e);
+                    }
+                }
+            } catch (Exception e) {
+                Console.WriteLine(e);
+            }
+        }
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
-    private void PopulateDetailedView(Events value) {
+    private void PopulateDetailedView(CalendarEvents value) {
         EventText = value.name;
         LocationText = value.location;
         DescriptionText = value.description;
@@ -78,7 +109,7 @@ public class CalendarEventVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<Events> EventList {
+    public ObservableCollection<CalendarEvents> EventList {
         get => _eventList;
         set {
             _eventList = value;
@@ -86,10 +117,10 @@ public class CalendarEventVM : BaseViewModel {
         }
     }
 
-    public Events EventSelected {
-        get => _eventSelected;
+    public CalendarEvents CalendarEventSelected {
+        get => _calendarEventSelected;
         set {
-            _eventSelected = value;
+            _calendarEventSelected = value;
             PopulateDetailedView(value);
             RaisePropertyChangedEvent("EventSelected");
         }

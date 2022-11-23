@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace HomeControl.Source.Helpers;
 
 public class JsonCalendar {
-    public List<Events> eventsList { get; set; }
+    public ObservableCollection<CalendarEvents> eventsList { get; set; }
 }
 
-public class Events {
-    public DateTime date { get; set; }
+public class CalendarEvents {
     public string name { get; set; }
     public string description { get; set; }
     public string location { get; set; }

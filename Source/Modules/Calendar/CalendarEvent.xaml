@@ -7,7 +7,68 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border BorderThickness="0" CornerRadius="8" Background="Gray"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding MinWidth}"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TickBar Grid.Column="0" x:Name="TopTick" SnapsToDevicePixels="True" Placement="Left" Width="4" Visibility="Collapsed"/>
+
+                <Track Grid.Column="1" x:Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderButtonStyle}" Command="Slider.DecreaseLarge"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumbStyle}"/>
+                    </Track.Thumb>
+                </Track>
+
+                <TickBar x:Name="BottomTick" SnapsToDevicePixels="True" Grid.Column="2" Placement="Right" Width="4" Visibility="Collapsed"/>
+            </Grid>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Vertical">
+                    <Setter Property="MinWidth" Value="8"/>
+                    <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
 
@@ -18,14 +79,22 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Margin="0 0 8 0">
-            <ListView Grid.Row="0" ItemsSource="{Binding EventList}" SelectedItem="{Binding EventSelected}" SelectionMode="Single" IsSelected="{Binding IsSelected}">
+            <ListView Grid.Row="0" ItemsSource="{Binding EventList}" SelectedItem="{Binding EventSelected}" SelectionMode="Single" IsSelected="{Binding IsSelected}"
+                      Background="Transparent">
+                <ListView.Resources>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                        <Setter Property="BorderBrush" Value="White"/>
+                    </Style>
+                </ListView.Resources>
                 <ListView.View>
                     <GridView AllowsColumnReorder="false">
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=date}" Header="Date" Width="16"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Header="Event Name" Width="96"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=location}" Header="Location" Width="96"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=description}" Header="Description" Width="48"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Header="Person" Width="48"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Header="Event Name" Width="Auto"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=description}" Header="Description" Width="Auto"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=location}" Header="Location" Width="Auto"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Header="Person" Width="Auto"/>
                     </GridView>
                 </ListView.View>
             </ListView>

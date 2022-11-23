@@ -26,6 +26,21 @@
             <TextBox Text="{Binding UserAgentText}" FontSize="24"/>
         </StackPanel>
 
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Child 1 Name" FontSize="24"/>
+            <TextBox Text="{Binding Child1Name}" FontSize="24"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Child 2 Name" FontSize="24"/>
+            <TextBox Text="{Binding Child2Name}" FontSize="24"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3">
+            <TextBlock Text="Child 3 Name" FontSize="24"/>
+            <TextBox Text="{Binding Child3Name}" FontSize="24"/>
+        </StackPanel>
+
         <Button Grid.Row="6" Content="Save" HorizontalAlignment="Stretch" FontSize="14" Command="{Binding ButtonCommand}" CommandParameter="save"/>
     </Grid>
 </Window>

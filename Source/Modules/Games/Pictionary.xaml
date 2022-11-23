@@ -9,7 +9,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <ProgressBar Grid.Row="0" Value="{Binding ProgressBarValue}" IsIndeterminate="False" Foreground="Blue" Background="DarkSlateGray" BorderThickness="0"/>
+            <ProgressBar Grid.Row="0" Value="{Binding ProgressBarValue}" IsIndeterminate="False" Foreground="Blue" Background="Transparent" BorderThickness="0"/>
         </Grid>
         <Grid Grid.Row="1">
             <TextBlock Foreground="White" Text="{Binding RealTime}" FontSize="24" HorizontalAlignment="Right"/>

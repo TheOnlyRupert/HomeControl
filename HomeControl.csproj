@@ -97,12 +97,16 @@
         <Compile Include="Source\Helpers\JsonWeatherForecast.cs"/>
         <Compile Include="Source\Helpers\JsonWeatherForecastHourly.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
+        <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
         <Compile Include="Source\IO\CsvParser.cs"/>
         <Compile Include="Source\Modules\Alarms.xaml.cs">
             <DependentUpon>Alarms.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Behavior.xaml.cs">
+        <Compile Include="Source\Modules\Behavior\Behavior.xaml.cs">
             <DependentUpon>Behavior.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Behavior\BehaviorDialog.xaml.cs">
+            <DependentUpon>BehaviorDialog.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Calendar\Calendar.xaml.cs">
             <DependentUpon>Calendar.xaml</DependentUpon>
@@ -142,7 +146,8 @@
         <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
         <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs"/>
         <Compile Include="Source\ViewModel\Base\DelegateCommand.cs"/>
-        <Compile Include="Source\ViewModel\BehaviorVM.cs"/>
+        <Compile Include="Source\ViewModel\Behavior\BehaviorDialogVM.cs"/>
+        <Compile Include="Source\ViewModel\Behavior\BehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\CalendarEventVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\CalendarVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\TodayCalendarVM.cs"/>
@@ -170,7 +175,8 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Source\Modules\Alarms.xaml"/>
-        <Page Include="Source\Modules\Behavior.xaml"/>
+        <Page Include="Source\Modules\Behavior\Behavior.xaml"/>
+        <Page Include="Source\Modules\Behavior\BehaviorDialog.xaml"/>
         <Page Include="Source\Modules\Calendar\Calendar.xaml"/>
         <Page Include="Source\Modules\Calendar\CalendarEvent.xaml"/>
         <Page Include="Source\Modules\Calendar\TodayCalendar.xaml"/>
