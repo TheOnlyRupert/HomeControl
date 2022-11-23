@@ -100,13 +100,11 @@
                     <TextBlock Text="{Binding CashAvailableText}" FontSize="24" Foreground="{Binding CashAvailableTextColor}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Width="100">
-                    <Button Content="ADD" Command="{Binding ButtonCommand}" CommandParameter="add" FontSize="16" Height="32" Background="Transparent"/>
-                    <Button Content="EDIT" Command="{Binding ButtonCommand}" CommandParameter="edit" FontSize="16" Height="32" Background="Transparent"/>
-                </StackPanel>
+                <Button Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Width="100" Content="EDIT" Command="{Binding ButtonCommand}" CommandParameter="edit" FontSize="16"
+                        Height="32" Background="Transparent"/>
             </Grid>
             <Grid Grid.Row="1">
-                <ListView Grid.Row="0" ItemsSource="{Binding FinanceList}" Background="Transparent">
+                <ListView Grid.Row="0" ItemsSource="{Binding FinanceList}" Background="Transparent" SelectionMode="Single" Focusable="False">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>

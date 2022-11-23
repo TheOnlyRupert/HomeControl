@@ -99,6 +99,7 @@
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
         <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
         <Compile Include="Source\IO\CsvParser.cs"/>
+        <Compile Include="Source\IO\FinancesFromJson.cs"/>
         <Compile Include="Source\Modules\Alarms.xaml.cs">
             <DependentUpon>Alarms.xaml</DependentUpon>
         </Compile>

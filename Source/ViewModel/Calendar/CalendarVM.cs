@@ -51,9 +51,9 @@ public class CalendarVM : BaseViewModel {
         _button34EventColor2, _button34EventColor3, _button35EventColor1, _button35EventColor2, _button35EventColor3, _button36EventColor1, _button36EventColor2,
         _button36EventColor3, _button37EventColor1, _button37EventColor2, _button37EventColor3, _button38EventColor1, _button38EventColor2, _button38EventColor3,
         _button39EventColor1, _button39EventColor2, _button39EventColor3, _button40EventColor1, _button40EventColor2, _button40EventColor3, _button41EventColor1,
-        _button41EventColor2, _button41EventColor3;
+        _button41EventColor2, _button41EventColor3, _button42EventColor1, _button42EventColor2, _button42EventColor3;
 
-    private DateTime currentDateTime, calendarStartDateTime, button1DateTime;
+    private DateTime currentDateTime, button1DateTime;
 
     public CalendarVM() {
         currentDateTime = DateTime.Now;
@@ -82,12 +82,180 @@ public class CalendarVM : BaseViewModel {
             break;
         case "button1":
             ReferenceValues.CalendarEventDate = button1DateTime;
-            CalendarEvent calendarEvent = new();
-            calendarEvent.ShowDialog();
-            calendarEvent.Close();
-            PopulateCalendar(currentDateTime);
+            OpenEventDialog();
+            break;
+        case "button2":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(1);
+            OpenEventDialog();
+            break;
+        case "button3":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(2);
+            OpenEventDialog();
+            break;
+        case "button4":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(3);
+            OpenEventDialog();
+            break;
+        case "button5":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(4);
+            OpenEventDialog();
+            break;
+        case "button6":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(5);
+            OpenEventDialog();
+            break;
+        case "button7":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(6);
+            OpenEventDialog();
+            break;
+        case "button8":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(7);
+            OpenEventDialog();
+            break;
+        case "button9":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(8);
+            OpenEventDialog();
+            break;
+        case "button10":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(9);
+            OpenEventDialog();
+            break;
+        case "button11":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(10);
+            OpenEventDialog();
+            break;
+        case "button12":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(11);
+            OpenEventDialog();
+            break;
+        case "button13":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(12);
+            OpenEventDialog();
+            break;
+        case "button14":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(13);
+            OpenEventDialog();
+            break;
+        case "button15":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(14);
+            OpenEventDialog();
+            break;
+        case "button16":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(15);
+            OpenEventDialog();
+            break;
+        case "button17":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(16);
+            OpenEventDialog();
+            break;
+        case "button18":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(17);
+            OpenEventDialog();
+            break;
+        case "button19":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(18);
+            OpenEventDialog();
+            break;
+        case "button20":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(19);
+            OpenEventDialog();
+            break;
+        case "button21":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(20);
+            OpenEventDialog();
+            break;
+        case "button22":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(21);
+            OpenEventDialog();
+            break;
+        case "button23":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(22);
+            OpenEventDialog();
+            break;
+        case "button24":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(23);
+            OpenEventDialog();
+            break;
+        case "button25":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(24);
+            OpenEventDialog();
+            break;
+        case "button26":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(25);
+            OpenEventDialog();
+            break;
+        case "button27":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(26);
+            OpenEventDialog();
+            break;
+        case "button28":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(27);
+            OpenEventDialog();
+            break;
+        case "button29":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(28);
+            OpenEventDialog();
+            break;
+        case "button30":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(29);
+            OpenEventDialog();
+            break;
+        case "button31":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(30);
+            OpenEventDialog();
+            break;
+        case "button32":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(31);
+            OpenEventDialog();
+            break;
+        case "button33":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(32);
+            OpenEventDialog();
+            break;
+        case "button34":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(33);
+            OpenEventDialog();
+            break;
+        case "button35":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(34);
+            OpenEventDialog();
+            break;
+        case "button36":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(35);
+            OpenEventDialog();
+            break;
+        case "button37":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(36);
+            OpenEventDialog();
+            break;
+        case "button38":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(37);
+            OpenEventDialog();
+            break;
+        case "button39":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(38);
+            OpenEventDialog();
+            break;
+        case "button40":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(39);
+            OpenEventDialog();
+            break;
+        case "button41":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(40);
+            OpenEventDialog();
+            break;
+        case "button42":
+            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(41);
+            OpenEventDialog();
             break;
         }
+    }
+
+    private void OpenEventDialog() {
+        CalendarEvent calendarEvent = new();
+        calendarEvent.ShowDialog();
+        calendarEvent.Close();
+        PopulateCalendar(currentDateTime);
     }
 
     public void PopulateCalendar(DateTime dateTime) {
@@ -276,7 +444,6 @@ public class CalendarVM : BaseViewModel {
 
         /* Adjust Calendar with new days */
         dateTime = startingYear.AddDays(mathDate);
-        calendarStartDateTime = dateTime;
 
         Button1Date = dateTime.ToString("MMM/dd");
         Button2Date = dateTime.AddDays(1).ToString("MMM/dd");
@@ -390,6 +557,786 @@ public class CalendarVM : BaseViewModel {
             if (ReferenceValues.JsonCalendarMasterEventList[2].eventsList.Count > 3) {
                 Button3EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[2].eventsList.Count - 2) + " More Events...";
                 Button3EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 4 */
+        try {
+            Button4EventText1 = ReferenceValues.JsonCalendarMasterEventList[3].eventsList[0].name;
+            Button4EventText2 = ReferenceValues.JsonCalendarMasterEventList[3].eventsList[1].name;
+            Button4EventText3 = ReferenceValues.JsonCalendarMasterEventList[3].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button4EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[3].eventsList[0].person);
+            Button4EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[3].eventsList[1].person);
+            Button4EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[3].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[3].eventsList.Count > 3) {
+                Button4EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[3].eventsList.Count - 2) + " More Events...";
+                Button4EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 5 */
+        try {
+            Button5EventText1 = ReferenceValues.JsonCalendarMasterEventList[4].eventsList[0].name;
+            Button5EventText2 = ReferenceValues.JsonCalendarMasterEventList[4].eventsList[1].name;
+            Button5EventText3 = ReferenceValues.JsonCalendarMasterEventList[4].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button5EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[4].eventsList[0].person);
+            Button5EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[4].eventsList[1].person);
+            Button5EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[4].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[4].eventsList.Count > 3) {
+                Button5EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[4].eventsList.Count - 2) + " More Events...";
+                Button5EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 6 */
+        try {
+            Button6EventText1 = ReferenceValues.JsonCalendarMasterEventList[5].eventsList[0].name;
+            Button6EventText2 = ReferenceValues.JsonCalendarMasterEventList[5].eventsList[1].name;
+            Button6EventText3 = ReferenceValues.JsonCalendarMasterEventList[5].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button6EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[5].eventsList[0].person);
+            Button6EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[5].eventsList[1].person);
+            Button6EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[5].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[5].eventsList.Count > 3) {
+                Button6EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[5].eventsList.Count - 2) + " More Events...";
+                Button6EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 7 */
+        try {
+            Button7EventText1 = ReferenceValues.JsonCalendarMasterEventList[6].eventsList[0].name;
+            Button7EventText2 = ReferenceValues.JsonCalendarMasterEventList[6].eventsList[1].name;
+            Button7EventText3 = ReferenceValues.JsonCalendarMasterEventList[6].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button7EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[6].eventsList[0].person);
+            Button7EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[6].eventsList[1].person);
+            Button7EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[6].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[6].eventsList.Count > 3) {
+                Button7EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[6].eventsList.Count - 2) + " More Events...";
+                Button7EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 8 */
+        try {
+            Button8EventText1 = ReferenceValues.JsonCalendarMasterEventList[7].eventsList[0].name;
+            Button8EventText2 = ReferenceValues.JsonCalendarMasterEventList[7].eventsList[1].name;
+            Button8EventText3 = ReferenceValues.JsonCalendarMasterEventList[7].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button8EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[7].eventsList[0].person);
+            Button8EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[7].eventsList[1].person);
+            Button8EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[7].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[7].eventsList.Count > 3) {
+                Button8EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[7].eventsList.Count - 2) + " More Events...";
+                Button8EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 9 */
+        try {
+            Button9EventText1 = ReferenceValues.JsonCalendarMasterEventList[8].eventsList[0].name;
+            Button9EventText2 = ReferenceValues.JsonCalendarMasterEventList[8].eventsList[1].name;
+            Button9EventText3 = ReferenceValues.JsonCalendarMasterEventList[8].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button9EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[8].eventsList[0].person);
+            Button9EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[8].eventsList[1].person);
+            Button9EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[8].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[8].eventsList.Count > 3) {
+                Button9EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[8].eventsList.Count - 2) + " More Events...";
+                Button9EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 10 */
+        try {
+            Button10EventText1 = ReferenceValues.JsonCalendarMasterEventList[9].eventsList[0].name;
+            Button10EventText2 = ReferenceValues.JsonCalendarMasterEventList[9].eventsList[1].name;
+            Button10EventText3 = ReferenceValues.JsonCalendarMasterEventList[9].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button10EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[9].eventsList[0].person);
+            Button10EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[9].eventsList[1].person);
+            Button10EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[9].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[9].eventsList.Count > 3) {
+                Button10EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[9].eventsList.Count - 2) + " More Events...";
+                Button10EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 11 */
+        try {
+            Button11EventText1 = ReferenceValues.JsonCalendarMasterEventList[10].eventsList[0].name;
+            Button11EventText2 = ReferenceValues.JsonCalendarMasterEventList[10].eventsList[1].name;
+            Button11EventText3 = ReferenceValues.JsonCalendarMasterEventList[10].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button11EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[10].eventsList[0].person);
+            Button11EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[10].eventsList[1].person);
+            Button11EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[10].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[10].eventsList.Count > 3) {
+                Button11EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[10].eventsList.Count - 2) + " More Events...";
+                Button11EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 12 */
+        try {
+            Button12EventText1 = ReferenceValues.JsonCalendarMasterEventList[11].eventsList[0].name;
+            Button12EventText2 = ReferenceValues.JsonCalendarMasterEventList[11].eventsList[1].name;
+            Button12EventText3 = ReferenceValues.JsonCalendarMasterEventList[11].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button12EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[11].eventsList[0].person);
+            Button12EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[11].eventsList[1].person);
+            Button12EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[11].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[11].eventsList.Count > 3) {
+                Button12EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[11].eventsList.Count - 2) + " More Events...";
+                Button12EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 13 */
+        try {
+            Button13EventText1 = ReferenceValues.JsonCalendarMasterEventList[12].eventsList[0].name;
+            Button13EventText2 = ReferenceValues.JsonCalendarMasterEventList[12].eventsList[1].name;
+            Button13EventText3 = ReferenceValues.JsonCalendarMasterEventList[12].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button13EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[12].eventsList[0].person);
+            Button13EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[12].eventsList[1].person);
+            Button13EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[12].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[12].eventsList.Count > 3) {
+                Button13EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[12].eventsList.Count - 2) + " More Events...";
+                Button13EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 14 */
+        try {
+            Button14EventText1 = ReferenceValues.JsonCalendarMasterEventList[13].eventsList[0].name;
+            Button14EventText2 = ReferenceValues.JsonCalendarMasterEventList[13].eventsList[1].name;
+            Button14EventText3 = ReferenceValues.JsonCalendarMasterEventList[13].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button14EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[13].eventsList[0].person);
+            Button14EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[13].eventsList[1].person);
+            Button14EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[13].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[13].eventsList.Count > 3) {
+                Button14EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[13].eventsList.Count - 2) + " More Events...";
+                Button14EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 15 */
+        try {
+            Button15EventText1 = ReferenceValues.JsonCalendarMasterEventList[14].eventsList[0].name;
+            Button15EventText2 = ReferenceValues.JsonCalendarMasterEventList[14].eventsList[1].name;
+            Button15EventText3 = ReferenceValues.JsonCalendarMasterEventList[14].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button15EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[14].eventsList[0].person);
+            Button15EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[14].eventsList[1].person);
+            Button15EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[14].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[14].eventsList.Count > 3) {
+                Button15EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[14].eventsList.Count - 2) + " More Events...";
+                Button15EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 16 */
+        try {
+            Button16EventText1 = ReferenceValues.JsonCalendarMasterEventList[15].eventsList[0].name;
+            Button16EventText2 = ReferenceValues.JsonCalendarMasterEventList[15].eventsList[1].name;
+            Button16EventText3 = ReferenceValues.JsonCalendarMasterEventList[15].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button16EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[15].eventsList[0].person);
+            Button16EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[15].eventsList[1].person);
+            Button16EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[15].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[15].eventsList.Count > 3) {
+                Button16EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[15].eventsList.Count - 2) + " More Events...";
+                Button16EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 17 */
+        try {
+            Button17EventText1 = ReferenceValues.JsonCalendarMasterEventList[16].eventsList[0].name;
+            Button17EventText2 = ReferenceValues.JsonCalendarMasterEventList[16].eventsList[1].name;
+            Button17EventText3 = ReferenceValues.JsonCalendarMasterEventList[16].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button17EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[16].eventsList[0].person);
+            Button17EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[16].eventsList[1].person);
+            Button17EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[16].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[16].eventsList.Count > 3) {
+                Button17EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[16].eventsList.Count - 2) + " More Events...";
+                Button17EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 18 */
+        try {
+            Button18EventText1 = ReferenceValues.JsonCalendarMasterEventList[17].eventsList[0].name;
+            Button18EventText2 = ReferenceValues.JsonCalendarMasterEventList[17].eventsList[1].name;
+            Button18EventText3 = ReferenceValues.JsonCalendarMasterEventList[17].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button18EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[17].eventsList[0].person);
+            Button18EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[17].eventsList[1].person);
+            Button18EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[17].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[17].eventsList.Count > 3) {
+                Button18EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[17].eventsList.Count - 2) + " More Events...";
+                Button18EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 19 */
+        try {
+            Button19EventText1 = ReferenceValues.JsonCalendarMasterEventList[18].eventsList[0].name;
+            Button19EventText2 = ReferenceValues.JsonCalendarMasterEventList[18].eventsList[1].name;
+            Button19EventText3 = ReferenceValues.JsonCalendarMasterEventList[18].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button19EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[18].eventsList[0].person);
+            Button19EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[18].eventsList[1].person);
+            Button19EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[18].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[18].eventsList.Count > 3) {
+                Button19EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[18].eventsList.Count - 2) + " More Events...";
+                Button19EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 20 */
+        try {
+            Button20EventText1 = ReferenceValues.JsonCalendarMasterEventList[19].eventsList[0].name;
+            Button20EventText2 = ReferenceValues.JsonCalendarMasterEventList[19].eventsList[1].name;
+            Button20EventText3 = ReferenceValues.JsonCalendarMasterEventList[19].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button20EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[19].eventsList[0].person);
+            Button20EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[19].eventsList[1].person);
+            Button20EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[19].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[19].eventsList.Count > 3) {
+                Button20EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[19].eventsList.Count - 2) + " More Events...";
+                Button20EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 21 */
+        try {
+            Button21EventText1 = ReferenceValues.JsonCalendarMasterEventList[20].eventsList[0].name;
+            Button21EventText2 = ReferenceValues.JsonCalendarMasterEventList[20].eventsList[1].name;
+            Button21EventText3 = ReferenceValues.JsonCalendarMasterEventList[20].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button21EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[20].eventsList[0].person);
+            Button21EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[20].eventsList[1].person);
+            Button21EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[20].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[20].eventsList.Count > 3) {
+                Button21EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[20].eventsList.Count - 2) + " More Events...";
+                Button21EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 22 */
+        try {
+            Button22EventText1 = ReferenceValues.JsonCalendarMasterEventList[21].eventsList[0].name;
+            Button22EventText2 = ReferenceValues.JsonCalendarMasterEventList[21].eventsList[1].name;
+            Button22EventText3 = ReferenceValues.JsonCalendarMasterEventList[21].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button22EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[21].eventsList[0].person);
+            Button22EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[21].eventsList[1].person);
+            Button22EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[21].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[21].eventsList.Count > 3) {
+                Button22EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[21].eventsList.Count - 2) + " More Events...";
+                Button22EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 23 */
+        try {
+            Button23EventText1 = ReferenceValues.JsonCalendarMasterEventList[22].eventsList[0].name;
+            Button23EventText2 = ReferenceValues.JsonCalendarMasterEventList[22].eventsList[1].name;
+            Button23EventText3 = ReferenceValues.JsonCalendarMasterEventList[22].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button23EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[22].eventsList[0].person);
+            Button23EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[22].eventsList[1].person);
+            Button23EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[22].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[22].eventsList.Count > 3) {
+                Button23EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[22].eventsList.Count - 2) + " More Events...";
+                Button23EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 24 */
+        try {
+            Button24EventText1 = ReferenceValues.JsonCalendarMasterEventList[23].eventsList[0].name;
+            Button24EventText2 = ReferenceValues.JsonCalendarMasterEventList[23].eventsList[1].name;
+            Button24EventText3 = ReferenceValues.JsonCalendarMasterEventList[23].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button24EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[23].eventsList[0].person);
+            Button24EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[23].eventsList[1].person);
+            Button24EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[23].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[23].eventsList.Count > 3) {
+                Button24EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[23].eventsList.Count - 2) + " More Events...";
+                Button24EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 25 */
+        try {
+            Button25EventText1 = ReferenceValues.JsonCalendarMasterEventList[24].eventsList[0].name;
+            Button25EventText2 = ReferenceValues.JsonCalendarMasterEventList[24].eventsList[1].name;
+            Button25EventText3 = ReferenceValues.JsonCalendarMasterEventList[24].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button25EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[24].eventsList[0].person);
+            Button25EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[24].eventsList[1].person);
+            Button25EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[24].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[24].eventsList.Count > 3) {
+                Button25EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[24].eventsList.Count - 2) + " More Events...";
+                Button25EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 26 */
+        try {
+            Button26EventText1 = ReferenceValues.JsonCalendarMasterEventList[25].eventsList[0].name;
+            Button26EventText2 = ReferenceValues.JsonCalendarMasterEventList[25].eventsList[1].name;
+            Button26EventText3 = ReferenceValues.JsonCalendarMasterEventList[25].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button26EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[25].eventsList[0].person);
+            Button26EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[25].eventsList[1].person);
+            Button26EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[25].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[25].eventsList.Count > 3) {
+                Button26EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[25].eventsList.Count - 2) + " More Events...";
+                Button26EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 27 */
+        try {
+            Button27EventText1 = ReferenceValues.JsonCalendarMasterEventList[26].eventsList[0].name;
+            Button27EventText2 = ReferenceValues.JsonCalendarMasterEventList[26].eventsList[1].name;
+            Button27EventText3 = ReferenceValues.JsonCalendarMasterEventList[26].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button27EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[26].eventsList[0].person);
+            Button27EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[26].eventsList[1].person);
+            Button27EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[26].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[26].eventsList.Count > 3) {
+                Button27EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[26].eventsList.Count - 2) + " More Events...";
+                Button27EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 28 */
+        try {
+            Button28EventText1 = ReferenceValues.JsonCalendarMasterEventList[27].eventsList[0].name;
+            Button28EventText2 = ReferenceValues.JsonCalendarMasterEventList[27].eventsList[1].name;
+            Button28EventText3 = ReferenceValues.JsonCalendarMasterEventList[27].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button28EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[27].eventsList[0].person);
+            Button28EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[27].eventsList[1].person);
+            Button28EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[27].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[27].eventsList.Count > 3) {
+                Button28EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[27].eventsList.Count - 2) + " More Events...";
+                Button28EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 29 */
+        try {
+            Button29EventText1 = ReferenceValues.JsonCalendarMasterEventList[28].eventsList[0].name;
+            Button29EventText2 = ReferenceValues.JsonCalendarMasterEventList[28].eventsList[1].name;
+            Button29EventText3 = ReferenceValues.JsonCalendarMasterEventList[28].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button29EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[28].eventsList[0].person);
+            Button29EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[28].eventsList[1].person);
+            Button29EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[28].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[28].eventsList.Count > 3) {
+                Button29EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[28].eventsList.Count - 2) + " More Events...";
+                Button29EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 30 */
+        try {
+            Button30EventText1 = ReferenceValues.JsonCalendarMasterEventList[29].eventsList[0].name;
+            Button30EventText2 = ReferenceValues.JsonCalendarMasterEventList[29].eventsList[1].name;
+            Button30EventText3 = ReferenceValues.JsonCalendarMasterEventList[29].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button30EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[29].eventsList[0].person);
+            Button30EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[29].eventsList[1].person);
+            Button30EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[29].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[29].eventsList.Count > 3) {
+                Button30EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[29].eventsList.Count - 2) + " More Events...";
+                Button30EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 31 */
+        try {
+            Button31EventText1 = ReferenceValues.JsonCalendarMasterEventList[30].eventsList[0].name;
+            Button31EventText2 = ReferenceValues.JsonCalendarMasterEventList[30].eventsList[1].name;
+            Button31EventText3 = ReferenceValues.JsonCalendarMasterEventList[30].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button31EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[30].eventsList[0].person);
+            Button31EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[30].eventsList[1].person);
+            Button31EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[30].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[30].eventsList.Count > 3) {
+                Button31EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[30].eventsList.Count - 2) + " More Events...";
+                Button31EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 32 */
+        try {
+            Button32EventText1 = ReferenceValues.JsonCalendarMasterEventList[31].eventsList[0].name;
+            Button32EventText2 = ReferenceValues.JsonCalendarMasterEventList[31].eventsList[1].name;
+            Button32EventText3 = ReferenceValues.JsonCalendarMasterEventList[31].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button32EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[31].eventsList[0].person);
+            Button32EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[31].eventsList[1].person);
+            Button32EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[31].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[31].eventsList.Count > 3) {
+                Button32EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[31].eventsList.Count - 2) + " More Events...";
+                Button32EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 33 */
+        try {
+            Button33EventText1 = ReferenceValues.JsonCalendarMasterEventList[32].eventsList[0].name;
+            Button33EventText2 = ReferenceValues.JsonCalendarMasterEventList[32].eventsList[1].name;
+            Button33EventText3 = ReferenceValues.JsonCalendarMasterEventList[32].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button33EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[32].eventsList[0].person);
+            Button33EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[32].eventsList[1].person);
+            Button33EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[32].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[32].eventsList.Count > 3) {
+                Button33EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[32].eventsList.Count - 2) + " More Events...";
+                Button33EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 34 */
+        try {
+            Button34EventText1 = ReferenceValues.JsonCalendarMasterEventList[33].eventsList[0].name;
+            Button34EventText2 = ReferenceValues.JsonCalendarMasterEventList[33].eventsList[1].name;
+            Button34EventText3 = ReferenceValues.JsonCalendarMasterEventList[33].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button34EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[33].eventsList[0].person);
+            Button34EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[33].eventsList[1].person);
+            Button34EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[33].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[33].eventsList.Count > 3) {
+                Button34EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[33].eventsList.Count - 2) + " More Events...";
+                Button34EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 35 */
+        try {
+            Button35EventText1 = ReferenceValues.JsonCalendarMasterEventList[34].eventsList[0].name;
+            Button35EventText2 = ReferenceValues.JsonCalendarMasterEventList[34].eventsList[1].name;
+            Button35EventText3 = ReferenceValues.JsonCalendarMasterEventList[34].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button35EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[34].eventsList[0].person);
+            Button35EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[34].eventsList[1].person);
+            Button35EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[34].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[34].eventsList.Count > 3) {
+                Button35EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[34].eventsList.Count - 2) + " More Events...";
+                Button35EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 36 */
+        try {
+            Button36EventText1 = ReferenceValues.JsonCalendarMasterEventList[35].eventsList[0].name;
+            Button36EventText2 = ReferenceValues.JsonCalendarMasterEventList[35].eventsList[1].name;
+            Button36EventText3 = ReferenceValues.JsonCalendarMasterEventList[35].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button36EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[35].eventsList[0].person);
+            Button36EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[35].eventsList[1].person);
+            Button36EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[35].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[35].eventsList.Count > 3) {
+                Button36EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[35].eventsList.Count - 2) + " More Events...";
+                Button36EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 37 */
+        try {
+            Button37EventText1 = ReferenceValues.JsonCalendarMasterEventList[36].eventsList[0].name;
+            Button37EventText2 = ReferenceValues.JsonCalendarMasterEventList[36].eventsList[1].name;
+            Button37EventText3 = ReferenceValues.JsonCalendarMasterEventList[36].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button37EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[36].eventsList[0].person);
+            Button37EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[36].eventsList[1].person);
+            Button37EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[36].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[36].eventsList.Count > 3) {
+                Button37EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[36].eventsList.Count - 2) + " More Events...";
+                Button37EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 38 */
+        try {
+            Button38EventText1 = ReferenceValues.JsonCalendarMasterEventList[37].eventsList[0].name;
+            Button38EventText2 = ReferenceValues.JsonCalendarMasterEventList[37].eventsList[1].name;
+            Button38EventText3 = ReferenceValues.JsonCalendarMasterEventList[37].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button38EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[37].eventsList[0].person);
+            Button38EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[37].eventsList[1].person);
+            Button38EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[37].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[37].eventsList.Count > 3) {
+                Button38EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[37].eventsList.Count - 2) + " More Events...";
+                Button38EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 39 */
+        try {
+            Button39EventText1 = ReferenceValues.JsonCalendarMasterEventList[38].eventsList[0].name;
+            Button39EventText2 = ReferenceValues.JsonCalendarMasterEventList[38].eventsList[1].name;
+            Button39EventText3 = ReferenceValues.JsonCalendarMasterEventList[38].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button39EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[38].eventsList[0].person);
+            Button39EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[38].eventsList[1].person);
+            Button39EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[38].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[38].eventsList.Count > 3) {
+                Button39EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[38].eventsList.Count - 2) + " More Events...";
+                Button39EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 40 */
+        try {
+            Button40EventText1 = ReferenceValues.JsonCalendarMasterEventList[39].eventsList[0].name;
+            Button40EventText2 = ReferenceValues.JsonCalendarMasterEventList[39].eventsList[1].name;
+            Button40EventText3 = ReferenceValues.JsonCalendarMasterEventList[39].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button40EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[39].eventsList[0].person);
+            Button40EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[39].eventsList[1].person);
+            Button40EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[39].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[39].eventsList.Count > 3) {
+                Button40EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[39].eventsList.Count - 2) + " More Events...";
+                Button40EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 41 */
+        try {
+            Button41EventText1 = ReferenceValues.JsonCalendarMasterEventList[40].eventsList[0].name;
+            Button41EventText2 = ReferenceValues.JsonCalendarMasterEventList[40].eventsList[1].name;
+            Button41EventText3 = ReferenceValues.JsonCalendarMasterEventList[40].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button41EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[40].eventsList[0].person);
+            Button41EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[40].eventsList[1].person);
+            Button41EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[40].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[40].eventsList.Count > 3) {
+                Button41EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[40].eventsList.Count - 2) + " More Events...";
+                Button41EventColor3 = "White";
+            }
+        } catch (Exception) { }
+
+        /* Button 42 */
+        try {
+            Button42EventText1 = ReferenceValues.JsonCalendarMasterEventList[41].eventsList[0].name;
+            Button42EventText2 = ReferenceValues.JsonCalendarMasterEventList[41].eventsList[1].name;
+            Button42EventText3 = ReferenceValues.JsonCalendarMasterEventList[41].eventsList[2].name;
+        } catch (Exception) { }
+
+        try {
+            Button42EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[41].eventsList[0].person);
+            Button42EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[41].eventsList[1].person);
+            Button42EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[41].eventsList[2].person);
+        } catch (Exception) { }
+
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[41].eventsList.Count > 3) {
+                Button42EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[41].eventsList.Count - 2) + " More Events...";
+                Button42EventColor3 = "White";
             }
         } catch (Exception) { }
     }
@@ -3081,6 +4028,30 @@ public class CalendarVM : BaseViewModel {
         set {
             _button41EventColor3 = value;
             RaisePropertyChangedEvent("Button41EventColor3");
+        }
+    }
+
+    public string Button42EventColor1 {
+        get => _button42EventColor1;
+        set {
+            _button42EventColor1 = value;
+            RaisePropertyChangedEvent("Button42EventColor1");
+        }
+    }
+
+    public string Button42EventColor2 {
+        get => _button42EventColor2;
+        set {
+            _button42EventColor2 = value;
+            RaisePropertyChangedEvent("Button42EventColor2");
+        }
+    }
+
+    public string Button42EventColor3 {
+        get => _button42EventColor3;
+        set {
+            _button42EventColor3 = value;
+            RaisePropertyChangedEvent("Button42EventColor3");
         }
     }
 

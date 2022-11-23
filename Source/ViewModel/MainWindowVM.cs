@@ -15,8 +15,13 @@ public class MainWindowVM : BaseViewModel {
         /* Get Settings */
         string[] settings = CsvParser.GetSettings();
         ReferenceValues.UserAgent = settings[0];
+        ReferenceValues.User1Name = settings[1];
+        ReferenceValues.User2Name = settings[2];
+        ReferenceValues.Child1Name = settings[3];
+        ReferenceValues.Child2Name = settings[4];
+        ReferenceValues.Child3Name = settings[5];
 
-        if (string.IsNullOrEmpty(settings[0])) {
+        if (ReferenceValues.UserAgent == "null") {
             do {
                 Settings settingsDialog = new();
                 settingsDialog.ShowDialog();

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Finances;
+using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Finances;
@@ -12,7 +13,6 @@ namespace HomeControl.Source.ViewModel.Finances;
 public class FinancesVM : BaseViewModel {
     private string _cashIncomeText, _cashExpenseText, _cashAvailableText, _cashAvailableTextColor;
     private ObservableCollection<FinanceBlock> _financeList;
-    private FinanceBlock _financeSelected;
     private int expense, income, available;
 
     public FinancesVM() {
@@ -23,11 +23,8 @@ public class FinancesVM : BaseViewModel {
         income = 0;
         available = 0;
         CashAvailableTextColor = "CornflowerBlue";
-
-        /* CSV to list */
-        _financeList = new ObservableCollection<FinanceBlock>();
-        _financeSelected = new FinanceBlock();
-        FinanceList = CsvParser.GetFinanceList();
+        FinanceList = new ObservableCollection<FinanceBlock>();
+        new FinancesFromJson();
         RefreshFinances();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -38,12 +35,12 @@ public class FinancesVM : BaseViewModel {
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
-        case "add":
+        case "edit":
+            ReferenceValues.JsonFinanceMasterList.financeList = FinanceList;
             FinancesAdd financesAdd = new();
             financesAdd.ShowDialog();
             financesAdd.Close();
-            break;
-        case "edit":
+            RefreshFinances();
             break;
         }
     }
@@ -55,26 +52,28 @@ public class FinancesVM : BaseViewModel {
     }
 
     private void RefreshFinances() {
-        /* Refresh list */
-        FinanceList.Clear();
-        FinanceList = CsvParser.GetFinanceList();
+        FinanceList = ReferenceValues.JsonFinanceMasterList.financeList;
+        expense = 0;
+        income = 0;
 
         /* Calculate income, expense, and available cash */
-        for (int i = 0; i < FinanceList.Count; i++) {
-            if (FinanceList[i].AddSub == "SUB") {
-                try {
-                    expense += int.Parse(FinanceList[i].Cost);
-                } catch (Exception) { }
+        try {
+            for (int i = 0; i < FinanceList.Count; i++) {
+                if (FinanceList[i].AddSub == "SUB") {
+                    try {
+                        expense += FinanceList[i].Cost;
+                    } catch (Exception) { }
+                }
             }
-        }
 
-        for (int i = 0; i < FinanceList.Count; i++) {
-            if (FinanceList[i].AddSub == "ADD") {
-                try {
-                    income += int.Parse(FinanceList[i].Cost);
-                } catch (Exception) { }
+            for (int i = 0; i < FinanceList.Count; i++) {
+                if (FinanceList[i].AddSub == "ADD") {
+                    try {
+                        income += FinanceList[i].Cost;
+                    } catch (Exception) { }
+                }
             }
-        }
+        } catch (Exception) { }
 
         available = income - expense;
 
@@ -126,14 +125,6 @@ public class FinancesVM : BaseViewModel {
         set {
             _financeList = value;
             RaisePropertyChangedEvent("FinanceList");
-        }
-    }
-
-    public FinanceBlock FinanceSelected {
-        get => _financeSelected;
-        set {
-            _financeSelected = value;
-            RaisePropertyChangedEvent("FinanceSelected");
         }
     }
 

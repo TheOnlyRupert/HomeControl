@@ -85,9 +85,10 @@ public class WeatherVM : BaseViewModel {
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
+            // ReSharper disable once RedundantIfElseBlock
+        } else {
+            Console.WriteLine("Weather Disabled in Debug");
         }
-
-        Console.WriteLine("Weather Disabled in Debug");
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
@@ -100,7 +101,7 @@ public class WeatherVM : BaseViewModel {
             //update date stuff
         }
 
-        /* Update weather every 15 minutes or when */
+        /* Update weather every 15 minutes or when hour changes */
         if ((poolWeather > 900 || updateForecast || updateForecastHourly) && !string.IsNullOrEmpty(ReferenceValues.UserAgent)) {
             bool errored = false;
             JsonSerializerOptions options = new() {

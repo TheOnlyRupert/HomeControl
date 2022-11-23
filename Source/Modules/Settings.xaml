@@ -22,21 +22,31 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <TextBlock Text="NWF User Agent (Email)" FontSize="24"/>
+            <TextBlock Text="*NWF User Agent (Email)" FontSize="24"/>
             <TextBox Text="{Binding UserAgentText}" FontSize="24"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1">
+            <TextBlock Text="*User 1 Name (Father)" FontSize="24"/>
+            <TextBox Text="{Binding User1Name}" FontSize="24"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="*User 2 Name (Mother)" FontSize="24"/>
+            <TextBox Text="{Binding User2Name}" FontSize="24"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3">
             <TextBlock Text="Child 1 Name" FontSize="24"/>
             <TextBox Text="{Binding Child1Name}" FontSize="24"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
+        <StackPanel Grid.Row="4">
             <TextBlock Text="Child 2 Name" FontSize="24"/>
             <TextBox Text="{Binding Child2Name}" FontSize="24"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3">
+        <StackPanel Grid.Row="5">
             <TextBlock Text="Child 3 Name" FontSize="24"/>
             <TextBox Text="{Binding Child3Name}" FontSize="24"/>
         </StackPanel>

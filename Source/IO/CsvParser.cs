@@ -1,15 +1,11 @@
 using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
-using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.IO;
 
 public static class CsvParser {
-    private static readonly ObservableCollection<FinanceBlock> _list = new();
-
     static CsvParser() {
         try {
             Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "events/");
@@ -17,14 +13,7 @@ public static class CsvParser {
             if (!File.Exists(ReferenceValues.FILE_DIRECTORY + "settings.csv")) {
                 Console.WriteLine("settings.csv does not exist. Restoring default settings");
                 StreamWriter file = new(ReferenceValues.FILE_DIRECTORY + "settings.csv", true);
-                file.WriteLine("!KEY,VALUE\nUserAgent,");
-                file.Close();
-            }
-
-            if (!File.Exists(ReferenceValues.FILE_DIRECTORY + "finances2022.csv")) {
-                Console.WriteLine("finances2022.csv does not exist. Restoring default settings");
-                StreamWriter file = new(ReferenceValues.FILE_DIRECTORY + "finances2022.csv", true);
-                file.WriteLine("!ADDSUB,DATE,ITEM,AMOUNT,CATEGORY,PERSON");
+                file.WriteLine("!KEY,VALUE");
                 file.Close();
             }
 
@@ -41,47 +30,9 @@ public static class CsvParser {
         }
     }
 
-    public static ObservableCollection<FinanceBlock> GetFinanceList() {
-        try {
-            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "finances2022.csv");
-            while (!streamReader.EndOfStream) {
-                string str = streamReader.ReadLine();
-
-                if (str != null && str[0] != '!') {
-                    string[] strArray = str.Split(',');
-
-                    _list.Add(new FinanceBlock {
-                        AddSub = strArray[0],
-                        Date = strArray[1],
-                        Item = strArray[2],
-                        Cost = strArray[3],
-                        Category = strArray[4],
-                        Person = strArray[5]
-                    });
-                }
-            }
-
-            streamReader.Close();
-        } catch (Exception) {
-            MessageBox.Show("Error! finances2022.csv file error.", "Error");
-        }
-
-        return _list;
-    }
-
-    public static void AddFiance(string line) {
-        try {
-            StreamWriter file = new(ReferenceValues.FILE_DIRECTORY + "finances2022.csv", true);
-            file.WriteLine(line);
-            file.Close();
-        } catch (Exception) {
-            MessageBox.Show("Error! Unable to save finances2022.csv file.", "Error");
-        }
-    }
-
     public static string[] GetSettings() {
         StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "settings.csv");
-        string[] values = new string[1];
+        string[] values = { "null", "null", "null", "null", "null", "null" };
 
         while (!streamReader.EndOfStream) {
             string str = streamReader.ReadLine();
@@ -97,6 +48,47 @@ public static class CsvParser {
                     }
 
                     break;
+                case "User1Name":
+                    try {
+                        values[1] = strArray[1];
+                    } catch (Exception) {
+                        Console.WriteLine("Error when reading value of \"User1Name\" in settings.csv, using default settings");
+                    }
+
+                    break;
+
+                case "User2Name":
+                    try {
+                        values[2] = strArray[1];
+                    } catch (Exception) {
+                        Console.WriteLine("Error when reading value of \"User2Name\" in settings.csv, using default settings");
+                    }
+
+                    break;
+                case "Child1Name":
+                    try {
+                        values[3] = strArray[1];
+                    } catch (Exception) {
+                        Console.WriteLine("Error when reading value of \"Child1Name\" in settings.csv, using default settings");
+                    }
+
+                    break;
+                case "Child2Name":
+                    try {
+                        values[4] = strArray[1];
+                    } catch (Exception) {
+                        Console.WriteLine("Error when reading value of \"Child2Name\" in settings.csv, using default settings");
+                    }
+
+                    break;
+                case "Child3Name":
+                    try {
+                        values[5] = strArray[1];
+                    } catch (Exception) {
+                        Console.WriteLine("Error when reading value of \"Child3Name\" in settings.csv, using default settings");
+                    }
+
+                    break;
                 }
             }
         }
@@ -106,7 +98,11 @@ public static class CsvParser {
 
     public static void SaveSettings() {
         try {
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "settings.csv", "!KEY,!VALUE\nUserAgent," + ReferenceValues.UserAgent.Trim());
+            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "settings.csv", "!KEY,VALUE\nUserAgent," + ReferenceValues.UserAgent.Trim()
+                                                                                                        + "\nUser1Name," + ReferenceValues.User1Name + "\nUser2Name," +
+                                                                                                        ReferenceValues.User2Name + "\nChild1Name," + ReferenceValues.Child1Name
+                                                                                                        + "\nChild2Name," + ReferenceValues.Child2Name + "\nChild3Name," +
+                                                                                                        ReferenceValues.Child3Name);
         } catch (Exception e) {
             Console.WriteLine("Unable to save settings.csv... " + e.Message);
         }

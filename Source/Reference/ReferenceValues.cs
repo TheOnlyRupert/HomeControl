@@ -8,7 +8,7 @@ public static class ReferenceValues {
     public const string COPYRIGHT = "Copyright © 2022  Robert Higgins";
     public const string VERSION = "1.0.0";
 
-    public const bool EnableWeather = false;
+    public const bool EnableWeather = true;
 
     public static readonly List<string> CategorySpendingList = new() {
         "Billing",
@@ -43,6 +43,11 @@ public static class ReferenceValues {
     public static DateTime CalendarEventDate { get; set; }
 
     public static JsonCalendar[] JsonCalendarMasterEventList { get; set; }
+
+    public static JsonFinances JsonFinanceMasterList { get; set; }
+
+    public static string User1Name { get; set; }
+    public static string User2Name { get; set; }
 
     public static string Child1Name { get; set; }
     public static string Child2Name { get; set; }

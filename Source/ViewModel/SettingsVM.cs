@@ -7,10 +7,15 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
-    private string _userAgentText, _child1Name, _child2Name, _child3Name;
+    private string _userAgentText, _user1Name, _user2Name, _child1Name, _child2Name, _child3Name;
 
     public SettingsVM() {
-        ReferenceValues.UserAgent = "";
+        ReferenceValues.UserAgent = "null";
+        ReferenceValues.User1Name = "null";
+        ReferenceValues.User2Name = "null";
+        ReferenceValues.Child1Name = "null";
+        ReferenceValues.Child2Name = "null";
+        ReferenceValues.Child3Name = "null";
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -18,8 +23,10 @@ public class SettingsVM : BaseViewModel {
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "save":
-            if (!string.IsNullOrEmpty(UserAgentText)) {
+            if (!string.IsNullOrEmpty(UserAgentText) || !string.IsNullOrEmpty(User1Name) || !string.IsNullOrEmpty(User2Name)) {
                 ReferenceValues.UserAgent = UserAgentText;
+                ReferenceValues.User1Name = User1Name;
+                ReferenceValues.User2Name = User2Name;
                 ReferenceValues.Child1Name = Child1Name;
                 ReferenceValues.Child2Name = Child2Name;
                 ReferenceValues.Child3Name = Child3Name;
@@ -27,7 +34,6 @@ public class SettingsVM : BaseViewModel {
             } else {
                 MessageBox.Show("Fields cannot be blank", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
 
             break;
         }
@@ -40,6 +46,22 @@ public class SettingsVM : BaseViewModel {
         set {
             _userAgentText = value;
             RaisePropertyChangedEvent("UserAgentText");
+        }
+    }
+
+    public string User1Name {
+        get => _user1Name;
+        set {
+            _user1Name = value;
+            RaisePropertyChangedEvent("User1Name");
+        }
+    }
+
+    public string User2Name {
+        get => _user2Name;
+        set {
+            _user2Name = value;
+            RaisePropertyChangedEvent("User2Name");
         }
     }
 

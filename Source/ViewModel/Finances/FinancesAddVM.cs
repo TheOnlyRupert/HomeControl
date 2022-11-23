@@ -1,29 +1,45 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.IO;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesAddVM : BaseViewModel {
-    private readonly CrossViewMessenger _crossViewMessenger;
     private ObservableCollection<string> _categoryList;
-    private string _categorySelected, _descriptionText, _amountText, _dateText, _switchModeButtonText, _switchModeButtonColor;
-    private bool isExpense;
+    private int _costText;
+
+    private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
+        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub;
+
+    private ObservableCollection<FinanceBlock> _financeList;
+    private FinanceBlock _financeSelected;
+    private readonly JsonFinances _jsonFinances;
+    private string selectedPerson, _categorySelected, _descriptionText;
 
     public FinancesAddVM() {
-        _crossViewMessenger = CrossViewMessenger.Instance;
-        DescriptionText = AmountText = "";
         DateTime dateTime = DateTime.Now;
+        _financeSelected = new FinanceBlock();
+        FinanceList = new ObservableCollection<FinanceBlock>();
+        selectedPerson = ReferenceValues.User1Name;
+        User1NameText = ReferenceValues.User1Name;
+        User2NameText = ReferenceValues.User2Name;
+        DescriptionText = "";
+        CostText = 0;
+        UserButtonLogic();
+        _jsonFinances = new JsonFinances();
+        FinanceList = ReferenceValues.JsonFinanceMasterList.financeList;
 
         DateText = dateTime.ToShortDateString();
 
         SwitchModeButtonText = "Current Mode:\nAdd Expense";
         SwitchModeButtonColor = "Red";
-        isExpense = true;
+        AddOrSub = "SUB";
 
         /* Populate drop down box with spending categories and set default */
         CategoryList = new ObservableCollection<string>();
@@ -41,53 +57,157 @@ public class FinancesAddVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void ButtonCommandLogic(object param) {
+        MessageBoxResult confirmation;
         switch (param) {
-        case "save":
-            string missingItemsText = "";
-            bool isMissingItems = false;
-            string expenseType;
-
-            expenseType = isExpense ? "SUB" : "ADD";
-
-            if (string.IsNullOrEmpty(DescriptionText)) {
-                missingItemsText += "Description, ";
-                isMissingItems = true;
-            }
-
-            if (string.IsNullOrEmpty(AmountText)) {
-                missingItemsText += "Amount, ";
-                isMissingItems = true;
-            }
-
-            if (string.IsNullOrEmpty(DateText)) {
-                missingItemsText += "Date, ";
-                isMissingItems = true;
-            }
-
-            /* Create missing items message */
-            if (isMissingItems) {
-                /* Remove ending comma */
-                missingItemsText = missingItemsText.Substring(0, missingItemsText.Length - 2).Trim();
-                MessageBox.Show(missingItemsText, "Missing Required Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+        case "add":
+            if (string.IsNullOrWhiteSpace(DescriptionText)) {
+                MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
-                CsvParser.AddFiance(expenseType + ',' + DateText.Trim() + ',' + DescriptionText.Trim() + ',' + AmountText.Trim() + ',' + CategorySelected + ',' + "Person");
-                _crossViewMessenger.PushMessage("RefreshFinances", null);
-                CloseAction();
+                FinanceList.Add(new FinanceBlock {
+                    AddSub = AddOrSub,
+                    Date = DateText,
+                    Item = DescriptionText,
+                    Cost = CostText,
+                    Category = CategorySelected,
+                    Person = selectedPerson
+                });
+
+                DateText = "";
+                DescriptionText = "";
+                CostText = 0;
             }
 
             break;
+        case "update":
+            if (string.IsNullOrWhiteSpace(DescriptionText)) {
+                MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else if (!string.IsNullOrWhiteSpace(FinanceSelected.Item)) {
+                confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
+                if (confirmation == MessageBoxResult.Yes) {
+                    FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
+                        Date = DateText,
+                        Item = DescriptionText,
+                        Cost = CostText,
+                        Category = CategorySelected,
+                        Person = selectedPerson
+                    });
+                    FinanceList.Remove(FinanceSelected);
+
+                    DateText = "";
+                    DescriptionText = "";
+                    CostText = 0;
+                }
+            }
+
+            break;
+
+        case "save":
+            if (FinanceList.Count > 0) {
+                try {
+                    _jsonFinances.financeList = FinanceList;
+                    string jsonString = JsonSerializer.Serialize(_jsonFinances);
+                    File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "finances.json", jsonString);
+                    ReferenceValues.JsonFinanceMasterList = _jsonFinances;
+                } catch (Exception e) {
+                    Console.WriteLine("Unable to save finances.json... " + e.Message);
+                }
+            } else {
+                try {
+                    File.Delete(ReferenceValues.FILE_DIRECTORY + "finances.json");
+                } catch (Exception) { }
+            }
+
+            break;
+        case "delete":
+            if (!string.IsNullOrWhiteSpace(FinanceSelected.Item)) {
+                confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
+                if (confirmation == MessageBoxResult.Yes) {
+                    FinanceList.Remove(FinanceSelected);
+                }
+            }
+
+            break;
+
+        case "user1":
+            selectedPerson = ReferenceValues.User1Name;
+            UserButtonLogic();
+            break;
+
+        case "user2":
+            selectedPerson = ReferenceValues.User2Name;
+            UserButtonLogic();
+            break;
+
+        case "children":
+            selectedPerson = "Children";
+            UserButtonLogic();
+            break;
+
+        case "home":
+            selectedPerson = "Home";
+            UserButtonLogic();
+            break;
+
+        case "other":
+            selectedPerson = "Other";
+            UserButtonLogic();
+            break;
+
         case "switchMode":
-            if (isExpense) {
+            if (AddOrSub == "SUB") {
                 SwitchModeButtonText = "Current Mode:\nAdd Income";
                 SwitchModeButtonColor = "Green";
-                isExpense = false;
+                AddOrSub = "ADD";
             } else {
                 SwitchModeButtonText = "Current Mode:\nAdd Expense";
                 SwitchModeButtonColor = "Red";
-                isExpense = true;
+                AddOrSub = "SUB";
             }
 
             break;
+        }
+    }
+
+    private void PopulateDetailedView(FinanceBlock value) {
+        DescriptionText = value.Item;
+        DateText = value.Date;
+        CostText = value.Cost;
+        CategorySelected = value.Category;
+
+        if (value.Person == ReferenceValues.User1Name) {
+            selectedPerson = ReferenceValues.User1Name;
+        } else if (value.Person == ReferenceValues.User2Name) {
+            selectedPerson = ReferenceValues.User2Name;
+        } else {
+            selectedPerson = value.Person;
+        }
+
+        UserButtonLogic();
+    }
+
+    private void UserButtonLogic() {
+        User1BackgroundColor = "Transparent";
+        User2BackgroundColor = "Transparent";
+        ChildrenBackgroundColor = "Transparent";
+        HomeBackgroundColor = "Transparent";
+        OtherBackgroundColor = "Transparent";
+
+        if (selectedPerson == ReferenceValues.User1Name) {
+            User1BackgroundColor = "Green";
+        } else if (selectedPerson == ReferenceValues.User2Name) {
+            User2BackgroundColor = "Green";
+        } else {
+            switch (selectedPerson) {
+            case "Children":
+                ChildrenBackgroundColor = "Green";
+                break;
+            case "Home":
+                HomeBackgroundColor = "Green";
+                break;
+            default:
+                OtherBackgroundColor = "Green";
+                break;
+            }
         }
     }
 
@@ -109,11 +229,11 @@ public class FinancesAddVM : BaseViewModel {
         }
     }
 
-    public string AmountText {
-        get => _amountText;
+    public int CostText {
+        get => _costText;
         set {
-            _amountText = value;
-            RaisePropertyChangedEvent("AmountText");
+            _costText = value;
+            RaisePropertyChangedEvent("CostText");
         }
     }
 
@@ -141,11 +261,84 @@ public class FinancesAddVM : BaseViewModel {
         }
     }
 
+    public ObservableCollection<FinanceBlock> FinanceList {
+        get => _financeList;
+        set {
+            _financeList = value;
+            RaisePropertyChangedEvent("FinanceList");
+        }
+    }
+
+    public FinanceBlock FinanceSelected {
+        get => _financeSelected;
+        set {
+            _financeSelected = value;
+            PopulateDetailedView(value);
+            RaisePropertyChangedEvent("FinanceSelected");
+        }
+    }
+
     public string SwitchModeButtonColor {
         get => _switchModeButtonColor;
         set {
             _switchModeButtonColor = value;
             RaisePropertyChangedEvent("SwitchModeButtonColor");
+        }
+    }
+
+    public string User1BackgroundColor {
+        get => _user1BackgroundColor;
+        set {
+            _user1BackgroundColor = value;
+            RaisePropertyChangedEvent("User1BackgroundColor");
+        }
+    }
+
+    public string User2BackgroundColor {
+        get => _user2BackgroundColor;
+        set {
+            _user2BackgroundColor = value;
+            RaisePropertyChangedEvent("User2BackgroundColor");
+        }
+    }
+
+    public string ChildrenBackgroundColor {
+        get => _childrenBackgroundColor;
+        set {
+            _childrenBackgroundColor = value;
+            RaisePropertyChangedEvent("ChildrenBackgroundColor");
+        }
+    }
+
+    public string HomeBackgroundColor {
+        get => _homeBackgroundColor;
+        set {
+            _homeBackgroundColor = value;
+            RaisePropertyChangedEvent("HomeBackgroundColor");
+        }
+    }
+
+    public string OtherBackgroundColor {
+        get => _otherBackgroundColor;
+        set {
+            _otherBackgroundColor = value;
+            RaisePropertyChangedEvent("OtherBackgroundColor");
+        }
+    }
+
+    public string User1NameText {
+        get => _user1NameText;
+        set {
+            _user1NameText = value;
+            RaisePropertyChangedEvent("User1NameText");
+        }
+    }
+
+    public string User2NameText {
+        get => _user2NameText;
+        set {
+            _user2NameText = value;
+            RaisePropertyChangedEvent("User2NameText");
         }
     }
 

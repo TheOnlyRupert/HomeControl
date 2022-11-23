@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
@@ -11,14 +12,25 @@ namespace HomeControl.Source.ViewModel.Calendar;
 
 public class CalendarEventVM : BaseViewModel {
     private CalendarEvents _calendarEventSelected;
-    private string _eventDate, _eventText, _locationText, _descriptionText, _saveButtonText;
     private ObservableCollection<CalendarEvents> _eventList;
+    private readonly JsonCalendar _jsonCalendar;
+
+    private readonly string fileName;
+
+    private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
+        _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText;
 
     public CalendarEventVM() {
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
-        SaveButtonText = "Save";
-        string fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
-        Console.WriteLine(fileName);
+        fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
+        EventList = new ObservableCollection<CalendarEvents>();
+        EventText = "";
+        _jsonCalendar = new JsonCalendar();
+        selectedPerson = "House";
+        User1NameText = ReferenceValues.User1Name;
+        User2NameText = ReferenceValues.User2Name;
+        CalendarEventSelected = new CalendarEvents();
+        UserButtonLogic();
 
         if (File.Exists(fileName)) {
             JsonSerializerOptions options = new() {
@@ -55,14 +67,135 @@ public class CalendarEventVM : BaseViewModel {
         EventText = value.name;
         LocationText = value.location;
         DescriptionText = value.description;
+
+        if (value.person == ReferenceValues.User1Name) {
+            selectedPerson = ReferenceValues.User1Name;
+        } else if (value.person == ReferenceValues.User2Name) {
+            selectedPerson = ReferenceValues.User2Name;
+        } else {
+            selectedPerson = value.person;
+        }
+
+        UserButtonLogic();
+    }
+
+    private void UserButtonLogic() {
+        User1BackgroundColor = "Transparent";
+        User2BackgroundColor = "Transparent";
+        ChildrenBackgroundColor = "Transparent";
+        HomeBackgroundColor = "Transparent";
+        OtherBackgroundColor = "Transparent";
+
+        if (selectedPerson == ReferenceValues.User1Name) {
+            User1BackgroundColor = "Green";
+        } else if (selectedPerson == ReferenceValues.User2Name) {
+            User2BackgroundColor = "Green";
+        } else {
+            switch (selectedPerson) {
+            case "Children":
+                ChildrenBackgroundColor = "Green";
+                break;
+            case "Home":
+                HomeBackgroundColor = "Green";
+                break;
+            default:
+                OtherBackgroundColor = "Green";
+                break;
+            }
+        }
     }
 
     private void ButtonLogic(object param) {
+        MessageBoxResult confirmation;
+
         switch (param) {
+        case "add":
+            if (string.IsNullOrWhiteSpace(EventText)) {
+                MessageBox.Show("Event needs a name.", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else {
+                EventList.Add(new CalendarEvents {
+                    name = EventText,
+                    description = DescriptionText,
+                    location = LocationText,
+                    person = selectedPerson
+                });
+
+                EventText = "";
+                DescriptionText = "";
+                LocationText = "";
+            }
+
+            break;
+        case "update":
+            if (string.IsNullOrWhiteSpace(EventText)) {
+                MessageBox.Show("Event needs a name.", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
+                confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (confirmation == MessageBoxResult.Yes) {
+                    EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
+                        name = EventText,
+                        description = DescriptionText,
+                        location = LocationText,
+                        person = selectedPerson
+                    });
+                    EventList.Remove(CalendarEventSelected);
+
+                    EventText = "";
+                    DescriptionText = "";
+                    LocationText = "";
+                }
+            }
+
+            break;
         case "save":
+            if (EventList.Count > 0) {
+                try {
+                    _jsonCalendar.eventsList = EventList;
+                    string jsonString = JsonSerializer.Serialize(_jsonCalendar);
+                    File.WriteAllText(fileName, jsonString);
+                } catch (Exception e) {
+                    Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+                }
+            } else {
+                try {
+                    File.Delete(fileName);
+                } catch (Exception) { }
+            }
 
             break;
         case "delete":
+            if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
+                confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (confirmation == MessageBoxResult.Yes) {
+                    EventList.Remove(CalendarEventSelected);
+                }
+            }
+
+            break;
+
+        case "user1":
+            selectedPerson = ReferenceValues.User1Name;
+            UserButtonLogic();
+            break;
+
+        case "user2":
+            selectedPerson = ReferenceValues.User2Name;
+            UserButtonLogic();
+            break;
+
+        case "children":
+            selectedPerson = "Children";
+            UserButtonLogic();
+            break;
+
+        case "home":
+            selectedPerson = "Home";
+            UserButtonLogic();
+            break;
+
+        case "other":
+            selectedPerson = "Other";
+            UserButtonLogic();
             break;
         }
     }
@@ -82,14 +215,6 @@ public class CalendarEventVM : BaseViewModel {
         set {
             _eventText = value;
             RaisePropertyChangedEvent("EventText");
-        }
-    }
-
-    public string SaveButtonText {
-        get => _saveButtonText;
-        set {
-            _saveButtonText = value;
-            RaisePropertyChangedEvent("SaveButtonText");
         }
     }
 
@@ -123,6 +248,62 @@ public class CalendarEventVM : BaseViewModel {
             _calendarEventSelected = value;
             PopulateDetailedView(value);
             RaisePropertyChangedEvent("EventSelected");
+        }
+    }
+
+    public string User1BackgroundColor {
+        get => _user1BackgroundColor;
+        set {
+            _user1BackgroundColor = value;
+            RaisePropertyChangedEvent("User1BackgroundColor");
+        }
+    }
+
+    public string User2BackgroundColor {
+        get => _user2BackgroundColor;
+        set {
+            _user2BackgroundColor = value;
+            RaisePropertyChangedEvent("User2BackgroundColor");
+        }
+    }
+
+    public string ChildrenBackgroundColor {
+        get => _childrenBackgroundColor;
+        set {
+            _childrenBackgroundColor = value;
+            RaisePropertyChangedEvent("ChildrenBackgroundColor");
+        }
+    }
+
+    public string HomeBackgroundColor {
+        get => _homeBackgroundColor;
+        set {
+            _homeBackgroundColor = value;
+            RaisePropertyChangedEvent("HomeBackgroundColor");
+        }
+    }
+
+    public string OtherBackgroundColor {
+        get => _otherBackgroundColor;
+        set {
+            _otherBackgroundColor = value;
+            RaisePropertyChangedEvent("OtherBackgroundColor");
+        }
+    }
+
+    public string User1NameText {
+        get => _user1NameText;
+        set {
+            _user1NameText = value;
+            RaisePropertyChangedEvent("User1NameText");
+        }
+    }
+
+    public string User2NameText {
+        get => _user2NameText;
+        set {
+            _user2NameText = value;
+            RaisePropertyChangedEvent("User2NameText");
         }
     }
 
