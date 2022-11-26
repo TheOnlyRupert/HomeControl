@@ -83,7 +83,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="0" Grid.Column="0" Background="{Binding Button1BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button1">
                     <StackPanel>
                         <Grid>
@@ -93,14 +93,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button1Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button1HolidayText}" Foreground="Red" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button1HolidayText}" Foreground="YellowGreen" HorizontalAlignment="Right"/>
                         </Grid>
                         <TextBlock Text="{Binding Button1EventText1}" Foreground="{Binding Button1EventColor1}"/>
                         <TextBlock Text="{Binding Button1EventText2}" Foreground="{Binding Button1EventColor2}"/>
                         <TextBlock Text="{Binding Button1EventText3}" Foreground="{Binding Button1EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="1" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="0" Grid.Column="1" Background="{Binding Button2BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button2">
                     <StackPanel>
                         <Grid>
@@ -110,7 +110,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button2Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button2HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button2HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button2EventText1}" Foreground="{Binding Button2EventColor1}"/>
                         <TextBlock Text="{Binding Button2EventText2}" Foreground="{Binding Button2EventColor2}"/>
@@ -118,7 +118,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="2" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="0" Grid.Column="2" Background="{Binding Button3BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button3">
                     <StackPanel>
                         <Grid>
@@ -128,14 +128,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button3Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button3HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button3HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button3EventText1}" Foreground="{Binding Button3EventColor1}"/>
                         <TextBlock Text="{Binding Button3EventText2}" Foreground="{Binding Button3EventColor2}"/>
                         <TextBlock Text="{Binding Button3EventText3}" Foreground="{Binding Button3EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="3" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="0" Grid.Column="3" Background="{Binding Button4BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button4">
                     <StackPanel>
                         <Grid>
@@ -145,14 +145,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button4Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button4HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button4HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button4EventText1}" Foreground="{Binding Button4EventColor1}"/>
                         <TextBlock Text="{Binding Button4EventText2}" Foreground="{Binding Button4EventColor2}"/>
                         <TextBlock Text="{Binding Button4EventText3}" Foreground="{Binding Button4EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="4" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="0" Grid.Column="4" Background="{Binding Button5BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button5">
                     <StackPanel>
                         <Grid>
@@ -162,14 +162,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button5Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button5HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button5HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button5EventText1}" Foreground="{Binding Button5EventColor1}"/>
                         <TextBlock Text="{Binding Button5EventText2}" Foreground="{Binding Button5EventColor2}"/>
                         <TextBlock Text="{Binding Button5EventText3}" Foreground="{Binding Button5EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="5" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="0" Grid.Column="5" Background="{Binding Button6BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button6">
                     <StackPanel>
                         <Grid>
@@ -179,14 +179,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button6Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button6HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button6HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button6EventText1}" Foreground="{Binding Button6EventColor1}"/>
                         <TextBlock Text="{Binding Button6EventText2}" Foreground="{Binding Button6EventColor2}"/>
                         <TextBlock Text="{Binding Button6EventText3}" Foreground="{Binding Button6EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="6" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="0" Grid.Column="6" Background="{Binding Button7BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button7">
                     <StackPanel>
                         <Grid>
@@ -196,7 +196,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button7Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button7HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button7HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button7EventText1}" Foreground="{Binding Button7EventColor1}"/>
                         <TextBlock Text="{Binding Button7EventText2}" Foreground="{Binding Button7EventColor2}"/>
@@ -204,7 +204,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="0" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="1" Grid.Column="0" Background="{Binding Button8BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button8">
                     <StackPanel>
                         <Grid>
@@ -214,14 +214,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button8Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button8HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button8HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button8EventText1}" Foreground="{Binding Button8EventColor1}"/>
                         <TextBlock Text="{Binding Button8EventText2}" Foreground="{Binding Button8EventColor2}"/>
                         <TextBlock Text="{Binding Button8EventText3}" Foreground="{Binding Button8EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="1" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="1" Grid.Column="1" Background="{Binding Button9BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button9">
                     <StackPanel>
                         <Grid>
@@ -231,14 +231,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button9Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button9HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button9HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button9EventText1}" Foreground="{Binding Button9EventColor1}"/>
                         <TextBlock Text="{Binding Button9EventText2}" Foreground="{Binding Button9EventColor2}"/>
                         <TextBlock Text="{Binding Button9EventText3}" Foreground="{Binding Button9EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="2" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="1" Grid.Column="2" Background="{Binding Button10BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button10">
                     <StackPanel>
                         <Grid>
@@ -248,14 +248,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button10Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button10HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button10HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button10EventText1}" Foreground="{Binding Button10EventColor1}"/>
                         <TextBlock Text="{Binding Button10EventText2}" Foreground="{Binding Button10EventColor2}"/>
                         <TextBlock Text="{Binding Button10EventText3}" Foreground="{Binding Button10EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="3" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="1" Grid.Column="3" Background="{Binding Button11BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button11">
                     <StackPanel>
                         <Grid>
@@ -265,14 +265,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button11Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button11HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button11HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button11EventText1}" Foreground="{Binding Button11EventColor1}"/>
                         <TextBlock Text="{Binding Button11EventText2}" Foreground="{Binding Button11EventColor2}"/>
                         <TextBlock Text="{Binding Button11EventText3}" Foreground="{Binding Button11EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="4" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="1" Grid.Column="4" Background="{Binding Button12BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button12">
                     <StackPanel>
                         <Grid>
@@ -282,14 +282,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button12Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button12HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button12HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button12EventText1}" Foreground="{Binding Button12EventColor1}"/>
                         <TextBlock Text="{Binding Button12EventText2}" Foreground="{Binding Button12EventColor2}"/>
                         <TextBlock Text="{Binding Button12EventText3}" Foreground="{Binding Button12EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="5" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="1" Grid.Column="5" Background="{Binding Button13BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button13">
                     <StackPanel>
                         <Grid>
@@ -299,14 +299,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button13Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button13HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button13HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button13EventText1}" Foreground="{Binding Button13EventColor1}"/>
                         <TextBlock Text="{Binding Button13EventText2}" Foreground="{Binding Button13EventColor2}"/>
                         <TextBlock Text="{Binding Button13EventText3}" Foreground="{Binding Button13EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="6" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="1" Grid.Column="6" Background="{Binding Button14BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button14">
                     <StackPanel>
                         <Grid>
@@ -316,7 +316,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button14Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button14HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button14HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button14EventText1}" Foreground="{Binding Button14EventColor1}"/>
                         <TextBlock Text="{Binding Button14EventText2}" Foreground="{Binding Button14EventColor2}"/>
@@ -324,7 +324,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="0" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="2" Grid.Column="0" Background="{Binding Button15BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button15">
                     <StackPanel>
                         <Grid>
@@ -334,14 +334,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button15Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button15HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button15HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button15EventText1}" Foreground="{Binding Button15EventColor1}"/>
                         <TextBlock Text="{Binding Button15EventText2}" Foreground="{Binding Button15EventColor2}"/>
                         <TextBlock Text="{Binding Button15EventText3}" Foreground="{Binding Button15EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="2" Grid.Column="1" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="2" Grid.Column="1" Background="{Binding Button16BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button16">
                     <StackPanel>
                         <Grid>
@@ -351,14 +351,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button16Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button16HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button16HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button16EventText1}" Foreground="{Binding Button16EventColor1}"/>
                         <TextBlock Text="{Binding Button16EventText2}" Foreground="{Binding Button16EventColor2}"/>
                         <TextBlock Text="{Binding Button16EventText3}" Foreground="{Binding Button16EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="2" Grid.Column="2" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="2" Grid.Column="2" Background="{Binding Button17BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button17">
                     <StackPanel>
                         <Grid>
@@ -368,14 +368,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button17Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button17HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button17HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button17EventText1}" Foreground="{Binding Button17EventColor1}"/>
                         <TextBlock Text="{Binding Button17EventText2}" Foreground="{Binding Button17EventColor2}"/>
                         <TextBlock Text="{Binding Button17EventText3}" Foreground="{Binding Button17EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="2" Grid.Column="3" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="2" Grid.Column="3" Background="{Binding Button18BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button18">
                     <StackPanel>
                         <Grid>
@@ -385,14 +385,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button18Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button18HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button18HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button18EventText1}" Foreground="{Binding Button18EventColor1}"/>
                         <TextBlock Text="{Binding Button18EventText2}" Foreground="{Binding Button18EventColor2}"/>
                         <TextBlock Text="{Binding Button18EventText3}" Foreground="{Binding Button18EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="2" Grid.Column="4" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="2" Grid.Column="4" Background="{Binding Button19BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button19">
                     <StackPanel>
                         <Grid>
@@ -402,14 +402,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button19Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button19HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button19HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button19EventText1}" Foreground="{Binding Button19EventColor1}"/>
                         <TextBlock Text="{Binding Button19EventText2}" Foreground="{Binding Button19EventColor2}"/>
                         <TextBlock Text="{Binding Button19EventText3}" Foreground="{Binding Button19EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="2" Grid.Column="5" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="2" Grid.Column="5" Background="{Binding Button20BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button20">
                     <StackPanel>
                         <Grid>
@@ -419,14 +419,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button20Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button20HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button20HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button20EventText1}" Foreground="{Binding Button20EventColor1}"/>
                         <TextBlock Text="{Binding Button20EventText2}" Foreground="{Binding Button20EventColor2}"/>
                         <TextBlock Text="{Binding Button20EventText3}" Foreground="{Binding Button20EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="2" Grid.Column="6" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="2" Grid.Column="6" Background="{Binding Button21BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button21">
                     <StackPanel>
                         <Grid>
@@ -436,7 +436,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button21Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button21HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button21HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button21EventText1}" Foreground="{Binding Button21EventColor1}"/>
                         <TextBlock Text="{Binding Button21EventText2}" Foreground="{Binding Button21EventColor2}"/>
@@ -444,7 +444,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="3" Grid.Column="0" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="3" Grid.Column="0" Background="{Binding Button22BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button22">
                     <StackPanel>
                         <Grid>
@@ -454,14 +454,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button22Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button22HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button22HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button22EventText1}" Foreground="{Binding Button22EventColor1}"/>
                         <TextBlock Text="{Binding Button22EventText2}" Foreground="{Binding Button22EventColor2}"/>
                         <TextBlock Text="{Binding Button22EventText3}" Foreground="{Binding Button22EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="3" Grid.Column="1" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="3" Grid.Column="1" Background="{Binding Button23BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button23">
                     <StackPanel>
                         <Grid>
@@ -471,14 +471,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button23Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button23HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button23HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button23EventText1}" Foreground="{Binding Button23EventColor1}"/>
                         <TextBlock Text="{Binding Button23EventText2}" Foreground="{Binding Button23EventColor2}"/>
                         <TextBlock Text="{Binding Button23EventText3}" Foreground="{Binding Button23EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="3" Grid.Column="2" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="3" Grid.Column="2" Background="{Binding Button24BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button24">
                     <StackPanel>
                         <Grid>
@@ -488,14 +488,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button24Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button24HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button24HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button24EventText1}" Foreground="{Binding Button24EventColor1}"/>
                         <TextBlock Text="{Binding Button24EventText2}" Foreground="{Binding Button24EventColor2}"/>
                         <TextBlock Text="{Binding Button24EventText3}" Foreground="{Binding Button24EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="3" Grid.Column="3" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="3" Grid.Column="3" Background="{Binding Button25BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button25">
                     <StackPanel>
                         <Grid>
@@ -505,14 +505,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button25Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button25HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button25HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button25EventText1}" Foreground="{Binding Button25EventColor1}"/>
                         <TextBlock Text="{Binding Button25EventText2}" Foreground="{Binding Button25EventColor2}"/>
                         <TextBlock Text="{Binding Button25EventText3}" Foreground="{Binding Button25EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="3" Grid.Column="4" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="3" Grid.Column="4" Background="{Binding Button26BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button26">
                     <StackPanel>
                         <Grid>
@@ -522,14 +522,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button26Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button26HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button26HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button26EventText1}" Foreground="{Binding Button26EventColor1}"/>
                         <TextBlock Text="{Binding Button26EventText2}" Foreground="{Binding Button26EventColor2}"/>
                         <TextBlock Text="{Binding Button26EventText3}" Foreground="{Binding Button26EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="3" Grid.Column="5" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="3" Grid.Column="5" Background="{Binding Button27BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button27">
                     <StackPanel>
                         <Grid>
@@ -539,14 +539,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button27Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button27HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button27HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button27EventText1}" Foreground="{Binding Button27EventColor1}"/>
                         <TextBlock Text="{Binding Button27EventText2}" Foreground="{Binding Button27EventColor2}"/>
                         <TextBlock Text="{Binding Button27EventText3}" Foreground="{Binding Button27EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="3" Grid.Column="6" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="3" Grid.Column="6" Background="{Binding Button28BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button28">
                     <StackPanel>
                         <Grid>
@@ -556,7 +556,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button28Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button28HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button28HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button28EventText1}" Foreground="{Binding Button28EventColor1}"/>
                         <TextBlock Text="{Binding Button28EventText2}" Foreground="{Binding Button28EventColor2}"/>
@@ -564,7 +564,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="4" Grid.Column="0" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="4" Grid.Column="0" Background="{Binding Button29BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button29">
                     <StackPanel>
                         <Grid>
@@ -574,14 +574,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button29Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button29HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button29HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button29EventText1}" Foreground="{Binding Button29EventColor1}"/>
                         <TextBlock Text="{Binding Button29EventText2}" Foreground="{Binding Button29EventColor2}"/>
                         <TextBlock Text="{Binding Button29EventText3}" Foreground="{Binding Button29EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="1" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="4" Grid.Column="1" Background="{Binding Button30BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button30">
                     <StackPanel>
                         <Grid>
@@ -591,14 +591,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button30Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button30HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button30HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button30EventText1}" Foreground="{Binding Button30EventColor1}"/>
                         <TextBlock Text="{Binding Button30EventText2}" Foreground="{Binding Button30EventColor2}"/>
                         <TextBlock Text="{Binding Button30EventText3}" Foreground="{Binding Button30EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="2" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="4" Grid.Column="2" Background="{Binding Button31BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button31">
                     <StackPanel>
                         <Grid>
@@ -608,14 +608,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button31Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button31HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button31HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button31EventText1}" Foreground="{Binding Button31EventColor1}"/>
                         <TextBlock Text="{Binding Button31EventText2}" Foreground="{Binding Button31EventColor2}"/>
                         <TextBlock Text="{Binding Button31EventText3}" Foreground="{Binding Button31EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="3" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="4" Grid.Column="3" Background="{Binding Button32BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button32">
                     <StackPanel>
                         <Grid>
@@ -625,14 +625,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button32Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button32HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button32HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button32EventText1}" Foreground="{Binding Button32EventColor1}"/>
                         <TextBlock Text="{Binding Button32EventText2}" Foreground="{Binding Button32EventColor2}"/>
                         <TextBlock Text="{Binding Button32EventText3}" Foreground="{Binding Button32EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="4" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="4" Grid.Column="4" Background="{Binding Button33BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button33">
                     <StackPanel>
                         <Grid>
@@ -642,14 +642,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button33Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button33HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button33HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button33EventText1}" Foreground="{Binding Button33EventColor1}"/>
                         <TextBlock Text="{Binding Button33EventText2}" Foreground="{Binding Button33EventColor2}"/>
                         <TextBlock Text="{Binding Button33EventText3}" Foreground="{Binding Button33EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="5" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="4" Grid.Column="5" Background="{Binding Button34BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button34">
                     <StackPanel>
                         <Grid>
@@ -659,14 +659,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button34Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button34HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button34HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button34EventText1}" Foreground="{Binding Button34EventColor1}"/>
                         <TextBlock Text="{Binding Button34EventText2}" Foreground="{Binding Button34EventColor2}"/>
                         <TextBlock Text="{Binding Button34EventText3}" Foreground="{Binding Button34EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="4" Grid.Column="6" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="4" Grid.Column="6" Background="{Binding Button35BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button35">
                     <StackPanel>
                         <Grid>
@@ -676,7 +676,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button35Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button35HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button35HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button35EventText1}" Foreground="{Binding Button35EventColor1}"/>
                         <TextBlock Text="{Binding Button35EventText2}" Foreground="{Binding Button35EventColor2}"/>
@@ -684,7 +684,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="5" Grid.Column="0" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="5" Grid.Column="0" Background="{Binding Button36BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button36">
                     <StackPanel>
                         <Grid>
@@ -694,14 +694,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button36Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button36HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button36HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button36EventText1}" Foreground="{Binding Button36EventColor1}"/>
                         <TextBlock Text="{Binding Button36EventText2}" Foreground="{Binding Button36EventColor2}"/>
                         <TextBlock Text="{Binding Button36EventText3}" Foreground="{Binding Button36EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="5" Grid.Column="1" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="5" Grid.Column="1" Background="{Binding Button37BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button37">
                     <StackPanel>
                         <Grid>
@@ -711,14 +711,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button37Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button37HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button37HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button37EventText1}" Foreground="{Binding Button37EventColor1}"/>
                         <TextBlock Text="{Binding Button37EventText2}" Foreground="{Binding Button37EventColor2}"/>
                         <TextBlock Text="{Binding Button37EventText3}" Foreground="{Binding Button37EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="5" Grid.Column="2" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="5" Grid.Column="2" Background="{Binding Button38BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button38">
                     <StackPanel>
                         <Grid>
@@ -728,14 +728,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button38Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button38HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button38HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button38EventText1}" Foreground="{Binding Button38EventColor1}"/>
                         <TextBlock Text="{Binding Button38EventText2}" Foreground="{Binding Button38EventColor2}"/>
                         <TextBlock Text="{Binding Button38EventText3}" Foreground="{Binding Button38EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="5" Grid.Column="3" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="5" Grid.Column="3" Background="{Binding Button39BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button39">
                     <StackPanel>
                         <Grid>
@@ -745,14 +745,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button39Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button39HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button39HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button39EventText1}" Foreground="{Binding Button39EventColor1}"/>
                         <TextBlock Text="{Binding Button39EventText2}" Foreground="{Binding Button39EventColor2}"/>
                         <TextBlock Text="{Binding Button39EventText3}" Foreground="{Binding Button39EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="5" Grid.Column="4" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="5" Grid.Column="4" Background="{Binding Button40BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button40">
                     <StackPanel>
                         <Grid>
@@ -762,14 +762,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button40Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button40HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button40HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button40EventText1}" Foreground="{Binding Button40EventColor1}"/>
                         <TextBlock Text="{Binding Button40EventText2}" Foreground="{Binding Button40EventColor2}"/>
                         <TextBlock Text="{Binding Button40EventText3}" Foreground="{Binding Button40EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="5" Grid.Column="5" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="5" Grid.Column="5" Background="{Binding Button41BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button41">
                     <StackPanel>
                         <Grid>
@@ -779,14 +779,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button41Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button41HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button41HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button41EventText1}" Foreground="{Binding Button41EventColor1}"/>
                         <TextBlock Text="{Binding Button41EventText2}" Foreground="{Binding Button41EventColor2}"/>
                         <TextBlock Text="{Binding Button41EventText3}" Foreground="{Binding Button41EventColor3}"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="5" Grid.Column="6" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                <Button Grid.Row="5" Grid.Column="6" Background="{Binding Button42BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                         Command="{Binding ButtonCommand}" CommandParameter="button42">
                     <StackPanel>
                         <Grid>
@@ -796,7 +796,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button42Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button42HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button42HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
                         <TextBlock Text="{Binding Button42EventText1}" Foreground="{Binding Button42EventColor1}"/>
                         <TextBlock Text="{Binding Button42EventText2}" Foreground="{Binding Button42EventColor2}"/>

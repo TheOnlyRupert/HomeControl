@@ -120,17 +120,17 @@
 
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Event" FontSize="24"/>
-                    <TextBox Text="{Binding EventText}" FontSize="24" MaxLength="24"/>
+                    <TextBox Text="{Binding EventText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="24"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Location" FontSize="24"/>
-                    <TextBox Text="{Binding LocationText}" FontSize="24" MaxLength="24"/>
+                    <TextBox Text="{Binding LocationText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="24"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">
                     <TextBlock Text="Description" FontSize="24"/>
-                    <TextBox Text="{Binding DescriptionText}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"/>
+                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"/>
                 </StackPanel>
 
                 <Grid Grid.Row="4">
@@ -156,8 +156,7 @@
             <Button Content="Add Event" FontSize="24" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="add"/>
             <Button Content="Delete Event" FontSize="24" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="delete"/>
             <Button Content="Update Event" FontSize="24" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="update"/>
-            <Button Content="Save Changes" FontSize="24" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="save"/>
-            <Button Content="Exit" FontSize="24" IsCancel="True" Margin="8 0"/>
+            <Button Content="Exit" FontSize="24" IsCancel="True" Margin="8 0" MinWidth="100"/>
         </StackPanel>
     </Grid>
 </Window>

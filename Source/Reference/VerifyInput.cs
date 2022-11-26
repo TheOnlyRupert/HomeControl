@@ -18,4 +18,12 @@ public static class VerifyInput {
 
         return value;
     }
+
+    public static string VerifyTextAlphaNumericSpace(string value) {
+        if (!string.IsNullOrEmpty(value)) {
+            value = Regex.Replace(value, @"[^a-zA-Z0-9\s]+", "");
+        }
+
+        return value;
+    }
 }

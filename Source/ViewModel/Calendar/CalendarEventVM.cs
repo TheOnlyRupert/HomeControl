@@ -11,14 +11,15 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Calendar;
 
 public class CalendarEventVM : BaseViewModel {
-    private CalendarEvents _calendarEventSelected;
-    private ObservableCollection<CalendarEvents> _eventList;
     private readonly JsonCalendar _jsonCalendar;
 
     private readonly string fileName;
+    private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
         _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText;
+
+    private ObservableCollection<CalendarEvents> _eventList;
 
     public CalendarEventVM() {
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
@@ -26,7 +27,7 @@ public class CalendarEventVM : BaseViewModel {
         EventList = new ObservableCollection<CalendarEvents>();
         EventText = "";
         _jsonCalendar = new JsonCalendar();
-        selectedPerson = "House";
+        selectedPerson = "Home";
         User1NameText = ReferenceValues.User1Name;
         User2NameText = ReferenceValues.User2Name;
         CalendarEventSelected = new CalendarEvents();
@@ -72,6 +73,8 @@ public class CalendarEventVM : BaseViewModel {
             selectedPerson = ReferenceValues.User1Name;
         } else if (value.person == ReferenceValues.User2Name) {
             selectedPerson = ReferenceValues.User2Name;
+        } else if (string.IsNullOrEmpty(value.person)) {
+            selectedPerson = "Home";
         } else {
             selectedPerson = value.person;
         }
@@ -111,7 +114,7 @@ public class CalendarEventVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(EventText)) {
-                MessageBox.Show("Event needs a name.", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Missing Event", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
                 EventList.Add(new CalendarEvents {
                     name = EventText,
@@ -123,53 +126,49 @@ public class CalendarEventVM : BaseViewModel {
                 EventText = "";
                 DescriptionText = "";
                 LocationText = "";
+
+                SaveJson();
             }
 
             break;
         case "update":
-            if (string.IsNullOrWhiteSpace(EventText)) {
-                MessageBox.Show("Event needs a name.", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
-            } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
-                confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (confirmation == MessageBoxResult.Yes) {
-                    EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
-                        name = EventText,
-                        description = DescriptionText,
-                        location = LocationText,
-                        person = selectedPerson
-                    });
-                    EventList.Remove(CalendarEventSelected);
+            try {
+                if (CalendarEventSelected.description != null) {
+                    if (string.IsNullOrWhiteSpace(EventText)) {
+                        MessageBox.Show("Event needs a name.", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
+                        confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (confirmation == MessageBoxResult.Yes) {
+                            EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
+                                name = EventText,
+                                description = DescriptionText,
+                                location = LocationText,
+                                person = selectedPerson
+                            });
+                            EventList.Remove(CalendarEventSelected);
 
-                    EventText = "";
-                    DescriptionText = "";
-                    LocationText = "";
-                }
-            }
+                            EventText = "";
+                            DescriptionText = "";
+                            LocationText = "";
 
-            break;
-        case "save":
-            if (EventList.Count > 0) {
-                try {
-                    _jsonCalendar.eventsList = EventList;
-                    string jsonString = JsonSerializer.Serialize(_jsonCalendar);
-                    File.WriteAllText(fileName, jsonString);
-                } catch (Exception e) {
-                    Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+                            SaveJson();
+                        }
+                    }
                 }
-            } else {
-                try {
-                    File.Delete(fileName);
-                } catch (Exception) { }
-            }
+            } catch (Exception) { }
 
             break;
         case "delete":
-            if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
-                confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (confirmation == MessageBoxResult.Yes) {
-                    EventList.Remove(CalendarEventSelected);
+            try {
+                if (CalendarEventSelected.description != null) {
+                    confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (confirmation == MessageBoxResult.Yes) {
+                        EventList.Remove(CalendarEventSelected);
+
+                        SaveJson();
+                    }
                 }
-            }
+            } catch (Exception) { }
 
             break;
 
@@ -200,6 +199,28 @@ public class CalendarEventVM : BaseViewModel {
         }
     }
 
+    private void SaveJson() {
+        if (EventList.Count > 0) {
+            try {
+                _jsonCalendar.eventsList = EventList;
+                string jsonString = JsonSerializer.Serialize(_jsonCalendar);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(fileName, jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            }
+        } else {
+            try {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.Delete(fileName);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to delete " + fileName + "... " + e.Message);
+            }
+        }
+    }
+
     #region Fields
 
     public string EventDate {
@@ -213,7 +234,7 @@ public class CalendarEventVM : BaseViewModel {
     public string EventText {
         get => _eventText;
         set {
-            _eventText = value;
+            _eventText = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("EventText");
         }
     }
@@ -221,7 +242,7 @@ public class CalendarEventVM : BaseViewModel {
     public string LocationText {
         get => _locationText;
         set {
-            _locationText = value;
+            _locationText = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("LocationText");
         }
     }
@@ -229,7 +250,7 @@ public class CalendarEventVM : BaseViewModel {
     public string DescriptionText {
         get => _descriptionText;
         set {
-            _descriptionText = value;
+            _descriptionText = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("DescriptionText");
         }
     }

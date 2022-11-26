@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Calendar;
@@ -51,7 +53,14 @@ public class CalendarVM : BaseViewModel {
         _button34EventColor2, _button34EventColor3, _button35EventColor1, _button35EventColor2, _button35EventColor3, _button36EventColor1, _button36EventColor2,
         _button36EventColor3, _button37EventColor1, _button37EventColor2, _button37EventColor3, _button38EventColor1, _button38EventColor2, _button38EventColor3,
         _button39EventColor1, _button39EventColor2, _button39EventColor3, _button40EventColor1, _button40EventColor2, _button40EventColor3, _button41EventColor1,
-        _button41EventColor2, _button41EventColor3, _button42EventColor1, _button42EventColor2, _button42EventColor3;
+        _button41EventColor2, _button41EventColor3, _button42EventColor1, _button42EventColor2, _button42EventColor3, _button1BackgroundColor, _button2BackgroundColor,
+        _button3BackgroundColor, _button4BackgroundColor, _button5BackgroundColor, _button6BackgroundColor, _button7BackgroundColor, _button8BackgroundColor,
+        _button9BackgroundColor, _button10BackgroundColor, _button11BackgroundColor, _button12BackgroundColor, _button13BackgroundColor, _button14BackgroundColor,
+        _button15BackgroundColor, _button16BackgroundColor, _button17BackgroundColor, _button18BackgroundColor, _button19BackgroundColor, _button20BackgroundColor,
+        _button21BackgroundColor, _button22BackgroundColor, _button23BackgroundColor, _button24BackgroundColor, _button25BackgroundColor, _button26BackgroundColor,
+        _button27BackgroundColor, _button28BackgroundColor, _button29BackgroundColor, _button30BackgroundColor, _button31BackgroundColor, _button32BackgroundColor,
+        _button33BackgroundColor, _button34BackgroundColor, _button35BackgroundColor, _button36BackgroundColor, _button37BackgroundColor, _button38BackgroundColor,
+        _button39BackgroundColor, _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor;
 
     private DateTime currentDateTime, button1DateTime;
 
@@ -427,6 +436,48 @@ public class CalendarVM : BaseViewModel {
         Button42EventText1 = "";
         Button42EventText2 = "";
         Button42EventText3 = "";
+        Button1BackgroundColor = "Transparent";
+        Button2BackgroundColor = "Transparent";
+        Button3BackgroundColor = "Transparent";
+        Button4BackgroundColor = "Transparent";
+        Button5BackgroundColor = "Transparent";
+        Button6BackgroundColor = "Transparent";
+        Button7BackgroundColor = "Transparent";
+        Button8BackgroundColor = "Transparent";
+        Button9BackgroundColor = "Transparent";
+        Button10BackgroundColor = "Transparent";
+        Button11BackgroundColor = "Transparent";
+        Button12BackgroundColor = "Transparent";
+        Button13BackgroundColor = "Transparent";
+        Button14BackgroundColor = "Transparent";
+        Button15BackgroundColor = "Transparent";
+        Button16BackgroundColor = "Transparent";
+        Button17BackgroundColor = "Transparent";
+        Button18BackgroundColor = "Transparent";
+        Button19BackgroundColor = "Transparent";
+        Button20BackgroundColor = "Transparent";
+        Button21BackgroundColor = "Transparent";
+        Button22BackgroundColor = "Transparent";
+        Button23BackgroundColor = "Transparent";
+        Button24BackgroundColor = "Transparent";
+        Button25BackgroundColor = "Transparent";
+        Button26BackgroundColor = "Transparent";
+        Button27BackgroundColor = "Transparent";
+        Button28BackgroundColor = "Transparent";
+        Button29BackgroundColor = "Transparent";
+        Button30BackgroundColor = "Transparent";
+        Button31BackgroundColor = "Transparent";
+        Button32BackgroundColor = "Transparent";
+        Button33BackgroundColor = "Transparent";
+        Button34BackgroundColor = "Transparent";
+        Button35BackgroundColor = "Transparent";
+        Button36BackgroundColor = "Transparent";
+        Button37BackgroundColor = "Transparent";
+        Button38BackgroundColor = "Transparent";
+        Button39BackgroundColor = "Transparent";
+        Button40BackgroundColor = "Transparent";
+        Button41BackgroundColor = "Transparent";
+        Button42BackgroundColor = "Transparent";
 
         /* Constant */
         DateTime startingYear = new(dateTime.Year, 1, 1);
@@ -491,11 +542,453 @@ public class CalendarVM : BaseViewModel {
         /* Probably only need this first button. All other buttons can just add days */
         button1DateTime = dateTime;
 
+        /* Set background color for today */
+        if (dateTime.Equals(DateTime.Today)) {
+            Button1BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(1).Equals(DateTime.Today)) {
+            Button2BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(2).Equals(DateTime.Today)) {
+            Button3BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(3).Equals(DateTime.Today)) {
+            Button4BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(4).Equals(DateTime.Today)) {
+            Button5BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(5).Equals(DateTime.Today)) {
+            Button6BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(6).Equals(DateTime.Today)) {
+            Button7BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(7).Equals(DateTime.Today)) {
+            Button8BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(8).Equals(DateTime.Today)) {
+            Button9BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(9).Equals(DateTime.Today)) {
+            Button10BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(10).Equals(DateTime.Today)) {
+            Button11BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(11).Equals(DateTime.Today)) {
+            Button12BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(12).Equals(DateTime.Today)) {
+            Button13BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(13).Equals(DateTime.Today)) {
+            Button14BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(14).Equals(DateTime.Today)) {
+            Button15BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(15).Equals(DateTime.Today)) {
+            Button16BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(16).Equals(DateTime.Today)) {
+            Button17BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(17).Equals(DateTime.Today)) {
+            Button18BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(18).Equals(DateTime.Today)) {
+            Button19BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(19).Equals(DateTime.Today)) {
+            Button20BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(20).Equals(DateTime.Today)) {
+            Button21BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(21).Equals(DateTime.Today)) {
+            Button22BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(22).Equals(DateTime.Today)) {
+            Button23BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(23).Equals(DateTime.Today)) {
+            Button24BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(24).Equals(DateTime.Today)) {
+            Button25BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(25).Equals(DateTime.Today)) {
+            Button26BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(26).Equals(DateTime.Today)) {
+            Button27BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(27).Equals(DateTime.Today)) {
+            Button28BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(28).Equals(DateTime.Today)) {
+            Button29BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(29).Equals(DateTime.Today)) {
+            Button30BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(30).Equals(DateTime.Today)) {
+            Button31BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(31).Equals(DateTime.Today)) {
+            Button32BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(32).Equals(DateTime.Today)) {
+            Button33BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(33).Equals(DateTime.Today)) {
+            Button34BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(34).Equals(DateTime.Today)) {
+            Button35BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(35).Equals(DateTime.Today)) {
+            Button36BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(36).Equals(DateTime.Today)) {
+            Button37BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(37).Equals(DateTime.Today)) {
+            Button38BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(38).Equals(DateTime.Today)) {
+            Button39BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(39).Equals(DateTime.Today)) {
+            Button40BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(40).Equals(DateTime.Today)) {
+            Button41BackgroundColor = "DarkBlue";
+        } else if (dateTime.AddDays(41).Equals(DateTime.Today)) {
+            Button42BackgroundColor = "DarkBlue";
+        }
+
         /* Get Holidays (hardcoded) */
+        foreach (HolidayBlock holiday in GetHolidays(dateTime.AddDays(7).Year)) {
+            if (dateTime.Month == holiday.Date.Month && dateTime.Day == holiday.Date.Day) {
+                Button1HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(1).Month == holiday.Date.Month && dateTime.AddDays(1).Day == holiday.Date.Day) {
+                Button2HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(2).Month == holiday.Date.Month && dateTime.AddDays(2).Day == holiday.Date.Day) {
+                Button3HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(3).Month == holiday.Date.Month && dateTime.AddDays(3).Day == holiday.Date.Day) {
+                Button4HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(4).Month == holiday.Date.Month && dateTime.AddDays(4).Day == holiday.Date.Day) {
+                Button5HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(5).Month == holiday.Date.Month && dateTime.AddDays(5).Day == holiday.Date.Day) {
+                Button6HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(6).Month == holiday.Date.Month && dateTime.AddDays(6).Day == holiday.Date.Day) {
+                Button7HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(7).Month == holiday.Date.Month && dateTime.AddDays(7).Day == holiday.Date.Day) {
+                Button8HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(8).Month == holiday.Date.Month && dateTime.AddDays(8).Day == holiday.Date.Day) {
+                Button9HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(9).Month == holiday.Date.Month && dateTime.AddDays(9).Day == holiday.Date.Day) {
+                Button10HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(10).Month == holiday.Date.Month && dateTime.AddDays(10).Day == holiday.Date.Day) {
+                Button11HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(11).Month == holiday.Date.Month && dateTime.AddDays(11).Day == holiday.Date.Day) {
+                Button12HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(12).Month == holiday.Date.Month && dateTime.AddDays(12).Day == holiday.Date.Day) {
+                Button13HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(13).Month == holiday.Date.Month && dateTime.AddDays(13).Day == holiday.Date.Day) {
+                Button14HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(14).Month == holiday.Date.Month && dateTime.AddDays(14).Day == holiday.Date.Day) {
+                Button15HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(15).Month == holiday.Date.Month && dateTime.AddDays(15).Day == holiday.Date.Day) {
+                Button16HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(16).Month == holiday.Date.Month && dateTime.AddDays(16).Day == holiday.Date.Day) {
+                Button17HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(17).Month == holiday.Date.Month && dateTime.AddDays(17).Day == holiday.Date.Day) {
+                Button18HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(18).Month == holiday.Date.Month && dateTime.AddDays(18).Day == holiday.Date.Day) {
+                Button19HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(19).Month == holiday.Date.Month && dateTime.AddDays(19).Day == holiday.Date.Day) {
+                Button20HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(20).Month == holiday.Date.Month && dateTime.AddDays(20).Day == holiday.Date.Day) {
+                Button21HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(21).Month == holiday.Date.Month && dateTime.AddDays(21).Day == holiday.Date.Day) {
+                Button22HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(22).Month == holiday.Date.Month && dateTime.AddDays(22).Day == holiday.Date.Day) {
+                Button23HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(23).Month == holiday.Date.Month && dateTime.AddDays(23).Day == holiday.Date.Day) {
+                Button24HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(24).Month == holiday.Date.Month && dateTime.AddDays(24).Day == holiday.Date.Day) {
+                Button25HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(25).Month == holiday.Date.Month && dateTime.AddDays(25).Day == holiday.Date.Day) {
+                Button26HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(26).Month == holiday.Date.Month && dateTime.AddDays(26).Day == holiday.Date.Day) {
+                Button27HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(27).Month == holiday.Date.Month && dateTime.AddDays(27).Day == holiday.Date.Day) {
+                Button28HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(28).Month == holiday.Date.Month && dateTime.AddDays(28).Day == holiday.Date.Day) {
+                Button29HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(29).Month == holiday.Date.Month && dateTime.AddDays(29).Day == holiday.Date.Day) {
+                Button30HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(30).Month == holiday.Date.Month && dateTime.AddDays(30).Day == holiday.Date.Day) {
+                Button31HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(31).Month == holiday.Date.Month && dateTime.AddDays(31).Day == holiday.Date.Day) {
+                Button32HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(32).Month == holiday.Date.Month && dateTime.AddDays(32).Day == holiday.Date.Day) {
+                Button33HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(33).Month == holiday.Date.Month && dateTime.AddDays(33).Day == holiday.Date.Day) {
+                Button34HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(34).Month == holiday.Date.Month && dateTime.AddDays(34).Day == holiday.Date.Day) {
+                Button35HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(35).Month == holiday.Date.Month && dateTime.AddDays(35).Day == holiday.Date.Day) {
+                Button36HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(36).Month == holiday.Date.Month && dateTime.AddDays(36).Day == holiday.Date.Day) {
+                Button37HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(37).Month == holiday.Date.Month && dateTime.AddDays(37).Day == holiday.Date.Day) {
+                Button38HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(38).Month == holiday.Date.Month && dateTime.AddDays(38).Day == holiday.Date.Day) {
+                Button39HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(39).Month == holiday.Date.Month && dateTime.AddDays(39).Day == holiday.Date.Day) {
+                Button40HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(40).Month == holiday.Date.Month && dateTime.AddDays(40).Day == holiday.Date.Day) {
+                Button41HolidayText = holiday.Holiday;
+            }
+
+            if (dateTime.AddDays(41).Month == holiday.Date.Month && dateTime.AddDays(41).Day == holiday.Date.Day) {
+                Button42HolidayText = holiday.Holiday;
+            }
+        }
 
         /* Get Calendar Events */
         new CalenderEventsFromJson(button1DateTime);
         PopulateEvents();
+    }
+
+    private static List<HolidayBlock> GetHolidays(int year) {
+        List<HolidayBlock> holidays = new();
+
+        // New Years Day
+        DateTime newYearsDate = new(year, 1, 1);
+        holidays.Add(new HolidayBlock {
+            Date = newYearsDate,
+            Holiday = "New Year's Day"
+        });
+
+        // MLK Day -- 3rd Monday in January 
+        int mlk = (from day in Enumerable.Range(1, 31)
+            where new DateTime(year, 1, day).DayOfWeek == DayOfWeek.Monday
+            select day).ElementAt(2);
+        DateTime mlkDay = new(year, 1, mlk);
+        holidays.Add(new HolidayBlock {
+            Date = mlkDay,
+            Holiday = "MLK Day"
+        });
+
+        // Valentine's Day -- February 14th
+        DateTime valentinesDay = new(year, 2, 14);
+        holidays.Add(new HolidayBlock {
+            Date = valentinesDay,
+            Holiday = "Valentine's Day"
+        });
+
+        // Presidents Day -- 3rd Monday in February 
+        int presidents = (from day in Enumerable.Range(1, 28)
+            where new DateTime(year, 2, day).DayOfWeek == DayOfWeek.Monday
+            select day).ElementAt(2);
+        DateTime presidentsDay = new(year, 2, presidents);
+        holidays.Add(new HolidayBlock {
+            Date = presidentsDay,
+            Holiday = "President's Day"
+        });
+
+        // Easter Sunday -- Complicated as hell
+        int g = year % 19;
+        int c = year / 100;
+        int h = (c - c / 4 - (8 * c + 13) / 25 + 19 * g + 15) % 30;
+        int i = h - h / 28 * (1 - h / 28 * (29 / (h + 1)) * ((21 - g) / 11));
+
+        int easterDay = i - (year + year / 4 + i + 2 - c + c / 4) % 7 + 28;
+        int easterMonth = 3;
+
+        if (easterDay > 31) {
+            easterMonth++;
+            easterDay -= 31;
+        }
+
+        holidays.Add(new HolidayBlock {
+            Date = new DateTime(year, easterMonth, easterDay),
+            Holiday = "Easter"
+        });
+
+        // Mother's Day -- 2nd Sunday in May
+        int mothers = (from day in Enumerable.Range(1, 31)
+            where new DateTime(year, 5, day).DayOfWeek == DayOfWeek.Sunday
+            select day).ElementAt(1);
+        DateTime mothersDay = new(year, 5, mothers);
+        holidays.Add(new HolidayBlock {
+            Date = mothersDay,
+            Holiday = "Mother's Day"
+        });
+
+        // Memorial Day -- last monday in May 
+        DateTime memorialDay = new(year, 5, 31);
+        DayOfWeek dayOfWeek = memorialDay.DayOfWeek;
+        while (dayOfWeek != DayOfWeek.Monday) {
+            memorialDay = memorialDay.AddDays(-1);
+            dayOfWeek = memorialDay.DayOfWeek;
+        }
+
+        holidays.Add(new HolidayBlock {
+            Date = memorialDay,
+            Holiday = "Memorial Day"
+        });
+
+        // Father's Day -- 3nd Sunday in June
+        int fathers = (from day in Enumerable.Range(1, 30)
+            where new DateTime(year, 6, day).DayOfWeek == DayOfWeek.Sunday
+            select day).ElementAt(2);
+        DateTime fathersDay = new(year, 6, fathers);
+        holidays.Add(new HolidayBlock {
+            Date = fathersDay,
+            Holiday = "Father's Day"
+        });
+
+        // Juneteenth - June 19th
+        DateTime juneteenth = new(year, 6, 19);
+        holidays.Add(new HolidayBlock {
+            Date = juneteenth,
+            Holiday = "Juneteenth"
+        });
+
+
+        // Independence Day - July 4th
+        DateTime independenceDay = new(year, 7, 4);
+        holidays.Add(new HolidayBlock {
+            Date = independenceDay,
+            Holiday = "Independence Day"
+        });
+
+        // Labor Day -- 1st Monday in September 
+        DateTime laborDay = new(year, 9, 1);
+        dayOfWeek = laborDay.DayOfWeek;
+        while (dayOfWeek != DayOfWeek.Monday) {
+            laborDay = laborDay.AddDays(1);
+            dayOfWeek = laborDay.DayOfWeek;
+        }
+
+        holidays.Add(new HolidayBlock {
+            Date = laborDay,
+            Holiday = "Labor Day"
+        });
+
+        // Veterans Day -- November 11th
+        DateTime veteransDay = new(year, 11, 11);
+        holidays.Add(new HolidayBlock {
+            Date = veteransDay,
+            Holiday = "Veterans Day"
+        });
+
+        // Halloween Day -- October 31st
+        DateTime halloweenDay = new(year, 12, 24);
+        holidays.Add(new HolidayBlock {
+            Date = halloweenDay,
+            Holiday = "Halloween Day"
+        });
+
+        // Thanksgiving Day -- 4th Thursday in November 
+        int thanksgiving = (from day in Enumerable.Range(1, 30)
+            where new DateTime(year, 11, day).DayOfWeek == DayOfWeek.Thursday
+            select day).ElementAt(3);
+        DateTime thanksgivingDay = new(year, 11, thanksgiving);
+        holidays.Add(new HolidayBlock {
+            Date = thanksgivingDay,
+            Holiday = "Thanksgiving Day"
+        });
+
+        // Day After Thanksgiving
+        holidays.Add(new HolidayBlock {
+            Date = thanksgivingDay.AddDays(1),
+            Holiday = "Day After Thanksgiving"
+        });
+
+        // Christmas Eve -- December 24th
+        DateTime christmasEve = new(year, 12, 24);
+        holidays.Add(new HolidayBlock {
+            Date = christmasEve,
+            Holiday = "Christmas Eve"
+        });
+
+        // Christmas Day 
+        holidays.Add(new HolidayBlock {
+            Date = christmasEve.AddDays(1),
+            Holiday = "Christmas Day"
+        });
+
+        // Daylight Savings Start -- 2nd Sunday of March
+        int dlsStart = (from day in Enumerable.Range(1, 31)
+            where new DateTime(year, 3, day).DayOfWeek == DayOfWeek.Sunday
+            select day).ElementAt(1);
+        DateTime dlsStartDay = new(year, 3, dlsStart);
+        holidays.Add(new HolidayBlock {
+            Date = dlsStartDay,
+            Holiday = "Daylight Savings Start"
+        });
+
+        // Daylight Savings End -- 1st Sunday in November
+        DateTime dlsEnd = new(year, 11, 1);
+        dayOfWeek = dlsEnd.DayOfWeek;
+        while (dayOfWeek != DayOfWeek.Sunday) {
+            dlsEnd = dlsEnd.AddDays(1);
+            dayOfWeek = dlsEnd.DayOfWeek;
+        }
+
+        holidays.Add(new HolidayBlock {
+            Date = dlsEnd,
+            Holiday = "Daylight Savings End"
+        });
+
+        return holidays;
     }
 
 
@@ -1353,6 +1846,11 @@ public class CalendarVM : BaseViewModel {
         default:
             return "White";
         }
+    }
+
+    private class HolidayBlock {
+        public DateTime Date { get; set; }
+        public string Holiday { get; set; }
     }
 
     #region Fields
@@ -4052,6 +4550,342 @@ public class CalendarVM : BaseViewModel {
         set {
             _button42EventColor3 = value;
             RaisePropertyChangedEvent("Button42EventColor3");
+        }
+    }
+
+    public string Button1BackgroundColor {
+        get => _button1BackgroundColor;
+        set {
+            _button1BackgroundColor = value;
+            RaisePropertyChangedEvent("Button1BackgroundColor");
+        }
+    }
+
+    public string Button2BackgroundColor {
+        get => _button2BackgroundColor;
+        set {
+            _button2BackgroundColor = value;
+            RaisePropertyChangedEvent("Button2BackgroundColor");
+        }
+    }
+
+    public string Button3BackgroundColor {
+        get => _button3BackgroundColor;
+        set {
+            _button3BackgroundColor = value;
+            RaisePropertyChangedEvent("Button3BackgroundColor");
+        }
+    }
+
+    public string Button4BackgroundColor {
+        get => _button4BackgroundColor;
+        set {
+            _button4BackgroundColor = value;
+            RaisePropertyChangedEvent("Button4BackgroundColor");
+        }
+    }
+
+    public string Button5BackgroundColor {
+        get => _button5BackgroundColor;
+        set {
+            _button5BackgroundColor = value;
+            RaisePropertyChangedEvent("Button5BackgroundColor");
+        }
+    }
+
+    public string Button6BackgroundColor {
+        get => _button6BackgroundColor;
+        set {
+            _button6BackgroundColor = value;
+            RaisePropertyChangedEvent("Button6BackgroundColor");
+        }
+    }
+
+    public string Button7BackgroundColor {
+        get => _button7BackgroundColor;
+        set {
+            _button7BackgroundColor = value;
+            RaisePropertyChangedEvent("Button7BackgroundColor");
+        }
+    }
+
+    public string Button8BackgroundColor {
+        get => _button8BackgroundColor;
+        set {
+            _button8BackgroundColor = value;
+            RaisePropertyChangedEvent("Button8BackgroundColor");
+        }
+    }
+
+    public string Button9BackgroundColor {
+        get => _button9BackgroundColor;
+        set {
+            _button9BackgroundColor = value;
+            RaisePropertyChangedEvent("Button9BackgroundColor");
+        }
+    }
+
+    public string Button10BackgroundColor {
+        get => _button10BackgroundColor;
+        set {
+            _button10BackgroundColor = value;
+            RaisePropertyChangedEvent("Button10BackgroundColor");
+        }
+    }
+
+    public string Button11BackgroundColor {
+        get => _button11BackgroundColor;
+        set {
+            _button11BackgroundColor = value;
+            RaisePropertyChangedEvent("Button11BackgroundColor");
+        }
+    }
+
+    public string Button12BackgroundColor {
+        get => _button12BackgroundColor;
+        set {
+            _button12BackgroundColor = value;
+            RaisePropertyChangedEvent("Button12BackgroundColor");
+        }
+    }
+
+    public string Button13BackgroundColor {
+        get => _button13BackgroundColor;
+        set {
+            _button13BackgroundColor = value;
+            RaisePropertyChangedEvent("Button13BackgroundColor");
+        }
+    }
+
+    public string Button14BackgroundColor {
+        get => _button14BackgroundColor;
+        set {
+            _button14BackgroundColor = value;
+            RaisePropertyChangedEvent("Button14BackgroundColor");
+        }
+    }
+
+    public string Button15BackgroundColor {
+        get => _button15BackgroundColor;
+        set {
+            _button15BackgroundColor = value;
+            RaisePropertyChangedEvent("Button15BackgroundColor");
+        }
+    }
+
+    public string Button16BackgroundColor {
+        get => _button16BackgroundColor;
+        set {
+            _button16BackgroundColor = value;
+            RaisePropertyChangedEvent("Button16BackgroundColor");
+        }
+    }
+
+    public string Button17BackgroundColor {
+        get => _button17BackgroundColor;
+        set {
+            _button17BackgroundColor = value;
+            RaisePropertyChangedEvent("Button17BackgroundColor");
+        }
+    }
+
+    public string Button18BackgroundColor {
+        get => _button18BackgroundColor;
+        set {
+            _button18BackgroundColor = value;
+            RaisePropertyChangedEvent("Button18BackgroundColor");
+        }
+    }
+
+    public string Button19BackgroundColor {
+        get => _button19BackgroundColor;
+        set {
+            _button19BackgroundColor = value;
+            RaisePropertyChangedEvent("Button19BackgroundColor");
+        }
+    }
+
+    public string Button20BackgroundColor {
+        get => _button20BackgroundColor;
+        set {
+            _button20BackgroundColor = value;
+            RaisePropertyChangedEvent("Button20BackgroundColor");
+        }
+    }
+
+    public string Button21BackgroundColor {
+        get => _button21BackgroundColor;
+        set {
+            _button21BackgroundColor = value;
+            RaisePropertyChangedEvent("Button21BackgroundColor");
+        }
+    }
+
+    public string Button22BackgroundColor {
+        get => _button22BackgroundColor;
+        set {
+            _button22BackgroundColor = value;
+            RaisePropertyChangedEvent("Button22BackgroundColor");
+        }
+    }
+
+    public string Button23BackgroundColor {
+        get => _button23BackgroundColor;
+        set {
+            _button23BackgroundColor = value;
+            RaisePropertyChangedEvent("Button23BackgroundColor");
+        }
+    }
+
+    public string Button24BackgroundColor {
+        get => _button24BackgroundColor;
+        set {
+            _button24BackgroundColor = value;
+            RaisePropertyChangedEvent("Button24BackgroundColor");
+        }
+    }
+
+    public string Button25BackgroundColor {
+        get => _button25BackgroundColor;
+        set {
+            _button25BackgroundColor = value;
+            RaisePropertyChangedEvent("Button25BackgroundColor");
+        }
+    }
+
+    public string Button26BackgroundColor {
+        get => _button26BackgroundColor;
+        set {
+            _button26BackgroundColor = value;
+            RaisePropertyChangedEvent("Button26BackgroundColor");
+        }
+    }
+
+    public string Button27BackgroundColor {
+        get => _button27BackgroundColor;
+        set {
+            _button27BackgroundColor = value;
+            RaisePropertyChangedEvent("Button27BackgroundColor");
+        }
+    }
+
+    public string Button28BackgroundColor {
+        get => _button28BackgroundColor;
+        set {
+            _button28BackgroundColor = value;
+            RaisePropertyChangedEvent("Button28BackgroundColor");
+        }
+    }
+
+    public string Button29BackgroundColor {
+        get => _button29BackgroundColor;
+        set {
+            _button29BackgroundColor = value;
+            RaisePropertyChangedEvent("Button29BackgroundColor");
+        }
+    }
+
+    public string Button30BackgroundColor {
+        get => _button30BackgroundColor;
+        set {
+            _button30BackgroundColor = value;
+            RaisePropertyChangedEvent("Button30BackgroundColor");
+        }
+    }
+
+    public string Button31BackgroundColor {
+        get => _button31BackgroundColor;
+        set {
+            _button31BackgroundColor = value;
+            RaisePropertyChangedEvent("Button31BackgroundColor");
+        }
+    }
+
+    public string Button32BackgroundColor {
+        get => _button32BackgroundColor;
+        set {
+            _button32BackgroundColor = value;
+            RaisePropertyChangedEvent("Button32BackgroundColor");
+        }
+    }
+
+    public string Button33BackgroundColor {
+        get => _button33BackgroundColor;
+        set {
+            _button33BackgroundColor = value;
+            RaisePropertyChangedEvent("Button33BackgroundColor");
+        }
+    }
+
+    public string Button34BackgroundColor {
+        get => _button34BackgroundColor;
+        set {
+            _button34BackgroundColor = value;
+            RaisePropertyChangedEvent("Button34BackgroundColor");
+        }
+    }
+
+    public string Button35BackgroundColor {
+        get => _button35BackgroundColor;
+        set {
+            _button35BackgroundColor = value;
+            RaisePropertyChangedEvent("Button35BackgroundColor");
+        }
+    }
+
+    public string Button36BackgroundColor {
+        get => _button36BackgroundColor;
+        set {
+            _button36BackgroundColor = value;
+            RaisePropertyChangedEvent("Button36BackgroundColor");
+        }
+    }
+
+    public string Button37BackgroundColor {
+        get => _button37BackgroundColor;
+        set {
+            _button37BackgroundColor = value;
+            RaisePropertyChangedEvent("Button37BackgroundColor");
+        }
+    }
+
+    public string Button38BackgroundColor {
+        get => _button38BackgroundColor;
+        set {
+            _button38BackgroundColor = value;
+            RaisePropertyChangedEvent("Button38BackgroundColor");
+        }
+    }
+
+    public string Button39BackgroundColor {
+        get => _button39BackgroundColor;
+        set {
+            _button39BackgroundColor = value;
+            RaisePropertyChangedEvent("Button39BackgroundColor");
+        }
+    }
+
+    public string Button40BackgroundColor {
+        get => _button40BackgroundColor;
+        set {
+            _button40BackgroundColor = value;
+            RaisePropertyChangedEvent("Button40BackgroundColor");
+        }
+    }
+
+    public string Button41BackgroundColor {
+        get => _button41BackgroundColor;
+        set {
+            _button41BackgroundColor = value;
+            RaisePropertyChangedEvent("Button41BackgroundColor");
+        }
+    }
+
+    public string Button42BackgroundColor {
+        get => _button42BackgroundColor;
+        set {
+            _button42BackgroundColor = value;
+            RaisePropertyChangedEvent("Button42BackgroundColor");
         }
     }
 

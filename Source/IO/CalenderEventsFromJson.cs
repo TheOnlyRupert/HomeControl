@@ -27,6 +27,8 @@ public class CalenderEventsFromJson {
                             eventsListString = streamReader.ReadToEnd();
                         }
 
+                        streamReader.Close();
+
                         if (eventsListString != null) {
                             try {
                                 JsonCalendar currentJsonCalendar = JsonSerializer.Deserialize<JsonCalendar>(eventsListString, options);
@@ -34,7 +36,7 @@ public class CalenderEventsFromJson {
                                 if (currentJsonCalendar != null) {
                                     _jsonCalendar[i] = currentJsonCalendar;
                                 }
-                            } catch (Exception) {
+                            } catch (Exception e) {
                                 Console.WriteLine("Failed to Deserialize event:\n" + eventsListString);
                             }
                         }

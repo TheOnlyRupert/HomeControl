@@ -26,9 +26,6 @@ public class FinancesVM : BaseViewModel {
         FinanceList = new ObservableCollection<FinanceBlock>();
         new FinancesFromJson();
         RefreshFinances();
-
-        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
-        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -36,7 +33,6 @@ public class FinancesVM : BaseViewModel {
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "edit":
-            ReferenceValues.JsonFinanceMasterList.financeList = FinanceList;
             FinancesAdd financesAdd = new();
             financesAdd.ShowDialog();
             financesAdd.Close();
@@ -45,23 +41,18 @@ public class FinancesVM : BaseViewModel {
         }
     }
 
-    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "RefreshFinances") {
-            RefreshFinances();
-        }
-    }
 
     private void RefreshFinances() {
-        FinanceList = ReferenceValues.JsonFinanceMasterList.financeList;
         expense = 0;
         income = 0;
 
         /* Calculate income, expense, and available cash */
         try {
+            FinanceList = ReferenceValues.JsonFinanceMasterList.financeList;
             for (int i = 0; i < FinanceList.Count; i++) {
                 if (FinanceList[i].AddSub == "SUB") {
                     try {
-                        expense += FinanceList[i].Cost;
+                        expense += int.Parse(FinanceList[i].Cost);
                     } catch (Exception) { }
                 }
             }
@@ -69,7 +60,7 @@ public class FinancesVM : BaseViewModel {
             for (int i = 0; i < FinanceList.Count; i++) {
                 if (FinanceList[i].AddSub == "ADD") {
                     try {
-                        income += FinanceList[i].Cost;
+                        income += int.Parse(FinanceList[i].Cost);
                     } catch (Exception) { }
                 }
             }

@@ -44,7 +44,7 @@ public class SettingsVM : BaseViewModel {
     public string UserAgentText {
         get => _userAgentText;
         set {
-            _userAgentText = value;
+            _userAgentText = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("UserAgentText");
         }
     }
@@ -52,7 +52,7 @@ public class SettingsVM : BaseViewModel {
     public string User1Name {
         get => _user1Name;
         set {
-            _user1Name = value;
+            _user1Name = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("User1Name");
         }
     }
@@ -60,7 +60,7 @@ public class SettingsVM : BaseViewModel {
     public string User2Name {
         get => _user2Name;
         set {
-            _user2Name = value;
+            _user2Name = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("User2Name");
         }
     }
@@ -68,7 +68,7 @@ public class SettingsVM : BaseViewModel {
     public string Child1Name {
         get => _child1Name;
         set {
-            _child1Name = value;
+            _child1Name = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("Child1Name");
         }
     }
@@ -76,7 +76,7 @@ public class SettingsVM : BaseViewModel {
     public string Child2Name {
         get => _child2Name;
         set {
-            _child2Name = value;
+            _child2Name = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("Child2Name");
         }
     }
@@ -84,7 +84,7 @@ public class SettingsVM : BaseViewModel {
     public string Child3Name {
         get => _child3Name;
         set {
-            _child3Name = value;
+            _child3Name = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("Child3Name");
         }
     }

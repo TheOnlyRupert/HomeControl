@@ -11,33 +11,36 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesAddVM : BaseViewModel {
+    private readonly string fileName;
     private ObservableCollection<string> _categoryList;
-    private int _costText;
 
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub;
+        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText;
 
     private ObservableCollection<FinanceBlock> _financeList;
     private FinanceBlock _financeSelected;
-    private readonly JsonFinances _jsonFinances;
     private string selectedPerson, _categorySelected, _descriptionText;
 
     public FinancesAddVM() {
-        DateTime dateTime = DateTime.Now;
+        fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
         _financeSelected = new FinanceBlock();
-        FinanceList = new ObservableCollection<FinanceBlock>();
         selectedPerson = ReferenceValues.User1Name;
         User1NameText = ReferenceValues.User1Name;
         User2NameText = ReferenceValues.User2Name;
         DescriptionText = "";
-        CostText = 0;
+        CostText = "";
         UserButtonLogic();
-        _jsonFinances = new JsonFinances();
-        FinanceList = ReferenceValues.JsonFinanceMasterList.financeList;
+        FinanceList = new ObservableCollection<FinanceBlock>();
+        try {
+            FinanceList = ReferenceValues.JsonFinanceMasterList.financeList;
+        } catch (Exception) {
+            ReferenceValues.JsonFinanceMasterList = new JsonFinances {
+                financeList = new ObservableCollection<FinanceBlock>()
+            };
+        }
 
-        DateText = dateTime.ToShortDateString();
-
-        SwitchModeButtonText = "Current Mode:\nAdd Expense";
+        DateText = DateTime.Now.ToShortDateString();
+        SwitchModeButtonText = "Expense  ☹";
         SwitchModeButtonColor = "Red";
         AddOrSub = "SUB";
 
@@ -62,69 +65,64 @@ public class FinancesAddVM : BaseViewModel {
         case "add":
             if (string.IsNullOrWhiteSpace(DescriptionText)) {
                 MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+            } else if (string.IsNullOrWhiteSpace(CostText)) {
+                MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
                 FinanceList.Add(new FinanceBlock {
                     AddSub = AddOrSub,
-                    Date = DateText,
+                    Date = DateTime.Parse(DateText).ToShortDateString(),
                     Item = DescriptionText,
                     Cost = CostText,
                     Category = CategorySelected,
                     Person = selectedPerson
                 });
 
-                DateText = "";
+                DateText = DateTime.Now.ToShortDateString();
                 DescriptionText = "";
-                CostText = 0;
+                CostText = "";
+                SaveJson();
             }
 
             break;
         case "update":
-            if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
-            } else if (!string.IsNullOrWhiteSpace(FinanceSelected.Item)) {
-                confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
-                if (confirmation == MessageBoxResult.Yes) {
-                    FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
-                        Date = DateText,
-                        Item = DescriptionText,
-                        Cost = CostText,
-                        Category = CategorySelected,
-                        Person = selectedPerson
-                    });
-                    FinanceList.Remove(FinanceSelected);
-
-                    DateText = "";
-                    DescriptionText = "";
-                    CostText = 0;
+            try {
+                if (FinanceSelected.Item != null) {
+                    if (string.IsNullOrWhiteSpace(DescriptionText)) {
+                        MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    } else if (string.IsNullOrWhiteSpace(CostText)) {
+                        MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    } else {
+                        confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
+                        if (confirmation == MessageBoxResult.Yes) {
+                            FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
+                                AddSub = AddOrSub,
+                                Date = DateTime.Parse(DateText).ToShortDateString(),
+                                Item = DescriptionText,
+                                Cost = CostText,
+                                Category = CategorySelected,
+                                Person = selectedPerson
+                            });
+                            FinanceList.Remove(FinanceSelected);
+                            DateText = DateTime.Now.ToShortDateString();
+                            DescriptionText = "";
+                            CostText = "";
+                            SaveJson();
+                        }
+                    }
                 }
-            }
-
-            break;
-
-        case "save":
-            if (FinanceList.Count > 0) {
-                try {
-                    _jsonFinances.financeList = FinanceList;
-                    string jsonString = JsonSerializer.Serialize(_jsonFinances);
-                    File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "finances.json", jsonString);
-                    ReferenceValues.JsonFinanceMasterList = _jsonFinances;
-                } catch (Exception e) {
-                    Console.WriteLine("Unable to save finances.json... " + e.Message);
-                }
-            } else {
-                try {
-                    File.Delete(ReferenceValues.FILE_DIRECTORY + "finances.json");
-                } catch (Exception) { }
-            }
+            } catch (Exception) { }
 
             break;
         case "delete":
-            if (!string.IsNullOrWhiteSpace(FinanceSelected.Item)) {
-                confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
-                if (confirmation == MessageBoxResult.Yes) {
-                    FinanceList.Remove(FinanceSelected);
+            try {
+                if (FinanceSelected.Item != null) {
+                    confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
+                    if (confirmation == MessageBoxResult.Yes) {
+                        FinanceList.Remove(FinanceSelected);
+                        SaveJson();
+                    }
                 }
-            }
+            } catch (Exception) { }
 
             break;
 
@@ -155,11 +153,11 @@ public class FinancesAddVM : BaseViewModel {
 
         case "switchMode":
             if (AddOrSub == "SUB") {
-                SwitchModeButtonText = "Current Mode:\nAdd Income";
+                SwitchModeButtonText = "Income  ☺";
                 SwitchModeButtonColor = "Green";
                 AddOrSub = "ADD";
             } else {
-                SwitchModeButtonText = "Current Mode:\nAdd Expense";
+                SwitchModeButtonText = "Expense  ☹";
                 SwitchModeButtonColor = "Red";
                 AddOrSub = "SUB";
             }
@@ -173,6 +171,16 @@ public class FinancesAddVM : BaseViewModel {
         DateText = value.Date;
         CostText = value.Cost;
         CategorySelected = value.Category;
+
+        if (value.AddSub == "ADD") {
+            SwitchModeButtonText = "Income  ☺";
+            SwitchModeButtonColor = "Green";
+            AddOrSub = "ADD";
+        } else {
+            SwitchModeButtonText = "Expense  ☹";
+            SwitchModeButtonColor = "Red";
+            AddOrSub = "SUB";
+        }
 
         if (value.Person == ReferenceValues.User1Name) {
             selectedPerson = ReferenceValues.User1Name;
@@ -211,12 +219,39 @@ public class FinancesAddVM : BaseViewModel {
         }
     }
 
+    private void SaveJson() {
+        if (FinanceList.Count > 0) {
+            try {
+                ReferenceValues.JsonFinanceMasterList.financeList = FinanceList;
+            } catch (Exception) {
+                Console.WriteLine("ReferenceValues Doesnt exist");
+            }
+
+            try {
+                string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceMasterList);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(fileName, jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save finances.json... " + e.Message);
+            }
+        } else {
+            try {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.Delete(fileName);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to delete finances.json... " + e.Message);
+            }
+        }
+    }
+
     #region Fields
 
     public string DescriptionText {
         get => _descriptionText;
         set {
-            _descriptionText = value;
+            _descriptionText = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("DescriptionText");
         }
     }
@@ -229,10 +264,10 @@ public class FinancesAddVM : BaseViewModel {
         }
     }
 
-    public int CostText {
+    public string CostText {
         get => _costText;
         set {
-            _costText = value;
+            _costText = VerifyInput.VerifyTextNumeric(value);
             RaisePropertyChangedEvent("CostText");
         }
     }

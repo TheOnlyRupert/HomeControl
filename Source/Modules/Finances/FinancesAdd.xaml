@@ -120,16 +120,16 @@
                 </Grid.RowDefinitions>
 
                 <Button Grid.Row="0" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="24" Margin="16"
-                        Background="{Binding SwitchModeButtonColor}"/>
+                        Background="{Binding SwitchModeButtonColor}" HorizontalContentAlignment="Center"/>
 
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Description" FontSize="24"/>
-                    <TextBox Text="{Binding DescriptionText}" FontSize="24" MaxLength="24"/>
+                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="24"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Amount ($)" FontSize="24"/>
-                    <TextBox Text="{Binding CostText}" MaxLength="12" FontSize="24"/>
+                    <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="12" FontSize="24"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">
@@ -138,7 +138,7 @@
                 </StackPanel>
 
                 <Viewbox Grid.Row="4" Height="64" Margin="0 8">
-                    <DatePicker CalendarStyle="{StaticResource styleCalendar}" Text="{Binding DateText}"/>
+                    <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2022-11-10"/>
                 </Viewbox>
 
                 <Grid Grid.Row="5">
@@ -165,8 +165,7 @@
             <Button Content="Add Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="add"/>
             <Button Content="Delete Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="delete"/>
             <Button Content="Update Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="update"/>
-            <Button Content="Save Changes" FontSize="24" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="save"/>
-            <Button Content="Exit" FontSize="24" IsCancel="True" Margin="8 0"/>
+            <Button Content="Exit" FontSize="24" IsCancel="True" Margin="8 0" MinWidth="100"/>
         </StackPanel>
     </Grid>
 </Window>

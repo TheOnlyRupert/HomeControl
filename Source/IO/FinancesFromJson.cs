@@ -19,12 +19,14 @@ public class FinancesFromJson {
                 financeListString = streamReader.ReadToEnd();
             }
 
+            streamReader.Close();
+
             if (financeListString != null) {
                 try {
                     JsonFinances jsonFinances = JsonSerializer.Deserialize<JsonFinances>(financeListString, options);
                     ReferenceValues.JsonFinanceMasterList = jsonFinances;
-                } catch (Exception) {
-                    Console.WriteLine("Failed to Deserialize finances.json");
+                } catch (Exception e) {
+                    Console.WriteLine("Failed to Deserialize finances.json..." + e);
                 }
             }
         } catch (Exception) { }
