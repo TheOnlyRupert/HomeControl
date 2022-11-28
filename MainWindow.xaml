@@ -53,7 +53,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Frame Grid.Column="0" Source="Source/Modules/Games/Games.xaml" Focusable="False"/>
-                    <Frame Grid.Column="1" Source="Source/Modules/Chores.xaml" Focusable="False"/>
+                    <Frame Grid.Column="1" Source="Source/Modules/Chores/Chores.xaml" Focusable="False"/>
 
                     <Grid Grid.Column="2">
                         <Grid.ColumnDefinitions>

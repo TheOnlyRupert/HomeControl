@@ -68,9 +68,19 @@ public class CalendarVM : BaseViewModel {
         currentDateTime = DateTime.Now;
         CurrentMonthAndYear = currentDateTime.ToString("MMMM, yyyy");
         PopulateCalendar(currentDateTime);
+
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        if (e.PropertyName == "RealDateChanged") {
+            currentDateTime = DateTime.Now;
+            PopulateCalendar(currentDateTime);
+        }
+    }
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
@@ -808,7 +818,7 @@ public class CalendarVM : BaseViewModel {
     private static List<HolidayBlock> GetHolidays(int year) {
         List<HolidayBlock> holidays = new();
 
-        // New Years Day
+        // New Years Day -- January 1st
         DateTime newYearsDate = new(year, 1, 1);
         holidays.Add(new HolidayBlock {
             Date = newYearsDate,
@@ -842,7 +852,7 @@ public class CalendarVM : BaseViewModel {
             Holiday = "President's Day"
         });
 
-        // Easter Sunday -- Complicated as hell
+        // Easter Sunday -- Complicated
         int g = year % 19;
         int c = year / 100;
         int h = (c - c / 4 - (8 * c + 13) / 25 + 19 * g + 15) % 30;
@@ -871,7 +881,7 @@ public class CalendarVM : BaseViewModel {
             Holiday = "Mother's Day"
         });
 
-        // Memorial Day -- last monday in May 
+        // Memorial Day -- Last monday in May 
         DateTime memorialDay = new(year, 5, 31);
         DayOfWeek dayOfWeek = memorialDay.DayOfWeek;
         while (dayOfWeek != DayOfWeek.Monday) {
@@ -929,11 +939,11 @@ public class CalendarVM : BaseViewModel {
             Holiday = "Veterans Day"
         });
 
-        // Halloween Day -- October 31st
-        DateTime halloweenDay = new(year, 12, 24);
+        // Halloween -- October 31st
+        DateTime halloweenDay = new(year, 10, 31);
         holidays.Add(new HolidayBlock {
             Date = halloweenDay,
-            Holiday = "Halloween Day"
+            Holiday = "Halloween"
         });
 
         // Thanksgiving Day -- 4th Thursday in November 

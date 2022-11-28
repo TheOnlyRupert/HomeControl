@@ -1,6 +1,6 @@
-﻿using HomeControl.Source.ViewModel;
+﻿using HomeControl.Source.ViewModel.Chores;
 
-namespace HomeControl.Source.Modules;
+namespace HomeControl.Source.Modules.Chores;
 
 public partial class Chores {
     public Chores() {

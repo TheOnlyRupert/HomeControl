@@ -1,0 +1,40 @@
+﻿<Window x:Class="HomeControl.Source.Modules.Chores.ChoresWeek" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="Weekly Chores" Height="600" Width="1200" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" Background="DarkSlateGray">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="Master Bedroom"/>
+            <StackPanel>
+                <Button Background="{Binding Room1Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task1" HorizontalContentAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
+                        <TextBlock Text="Remove - Dirty Laundry"/>
+                        <TextBlock Text="{Binding Room1Task1DateText}"/>
+                    </StackPanel>
+                </Button>
+                <Button Background="{Binding Room1Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task2" HorizontalContentAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../../../Resources/Images/icons/chores.png" MaxHeight="32"/>
+                        <TextBlock Text="Sweep - Floor"/>
+                        <TextBlock Text="{Binding Room1Task2DateText}"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

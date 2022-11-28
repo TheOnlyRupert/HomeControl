@@ -10,12 +10,12 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class WeatherVM : BaseViewModel {
-    public int _currentWindDirectionRotation, _hourlyForecastWindDirectionRotation1, _hourlyForecastWindDirectionRotation2, _hourlyForecastWindDirectionRotation3,
+    private int _currentWindDirectionRotation, _hourlyForecastWindDirectionRotation1, _hourlyForecastWindDirectionRotation2, _hourlyForecastWindDirectionRotation3,
         _hourlyForecastWindDirectionRotation4,
         _hourlyForecastWindDirectionRotation5, _hourlyForecastWindDirectionRotation6, _hourlyForecastWindDirectionRotation7, _hourlyForecastWindDirectionRotation8,
         _hourlyForecastWindDirectionRotation9;
 
-    public string _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText, _currentTimeSecondsText, _currentWeatherLocationText,
+    private string _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText, _currentTimeSecondsText, _currentWeatherLocationText,
         _currentWeatherTempText, _currentWeatherCloudIcon, _sunRiseText, _sunSetText, _sunRiseIcon, _sunSetIcon, _hourlyForecastRainIcon1,
         _sevenDayForecastDescription1, _sevenDayForecastWindSpeed1, _sevenDayForecastWindDirectionRotation1, _sevenDayForecastWeatherIcon1a, _sevenDayForecastWeatherIcon1b,
         _sevenDayForecastTemp1,
@@ -78,7 +78,7 @@ public class WeatherVM : BaseViewModel {
         updateForecastHourly = true;
 
         /* Timer used to update time and weather.
-         * It also pushes a crossViewMessage to update calendar, finances, etc.. when the date changes.
+         * It also pushes an update to calendar when the date changes.
          */
         if (ReferenceValues.EnableWeather) {
             DispatcherTimer dispatcherTimer = new();
@@ -98,11 +98,14 @@ public class WeatherVM : BaseViewModel {
         poolWeather++;
 
         if (!currentTime.Day.Equals(DateTime.Now.Day)) {
-            //update date stuff
+            Console.WriteLine("Updating calendar date");
+            CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+            simpleMessenger.PushMessage("RealDateChanged", null);
         }
 
         /* Update weather every 15 minutes or when hour changes */
         if ((poolWeather > 900 || updateForecast || updateForecastHourly) && !string.IsNullOrEmpty(ReferenceValues.UserAgent)) {
+            Console.WriteLine("Updating weather @" + DateTime.Now.ToLongTimeString());
             bool errored = false;
             JsonSerializerOptions options = new() {
                 IncludeFields = true
@@ -467,6 +470,7 @@ public class WeatherVM : BaseViewModel {
         case "Slight Chance Light Rain":
         case "Chance Very Light Rain":
         case "Chance Light Rain":
+        case "Areas Of Drizzle":
             return "../../Resources/Images/weather/weather_rain_light.png";
         case "Rain Showers Likely":
         case "Rain Likely":

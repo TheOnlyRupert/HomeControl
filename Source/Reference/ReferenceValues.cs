@@ -18,6 +18,7 @@ public static class ReferenceValues {
         "Shopping",
         "Health",
         "Travel",
+        "Coffee",
         "Entertainment",
         "Services",
         "Personal Care",
@@ -61,4 +62,8 @@ public static class ReferenceValues {
     public static int Child1Strikes { get; set; }
     public static int Child2Strikes { get; set; }
     public static int Child3Strikes { get; set; }
+
+
+    public static int ChoresWeekCompleted { get; set; }
+    public static int ChoresMonthCompleted { get; set; }
 }

@@ -133,7 +133,7 @@ public class CalendarEventVM : BaseViewModel {
             break;
         case "update":
             try {
-                if (CalendarEventSelected.description != null) {
+                if (CalendarEventSelected.name != null) {
                     if (string.IsNullOrWhiteSpace(EventText)) {
                         MessageBox.Show("Event needs a name.", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
@@ -160,7 +160,7 @@ public class CalendarEventVM : BaseViewModel {
             break;
         case "delete":
             try {
-                if (CalendarEventSelected.description != null) {
+                if (CalendarEventSelected.name != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (confirmation == MessageBoxResult.Yes) {
                         EventList.Remove(CalendarEventSelected);
