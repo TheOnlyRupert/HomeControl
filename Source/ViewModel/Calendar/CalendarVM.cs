@@ -639,7 +639,7 @@ public class CalendarVM : BaseViewModel {
             Button42BackgroundColor = "DarkBlue";
         }
 
-        /* Get Holidays (hardcoded) */
+        /* Get Holidays (Hardcoded) */
         foreach (HolidayBlock holiday in GetHolidays(dateTime.AddDays(7).Year)) {
             if (dateTime.Month == holiday.Date.Month && dateTime.Day == holiday.Date.Day) {
                 Button1HolidayText = holiday.Holiday;
@@ -852,7 +852,7 @@ public class CalendarVM : BaseViewModel {
             Holiday = "President's Day"
         });
 
-        // Easter Sunday -- Complicated
+        // Easter Sunday -- Complicated 
         int g = year % 19;
         int c = year / 100;
         int h = (c - c / 4 - (8 * c + 13) / 25 + 19 * g + 15) % 30;

@@ -1,33 +1,25 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
+using HomeControl.Source.Helpers;
+using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
-using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
+using static HomeControl.Source.Reference.ReferenceValues;
 
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresVM : BaseViewModel {
     private string _currentMonthText, _currentWeekText, _choresCompletedWeekText, _choresCompletedMonthText, _choresTitleText, _currentWeekSpanText,
-        _choresCompletedWeekProgressText, _choresCompletedWeekProgressValue, _projectedFundMonthText, _projectedFundLevelText, _projectedFundCashText;
+        _choresCompletedWeekProgressText, _projectedFundMonthText, _projectedFundLevelText, _projectedFundCashText;
+
+    private int choresCompletedWeek, choresCompletedMonth, _choresCompletedWeekProgressValue;
 
     public ChoresVM() {
-        DateTime dateTime = DateTime.Now;
-        DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
-        System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
+        ChoreWeekStartDate = new DateTime();
 
-        CurrentMonthText = dateTime.ToString("MMMM");
-        CurrentWeekText = "Week: " + calendar.GetWeekOfYear(dateTime, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
-        ChoresCompletedWeekText = ReferenceValues.ChoresWeekCompleted + " / 24";
-        ChoresCompletedMonthText = ReferenceValues.ChoresMonthCompleted + " / 32";
-        ChoresTitleText = ReferenceValues.User2Name + " Monthly Chores";
-
-        CurrentWeekSpanText = "TODO";
-        ChoresCompletedWeekProgressText = ReferenceValues.ChoresWeekCompleted / 24 * 100 + "%";
-        ChoresCompletedWeekProgressValue = "1";
-        ProjectedFundMonthText = dateTime.AddMonths(1).ToString("MMM") + " Projected Funds";
-        ProjectedFundLevelText = "Level TODO";
-        ProjectedFundCashText = "Cash TODO";
+        RefreshFields();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
@@ -38,11 +30,63 @@ public class ChoresVM : BaseViewModel {
             ChoresWeek choresWeek = new();
             choresWeek.ShowDialog();
             choresWeek.Close();
+
+            RefreshFields();
             break;
         case "choresMonth":
+            ChoresMonth choresMonth = new();
+            choresMonth.ShowDialog();
+            choresMonth.Close();
+
+            RefreshFields();
             break;
         case "funds":
             break;
+        }
+    }
+
+    private void RefreshFields() {
+        DateTime dateTime = DateTime.Now;
+        DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
+        System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
+        JsonChoreMasterList = new JsonChoresWeek {
+            choreList = new ObservableCollection<ChoreDetails>()
+        };
+        choresCompletedWeek = 0;
+        choresCompletedMonth = 0;
+
+        while (ChoreWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
+            ChoreWeekStartDate = dateTime.AddDays(-1);
+        }
+
+        new ChoresFromJson(ChoreWeekStartDate);
+
+        CurrentMonthText = dateTime.ToString("MMMM");
+        CurrentWeekText = "Week: " + calendar.GetWeekOfYear(dateTime, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
+
+        ChoresTitleText = User2Name + " Monthly Chores";
+
+        CurrentWeekSpanText = "TODO";
+        ProjectedFundMonthText = dateTime.AddMonths(1).ToString("MMM") + " Projected Funds";
+        ProjectedFundLevelText = "Level TODO";
+        ProjectedFundCashText = "Cash TODO";
+        ChoresCompletedWeekProgressText = "0%";
+
+        if (JsonChoreMasterList != null) {
+            foreach (ChoreDetails choreDetails in JsonChoreMasterList.choreList) {
+                if (choreDetails.IsComplete) {
+                    choresCompletedWeek++;
+                }
+            }
+        }
+
+
+        if (JsonChoreMasterList != null) {
+            ChoresCompletedWeekText = choresCompletedWeek + " / " + JsonChoreMasterList.choreList.Count;
+            double progress = Convert.ToDouble(choresCompletedWeek) / Convert.ToDouble(JsonChoreMasterList.choreList.Count) * 100;
+            try {
+                ChoresCompletedWeekProgressText = Convert.ToInt16(progress) + "%";
+            } catch (Exception) { }
         }
     }
 
@@ -104,7 +148,7 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string ChoresCompletedWeekProgressValue {
+    public int ChoresCompletedWeekProgressValue {
         get => _choresCompletedWeekProgressValue;
         set {
             _choresCompletedWeekProgressValue = value;

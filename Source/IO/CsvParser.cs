@@ -8,7 +8,8 @@ namespace HomeControl.Source.IO;
 public static class CsvParser {
     static CsvParser() {
         try {
-            Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "events/");
+            Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY);
+
 
             if (!File.Exists(ReferenceValues.FILE_DIRECTORY + "settings.csv")) {
                 Console.WriteLine("settings.csv does not exist. Restoring default settings");

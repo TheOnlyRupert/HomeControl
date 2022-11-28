@@ -3,9 +3,9 @@ using HomeControl.Source.ViewModel.Chores;
 
 namespace HomeControl.Source.Modules.Chores;
 
-public partial class ChoresWeek : Window {
-    public ChoresWeek() {
+public partial class ChoresMonth : Window {
+    public ChoresMonth() {
         InitializeComponent();
-        DataContext = new ChoresWeekVM();
+        DataContext = new ChoresMonthVM();
     }
 }

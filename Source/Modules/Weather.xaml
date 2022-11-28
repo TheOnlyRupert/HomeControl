@@ -12,8 +12,8 @@
     <Border BorderBrush="Black" BorderThickness="1" Margin="4">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
             <Image Grid.Row="0" Source="{Binding ThermometerDisplayIcon}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="48"/>
@@ -48,23 +48,23 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
                             <TextBlock Text="{Binding CurrentWeatherLocationText}" FontSize="18"/>
                             <TextBlock Text="{Binding CurrentWeatherTempText}" FontSize="36"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3">
                             <Image Source="{Binding CurrentWeatherCloudIcon}" Height="128"/>
                             <TextBlock Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Top"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
-                            <Image Source="../../Resources/Images/weather/wind_compass.png" Width="64" Height="64" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right">
+                            <Image Source="../../Resources/Images/weather/wind_compass.png" Width="64" Height="64" HorizontalAlignment="Center"/>
                             <TextBlock Text="" HorizontalAlignment="Center" FontSize="16"/>
                         </StackPanel>
-                        <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right">
-                            <Image Width="64" Height="64" HorizontalAlignment="Center" VerticalAlignment="Center" Source="../../Resources/Images/weather/wind_direction.png"
-                                   RenderTransformOrigin="0.5, 0.5">
+
+                        <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right">
+                            <Image Width="64" Height="64" HorizontalAlignment="Center" Source="../../Resources/Images/weather/wind_direction.png" RenderTransformOrigin="0.5, 0.5">
                                 <Image.RenderTransform>
                                     <RotateTransform Angle="{Binding CurrentWindDirectionRotation}"/>
                                 </Image.RenderTransform>

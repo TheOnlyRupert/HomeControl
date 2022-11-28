@@ -7,14 +7,14 @@ using HomeControl.Source.Reference;
 namespace HomeControl.Source.IO;
 
 public class CalenderEventsFromJson {
-    private readonly JsonCalendar[] _jsonCalendar;
-
     public CalenderEventsFromJson(DateTime startDate) {
+        Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "events/");
+
         JsonSerializerOptions options = new() {
             IncludeFields = true
         };
 
-        _jsonCalendar = new JsonCalendar[42];
+        JsonCalendar[] jsonCalendar = new JsonCalendar[42];
 
         /* Loop through every file in events folder and see if there are events needing to populate the calendar */
         for (int i = 0; i < 42; i++) {
@@ -34,17 +34,19 @@ public class CalenderEventsFromJson {
                                 JsonCalendar currentJsonCalendar = JsonSerializer.Deserialize<JsonCalendar>(eventsListString, options);
 
                                 if (currentJsonCalendar != null) {
-                                    _jsonCalendar[i] = currentJsonCalendar;
+                                    jsonCalendar[i] = currentJsonCalendar;
                                 }
                             } catch (Exception e) {
                                 Console.WriteLine("Failed to Deserialize event:\n" + eventsListString);
                             }
                         }
-                    } catch (Exception) { }
+                    } catch (Exception e) {
+                        Console.WriteLine("Event File Failed " + e);
+                    }
                 }
             }
         }
 
-        ReferenceValues.JsonCalendarMasterEventList = _jsonCalendar;
+        ReferenceValues.JsonCalendarMasterEventList = jsonCalendar;
     }
 }

@@ -94,10 +94,12 @@
         <Compile Include="Source\Control\SnowInfo.cs"/>
         <Compile Include="Source\Helpers\FinanceBlock.cs"/>
         <Compile Include="Source\Helpers\JsonCalendar.cs"/>
+        <Compile Include="Source\Helpers\JsonChores.cs"/>
         <Compile Include="Source\Helpers\JsonWeatherForecast.cs"/>
         <Compile Include="Source\Helpers\JsonWeatherForecastHourly.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
         <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
+        <Compile Include="Source\IO\ChoresFromJson.cs"/>
         <Compile Include="Source\IO\CsvParser.cs"/>
         <Compile Include="Source\IO\FinancesFromJson.cs"/>
         <Compile Include="Source\Modules\Alarms.xaml.cs">
@@ -120,6 +122,9 @@
         </Compile>
         <Compile Include="Source\Modules\Chores\Chores.xaml.cs">
             <DependentUpon>Chores.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Chores\ChoresMonth.xaml.cs">
+            <DependentUpon>ChoresMonth.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Chores\ChoresWeek.xaml.cs">
             <DependentUpon>ChoresWeek.xaml</DependentUpon>
@@ -187,6 +192,7 @@
         <Page Include="Source\Modules\Calendar\CalendarEvent.xaml"/>
         <Page Include="Source\Modules\Calendar\TodayCalendar.xaml"/>
         <Page Include="Source\Modules\Chores\Chores.xaml"/>
+        <Page Include="Source\Modules\Chores\ChoresMonth.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresWeek.xaml"/>
         <Page Include="Source\Modules\Notes.xaml"/>
         <Page Include="Source\Modules\Settings.xaml"/>

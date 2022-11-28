@@ -80,15 +80,12 @@ public class WeatherVM : BaseViewModel {
         /* Timer used to update time and weather.
          * It also pushes an update to calendar when the date changes.
          */
-        if (ReferenceValues.EnableWeather) {
-            DispatcherTimer dispatcherTimer = new();
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherTimer.Start();
-            // ReSharper disable once RedundantIfElseBlock
-        } else {
-            Console.WriteLine("Weather Disabled in Debug");
-        }
+
+        DispatcherTimer dispatcherTimer = new();
+        dispatcherTimer.Tick += dispatcherTimer_Tick;
+        dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+        dispatcherTimer.Start();
+        // ReSharper disable once RedundantIfElseBlock
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
@@ -104,7 +101,8 @@ public class WeatherVM : BaseViewModel {
         }
 
         /* Update weather every 15 minutes or when hour changes */
-        if ((poolWeather > 900 || updateForecast || updateForecastHourly) && !string.IsNullOrEmpty(ReferenceValues.UserAgent)) {
+#pragma warning disable CS0162
+        if ((poolWeather > 900 || updateForecast || updateForecastHourly) && !string.IsNullOrEmpty(ReferenceValues.UserAgent) && ReferenceValues.EnableWeather) {
             Console.WriteLine("Updating weather @" + DateTime.Now.ToLongTimeString());
             bool errored = false;
             JsonSerializerOptions options = new() {
@@ -119,7 +117,6 @@ public class WeatherVM : BaseViewModel {
                 forecast = JsonSerializer.Deserialize<JsonWeatherForecast>(weatherForecast, options);
                 updateForecast = false;
             } catch (Exception) {
-                Console.WriteLine("JsonWeatherForecast Errored");
                 errored = true;
             }
 
@@ -131,7 +128,6 @@ public class WeatherVM : BaseViewModel {
                 forecastHourly = JsonSerializer.Deserialize<JsonWeatherForecastHourly>(weatherForecastHourly, options);
                 updateForecastHourly = false;
             } catch (Exception) {
-                Console.WriteLine("JsonWeatherForecastHourly Errored");
                 errored = true;
             }
 
@@ -141,6 +137,7 @@ public class WeatherVM : BaseViewModel {
 
             poolWeather = 0;
         }
+#pragma warning restore CS0162
     }
 
     public void UpdateWeatherForecast() {
