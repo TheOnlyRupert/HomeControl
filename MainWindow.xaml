@@ -67,7 +67,7 @@
                             <RowDefinition Height="3*"/>
                         </Grid.RowDefinitions>
 
-                        <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Source="Source/Modules/Alarms.xaml" Focusable="False"/>
+                        <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Source="Source/Modules/Alarms/Alarms.xaml" Focusable="False"/>
                         <Frame Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Source="Source/Modules/Function.xaml" Focusable="False"/>
                         <Grid Grid.Row="1" Grid.Column="1">
                             <Grid.RowDefinitions>

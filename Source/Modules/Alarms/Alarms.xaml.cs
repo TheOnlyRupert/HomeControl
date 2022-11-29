@@ -1,6 +1,6 @@
-﻿using HomeControl.Source.ViewModel;
+﻿using HomeControl.Source.ViewModel.Alarms;
 
-namespace HomeControl.Source.Modules;
+namespace HomeControl.Source.Modules.Alarms;
 
 public partial class Alarms {
     public Alarms() {

@@ -102,8 +102,11 @@
         <Compile Include="Source\IO\ChoresFromJson.cs"/>
         <Compile Include="Source\IO\CsvParser.cs"/>
         <Compile Include="Source\IO\FinancesFromJson.cs"/>
-        <Compile Include="Source\Modules\Alarms.xaml.cs">
+        <Compile Include="Source\Modules\Alarms\Alarms.xaml.cs">
             <DependentUpon>Alarms.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Alarms\EditAlarm.xaml.cs">
+            <DependentUpon>EditAlarm.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Behavior\Behavior.xaml.cs">
             <DependentUpon>Behavior.xaml</DependentUpon>
@@ -151,7 +154,8 @@
         </Compile>
         <Compile Include="Source\Reference\ReferenceValues.cs"/>
         <Compile Include="Source\Reference\VerifyInput.cs"/>
-        <Compile Include="Source\ViewModel\AlarmsVM.cs"/>
+        <Compile Include="Source\ViewModel\Alarms\AlarmsVM.cs"/>
+        <Compile Include="Source\ViewModel\Alarms\EditAlarmVM.cs"/>
         <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
         <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs"/>
         <Compile Include="Source\ViewModel\Base\DelegateCommand.cs"/>
@@ -185,7 +189,8 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Page Include="Source\Modules\Alarms.xaml"/>
+        <Page Include="Source\Modules\Alarms\Alarms.xaml"/>
+        <Page Include="Source\Modules\Alarms\EditAlarm.xaml"/>
         <Page Include="Source\Modules\Behavior\Behavior.xaml"/>
         <Page Include="Source\Modules\Behavior\BehaviorDialog.xaml"/>
         <Page Include="Source\Modules\Calendar\Calendar.xaml"/>

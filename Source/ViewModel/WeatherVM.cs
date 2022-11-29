@@ -77,15 +77,11 @@ public class WeatherVM : BaseViewModel {
         updateForecast = true;
         updateForecastHourly = true;
 
-        /* Timer used to update time and weather.
-         * It also pushes an update to calendar when the date changes.
-         */
-
+        /* Timer used to update time and weather. It also pushes an update to calendar when the date changes. */
         DispatcherTimer dispatcherTimer = new();
         dispatcherTimer.Tick += dispatcherTimer_Tick;
         dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
         dispatcherTimer.Start();
-        // ReSharper disable once RedundantIfElseBlock
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {

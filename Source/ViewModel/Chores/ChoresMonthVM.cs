@@ -259,7 +259,6 @@ public class ChoresMonthVM : BaseViewModel {
                     Room2Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room2Task5DateText = choreDetails.Date;
                     break;
-
                 case "Room3Task1":
                     Room3Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room3Task1DateText = choreDetails.Date;
@@ -307,6 +306,14 @@ public class ChoresMonthVM : BaseViewModel {
                 case "Room4Task5":
                     Room4Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room4Task5DateText = choreDetails.Date;
+                    break;
+                case "Room4Task6":
+                    Room4Task6Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room4Task6DateText = choreDetails.Date;
+                    break;
+                case "Room4Task7":
+                    Room4Task7Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room4Task7DateText = choreDetails.Date;
                     break;
                 case "Room5Task1":
                     Room5Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";

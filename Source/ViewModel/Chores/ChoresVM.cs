@@ -20,9 +20,18 @@ public class ChoresVM : BaseViewModel {
         ChoreWeekStartDate = DateTime.Now;
 
         RefreshFields();
+
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        if (e.PropertyName == "RealDateChanged") {
+            RefreshFields();
+        }
+    }
 
     private void ButtonLogic(object param) {
         switch (param) {
