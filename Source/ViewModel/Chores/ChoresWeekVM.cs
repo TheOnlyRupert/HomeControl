@@ -11,6 +11,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresWeekVM : BaseViewModel {
+    private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_week_" + ReferenceValues.ChoreWeekStartDate.ToString("yyyy_MM_dd") + ".json";
+
     private string _room1Task1Color, _room1Task2Color, _room1Task3Color, _room1Task4Color, _room1Task5Color, _room2Task1Color, _room2Task2Color, _room2Task3Color, _room2Task4Color,
         _room2Task5Color, _room2Task6Color, _room3Task1Color, _room3Task2Color, _room3Task3Color, _room3Task4Color, _room4Task1Color, _room4Task2Color, _room4Task3Color,
         _room4Task4Color, _room4Task5Color, _room5Task1Color, _room5Task2Color, _room5Task3Color, _room5Task4Color, _room5Task5Color, _room6Task1Color, _room6Task2Color,
@@ -27,8 +29,6 @@ public class ChoresWeekVM : BaseViewModel {
         _room8Task2DateText, _room8Task3DateText, _room8Task4DateText, _room9Task1DateText, _room9Task2DateText, _room9Task3DateText, _room9Task4DateText, _room10Task1DateText,
         _room10Task2DateText, _room10Task3DateText,
         _room10Task4DateText, _room10Task5DateText;
-
-    private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_week_" + ReferenceValues.ChoreWeekStartDate.ToString("yyyy_MM_dd") + ".json";
 
     public ChoresWeekVM() {
         GetButtonColors();
@@ -185,7 +185,7 @@ public class ChoresWeekVM : BaseViewModel {
         }
 
         try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreMasterList);
+            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreWeekMasterList);
             GC.Collect();
             GC.WaitForPendingFinalizers();
             File.WriteAllText(fileName, jsonString);
@@ -197,22 +197,22 @@ public class ChoresWeekVM : BaseViewModel {
     }
 
     private void SwitchButtonLogic(string value) {
-        int index = ReferenceValues.JsonChoreMasterList.choreList.IndexOf(ReferenceValues.JsonChoreMasterList.choreList.First(i => i.Name == value));
-        if (ReferenceValues.JsonChoreMasterList.choreList[index].IsComplete) {
+        int index = ReferenceValues.JsonChoreWeekMasterList.choreList.IndexOf(ReferenceValues.JsonChoreWeekMasterList.choreList.First(i => i.Name == value));
+        if (ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete) {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to reset this chore?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Stop);
             if (result == MessageBoxResult.Yes) {
-                ReferenceValues.JsonChoreMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreMasterList.choreList[index].IsComplete;
-                ReferenceValues.JsonChoreMasterList.choreList[index].Date = "";
+                ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete;
+                ReferenceValues.JsonChoreWeekMasterList.choreList[index].Date = "";
             }
         } else {
-            ReferenceValues.JsonChoreMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreMasterList.choreList[index].IsComplete;
-            ReferenceValues.JsonChoreMasterList.choreList[index].Date = DateTime.Now.ToString("yyyy-MM-dd");
+            ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete;
+            ReferenceValues.JsonChoreWeekMasterList.choreList[index].Date = DateTime.Now.ToString("yyyy-MM-dd");
         }
     }
 
     private void GetButtonColors() {
-        if (ReferenceValues.JsonChoreMasterList != null) {
-            foreach (ChoreDetails choreDetails in ReferenceValues.JsonChoreMasterList.choreList) {
+        if (ReferenceValues.JsonChoreWeekMasterList != null) {
+            foreach (ChoreDetails choreDetails in ReferenceValues.JsonChoreWeekMasterList.choreList) {
                 switch (choreDetails.Name) {
                 case "Room1Task1":
                     Room1Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";

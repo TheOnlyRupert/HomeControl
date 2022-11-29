@@ -17,7 +17,7 @@ public class ChoresVM : BaseViewModel {
     private int choresCompletedWeek, choresCompletedMonth, _choresCompletedWeekProgressValue;
 
     public ChoresVM() {
-        ChoreWeekStartDate = new DateTime();
+        ChoreWeekStartDate = DateTime.Now;
 
         RefreshFields();
     }
@@ -49,45 +49,51 @@ public class ChoresVM : BaseViewModel {
         DateTime dateTime = DateTime.Now;
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
         System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
-        JsonChoreMasterList = new JsonChoresWeek {
+        JsonChoreWeekMasterList = new JsonChores {
             choreList = new ObservableCollection<ChoreDetails>()
         };
         choresCompletedWeek = 0;
         choresCompletedMonth = 0;
 
         while (ChoreWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
-            ChoreWeekStartDate = dateTime.AddDays(-1);
+            ChoreWeekStartDate = ChoreWeekStartDate.AddDays(-1);
         }
 
-        new ChoresFromJson(ChoreWeekStartDate);
+        ChoreMonthStartDate = DateTime.Now;
+
+        ChoresFromJson choresFromJson = new();
+        choresFromJson.ChoresWeekFromJson(ChoreWeekStartDate);
+        choresFromJson.ChoresMonthFromJson(ChoreMonthStartDate);
 
         CurrentMonthText = dateTime.ToString("MMMM");
         CurrentWeekText = "Week: " + calendar.GetWeekOfYear(dateTime, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
 
         ChoresTitleText = User2Name + " Monthly Chores";
 
-        CurrentWeekSpanText = "TODO";
+        CurrentWeekSpanText = ChoreWeekStartDate.ToString("MMM dd") + " - " + ChoreWeekStartDate.AddDays(6).ToString("MMM dd");
         ProjectedFundMonthText = dateTime.AddMonths(1).ToString("MMM") + " Projected Funds";
-        ProjectedFundLevelText = "Level TODO";
-        ProjectedFundCashText = "Cash TODO";
         ChoresCompletedWeekProgressText = "0%";
 
-        if (JsonChoreMasterList != null) {
-            foreach (ChoreDetails choreDetails in JsonChoreMasterList.choreList) {
-                if (choreDetails.IsComplete) {
-                    choresCompletedWeek++;
-                }
+        foreach (ChoreDetails choreDetails in JsonChoreWeekMasterList.choreList) {
+            if (choreDetails.IsComplete) {
+                choresCompletedWeek++;
             }
         }
 
-
-        if (JsonChoreMasterList != null) {
-            ChoresCompletedWeekText = choresCompletedWeek + " / " + JsonChoreMasterList.choreList.Count;
-            double progress = Convert.ToDouble(choresCompletedWeek) / Convert.ToDouble(JsonChoreMasterList.choreList.Count) * 100;
-            try {
-                ChoresCompletedWeekProgressText = Convert.ToInt16(progress) + "%";
-            } catch (Exception) { }
+        foreach (ChoreDetails choreDetails in JsonChoreMonthMasterList.choreList) {
+            if (choreDetails.IsComplete) {
+                choresCompletedMonth++;
+            }
         }
+
+        ChoresCompletedWeekText = choresCompletedWeek + " / " + JsonChoreWeekMasterList.choreList.Count;
+        ChoresCompletedMonthText = choresCompletedMonth + " / " + JsonChoreMonthMasterList.choreList.Count;
+
+        double progress = Convert.ToDouble(choresCompletedWeek) / Convert.ToDouble(JsonChoreWeekMasterList.choreList.Count) * 100;
+        try {
+            ChoresCompletedWeekProgressText = Convert.ToInt16(progress) + "%";
+            ChoresCompletedWeekProgressValue = Convert.ToInt16(progress);
+        } catch (Exception) { }
     }
 
     #region Fields

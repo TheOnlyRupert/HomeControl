@@ -2,7 +2,7 @@
 
 namespace HomeControl.Source.Helpers;
 
-public class JsonChoresWeek {
+public class JsonChores {
     public ObservableCollection<ChoreDetails> choreList { get; set; }
 }
 

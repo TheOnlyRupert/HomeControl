@@ -35,12 +35,13 @@
             </Grid>
 
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 24 0 0">
-                <TextBlock Text="Current Week" FontSize="16"/>
+                <TextBlock Text="Current Week:" FontSize="16"/>
                 <TextBlock Text="{Binding CurrentWeekSpanText}" FontSize="16"/>
-                <TextBlock Text="Completed:" FontSize="16" Margin="0 6 0 0"/>
-                <TextBlock Text="{Binding ChoresCompletedWeekProgressText}" FontSize="16" Margin="0 0 0 6"/>
-                <ProgressBar Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ChoresCompletedWeekProgressValue}" IsIndeterminate="False"
-                             Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" MinWidth="256"/>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ProgressBar Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ChoresCompletedWeekProgressValue}" IsIndeterminate="False"
+                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" MinWidth="256"/>
+                    <TextBlock Text="{Binding ChoresCompletedWeekProgressText}" FontSize="16" HorizontalAlignment="Center"/>
+                </Grid>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
