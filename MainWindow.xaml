@@ -7,7 +7,26 @@
             <Style TargetType="Frame">
                 <Setter Property="NavigationUIVisibility" Value="Hidden"/>
             </Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="Black"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </Grid.Resources>
+
 
         <Canvas Name="canvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
@@ -91,8 +110,8 @@
                             </Button>
                         </Grid>
 
-                        <Button Grid.Column="1" Grid.Row="2" Background="Red" Foreground="White" FontSize="24" Content="! PANIC !" HorizontalContentAlignment="Center"
-                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 4 4 4"/>
+                        <Button Grid.Column="1" Grid.Row="2" Background="Red" FontSize="24" Content="! PANIC !" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" Margin="0 4 4 4"/>
                     </Grid>
                 </Grid>
 

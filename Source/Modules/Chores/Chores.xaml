@@ -5,14 +5,29 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
 
     <Border BorderBrush="Black" BorderThickness="1" Margin=" 4 0 4 4">
         <Grid Margin="4">
             <StackPanel HorizontalAlignment="Right">
-                <Button Command="{Binding ButtonCommand}" CommandParameter="choresWeek" Background="Transparent" HorizontalContentAlignment="Stretch" Padding="12 6">
+                <Button Command="{Binding ButtonCommand}" CommandParameter="choresWeek" HorizontalContentAlignment="Stretch" Padding="12 6">
                     <StackPanel>
                         <TextBlock Text="{Binding CurrentMonthText}" FontSize="16" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding CurrentWeekText}" HorizontalAlignment="Center"/>
@@ -20,7 +35,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding ButtonCommand}" CommandParameter="choresMonth" Background="Transparent" HorizontalContentAlignment="Stretch" Padding="12 6">
+                <Button Command="{Binding ButtonCommand}" CommandParameter="choresMonth" HorizontalContentAlignment="Stretch" Padding="12 6">
                     <StackPanel>
                         <TextBlock Text="{Binding CurrentMonthText}" FontSize="16" HorizontalAlignment="Center"/>
                         <TextBlock Text="Deep Clean" HorizontalAlignment="Center"/>
@@ -46,7 +61,7 @@
 
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <TextBlock Text="{Binding ProjectedFundMonthText}" FontSize="24" HorizontalAlignment="Center"/>
-                <Button HorizontalContentAlignment="Stretch" Background="Transparent" Command="{Binding ButtonCommand}" CommandParameter="funds">
+                <Button HorizontalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="funds">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="{Binding ProjectedFundLevelText}" FontSize="16" VerticalAlignment="Center"/>
                         <Image Source="../../Resources/Images/icons/money.png" Width="32" Height="32" Margin="8 0"/>

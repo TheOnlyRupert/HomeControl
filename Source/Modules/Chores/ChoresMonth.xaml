@@ -8,6 +8,20 @@
         </Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
 
@@ -47,7 +61,7 @@
             <Grid Grid.Column="0" Grid.Row="0" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Master Bedroom" FontSize="24" HorizontalAlignment="Center"/>
-                    <Button Background="{Binding Room1Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task1" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -60,7 +74,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task1DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task2" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -73,7 +87,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task2DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task3" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -86,7 +100,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task3DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task4" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -99,7 +113,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task4DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task5" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -112,7 +126,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task5DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task6" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task6">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -125,7 +139,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task6DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task7" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task7">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -138,7 +152,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task7DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task8Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task8" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task8Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task8">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -151,7 +165,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task8DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task9Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task9" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task9Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task9">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -164,7 +178,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task9DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room1Task10Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task10" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room1Task10Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -183,7 +197,7 @@
             <Grid Grid.Column="1" Grid.Row="0" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Upstairs Bathroom" FontSize="24" HorizontalAlignment="Center"/>
-                    <Button Background="{Binding Room2Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task1" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room2Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -196,7 +210,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room2Task1DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room2Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task2" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room2Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -209,7 +223,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room2Task2DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room2Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task3" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room2Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -222,7 +236,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room2Task3DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room2Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task4" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room2Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -235,7 +249,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room2Task4DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room2Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task5" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room2Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -254,7 +268,7 @@
             <Grid Grid.Column="2" Grid.Row="0" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Living Room" FontSize="24" HorizontalAlignment="Center"/>
-                    <Button Background="{Binding Room3Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task1" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room3Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -267,7 +281,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room3Task1DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room3Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task2" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room3Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -280,7 +294,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room3Task2DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room3Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task3" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room3Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -293,7 +307,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room3Task3DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room3Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task4" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room3Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -306,7 +320,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room3Task4DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room3Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task5" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room3Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -319,7 +333,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room3Task5DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room3Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task6" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room3Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task6">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -332,7 +346,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room3Task6DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room3Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task7" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room3Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task7">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -351,7 +365,7 @@
             <Grid Grid.Column="3" Grid.Row="0" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Kitchen" FontSize="24" HorizontalAlignment="Center"/>
-                    <Button Background="{Binding Room4Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task1" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room4Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -364,7 +378,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room4Task1DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room4Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task2" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room4Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -377,7 +391,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room4Task2DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room4Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task3" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room4Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -390,7 +404,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room4Task3DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room4Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task4" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room4Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -403,7 +417,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room4Task4DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room4Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task5" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room4Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -416,7 +430,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room4Task5DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room4Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task6" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room4Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task6">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -429,7 +443,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room4Task6DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room4Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task7" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room4Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task7">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -448,7 +462,7 @@
             <Grid Grid.Column="0" Grid.Row="1" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Pantry/Stairs" FontSize="24" HorizontalAlignment="Center"/>
-                    <Button Background="{Binding Room5Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task1" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room5Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -461,7 +475,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room5Task1DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room5Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task2" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room5Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -474,7 +488,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room5Task2DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room5Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task3" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room5Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -493,7 +507,7 @@
             <Grid Grid.Column="1" Grid.Row="1" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Downstairs Bathroom" FontSize="24" HorizontalAlignment="Center"/>
-                    <Button Background="{Binding Room6Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task1" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room6Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -506,7 +520,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room6Task1DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room6Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task2" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room6Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -519,7 +533,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room6Task2DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room6Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task3" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room6Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -532,7 +546,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room6Task3DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room6Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task4" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room6Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -545,7 +559,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room6Task4DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room6Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task5" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room6Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -564,7 +578,7 @@
             <Grid Grid.Column="2" Grid.Row="1" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Downstairs Closet" FontSize="24" HorizontalAlignment="Center"/>
-                    <Button Background="{Binding Room7Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task1" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room7Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -577,7 +591,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room7Task1DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room7Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task2" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room7Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -596,7 +610,7 @@
             <Grid Grid.Column="3" Grid.Row="1" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Daycare/Computer Room" FontSize="24" HorizontalAlignment="Center"/>
-                    <Button Background="{Binding Room8Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task1" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room8Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task1">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -609,7 +623,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room8Task1DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room8Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task2" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room8Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -622,7 +636,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room8Task2DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room8Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task3" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room8Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task3">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -635,7 +649,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room8Task3DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room8Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task4" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room8Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task4">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
@@ -648,7 +662,7 @@
                             <TextBlock Grid.Column="2" Text="{Binding Room8Task4DateText}"/>
                         </Grid>
                     </Button>
-                    <Button Background="{Binding Room8Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task5" HorizontalContentAlignment="Stretch">
+                    <Button Background="{Binding Room8Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>

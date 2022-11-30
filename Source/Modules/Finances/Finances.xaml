@@ -6,7 +6,22 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
@@ -101,7 +116,7 @@
                 </StackPanel>
 
                 <Button Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Width="100" Content="DETAILS" Command="{Binding ButtonCommand}" CommandParameter="edit"
-                        FontSize="16" Height="32" Background="Transparent"/>
+                        FontSize="16" Height="32"/>
             </Grid>
             <Grid Grid.Row="1">
                 <ListView Grid.Row="0" ItemsSource="{Binding FinanceList}" Background="Transparent" SelectionMode="Single" Focusable="False">

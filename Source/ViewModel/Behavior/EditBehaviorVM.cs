@@ -12,7 +12,6 @@ public class EditBehaviorVM : BaseViewModel {
     private int _progressBarChildValue, stars, strikes;
 
     public EditBehaviorVM() {
-        Console.WriteLine(ReferenceValues.ActiveChild);
         ChildName = ReferenceValues.ChildName[ReferenceValues.ActiveChild];
 
         switch (ReferenceValues.ActiveChild) {

@@ -5,7 +5,22 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
 
@@ -75,7 +90,7 @@
                 </Grid>
 
                 <Grid Grid.Column="1">
-                    <Button Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                    <Button HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                         <Grid Margin="8 4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="48"/>
@@ -252,7 +267,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="0" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -276,7 +291,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="1" Grid.Row="0" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -300,7 +315,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="2" Grid.Row="0" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="2" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -324,7 +339,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="3" Grid.Row="0" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="3" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -348,7 +363,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="4" Grid.Row="0" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="4" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -372,7 +387,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="5" Grid.Row="0" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="5" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -396,7 +411,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="6" Grid.Row="0" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="6" Grid.Row="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -420,7 +435,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="0" Grid.Row="1" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -444,7 +459,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="1" Grid.Row="1" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -468,7 +483,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="2" Grid.Row="1" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="2" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -492,7 +507,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="3" Grid.Row="1" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="3" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -516,7 +531,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="4" Grid.Row="1" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="4" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -540,7 +555,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="5" Grid.Row="1" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="5" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -564,7 +579,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="6" Grid.Row="1" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Button Grid.Column="6" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

@@ -90,7 +90,6 @@ public class WeatherVM : BaseViewModel {
             /* Update weather every 15 minutes */
 #pragma warning disable CS0162
             if ((poolWeather > 900 || updateForecast || updateForecastHourly) && !string.IsNullOrEmpty(ReferenceValues.UserAgent) && ReferenceValues.EnableWeather) {
-                Console.WriteLine("Updating weather @ " + DateTime.Now.ToLongTimeString());
                 bool errored = false;
                 JsonSerializerOptions options = new() {
                     IncludeFields = true

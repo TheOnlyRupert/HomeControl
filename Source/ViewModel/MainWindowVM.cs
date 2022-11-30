@@ -74,7 +74,6 @@ public class MainWindowVM : BaseViewModel {
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
         /* Date Changes */
         if (!currentDate.Day.Equals(DateTime.Now.Day)) {
-            Console.WriteLine("Updating calendar date");
             currentDate = DateTime.Now;
             simpleMessenger.PushMessage("DateChanged", null);
         }

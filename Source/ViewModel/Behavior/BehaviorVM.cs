@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.Reference;
@@ -190,15 +189,12 @@ public class BehaviorVM : BaseViewModel {
         switch (param) {
         case "child1":
             ReferenceValues.ActiveChild = 0;
-            Console.WriteLine(ReferenceValues.ActiveChild);
             break;
         case "child2":
             ReferenceValues.ActiveChild = 1;
-            Console.WriteLine(ReferenceValues.ActiveChild);
             break;
         case "child3":
             ReferenceValues.ActiveChild = 2;
-            Console.WriteLine(ReferenceValues.ActiveChild);
             break;
         }
 

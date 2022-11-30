@@ -5,7 +5,22 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
         <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
 
@@ -34,32 +49,28 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0" Margin="4 4 2 2" Command="{Binding ButtonCommand}" Background="Transparent" CommandParameter="coinFlip"
-                        HorizontalContentAlignment="Stretch">
+                <Button Grid.Row="0" Grid.Column="0" Margin="4 4 2 2" Command="{Binding ButtonCommand}" CommandParameter="coinFlip" HorizontalContentAlignment="Stretch">
                     <StackPanel>
                         <Image Source="../../../Resources/Images/icons/coin_flip.png" Width="48" Height="48"/>
                         <TextBlock Text="Coin Flip" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="1" Margin="2 4 2 2" Command="{Binding ButtonCommand}" Background="Transparent" CommandParameter="ticTacToe"
-                        HorizontalContentAlignment="Stretch">
+                <Button Grid.Row="0" Grid.Column="1" Margin="2 4 2 2" Command="{Binding ButtonCommand}" CommandParameter="ticTacToe" HorizontalContentAlignment="Stretch">
                     <StackPanel>
                         <Image Source="../../../Resources/Images/icons/tic_tac_toe.png" Width="48" Height="48"/>
                         <TextBlock Text="TicTacToe" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="2" Margin="2 4 4 2" Command="{Binding ButtonCommand}" Background="Transparent" CommandParameter="tamagotchi"
-                        HorizontalContentAlignment="Stretch">
+                <Button Grid.Row="0" Grid.Column="2" Margin="2 4 4 2" Command="{Binding ButtonCommand}" CommandParameter="tamagotchi" HorizontalContentAlignment="Stretch">
                     <StackPanel>
                         <Image Source="../../../Resources/Images/icons/tamagotchi.png" Width="48" Height="48"/>
                         <TextBlock Text="Tamagotchi" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="0" Margin="4 2 2 2" Command="{Binding ButtonCommand}" Background="Transparent" CommandParameter="pictionary"
-                        HorizontalContentAlignment="Stretch">
+                <Button Grid.Row="1" Grid.Column="0" Margin="4 2 2 2" Command="{Binding ButtonCommand}" CommandParameter="pictionary" HorizontalContentAlignment="Stretch">
                     <StackPanel>
                         <Image Source="../../../Resources/Images/icons/pictionary.png" Width="48" Height="48"/>
                         <TextBlock Text="Pictionary" HorizontalAlignment="Center"/>
