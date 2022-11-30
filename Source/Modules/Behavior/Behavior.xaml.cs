@@ -1,4 +1,4 @@
-﻿using HomeControl.Source.ViewModel;
+﻿using HomeControl.Source.ViewModel.Behavior;
 
 namespace HomeControl.Source.Modules.Behavior;
 

@@ -76,7 +76,7 @@ public class CalendarVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "RealDateChanged") {
+        if (e.PropertyName == "DateChanged") {
             currentDateTime = DateTime.Now;
             PopulateCalendar(currentDateTime);
         }
@@ -271,9 +271,9 @@ public class CalendarVM : BaseViewModel {
     }
 
     private void OpenEventDialog() {
-        CalendarEvent calendarEvent = new();
-        calendarEvent.ShowDialog();
-        calendarEvent.Close();
+        EditCalendar editCalendar = new();
+        editCalendar.ShowDialog();
+        editCalendar.Close();
         PopulateCalendar(currentDateTime);
     }
 

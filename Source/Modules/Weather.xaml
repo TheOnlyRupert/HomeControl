@@ -54,7 +54,7 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3">
-                            <Image Source="{Binding CurrentWeatherCloudIcon}" Height="128"/>
+                            <Image Source="{Binding CurrentWeatherCloudIcon}" Height="96"/>
                             <TextBlock Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Top"/>
                         </StackPanel>
 

@@ -9,6 +9,7 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Page.Resources>
+
     <Border BorderBrush="Black" BorderThickness="1" Margin="4 4 0 4">
         <Grid Margin="4">
             <Grid.RowDefinitions>

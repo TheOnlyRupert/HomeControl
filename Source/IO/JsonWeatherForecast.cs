@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HomeControl.Source.Helpers;
+namespace HomeControl.Source.IO;
 
 public class JsonWeatherForecast {
     public Properties properties { get; set; }
@@ -21,4 +21,8 @@ public class JsonWeatherForecast {
         public string shortForecast { get; set; }
         public string detailedForecast { get; set; }
     }
+}
+
+public class ApiStatus {
+    public string status { get; set; }
 }

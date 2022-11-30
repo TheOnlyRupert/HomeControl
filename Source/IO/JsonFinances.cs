@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace HomeControl.Source.Helpers;
+namespace HomeControl.Source.IO;
 
 public class JsonFinances {
     public ObservableCollection<FinanceBlock> financeList { get; set; }

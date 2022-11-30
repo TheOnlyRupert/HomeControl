@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Threading;
-using HomeControl.Source.ViewModel.Base;
+﻿using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel;
 
@@ -12,21 +10,22 @@ public class FunctionVM : BaseViewModel {
         Color1 = "Transparent";
         Color2 = "Black";
 
-        DispatcherTimer dispatcherTimer = new();
-        dispatcherTimer.Tick += dispatcherTimer_Tick;
-        dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-        dispatcherTimer.Start();
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
-    private void dispatcherTimer_Tick(object sender, EventArgs e) {
-        if (switchColor) {
-            Color1 = "Transparent";
-            Color2 = "Black";
-            switchColor = false;
-        } else {
-            Color1 = "Black";
-            Color2 = "Transparent";
-            switchColor = true;
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        if (e.PropertyName == "Refresh") {
+            /*  Function Module */
+            if (switchColor) {
+                Color1 = "Transparent";
+                Color2 = "Black";
+                switchColor = false;
+            } else {
+                Color1 = "Black";
+                Color2 = "Transparent";
+                switchColor = true;
+            }
         }
     }
 

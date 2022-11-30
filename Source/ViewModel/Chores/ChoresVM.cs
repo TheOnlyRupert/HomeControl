@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
-using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
 using HomeControl.Source.ViewModel.Base;
@@ -28,7 +27,7 @@ public class ChoresVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "RealDateChanged") {
+        if (e.PropertyName == "DateChanged") {
             RefreshFields();
         }
     }

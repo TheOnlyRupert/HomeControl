@@ -17,7 +17,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Image Source="../../Resources/Images/icons/notes.png" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock Text="Notes" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <TextBlock Text="Modules" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center"/>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -66,6 +66,12 @@
                     <StackPanel>
                         <Image Source="../../../Resources/Images/icons/meal.png" Width="48" Height="48"/>
                         <TextBlock Text="Meal Prep" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Row="3" Grid.Column="0" Background="Transparent">
+                    <StackPanel>
+                        <Image Source="../../../Resources/Images/icons/open_tickets.png" Width="48" Height="48"/>
+                        <TextBlock Text="Open Tickets" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Button>
             </Grid>

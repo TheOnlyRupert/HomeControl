@@ -2,9 +2,9 @@
 
 namespace HomeControl.Source.Modules.Calendar;
 
-public partial class CalendarEvent {
-    public CalendarEvent() {
+public partial class EditCalendar {
+    public EditCalendar() {
         InitializeComponent();
-        DataContext = new CalendarEventVM();
+        DataContext = new EditCalendarVM();
     }
 }

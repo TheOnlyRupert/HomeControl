@@ -2,9 +2,9 @@
 
 namespace HomeControl.Source.Modules.Behavior;
 
-public partial class BehaviorDialog {
-    public BehaviorDialog() {
+public partial class EditBehavior {
+    public EditBehavior() {
         InitializeComponent();
-        DataContext = new BehaviorDialogVM();
+        DataContext = new EditBehaviorVM();
     }
 }

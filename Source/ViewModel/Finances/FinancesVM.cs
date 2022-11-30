@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
-using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.Reference;
@@ -33,9 +32,9 @@ public class FinancesVM : BaseViewModel {
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "edit":
-            FinancesAdd financesAdd = new();
-            financesAdd.ShowDialog();
-            financesAdd.Close();
+            EditFinances editFinances = new();
+            editFinances.ShowDialog();
+            editFinances.Close();
             RefreshFinances();
             break;
         }

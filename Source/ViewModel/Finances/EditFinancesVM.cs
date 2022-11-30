@@ -4,13 +4,13 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Helpers;
+using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Finances;
 
-public class FinancesAddVM : BaseViewModel {
+public class EditFinancesVM : BaseViewModel {
     private readonly string fileName;
     private ObservableCollection<string> _categoryList;
 
@@ -21,7 +21,7 @@ public class FinancesAddVM : BaseViewModel {
     private FinanceBlock _financeSelected;
     private string selectedPerson, _categorySelected, _descriptionText;
 
-    public FinancesAddVM() {
+    public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
         _financeSelected = new FinanceBlock();
         selectedPerson = ReferenceValues.User1Name;
@@ -54,8 +54,6 @@ public class FinancesAddVM : BaseViewModel {
             CategorySelected = "Billing";
         }
     }
-
-    public static Action CloseAction { get; set; }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 

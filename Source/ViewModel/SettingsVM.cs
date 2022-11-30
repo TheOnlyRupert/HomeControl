@@ -13,9 +13,7 @@ public class SettingsVM : BaseViewModel {
         ReferenceValues.UserAgent = "null";
         ReferenceValues.User1Name = "null";
         ReferenceValues.User2Name = "null";
-        ReferenceValues.Child1Name = "null";
-        ReferenceValues.Child2Name = "null";
-        ReferenceValues.Child3Name = "null";
+        ReferenceValues.ChildName = new string[3];
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -27,9 +25,9 @@ public class SettingsVM : BaseViewModel {
                 ReferenceValues.UserAgent = UserAgentText;
                 ReferenceValues.User1Name = User1Name;
                 ReferenceValues.User2Name = User2Name;
-                ReferenceValues.Child1Name = Child1Name;
-                ReferenceValues.Child2Name = Child2Name;
-                ReferenceValues.Child3Name = Child3Name;
+                ReferenceValues.ChildName[0] = Child1Name;
+                ReferenceValues.ChildName[1] = Child2Name;
+                ReferenceValues.ChildName[2] = Child3Name;
                 CsvParser.SaveSettings();
             } else {
                 MessageBox.Show("Fields cannot be blank", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);

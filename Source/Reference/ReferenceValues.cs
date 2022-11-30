@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HomeControl.Source.Helpers;
+using HomeControl.Source.IO;
 
 namespace HomeControl.Source.Reference;
 
@@ -39,16 +39,17 @@ public static class ReferenceValues {
 
     public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 
+    public static bool LockUI;
+
     public static string UserAgent { get; set; }
 
     public static DateTime CalendarEventDate { get; set; }
 
     public static JsonCalendar[] JsonCalendarMasterEventList { get; set; }
-
     public static JsonFinances JsonFinanceMasterList { get; set; }
-
     public static JsonChores JsonChoreWeekMasterList { get; set; }
     public static JsonChores JsonChoreMonthMasterList { get; set; }
+    public static JsonBehavior JsonBehavior { get; set; }
 
     public static DateTime ChoreWeekStartDate { get; set; }
     public static DateTime ChoreMonthStartDate { get; set; }
@@ -56,16 +57,13 @@ public static class ReferenceValues {
     public static string User1Name { get; set; }
     public static string User2Name { get; set; }
 
-    public static string Child1Name { get; set; }
-    public static string Child2Name { get; set; }
-    public static string Child3Name { get; set; }
-    public static int Child1Progress { get; set; }
-    public static int Child2Progress { get; set; }
-    public static int Child3Progress { get; set; }
-    public static int Child1Stars { get; set; }
-    public static int Child2Stars { get; set; }
-    public static int Child3Stars { get; set; }
-    public static int Child1Strikes { get; set; }
-    public static int Child2Strikes { get; set; }
-    public static int Child3Strikes { get; set; }
+    public static int[] TimerMinutes { get; set; }
+    public static int[] TimerSeconds { get; set; }
+    public static int ActiveTimerEdit { get; set; }
+    public static bool IsTimerAlarmActive { get; set; }
+    public static bool[] IsTimerRunning { get; set; }
+    public static bool[] SwitchTimerDirection { get; set; }
+
+    public static string[] ChildName { get; set; }
+    public static int ActiveChild { get; set; }
 }

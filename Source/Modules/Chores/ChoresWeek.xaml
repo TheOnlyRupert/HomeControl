@@ -12,726 +12,735 @@
     </Window.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="64"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="3" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="2" Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="3" Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="2" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
-        <Border Grid.Column="3" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="0" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Master Bedroom" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room1Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room1Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room1Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="3" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="2" Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="3" Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="2" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="3" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
 
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room1Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room1Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Grid.Row="0" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Master Bedroom" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room1Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Nightstands"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room1Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room1Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room1Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room1Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - TV Stand"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room1Task4DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room1Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task5" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room1Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room1Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room1Task5DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Nightstands"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room1Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room1Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - TV Stand"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room1Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room1Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task5" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room1Task5DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Upstairs Bathroom" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room2Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room2Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room2Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room2Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room2Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean - Toilet"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room2Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room2Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean - Sink"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room2Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room2Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task5" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean - Bathtub"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room2Task5DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room2Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task6" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room2Task6DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="0" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Living Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room3Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room3Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room3Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room3Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room3Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Tables"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room3Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room3Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room3Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="3" Grid.Row="0" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Kitchen" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room4Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room4Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room4Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room4Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room4Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Counters"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room4Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room4Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Kitchen Table"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room4Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room4Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task5" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room4Task5DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="1" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Pantry/Stairs" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room5Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room5Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room5Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room5Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room5Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Vacuum - Stairs"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room5Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room5Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Shelves"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room5Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room5Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task5" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room5Task5DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="1" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Downstairs Bathroom" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room6Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room6Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room6Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room6Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room6Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean - Toilet"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room6Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room6Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean - Sink"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room6Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room6Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task5" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean - Shower"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room6Task5DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room6Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task6" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room6Task6DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="1" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Downstairs Closet" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room7Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room7Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room7Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room7Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room7Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean/Fold - Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room7Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room7Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room7Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="3" Grid.Row="1" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Daycare/Computer Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room8Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room8Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room8Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room8Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room8Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Computer Desks"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room8Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room8Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room8Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="2" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Mac Mac's Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room9Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room9Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room9Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room9Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room9Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room9Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room9Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room9Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Nightstand"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room9Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room9Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room9Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room9Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="2" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Twin's Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <Button Background="{Binding Room10Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task1" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room10Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room10Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task2" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room10Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room10Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task3" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Cribs"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room10Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room10Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task4" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Tidy - Diper Changing Station"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room10Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room10Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task5" HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room10Task5DateText}"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="2" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Laundry Room" FontSize="24" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="3" Grid.Row="2" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Garage" FontSize="24" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
         </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="0" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Upstairs Bathroom" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room2Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room2Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room2Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room2Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room2Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Clean - Toilet"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room2Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room2Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Clean - Sink"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room2Task4DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room2Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task5" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Clean - Bathtub"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room2Task5DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room2Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task6" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room2Task6DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="2" Grid.Row="0" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Living Room" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room3Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room3Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room3Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room3Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room3Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Tables"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room3Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room3Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room3Task4DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="3" Grid.Row="0" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Kitchen" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room4Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room4Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room4Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room4Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room4Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Counters"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room4Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room4Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Kitchen Table"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room4Task4DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room4Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task5" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room4Task5DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.Row="1" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Pantry/Stairs" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room5Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room5Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room5Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room5Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room5Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Vacuum - Stairs"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room5Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room5Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Shelves"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room5Task4DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room5Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task5" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room5Task5DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="1" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Downstairs Bathroom" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room6Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room6Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room6Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room6Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room6Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Clean - Toilet"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room6Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room6Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Clean - Sink"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room6Task4DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room6Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task5" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Clean - Shower"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room6Task5DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room6Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task6" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room6Task6DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="2" Grid.Row="1" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Downstairs Closet" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room7Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room7Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room7Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room7Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room7Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Clean/Fold - Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room7Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room7Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room7Task4DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="3" Grid.Row="1" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Daycare/Computer Room" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room8Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room8Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room8Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room8Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room8Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Computer Desks"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room8Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room8Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room8Task4DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.Row="2" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Mac Mac's Room" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room9Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room9Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room9Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room9Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room9Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room9Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room9Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room9Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Nightstand"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room9Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room9Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room9Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room9Task4DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="2" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Twin's Room" FontSize="24" HorizontalAlignment="Center"/>
-                <Button Background="{Binding Room10Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task1" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Dirty Laundry"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room10Task1DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room10Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task2" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Sweep - Floor"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room10Task2DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room10Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task3" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Cribs"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room10Task3DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room10Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task4" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Tidy - Diper Changing Station"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room10Task4DateText}"/>
-                    </Grid>
-                </Button>
-                <Button Background="{Binding Room10Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room10Task5" HorizontalContentAlignment="Stretch">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="32"/>
-                        <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging to Room"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Room10Task5DateText}"/>
-                    </Grid>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="2" Grid.Row="2" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Laundry Room" FontSize="24" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Column="3" Grid.Row="2" Margin="8">
-            <StackPanel>
-                <TextBlock Text="Garage" FontSize="24" HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Grid>
+        <Button Grid.Row="1" Content="Exit" FontSize="24" Foreground="White" Background="Transparent" Padding="4" HorizontalAlignment="Right" VerticalContentAlignment="Stretch"
+                VerticalAlignment="Bottom" MinWidth="128" IsCancel="True" Margin="8"/>
     </Grid>
 </Window>

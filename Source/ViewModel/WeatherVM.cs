@@ -2,8 +2,7 @@
 using System.Net;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Windows.Threading;
-using HomeControl.Source.Helpers;
+using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -77,67 +76,60 @@ public class WeatherVM : BaseViewModel {
         updateForecast = true;
         updateForecastHourly = true;
 
-        /* Timer used to update time and weather. It also pushes an update to calendar when the date changes. */
-        DispatcherTimer dispatcherTimer = new();
-        dispatcherTimer.Tick += dispatcherTimer_Tick;
-        dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-        dispatcherTimer.Start();
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
-    private void dispatcherTimer_Tick(object sender, EventArgs e) {
-        CurrentDateText = DateTime.Now.ToLongDateString();
-        CurrentTimeText = DateTime.Now.ToString("HHmm");
-        CurrentTimeSecondsText = DateTime.Now.ToString("ss");
-        poolWeather++;
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        if (e.PropertyName == "Refresh") {
+            CurrentDateText = DateTime.Now.ToLongDateString();
+            CurrentTimeText = DateTime.Now.ToString("HHmm");
+            CurrentTimeSecondsText = DateTime.Now.ToString("ss");
+            poolWeather++;
 
-        if (!currentTime.Day.Equals(DateTime.Now.Day)) {
-            Console.WriteLine("Updating calendar date");
-            CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
-            simpleMessenger.PushMessage("RealDateChanged", null);
-        }
-
-        /* Update weather every 15 minutes or when hour changes */
+            /* Update weather every 15 minutes */
 #pragma warning disable CS0162
-        if ((poolWeather > 900 || updateForecast || updateForecastHourly) && !string.IsNullOrEmpty(ReferenceValues.UserAgent) && ReferenceValues.EnableWeather) {
-            Console.WriteLine("Updating weather @" + DateTime.Now.ToLongTimeString());
-            bool errored = false;
-            JsonSerializerOptions options = new() {
-                IncludeFields = true
-            };
+            if ((poolWeather > 900 || updateForecast || updateForecastHourly) && !string.IsNullOrEmpty(ReferenceValues.UserAgent) && ReferenceValues.EnableWeather) {
+                Console.WriteLine("Updating weather @ " + DateTime.Now.ToLongTimeString());
+                bool errored = false;
+                JsonSerializerOptions options = new() {
+                    IncludeFields = true
+                };
 
-            try {
-                using WebClient client1 = new();
-                Uri weatherForecastURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast");
-                client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
-                string weatherForecast = client1.DownloadString(weatherForecastURL);
-                forecast = JsonSerializer.Deserialize<JsonWeatherForecast>(weatherForecast, options);
-                updateForecast = false;
-            } catch (Exception) {
-                errored = true;
+                try {
+                    using WebClient client1 = new();
+                    Uri weatherForecastURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast");
+                    client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
+                    string weatherForecast = client1.DownloadString(weatherForecastURL);
+                    forecast = JsonSerializer.Deserialize<JsonWeatherForecast>(weatherForecast, options);
+                    updateForecast = false;
+                } catch (Exception) {
+                    errored = true;
+                }
+
+                try {
+                    using WebClient client2 = new();
+                    Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
+                    client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
+                    string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
+                    forecastHourly = JsonSerializer.Deserialize<JsonWeatherForecastHourly>(weatherForecastHourly, options);
+                    updateForecastHourly = false;
+                } catch (Exception) {
+                    errored = true;
+                }
+
+                if (!errored) {
+                    UpdateWeatherForecast();
+                }
+
+                poolWeather = 0;
             }
-
-            try {
-                using WebClient client2 = new();
-                Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
-                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
-                string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
-                forecastHourly = JsonSerializer.Deserialize<JsonWeatherForecastHourly>(weatherForecastHourly, options);
-                updateForecastHourly = false;
-            } catch (Exception) {
-                errored = true;
-            }
-
-            if (!errored) {
-                UpdateWeatherForecast();
-            }
-
-            poolWeather = 0;
-        }
 #pragma warning restore CS0162
+        }
     }
 
-    public void UpdateWeatherForecast() {
-        string[] weatherIcons = new string[2];
+    private void UpdateWeatherForecast() {
+        string[] weatherIcons;
 
         //TODO: Add more places
         CurrentWeatherLocationText = "Ashland City, TN";

@@ -101,70 +101,9 @@ public static class CsvParser {
         try {
             File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "settings.csv", "!KEY,VALUE\nUserAgent," + ReferenceValues.UserAgent.Trim()
                                                                                                         + "\nUser1Name," + ReferenceValues.User1Name + "\nUser2Name," +
-                                                                                                        ReferenceValues.User2Name + "\nChild1Name," + ReferenceValues.Child1Name
-                                                                                                        + "\nChild2Name," + ReferenceValues.Child2Name + "\nChild3Name," +
-                                                                                                        ReferenceValues.Child3Name);
-        } catch (Exception e) {
-            Console.WriteLine("Unable to save settings.csv... " + e.Message);
-        }
-    }
-
-    public static string[] GetBehavior() {
-        StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "behavior.csv");
-        string[] values = new string[1];
-
-        while (!streamReader.EndOfStream) {
-            string str = streamReader.ReadLine();
-
-            if (str != null && str[0] != '!') {
-                string[] strArray = str.Split(',');
-                switch (strArray[0]) {
-                case "UserAgent":
-                    try {
-                        values[0] = strArray[1];
-                    } catch (Exception) {
-                        values[0] = "null";
-                        Console.WriteLine("Error when reading value of \"UserAgent\" in settings.csv, using default settings");
-                    }
-
-                    break;
-                case "Child1Name":
-                    try {
-                        values[1] = strArray[1];
-                    } catch (Exception) {
-                        values[1] = "null";
-                        Console.WriteLine("Error when reading value of \"Child1Name\" in settings.csv, using default settings");
-                    }
-
-                    break;
-                case "Child2Name":
-                    try {
-                        values[2] = strArray[2];
-                    } catch (Exception) {
-                        values[2] = "null";
-                        Console.WriteLine("Error when reading value of \"Child2Name\" in settings.csv, using default settings");
-                    }
-
-                    break;
-                case "Child3Name":
-                    try {
-                        values[3] = strArray[3];
-                    } catch (Exception) {
-                        values[3] = "null";
-                        Console.WriteLine("Error when reading value of \"Child3Name\" in settings.csv, using default settings");
-                    }
-
-                    break;
-                }
-            }
-        }
-
-        return values;
-    }
-
-    public static void SaveBehavior() {
-        try {
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "behavior.csv", "!KEY,!VALUE\nChild1Name," + ReferenceValues.Child1Name.Trim());
+                                                                                                        ReferenceValues.User2Name + "\nChild1Name," + ReferenceValues.ChildName[0]
+                                                                                                        + "\nChild2Name," + ReferenceValues.ChildName[1] + "\nChild3Name," +
+                                                                                                        ReferenceValues.ChildName[2]);
         } catch (Exception e) {
             Console.WriteLine("Unable to save settings.csv... " + e.Message);
         }

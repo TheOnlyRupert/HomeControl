@@ -4,13 +4,13 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Helpers;
+using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Calendar;
 
-public class CalendarEventVM : BaseViewModel {
+public class EditCalendarVM : BaseViewModel {
     private readonly JsonCalendar _jsonCalendar;
 
     private readonly string fileName;
@@ -21,7 +21,7 @@ public class CalendarEventVM : BaseViewModel {
 
     private ObservableCollection<CalendarEvents> _eventList;
 
-    public CalendarEventVM() {
+    public EditCalendarVM() {
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
         fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
         EventList = new ObservableCollection<CalendarEvents>();

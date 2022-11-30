@@ -38,9 +38,9 @@
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="3*"/>
                     <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Weather.xaml" Focusable="False"/>
@@ -67,7 +67,7 @@
                             <RowDefinition Height="3*"/>
                         </Grid.RowDefinitions>
 
-                        <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Source="Source/Modules/Alarms/Alarms.xaml" Focusable="False"/>
+                        <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
                         <Frame Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Source="Source/Modules/Function.xaml" Focusable="False"/>
                         <Grid Grid.Row="1" Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -75,24 +75,24 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <Button Grid.Row="0" Background="Transparent" Foreground="White" Margin="0 0 4 0" HorizontalContentAlignment="Stretch">
+                            <Button Grid.Row="0" Foreground="White" Margin="0 0 4 0" HorizontalContentAlignment="Stretch" Background="{Binding LockedColor}"
+                                    Command="{Binding 
+                            ButtonCommand}" CommandParameter="lockUi">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="../../Resources/Images/icons/key_locked.png" Width="16" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="LOCKED" HorizontalAlignment="Center" Margin="8 0 0 0"/>
+                                    <TextBlock Text="{Binding LockedText}" HorizontalAlignment="Center" Margin="8 0 0 0"/>
                                 </StackPanel>
                             </Button>
-                            <Button Grid.Row="1" Background="Transparent" Foreground="White" Margin="0 4 4 0" HorizontalContentAlignment="Stretch">
+                            <Button Grid.Row="1" Foreground="White" Margin="0 4 4 0" HorizontalContentAlignment="Stretch" Background="{Binding OnlineColor}">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="../../Resources/Images/icons/wifi.png" Width="16" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="ONLINE" HorizontalAlignment="Center" Margin="8 0 0 0"/>
+                                    <TextBlock Text="{Binding OnlineText}" HorizontalAlignment="Center" Margin="8 0 0 0"/>
                                 </StackPanel>
                             </Button>
                         </Grid>
 
-                        <Button Grid.Column="1" Grid.Row="2" Background="Transparent" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" Margin="0 4 4 4">
-                            <Image Source="../../Resources/Images/icons/panic.png" HorizontalAlignment="Center"/>
-                        </Button>
+                        <Button Grid.Column="1" Grid.Row="2" Background="Red" Foreground="White" FontSize="24" Content="! PANIC !" HorizontalContentAlignment="Center"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 4 4 4"/>
                     </Grid>
                 </Grid>
 
