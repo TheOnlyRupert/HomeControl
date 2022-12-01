@@ -183,6 +183,18 @@ public class BehaviorVM : BaseViewModel {
         ProgressBarChild1Value = ReferenceValues.JsonBehavior.Child1Progress;
         ProgressBarChild2Value = ReferenceValues.JsonBehavior.Child2Progress;
         ProgressBarChild3Value = ReferenceValues.JsonBehavior.Child3Progress;
+
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
+    }
+
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        if (e.PropertyName == "DateChanged") {
+            ReferenceValues.JsonBehavior.Child1Strikes = 0;
+            ReferenceValues.JsonBehavior.Child2Strikes = 0;
+            ReferenceValues.JsonBehavior.Child3Strikes = 0;
+            RefreshBehavior();
+        }
     }
 
     private void ButtonLogic(object param) {

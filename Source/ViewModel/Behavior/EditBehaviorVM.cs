@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 using System.Windows.Input;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -33,9 +34,21 @@ public class EditBehaviorVM : BaseViewModel {
         }
 
         RefreshBehavior();
+
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        if (e.PropertyName == "DateChanged") {
+            ReferenceValues.JsonBehavior.Child1Strikes = 0;
+            ReferenceValues.JsonBehavior.Child2Strikes = 0;
+            ReferenceValues.JsonBehavior.Child3Strikes = 0;
+            RefreshBehavior();
+        }
+    }
 
     private void RefreshBehavior() {
         ChildStar1 = "../../../Resources/Images/behavior/star_black.png";
@@ -120,54 +133,82 @@ public class EditBehaviorVM : BaseViewModel {
     }
 
     private void ButtonLogic(object param) {
+        MessageBoxResult result;
+
         switch (param) {
         case "addStar":
-            stars++;
-            if (stars > 5) {
-                stars = 5;
+            if (stars < 5) {
+                result = MessageBox.Show("Are you sure you want to add a star?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes) {
+                    stars++;
+                }
             }
 
             break;
         case "removeStar":
-            stars--;
-            if (stars < 0) {
-                stars = 0;
+            if (stars > 0) {
+                result = MessageBox.Show("Are you sure you want to remove a star?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes) {
+                    stars--;
+                }
             }
 
             break;
         case "addStrike":
-            strikes++;
-            if (strikes > 3) {
-                strikes = 3;
+            if (strikes < 3) {
+                result = MessageBox.Show("Are you sure you want to add a strike?\nThis will reset all progress (but not stars)", "Confirmation", MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes) {
+                    strikes++;
+                    ProgressBarChildValue = 0;
+                }
             }
 
             break;
         case "removeStrike":
-            strikes--;
-            if (strikes < 0) {
-                strikes = 0;
+            if (strikes > 0) {
+                result = MessageBox.Show("Are you sure you want to remove a strike?\nNote: Strikes get removed at midnight", "Confirmation", MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes) {
+                    strikes--;
+                }
             }
 
             break;
 
         case "add1":
             ProgressBarChildValue++;
-            if (ProgressBarChildValue > 100) {
-                ProgressBarChildValue = 100;
+            if (ProgressBarChildValue > 99) {
+                if (stars < 5) {
+                    stars++;
+                    ProgressBarChildValue = 0;
+                } else {
+                    ProgressBarChildValue = 100;
+                }
             }
 
             break;
         case "add10":
             ProgressBarChildValue += 10;
-            if (ProgressBarChildValue > 100) {
-                ProgressBarChildValue = 100;
+            if (ProgressBarChildValue > 99) {
+                if (stars < 5) {
+                    stars++;
+                    ProgressBarChildValue = 0;
+                } else {
+                    ProgressBarChildValue = 100;
+                }
             }
 
             break;
         case "add25":
             ProgressBarChildValue += 25;
-            if (ProgressBarChildValue > 100) {
-                ProgressBarChildValue = 100;
+            if (ProgressBarChildValue > 99) {
+                if (stars < 5) {
+                    stars++;
+                    ProgressBarChildValue = 0;
+                } else {
+                    ProgressBarChildValue = 100;
+                }
             }
 
             break;
@@ -175,21 +216,36 @@ public class EditBehaviorVM : BaseViewModel {
         case "remove1":
             ProgressBarChildValue--;
             if (ProgressBarChildValue < 0) {
-                ProgressBarChildValue = 0;
+                if (stars > 0) {
+                    stars--;
+                    ProgressBarChildValue = 90;
+                } else {
+                    ProgressBarChildValue = 0;
+                }
             }
 
             break;
         case "remove10":
             ProgressBarChildValue -= 10;
             if (ProgressBarChildValue < 0) {
-                ProgressBarChildValue = 0;
+                if (stars > 0) {
+                    stars--;
+                    ProgressBarChildValue = 90;
+                } else {
+                    ProgressBarChildValue = 0;
+                }
             }
 
             break;
         case "remove25":
             ProgressBarChildValue -= 25;
             if (ProgressBarChildValue < 0) {
-                ProgressBarChildValue = 0;
+                if (stars > 0) {
+                    stars--;
+                    ProgressBarChildValue = 90;
+                } else {
+                    ProgressBarChildValue = 0;
+                }
             }
 
             break;

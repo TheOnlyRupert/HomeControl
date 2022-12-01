@@ -1,30 +1,8 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Calendar.EditCalendar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="View Events" Height="600" Width="900" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" Background="DarkSlateGray">
+        ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="Black" BorderThickness="4">
     <Window.Resources>
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -100,13 +78,38 @@
 
             <Grid Grid.Column="0" Margin="8">
                 <ListView Grid.Row="0" ItemsSource="{Binding EventList}" SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" IsSelected="{Binding IsSelected}"
-                          Background="Transparent">
+                          Background="Transparent" Foreground="White">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter Property="BorderThickness" Value="0 0 0 1"/>
                             <Setter Property="BorderBrush" Value="White"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
                         </Style>
                     </ListView.Resources>
                     <ListView.View>
@@ -130,20 +133,20 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{Binding EventDate}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="0" Text="{Binding EventDate}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
                 <StackPanel Grid.Row="1">
-                    <TextBlock Text="Event" FontSize="24"/>
+                    <TextBlock Text="Event" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding EventText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="24"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
-                    <TextBlock Text="Location" FontSize="24"/>
+                    <TextBlock Text="Location" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding LocationText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="24"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">
-                    <TextBlock Text="Description" FontSize="24"/>
+                    <TextBlock Text="Description" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"/>
                 </StackPanel>
 
@@ -156,22 +159,212 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="{Binding User1NameText}" Command="{Binding ButtonCommand}" CommandParameter="user1"
-                            Background="{Binding User1BackgroundColor}"/>
-                    <Button Grid.Column="1" Content="{Binding User2NameText}" Command="{Binding ButtonCommand}" CommandParameter="user2"
-                            Background="{Binding User2BackgroundColor}"/>
-                    <Button Grid.Column="2" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children" Background="{Binding ChildrenBackgroundColor}"/>
-                    <Button Grid.Column="3" Content="Home" Command="{Binding ButtonCommand}" CommandParameter="home" Background="{Binding HomeBackgroundColor}"/>
-                    <Button Grid.Column="4" Content="Other" Command="{Binding ButtonCommand}" CommandParameter="other" Background="{Binding OtherBackgroundColor}"/>
+                    <Button Grid.Column="0" Content="{Binding User1NameText}" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="user1"
+                            Background="{Binding User1BackgroundColor}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Grid.Column="1" Content="{Binding User2NameText}" Command="{Binding ButtonCommand}" CommandParameter="user2" FontSize="18"
+                            Background="{Binding User2BackgroundColor}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Grid.Column="2" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children" FontSize="18"
+                            Background="{Binding ChildrenBackgroundColor}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Grid.Column="3" Content="Home" Command="{Binding ButtonCommand}" CommandParameter="home" FontSize="18" Background="{Binding HomeBackgroundColor}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Grid.Column="4" Content="Other" Command="{Binding ButtonCommand}" CommandParameter="other" FontSize="18" Background="{Binding OtherBackgroundColor}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="8 0 0 8">
-            <Button Content="Add Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="add"/>
-            <Button Content="Delete Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="delete"/>
-            <Button Content="Update Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="update"/>
+            <Button Content="Add Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="add">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Delete Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="delete">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Update Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="update">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
 
-        <Button Grid.Row="1" Content="Exit" FontSize="24" IsCancel="True" Margin="0 0 8 8" MinWidth="128" HorizontalAlignment="Right"/>
+        <Button Grid.Row="1" Content="Exit" FontSize="24" IsCancel="True" Margin="0 0 8 8" MinWidth="128" HorizontalAlignment="Right">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

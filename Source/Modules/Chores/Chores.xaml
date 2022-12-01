@@ -1,33 +1,30 @@
 ﻿<Page x:Class="HomeControl.Source.Modules.Chores.Chores" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
-    <Page.Resources>
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Page.Resources>
-
     <Border BorderBrush="Black" BorderThickness="1" Margin=" 4 0 4 4">
         <Grid Margin="4">
             <StackPanel HorizontalAlignment="Right">
                 <Button Command="{Binding ButtonCommand}" CommandParameter="choresWeek" HorizontalContentAlignment="Stretch" Padding="12 6">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" Padding="8" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
                     <StackPanel>
                         <TextBlock Text="{Binding CurrentMonthText}" FontSize="16" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding CurrentWeekText}" HorizontalAlignment="Center"/>
@@ -35,7 +32,28 @@
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding ButtonCommand}" CommandParameter="choresMonth" HorizontalContentAlignment="Stretch" Padding="12 6">
+                <Button Command="{Binding ButtonCommand}" CommandParameter="choresMonth" HorizontalContentAlignment="Stretch">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" Padding="8" BorderBrush="Black" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
                     <StackPanel>
                         <TextBlock Text="{Binding CurrentMonthText}" FontSize="16" HorizontalAlignment="Center"/>
                         <TextBlock Text="Deep Clean" HorizontalAlignment="Center"/>
@@ -46,26 +64,47 @@
 
             <Grid>
                 <Image Source="../../Resources/Images/icons/chores.png" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock Text="{Binding ChoresTitleText}" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding ChoresTitleText}" Foreground="White" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center"/>
             </Grid>
 
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 24 0 0">
-                <TextBlock Text="Current Week:" FontSize="16"/>
-                <TextBlock Text="{Binding CurrentWeekSpanText}" FontSize="16"/>
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ProgressBar Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ChoresCompletedWeekProgressValue}" IsIndeterminate="False"
-                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" MinWidth="256"/>
-                    <TextBlock Text="{Binding ChoresCompletedWeekProgressText}" FontSize="16" HorizontalAlignment="Center"/>
+                <TextBlock Text="Current Week:" FontSize="18" Foreground="White"/>
+                <TextBlock Text="{Binding CurrentWeekSpanText}" FontSize="18" Foreground="White"/>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ProgressBar Value="{Binding ChoresCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+                                 BorderBrush="Black" BorderThickness="1"/>
+                    <TextBlock Text="{Binding ChoresCompletedWeekProgressText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                <TextBlock Text="{Binding ProjectedFundMonthText}" FontSize="24" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding ProjectedFundMonthText}" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
                 <Button HorizontalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="funds">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding ProjectedFundLevelText}" FontSize="16" VerticalAlignment="Center"/>
-                        <Image Source="../../Resources/Images/icons/money.png" Width="32" Height="32" Margin="8 0"/>
-                        <TextBlock Text="{Binding ProjectedFundCashText}" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding ProjectedFundLevelText}" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
+                        <Image Source="../../../Resources/Images/icons/money.png" Width="32" Height="32" Margin="8 0"/>
+                        <TextBlock Text="{Binding ProjectedFundCashText}" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

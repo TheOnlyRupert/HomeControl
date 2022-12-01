@@ -1,30 +1,7 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Chores.ChoresMonth" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="Weekly Chores" Height="900" Width="1200" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" Background="DarkSlateGray">
-    <Window.Resources>
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
-
+        ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="Black" BorderThickness="4">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -60,12 +37,32 @@
 
             <Grid Grid.Column="0" Grid.Row="0" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Master Bedroom" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Master Bedroom" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                     <Button Background="{Binding Room1Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task1">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -75,10 +72,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -88,10 +105,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task3">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -101,10 +138,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task4">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -114,10 +171,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -127,10 +204,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task6">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -140,10 +237,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task7">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -153,10 +270,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task8Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task8">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -166,10 +303,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task9Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task9">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -179,10 +336,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room1Task10Color}" Command="{Binding ButtonCommand}" CommandParameter="room1Task10">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -196,12 +373,32 @@
 
             <Grid Grid.Column="1" Grid.Row="0" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Upstairs Bathroom" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Upstairs Bathroom" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                     <Button Background="{Binding Room2Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task1">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -211,10 +408,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room2Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -224,10 +441,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room2Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task3">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -237,10 +474,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room2Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task4">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -250,10 +507,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room2Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room2Task5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -267,12 +544,32 @@
 
             <Grid Grid.Column="2" Grid.Row="0" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Living Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Living Room" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                     <Button Background="{Binding Room3Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task1">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -282,10 +579,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room3Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -295,10 +612,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room3Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task3">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -308,10 +645,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room3Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task4">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -321,10 +678,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room3Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -334,10 +711,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room3Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task6">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -347,10 +744,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room3Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room3Task7">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -364,12 +781,32 @@
 
             <Grid Grid.Column="3" Grid.Row="0" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Kitchen" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Kitchen" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                     <Button Background="{Binding Room4Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task1">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -379,10 +816,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room4Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -392,10 +849,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room4Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task3">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -405,10 +882,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room4Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task4">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -418,10 +915,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room4Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -431,10 +948,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room4Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task6">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -444,10 +981,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room4Task7Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task7">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -461,12 +1018,32 @@
 
             <Grid Grid.Column="0" Grid.Row="1" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Pantry/Stairs" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Pantry/Stairs" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                     <Button Background="{Binding Room5Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task1">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -476,10 +1053,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room5Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -489,10 +1086,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room5Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room5Task3">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -506,12 +1123,32 @@
 
             <Grid Grid.Column="1" Grid.Row="1" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Downstairs Bathroom" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Downstairs Bathroom" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                     <Button Background="{Binding Room6Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task1">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -521,10 +1158,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room6Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -534,10 +1191,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room6Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task3">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -547,10 +1224,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room6Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task4">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -560,10 +1257,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room6Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room6Task5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -577,12 +1294,32 @@
 
             <Grid Grid.Column="2" Grid.Row="1" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Downstairs Closet" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Downstairs Closet" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                     <Button Background="{Binding Room7Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task1">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -592,10 +1329,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room7Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room7Task2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -609,12 +1366,32 @@
 
             <Grid Grid.Column="3" Grid.Row="1" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Daycare/Computer Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Daycare/Computer Room" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                     <Button Background="{Binding Room8Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task1">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -624,10 +1401,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room8Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task2">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -637,10 +1434,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room8Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task3">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -650,10 +1467,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room8Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task4">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -663,10 +1500,30 @@
                         </Grid>
                     </Button>
                     <Button Background="{Binding Room8Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task5">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -680,29 +1537,50 @@
 
             <Grid Grid.Column="0" Grid.Row="2" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Mac Mac's Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Mac Mac's Room" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Column="1" Grid.Row="2" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Twin's Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Twin's Room" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Column="2" Grid.Row="2" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Laundry Room" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Laundry Room" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Column="3" Grid.Row="2" Margin="8">
                 <StackPanel>
-                    <TextBlock Text="Garage" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Garage" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Grid>
         </Grid>
-        <Button Grid.Row="1" Content="Exit" FontSize="24" Foreground="White" Background="Transparent" Padding="4" HorizontalAlignment="Right" VerticalContentAlignment="Stretch"
-                VerticalAlignment="Bottom" MinWidth="128" IsCancel="True" Margin="8"/>
+        <Button Grid.Row="1" Content="Exit" FontSize="24" Padding="4" HorizontalAlignment="Right" VerticalContentAlignment="Stretch" VerticalAlignment="Bottom" MinWidth="128"
+                IsCancel="True" Margin="8">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>

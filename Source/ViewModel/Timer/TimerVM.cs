@@ -63,72 +63,61 @@ public class TimerVM : BaseViewModel {
             if (ReferenceValues.IsTimerAlarmActive) {
                 player.Load();
                 player.PlayLooping();
+            } else {
+                player.Stop();
             }
         }
     }
 
     private void ButtonLogic(object param) {
+        EditTimer editTimer = new();
+
         switch (param) {
         case "timer1":
             ReferenceValues.ActiveTimerEdit = 0;
-            if (ReferenceValues.SwitchTimerDirection[0] && ReferenceValues.IsTimerRunning[0]) {
-                ReferenceValues.IsTimerRunning[0] = false;
-                ReferenceValues.IsTimerAlarmActive = false;
-                player.Stop();
-                Timer1Text = "NONE";
-                Timer1Color = "White";
-            } else {
-                EditTimer editTimer = new();
-                editTimer.ShowDialog();
-                editTimer.Close();
-            }
-
             break;
         case "timer2":
             ReferenceValues.ActiveTimerEdit = 1;
-            if (ReferenceValues.SwitchTimerDirection[1] && ReferenceValues.IsTimerRunning[1]) {
-                ReferenceValues.IsTimerRunning[1] = false;
-                ReferenceValues.IsTimerAlarmActive = false;
-                player.Stop();
-                Timer2Text = "NONE";
-                Timer2Color = "White";
-            } else {
-                EditTimer editTimer = new();
-                editTimer.ShowDialog();
-                editTimer.Close();
-            }
-
             break;
         case "timer3":
             ReferenceValues.ActiveTimerEdit = 2;
-            if (ReferenceValues.SwitchTimerDirection[2] && ReferenceValues.IsTimerRunning[2]) {
-                ReferenceValues.IsTimerRunning[2] = false;
-                ReferenceValues.IsTimerAlarmActive = false;
-                player.Stop();
-                Timer3Text = "NONE";
-                Timer3Color = "White";
-            } else {
-                EditTimer editTimer = new();
-                editTimer.ShowDialog();
-                editTimer.Close();
-            }
-
             break;
         case "timer4":
             ReferenceValues.ActiveTimerEdit = 3;
-            if (ReferenceValues.SwitchTimerDirection[3] && ReferenceValues.IsTimerRunning[3]) {
-                ReferenceValues.IsTimerRunning[3] = false;
-                ReferenceValues.IsTimerAlarmActive = false;
-                player.Stop();
-                Timer4Text = "NONE";
-                Timer4Color = "White";
-            } else {
-                EditTimer editTimer = new();
-                editTimer.ShowDialog();
-                editTimer.Close();
-            }
-
             break;
+        }
+
+        editTimer.ShowDialog();
+        editTimer.Close();
+        
+        Timer1Text = $"{ReferenceValues.TimerMinutes[0]:000}:{ReferenceValues.TimerSeconds[0]:00}";
+        Timer2Text = $"{ReferenceValues.TimerMinutes[1]:000}:{ReferenceValues.TimerSeconds[1]:00}";
+        Timer3Text = $"{ReferenceValues.TimerMinutes[2]:000}:{ReferenceValues.TimerSeconds[2]:00}";
+        Timer4Text = $"{ReferenceValues.TimerMinutes[3]:000}:{ReferenceValues.TimerSeconds[3]:00}";
+        
+        Timer1Color = ReferenceValues.SwitchTimerDirection[0] ? "Red" : "YellowGreen";
+        Timer2Color = ReferenceValues.SwitchTimerDirection[1] ? "Red" : "YellowGreen";
+        Timer3Color = ReferenceValues.SwitchTimerDirection[2] ? "Red" : "YellowGreen";
+        Timer4Color = ReferenceValues.SwitchTimerDirection[3] ? "Red" : "YellowGreen";
+
+        if (ReferenceValues.TimerMinutes[0] == 0 && ReferenceValues.TimerSeconds[0] == 0) {
+            Timer1Text = "NONE";
+            Timer1Color = "White";
+        }
+        
+        if (ReferenceValues.TimerMinutes[1] == 0 && ReferenceValues.TimerSeconds[1] == 0) {
+            Timer2Text = "NONE";
+            Timer2Color = "White";
+        }
+        
+        if (ReferenceValues.TimerMinutes[2] == 0 && ReferenceValues.TimerSeconds[2] == 0) {
+            Timer3Text = "NONE";
+            Timer3Color = "White";
+        }
+        
+        if (ReferenceValues.TimerMinutes[3] == 0 && ReferenceValues.TimerSeconds[3] == 0) {
+            Timer4Text = "NONE";
+            Timer4Color = "White";
         }
     }
 

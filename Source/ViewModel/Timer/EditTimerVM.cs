@@ -74,6 +74,7 @@ public class EditTimerVM : BaseViewModel {
             }
 
             ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+            ReferenceValues.IsTimerAlarmActive = false;
 
             break;
         case "timerStop":
@@ -82,6 +83,7 @@ public class EditTimerVM : BaseViewModel {
             }
 
             ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+            ReferenceValues.IsTimerAlarmActive = false;
             ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
             ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] = 0;
             break;
