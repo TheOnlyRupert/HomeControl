@@ -20,6 +20,7 @@ public class JsonWeatherForecast {
         public string windDirection { get; set; }
         public string shortForecast { get; set; }
         public string detailedForecast { get; set; }
+        public string icon { get; set; }
     }
 }
 

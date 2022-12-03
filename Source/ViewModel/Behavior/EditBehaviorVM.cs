@@ -46,6 +46,7 @@ public class EditBehaviorVM : BaseViewModel {
             ReferenceValues.JsonBehavior.Child1Strikes = 0;
             ReferenceValues.JsonBehavior.Child2Strikes = 0;
             ReferenceValues.JsonBehavior.Child3Strikes = 0;
+            strikes = 0;
             RefreshBehavior();
         }
     }

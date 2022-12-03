@@ -89,12 +89,12 @@ public class TimerVM : BaseViewModel {
 
         editTimer.ShowDialog();
         editTimer.Close();
-        
+
         Timer1Text = $"{ReferenceValues.TimerMinutes[0]:000}:{ReferenceValues.TimerSeconds[0]:00}";
         Timer2Text = $"{ReferenceValues.TimerMinutes[1]:000}:{ReferenceValues.TimerSeconds[1]:00}";
         Timer3Text = $"{ReferenceValues.TimerMinutes[2]:000}:{ReferenceValues.TimerSeconds[2]:00}";
         Timer4Text = $"{ReferenceValues.TimerMinutes[3]:000}:{ReferenceValues.TimerSeconds[3]:00}";
-        
+
         Timer1Color = ReferenceValues.SwitchTimerDirection[0] ? "Red" : "YellowGreen";
         Timer2Color = ReferenceValues.SwitchTimerDirection[1] ? "Red" : "YellowGreen";
         Timer3Color = ReferenceValues.SwitchTimerDirection[2] ? "Red" : "YellowGreen";
@@ -104,17 +104,17 @@ public class TimerVM : BaseViewModel {
             Timer1Text = "NONE";
             Timer1Color = "White";
         }
-        
+
         if (ReferenceValues.TimerMinutes[1] == 0 && ReferenceValues.TimerSeconds[1] == 0) {
             Timer2Text = "NONE";
             Timer2Color = "White";
         }
-        
+
         if (ReferenceValues.TimerMinutes[2] == 0 && ReferenceValues.TimerSeconds[2] == 0) {
             Timer3Text = "NONE";
             Timer3Color = "White";
         }
-        
+
         if (ReferenceValues.TimerMinutes[3] == 0 && ReferenceValues.TimerSeconds[3] == 0) {
             Timer4Text = "NONE";
             Timer4Color = "White";

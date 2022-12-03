@@ -78,6 +78,7 @@ public class CalendarVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "DateChanged") {
             currentDateTime = DateTime.Now;
+            CurrentMonthAndYear = currentDateTime.ToString("MMMM, yyyy");
             PopulateCalendar(currentDateTime);
         }
     }
