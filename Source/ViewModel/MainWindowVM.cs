@@ -80,6 +80,8 @@ public class MainWindowVM : BaseViewModel {
         }
 
         if (!currentDate.Minute.Equals(DateTime.Now.Minute)) {
+            currentDate = DateTime.Now;
+            simpleMessenger.PushMessage("MinChanged", null);
             ApiStatus();
         }
 
