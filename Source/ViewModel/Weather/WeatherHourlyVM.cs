@@ -6,9 +6,9 @@ using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel;
+namespace HomeControl.Source.ViewModel.Weather;
 
-public class WeatherVM : BaseViewModel {
+public class WeatherHourlyVM : BaseViewModel {
     private int _currentWindDirectionRotation, _hourlyForecastWindDirectionRotation1, _hourlyForecastWindDirectionRotation2, _hourlyForecastWindDirectionRotation3,
         _hourlyForecastWindDirectionRotation4,
         _hourlyForecastWindDirectionRotation5, _hourlyForecastWindDirectionRotation6, _hourlyForecastWindDirectionRotation7, _hourlyForecastWindDirectionRotation8,
@@ -78,7 +78,7 @@ public class WeatherVM : BaseViewModel {
     private int poolWeather;
     private bool updateForecast, updateForecastHourly;
 
-    public WeatherVM() {
+    public WeatherHourlyVM() {
         currentTime = DateTime.Now;
         poolWeather = 0;
         updateForecast = true;
@@ -421,19 +421,19 @@ public class WeatherVM : BaseViewModel {
 
         /* Add Thermometer if needed */
         if (forecastHourly.properties.periods[0].temperature < 20) {
-            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_freezing.png";
-            WeatherOverlay = "../../Resources/Images/weather/cold_border.png";
+            ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_freezing.png";
+            WeatherOverlay = "../../../Resources/Images/weather/cold_border.png";
         } else if (forecastHourly.properties.periods[0].temperature >= 20 && forecastHourly.properties.periods[0].temperature < 35) {
-            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_cold.png";
+            ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_cold.png";
         } else if (forecastHourly.properties.periods[0].temperature >= 35 && forecastHourly.properties.periods[0].temperature < 60) {
-            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_cool.png";
+            ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_cool.png";
         } else if (forecastHourly.properties.periods[0].temperature >= 60 && forecastHourly.properties.periods[0].temperature < 85) {
-            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_warm.png";
+            ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_warm.png";
         } else if (forecastHourly.properties.periods[0].temperature >= 85 && forecastHourly.properties.periods[0].temperature < 100) {
-            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_hot.png";
+            ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_hot.png";
         } else {
-            ThermometerDisplayIcon = "../../Resources/Images/Icons/temp_burning.png";
-            WeatherOverlay = "../../Resources/Images/weather/fire_border.png";
+            ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_burning.png";
+            WeatherOverlay = "../../../Resources/Images/weather/fire_border.png";
         }
     }
 
@@ -450,7 +450,7 @@ public class WeatherVM : BaseViewModel {
         case "Isolated Snow Showers":
             return "./../Resources/Images/weather/snow_drop.png";
         default:
-            return "../../Resources/Images/weather/rain_drop.png";
+            return "../../../Resources/Images/weather/rain_drop.png";
         }
     }
 
@@ -461,45 +461,45 @@ public class WeatherVM : BaseViewModel {
         case "Clear":
         case "Mostly Clear":
             return isDayTime
-                ? "../../Resources/Images/weather/weather_clear.png"
-                : "../../Resources/Images/weather/weather_clear_night.png";
+                ? "../../../Resources/Images/weather/weather_clear.png"
+                : "../../../Resources/Images/weather/weather_clear_night.png";
         case "Partly Cloudy":
         case "Partly Sunny":
             return isDayTime
-                ? "../../Resources/Images/weather/weather_part_cloudy.png"
-                : "../../Resources/Images/weather/weather_cloudy_night.png";
+                ? "../../../Resources/Images/weather/weather_part_cloudy.png"
+                : "../../../Resources/Images/weather/weather_cloudy_night.png";
         case "Cloudy":
         case "Mostly Cloudy":
-            return "../../Resources/Images/weather/weather_cloudy.png";
+            return "../../../Resources/Images/weather/weather_cloudy.png";
         case "Patchy Fog":
         case "Areas Of Fog":
-            return "../../Resources/Images/weather/weather_fog.png";
+            return "../../../Resources/Images/weather/weather_fog.png";
         case "Slight Chance Very Light Rain":
         case "Slight Chance Light Rain":
         case "Chance Very Light Rain":
         case "Chance Light Rain":
         case "Areas Of Drizzle":
-            return "../../Resources/Images/weather/weather_rain_light.png";
+            return "../../../Resources/Images/weather/weather_rain_light.png";
         case "Rain Showers Likely":
         case "Rain Likely":
         case "Rain Showers":
         case "Chance Rain Showers":
         case "Slight Chance Rain Showers":
-            return "../../Resources/Images/weather/weather_rain_medium.png";
+            return "../../../Resources/Images/weather/weather_rain_medium.png";
         case "Showers And Thunderstorms":
         case "Showers And Thunderstorms Likely":
         case "Chance Showers And Thunderstorms":
         case "Slight Chance Showers And Thunderstorms":
-            return "../../Resources/Images/weather/weather_storm.png";
+            return "../../../Resources/Images/weather/weather_storm.png";
         case "Widespread Frost":
-            return "../../Resources/Images/weather/weather_frost.png";
+            return "../../../Resources/Images/weather/weather_frost.png";
         case "Snow Showers":
         case "Scattered Snow Showers":
         case "Chance Snow Showers":
         case "Isolated Snow Showers":
-            return "../../Resources/Images/weather/weather_snow.png";
+            return "../../../Resources/Images/weather/weather_snow.png";
         case "Chance Rain And Snow Showers":
-            return "../../Resources/Images/weather/weather_snow_rain_mixed.png";
+            return "../../../Resources/Images/weather/weather_snow_rain_mixed.png";
         default:
             return "null";
         }

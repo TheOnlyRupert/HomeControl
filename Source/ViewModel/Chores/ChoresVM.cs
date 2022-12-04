@@ -16,8 +16,6 @@ public class ChoresVM : BaseViewModel {
     private int choresCompletedWeek, choresCompletedMonth, _choresCompletedWeekProgressValue;
 
     public ChoresVM() {
-        ChoreWeekStartDate = DateTime.Now;
-
         RefreshFields();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -54,20 +52,21 @@ public class ChoresVM : BaseViewModel {
     }
 
     private void RefreshFields() {
+        ChoreWeekStartDate = DateTime.Now;
+        ChoreMonthStartDate = DateTime.Now;
         DateTime dateTime = DateTime.Now;
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
         System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
         JsonChoreWeekMasterList = new JsonChores {
             choreList = new ObservableCollection<ChoreDetails>()
         };
+
         choresCompletedWeek = 0;
         choresCompletedMonth = 0;
 
         while (ChoreWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
             ChoreWeekStartDate = ChoreWeekStartDate.AddDays(-1);
         }
-
-        ChoreMonthStartDate = DateTime.Now;
 
         ChoresFromJson choresFromJson = new();
         choresFromJson.ChoresWeekFromJson(ChoreWeekStartDate);

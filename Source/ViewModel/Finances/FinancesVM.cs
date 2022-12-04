@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
 using HomeControl.Source.IO;
@@ -11,7 +10,6 @@ namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesVM : BaseViewModel {
     private string _cashIncomeText, _cashExpenseText, _cashAvailableText, _cashAvailableTextColor;
-    private ObservableCollection<FinanceBlock> _financeList;
     private int expense, income, available;
 
     public FinancesVM() {
@@ -22,7 +20,6 @@ public class FinancesVM : BaseViewModel {
         income = 0;
         available = 0;
         CashAvailableTextColor = "CornflowerBlue";
-        FinanceList = new ObservableCollection<FinanceBlock>();
         new FinancesFromJson();
         RefreshFinances();
     }
@@ -47,19 +44,18 @@ public class FinancesVM : BaseViewModel {
 
         /* Calculate income, expense, and available cash */
         try {
-            FinanceList = ReferenceValues.JsonFinanceMasterList.financeList;
-            for (int i = 0; i < FinanceList.Count; i++) {
-                if (FinanceList[i].AddSub == "SUB") {
+            for (int i = 0; i < ReferenceValues.JsonFinanceMasterList.financeList.Count; i++) {
+                if (ReferenceValues.JsonFinanceMasterList.financeList[i].AddSub == "SUB") {
                     try {
-                        expense += int.Parse(FinanceList[i].Cost);
+                        expense += int.Parse(ReferenceValues.JsonFinanceMasterList.financeList[i].Cost);
                     } catch (Exception) { }
                 }
             }
 
-            for (int i = 0; i < FinanceList.Count; i++) {
-                if (FinanceList[i].AddSub == "ADD") {
+            for (int i = 0; i < ReferenceValues.JsonFinanceMasterList.financeList.Count; i++) {
+                if (ReferenceValues.JsonFinanceMasterList.financeList[i].AddSub == "ADD") {
                     try {
-                        income += int.Parse(FinanceList[i].Cost);
+                        income += int.Parse(ReferenceValues.JsonFinanceMasterList.financeList[i].Cost);
                     } catch (Exception) { }
                 }
             }
@@ -107,14 +103,6 @@ public class FinancesVM : BaseViewModel {
         set {
             _cashAvailableTextColor = value;
             RaisePropertyChangedEvent("CashAvailableTextColor");
-        }
-    }
-
-    public ObservableCollection<FinanceBlock> FinanceList {
-        get => _financeList;
-        set {
-            _financeList = value;
-            RaisePropertyChangedEvent("FinanceList");
         }
     }
 

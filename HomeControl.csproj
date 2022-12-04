@@ -109,6 +109,9 @@
         <Compile Include="Source\Modules\Contacts.xaml.cs">
             <DependentUpon>Contacts.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Daily.xaml.cs">
+            <DependentUpon>Daily.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\MealPrep.xaml.cs">
             <DependentUpon>MealPrep.xaml</DependentUpon>
         </Compile>
@@ -159,12 +162,16 @@
         </Compile>
         <Compile Include="Source\Modules\Games\Games.xaml.cs"/>
         <Compile Include="Source\Modules\Games\Pictionary.xaml.cs"/>
-        <Compile Include="Source\Modules\Weather.xaml.cs">
+        <Compile Include="Source\Modules\Weather\Weather.xaml.cs">
             <DependentUpon>Weather.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Weather\WeatherHourly.xaml.cs">
+            <DependentUpon>WeatherHourly.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Reference\ReferenceValues.cs"/>
         <Compile Include="Source\Reference\VerifyInput.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
+        <Compile Include="Source\ViewModel\DailyVM.cs"/>
         <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
@@ -188,7 +195,8 @@
         <Compile Include="Source\ViewModel\MainWindowVM.cs"/>
         <Compile Include="Source\ViewModel\NotesVM.cs"/>
         <Compile Include="Source\ViewModel\SettingsVM.cs"/>
-        <Compile Include="Source\ViewModel\WeatherVM.cs"/>
+        <Compile Include="Source\ViewModel\Weather\WeatherHourlyVM.cs"/>
+        <Compile Include="Source\ViewModel\Weather\WeatherVM.cs"/>
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -202,6 +210,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Source\Modules\Contacts.xaml"/>
+        <Page Include="Source\Modules\Daily.xaml"/>
         <Page Include="Source\Modules\MealPrep.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
         <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
@@ -220,7 +229,8 @@
         <Page Include="Source\Modules\Function.xaml"/>
         <Page Include="Source\Modules\Games\Games.xaml"/>
         <Page Include="Source\Modules\Games\Pictionary.xaml"/>
-        <Page Include="Source\Modules\Weather.xaml"/>
+        <Page Include="Source\Modules\Weather\Weather.xaml"/>
+        <Page Include="Source\Modules\Weather\WeatherHourly.xaml"/>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">

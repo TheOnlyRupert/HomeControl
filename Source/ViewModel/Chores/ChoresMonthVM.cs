@@ -11,7 +11,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresMonthVM : BaseViewModel {
-    private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + ReferenceValues.ChoreWeekStartDate.ToString("yyyy_MM") + ".json";
+    private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy_MM") + ".json";
 
     private string _room1Task1Color, _room1Task2Color, _room1Task3Color, _room1Task4Color, _room1Task5Color, _room1Task6Color, _room1Task7Color, _room1Task8Color, _room1Task9Color,
         _room1Task10Color, _room2Task1Color, _room2Task2Color, _room2Task3Color, _room2Task4Color, _room2Task5Color, _room3Task1Color, _room3Task2Color, _room3Task3Color,
