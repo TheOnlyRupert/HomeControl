@@ -106,6 +106,7 @@
         <Compile Include="Source\IO\JsonFinances.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecast.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecastHourly.cs"/>
+        <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
         <Compile Include="Source\Modules\Contacts.xaml.cs">
             <DependentUpon>Contacts.xaml</DependentUpon>
         </Compile>

@@ -1,164 +1,142 @@
 ﻿<Page x:Class="HomeControl.Source.Modules.Weather.WeatherHourly" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
-    <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-        <Grid Margin="8 4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <Page.Resources>
+        <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border BorderThickness="0" CornerRadius="8" Background="Gray"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding HourlyForecastTime1}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="0" Source="{Binding HourlyForecastWeatherIcon1}" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding HourlyForecastTemp1}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon1}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance1}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="0" Text="{Binding HourlyForecastWindSpeed1}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="0" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation1}"/>
-                </Image.RenderTransform>
-            </Image>
+        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding MinWidth}"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding HourlyForecastTime2}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="1" Source="{Binding HourlyForecastWeatherIcon2}" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding HourlyForecastTemp2}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon2}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance2}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding HourlyForecastWindSpeed2}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="1" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation2}"/>
-                </Image.RenderTransform>
-            </Image>
+                <TickBar Grid.Column="0" x:Name="TopTick" SnapsToDevicePixels="True" Placement="Left" Width="4" Visibility="Collapsed"/>
 
-            <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding HourlyForecastTime3}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="2" Source="{Binding HourlyForecastWeatherIcon3}" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding HourlyForecastTemp3}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="2" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon3}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance3}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="2" Text="{Binding HourlyForecastWindSpeed3}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="2" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation3}"/>
-                </Image.RenderTransform>
-            </Image>
+                <Track Grid.Column="1" x:Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderButtonStyle}" Command="Slider.DecreaseLarge"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumbStyle}"/>
+                    </Track.Thumb>
+                </Track>
 
-            <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding HourlyForecastTime4}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="3" Source="{Binding HourlyForecastWeatherIcon4}" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding HourlyForecastTemp4}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="3" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon4}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance4}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="3" Text="{Binding HourlyForecastWindSpeed4}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="3" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation4}"/>
-                </Image.RenderTransform>
-            </Image>
+                <TickBar x:Name="BottomTick" SnapsToDevicePixels="True" Grid.Column="2" Placement="Right" Width="4" Visibility="Collapsed"/>
+            </Grid>
+        </ControlTemplate>
 
-            <TextBlock Grid.Column="0" Grid.Row="4" Text="{Binding HourlyForecastTime5}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="4" Source="{Binding HourlyForecastWeatherIcon5}"/>
-            <TextBlock Grid.Column="2" Grid.Row="4" Text="{Binding HourlyForecastTemp5}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="4" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon5}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance5}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="4" Text="{Binding HourlyForecastWindSpeed5}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="4" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation5}"/>
-                </Image.RenderTransform>
-            </Image>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Vertical">
+                    <Setter Property="MinWidth" Value="8"/>
+                    <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
 
-            <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding HourlyForecastTime6}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="5" Source="{Binding HourlyForecastWeatherIcon6}" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Grid.Row="5" Text="{Binding HourlyForecastTemp6}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="5" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon6}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance6}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="5" Text="{Binding HourlyForecastWindSpeed6}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="5" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation6}"/>
-                </Image.RenderTransform>
-            </Image>
+    <Border BorderBrush="Black" BorderThickness="1" Margin="4" Focusable="False">
+        <ListView x:Name="ListView" ItemsSource="{Binding ForecastHourlyList}" SelectionChanged="Selector_OnSelectionChanged" Foreground="White" SelectionMode="Single"
+                  Background="Transparent" BorderBrush="Black" Focusable="False">
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                    <Setter Property="BorderBrush" Value="White"/>
+                </Style>
 
-            <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding HourlyForecastTime7}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="6" Source="{Binding HourlyForecastWeatherIcon7}" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Grid.Row="6" Text="{Binding HourlyForecastTemp7}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="6" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon7}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance7}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="6" Text="{Binding HourlyForecastWindSpeed7}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="6" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation7}"/>
-                </Image.RenderTransform>
-            </Image>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.Resources>
 
-            <TextBlock Grid.Column="0" Grid.Row="7" Text="{Binding HourlyForecastTime8}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="7" Source="{Binding HourlyForecastWeatherIcon8}" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Grid.Row="7" Text="{Binding HourlyForecastTemp8}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="7" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon8}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance8}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="7" Text="{Binding HourlyForecastWindSpeed8}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="7" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation8}"/>
-                </Image.RenderTransform>
-            </Image>
-
-            <TextBlock Grid.Column="0" Grid.Row="8" Text="{Binding HourlyForecastTime9}" FontSize="16" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Image Grid.Column="1" Grid.Row="8" Source="{Binding HourlyForecastWeatherIcon9}" VerticalAlignment="Center"/>
-            <TextBlock Grid.Column="2" Grid.Row="8" Text="{Binding HourlyForecastTemp9}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <StackPanel Grid.Column="3" Grid.Row="8" Orientation="Horizontal">
-                <Image Source="{Binding HourlyForecastRainIcon9}" Height="16" VerticalAlignment="Center" Margin="0 0 4 0"/>
-                <TextBlock Text="{Binding HourlyForecastRainChance9}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            </StackPanel>
-            <TextBlock Grid.Column="4" Grid.Row="8" Text="{Binding HourlyForecastWindSpeed9}" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-            <Image Grid.Column="5" Grid.Row="8" Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center"
-                   RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Left">
-                <Image.RenderTransform>
-                    <RotateTransform Angle="{Binding HourlyForecastWindDirectionRotation9}"/>
-                </Image.RenderTransform>
-            </Image>
-        </Grid>
-
+            <ListView.View>
+                <GridView AllowsColumnReorder="false">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Header="Time" Width="Auto"/>
+                    <GridViewColumn Header="Icon" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding WeatherIcon}" Height="24"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Temp}" Header="Temp" Width="Auto"/>
+                    <GridViewColumn Header="Precip" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding RainIcon}" Height="24"/>
+                                    <TextBlock Text="{Binding RainChance}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Wind" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding WindSpeed}"/>
+                                    <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="24" RenderTransformOrigin="0.5, 0.5">
+                                        <Image.RenderTransform>
+                                            <RotateTransform Angle="{Binding WindDirectionIcon}"/>
+                                        </Image.RenderTransform>
+                                    </Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Border>
 </Page>

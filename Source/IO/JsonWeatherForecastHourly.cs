@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace HomeControl.Source.IO;
 
@@ -8,7 +8,7 @@ public class JsonWeatherForecastHourly {
 
     public class Properties {
         public DateTime updated { get; set; }
-        public List<Periods> periods { get; set; }
+        public ObservableCollection<Periods> periods { get; set; }
     }
 
     public class Periods {

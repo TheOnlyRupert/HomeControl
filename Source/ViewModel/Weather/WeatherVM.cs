@@ -49,7 +49,7 @@ public class WeatherVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "Refresh") {
             CurrentDateText = DateTime.Now.ToLongDateString();
-            CurrentTimeText = DateTime.Now.ToString("HHmm");
+            CurrentTimeText = DateTime.Now.ToString("HH:mm");
             CurrentTimeSecondsText = DateTime.Now.ToString("ss");
             if (updateForecast) {
                 UpdateWeatherForecastPart1();
@@ -92,7 +92,7 @@ public class WeatherVM : BaseViewModel {
 
         //TODO: Add more places
         CurrentWeatherLocationText = "Ashland City, TN";
-        CurrentWeatherTempText = forecast.properties.periods[0].temperature.ToString() + '°';
+        CurrentWeatherTempText = forecast.properties.periods[0].temperature + "°";
         CurrentWindDirectionRotation = GetWindRotation(forecast.properties.periods[0].windDirection);
         CurrentWindSpeedText = forecast.properties.periods[0].windSpeed;
         CurrentWeatherDescription = forecast.properties.periods[0].shortForecast;
@@ -100,7 +100,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName1 = forecast.properties.periods[0].name;
-            SevenDayForecastTemp1 = forecast.properties.periods[0].temperature.ToString() + '°';
+            SevenDayForecastTemp1 = forecast.properties.periods[0].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[0].shortForecast);
             SevenDayForecastWeatherIcon1a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime);
@@ -114,7 +114,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName2 = forecast.properties.periods[1].name;
-            SevenDayForecastTemp2 = forecast.properties.periods[1].temperature.ToString() + '°';
+            SevenDayForecastTemp2 = forecast.properties.periods[1].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[1].shortForecast);
             SevenDayForecastWeatherIcon2a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[1].isDaytime);
@@ -128,7 +128,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName3 = forecast.properties.periods[2].name;
-            SevenDayForecastTemp3 = forecast.properties.periods[2].temperature.ToString() + '°';
+            SevenDayForecastTemp3 = forecast.properties.periods[2].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[2].shortForecast);
             SevenDayForecastWeatherIcon3a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[2].isDaytime);
@@ -142,7 +142,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName4 = forecast.properties.periods[3].name;
-            SevenDayForecastTemp4 = forecast.properties.periods[3].temperature.ToString() + '°';
+            SevenDayForecastTemp4 = forecast.properties.periods[3].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[3].shortForecast);
             SevenDayForecastWeatherIcon4a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[3].isDaytime);
@@ -156,7 +156,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName5 = forecast.properties.periods[4].name;
-            SevenDayForecastTemp5 = forecast.properties.periods[4].temperature.ToString() + '°';
+            SevenDayForecastTemp5 = forecast.properties.periods[4].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[4].shortForecast);
             SevenDayForecastWeatherIcon5a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[4].isDaytime);
@@ -170,7 +170,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName6 = forecast.properties.periods[5].name;
-            SevenDayForecastTemp6 = forecast.properties.periods[5].temperature.ToString() + '°';
+            SevenDayForecastTemp6 = forecast.properties.periods[5].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[5].shortForecast);
             SevenDayForecastWeatherIcon6a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[5].isDaytime);
@@ -184,7 +184,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName7 = forecast.properties.periods[6].name;
-            SevenDayForecastTemp7 = forecast.properties.periods[6].temperature.ToString() + '°';
+            SevenDayForecastTemp7 = forecast.properties.periods[6].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[6].shortForecast);
             SevenDayForecastWeatherIcon7a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[6].isDaytime);
@@ -198,7 +198,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName8 = forecast.properties.periods[7].name;
-            SevenDayForecastTemp8 = forecast.properties.periods[7].temperature.ToString() + '°';
+            SevenDayForecastTemp8 = forecast.properties.periods[7].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[7].shortForecast);
             SevenDayForecastWeatherIcon8a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[7].isDaytime);
@@ -212,7 +212,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName9 = forecast.properties.periods[8].name;
-            SevenDayForecastTemp9 = forecast.properties.periods[8].temperature.ToString() + '°';
+            SevenDayForecastTemp9 = forecast.properties.periods[8].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[8].shortForecast);
             SevenDayForecastWeatherIcon9a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[8].isDaytime);
@@ -226,7 +226,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName10 = forecast.properties.periods[9].name;
-            SevenDayForecastTemp10 = forecast.properties.periods[9].temperature.ToString() + '°';
+            SevenDayForecastTemp10 = forecast.properties.periods[9].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[9].shortForecast);
             SevenDayForecastWeatherIcon10a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[9].isDaytime);
@@ -240,7 +240,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName11 = forecast.properties.periods[10].name;
-            SevenDayForecastTemp11 = forecast.properties.periods[10].temperature.ToString() + '°';
+            SevenDayForecastTemp11 = forecast.properties.periods[10].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[10].shortForecast);
             SevenDayForecastWeatherIcon11a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[10].isDaytime);
@@ -254,7 +254,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName12 = forecast.properties.periods[11].name;
-            SevenDayForecastTemp12 = forecast.properties.periods[11].temperature.ToString() + '°';
+            SevenDayForecastTemp12 = forecast.properties.periods[11].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[11].shortForecast);
             SevenDayForecastWeatherIcon12a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[11].isDaytime);
@@ -268,7 +268,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName13 = forecast.properties.periods[12].name;
-            SevenDayForecastTemp13 = forecast.properties.periods[12].temperature.ToString() + '°';
+            SevenDayForecastTemp13 = forecast.properties.periods[12].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[12].shortForecast);
             SevenDayForecastWeatherIcon13a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[12].isDaytime);
@@ -282,7 +282,7 @@ public class WeatherVM : BaseViewModel {
 
         try {
             SevenDayForecastName14 = forecast.properties.periods[13].name;
-            SevenDayForecastTemp14 = forecast.properties.periods[13].temperature.ToString() + '°';
+            SevenDayForecastTemp14 = forecast.properties.periods[13].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[13].shortForecast);
             SevenDayForecastWeatherIcon14a = GetWeatherIcon(weatherIcons[0], forecast.properties.periods[13].isDaytime);
@@ -299,13 +299,13 @@ public class WeatherVM : BaseViewModel {
         if (forecast.properties.periods[0].temperature < 20) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_freezing.png";
             WeatherOverlay = "../../../Resources/Images/weather/cold_border.png";
-        } else if (forecast.properties.periods[0].temperature >= 20 && forecast.properties.periods[0].temperature < 35) {
+        } else if (forecast.properties.periods[0].temperature is >= 20 and < 35) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_cold.png";
-        } else if (forecast.properties.periods[0].temperature >= 35 && forecast.properties.periods[0].temperature < 60) {
+        } else if (forecast.properties.periods[0].temperature is >= 35 and < 60) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_cool.png";
-        } else if (forecast.properties.periods[0].temperature >= 60 && forecast.properties.periods[0].temperature < 85) {
+        } else if (forecast.properties.periods[0].temperature is >= 60 and < 85) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_warm.png";
-        } else if (forecast.properties.periods[0].temperature >= 85 && forecast.properties.periods[0].temperature < 100) {
+        } else if (forecast.properties.periods[0].temperature is >= 85 and < 100) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_hot.png";
         } else {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_burning.png";
