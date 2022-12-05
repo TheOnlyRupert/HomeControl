@@ -17,19 +17,19 @@ public class EditBehaviorVM : BaseViewModel {
 
         switch (ReferenceValues.ActiveChild) {
         case 0:
-            stars = ReferenceValues.JsonBehavior.Child1Stars;
-            strikes = ReferenceValues.JsonBehavior.Child1Strikes;
-            ProgressBarChildValue = ReferenceValues.JsonBehavior.Child1Progress;
+            stars = ReferenceValues.JsonBehaviorMaster.Child1Stars;
+            strikes = ReferenceValues.JsonBehaviorMaster.Child1Strikes;
+            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child1Progress;
             break;
         case 1:
-            stars = ReferenceValues.JsonBehavior.Child2Stars;
-            strikes = ReferenceValues.JsonBehavior.Child2Strikes;
-            ProgressBarChildValue = ReferenceValues.JsonBehavior.Child2Progress;
+            stars = ReferenceValues.JsonBehaviorMaster.Child2Stars;
+            strikes = ReferenceValues.JsonBehaviorMaster.Child2Strikes;
+            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child2Progress;
             break;
         case 2:
-            stars = ReferenceValues.JsonBehavior.Child3Stars;
-            strikes = ReferenceValues.JsonBehavior.Child3Strikes;
-            ProgressBarChildValue = ReferenceValues.JsonBehavior.Child3Progress;
+            stars = ReferenceValues.JsonBehaviorMaster.Child3Stars;
+            strikes = ReferenceValues.JsonBehaviorMaster.Child3Strikes;
+            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child3Progress;
             break;
         }
 
@@ -43,9 +43,9 @@ public class EditBehaviorVM : BaseViewModel {
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "DateChanged") {
-            ReferenceValues.JsonBehavior.Child1Strikes = 0;
-            ReferenceValues.JsonBehavior.Child2Strikes = 0;
-            ReferenceValues.JsonBehavior.Child3Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.Child1Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.Child2Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.Child3Strikes = 0;
             strikes = 0;
             RefreshBehavior();
         }
@@ -107,24 +107,24 @@ public class EditBehaviorVM : BaseViewModel {
         /* Save Progress */
         switch (ReferenceValues.ActiveChild) {
         case 0:
-            ReferenceValues.JsonBehavior.Child1Stars = stars;
-            ReferenceValues.JsonBehavior.Child1Strikes = strikes;
-            ReferenceValues.JsonBehavior.Child1Progress = ProgressBarChildValue;
+            ReferenceValues.JsonBehaviorMaster.Child1Stars = stars;
+            ReferenceValues.JsonBehaviorMaster.Child1Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.Child1Progress = ProgressBarChildValue;
             break;
         case 1:
-            ReferenceValues.JsonBehavior.Child2Stars = stars;
-            ReferenceValues.JsonBehavior.Child2Strikes = strikes;
-            ReferenceValues.JsonBehavior.Child2Progress = ProgressBarChildValue;
+            ReferenceValues.JsonBehaviorMaster.Child2Stars = stars;
+            ReferenceValues.JsonBehaviorMaster.Child2Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.Child2Progress = ProgressBarChildValue;
             break;
         case 2:
-            ReferenceValues.JsonBehavior.Child3Stars = stars;
-            ReferenceValues.JsonBehavior.Child3Strikes = strikes;
-            ReferenceValues.JsonBehavior.Child3Progress = ProgressBarChildValue;
+            ReferenceValues.JsonBehaviorMaster.Child3Stars = stars;
+            ReferenceValues.JsonBehaviorMaster.Child3Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.Child3Progress = ProgressBarChildValue;
             break;
         }
 
         try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonBehavior);
+            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster);
             GC.Collect();
             GC.WaitForPendingFinalizers();
             File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "behavior.json", jsonString);

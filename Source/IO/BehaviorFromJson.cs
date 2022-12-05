@@ -7,7 +7,7 @@ namespace HomeControl.Source.IO;
 
 public class BehaviorFromJson {
     public BehaviorFromJson() {
-        ReferenceValues.JsonBehavior = new JsonBehavior();
+        ReferenceValues.JsonBehaviorMaster = new JsonBehavior();
 
         JsonSerializerOptions options = new() {
             IncludeFields = true
@@ -25,7 +25,7 @@ public class BehaviorFromJson {
             if (behaviorString != null) {
                 try {
                     JsonBehavior jsonBehavior = JsonSerializer.Deserialize<JsonBehavior>(behaviorString, options);
-                    ReferenceValues.JsonBehavior = jsonBehavior;
+                    ReferenceValues.JsonBehaviorMaster = jsonBehavior;
                 } catch (Exception e) {
                     Console.WriteLine("Failed to Deserialize behavior.json..." + e);
                 }

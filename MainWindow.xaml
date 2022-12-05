@@ -37,7 +37,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Frame Grid.Column="0" Source="Source/Modules/Notes.xaml" Focusable="False"/>
-                            <Frame Grid.Column="1" Source="Source/Modules/Daily.xaml" Focusable="False"/>
+                            <Frame Grid.Column="1" Source="Source/Modules/Daily/Daily.xaml" Focusable="False"/>
                         </Grid>
                     </Grid>
 
@@ -87,11 +87,11 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <Button Grid.Row="0" Foreground="White" Margin="0 0 4 0" HorizontalContentAlignment="Stretch" Background="{Binding LockedColor}"
-                                    Command="{Binding ButtonCommand}" CommandParameter="lockUi">
+                            <Button Grid.Row="0" Foreground="White" Margin="0 0 4 0" HorizontalContentAlignment="Stretch" Command="{Binding ButtonCommand}"
+                                    CommandParameter="lockUi">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Background" Value="{Binding LockedColor}"/>
                                         <Setter Property="Foreground" Value="White"/>
                                         <Setter Property="Template">
                                             <Setter.Value>
@@ -114,10 +114,10 @@
                                     <TextBlock Text="{Binding LockedText}" HorizontalAlignment="Center" Margin="8 0 0 0"/>
                                 </StackPanel>
                             </Button>
-                            <Button Grid.Row="1" Foreground="White" Margin="0 4 4 0" HorizontalContentAlignment="Stretch" Background="{Binding OnlineColor}">
+                            <Button Grid.Row="1" Foreground="White" Margin="0 4 4 0" HorizontalContentAlignment="Stretch">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Background" Value="{Binding OnlineColor}"/>
                                         <Setter Property="Foreground" Value="White"/>
                                         <Setter Property="Template">
                                             <Setter.Value>
@@ -142,11 +142,11 @@
                             </Button>
                         </Grid>
 
-                        <Button Grid.Column="1" Grid.Row="2" Background="Red" FontSize="24" Content="PANIC" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
+                        <Button Grid.Column="1" Grid.Row="2" FontSize="24" Content="PANIC" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch" Margin="0 4 4 4">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Background" Value="Red"/>
                                     <Setter Property="Foreground" Value="White"/>
                                     <Setter Property="Template">
                                         <Setter.Value>

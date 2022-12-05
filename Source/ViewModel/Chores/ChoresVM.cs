@@ -47,6 +47,9 @@ public class ChoresVM : BaseViewModel {
             RefreshFields();
             break;
         case "funds":
+            ChoresFunds choresFunds = new();
+            choresFunds.ShowDialog();
+            choresFunds.Close();
             break;
         }
     }

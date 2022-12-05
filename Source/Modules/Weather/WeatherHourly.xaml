@@ -63,15 +63,28 @@
         </Style>
     </Page.Resources>
 
-    <Border BorderBrush="Black" BorderThickness="1" Margin="4" Focusable="False">
+    <Border BorderBrush="Black" BorderThickness="1" Margin="0 4 0 0" Focusable="False">
         <ListView x:Name="ListView" ItemsSource="{Binding ForecastHourlyList}" SelectionChanged="Selector_OnSelectionChanged" Foreground="White" SelectionMode="Single"
-                  Background="Transparent" BorderBrush="Black" Focusable="False">
+                  Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border BorderBrush="Transparent" BorderThickness="0" Background="{TemplateBinding Background}">
+                                    <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="Auto" Margin="0"
+                                                          Content="{TemplateBinding Content}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="BorderThickness" Value="0 0 0 1"/>
-                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="Visibility" Value="Collapsed"/>
                 </Style>
 
                 <Style TargetType="ListViewItem">
@@ -84,6 +97,7 @@
                                 <Setter Property="Background" Value="Black"/>
                                 <Setter Property="BorderBrush" Value="Black"/>
                                 <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Focusable" Value="False"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <MultiTrigger>
@@ -94,6 +108,7 @@
                                 <Setter Property="Background" Value="Transparent"/>
                                 <Setter Property="BorderBrush" Value="Black"/>
                                 <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Focusable" Value="False"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </Style.Triggers>

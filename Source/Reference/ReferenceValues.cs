@@ -49,7 +49,8 @@ public static class ReferenceValues {
     public static JsonFinances JsonFinanceMasterList { get; set; }
     public static JsonChores JsonChoreWeekMasterList { get; set; }
     public static JsonChores JsonChoreMonthMasterList { get; set; }
-    public static JsonBehavior JsonBehavior { get; set; }
+    public static JsonBehavior JsonBehaviorMaster { get; set; }
+    public static JsonDaily JsonDailyMasterList { get; set; }
 
     public static DateTime ChoreWeekStartDate { get; set; }
     public static DateTime ChoreMonthStartDate { get; set; }

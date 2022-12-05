@@ -36,6 +36,7 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14;
 
     private JsonWeatherForecast forecast;
+    private JsonWeatherForecastHourly forecastHourly;
     private bool updateForecast;
 
     public WeatherVM() {
@@ -80,6 +81,17 @@ public class WeatherVM : BaseViewModel {
                 errored = true;
             }
 
+            try {
+                using WebClient client2 = new();
+                Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
+                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
+                string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
+                forecastHourly = JsonSerializer.Deserialize<JsonWeatherForecastHourly>(weatherForecastHourly, options);
+                updateForecast = false;
+            } catch (Exception) {
+                errored = true;
+            }
+
             if (!errored) {
                 UpdateWeatherForecastPart2();
             }
@@ -92,11 +104,11 @@ public class WeatherVM : BaseViewModel {
 
         //TODO: Add more places
         CurrentWeatherLocationText = "Ashland City, TN";
-        CurrentWeatherTempText = forecast.properties.periods[0].temperature + "°";
-        CurrentWindDirectionRotation = GetWindRotation(forecast.properties.periods[0].windDirection);
-        CurrentWindSpeedText = forecast.properties.periods[0].windSpeed;
-        CurrentWeatherDescription = forecast.properties.periods[0].shortForecast;
-        CurrentWeatherCloudIcon = GetWeatherIcon(forecast.properties.periods[0].shortForecast, forecast.properties.periods[0].isDaytime);
+        CurrentWeatherTempText = forecastHourly.properties.periods[0].temperature + "°";
+        CurrentWindDirectionRotation = GetWindRotation(forecastHourly.properties.periods[0].windDirection);
+        CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
+        CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
+        CurrentWeatherCloudIcon = GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime);
 
         try {
             SevenDayForecastName1 = forecast.properties.periods[0].name;

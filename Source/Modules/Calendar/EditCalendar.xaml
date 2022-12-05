@@ -85,6 +85,7 @@
                             <Setter Property="Foreground" Value="White"/>
                             <Setter Property="BorderThickness" Value="0 0 0 1"/>
                             <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="IsEnabled" Value="False"/>
                         </Style>
 
                         <Style TargetType="ListViewItem">

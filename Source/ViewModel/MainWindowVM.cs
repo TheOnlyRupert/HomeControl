@@ -43,13 +43,13 @@ public class MainWindowVM : BaseViewModel {
             } while (string.IsNullOrEmpty(ReferenceValues.UserAgent));
         }
 
+        ApiStatus();
+
         /* Global DispatcherTimer */
         DispatcherTimer dispatcherTimer = new();
         dispatcherTimer.Tick += dispatcherTimer_Tick;
         dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
         dispatcherTimer.Start();
-
-        ApiStatus();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);

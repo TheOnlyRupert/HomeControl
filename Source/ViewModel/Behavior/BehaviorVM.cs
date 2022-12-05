@@ -51,7 +51,7 @@ public class BehaviorVM : BaseViewModel {
         Child3Strike2 = "../../../Resources/Images/behavior/strike_black.png";
         Child3Strike3 = "../../../Resources/Images/behavior/strike_black.png";
 
-        switch (ReferenceValues.JsonBehavior.Child1Stars) {
+        switch (ReferenceValues.JsonBehaviorMaster.Child1Stars) {
         case 1:
             Child1Star1 = "../../../Resources/Images/behavior/star_gold.png";
             break;
@@ -79,7 +79,7 @@ public class BehaviorVM : BaseViewModel {
             break;
         }
 
-        switch (ReferenceValues.JsonBehavior.Child2Stars) {
+        switch (ReferenceValues.JsonBehaviorMaster.Child2Stars) {
         case 1:
             Child2Star1 = "../../../Resources/Images/behavior/star_gold.png";
             break;
@@ -107,7 +107,7 @@ public class BehaviorVM : BaseViewModel {
             break;
         }
 
-        switch (ReferenceValues.JsonBehavior.Child3Stars) {
+        switch (ReferenceValues.JsonBehaviorMaster.Child3Stars) {
         case 1:
             Child3Star1 = "../../../Resources/Images/behavior/star_gold.png";
             break;
@@ -135,7 +135,7 @@ public class BehaviorVM : BaseViewModel {
             break;
         }
 
-        switch (ReferenceValues.JsonBehavior.Child1Strikes) {
+        switch (ReferenceValues.JsonBehaviorMaster.Child1Strikes) {
         case 1:
             Child1Strike1 = "../../../Resources/Images/behavior/strike_red.png";
             break;
@@ -150,7 +150,7 @@ public class BehaviorVM : BaseViewModel {
             break;
         }
 
-        switch (ReferenceValues.JsonBehavior.Child2Strikes) {
+        switch (ReferenceValues.JsonBehaviorMaster.Child2Strikes) {
         case 1:
             Child2Strike1 = "../../../Resources/Images/behavior/strike_red.png";
             break;
@@ -165,7 +165,7 @@ public class BehaviorVM : BaseViewModel {
             break;
         }
 
-        switch (ReferenceValues.JsonBehavior.Child3Strikes) {
+        switch (ReferenceValues.JsonBehaviorMaster.Child3Strikes) {
         case 1:
             Child3Strike1 = "../../../Resources/Images/behavior/strike_red.png";
             break;
@@ -180,9 +180,9 @@ public class BehaviorVM : BaseViewModel {
             break;
         }
 
-        ProgressBarChild1Value = ReferenceValues.JsonBehavior.Child1Progress;
-        ProgressBarChild2Value = ReferenceValues.JsonBehavior.Child2Progress;
-        ProgressBarChild3Value = ReferenceValues.JsonBehavior.Child3Progress;
+        ProgressBarChild1Value = ReferenceValues.JsonBehaviorMaster.Child1Progress;
+        ProgressBarChild2Value = ReferenceValues.JsonBehaviorMaster.Child2Progress;
+        ProgressBarChild3Value = ReferenceValues.JsonBehaviorMaster.Child3Progress;
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -190,9 +190,9 @@ public class BehaviorVM : BaseViewModel {
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "DateChanged") {
-            ReferenceValues.JsonBehavior.Child1Strikes = 0;
-            ReferenceValues.JsonBehavior.Child2Strikes = 0;
-            ReferenceValues.JsonBehavior.Child3Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.Child1Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.Child2Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.Child3Strikes = 0;
             RefreshBehavior();
         }
     }

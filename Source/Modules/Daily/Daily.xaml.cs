@@ -1,6 +1,6 @@
-﻿using HomeControl.Source.ViewModel;
+﻿using HomeControl.Source.ViewModel.Daily;
 
-namespace HomeControl.Source.Modules;
+namespace HomeControl.Source.Modules.Daily;
 
 public partial class Daily {
     public Daily() {

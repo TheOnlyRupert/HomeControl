@@ -99,19 +99,27 @@
         <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
         <Compile Include="Source\IO\ChoresFromJson.cs"/>
         <Compile Include="Source\IO\CsvParser.cs"/>
+        <Compile Include="Source\IO\DailyFromJson.cs"/>
         <Compile Include="Source\IO\FinancesFromJson.cs"/>
         <Compile Include="Source\IO\JsonBehavior.cs"/>
         <Compile Include="Source\IO\JsonCalendar.cs"/>
         <Compile Include="Source\IO\JsonChores.cs"/>
+        <Compile Include="Source\IO\JsonDaily.cs"/>
         <Compile Include="Source\IO\JsonFinances.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecast.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecastHourly.cs"/>
         <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
+        <Compile Include="Source\Modules\Chores\ChoresFunds.xaml.cs">
+            <DependentUpon>ChoresFunds.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Contacts.xaml.cs">
             <DependentUpon>Contacts.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Daily.xaml.cs">
+        <Compile Include="Source\Modules\Daily\Daily.xaml.cs">
             <DependentUpon>Daily.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Daily\EditDaily.xaml.cs">
+            <DependentUpon>EditDaily.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\MealPrep.xaml.cs">
             <DependentUpon>MealPrep.xaml</DependentUpon>
@@ -171,8 +179,10 @@
         </Compile>
         <Compile Include="Source\Reference\ReferenceValues.cs"/>
         <Compile Include="Source\Reference\VerifyInput.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresFundsVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
-        <Compile Include="Source\ViewModel\DailyVM.cs"/>
+        <Compile Include="Source\ViewModel\Daily\DailyVM.cs"/>
+        <Compile Include="Source\ViewModel\Daily\EditDailyVM.cs"/>
         <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
@@ -210,8 +220,10 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="Source\Modules\Chores\ChoresFunds.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
-        <Page Include="Source\Modules\Daily.xaml"/>
+        <Page Include="Source\Modules\Daily\Daily.xaml"/>
+        <Page Include="Source\Modules\Daily\EditDaily.xaml"/>
         <Page Include="Source\Modules\MealPrep.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
         <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
