@@ -91,6 +91,10 @@
 
                         <Style TargetType="ListViewItem">
                             <Style.Triggers>
+                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
+                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                </DataTrigger>
+
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsSelected" Value="True"/>

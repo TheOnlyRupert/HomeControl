@@ -9,7 +9,7 @@ public class EditTimerVM : BaseViewModel {
 
     public EditTimerVM() {
         MainTimerOutput = $"{ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]:000}:{ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]:00}";
-        TimerNumberText = "Timer " + ReferenceValues.ActiveTimerEdit + 1;
+        TimerNumberText = "Timer " + ReferenceValues.ActiveTimerEdit;
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -44,6 +44,13 @@ public class EditTimerVM : BaseViewModel {
             }
 
             break;
+        case "timerMinAdd15":
+            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
+                ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] += 15;
+                ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+            }
+
+            break;
         case "timerSecSub":
             if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
                 ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]--;
@@ -58,6 +65,17 @@ public class EditTimerVM : BaseViewModel {
         case "timerMinSub":
             if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
                 ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]--;
+                if (ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] < 0) {
+                    ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
+                }
+
+                ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+            }
+
+            break;
+        case "timerMinSub15":
+            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
+                ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] -= 15;
                 if (ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] < 0) {
                     ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
                 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using HomeControl.Source.IO;
@@ -10,7 +11,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Calendar;
 
 public class CalendarVM : BaseViewModel {
-    private string _button1Date, _button1HolidayText, _button1EventText1, _button1EventText2, _button1EventText3, _button2Date, _button2HolidayText, _button2EventText1,
+    private string _button1Date, _button1HolidayText, _button1EventText2, _button1EventText3, _button2Date, _button2HolidayText, _button2EventText1,
         _button2EventText2, _button2EventText3, _button3Date, _button3HolidayText, _button3EventText1, _button3EventText2, _button3EventText3, _button4Date,
         _button4HolidayText, _button4EventText1, _button4EventText2, _button4EventText3, _button5Date, _button5HolidayText, _button5EventText1, _button5EventText2,
         _button5EventText3, _button6Date, _button6HolidayText, _button6EventText1, _button6EventText2, _button6EventText3, _button7Date, _button7HolidayText,
@@ -36,24 +37,7 @@ public class CalendarVM : BaseViewModel {
         _button38Date, _button38HolidayText, _button38EventText1, _button38EventText2, _button38EventText3, _button39Date, _button39HolidayText, _button39EventText1,
         _button39EventText2, _button39EventText3, _button40Date, _button40HolidayText, _button40EventText1, _button40EventText2, _button40EventText3, _button41Date,
         _button41HolidayText, _button41EventText1, _button41EventText2, _button41EventText3, _button42Date, _button42HolidayText, _button42EventText1, _button42EventText2,
-        _button42EventText3, _currentMonthAndYear, _button1EventColor1, _button1EventColor2, _button1EventColor3, _button2EventColor1, _button2EventColor2, _button2EventColor3,
-        _button3EventColor1, _button3EventColor2, _button3EventColor3, _button4EventColor1, _button4EventColor2, _button4EventColor3, _button5EventColor1, _button5EventColor2,
-        _button5EventColor3, _button6EventColor1, _button6EventColor2, _button6EventColor3, _button7EventColor1, _button7EventColor2, _button7EventColor3, _button8EventColor1,
-        _button8EventColor2, _button8EventColor3, _button9EventColor1, _button9EventColor2, _button9EventColor3, _button10EventColor1, _button10EventColor2, _button10EventColor3,
-        _button11EventColor1, _button11EventColor2, _button11EventColor3, _button12EventColor1, _button12EventColor2, _button12EventColor3, _button13EventColor1,
-        _button13EventColor2, _button13EventColor3, _button14EventColor1, _button14EventColor2, _button14EventColor3, _button15EventColor1, _button15EventColor2,
-        _button15EventColor3, _button16EventColor1, _button16EventColor2, _button16EventColor3, _button17EventColor1, _button17EventColor2, _button17EventColor3,
-        _button18EventColor1, _button18EventColor2, _button18EventColor3, _button19EventColor1, _button19EventColor2, _button19EventColor3, _button20EventColor1,
-        _button20EventColor2, _button20EventColor3, _button21EventColor1, _button21EventColor2, _button21EventColor3, _button22EventColor1, _button22EventColor2,
-        _button22EventColor3, _button23EventColor1, _button23EventColor2, _button23EventColor3, _button24EventColor1, _button24EventColor2, _button24EventColor3,
-        _button25EventColor1, _button25EventColor2, _button25EventColor3, _button26EventColor1, _button26EventColor2, _button26EventColor3, _button27EventColor1,
-        _button27EventColor2, _button27EventColor3, _button28EventColor1, _button28EventColor2, _button28EventColor3, _button29EventColor1, _button29EventColor2,
-        _button29EventColor3, _button30EventColor1, _button30EventColor2, _button30EventColor3, _button31EventColor1, _button31EventColor2, _button31EventColor3,
-        _button32EventColor1, _button32EventColor2, _button32EventColor3, _button33EventColor1, _button33EventColor2, _button33EventColor3, _button34EventColor1,
-        _button34EventColor2, _button34EventColor3, _button35EventColor1, _button35EventColor2, _button35EventColor3, _button36EventColor1, _button36EventColor2,
-        _button36EventColor3, _button37EventColor1, _button37EventColor2, _button37EventColor3, _button38EventColor1, _button38EventColor2, _button38EventColor3,
-        _button39EventColor1, _button39EventColor2, _button39EventColor3, _button40EventColor1, _button40EventColor2, _button40EventColor3, _button41EventColor1,
-        _button41EventColor2, _button41EventColor3, _button42EventColor1, _button42EventColor2, _button42EventColor3, _button1BackgroundColor, _button2BackgroundColor,
+        _button42EventText3, _currentMonthAndYear, _button1BackgroundColor, _button2BackgroundColor,
         _button3BackgroundColor, _button4BackgroundColor, _button5BackgroundColor, _button6BackgroundColor, _button7BackgroundColor, _button8BackgroundColor,
         _button9BackgroundColor, _button10BackgroundColor, _button11BackgroundColor, _button12BackgroundColor, _button13BackgroundColor, _button14BackgroundColor,
         _button15BackgroundColor, _button16BackgroundColor, _button17BackgroundColor, _button18BackgroundColor, _button19BackgroundColor, _button20BackgroundColor,
@@ -62,9 +46,59 @@ public class CalendarVM : BaseViewModel {
         _button33BackgroundColor, _button34BackgroundColor, _button35BackgroundColor, _button36BackgroundColor, _button37BackgroundColor, _button38BackgroundColor,
         _button39BackgroundColor, _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor;
 
+    private ObservableCollection<string> _button1EventList, _button2EventList, _button3EventList, _button4EventList, _button5EventList, _button6EventList, _button7EventList,
+        _button8EventList, _button9EventList, _button10EventList, _button11EventList, _button12EventList, _button13EventList, _button14EventList, _button15EventList,
+        _button16EventList, _button17EventList, _button18EventList, _button19EventList, _button20EventList, _button21EventList, _button22EventList, _button23EventList,
+        _button24EventList, _button25EventList, _button26EventList, _button27EventList, _button28EventList, _button29EventList, _button30EventList, _button31EventList,
+        _button32EventList, _button33EventList, _button34EventList, _button35EventList, _button36EventList, _button37EventList, _button38EventList, _button39EventList,
+        _button40EventList, _button41EventList, _button42EventList;
+
     private DateTime currentDateTime, button1DateTime;
 
     public CalendarVM() {
+        Button1EventList = new ObservableCollection<string>();
+        Button2EventList = new ObservableCollection<string>();
+        Button3EventList = new ObservableCollection<string>();
+        Button4EventList = new ObservableCollection<string>();
+        Button5EventList = new ObservableCollection<string>();
+        Button6EventList = new ObservableCollection<string>();
+        Button7EventList = new ObservableCollection<string>();
+        Button8EventList = new ObservableCollection<string>();
+        Button9EventList = new ObservableCollection<string>();
+        Button10EventList = new ObservableCollection<string>();
+        Button11EventList = new ObservableCollection<string>();
+        Button12EventList = new ObservableCollection<string>();
+        Button13EventList = new ObservableCollection<string>();
+        Button14EventList = new ObservableCollection<string>();
+        Button15EventList = new ObservableCollection<string>();
+        Button16EventList = new ObservableCollection<string>();
+        Button17EventList = new ObservableCollection<string>();
+        Button18EventList = new ObservableCollection<string>();
+        Button19EventList = new ObservableCollection<string>();
+        Button20EventList = new ObservableCollection<string>();
+        Button21EventList = new ObservableCollection<string>();
+        Button22EventList = new ObservableCollection<string>();
+        Button23EventList = new ObservableCollection<string>();
+        Button24EventList = new ObservableCollection<string>();
+        Button25EventList = new ObservableCollection<string>();
+        Button26EventList = new ObservableCollection<string>();
+        Button27EventList = new ObservableCollection<string>();
+        Button28EventList = new ObservableCollection<string>();
+        Button29EventList = new ObservableCollection<string>();
+        Button30EventList = new ObservableCollection<string>();
+        Button31EventList = new ObservableCollection<string>();
+        Button32EventList = new ObservableCollection<string>();
+        Button33EventList = new ObservableCollection<string>();
+        Button34EventList = new ObservableCollection<string>();
+        Button35EventList = new ObservableCollection<string>();
+        Button36EventList = new ObservableCollection<string>();
+        Button37EventList = new ObservableCollection<string>();
+        Button38EventList = new ObservableCollection<string>();
+        Button39EventList = new ObservableCollection<string>();
+        Button40EventList = new ObservableCollection<string>();
+        Button41EventList = new ObservableCollection<string>();
+        Button42EventList = new ObservableCollection<string>();
+
         currentDateTime = DateTime.Now;
         CurrentMonthAndYear = currentDateTime.ToString("MMMM, yyyy");
         PopulateCalendar(currentDateTime);
@@ -281,172 +315,47 @@ public class CalendarVM : BaseViewModel {
     public void PopulateCalendar(DateTime dateTime) {
         /* Clear Calender */
         Button1HolidayText = "";
-        Button1EventText1 = "";
-        Button1EventText2 = "";
-        Button1EventText3 = "";
         Button2HolidayText = "";
-        Button2EventText1 = "";
-        Button2EventText2 = "";
-        Button2EventText3 = "";
         Button3HolidayText = "";
-        Button3EventText1 = "";
-        Button3EventText2 = "";
-        Button3EventText3 = "";
         Button4HolidayText = "";
-        Button4EventText1 = "";
-        Button4EventText2 = "";
-        Button4EventText3 = "";
         Button5HolidayText = "";
-        Button5EventText1 = "";
-        Button5EventText2 = "";
-        Button5EventText3 = "";
-        Button6EventText1 = "";
-        Button6EventText2 = "";
-        Button6EventText3 = "";
+        Button6HolidayText = "";
         Button7HolidayText = "";
-        Button7EventText1 = "";
-        Button7EventText2 = "";
-        Button7EventText3 = "";
         Button8HolidayText = "";
-        Button8EventText1 = "";
-        Button8EventText2 = "";
-        Button8EventText3 = "";
         Button9HolidayText = "";
-        Button9EventText1 = "";
-        Button9EventText2 = "";
-        Button9EventText3 = "";
         Button10HolidayText = "";
-        Button10EventText1 = "";
-        Button10EventText2 = "";
-        Button10EventText3 = "";
         Button11HolidayText = "";
-        Button11EventText1 = "";
-        Button11EventText2 = "";
-        Button11EventText3 = "";
         Button12HolidayText = "";
-        Button12EventText1 = "";
-        Button12EventText2 = "";
-        Button12EventText3 = "";
         Button13HolidayText = "";
-        Button13EventText1 = "";
-        Button13EventText2 = "";
-        Button13EventText3 = "";
         Button14HolidayText = "";
-        Button14EventText1 = "";
-        Button14EventText2 = "";
-        Button14EventText3 = "";
         Button15HolidayText = "";
-        Button15EventText1 = "";
-        Button15EventText2 = "";
-        Button15EventText3 = "";
         Button16HolidayText = "";
-        Button16EventText1 = "";
-        Button16EventText2 = "";
-        Button16EventText3 = "";
         Button17HolidayText = "";
-        Button17EventText1 = "";
-        Button17EventText2 = "";
-        Button17EventText3 = "";
         Button18HolidayText = "";
-        Button18EventText1 = "";
-        Button18EventText2 = "";
-        Button18EventText3 = "";
         Button19HolidayText = "";
-        Button19EventText1 = "";
-        Button19EventText2 = "";
-        Button19EventText3 = "";
         Button20HolidayText = "";
-        Button20EventText1 = "";
-        Button20EventText2 = "";
-        Button20EventText3 = "";
         Button21HolidayText = "";
-        Button21EventText1 = "";
-        Button21EventText2 = "";
-        Button21EventText3 = "";
         Button22HolidayText = "";
-        Button22EventText1 = "";
-        Button22EventText2 = "";
-        Button22EventText3 = "";
         Button23HolidayText = "";
-        Button23EventText1 = "";
-        Button23EventText2 = "";
-        Button23EventText3 = "";
         Button24HolidayText = "";
-        Button24EventText1 = "";
-        Button24EventText2 = "";
-        Button24EventText3 = "";
         Button25HolidayText = "";
-        Button25EventText1 = "";
-        Button25EventText2 = "";
-        Button25EventText3 = "";
         Button26HolidayText = "";
-        Button26EventText1 = "";
-        Button26EventText2 = "";
-        Button26EventText3 = "";
         Button27HolidayText = "";
-        Button27EventText1 = "";
-        Button27EventText2 = "";
-        Button27EventText3 = "";
         Button28HolidayText = "";
-        Button28EventText1 = "";
-        Button28EventText2 = "";
-        Button28EventText3 = "";
         Button29HolidayText = "";
-        Button29EventText1 = "";
-        Button29EventText2 = "";
-        Button29EventText3 = "";
         Button30HolidayText = "";
-        Button30EventText1 = "";
-        Button30EventText2 = "";
-        Button30EventText3 = "";
         Button31HolidayText = "";
-        Button31EventText1 = "";
-        Button31EventText2 = "";
-        Button31EventText3 = "";
         Button32HolidayText = "";
-        Button32EventText1 = "";
-        Button32EventText2 = "";
-        Button32EventText3 = "";
         Button33HolidayText = "";
-        Button33EventText1 = "";
-        Button33EventText2 = "";
-        Button33EventText3 = "";
         Button34HolidayText = "";
-        Button34EventText1 = "";
-        Button34EventText2 = "";
-        Button34EventText3 = "";
         Button35HolidayText = "";
-        Button35EventText1 = "";
-        Button35EventText2 = "";
-        Button35EventText3 = "";
         Button36HolidayText = "";
-        Button36EventText1 = "";
-        Button36EventText2 = "";
-        Button36EventText3 = "";
         Button37HolidayText = "";
-        Button37EventText1 = "";
-        Button37EventText2 = "";
-        Button37EventText3 = "";
         Button38HolidayText = "";
-        Button38EventText1 = "";
-        Button38EventText2 = "";
-        Button38EventText3 = "";
         Button39HolidayText = "";
-        Button39EventText1 = "";
-        Button39EventText2 = "";
-        Button39EventText3 = "";
         Button40HolidayText = "";
-        Button40EventText1 = "";
-        Button40EventText2 = "";
-        Button40EventText3 = "";
         Button41HolidayText = "";
-        Button41EventText1 = "";
-        Button41EventText2 = "";
-        Button41EventText3 = "";
         Button42HolidayText = "";
-        Button42EventText1 = "";
-        Button42EventText2 = "";
-        Button42EventText3 = "";
         Button1BackgroundColor = "Transparent";
         Button2BackgroundColor = "Transparent";
         Button3BackgroundColor = "Transparent";
@@ -489,6 +398,49 @@ public class CalendarVM : BaseViewModel {
         Button40BackgroundColor = "Transparent";
         Button41BackgroundColor = "Transparent";
         Button42BackgroundColor = "Transparent";
+
+        Button1EventList.Clear();
+        Button2EventList.Clear();
+        Button3EventList.Clear();
+        Button4EventList.Clear();
+        Button5EventList.Clear();
+        Button6EventList.Clear();
+        Button7EventList.Clear();
+        Button8EventList.Clear();
+        Button9EventList.Clear();
+        Button10EventList.Clear();
+        Button11EventList.Clear();
+        Button12EventList.Clear();
+        Button13EventList.Clear();
+        Button14EventList.Clear();
+        Button15EventList.Clear();
+        Button16EventList.Clear();
+        Button17EventList.Clear();
+        Button18EventList.Clear();
+        Button19EventList.Clear();
+        Button20EventList.Clear();
+        Button21EventList.Clear();
+        Button22EventList.Clear();
+        Button23EventList.Clear();
+        Button24EventList.Clear();
+        Button25EventList.Clear();
+        Button26EventList.Clear();
+        Button27EventList.Clear();
+        Button28EventList.Clear();
+        Button29EventList.Clear();
+        Button30EventList.Clear();
+        Button31EventList.Clear();
+        Button32EventList.Clear();
+        Button33EventList.Clear();
+        Button34EventList.Clear();
+        Button35EventList.Clear();
+        Button36EventList.Clear();
+        Button37EventList.Clear();
+        Button38EventList.Clear();
+        Button39EventList.Clear();
+        Button40EventList.Clear();
+        Button41EventList.Clear();
+        Button42EventList.Clear();
 
         /* Constant */
         DateTime startingYear = new(dateTime.Year, 1, 1);
@@ -813,7 +765,258 @@ public class CalendarVM : BaseViewModel {
 
         /* Get Calendar Events */
         new CalenderEventsFromJson(button1DateTime);
-        PopulateEvents();
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[0].eventsList) {
+                Button1EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[1].eventsList) {
+                Button2EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[2].eventsList) {
+                Button3EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[3].eventsList) {
+                Button4EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[4].eventsList) {
+                Button5EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[5].eventsList) {
+                Button6EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[6].eventsList) {
+                Button7EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[7].eventsList) {
+                Button8EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[8].eventsList) {
+                Button9EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[9].eventsList) {
+                Button10EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[10].eventsList) {
+                Button11EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[11].eventsList) {
+                Button12EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[12].eventsList) {
+                Button13EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[13].eventsList) {
+                Button14EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[14].eventsList) {
+                Button15EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[15].eventsList) {
+                Button16EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[16].eventsList) {
+                Button17EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[17].eventsList) {
+                Button18EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[18].eventsList) {
+                Button19EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[19].eventsList) {
+                Button20EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[20].eventsList) {
+                Button21EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[21].eventsList) {
+                Button22EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[22].eventsList) {
+                Button23EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[23].eventsList) {
+                Button24EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[24].eventsList) {
+                Button25EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[25].eventsList) {
+                Button26EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[26].eventsList) {
+                Button27EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[27].eventsList) {
+                Button28EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[28].eventsList) {
+                Button29EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[29].eventsList) {
+                Button30EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[30].eventsList) {
+                Button31EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[31].eventsList) {
+                Button32EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[32].eventsList) {
+                Button33EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[33].eventsList) {
+                Button34EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[34].eventsList) {
+                Button35EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[35].eventsList) {
+                Button36EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[36].eventsList) {
+                Button37EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[37].eventsList) {
+                Button38EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[38].eventsList) {
+                Button39EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[39].eventsList) {
+                Button40EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[40].eventsList) {
+                Button41EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
+
+        try {
+            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[41].eventsList) {
+                Button42EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+            }
+        } catch (Exception) { }
     }
 
     private static List<HolidayBlock> GetHolidays(int year) {
@@ -1002,863 +1205,6 @@ public class CalendarVM : BaseViewModel {
         return holidays;
     }
 
-
-    private void PopulateEvents() {
-        /* Button 1 */
-        try {
-            Button1EventText1 = ReferenceValues.JsonCalendarMasterEventList[0].eventsList[0].name;
-            Button1EventText2 = ReferenceValues.JsonCalendarMasterEventList[0].eventsList[1].name;
-            Button1EventText3 = ReferenceValues.JsonCalendarMasterEventList[0].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button1EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[0].eventsList[0].person);
-            Button1EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[0].eventsList[1].person);
-            Button1EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[0].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[0].eventsList.Count > 3) {
-                Button1EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[0].eventsList.Count - 2) + " More Events...";
-                Button1EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 2 */
-        try {
-            Button2EventText1 = ReferenceValues.JsonCalendarMasterEventList[1].eventsList[0].name;
-            Button2EventText2 = ReferenceValues.JsonCalendarMasterEventList[1].eventsList[1].name;
-            Button2EventText3 = ReferenceValues.JsonCalendarMasterEventList[1].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button2EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[1].eventsList[0].person);
-            Button2EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[1].eventsList[1].person);
-            Button2EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[1].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[1].eventsList.Count > 3) {
-                Button2EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[1].eventsList.Count - 2) + " More Events...";
-                Button2EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 3 */
-        try {
-            Button3EventText1 = ReferenceValues.JsonCalendarMasterEventList[2].eventsList[0].name;
-            Button3EventText2 = ReferenceValues.JsonCalendarMasterEventList[2].eventsList[1].name;
-            Button3EventText3 = ReferenceValues.JsonCalendarMasterEventList[2].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button3EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[2].eventsList[0].person);
-            Button3EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[2].eventsList[1].person);
-            Button3EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[2].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[2].eventsList.Count > 3) {
-                Button3EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[2].eventsList.Count - 2) + " More Events...";
-                Button3EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 4 */
-        try {
-            Button4EventText1 = ReferenceValues.JsonCalendarMasterEventList[3].eventsList[0].name;
-            Button4EventText2 = ReferenceValues.JsonCalendarMasterEventList[3].eventsList[1].name;
-            Button4EventText3 = ReferenceValues.JsonCalendarMasterEventList[3].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button4EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[3].eventsList[0].person);
-            Button4EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[3].eventsList[1].person);
-            Button4EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[3].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[3].eventsList.Count > 3) {
-                Button4EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[3].eventsList.Count - 2) + " More Events...";
-                Button4EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 5 */
-        try {
-            Button5EventText1 = ReferenceValues.JsonCalendarMasterEventList[4].eventsList[0].name;
-            Button5EventText2 = ReferenceValues.JsonCalendarMasterEventList[4].eventsList[1].name;
-            Button5EventText3 = ReferenceValues.JsonCalendarMasterEventList[4].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button5EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[4].eventsList[0].person);
-            Button5EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[4].eventsList[1].person);
-            Button5EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[4].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[4].eventsList.Count > 3) {
-                Button5EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[4].eventsList.Count - 2) + " More Events...";
-                Button5EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 6 */
-        try {
-            Button6EventText1 = ReferenceValues.JsonCalendarMasterEventList[5].eventsList[0].name;
-            Button6EventText2 = ReferenceValues.JsonCalendarMasterEventList[5].eventsList[1].name;
-            Button6EventText3 = ReferenceValues.JsonCalendarMasterEventList[5].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button6EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[5].eventsList[0].person);
-            Button6EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[5].eventsList[1].person);
-            Button6EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[5].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[5].eventsList.Count > 3) {
-                Button6EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[5].eventsList.Count - 2) + " More Events...";
-                Button6EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 7 */
-        try {
-            Button7EventText1 = ReferenceValues.JsonCalendarMasterEventList[6].eventsList[0].name;
-            Button7EventText2 = ReferenceValues.JsonCalendarMasterEventList[6].eventsList[1].name;
-            Button7EventText3 = ReferenceValues.JsonCalendarMasterEventList[6].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button7EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[6].eventsList[0].person);
-            Button7EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[6].eventsList[1].person);
-            Button7EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[6].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[6].eventsList.Count > 3) {
-                Button7EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[6].eventsList.Count - 2) + " More Events...";
-                Button7EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 8 */
-        try {
-            Button8EventText1 = ReferenceValues.JsonCalendarMasterEventList[7].eventsList[0].name;
-            Button8EventText2 = ReferenceValues.JsonCalendarMasterEventList[7].eventsList[1].name;
-            Button8EventText3 = ReferenceValues.JsonCalendarMasterEventList[7].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button8EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[7].eventsList[0].person);
-            Button8EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[7].eventsList[1].person);
-            Button8EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[7].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[7].eventsList.Count > 3) {
-                Button8EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[7].eventsList.Count - 2) + " More Events...";
-                Button8EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 9 */
-        try {
-            Button9EventText1 = ReferenceValues.JsonCalendarMasterEventList[8].eventsList[0].name;
-            Button9EventText2 = ReferenceValues.JsonCalendarMasterEventList[8].eventsList[1].name;
-            Button9EventText3 = ReferenceValues.JsonCalendarMasterEventList[8].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button9EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[8].eventsList[0].person);
-            Button9EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[8].eventsList[1].person);
-            Button9EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[8].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[8].eventsList.Count > 3) {
-                Button9EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[8].eventsList.Count - 2) + " More Events...";
-                Button9EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 10 */
-        try {
-            Button10EventText1 = ReferenceValues.JsonCalendarMasterEventList[9].eventsList[0].name;
-            Button10EventText2 = ReferenceValues.JsonCalendarMasterEventList[9].eventsList[1].name;
-            Button10EventText3 = ReferenceValues.JsonCalendarMasterEventList[9].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button10EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[9].eventsList[0].person);
-            Button10EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[9].eventsList[1].person);
-            Button10EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[9].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[9].eventsList.Count > 3) {
-                Button10EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[9].eventsList.Count - 2) + " More Events...";
-                Button10EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 11 */
-        try {
-            Button11EventText1 = ReferenceValues.JsonCalendarMasterEventList[10].eventsList[0].name;
-            Button11EventText2 = ReferenceValues.JsonCalendarMasterEventList[10].eventsList[1].name;
-            Button11EventText3 = ReferenceValues.JsonCalendarMasterEventList[10].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button11EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[10].eventsList[0].person);
-            Button11EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[10].eventsList[1].person);
-            Button11EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[10].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[10].eventsList.Count > 3) {
-                Button11EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[10].eventsList.Count - 2) + " More Events...";
-                Button11EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 12 */
-        try {
-            Button12EventText1 = ReferenceValues.JsonCalendarMasterEventList[11].eventsList[0].name;
-            Button12EventText2 = ReferenceValues.JsonCalendarMasterEventList[11].eventsList[1].name;
-            Button12EventText3 = ReferenceValues.JsonCalendarMasterEventList[11].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button12EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[11].eventsList[0].person);
-            Button12EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[11].eventsList[1].person);
-            Button12EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[11].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[11].eventsList.Count > 3) {
-                Button12EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[11].eventsList.Count - 2) + " More Events...";
-                Button12EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 13 */
-        try {
-            Button13EventText1 = ReferenceValues.JsonCalendarMasterEventList[12].eventsList[0].name;
-            Button13EventText2 = ReferenceValues.JsonCalendarMasterEventList[12].eventsList[1].name;
-            Button13EventText3 = ReferenceValues.JsonCalendarMasterEventList[12].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button13EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[12].eventsList[0].person);
-            Button13EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[12].eventsList[1].person);
-            Button13EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[12].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[12].eventsList.Count > 3) {
-                Button13EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[12].eventsList.Count - 2) + " More Events...";
-                Button13EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 14 */
-        try {
-            Button14EventText1 = ReferenceValues.JsonCalendarMasterEventList[13].eventsList[0].name;
-            Button14EventText2 = ReferenceValues.JsonCalendarMasterEventList[13].eventsList[1].name;
-            Button14EventText3 = ReferenceValues.JsonCalendarMasterEventList[13].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button14EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[13].eventsList[0].person);
-            Button14EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[13].eventsList[1].person);
-            Button14EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[13].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[13].eventsList.Count > 3) {
-                Button14EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[13].eventsList.Count - 2) + " More Events...";
-                Button14EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 15 */
-        try {
-            Button15EventText1 = ReferenceValues.JsonCalendarMasterEventList[14].eventsList[0].name;
-            Button15EventText2 = ReferenceValues.JsonCalendarMasterEventList[14].eventsList[1].name;
-            Button15EventText3 = ReferenceValues.JsonCalendarMasterEventList[14].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button15EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[14].eventsList[0].person);
-            Button15EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[14].eventsList[1].person);
-            Button15EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[14].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[14].eventsList.Count > 3) {
-                Button15EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[14].eventsList.Count - 2) + " More Events...";
-                Button15EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 16 */
-        try {
-            Button16EventText1 = ReferenceValues.JsonCalendarMasterEventList[15].eventsList[0].name;
-            Button16EventText2 = ReferenceValues.JsonCalendarMasterEventList[15].eventsList[1].name;
-            Button16EventText3 = ReferenceValues.JsonCalendarMasterEventList[15].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button16EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[15].eventsList[0].person);
-            Button16EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[15].eventsList[1].person);
-            Button16EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[15].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[15].eventsList.Count > 3) {
-                Button16EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[15].eventsList.Count - 2) + " More Events...";
-                Button16EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 17 */
-        try {
-            Button17EventText1 = ReferenceValues.JsonCalendarMasterEventList[16].eventsList[0].name;
-            Button17EventText2 = ReferenceValues.JsonCalendarMasterEventList[16].eventsList[1].name;
-            Button17EventText3 = ReferenceValues.JsonCalendarMasterEventList[16].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button17EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[16].eventsList[0].person);
-            Button17EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[16].eventsList[1].person);
-            Button17EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[16].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[16].eventsList.Count > 3) {
-                Button17EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[16].eventsList.Count - 2) + " More Events...";
-                Button17EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 18 */
-        try {
-            Button18EventText1 = ReferenceValues.JsonCalendarMasterEventList[17].eventsList[0].name;
-            Button18EventText2 = ReferenceValues.JsonCalendarMasterEventList[17].eventsList[1].name;
-            Button18EventText3 = ReferenceValues.JsonCalendarMasterEventList[17].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button18EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[17].eventsList[0].person);
-            Button18EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[17].eventsList[1].person);
-            Button18EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[17].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[17].eventsList.Count > 3) {
-                Button18EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[17].eventsList.Count - 2) + " More Events...";
-                Button18EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 19 */
-        try {
-            Button19EventText1 = ReferenceValues.JsonCalendarMasterEventList[18].eventsList[0].name;
-            Button19EventText2 = ReferenceValues.JsonCalendarMasterEventList[18].eventsList[1].name;
-            Button19EventText3 = ReferenceValues.JsonCalendarMasterEventList[18].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button19EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[18].eventsList[0].person);
-            Button19EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[18].eventsList[1].person);
-            Button19EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[18].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[18].eventsList.Count > 3) {
-                Button19EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[18].eventsList.Count - 2) + " More Events...";
-                Button19EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 20 */
-        try {
-            Button20EventText1 = ReferenceValues.JsonCalendarMasterEventList[19].eventsList[0].name;
-            Button20EventText2 = ReferenceValues.JsonCalendarMasterEventList[19].eventsList[1].name;
-            Button20EventText3 = ReferenceValues.JsonCalendarMasterEventList[19].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button20EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[19].eventsList[0].person);
-            Button20EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[19].eventsList[1].person);
-            Button20EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[19].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[19].eventsList.Count > 3) {
-                Button20EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[19].eventsList.Count - 2) + " More Events...";
-                Button20EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 21 */
-        try {
-            Button21EventText1 = ReferenceValues.JsonCalendarMasterEventList[20].eventsList[0].name;
-            Button21EventText2 = ReferenceValues.JsonCalendarMasterEventList[20].eventsList[1].name;
-            Button21EventText3 = ReferenceValues.JsonCalendarMasterEventList[20].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button21EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[20].eventsList[0].person);
-            Button21EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[20].eventsList[1].person);
-            Button21EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[20].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[20].eventsList.Count > 3) {
-                Button21EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[20].eventsList.Count - 2) + " More Events...";
-                Button21EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 22 */
-        try {
-            Button22EventText1 = ReferenceValues.JsonCalendarMasterEventList[21].eventsList[0].name;
-            Button22EventText2 = ReferenceValues.JsonCalendarMasterEventList[21].eventsList[1].name;
-            Button22EventText3 = ReferenceValues.JsonCalendarMasterEventList[21].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button22EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[21].eventsList[0].person);
-            Button22EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[21].eventsList[1].person);
-            Button22EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[21].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[21].eventsList.Count > 3) {
-                Button22EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[21].eventsList.Count - 2) + " More Events...";
-                Button22EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 23 */
-        try {
-            Button23EventText1 = ReferenceValues.JsonCalendarMasterEventList[22].eventsList[0].name;
-            Button23EventText2 = ReferenceValues.JsonCalendarMasterEventList[22].eventsList[1].name;
-            Button23EventText3 = ReferenceValues.JsonCalendarMasterEventList[22].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button23EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[22].eventsList[0].person);
-            Button23EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[22].eventsList[1].person);
-            Button23EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[22].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[22].eventsList.Count > 3) {
-                Button23EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[22].eventsList.Count - 2) + " More Events...";
-                Button23EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 24 */
-        try {
-            Button24EventText1 = ReferenceValues.JsonCalendarMasterEventList[23].eventsList[0].name;
-            Button24EventText2 = ReferenceValues.JsonCalendarMasterEventList[23].eventsList[1].name;
-            Button24EventText3 = ReferenceValues.JsonCalendarMasterEventList[23].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button24EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[23].eventsList[0].person);
-            Button24EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[23].eventsList[1].person);
-            Button24EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[23].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[23].eventsList.Count > 3) {
-                Button24EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[23].eventsList.Count - 2) + " More Events...";
-                Button24EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 25 */
-        try {
-            Button25EventText1 = ReferenceValues.JsonCalendarMasterEventList[24].eventsList[0].name;
-            Button25EventText2 = ReferenceValues.JsonCalendarMasterEventList[24].eventsList[1].name;
-            Button25EventText3 = ReferenceValues.JsonCalendarMasterEventList[24].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button25EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[24].eventsList[0].person);
-            Button25EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[24].eventsList[1].person);
-            Button25EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[24].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[24].eventsList.Count > 3) {
-                Button25EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[24].eventsList.Count - 2) + " More Events...";
-                Button25EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 26 */
-        try {
-            Button26EventText1 = ReferenceValues.JsonCalendarMasterEventList[25].eventsList[0].name;
-            Button26EventText2 = ReferenceValues.JsonCalendarMasterEventList[25].eventsList[1].name;
-            Button26EventText3 = ReferenceValues.JsonCalendarMasterEventList[25].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button26EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[25].eventsList[0].person);
-            Button26EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[25].eventsList[1].person);
-            Button26EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[25].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[25].eventsList.Count > 3) {
-                Button26EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[25].eventsList.Count - 2) + " More Events...";
-                Button26EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 27 */
-        try {
-            Button27EventText1 = ReferenceValues.JsonCalendarMasterEventList[26].eventsList[0].name;
-            Button27EventText2 = ReferenceValues.JsonCalendarMasterEventList[26].eventsList[1].name;
-            Button27EventText3 = ReferenceValues.JsonCalendarMasterEventList[26].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button27EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[26].eventsList[0].person);
-            Button27EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[26].eventsList[1].person);
-            Button27EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[26].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[26].eventsList.Count > 3) {
-                Button27EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[26].eventsList.Count - 2) + " More Events...";
-                Button27EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 28 */
-        try {
-            Button28EventText1 = ReferenceValues.JsonCalendarMasterEventList[27].eventsList[0].name;
-            Button28EventText2 = ReferenceValues.JsonCalendarMasterEventList[27].eventsList[1].name;
-            Button28EventText3 = ReferenceValues.JsonCalendarMasterEventList[27].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button28EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[27].eventsList[0].person);
-            Button28EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[27].eventsList[1].person);
-            Button28EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[27].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[27].eventsList.Count > 3) {
-                Button28EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[27].eventsList.Count - 2) + " More Events...";
-                Button28EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 29 */
-        try {
-            Button29EventText1 = ReferenceValues.JsonCalendarMasterEventList[28].eventsList[0].name;
-            Button29EventText2 = ReferenceValues.JsonCalendarMasterEventList[28].eventsList[1].name;
-            Button29EventText3 = ReferenceValues.JsonCalendarMasterEventList[28].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button29EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[28].eventsList[0].person);
-            Button29EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[28].eventsList[1].person);
-            Button29EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[28].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[28].eventsList.Count > 3) {
-                Button29EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[28].eventsList.Count - 2) + " More Events...";
-                Button29EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 30 */
-        try {
-            Button30EventText1 = ReferenceValues.JsonCalendarMasterEventList[29].eventsList[0].name;
-            Button30EventText2 = ReferenceValues.JsonCalendarMasterEventList[29].eventsList[1].name;
-            Button30EventText3 = ReferenceValues.JsonCalendarMasterEventList[29].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button30EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[29].eventsList[0].person);
-            Button30EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[29].eventsList[1].person);
-            Button30EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[29].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[29].eventsList.Count > 3) {
-                Button30EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[29].eventsList.Count - 2) + " More Events...";
-                Button30EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 31 */
-        try {
-            Button31EventText1 = ReferenceValues.JsonCalendarMasterEventList[30].eventsList[0].name;
-            Button31EventText2 = ReferenceValues.JsonCalendarMasterEventList[30].eventsList[1].name;
-            Button31EventText3 = ReferenceValues.JsonCalendarMasterEventList[30].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button31EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[30].eventsList[0].person);
-            Button31EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[30].eventsList[1].person);
-            Button31EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[30].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[30].eventsList.Count > 3) {
-                Button31EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[30].eventsList.Count - 2) + " More Events...";
-                Button31EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 32 */
-        try {
-            Button32EventText1 = ReferenceValues.JsonCalendarMasterEventList[31].eventsList[0].name;
-            Button32EventText2 = ReferenceValues.JsonCalendarMasterEventList[31].eventsList[1].name;
-            Button32EventText3 = ReferenceValues.JsonCalendarMasterEventList[31].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button32EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[31].eventsList[0].person);
-            Button32EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[31].eventsList[1].person);
-            Button32EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[31].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[31].eventsList.Count > 3) {
-                Button32EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[31].eventsList.Count - 2) + " More Events...";
-                Button32EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 33 */
-        try {
-            Button33EventText1 = ReferenceValues.JsonCalendarMasterEventList[32].eventsList[0].name;
-            Button33EventText2 = ReferenceValues.JsonCalendarMasterEventList[32].eventsList[1].name;
-            Button33EventText3 = ReferenceValues.JsonCalendarMasterEventList[32].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button33EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[32].eventsList[0].person);
-            Button33EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[32].eventsList[1].person);
-            Button33EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[32].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[32].eventsList.Count > 3) {
-                Button33EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[32].eventsList.Count - 2) + " More Events...";
-                Button33EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 34 */
-        try {
-            Button34EventText1 = ReferenceValues.JsonCalendarMasterEventList[33].eventsList[0].name;
-            Button34EventText2 = ReferenceValues.JsonCalendarMasterEventList[33].eventsList[1].name;
-            Button34EventText3 = ReferenceValues.JsonCalendarMasterEventList[33].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button34EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[33].eventsList[0].person);
-            Button34EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[33].eventsList[1].person);
-            Button34EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[33].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[33].eventsList.Count > 3) {
-                Button34EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[33].eventsList.Count - 2) + " More Events...";
-                Button34EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 35 */
-        try {
-            Button35EventText1 = ReferenceValues.JsonCalendarMasterEventList[34].eventsList[0].name;
-            Button35EventText2 = ReferenceValues.JsonCalendarMasterEventList[34].eventsList[1].name;
-            Button35EventText3 = ReferenceValues.JsonCalendarMasterEventList[34].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button35EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[34].eventsList[0].person);
-            Button35EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[34].eventsList[1].person);
-            Button35EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[34].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[34].eventsList.Count > 3) {
-                Button35EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[34].eventsList.Count - 2) + " More Events...";
-                Button35EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 36 */
-        try {
-            Button36EventText1 = ReferenceValues.JsonCalendarMasterEventList[35].eventsList[0].name;
-            Button36EventText2 = ReferenceValues.JsonCalendarMasterEventList[35].eventsList[1].name;
-            Button36EventText3 = ReferenceValues.JsonCalendarMasterEventList[35].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button36EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[35].eventsList[0].person);
-            Button36EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[35].eventsList[1].person);
-            Button36EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[35].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[35].eventsList.Count > 3) {
-                Button36EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[35].eventsList.Count - 2) + " More Events...";
-                Button36EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 37 */
-        try {
-            Button37EventText1 = ReferenceValues.JsonCalendarMasterEventList[36].eventsList[0].name;
-            Button37EventText2 = ReferenceValues.JsonCalendarMasterEventList[36].eventsList[1].name;
-            Button37EventText3 = ReferenceValues.JsonCalendarMasterEventList[36].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button37EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[36].eventsList[0].person);
-            Button37EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[36].eventsList[1].person);
-            Button37EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[36].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[36].eventsList.Count > 3) {
-                Button37EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[36].eventsList.Count - 2) + " More Events...";
-                Button37EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 38 */
-        try {
-            Button38EventText1 = ReferenceValues.JsonCalendarMasterEventList[37].eventsList[0].name;
-            Button38EventText2 = ReferenceValues.JsonCalendarMasterEventList[37].eventsList[1].name;
-            Button38EventText3 = ReferenceValues.JsonCalendarMasterEventList[37].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button38EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[37].eventsList[0].person);
-            Button38EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[37].eventsList[1].person);
-            Button38EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[37].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[37].eventsList.Count > 3) {
-                Button38EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[37].eventsList.Count - 2) + " More Events...";
-                Button38EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 39 */
-        try {
-            Button39EventText1 = ReferenceValues.JsonCalendarMasterEventList[38].eventsList[0].name;
-            Button39EventText2 = ReferenceValues.JsonCalendarMasterEventList[38].eventsList[1].name;
-            Button39EventText3 = ReferenceValues.JsonCalendarMasterEventList[38].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button39EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[38].eventsList[0].person);
-            Button39EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[38].eventsList[1].person);
-            Button39EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[38].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[38].eventsList.Count > 3) {
-                Button39EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[38].eventsList.Count - 2) + " More Events...";
-                Button39EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 40 */
-        try {
-            Button40EventText1 = ReferenceValues.JsonCalendarMasterEventList[39].eventsList[0].name;
-            Button40EventText2 = ReferenceValues.JsonCalendarMasterEventList[39].eventsList[1].name;
-            Button40EventText3 = ReferenceValues.JsonCalendarMasterEventList[39].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button40EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[39].eventsList[0].person);
-            Button40EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[39].eventsList[1].person);
-            Button40EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[39].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[39].eventsList.Count > 3) {
-                Button40EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[39].eventsList.Count - 2) + " More Events...";
-                Button40EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 41 */
-        try {
-            Button41EventText1 = ReferenceValues.JsonCalendarMasterEventList[40].eventsList[0].name;
-            Button41EventText2 = ReferenceValues.JsonCalendarMasterEventList[40].eventsList[1].name;
-            Button41EventText3 = ReferenceValues.JsonCalendarMasterEventList[40].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button41EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[40].eventsList[0].person);
-            Button41EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[40].eventsList[1].person);
-            Button41EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[40].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[40].eventsList.Count > 3) {
-                Button41EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[40].eventsList.Count - 2) + " More Events...";
-                Button41EventColor3 = "White";
-            }
-        } catch (Exception) { }
-
-        /* Button 42 */
-        try {
-            Button42EventText1 = ReferenceValues.JsonCalendarMasterEventList[41].eventsList[0].name;
-            Button42EventText2 = ReferenceValues.JsonCalendarMasterEventList[41].eventsList[1].name;
-            Button42EventText3 = ReferenceValues.JsonCalendarMasterEventList[41].eventsList[2].name;
-        } catch (Exception) { }
-
-        try {
-            Button42EventColor1 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[41].eventsList[0].person);
-            Button42EventColor2 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[41].eventsList[1].person);
-            Button42EventColor3 = GetColorByName(ReferenceValues.JsonCalendarMasterEventList[41].eventsList[2].person);
-        } catch (Exception) { }
-
-        try {
-            if (ReferenceValues.JsonCalendarMasterEventList[41].eventsList.Count > 3) {
-                Button42EventText3 = "+" + (ReferenceValues.JsonCalendarMasterEventList[41].eventsList.Count - 2) + " More Events...";
-                Button42EventColor3 = "White";
-            }
-        } catch (Exception) { }
-    }
-
-    //TODO: hardcoded the names for now, add these as config options in the future.
-    private string GetColorByName(string name) {
-        switch (name) {
-        case "Robert":
-            return "CornflowerBlue";
-        case "Brittany":
-            return "LightGreen";
-        case "Children":
-            return "LightGray";
-        default:
-            return "White";
-        }
-    }
-
     private class HolidayBlock {
         public DateTime Date { get; set; }
         public string Holiday { get; set; }
@@ -1890,30 +1236,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button1EventText1 {
-        get => _button1EventText1;
-        set {
-            _button1EventText1 = value;
-            RaisePropertyChangedEvent("Button1EventText1");
-        }
-    }
-
-    public string Button1EventText2 {
-        get => _button1EventText2;
-        set {
-            _button1EventText2 = value;
-            RaisePropertyChangedEvent("Button1EventText2");
-        }
-    }
-
-    public string Button1EventText3 {
-        get => _button1EventText3;
-        set {
-            _button1EventText3 = value;
-            RaisePropertyChangedEvent("Button1EventText3");
-        }
-    }
-
     public string Button2Date {
         get => _button2Date;
         set {
@@ -1927,30 +1249,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button2HolidayText = value;
             RaisePropertyChangedEvent("Button2HolidayText");
-        }
-    }
-
-    public string Button2EventText1 {
-        get => _button2EventText1;
-        set {
-            _button2EventText1 = value;
-            RaisePropertyChangedEvent("Button2EventText1");
-        }
-    }
-
-    public string Button2EventText2 {
-        get => _button2EventText2;
-        set {
-            _button2EventText2 = value;
-            RaisePropertyChangedEvent("Button2EventText2");
-        }
-    }
-
-    public string Button2EventText3 {
-        get => _button2EventText3;
-        set {
-            _button2EventText3 = value;
-            RaisePropertyChangedEvent("Button2EventText3");
         }
     }
 
@@ -1970,30 +1268,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button3EventText1 {
-        get => _button3EventText1;
-        set {
-            _button3EventText1 = value;
-            RaisePropertyChangedEvent("Button3EventText1");
-        }
-    }
-
-    public string Button3EventText2 {
-        get => _button3EventText2;
-        set {
-            _button3EventText2 = value;
-            RaisePropertyChangedEvent("Button3EventText2");
-        }
-    }
-
-    public string Button3EventText3 {
-        get => _button3EventText3;
-        set {
-            _button3EventText3 = value;
-            RaisePropertyChangedEvent("Button3EventText3");
-        }
-    }
-
     public string Button4Date {
         get => _button4Date;
         set {
@@ -2007,30 +1281,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button4HolidayText = value;
             RaisePropertyChangedEvent("Button4HolidayText");
-        }
-    }
-
-    public string Button4EventText1 {
-        get => _button4EventText1;
-        set {
-            _button4EventText1 = value;
-            RaisePropertyChangedEvent("Button4EventText1");
-        }
-    }
-
-    public string Button4EventText2 {
-        get => _button4EventText2;
-        set {
-            _button4EventText2 = value;
-            RaisePropertyChangedEvent("Button4EventText2");
-        }
-    }
-
-    public string Button4EventText3 {
-        get => _button4EventText3;
-        set {
-            _button4EventText3 = value;
-            RaisePropertyChangedEvent("Button4EventText3");
         }
     }
 
@@ -2050,30 +1300,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button5EventText1 {
-        get => _button5EventText1;
-        set {
-            _button5EventText1 = value;
-            RaisePropertyChangedEvent("Button5EventText1");
-        }
-    }
-
-    public string Button5EventText2 {
-        get => _button5EventText2;
-        set {
-            _button5EventText2 = value;
-            RaisePropertyChangedEvent("Button5EventText2");
-        }
-    }
-
-    public string Button5EventText3 {
-        get => _button5EventText3;
-        set {
-            _button5EventText3 = value;
-            RaisePropertyChangedEvent("Button5EventText3");
-        }
-    }
-
     public string Button6Date {
         get => _button6Date;
         set {
@@ -2087,30 +1313,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button6HolidayText = value;
             RaisePropertyChangedEvent("Button6HolidayText");
-        }
-    }
-
-    public string Button6EventText1 {
-        get => _button6EventText1;
-        set {
-            _button6EventText1 = value;
-            RaisePropertyChangedEvent("Button6EventText1");
-        }
-    }
-
-    public string Button6EventText2 {
-        get => _button6EventText2;
-        set {
-            _button6EventText2 = value;
-            RaisePropertyChangedEvent("Button6EventText2");
-        }
-    }
-
-    public string Button6EventText3 {
-        get => _button6EventText3;
-        set {
-            _button6EventText3 = value;
-            RaisePropertyChangedEvent("Button6EventText3");
         }
     }
 
@@ -2130,30 +1332,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button7EventText1 {
-        get => _button7EventText1;
-        set {
-            _button7EventText1 = value;
-            RaisePropertyChangedEvent("Button7EventText1");
-        }
-    }
-
-    public string Button7EventText2 {
-        get => _button7EventText2;
-        set {
-            _button7EventText2 = value;
-            RaisePropertyChangedEvent("Button7EventText2");
-        }
-    }
-
-    public string Button7EventText3 {
-        get => _button7EventText3;
-        set {
-            _button7EventText3 = value;
-            RaisePropertyChangedEvent("Button7EventText3");
-        }
-    }
-
     public string Button8Date {
         get => _button8Date;
         set {
@@ -2170,31 +1348,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button8EventText1 {
-        get => _button8EventText1;
-        set {
-            _button8EventText1 = value;
-            RaisePropertyChangedEvent("Button8EventText1");
-        }
-    }
-
-    public string Button8EventText2 {
-        get => _button8EventText2;
-        set {
-            _button8EventText2 = value;
-            RaisePropertyChangedEvent("Button8EventText2");
-        }
-    }
-
-    public string Button8EventText3 {
-        get => _button8EventText3;
-        set {
-            _button8EventText3 = value;
-            RaisePropertyChangedEvent("Button8EventText3");
-        }
-    }
-
-
     public string Button9Date {
         get => _button9Date;
         set {
@@ -2208,30 +1361,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button9HolidayText = value;
             RaisePropertyChangedEvent("Button9HolidayText");
-        }
-    }
-
-    public string Button9EventText1 {
-        get => _button9EventText1;
-        set {
-            _button9EventText1 = value;
-            RaisePropertyChangedEvent("Button9EventText1");
-        }
-    }
-
-    public string Button9EventText2 {
-        get => _button9EventText2;
-        set {
-            _button9EventText2 = value;
-            RaisePropertyChangedEvent("Button9EventText2");
-        }
-    }
-
-    public string Button9EventText3 {
-        get => _button9EventText3;
-        set {
-            _button9EventText3 = value;
-            RaisePropertyChangedEvent("Button9EventText3");
         }
     }
 
@@ -2251,30 +1380,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button10EventText1 {
-        get => _button10EventText1;
-        set {
-            _button10EventText1 = value;
-            RaisePropertyChangedEvent("Button10EventText1");
-        }
-    }
-
-    public string Button10EventText2 {
-        get => _button10EventText2;
-        set {
-            _button10EventText2 = value;
-            RaisePropertyChangedEvent("Button10EventText2");
-        }
-    }
-
-    public string Button10EventText3 {
-        get => _button10EventText3;
-        set {
-            _button10EventText3 = value;
-            RaisePropertyChangedEvent("Button10EventText3");
-        }
-    }
-
     public string Button11Date {
         get => _button11Date;
         set {
@@ -2288,30 +1393,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button11HolidayText = value;
             RaisePropertyChangedEvent("Button11HolidayText");
-        }
-    }
-
-    public string Button11EventText1 {
-        get => _button11EventText1;
-        set {
-            _button11EventText1 = value;
-            RaisePropertyChangedEvent("Button11EventText1");
-        }
-    }
-
-    public string Button11EventText2 {
-        get => _button11EventText2;
-        set {
-            _button11EventText2 = value;
-            RaisePropertyChangedEvent("Button11EventText2");
-        }
-    }
-
-    public string Button11EventText3 {
-        get => _button11EventText3;
-        set {
-            _button11EventText3 = value;
-            RaisePropertyChangedEvent("Button11EventText3");
         }
     }
 
@@ -2331,30 +1412,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button12EventText1 {
-        get => _button12EventText1;
-        set {
-            _button12EventText1 = value;
-            RaisePropertyChangedEvent("Button12EventText1");
-        }
-    }
-
-    public string Button12EventText2 {
-        get => _button12EventText2;
-        set {
-            _button12EventText2 = value;
-            RaisePropertyChangedEvent("Button12EventText2");
-        }
-    }
-
-    public string Button12EventText3 {
-        get => _button12EventText3;
-        set {
-            _button12EventText3 = value;
-            RaisePropertyChangedEvent("Button12EventText3");
-        }
-    }
-
     public string Button13Date {
         get => _button13Date;
         set {
@@ -2368,30 +1425,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button13HolidayText = value;
             RaisePropertyChangedEvent("Button13HolidayText");
-        }
-    }
-
-    public string Button13EventText1 {
-        get => _button13EventText1;
-        set {
-            _button13EventText1 = value;
-            RaisePropertyChangedEvent("Button13EventText1");
-        }
-    }
-
-    public string Button13EventText2 {
-        get => _button13EventText2;
-        set {
-            _button13EventText2 = value;
-            RaisePropertyChangedEvent("Button13EventText2");
-        }
-    }
-
-    public string Button13EventText3 {
-        get => _button13EventText3;
-        set {
-            _button13EventText3 = value;
-            RaisePropertyChangedEvent("Button13EventText3");
         }
     }
 
@@ -2411,30 +1444,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button14EventText1 {
-        get => _button14EventText1;
-        set {
-            _button14EventText1 = value;
-            RaisePropertyChangedEvent("Button14EventText1");
-        }
-    }
-
-    public string Button14EventText2 {
-        get => _button14EventText2;
-        set {
-            _button14EventText2 = value;
-            RaisePropertyChangedEvent("Button14EventText2");
-        }
-    }
-
-    public string Button14EventText3 {
-        get => _button14EventText3;
-        set {
-            _button14EventText3 = value;
-            RaisePropertyChangedEvent("Button14EventText3");
-        }
-    }
-
     public string Button15Date {
         get => _button15Date;
         set {
@@ -2451,30 +1460,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button15EventText1 {
-        get => _button15EventText1;
-        set {
-            _button15EventText1 = value;
-            RaisePropertyChangedEvent("Button15EventText1");
-        }
-    }
-
-    public string Button15EventText2 {
-        get => _button15EventText2;
-        set {
-            _button15EventText2 = value;
-            RaisePropertyChangedEvent("Button15EventText2");
-        }
-    }
-
-    public string Button15EventText3 {
-        get => _button15EventText3;
-        set {
-            _button15EventText3 = value;
-            RaisePropertyChangedEvent("Button15EventText3");
-        }
-    }
-
     public string Button16Date {
         get => _button16Date;
         set {
@@ -2488,30 +1473,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button16HolidayText = value;
             RaisePropertyChangedEvent("Button16HolidayText");
-        }
-    }
-
-    public string Button16EventText1 {
-        get => _button16EventText1;
-        set {
-            _button16EventText1 = value;
-            RaisePropertyChangedEvent("Button16EventText1");
-        }
-    }
-
-    public string Button16EventText2 {
-        get => _button16EventText2;
-        set {
-            _button16EventText2 = value;
-            RaisePropertyChangedEvent("Button16EventText2");
-        }
-    }
-
-    public string Button16EventText3 {
-        get => _button16EventText3;
-        set {
-            _button16EventText3 = value;
-            RaisePropertyChangedEvent("Button16EventText3");
         }
     }
 
@@ -2532,30 +1493,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button17EventText1 {
-        get => _button17EventText1;
-        set {
-            _button17EventText1 = value;
-            RaisePropertyChangedEvent("Button17EventText1");
-        }
-    }
-
-    public string Button17EventText2 {
-        get => _button17EventText2;
-        set {
-            _button17EventText2 = value;
-            RaisePropertyChangedEvent("Button17EventText2");
-        }
-    }
-
-    public string Button17EventText3 {
-        get => _button17EventText3;
-        set {
-            _button17EventText3 = value;
-            RaisePropertyChangedEvent("Button17EventText3");
-        }
-    }
-
     public string Button18Date {
         get => _button18Date;
         set {
@@ -2569,30 +1506,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button18HolidayText = value;
             RaisePropertyChangedEvent("Button18HolidayText");
-        }
-    }
-
-    public string Button18EventText1 {
-        get => _button18EventText1;
-        set {
-            _button18EventText1 = value;
-            RaisePropertyChangedEvent("Button18EventText1");
-        }
-    }
-
-    public string Button18EventText2 {
-        get => _button18EventText2;
-        set {
-            _button18EventText2 = value;
-            RaisePropertyChangedEvent("Button18EventText2");
-        }
-    }
-
-    public string Button18EventText3 {
-        get => _button18EventText3;
-        set {
-            _button18EventText3 = value;
-            RaisePropertyChangedEvent("Button18EventText3");
         }
     }
 
@@ -2612,30 +1525,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button19EventText1 {
-        get => _button19EventText1;
-        set {
-            _button19EventText1 = value;
-            RaisePropertyChangedEvent("Button19EventText1");
-        }
-    }
-
-    public string Button19EventText2 {
-        get => _button19EventText2;
-        set {
-            _button19EventText2 = value;
-            RaisePropertyChangedEvent("Button19EventText2");
-        }
-    }
-
-    public string Button19EventText3 {
-        get => _button19EventText3;
-        set {
-            _button19EventText3 = value;
-            RaisePropertyChangedEvent("Button19EventText3");
-        }
-    }
-
     public string Button20Date {
         get => _button20Date;
         set {
@@ -2649,30 +1538,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button20HolidayText = value;
             RaisePropertyChangedEvent("Button20HolidayText");
-        }
-    }
-
-    public string Button20EventText1 {
-        get => _button20EventText1;
-        set {
-            _button20EventText1 = value;
-            RaisePropertyChangedEvent("Button20EventText1");
-        }
-    }
-
-    public string Button20EventText2 {
-        get => _button20EventText2;
-        set {
-            _button20EventText2 = value;
-            RaisePropertyChangedEvent("Button20EventText2");
-        }
-    }
-
-    public string Button20EventText3 {
-        get => _button20EventText3;
-        set {
-            _button20EventText3 = value;
-            RaisePropertyChangedEvent("Button20EventText3");
         }
     }
 
@@ -2692,30 +1557,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button21EventText1 {
-        get => _button21EventText1;
-        set {
-            _button21EventText1 = value;
-            RaisePropertyChangedEvent("Button21EventText1");
-        }
-    }
-
-    public string Button21EventText2 {
-        get => _button21EventText2;
-        set {
-            _button21EventText2 = value;
-            RaisePropertyChangedEvent("Button21EventText2");
-        }
-    }
-
-    public string Button21EventText3 {
-        get => _button21EventText3;
-        set {
-            _button21EventText3 = value;
-            RaisePropertyChangedEvent("Button21EventText3");
-        }
-    }
-
     public string Button22Date {
         get => _button22Date;
         set {
@@ -2729,30 +1570,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button22HolidayText = value;
             RaisePropertyChangedEvent("Button22HolidayText");
-        }
-    }
-
-    public string Button22EventText1 {
-        get => _button22EventText1;
-        set {
-            _button22EventText1 = value;
-            RaisePropertyChangedEvent("Button22EventText1");
-        }
-    }
-
-    public string Button22EventText2 {
-        get => _button22EventText2;
-        set {
-            _button22EventText2 = value;
-            RaisePropertyChangedEvent("Button22EventText2");
-        }
-    }
-
-    public string Button22EventText3 {
-        get => _button22EventText3;
-        set {
-            _button22EventText3 = value;
-            RaisePropertyChangedEvent("Button22EventText3");
         }
     }
 
@@ -2772,30 +1589,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button23EventText1 {
-        get => _button23EventText1;
-        set {
-            _button23EventText1 = value;
-            RaisePropertyChangedEvent("Button23EventText1");
-        }
-    }
-
-    public string Button23EventText2 {
-        get => _button23EventText2;
-        set {
-            _button23EventText2 = value;
-            RaisePropertyChangedEvent("Button23EventText2");
-        }
-    }
-
-    public string Button23EventText3 {
-        get => _button23EventText3;
-        set {
-            _button23EventText3 = value;
-            RaisePropertyChangedEvent("Button23EventText3");
-        }
-    }
-
     public string Button24Date {
         get => _button24Date;
         set {
@@ -2809,30 +1602,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button24HolidayText = value;
             RaisePropertyChangedEvent("Button24HolidayText");
-        }
-    }
-
-    public string Button24EventText1 {
-        get => _button24EventText1;
-        set {
-            _button24EventText1 = value;
-            RaisePropertyChangedEvent("Button24EventText1");
-        }
-    }
-
-    public string Button24EventText2 {
-        get => _button24EventText2;
-        set {
-            _button24EventText2 = value;
-            RaisePropertyChangedEvent("Button24EventText2");
-        }
-    }
-
-    public string Button24EventText3 {
-        get => _button24EventText3;
-        set {
-            _button24EventText3 = value;
-            RaisePropertyChangedEvent("Button24EventText3");
         }
     }
 
@@ -2852,30 +1621,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button25EventText1 {
-        get => _button25EventText1;
-        set {
-            _button25EventText1 = value;
-            RaisePropertyChangedEvent("Button25EventText1");
-        }
-    }
-
-    public string Button25EventText2 {
-        get => _button25EventText2;
-        set {
-            _button25EventText2 = value;
-            RaisePropertyChangedEvent("Button25EventText2");
-        }
-    }
-
-    public string Button25EventText3 {
-        get => _button25EventText3;
-        set {
-            _button25EventText3 = value;
-            RaisePropertyChangedEvent("Button25EventText3");
-        }
-    }
-
     public string Button26Date {
         get => _button26Date;
         set {
@@ -2889,30 +1634,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button26HolidayText = value;
             RaisePropertyChangedEvent("Button26HolidayText");
-        }
-    }
-
-    public string Button26EventText1 {
-        get => _button26EventText1;
-        set {
-            _button26EventText1 = value;
-            RaisePropertyChangedEvent("Button26EventText1");
-        }
-    }
-
-    public string Button26EventText2 {
-        get => _button26EventText2;
-        set {
-            _button26EventText2 = value;
-            RaisePropertyChangedEvent("Button26EventText2");
-        }
-    }
-
-    public string Button26EventText3 {
-        get => _button26EventText3;
-        set {
-            _button26EventText3 = value;
-            RaisePropertyChangedEvent("Button26EventText3");
         }
     }
 
@@ -2932,30 +1653,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button27EventText1 {
-        get => _button27EventText1;
-        set {
-            _button27EventText1 = value;
-            RaisePropertyChangedEvent("Button27EventText1");
-        }
-    }
-
-    public string Button27EventText2 {
-        get => _button27EventText2;
-        set {
-            _button27EventText2 = value;
-            RaisePropertyChangedEvent("Button27EventText2");
-        }
-    }
-
-    public string Button27EventText3 {
-        get => _button27EventText3;
-        set {
-            _button27EventText3 = value;
-            RaisePropertyChangedEvent("Button27EventText3");
-        }
-    }
-
     public string Button28Date {
         get => _button28Date;
         set {
@@ -2969,30 +1666,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button28HolidayText = value;
             RaisePropertyChangedEvent("Button28HolidayText");
-        }
-    }
-
-    public string Button28EventText1 {
-        get => _button28EventText1;
-        set {
-            _button28EventText1 = value;
-            RaisePropertyChangedEvent("Button28EventText1");
-        }
-    }
-
-    public string Button28EventText2 {
-        get => _button28EventText2;
-        set {
-            _button28EventText2 = value;
-            RaisePropertyChangedEvent("Button28EventText2");
-        }
-    }
-
-    public string Button28EventText3 {
-        get => _button28EventText3;
-        set {
-            _button28EventText3 = value;
-            RaisePropertyChangedEvent("Button28EventText3");
         }
     }
 
@@ -3012,30 +1685,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button29EventText1 {
-        get => _button29EventText1;
-        set {
-            _button29EventText1 = value;
-            RaisePropertyChangedEvent("Button29EventText1");
-        }
-    }
-
-    public string Button29EventText2 {
-        get => _button29EventText2;
-        set {
-            _button29EventText2 = value;
-            RaisePropertyChangedEvent("Button29EventText2");
-        }
-    }
-
-    public string Button29EventText3 {
-        get => _button29EventText3;
-        set {
-            _button29EventText3 = value;
-            RaisePropertyChangedEvent("Button29EventText3");
-        }
-    }
-
     public string Button30Date {
         get => _button30Date;
         set {
@@ -3049,30 +1698,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button30HolidayText = value;
             RaisePropertyChangedEvent("Button30HolidayText");
-        }
-    }
-
-    public string Button30EventText1 {
-        get => _button30EventText1;
-        set {
-            _button30EventText1 = value;
-            RaisePropertyChangedEvent("Button30EventText1");
-        }
-    }
-
-    public string Button30EventText2 {
-        get => _button30EventText2;
-        set {
-            _button30EventText2 = value;
-            RaisePropertyChangedEvent("Button30EventText2");
-        }
-    }
-
-    public string Button30EventText3 {
-        get => _button30EventText3;
-        set {
-            _button30EventText3 = value;
-            RaisePropertyChangedEvent("Button30EventText3");
         }
     }
 
@@ -3092,30 +1717,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button31EventText1 {
-        get => _button31EventText1;
-        set {
-            _button31EventText1 = value;
-            RaisePropertyChangedEvent("Button31EventText1");
-        }
-    }
-
-    public string Button31EventText2 {
-        get => _button31EventText2;
-        set {
-            _button31EventText2 = value;
-            RaisePropertyChangedEvent("Button31EventText2");
-        }
-    }
-
-    public string Button31EventText3 {
-        get => _button31EventText3;
-        set {
-            _button31EventText3 = value;
-            RaisePropertyChangedEvent("Button31EventText3");
-        }
-    }
-
     public string Button32Date {
         get => _button32Date;
         set {
@@ -3129,30 +1730,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button32HolidayText = value;
             RaisePropertyChangedEvent("Button32HolidayText");
-        }
-    }
-
-    public string Button32EventText1 {
-        get => _button32EventText1;
-        set {
-            _button32EventText1 = value;
-            RaisePropertyChangedEvent("Button32EventText1");
-        }
-    }
-
-    public string Button32EventText2 {
-        get => _button32EventText2;
-        set {
-            _button32EventText2 = value;
-            RaisePropertyChangedEvent("Button32EventText2");
-        }
-    }
-
-    public string Button32EventText3 {
-        get => _button32EventText3;
-        set {
-            _button32EventText3 = value;
-            RaisePropertyChangedEvent("Button32EventText3");
         }
     }
 
@@ -3172,30 +1749,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button33EventText1 {
-        get => _button33EventText1;
-        set {
-            _button33EventText1 = value;
-            RaisePropertyChangedEvent("Button33EventText1");
-        }
-    }
-
-    public string Button33EventText2 {
-        get => _button33EventText2;
-        set {
-            _button33EventText2 = value;
-            RaisePropertyChangedEvent("Button33EventText2");
-        }
-    }
-
-    public string Button33EventText3 {
-        get => _button33EventText3;
-        set {
-            _button33EventText3 = value;
-            RaisePropertyChangedEvent("Button33EventText3");
-        }
-    }
-
     public string Button34Date {
         get => _button34Date;
         set {
@@ -3209,30 +1762,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button34HolidayText = value;
             RaisePropertyChangedEvent("Button34HolidayText");
-        }
-    }
-
-    public string Button34EventText1 {
-        get => _button34EventText1;
-        set {
-            _button34EventText1 = value;
-            RaisePropertyChangedEvent("Button34EventText1");
-        }
-    }
-
-    public string Button34EventText2 {
-        get => _button34EventText2;
-        set {
-            _button34EventText2 = value;
-            RaisePropertyChangedEvent("Button34EventText2");
-        }
-    }
-
-    public string Button34EventText3 {
-        get => _button34EventText3;
-        set {
-            _button34EventText3 = value;
-            RaisePropertyChangedEvent("Button34EventText3");
         }
     }
 
@@ -3252,30 +1781,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button35EventText1 {
-        get => _button35EventText1;
-        set {
-            _button35EventText1 = value;
-            RaisePropertyChangedEvent("Button35EventText1");
-        }
-    }
-
-    public string Button35EventText2 {
-        get => _button35EventText2;
-        set {
-            _button35EventText2 = value;
-            RaisePropertyChangedEvent("Button35EventText2");
-        }
-    }
-
-    public string Button35EventText3 {
-        get => _button35EventText3;
-        set {
-            _button35EventText3 = value;
-            RaisePropertyChangedEvent("Button35EventText3");
-        }
-    }
-
     public string Button36Date {
         get => _button36Date;
         set {
@@ -3289,30 +1794,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button36HolidayText = value;
             RaisePropertyChangedEvent("Button36HolidayText");
-        }
-    }
-
-    public string Button36EventText1 {
-        get => _button36EventText1;
-        set {
-            _button36EventText1 = value;
-            RaisePropertyChangedEvent("Button36EventText1");
-        }
-    }
-
-    public string Button36EventText2 {
-        get => _button36EventText2;
-        set {
-            _button36EventText2 = value;
-            RaisePropertyChangedEvent("Button36EventText2");
-        }
-    }
-
-    public string Button36EventText3 {
-        get => _button36EventText3;
-        set {
-            _button36EventText3 = value;
-            RaisePropertyChangedEvent("Button36EventText3");
         }
     }
 
@@ -3332,30 +1813,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button37EventText1 {
-        get => _button37EventText1;
-        set {
-            _button37EventText1 = value;
-            RaisePropertyChangedEvent("Button37EventText1");
-        }
-    }
-
-    public string Button37EventText2 {
-        get => _button37EventText2;
-        set {
-            _button37EventText2 = value;
-            RaisePropertyChangedEvent("Button37EventText2");
-        }
-    }
-
-    public string Button37EventText3 {
-        get => _button37EventText3;
-        set {
-            _button37EventText3 = value;
-            RaisePropertyChangedEvent("Button37EventText3");
-        }
-    }
-
     public string Button38Date {
         get => _button38Date;
         set {
@@ -3369,30 +1826,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button38HolidayText = value;
             RaisePropertyChangedEvent("Button38HolidayText");
-        }
-    }
-
-    public string Button38EventText1 {
-        get => _button38EventText1;
-        set {
-            _button38EventText1 = value;
-            RaisePropertyChangedEvent("Button38EventText1");
-        }
-    }
-
-    public string Button38EventText2 {
-        get => _button38EventText2;
-        set {
-            _button38EventText2 = value;
-            RaisePropertyChangedEvent("Button38EventText2");
-        }
-    }
-
-    public string Button38EventText3 {
-        get => _button38EventText3;
-        set {
-            _button38EventText3 = value;
-            RaisePropertyChangedEvent("Button38EventText3");
         }
     }
 
@@ -3412,30 +1845,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button39EventText1 {
-        get => _button39EventText1;
-        set {
-            _button39EventText1 = value;
-            RaisePropertyChangedEvent("Button39EventText1");
-        }
-    }
-
-    public string Button39EventText2 {
-        get => _button39EventText2;
-        set {
-            _button39EventText2 = value;
-            RaisePropertyChangedEvent("Button39EventText2");
-        }
-    }
-
-    public string Button39EventText3 {
-        get => _button39EventText3;
-        set {
-            _button39EventText3 = value;
-            RaisePropertyChangedEvent("Button39EventText3");
-        }
-    }
-
     public string Button40Date {
         get => _button40Date;
         set {
@@ -3449,30 +1858,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button40HolidayText = value;
             RaisePropertyChangedEvent("Button40HolidayText");
-        }
-    }
-
-    public string Button40EventText1 {
-        get => _button40EventText1;
-        set {
-            _button40EventText1 = value;
-            RaisePropertyChangedEvent("Button40EventText1");
-        }
-    }
-
-    public string Button40EventText2 {
-        get => _button40EventText2;
-        set {
-            _button40EventText2 = value;
-            RaisePropertyChangedEvent("Button40EventText2");
-        }
-    }
-
-    public string Button40EventText3 {
-        get => _button40EventText3;
-        set {
-            _button40EventText3 = value;
-            RaisePropertyChangedEvent("Button40EventText3");
         }
     }
 
@@ -3492,30 +1877,6 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public string Button41EventText1 {
-        get => _button41EventText1;
-        set {
-            _button41EventText1 = value;
-            RaisePropertyChangedEvent("Button41EventText1");
-        }
-    }
-
-    public string Button41EventText2 {
-        get => _button41EventText2;
-        set {
-            _button41EventText2 = value;
-            RaisePropertyChangedEvent("Button41EventText2");
-        }
-    }
-
-    public string Button41EventText3 {
-        get => _button41EventText3;
-        set {
-            _button41EventText3 = value;
-            RaisePropertyChangedEvent("Button41EventText3");
-        }
-    }
-
     public string Button42Date {
         get => _button42Date;
         set {
@@ -3529,1038 +1890,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button42HolidayText = value;
             RaisePropertyChangedEvent("Button42HolidayText");
-        }
-    }
-
-    public string Button42EventText1 {
-        get => _button42EventText1;
-        set {
-            _button42EventText1 = value;
-            RaisePropertyChangedEvent("Button42EventText1");
-        }
-    }
-
-    public string Button42EventText2 {
-        get => _button42EventText2;
-        set {
-            _button42EventText2 = value;
-            RaisePropertyChangedEvent("Button42EventText2");
-        }
-    }
-
-    public string Button42EventText3 {
-        get => _button42EventText3;
-        set {
-            _button42EventText3 = value;
-            RaisePropertyChangedEvent("Button42EventText3");
-        }
-    }
-
-    public string Button1EventColor1 {
-        get => _button1EventColor1;
-        set {
-            _button1EventColor1 = value;
-            RaisePropertyChangedEvent("Button1EventColor1");
-        }
-    }
-
-    public string Button1EventColor2 {
-        get => _button1EventColor2;
-        set {
-            _button1EventColor2 = value;
-            RaisePropertyChangedEvent("Button1EventColor2");
-        }
-    }
-
-    public string Button1EventColor3 {
-        get => _button1EventColor3;
-        set {
-            _button1EventColor3 = value;
-            RaisePropertyChangedEvent("Button1EventColor3");
-        }
-    }
-
-    public string Button2EventColor1 {
-        get => _button2EventColor1;
-        set {
-            _button2EventColor1 = value;
-            RaisePropertyChangedEvent("Button2EventColor1");
-        }
-    }
-
-    public string Button2EventColor2 {
-        get => _button2EventColor2;
-        set {
-            _button2EventColor2 = value;
-            RaisePropertyChangedEvent("Button2EventColor2");
-        }
-    }
-
-    public string Button2EventColor3 {
-        get => _button2EventColor3;
-        set {
-            _button2EventColor3 = value;
-            RaisePropertyChangedEvent("Button2EventColor3");
-        }
-    }
-
-    public string Button3EventColor1 {
-        get => _button3EventColor1;
-        set {
-            _button3EventColor1 = value;
-            RaisePropertyChangedEvent("Button3EventColor1");
-        }
-    }
-
-    public string Button3EventColor2 {
-        get => _button3EventColor2;
-        set {
-            _button3EventColor2 = value;
-            RaisePropertyChangedEvent("Button3EventColor2");
-        }
-    }
-
-    public string Button3EventColor3 {
-        get => _button3EventColor3;
-        set {
-            _button3EventColor3 = value;
-            RaisePropertyChangedEvent("Button3EventColor3");
-        }
-    }
-
-    public string Button4EventColor1 {
-        get => _button4EventColor1;
-        set {
-            _button4EventColor1 = value;
-            RaisePropertyChangedEvent("Button4EventColor1");
-        }
-    }
-
-    public string Button4EventColor2 {
-        get => _button4EventColor2;
-        set {
-            _button4EventColor2 = value;
-            RaisePropertyChangedEvent("Button4EventColor2");
-        }
-    }
-
-    public string Button4EventColor3 {
-        get => _button4EventColor3;
-        set {
-            _button4EventColor3 = value;
-            RaisePropertyChangedEvent("Button4EventColor3");
-        }
-    }
-
-    public string Button5EventColor1 {
-        get => _button5EventColor1;
-        set {
-            _button5EventColor1 = value;
-            RaisePropertyChangedEvent("Button5EventColor1");
-        }
-    }
-
-    public string Button5EventColor2 {
-        get => _button5EventColor2;
-        set {
-            _button5EventColor2 = value;
-            RaisePropertyChangedEvent("Button5EventColor2");
-        }
-    }
-
-    public string Button5EventColor3 {
-        get => _button5EventColor3;
-        set {
-            _button5EventColor3 = value;
-            RaisePropertyChangedEvent("Button5EventColor3");
-        }
-    }
-
-    public string Button6EventColor1 {
-        get => _button6EventColor1;
-        set {
-            _button6EventColor1 = value;
-            RaisePropertyChangedEvent("Button6EventColor1");
-        }
-    }
-
-    public string Button6EventColor2 {
-        get => _button6EventColor2;
-        set {
-            _button6EventColor2 = value;
-            RaisePropertyChangedEvent("Button6EventColor2");
-        }
-    }
-
-    public string Button6EventColor3 {
-        get => _button6EventColor3;
-        set {
-            _button6EventColor3 = value;
-            RaisePropertyChangedEvent("Button6EventColor3");
-        }
-    }
-
-    public string Button7EventColor1 {
-        get => _button7EventColor1;
-        set {
-            _button7EventColor1 = value;
-            RaisePropertyChangedEvent("Button7EventColor1");
-        }
-    }
-
-    public string Button7EventColor2 {
-        get => _button7EventColor2;
-        set {
-            _button7EventColor2 = value;
-            RaisePropertyChangedEvent("Button7EventColor2");
-        }
-    }
-
-    public string Button7EventColor3 {
-        get => _button7EventColor3;
-        set {
-            _button7EventColor3 = value;
-            RaisePropertyChangedEvent("Button7EventColor3");
-        }
-    }
-
-    public string Button8EventColor1 {
-        get => _button8EventColor1;
-        set {
-            _button8EventColor1 = value;
-            RaisePropertyChangedEvent("Button8EventColor1");
-        }
-    }
-
-    public string Button8EventColor2 {
-        get => _button8EventColor2;
-        set {
-            _button8EventColor2 = value;
-            RaisePropertyChangedEvent("Button8EventColor2");
-        }
-    }
-
-    public string Button8EventColor3 {
-        get => _button8EventColor3;
-        set {
-            _button8EventColor3 = value;
-            RaisePropertyChangedEvent("Button8EventColor3");
-        }
-    }
-
-    public string Button9EventColor1 {
-        get => _button9EventColor1;
-        set {
-            _button9EventColor1 = value;
-            RaisePropertyChangedEvent("Button9EventColor1");
-        }
-    }
-
-    public string Button9EventColor2 {
-        get => _button9EventColor2;
-        set {
-            _button9EventColor2 = value;
-            RaisePropertyChangedEvent("Button9EventColor2");
-        }
-    }
-
-    public string Button9EventColor3 {
-        get => _button9EventColor3;
-        set {
-            _button9EventColor3 = value;
-            RaisePropertyChangedEvent("Button9EventColor3");
-        }
-    }
-
-    public string Button10EventColor1 {
-        get => _button10EventColor1;
-        set {
-            _button10EventColor1 = value;
-            RaisePropertyChangedEvent("Button10EventColor1");
-        }
-    }
-
-    public string Button10EventColor2 {
-        get => _button10EventColor2;
-        set {
-            _button10EventColor2 = value;
-            RaisePropertyChangedEvent("Button10EventColor2");
-        }
-    }
-
-    public string Button10EventColor3 {
-        get => _button10EventColor3;
-        set {
-            _button10EventColor3 = value;
-            RaisePropertyChangedEvent("Button10EventColor3");
-        }
-    }
-
-    public string Button11EventColor1 {
-        get => _button11EventColor1;
-        set {
-            _button11EventColor1 = value;
-            RaisePropertyChangedEvent("Button11EventColor1");
-        }
-    }
-
-    public string Button11EventColor2 {
-        get => _button11EventColor2;
-        set {
-            _button11EventColor2 = value;
-            RaisePropertyChangedEvent("Button11EventColor2");
-        }
-    }
-
-    public string Button11EventColor3 {
-        get => _button11EventColor3;
-        set {
-            _button11EventColor3 = value;
-            RaisePropertyChangedEvent("Button11EventColor3");
-        }
-    }
-
-    public string Button12EventColor1 {
-        get => _button12EventColor1;
-        set {
-            _button12EventColor1 = value;
-            RaisePropertyChangedEvent("Button12EventColor1");
-        }
-    }
-
-    public string Button12EventColor2 {
-        get => _button12EventColor2;
-        set {
-            _button12EventColor2 = value;
-            RaisePropertyChangedEvent("Button12EventColor2");
-        }
-    }
-
-    public string Button12EventColor3 {
-        get => _button12EventColor3;
-        set {
-            _button12EventColor3 = value;
-            RaisePropertyChangedEvent("Button12EventColor3");
-        }
-    }
-
-    public string Button13EventColor1 {
-        get => _button13EventColor1;
-        set {
-            _button13EventColor1 = value;
-            RaisePropertyChangedEvent("Button13EventColor1");
-        }
-    }
-
-    public string Button13EventColor2 {
-        get => _button13EventColor2;
-        set {
-            _button13EventColor2 = value;
-            RaisePropertyChangedEvent("Button13EventColor2");
-        }
-    }
-
-    public string Button13EventColor3 {
-        get => _button13EventColor3;
-        set {
-            _button13EventColor3 = value;
-            RaisePropertyChangedEvent("Button13EventColor3");
-        }
-    }
-
-    public string Button14EventColor1 {
-        get => _button14EventColor1;
-        set {
-            _button14EventColor1 = value;
-            RaisePropertyChangedEvent("Button14EventColor1");
-        }
-    }
-
-    public string Button14EventColor2 {
-        get => _button14EventColor2;
-        set {
-            _button14EventColor2 = value;
-            RaisePropertyChangedEvent("Button14EventColor2");
-        }
-    }
-
-    public string Button14EventColor3 {
-        get => _button14EventColor3;
-        set {
-            _button14EventColor3 = value;
-            RaisePropertyChangedEvent("Button14EventColor3");
-        }
-    }
-
-    public string Button15EventColor1 {
-        get => _button15EventColor1;
-        set {
-            _button15EventColor1 = value;
-            RaisePropertyChangedEvent("Button15EventColor1");
-        }
-    }
-
-    public string Button15EventColor2 {
-        get => _button15EventColor2;
-        set {
-            _button15EventColor2 = value;
-            RaisePropertyChangedEvent("Button15EventColor2");
-        }
-    }
-
-    public string Button15EventColor3 {
-        get => _button15EventColor3;
-        set {
-            _button15EventColor3 = value;
-            RaisePropertyChangedEvent("Button15EventColor3");
-        }
-    }
-
-    public string Button16EventColor1 {
-        get => _button16EventColor1;
-        set {
-            _button16EventColor1 = value;
-            RaisePropertyChangedEvent("Button16EventColor1");
-        }
-    }
-
-    public string Button16EventColor2 {
-        get => _button16EventColor2;
-        set {
-            _button16EventColor2 = value;
-            RaisePropertyChangedEvent("Button16EventColor2");
-        }
-    }
-
-    public string Button16EventColor3 {
-        get => _button16EventColor3;
-        set {
-            _button16EventColor3 = value;
-            RaisePropertyChangedEvent("Button16EventColor3");
-        }
-    }
-
-    public string Button17EventColor1 {
-        get => _button17EventColor1;
-        set {
-            _button17EventColor1 = value;
-            RaisePropertyChangedEvent("Button17EventColor1");
-        }
-    }
-
-    public string Button17EventColor2 {
-        get => _button17EventColor2;
-        set {
-            _button17EventColor2 = value;
-            RaisePropertyChangedEvent("Button17EventColor2");
-        }
-    }
-
-    public string Button17EventColor3 {
-        get => _button17EventColor3;
-        set {
-            _button17EventColor3 = value;
-            RaisePropertyChangedEvent("Button17EventColor3");
-        }
-    }
-
-    public string Button18EventColor1 {
-        get => _button18EventColor1;
-        set {
-            _button18EventColor1 = value;
-            RaisePropertyChangedEvent("Button18EventColor1");
-        }
-    }
-
-    public string Button18EventColor2 {
-        get => _button18EventColor2;
-        set {
-            _button18EventColor2 = value;
-            RaisePropertyChangedEvent("Button18EventColor2");
-        }
-    }
-
-    public string Button18EventColor3 {
-        get => _button18EventColor3;
-        set {
-            _button18EventColor3 = value;
-            RaisePropertyChangedEvent("Button18EventColor3");
-        }
-    }
-
-    public string Button19EventColor1 {
-        get => _button19EventColor1;
-        set {
-            _button19EventColor1 = value;
-            RaisePropertyChangedEvent("Button19EventColor1");
-        }
-    }
-
-    public string Button19EventColor2 {
-        get => _button19EventColor2;
-        set {
-            _button19EventColor2 = value;
-            RaisePropertyChangedEvent("Button19EventColor2");
-        }
-    }
-
-    public string Button19EventColor3 {
-        get => _button19EventColor3;
-        set {
-            _button19EventColor3 = value;
-            RaisePropertyChangedEvent("Button19EventColor3");
-        }
-    }
-
-    public string Button20EventColor1 {
-        get => _button20EventColor1;
-        set {
-            _button20EventColor1 = value;
-            RaisePropertyChangedEvent("Button20EventColor1");
-        }
-    }
-
-    public string Button20EventColor2 {
-        get => _button20EventColor2;
-        set {
-            _button20EventColor2 = value;
-            RaisePropertyChangedEvent("Button20EventColor2");
-        }
-    }
-
-    public string Button20EventColor3 {
-        get => _button20EventColor3;
-        set {
-            _button20EventColor3 = value;
-            RaisePropertyChangedEvent("Button20EventColor3");
-        }
-    }
-
-    public string Button21EventColor1 {
-        get => _button21EventColor1;
-        set {
-            _button21EventColor1 = value;
-            RaisePropertyChangedEvent("Button21EventColor1");
-        }
-    }
-
-    public string Button21EventColor2 {
-        get => _button21EventColor2;
-        set {
-            _button21EventColor2 = value;
-            RaisePropertyChangedEvent("Button21EventColor2");
-        }
-    }
-
-    public string Button21EventColor3 {
-        get => _button21EventColor3;
-        set {
-            _button21EventColor3 = value;
-            RaisePropertyChangedEvent("Button21EventColor3");
-        }
-    }
-
-    public string Button22EventColor1 {
-        get => _button22EventColor1;
-        set {
-            _button22EventColor1 = value;
-            RaisePropertyChangedEvent("Button22EventColor1");
-        }
-    }
-
-    public string Button22EventColor2 {
-        get => _button22EventColor2;
-        set {
-            _button22EventColor2 = value;
-            RaisePropertyChangedEvent("Button22EventColor2");
-        }
-    }
-
-    public string Button22EventColor3 {
-        get => _button22EventColor3;
-        set {
-            _button22EventColor3 = value;
-            RaisePropertyChangedEvent("Button22EventColor3");
-        }
-    }
-
-    public string Button23EventColor1 {
-        get => _button23EventColor1;
-        set {
-            _button23EventColor1 = value;
-            RaisePropertyChangedEvent("Button23EventColor1");
-        }
-    }
-
-    public string Button23EventColor2 {
-        get => _button23EventColor2;
-        set {
-            _button23EventColor2 = value;
-            RaisePropertyChangedEvent("Button23EventColor2");
-        }
-    }
-
-    public string Button23EventColor3 {
-        get => _button23EventColor3;
-        set {
-            _button23EventColor3 = value;
-            RaisePropertyChangedEvent("Button23EventColor3");
-        }
-    }
-
-    public string Button24EventColor1 {
-        get => _button24EventColor1;
-        set {
-            _button24EventColor1 = value;
-            RaisePropertyChangedEvent("Button24EventColor1");
-        }
-    }
-
-    public string Button24EventColor2 {
-        get => _button24EventColor2;
-        set {
-            _button24EventColor2 = value;
-            RaisePropertyChangedEvent("Button24EventColor2");
-        }
-    }
-
-    public string Button24EventColor3 {
-        get => _button24EventColor3;
-        set {
-            _button24EventColor3 = value;
-            RaisePropertyChangedEvent("Button24EventColor3");
-        }
-    }
-
-    public string Button25EventColor1 {
-        get => _button25EventColor1;
-        set {
-            _button25EventColor1 = value;
-            RaisePropertyChangedEvent("Button25EventColor1");
-        }
-    }
-
-    public string Button25EventColor2 {
-        get => _button25EventColor2;
-        set {
-            _button25EventColor2 = value;
-            RaisePropertyChangedEvent("Button25EventColor2");
-        }
-    }
-
-    public string Button25EventColor3 {
-        get => _button25EventColor3;
-        set {
-            _button25EventColor3 = value;
-            RaisePropertyChangedEvent("Button25EventColor3");
-        }
-    }
-
-    public string Button26EventColor1 {
-        get => _button26EventColor1;
-        set {
-            _button26EventColor1 = value;
-            RaisePropertyChangedEvent("Button26EventColor1");
-        }
-    }
-
-    public string Button26EventColor2 {
-        get => _button26EventColor2;
-        set {
-            _button26EventColor2 = value;
-            RaisePropertyChangedEvent("Button26EventColor2");
-        }
-    }
-
-    public string Button26EventColor3 {
-        get => _button26EventColor3;
-        set {
-            _button26EventColor3 = value;
-            RaisePropertyChangedEvent("Button26EventColor3");
-        }
-    }
-
-    public string Button27EventColor1 {
-        get => _button27EventColor1;
-        set {
-            _button27EventColor1 = value;
-            RaisePropertyChangedEvent("Button27EventColor1");
-        }
-    }
-
-    public string Button27EventColor2 {
-        get => _button27EventColor2;
-        set {
-            _button27EventColor2 = value;
-            RaisePropertyChangedEvent("Button27EventColor2");
-        }
-    }
-
-    public string Button27EventColor3 {
-        get => _button27EventColor3;
-        set {
-            _button27EventColor3 = value;
-            RaisePropertyChangedEvent("Button27EventColor3");
-        }
-    }
-
-    public string Button28EventColor1 {
-        get => _button28EventColor1;
-        set {
-            _button28EventColor1 = value;
-            RaisePropertyChangedEvent("Button28EventColor1");
-        }
-    }
-
-    public string Button28EventColor2 {
-        get => _button28EventColor2;
-        set {
-            _button28EventColor2 = value;
-            RaisePropertyChangedEvent("Button28EventColor2");
-        }
-    }
-
-    public string Button28EventColor3 {
-        get => _button28EventColor3;
-        set {
-            _button28EventColor3 = value;
-            RaisePropertyChangedEvent("Button28EventColor3");
-        }
-    }
-
-    public string Button29EventColor1 {
-        get => _button29EventColor1;
-        set {
-            _button29EventColor1 = value;
-            RaisePropertyChangedEvent("Button29EventColor1");
-        }
-    }
-
-    public string Button29EventColor2 {
-        get => _button29EventColor2;
-        set {
-            _button29EventColor2 = value;
-            RaisePropertyChangedEvent("Button29EventColor2");
-        }
-    }
-
-    public string Button29EventColor3 {
-        get => _button29EventColor3;
-        set {
-            _button29EventColor3 = value;
-            RaisePropertyChangedEvent("Button29EventColor3");
-        }
-    }
-
-    public string Button30EventColor1 {
-        get => _button30EventColor1;
-        set {
-            _button30EventColor1 = value;
-            RaisePropertyChangedEvent("Button30EventColor1");
-        }
-    }
-
-    public string Button30EventColor2 {
-        get => _button30EventColor2;
-        set {
-            _button30EventColor2 = value;
-            RaisePropertyChangedEvent("Button30EventColor2");
-        }
-    }
-
-    public string Button30EventColor3 {
-        get => _button30EventColor3;
-        set {
-            _button30EventColor3 = value;
-            RaisePropertyChangedEvent("Button30EventColor3");
-        }
-    }
-
-    public string Button31EventColor1 {
-        get => _button31EventColor1;
-        set {
-            _button31EventColor1 = value;
-            RaisePropertyChangedEvent("Button31EventColor1");
-        }
-    }
-
-    public string Button31EventColor2 {
-        get => _button31EventColor2;
-        set {
-            _button31EventColor2 = value;
-            RaisePropertyChangedEvent("Button31EventColor2");
-        }
-    }
-
-    public string Button31EventColor3 {
-        get => _button31EventColor3;
-        set {
-            _button31EventColor3 = value;
-            RaisePropertyChangedEvent("Button31EventColor3");
-        }
-    }
-
-    public string Button32EventColor1 {
-        get => _button32EventColor1;
-        set {
-            _button32EventColor1 = value;
-            RaisePropertyChangedEvent("Button32EventColor1");
-        }
-    }
-
-    public string Button32EventColor2 {
-        get => _button32EventColor2;
-        set {
-            _button32EventColor2 = value;
-            RaisePropertyChangedEvent("Button32EventColor2");
-        }
-    }
-
-    public string Button32EventColor3 {
-        get => _button32EventColor3;
-        set {
-            _button32EventColor3 = value;
-            RaisePropertyChangedEvent("Button32EventColor3");
-        }
-    }
-
-    public string Button33EventColor1 {
-        get => _button33EventColor1;
-        set {
-            _button33EventColor1 = value;
-            RaisePropertyChangedEvent("Button33EventColor1");
-        }
-    }
-
-    public string Button33EventColor2 {
-        get => _button33EventColor2;
-        set {
-            _button33EventColor2 = value;
-            RaisePropertyChangedEvent("Button33EventColor2");
-        }
-    }
-
-    public string Button33EventColor3 {
-        get => _button33EventColor3;
-        set {
-            _button33EventColor3 = value;
-            RaisePropertyChangedEvent("Button33EventColor3");
-        }
-    }
-
-    public string Button34EventColor1 {
-        get => _button34EventColor1;
-        set {
-            _button34EventColor1 = value;
-            RaisePropertyChangedEvent("Button34EventColor1");
-        }
-    }
-
-    public string Button34EventColor2 {
-        get => _button34EventColor2;
-        set {
-            _button34EventColor2 = value;
-            RaisePropertyChangedEvent("Button34EventColor2");
-        }
-    }
-
-    public string Button34EventColor3 {
-        get => _button34EventColor3;
-        set {
-            _button34EventColor3 = value;
-            RaisePropertyChangedEvent("Button34EventColor3");
-        }
-    }
-
-    public string Button35EventColor1 {
-        get => _button35EventColor1;
-        set {
-            _button35EventColor1 = value;
-            RaisePropertyChangedEvent("Button35EventColor1");
-        }
-    }
-
-    public string Button35EventColor2 {
-        get => _button35EventColor2;
-        set {
-            _button35EventColor2 = value;
-            RaisePropertyChangedEvent("Button35EventColor2");
-        }
-    }
-
-    public string Button35EventColor3 {
-        get => _button35EventColor3;
-        set {
-            _button35EventColor3 = value;
-            RaisePropertyChangedEvent("Button35EventColor3");
-        }
-    }
-
-    public string Button36EventColor1 {
-        get => _button36EventColor1;
-        set {
-            _button36EventColor1 = value;
-            RaisePropertyChangedEvent("Button36EventColor1");
-        }
-    }
-
-    public string Button36EventColor2 {
-        get => _button36EventColor2;
-        set {
-            _button36EventColor2 = value;
-            RaisePropertyChangedEvent("Button36EventColor2");
-        }
-    }
-
-    public string Button36EventColor3 {
-        get => _button36EventColor3;
-        set {
-            _button36EventColor3 = value;
-            RaisePropertyChangedEvent("Button36EventColor3");
-        }
-    }
-
-    public string Button37EventColor1 {
-        get => _button37EventColor1;
-        set {
-            _button37EventColor1 = value;
-            RaisePropertyChangedEvent("Button37EventColor1");
-        }
-    }
-
-    public string Button37EventColor2 {
-        get => _button37EventColor2;
-        set {
-            _button37EventColor2 = value;
-            RaisePropertyChangedEvent("Button37EventColor2");
-        }
-    }
-
-    public string Button37EventColor3 {
-        get => _button37EventColor3;
-        set {
-            _button37EventColor3 = value;
-            RaisePropertyChangedEvent("Button37EventColor3");
-        }
-    }
-
-    public string Button38EventColor1 {
-        get => _button38EventColor1;
-        set {
-            _button38EventColor1 = value;
-            RaisePropertyChangedEvent("Button38EventColor1");
-        }
-    }
-
-    public string Button38EventColor2 {
-        get => _button38EventColor2;
-        set {
-            _button38EventColor2 = value;
-            RaisePropertyChangedEvent("Button38EventColor2");
-        }
-    }
-
-    public string Button38EventColor3 {
-        get => _button38EventColor3;
-        set {
-            _button38EventColor3 = value;
-            RaisePropertyChangedEvent("Button38EventColor3");
-        }
-    }
-
-    public string Button39EventColor1 {
-        get => _button39EventColor1;
-        set {
-            _button39EventColor1 = value;
-            RaisePropertyChangedEvent("Button39EventColor1");
-        }
-    }
-
-    public string Button39EventColor2 {
-        get => _button39EventColor2;
-        set {
-            _button39EventColor2 = value;
-            RaisePropertyChangedEvent("Button39EventColor2");
-        }
-    }
-
-    public string Button39EventColor3 {
-        get => _button39EventColor3;
-        set {
-            _button39EventColor3 = value;
-            RaisePropertyChangedEvent("Button39EventColor3");
-        }
-    }
-
-    public string Button40EventColor1 {
-        get => _button40EventColor1;
-        set {
-            _button40EventColor1 = value;
-            RaisePropertyChangedEvent("Button40EventColor1");
-        }
-    }
-
-    public string Button40EventColor2 {
-        get => _button40EventColor2;
-        set {
-            _button40EventColor2 = value;
-            RaisePropertyChangedEvent("Button40EventColor2");
-        }
-    }
-
-    public string Button40EventColor3 {
-        get => _button40EventColor3;
-        set {
-            _button40EventColor3 = value;
-            RaisePropertyChangedEvent("Button40EventColor3");
-        }
-    }
-
-    public string Button41EventColor1 {
-        get => _button41EventColor1;
-        set {
-            _button41EventColor1 = value;
-            RaisePropertyChangedEvent("Button41EventColor1");
-        }
-    }
-
-    public string Button41EventColor2 {
-        get => _button41EventColor2;
-        set {
-            _button41EventColor2 = value;
-            RaisePropertyChangedEvent("Button41EventColor2");
-        }
-    }
-
-    public string Button41EventColor3 {
-        get => _button41EventColor3;
-        set {
-            _button41EventColor3 = value;
-            RaisePropertyChangedEvent("Button41EventColor3");
-        }
-    }
-
-    public string Button42EventColor1 {
-        get => _button42EventColor1;
-        set {
-            _button42EventColor1 = value;
-            RaisePropertyChangedEvent("Button42EventColor1");
-        }
-    }
-
-    public string Button42EventColor2 {
-        get => _button42EventColor2;
-        set {
-            _button42EventColor2 = value;
-            RaisePropertyChangedEvent("Button42EventColor2");
-        }
-    }
-
-    public string Button42EventColor3 {
-        get => _button42EventColor3;
-        set {
-            _button42EventColor3 = value;
-            RaisePropertyChangedEvent("Button42EventColor3");
         }
     }
 
@@ -4897,6 +2226,342 @@ public class CalendarVM : BaseViewModel {
         set {
             _button42BackgroundColor = value;
             RaisePropertyChangedEvent("Button42BackgroundColor");
+        }
+    }
+
+    public ObservableCollection<string> Button1EventList {
+        get => _button1EventList;
+        set {
+            _button1EventList = value;
+            RaisePropertyChangedEvent("Button1EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button2EventList {
+        get => _button2EventList;
+        set {
+            _button2EventList = value;
+            RaisePropertyChangedEvent("Button2EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button3EventList {
+        get => _button3EventList;
+        set {
+            _button3EventList = value;
+            RaisePropertyChangedEvent("Button3EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button4EventList {
+        get => _button4EventList;
+        set {
+            _button4EventList = value;
+            RaisePropertyChangedEvent("Button4EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button5EventList {
+        get => _button5EventList;
+        set {
+            _button5EventList = value;
+            RaisePropertyChangedEvent("Button5EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button6EventList {
+        get => _button6EventList;
+        set {
+            _button6EventList = value;
+            RaisePropertyChangedEvent("Button6EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button7EventList {
+        get => _button7EventList;
+        set {
+            _button7EventList = value;
+            RaisePropertyChangedEvent("Button7EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button8EventList {
+        get => _button8EventList;
+        set {
+            _button8EventList = value;
+            RaisePropertyChangedEvent("Button8EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button9EventList {
+        get => _button9EventList;
+        set {
+            _button9EventList = value;
+            RaisePropertyChangedEvent("Button9EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button10EventList {
+        get => _button10EventList;
+        set {
+            _button10EventList = value;
+            RaisePropertyChangedEvent("Button10EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button11EventList {
+        get => _button11EventList;
+        set {
+            _button11EventList = value;
+            RaisePropertyChangedEvent("Button11EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button12EventList {
+        get => _button12EventList;
+        set {
+            _button12EventList = value;
+            RaisePropertyChangedEvent("Button12EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button13EventList {
+        get => _button13EventList;
+        set {
+            _button13EventList = value;
+            RaisePropertyChangedEvent("Button13EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button14EventList {
+        get => _button14EventList;
+        set {
+            _button14EventList = value;
+            RaisePropertyChangedEvent("Button14EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button15EventList {
+        get => _button15EventList;
+        set {
+            _button15EventList = value;
+            RaisePropertyChangedEvent("Button15EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button16EventList {
+        get => _button16EventList;
+        set {
+            _button16EventList = value;
+            RaisePropertyChangedEvent("Button16EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button17EventList {
+        get => _button17EventList;
+        set {
+            _button17EventList = value;
+            RaisePropertyChangedEvent("Button17EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button18EventList {
+        get => _button18EventList;
+        set {
+            _button18EventList = value;
+            RaisePropertyChangedEvent("Button18EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button19EventList {
+        get => _button19EventList;
+        set {
+            _button19EventList = value;
+            RaisePropertyChangedEvent("Button19EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button20EventList {
+        get => _button20EventList;
+        set {
+            _button20EventList = value;
+            RaisePropertyChangedEvent("Button20EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button21EventList {
+        get => _button21EventList;
+        set {
+            _button21EventList = value;
+            RaisePropertyChangedEvent("Button21EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button22EventList {
+        get => _button22EventList;
+        set {
+            _button22EventList = value;
+            RaisePropertyChangedEvent("Button22EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button23EventList {
+        get => _button23EventList;
+        set {
+            _button23EventList = value;
+            RaisePropertyChangedEvent("Button23EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button24EventList {
+        get => _button24EventList;
+        set {
+            _button24EventList = value;
+            RaisePropertyChangedEvent("Button24EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button25EventList {
+        get => _button25EventList;
+        set {
+            _button25EventList = value;
+            RaisePropertyChangedEvent("Button25EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button26EventList {
+        get => _button26EventList;
+        set {
+            _button26EventList = value;
+            RaisePropertyChangedEvent("Button26EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button27EventList {
+        get => _button27EventList;
+        set {
+            _button27EventList = value;
+            RaisePropertyChangedEvent("Button27EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button28EventList {
+        get => _button28EventList;
+        set {
+            _button28EventList = value;
+            RaisePropertyChangedEvent("Button28EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button29EventList {
+        get => _button29EventList;
+        set {
+            _button29EventList = value;
+            RaisePropertyChangedEvent("Button29EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button30EventList {
+        get => _button30EventList;
+        set {
+            _button30EventList = value;
+            RaisePropertyChangedEvent("Button30EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button31EventList {
+        get => _button31EventList;
+        set {
+            _button31EventList = value;
+            RaisePropertyChangedEvent("Button31EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button32EventList {
+        get => _button32EventList;
+        set {
+            _button32EventList = value;
+            RaisePropertyChangedEvent("Button32EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button33EventList {
+        get => _button33EventList;
+        set {
+            _button33EventList = value;
+            RaisePropertyChangedEvent("Button33EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button34EventList {
+        get => _button34EventList;
+        set {
+            _button34EventList = value;
+            RaisePropertyChangedEvent("Button34EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button35EventList {
+        get => _button35EventList;
+        set {
+            _button35EventList = value;
+            RaisePropertyChangedEvent("Button35EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button36EventList {
+        get => _button36EventList;
+        set {
+            _button36EventList = value;
+            RaisePropertyChangedEvent("Button36EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button37EventList {
+        get => _button37EventList;
+        set {
+            _button37EventList = value;
+            RaisePropertyChangedEvent("Button37EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button38EventList {
+        get => _button38EventList;
+        set {
+            _button38EventList = value;
+            RaisePropertyChangedEvent("Button38EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button39EventList {
+        get => _button39EventList;
+        set {
+            _button39EventList = value;
+            RaisePropertyChangedEvent("Button39EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button40EventList {
+        get => _button40EventList;
+        set {
+            _button40EventList = value;
+            RaisePropertyChangedEvent("Button40EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button41EventList {
+        get => _button41EventList;
+        set {
+            _button41EventList = value;
+            RaisePropertyChangedEvent("Button41EventList");
+        }
+    }
+
+    public ObservableCollection<string> Button42EventList {
+        get => _button42EventList;
+        set {
+            _button42EventList = value;
+            RaisePropertyChangedEvent("Button42EventList");
         }
     }
 

@@ -70,25 +70,31 @@ public class TimerVM : BaseViewModel {
     }
 
     private void ButtonLogic(object param) {
-        EditTimer editTimer = new();
+        EditTimer editTimer = null;
 
         switch (param) {
         case "timer1":
             ReferenceValues.ActiveTimerEdit = 0;
+            editTimer = new EditTimer();
             break;
         case "timer2":
             ReferenceValues.ActiveTimerEdit = 1;
+            editTimer = new EditTimer();
             break;
         case "timer3":
             ReferenceValues.ActiveTimerEdit = 2;
+            editTimer = new EditTimer();
             break;
         case "timer4":
             ReferenceValues.ActiveTimerEdit = 3;
+            editTimer = new EditTimer();
             break;
         }
 
-        editTimer.ShowDialog();
-        editTimer.Close();
+        if (editTimer != null) {
+            editTimer.ShowDialog();
+            editTimer.Close();
+        }
 
         Timer1Text = $"{ReferenceValues.TimerMinutes[0]:000}:{ReferenceValues.TimerSeconds[0]:00}";
         Timer2Text = $"{ReferenceValues.TimerMinutes[1]:000}:{ReferenceValues.TimerSeconds[1]:00}";

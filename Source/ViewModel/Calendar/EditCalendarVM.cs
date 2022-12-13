@@ -17,7 +17,7 @@ public class EditCalendarVM : BaseViewModel {
     private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText;
+        _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText, _startTimeText, _endTimeText;
 
     private ObservableCollection<CalendarEvents> _eventList;
 
@@ -68,6 +68,8 @@ public class EditCalendarVM : BaseViewModel {
         EventText = value.name;
         LocationText = value.location;
         DescriptionText = value.description;
+        StartTimeText = value.startTime;
+        EndTimeText = value.endTime;
 
         if (value.person == ReferenceValues.User1Name) {
             selectedPerson = ReferenceValues.User1Name;
@@ -120,12 +122,16 @@ public class EditCalendarVM : BaseViewModel {
                     name = EventText,
                     description = DescriptionText,
                     location = LocationText,
-                    person = selectedPerson
+                    person = selectedPerson,
+                    startTime = StartTimeText,
+                    endTime = EndTimeText
                 });
 
                 EventText = "";
                 DescriptionText = "";
                 LocationText = "";
+                StartTimeText = "";
+                EndTimeText = "";
 
                 SaveJson();
             }
@@ -143,13 +149,17 @@ public class EditCalendarVM : BaseViewModel {
                                 name = EventText,
                                 description = DescriptionText,
                                 location = LocationText,
-                                person = selectedPerson
+                                person = selectedPerson,
+                                startTime = StartTimeText,
+                                endTime = EndTimeText
                             });
                             EventList.Remove(CalendarEventSelected);
 
                             EventText = "";
                             DescriptionText = "";
                             LocationText = "";
+                            StartTimeText = "";
+                            EndTimeText = "";
 
                             SaveJson();
                         }
@@ -325,6 +335,22 @@ public class EditCalendarVM : BaseViewModel {
         set {
             _user2NameText = value;
             RaisePropertyChangedEvent("User2NameText");
+        }
+    }
+
+    public string StartTimeText {
+        get => _startTimeText;
+        set {
+            _startTimeText = VerifyInput.VerifyTextNumeric(value);
+            RaisePropertyChangedEvent("StartTimeText");
+        }
+    }
+
+    public string EndTimeText {
+        get => _endTimeText;
+        set {
+            _endTimeText = VerifyInput.VerifyTextNumeric(value);
+            RaisePropertyChangedEvent("EndTimeText");
         }
     }
 

@@ -85,7 +85,6 @@
                             <Setter Property="Foreground" Value="White"/>
                             <Setter Property="BorderThickness" Value="0 0 0 1"/>
                             <Setter Property="BorderBrush" Value="White"/>
-                            <Setter Property="IsEnabled" Value="False"/>
                         </Style>
 
                         <Style TargetType="ListViewItem">
@@ -116,6 +115,8 @@
                     <ListView.View>
                         <GridView AllowsColumnReorder="false">
                             <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Header="Person" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=startTime}" Header="Start" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=endTime}" Header="End" Width="Auto"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Header="Event Name" Width="Auto"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=location}" Header="Location" Width="Auto"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=description}" Header="Description" Width="Auto"/>
@@ -132,6 +133,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="{Binding EventDate}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -142,16 +145,26 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
+                    <TextBlock Text="Start Time" FontSize="24" Foreground="White"/>
+                    <TextBox Text="{Binding StartTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="End Time" FontSize="24" Foreground="White"/>
+                    <TextBox Text="{Binding EndTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4">
                     <TextBlock Text="Location" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding LocationText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="24"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="3">
+                <StackPanel Grid.Row="5">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"/>
                 </StackPanel>
 
-                <Grid Grid.Row="4">
+                <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
