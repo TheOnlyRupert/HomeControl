@@ -1026,7 +1026,7 @@ public class CalendarVM : BaseViewModel {
         DateTime newYearsDate = new(year, 1, 1);
         holidays.Add(new HolidayBlock {
             Date = newYearsDate,
-            Holiday = "New Year's Day"
+            Holiday = "New Year's"
         });
 
         // MLK Day -- 3rd Monday in January 
@@ -1157,13 +1157,13 @@ public class CalendarVM : BaseViewModel {
         DateTime thanksgivingDay = new(year, 11, thanksgiving);
         holidays.Add(new HolidayBlock {
             Date = thanksgivingDay,
-            Holiday = "Thanksgiving Day"
+            Holiday = "Thanksgiving"
         });
 
         // Day After Thanksgiving
         holidays.Add(new HolidayBlock {
             Date = thanksgivingDay.AddDays(1),
-            Holiday = "Day After Thanksgiving"
+            Holiday = "Black Friday"
         });
 
         // Christmas Eve -- December 24th
@@ -1186,7 +1186,7 @@ public class CalendarVM : BaseViewModel {
         DateTime dlsStartDay = new(year, 3, dlsStart);
         holidays.Add(new HolidayBlock {
             Date = dlsStartDay,
-            Holiday = "Daylight Savings Start"
+            Holiday = "DST Start"
         });
 
         // Daylight Savings End -- 1st Sunday in November
@@ -1199,7 +1199,7 @@ public class CalendarVM : BaseViewModel {
 
         holidays.Add(new HolidayBlock {
             Date = dlsEnd,
-            Holiday = "Daylight Savings End"
+            Holiday = "DST End"
         });
 
         return holidays;

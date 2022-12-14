@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.Reference;
@@ -18,13 +19,27 @@ public class BehaviorVM : BaseViewModel {
         Child2Name = ReferenceValues.ChildName[1];
         Child3Name = ReferenceValues.ChildName[2];
 
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
+
         new BehaviorFromJson();
+
+        /* Remove strikes if program was closed before midnight */
+        try {
+            if (!ReferenceValues.JsonBehaviorMaster.Date.Day.Equals(DateTime.Now.Day)) {
+                ReferenceValues.JsonBehaviorMaster.Child1Strikes = 0;
+                ReferenceValues.JsonBehaviorMaster.Child2Strikes = 0;
+                ReferenceValues.JsonBehaviorMaster.Child3Strikes = 0;
+            }
+        } catch (Exception) { }
+
         RefreshBehavior();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
     private void RefreshBehavior() {
+        ReferenceValues.JsonBehaviorMaster.Date = DateTime.Now;
         Child1Star1 = "../../../Resources/Images/behavior/star_black.png";
         Child1Star2 = "../../../Resources/Images/behavior/star_black.png";
         Child1Star3 = "../../../Resources/Images/behavior/star_black.png";
@@ -183,9 +198,6 @@ public class BehaviorVM : BaseViewModel {
         ProgressBarChild1Value = ReferenceValues.JsonBehaviorMaster.Child1Progress;
         ProgressBarChild2Value = ReferenceValues.JsonBehaviorMaster.Child2Progress;
         ProgressBarChild3Value = ReferenceValues.JsonBehaviorMaster.Child3Progress;
-
-        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
-        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {

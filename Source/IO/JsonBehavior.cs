@@ -1,6 +1,9 @@
-﻿namespace HomeControl.Source.IO;
+﻿using System;
+
+namespace HomeControl.Source.IO;
 
 public class JsonBehavior {
+    public DateTime Date { get; set; }
     public int Child1Progress { get; set; }
     public int Child1Stars { get; set; }
     public int Child1Strikes { get; set; }

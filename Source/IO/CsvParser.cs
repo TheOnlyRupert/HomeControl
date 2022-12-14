@@ -17,13 +17,6 @@ public static class CsvParser {
                 file.WriteLine("!KEY,VALUE");
                 file.Close();
             }
-
-            if (!File.Exists(ReferenceValues.FILE_DIRECTORY + "behavior.csv")) {
-                Console.WriteLine("behavior.csv does not exist. Restoring default settings");
-                StreamWriter file = new(ReferenceValues.FILE_DIRECTORY + "behavior.csv", true);
-                file.WriteLine("!KEY,VALUE");
-                file.Close();
-            }
         } catch (Exception) {
             MessageBox.Show("Error! Unable to create program files in directory.\n" +
                             "You must correct this issue and try running the program again.", "Fatal Error");
