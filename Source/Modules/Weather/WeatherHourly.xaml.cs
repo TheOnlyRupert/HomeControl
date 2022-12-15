@@ -8,8 +8,4 @@ public partial class WeatherHourly {
         InitializeComponent();
         DataContext = new WeatherHourlyVM();
     }
-
-    private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
-        ListView.SelectedIndex = -1;
-    }
 }

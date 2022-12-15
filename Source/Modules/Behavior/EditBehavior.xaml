@@ -297,8 +297,8 @@
             </Button>
         </Grid>
 
-        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding RewardText}" FontSize="64" Margin="16" VerticalAlignment="Stretch"
-                Command="{Binding ButtonCommand}" CommandParameter="reward">
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" FontSize="64" Margin="16" VerticalAlignment="Stretch" Command="{Binding ButtonCommand}" 
+        CommandParameter="reward" Visibility="{Binding RewardButtonVisibility}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -319,6 +319,7 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>
+            <Image Source="../../../Resources/Images/behavior/reward.png"/>
         </Button>
 
         <Button Grid.Row="5" Grid.Column="2" Content="Exit" FontSize="18" Padding="4" HorizontalAlignment="Right" MinWidth="128" IsCancel="True" Margin="8">

@@ -64,8 +64,8 @@
     </Page.Resources>
 
     <Border BorderBrush="Black" BorderThickness="1" Margin="0 4 0 0" Focusable="False">
-        <ListView x:Name="ListView" ItemsSource="{Binding ForecastHourlyList}" SelectionChanged="Selector_OnSelectionChanged" Foreground="White" SelectionMode="Single"
-                  Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False">
+        <ListView ItemsSource="{Binding ForecastHourlyList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" 
+                  Focusable="False">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Background" Value="Transparent"/>

@@ -1,15 +1,15 @@
 using System;
 
-namespace HomeControl.Source {
-    public class CrossViewMessenger {
-        private static CrossViewMessenger _instance;
-        public static CrossViewMessenger Instance => _instance ?? (_instance = new CrossViewMessenger());
+namespace HomeControl.Source.ViewModel.Base;
 
-        public event EventHandler<MessageValueChangedEventArgs> MessageValueChanged;
+public class CrossViewMessenger {
+    private static CrossViewMessenger _instance;
+    public static CrossViewMessenger Instance => _instance ??= new CrossViewMessenger();
 
-        public void PushMessage(string propertyName, string value) {
-            MessageValueChanged?.Invoke(this, new MessageValueChangedEventArgs { PropertyName = propertyName, Value = value });
-        }
+    public event EventHandler<MessageValueChangedEventArgs> MessageValueChanged;
+
+    public void PushMessage(string propertyName, string value) {
+        MessageValueChanged?.Invoke(this, new MessageValueChangedEventArgs { PropertyName = propertyName, Value = value });
     }
 }
 

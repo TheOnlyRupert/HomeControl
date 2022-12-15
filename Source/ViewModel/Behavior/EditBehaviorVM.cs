@@ -9,7 +9,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class EditBehaviorVM : BaseViewModel {
-    private string _childName, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3;
+    private string _childName, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3, _rewardButtonVisibility;
     private int _progressBarChildValue, stars, strikes;
 
     public EditBehaviorVM() {
@@ -122,6 +122,8 @@ public class EditBehaviorVM : BaseViewModel {
             ReferenceValues.JsonBehaviorMaster.Child3Progress = ProgressBarChildValue;
             break;
         }
+
+        RewardButtonVisibility = stars == 5 ? "VISIBLE" : "HIDDEN";
 
         try {
             string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster);
@@ -250,6 +252,11 @@ public class EditBehaviorVM : BaseViewModel {
             }
 
             break;
+        case "reward":
+            if (stars == 5) {
+                
+            }
+            break;
         }
 
         RefreshBehavior();
@@ -334,6 +341,14 @@ public class EditBehaviorVM : BaseViewModel {
         set {
             _progressBarChildValue = value;
             RaisePropertyChangedEvent("ProgressBarChildValue");
+        }
+    }
+    
+    public string RewardButtonVisibility {
+        get => _rewardButtonVisibility;
+        set {
+            _rewardButtonVisibility = value;
+            RaisePropertyChangedEvent("RewardButtonVisibility");
         }
     }
 
