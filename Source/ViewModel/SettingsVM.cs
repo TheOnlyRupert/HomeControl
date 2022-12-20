@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Text.Json;
+using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -9,26 +11,27 @@ namespace HomeControl.Source.ViewModel;
 public class SettingsVM : BaseViewModel {
     private string _userAgentText, _user1Name, _user2Name, _child1Name, _child2Name, _child3Name;
 
-    public SettingsVM() {
-        ReferenceValues.UserAgent = "null";
-        ReferenceValues.User1Name = "null";
-        ReferenceValues.User2Name = "null";
-        ReferenceValues.ChildName = new string[3];
-    }
-
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "save":
             if (!string.IsNullOrEmpty(UserAgentText) || !string.IsNullOrEmpty(User1Name) || !string.IsNullOrEmpty(User2Name)) {
-                ReferenceValues.UserAgent = UserAgentText;
-                ReferenceValues.User1Name = User1Name;
-                ReferenceValues.User2Name = User2Name;
-                ReferenceValues.ChildName[0] = Child1Name;
-                ReferenceValues.ChildName[1] = Child2Name;
-                ReferenceValues.ChildName[2] = Child3Name;
-                CsvParser.SaveSettings();
+                ReferenceValues.JsonMasterSettings.UserAgent = UserAgentText;
+                ReferenceValues.JsonMasterSettings.User1Name = User1Name;
+                ReferenceValues.JsonMasterSettings.User2Name = User2Name;
+                ReferenceValues.JsonMasterSettings.User3Name = Child1Name;
+                ReferenceValues.JsonMasterSettings.User4Name = Child2Name;
+                ReferenceValues.JsonMasterSettings.User5Name = Child3Name;
+
+                try {
+                    string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonMasterSettings);
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "settings.json", jsonString);
+                } catch (Exception e) {
+                    Console.WriteLine("Unable to save finances.json... " + e.Message);
+                }
             } else {
                 MessageBox.Show("Fields cannot be blank", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }

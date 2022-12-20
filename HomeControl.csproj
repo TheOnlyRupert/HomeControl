@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -41,18 +41,18 @@
             <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
             <Private>True</Private>
         </Reference>
-        <Reference Include="mscorlib" />
-        <Reference Include="System" />
+        <Reference Include="mscorlib"/>
+        <Reference Include="System"/>
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
             <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
             <Private>True</Private>
         </Reference>
-        <Reference Include="System.Core" />
-        <Reference Include="System.Data" />
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
         <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
         </Reference>
-        <Reference Include="System.Numerics" />
+        <Reference Include="System.Numerics"/>
         <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
             <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
             <Private>True</Private>
@@ -77,39 +77,40 @@
             <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
             <Private>True</Private>
         </Reference>
-        <Reference Include="System.Xml" />
+        <Reference Include="System.Xml"/>
         <Reference Include="System.Xaml">
             <RequiredTargetFramework>4.0</RequiredTargetFramework>
         </Reference>
-        <Reference Include="WindowsBase" />
-        <Reference Include="PresentationCore" />
-        <Reference Include="PresentationFramework" />
+        <Reference Include="WindowsBase"/>
+        <Reference Include="PresentationCore"/>
+        <Reference Include="PresentationFramework"/>
     </ItemGroup>
     <ItemGroup>
         <ApplicationDefinition Include="App.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="Source\Control\DisableNavigation.cs" />
-        <Compile Include="Source\Control\PlaySound.cs" />
-        <Compile Include="Source\Control\SnowEngine.cs" />
-        <Compile Include="Source\Control\SnowInfo.cs" />
-        <Compile Include="Source\Helpers\ListHelpers.cs" />
-        <Compile Include="Source\Helpers\WeatherHelpers.cs" />
-        <Compile Include="Source\IO\BehaviorFromJson.cs" />
-        <Compile Include="Source\IO\CalenderEventsFromJson.cs" />
-        <Compile Include="Source\IO\ChoresFromJson.cs" />
-        <Compile Include="Source\IO\CsvParser.cs" />
-        <Compile Include="Source\IO\DailyFromJson.cs" />
-        <Compile Include="Source\IO\FinancesFromJson.cs" />
-        <Compile Include="Source\IO\JsonBehavior.cs" />
-        <Compile Include="Source\IO\JsonCalendar.cs" />
-        <Compile Include="Source\IO\JsonChores.cs" />
-        <Compile Include="Source\IO\JsonDaily.cs" />
-        <Compile Include="Source\IO\JsonFinances.cs" />
-        <Compile Include="Source\IO\JsonWeatherForecast.cs" />
-        <Compile Include="Source\IO\JsonWeatherForecastHourly.cs" />
-        <Compile Include="Source\IO\WeatherHourlyBlock.cs" />
+        <Compile Include="Source\Control\DisableNavigation.cs"/>
+        <Compile Include="Source\Control\PlaySound.cs"/>
+        <Compile Include="Source\Control\SnowEngine.cs"/>
+        <Compile Include="Source\Control\SnowInfo.cs"/>
+        <Compile Include="Source\Helpers\ListHelpers.cs"/>
+        <Compile Include="Source\Helpers\WeatherHelpers.cs"/>
+        <Compile Include="Source\IO\BehaviorFromJson.cs"/>
+        <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
+        <Compile Include="Source\IO\ChoresFromJson.cs"/>
+        <Compile Include="Source\IO\DailyFromJson.cs"/>
+        <Compile Include="Source\IO\FinancesFromJson.cs"/>
+        <Compile Include="Source\IO\JsonBehavior.cs"/>
+        <Compile Include="Source\IO\JsonCalendar.cs"/>
+        <Compile Include="Source\IO\JsonChores.cs"/>
+        <Compile Include="Source\IO\JsonDaily.cs"/>
+        <Compile Include="Source\IO\JsonFinances.cs"/>
+        <Compile Include="Source\IO\JsonSettings.cs"/>
+        <Compile Include="Source\IO\JsonWeatherForecast.cs"/>
+        <Compile Include="Source\IO\JsonWeatherForecastHourly.cs"/>
+        <Compile Include="Source\IO\SettingsFromJson.cs"/>
+        <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
         <Compile Include="Source\Modules\Chores\ChoresFunds.xaml.cs">
             <DependentUpon>ChoresFunds.xaml</DependentUpon>
         </Compile>
@@ -170,45 +171,45 @@
         <Compile Include="Source\Modules\Function.xaml.cs">
             <DependentUpon>Function.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Games\Games.xaml.cs" />
-        <Compile Include="Source\Modules\Games\Pictionary.xaml.cs" />
+        <Compile Include="Source\Modules\Games\Games.xaml.cs"/>
+        <Compile Include="Source\Modules\Games\Pictionary.xaml.cs"/>
         <Compile Include="Source\Modules\Weather\Weather.xaml.cs">
             <DependentUpon>Weather.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Weather\WeatherHourly.xaml.cs">
             <DependentUpon>WeatherHourly.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Reference\ReferenceValues.cs" />
-        <Compile Include="Source\Reference\VerifyInput.cs" />
-        <Compile Include="Source\ViewModel\Chores\ChoresFundsVM.cs" />
-        <Compile Include="Source\ViewModel\ContactsVM.cs" />
-        <Compile Include="Source\ViewModel\Daily\DailyVM.cs" />
-        <Compile Include="Source\ViewModel\Daily\EditDailyVM.cs" />
-        <Compile Include="Source\ViewModel\MealPrepVM.cs" />
-        <Compile Include="Source\ViewModel\Timer\TimerVM.cs" />
-        <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs" />
-        <Compile Include="Source\ViewModel\Base\BaseViewModel.cs" />
-        <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs" />
-        <Compile Include="Source\ViewModel\Base\DelegateCommand.cs" />
-        <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs" />
-        <Compile Include="Source\ViewModel\Behavior\BehaviorVM.cs" />
-        <Compile Include="Source\ViewModel\Calendar\EditCalendarVM.cs" />
-        <Compile Include="Source\ViewModel\Calendar\CalendarVM.cs" />
-        <Compile Include="Source\ViewModel\Calendar\TodayCalendarVM.cs" />
-        <Compile Include="Source\ViewModel\Chores\ChoresMonthVM.cs" />
-        <Compile Include="Source\ViewModel\Chores\ChoresVM.cs" />
-        <Compile Include="Source\ViewModel\Chores\ChoresWeekVM.cs" />
-        <Compile Include="Source\ViewModel\Finances\EditFinancesVM.cs" />
-        <Compile Include="Source\ViewModel\Finances\FinancesVM.cs" />
-        <Compile Include="Source\ViewModel\FunctionVM.cs" />
-        <Compile Include="Source\ViewModel\Games\GamesVM.cs" />
-        <Compile Include="Source\ViewModel\Games\PictionaryVM.cs" />
-        <Compile Include="Source\ViewModel\Games\WordList.cs" />
-        <Compile Include="Source\ViewModel\MainWindowVM.cs" />
-        <Compile Include="Source\ViewModel\NotesVM.cs" />
-        <Compile Include="Source\ViewModel\SettingsVM.cs" />
-        <Compile Include="Source\ViewModel\Weather\WeatherHourlyVM.cs" />
-        <Compile Include="Source\ViewModel\Weather\WeatherVM.cs" />
+        <Compile Include="Source\Reference\ReferenceValues.cs"/>
+        <Compile Include="Source\Reference\VerifyInput.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresFundsVM.cs"/>
+        <Compile Include="Source\ViewModel\ContactsVM.cs"/>
+        <Compile Include="Source\ViewModel\Daily\DailyVM.cs"/>
+        <Compile Include="Source\ViewModel\Daily\EditDailyVM.cs"/>
+        <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
+        <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
+        <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
+        <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
+        <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs"/>
+        <Compile Include="Source\ViewModel\Base\DelegateCommand.cs"/>
+        <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
+        <Compile Include="Source\ViewModel\Behavior\BehaviorVM.cs"/>
+        <Compile Include="Source\ViewModel\Calendar\EditCalendarVM.cs"/>
+        <Compile Include="Source\ViewModel\Calendar\CalendarVM.cs"/>
+        <Compile Include="Source\ViewModel\Calendar\TodayCalendarVM.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresMonthVM.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresVM.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresWeekVM.cs"/>
+        <Compile Include="Source\ViewModel\Finances\EditFinancesVM.cs"/>
+        <Compile Include="Source\ViewModel\Finances\FinancesVM.cs"/>
+        <Compile Include="Source\ViewModel\FunctionVM.cs"/>
+        <Compile Include="Source\ViewModel\Games\GamesVM.cs"/>
+        <Compile Include="Source\ViewModel\Games\PictionaryVM.cs"/>
+        <Compile Include="Source\ViewModel\Games\WordList.cs"/>
+        <Compile Include="Source\ViewModel\MainWindowVM.cs"/>
+        <Compile Include="Source\ViewModel\NotesVM.cs"/>
+        <Compile Include="Source\ViewModel\SettingsVM.cs"/>
+        <Compile Include="Source\ViewModel\Weather\WeatherHourlyVM.cs"/>
+        <Compile Include="Source\ViewModel\Weather\WeatherVM.cs"/>
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -221,30 +222,30 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Page Include="Source\Modules\Chores\ChoresFunds.xaml" />
-        <Page Include="Source\Modules\Contacts.xaml" />
-        <Page Include="Source\Modules\Daily\Daily.xaml" />
-        <Page Include="Source\Modules\Daily\EditDaily.xaml" />
-        <Page Include="Source\Modules\MealPrep.xaml" />
-        <Page Include="Source\Modules\Timer\Timer.xaml" />
-        <Page Include="Source\Modules\Timer\EditTimer.xaml" />
-        <Page Include="Source\Modules\Behavior\Behavior.xaml" />
-        <Page Include="Source\Modules\Behavior\EditBehavior.xaml" />
-        <Page Include="Source\Modules\Calendar\Calendar.xaml" />
-        <Page Include="Source\Modules\Calendar\EditCalendar.xaml" />
-        <Page Include="Source\Modules\Calendar\TodayCalendar.xaml" />
-        <Page Include="Source\Modules\Chores\Chores.xaml" />
-        <Page Include="Source\Modules\Chores\ChoresMonth.xaml" />
-        <Page Include="Source\Modules\Chores\ChoresWeek.xaml" />
-        <Page Include="Source\Modules\Notes.xaml" />
-        <Page Include="Source\Modules\Settings.xaml" />
-        <Page Include="Source\Modules\Finances\Finances.xaml" />
-        <Page Include="Source\Modules\Finances\EditFinances.xaml" />
-        <Page Include="Source\Modules\Function.xaml" />
-        <Page Include="Source\Modules\Games\Games.xaml" />
-        <Page Include="Source\Modules\Games\Pictionary.xaml" />
-        <Page Include="Source\Modules\Weather\Weather.xaml" />
-        <Page Include="Source\Modules\Weather\WeatherHourly.xaml" />
+        <Page Include="Source\Modules\Chores\ChoresFunds.xaml"/>
+        <Page Include="Source\Modules\Contacts.xaml"/>
+        <Page Include="Source\Modules\Daily\Daily.xaml"/>
+        <Page Include="Source\Modules\Daily\EditDaily.xaml"/>
+        <Page Include="Source\Modules\MealPrep.xaml"/>
+        <Page Include="Source\Modules\Timer\Timer.xaml"/>
+        <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
+        <Page Include="Source\Modules\Behavior\Behavior.xaml"/>
+        <Page Include="Source\Modules\Behavior\EditBehavior.xaml"/>
+        <Page Include="Source\Modules\Calendar\Calendar.xaml"/>
+        <Page Include="Source\Modules\Calendar\EditCalendar.xaml"/>
+        <Page Include="Source\Modules\Calendar\TodayCalendar.xaml"/>
+        <Page Include="Source\Modules\Chores\Chores.xaml"/>
+        <Page Include="Source\Modules\Chores\ChoresMonth.xaml"/>
+        <Page Include="Source\Modules\Chores\ChoresWeek.xaml"/>
+        <Page Include="Source\Modules\Notes.xaml"/>
+        <Page Include="Source\Modules\Settings.xaml"/>
+        <Page Include="Source\Modules\Finances\Finances.xaml"/>
+        <Page Include="Source\Modules\Finances\EditFinances.xaml"/>
+        <Page Include="Source\Modules\Function.xaml"/>
+        <Page Include="Source\Modules\Games\Games.xaml"/>
+        <Page Include="Source\Modules\Games\Pictionary.xaml"/>
+        <Page Include="Source\Modules\Weather\Weather.xaml"/>
+        <Page Include="Source\Modules\Weather\WeatherHourly.xaml"/>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">
@@ -261,145 +262,145 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config" />
-        <None Include="packages.config" />
+        <None Include="App.config"/>
+        <None Include="packages.config"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icon.png" />
+        <Resource Include="Resources\Images\icon.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\alarms.png" />
-        <Resource Include="Resources\Images\icons\calendar.png" />
-        <Resource Include="Resources\Images\icons\chores.png" />
-        <Resource Include="Resources\Images\icons\coin_flip.png" />
-        <Resource Include="Resources\Images\icons\games.png" />
-        <Resource Include="Resources\Images\icons\money.png" />
-        <Resource Include="Resources\Images\icons\panic.png" />
-        <Resource Include="Resources\Images\icons\tamagotchi.png" />
-        <Resource Include="Resources\Images\icons\tic_tac_toe.png" />
-        <Resource Include="Resources\Images\icons\wifi.png" />
-        <Resource Include="Resources\Images\weather\rain_drop.png" />
-        <Resource Include="Resources\Images\weather\weather_clear.png" />
-        <Resource Include="Resources\Images\weather\weather_clear_night.png" />
-        <Resource Include="Resources\Images\weather\weather_cloudy.png" />
-        <Resource Include="Resources\Images\weather\weather_cloudy_night.png" />
-        <Resource Include="Resources\Images\weather\weather_dust.png" />
-        <Resource Include="Resources\Images\weather\weather_fog.png" />
-        <Resource Include="Resources\Images\weather\weather_haze.png" />
-        <Resource Include="Resources\Images\weather\weather_part_cloudy.png" />
-        <Resource Include="Resources\Images\weather\weather_rain_hail.png" />
-        <Resource Include="Resources\Images\weather\weather_rain_heavy.png" />
-        <Resource Include="Resources\Images\weather\weather_rain_light.png" />
-        <Resource Include="Resources\Images\weather\weather_rain_medium.png" />
-        <Resource Include="Resources\Images\weather\weather_rain_tornado.png" />
-        <Resource Include="Resources\Images\weather\weather_smoke.png" />
-        <Resource Include="Resources\Images\weather\weather_snow_heavy.png" />
-        <Resource Include="Resources\Images\weather\weather_snow_light.png" />
-        <Resource Include="Resources\Images\weather\weather_snow_rain_mixed.png" />
-        <Resource Include="Resources\Images\weather\weather_snow_windy.png" />
-        <Resource Include="Resources\Images\weather\weather_storm.png" />
-        <Resource Include="Resources\Images\weather\weather_sunrise.png" />
-        <Resource Include="Resources\Images\weather\weather_sunset.png" />
-        <Resource Include="Resources\Images\weather\weather_windy.png" />
-        <Resource Include="Resources\Images\weather\wind_compass.png" />
-        <Resource Include="Resources\Images\weather\wind_direction.png" />
+        <Resource Include="Resources\Images\icons\alarms.png"/>
+        <Resource Include="Resources\Images\icons\calendar.png"/>
+        <Resource Include="Resources\Images\icons\chores.png"/>
+        <Resource Include="Resources\Images\icons\coin_flip.png"/>
+        <Resource Include="Resources\Images\icons\games.png"/>
+        <Resource Include="Resources\Images\icons\money.png"/>
+        <Resource Include="Resources\Images\icons\panic.png"/>
+        <Resource Include="Resources\Images\icons\tamagotchi.png"/>
+        <Resource Include="Resources\Images\icons\tic_tac_toe.png"/>
+        <Resource Include="Resources\Images\icons\wifi.png"/>
+        <Resource Include="Resources\Images\weather\rain_drop.png"/>
+        <Resource Include="Resources\Images\weather\weather_clear.png"/>
+        <Resource Include="Resources\Images\weather\weather_clear_night.png"/>
+        <Resource Include="Resources\Images\weather\weather_cloudy.png"/>
+        <Resource Include="Resources\Images\weather\weather_cloudy_night.png"/>
+        <Resource Include="Resources\Images\weather\weather_dust.png"/>
+        <Resource Include="Resources\Images\weather\weather_fog.png"/>
+        <Resource Include="Resources\Images\weather\weather_haze.png"/>
+        <Resource Include="Resources\Images\weather\weather_part_cloudy.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_hail.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_heavy.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_light.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_medium.png"/>
+        <Resource Include="Resources\Images\weather\weather_rain_tornado.png"/>
+        <Resource Include="Resources\Images\weather\weather_smoke.png"/>
+        <Resource Include="Resources\Images\weather\weather_snow_heavy.png"/>
+        <Resource Include="Resources\Images\weather\weather_snow_light.png"/>
+        <Resource Include="Resources\Images\weather\weather_snow_rain_mixed.png"/>
+        <Resource Include="Resources\Images\weather\weather_snow_windy.png"/>
+        <Resource Include="Resources\Images\weather\weather_storm.png"/>
+        <Resource Include="Resources\Images\weather\weather_sunrise.png"/>
+        <Resource Include="Resources\Images\weather\weather_sunset.png"/>
+        <Resource Include="Resources\Images\weather\weather_windy.png"/>
+        <Resource Include="Resources\Images\weather\wind_compass.png"/>
+        <Resource Include="Resources\Images\weather\wind_direction.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\buzzer.wav" />
-        <Resource Include="Resources\Sounds\ding.wav" />
-        <Resource Include="Resources\Sounds\tap.wav" />
+        <Resource Include="Resources\Sounds\buzzer.wav"/>
+        <Resource Include="Resources\Sounds\ding.wav"/>
+        <Resource Include="Resources\Sounds\tap.wav"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\pictionary.png" />
+        <Resource Include="Resources\Images\icons\pictionary.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\notes.png" />
+        <Resource Include="Resources\Images\icons\notes.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\groceries.png" />
+        <Resource Include="Resources\Images\icons\groceries.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\todo.png" />
+        <Resource Include="Resources\Images\icons\todo.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\recipes.png" />
+        <Resource Include="Resources\Images\icons\recipes.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\contact.png" />
+        <Resource Include="Resources\Images\icons\contact.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\vacation.png" />
+        <Resource Include="Resources\Images\icons\vacation.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\snowflakes\snow1.png" />
-        <Resource Include="Resources\Images\snowflakes\snow2.png" />
-        <Resource Include="Resources\Images\snowflakes\snow3.png" />
-        <Resource Include="Resources\Images\snowflakes\snow4.png" />
-        <Resource Include="Resources\Images\snowflakes\snow5.png" />
-        <Resource Include="Resources\Images\snowflakes\snow6.png" />
-        <Resource Include="Resources\Images\snowflakes\snow7.png" />
-        <Resource Include="Resources\Images\snowflakes\snow8.png" />
-        <Resource Include="Resources\Images\snowflakes\snow9.png" />
+        <Resource Include="Resources\Images\snowflakes\snow1.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow2.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow3.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow4.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow5.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow6.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow7.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow8.png"/>
+        <Resource Include="Resources\Images\snowflakes\snow9.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\weather\cold_border.png" />
+        <Resource Include="Resources\Images\weather\cold_border.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\leaves\leaf1.png" />
-        <Resource Include="Resources\Images\leaves\leaf2.png" />
-        <Resource Include="Resources\Images\leaves\leaf3.png" />
-        <Resource Include="Resources\Images\leaves\leaf4.png" />
-        <Resource Include="Resources\Images\leaves\leaf5.png" />
-        <Resource Include="Resources\Images\leaves\leaf6.png" />
+        <Resource Include="Resources\Images\leaves\leaf1.png"/>
+        <Resource Include="Resources\Images\leaves\leaf2.png"/>
+        <Resource Include="Resources\Images\leaves\leaf3.png"/>
+        <Resource Include="Resources\Images\leaves\leaf4.png"/>
+        <Resource Include="Resources\Images\leaves\leaf5.png"/>
+        <Resource Include="Resources\Images\leaves\leaf6.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\weather\weather_frost.png" />
+        <Resource Include="Resources\Images\weather\weather_frost.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\meal.png" />
+        <Resource Include="Resources\Images\icons\meal.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\weather\fire_border.png" />
+        <Resource Include="Resources\Images\weather\fire_border.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\behavior\star_black.png" />
-        <Resource Include="Resources\Images\behavior\star_gold.png" />
+        <Resource Include="Resources\Images\behavior\star_black.png"/>
+        <Resource Include="Resources\Images\behavior\star_gold.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\behavior.png" />
-        <Resource Include="Resources\Images\icons\events.png" />
+        <Resource Include="Resources\Images\icons\behavior.png"/>
+        <Resource Include="Resources\Images\icons\events.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\key_locked.png" />
-        <Resource Include="Resources\Images\icons\key_unlocked.png" />
-        <Resource Include="Resources\Images\icons\temp_cold.png" />
-        <Resource Include="Resources\Images\icons\temp_hot.png" />
+        <Resource Include="Resources\Images\icons\key_locked.png"/>
+        <Resource Include="Resources\Images\icons\key_unlocked.png"/>
+        <Resource Include="Resources\Images\icons\temp_cold.png"/>
+        <Resource Include="Resources\Images\icons\temp_hot.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\temp_burning.png" />
-        <Resource Include="Resources\Images\icons\temp_cool.png" />
-        <Resource Include="Resources\Images\icons\temp_freezing.png" />
-        <Resource Include="Resources\Images\icons\temp_warm.png" />
+        <Resource Include="Resources\Images\icons\temp_burning.png"/>
+        <Resource Include="Resources\Images\icons\temp_cool.png"/>
+        <Resource Include="Resources\Images\icons\temp_freezing.png"/>
+        <Resource Include="Resources\Images\icons\temp_warm.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\open_tickets.png" />
+        <Resource Include="Resources\Images\icons\open_tickets.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\alarm.wav" />
+        <Resource Include="Resources\Sounds\alarm.wav"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\behavior\strike_black.png" />
-        <Resource Include="Resources\Images\behavior\strike_red.png" />
+        <Resource Include="Resources\Images\behavior\strike_black.png"/>
+        <Resource Include="Resources\Images\behavior\strike_red.png"/>
     </ItemGroup>
     <ItemGroup>
-      <Resource Include="Resources\Images\behavior\reward.png" />
+        <Resource Include="Resources\Images\behavior\reward.png"/>
     </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" />
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')"/>
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
         <PropertyGroup>
             <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
         </PropertyGroup>
-        <Error Condition="!Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Text.Json.6.0.6\build\System.Text.Json.targets'))" />
+        <Error Condition="!Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Text.Json.6.0.6\build\System.Text.Json.targets'))"/>
     </Target>
 </Project>

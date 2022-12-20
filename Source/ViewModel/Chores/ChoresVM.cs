@@ -78,7 +78,7 @@ public class ChoresVM : BaseViewModel {
         CurrentMonthText = dateTime.ToString("MMMM");
         CurrentWeekText = "Week: " + calendar.GetWeekOfYear(dateTime, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
 
-        ChoresTitleText = User2Name + " Monthly Chores";
+        ChoresTitleText = JsonMasterSettings.User2Name + " Monthly Chores";
 
         CurrentWeekSpanText = ChoreWeekStartDate.ToString("MMM dd") + " - " + ChoreWeekStartDate.AddDays(6).ToString("MMM dd");
         ProjectedFundMonthText = dateTime.AddMonths(1).ToString("MMM") + " Projected Funds";

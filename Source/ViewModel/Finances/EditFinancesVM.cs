@@ -24,9 +24,9 @@ public class EditFinancesVM : BaseViewModel {
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
         _financeSelected = new FinanceBlock();
-        selectedPerson = ReferenceValues.User1Name;
-        User1NameText = ReferenceValues.User1Name;
-        User2NameText = ReferenceValues.User2Name;
+        selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
+        User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
+        User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
         DescriptionText = "";
         CostText = "";
         UserButtonLogic();
@@ -125,12 +125,12 @@ public class EditFinancesVM : BaseViewModel {
             break;
 
         case "user1":
-            selectedPerson = ReferenceValues.User1Name;
+            selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
             UserButtonLogic();
             break;
 
         case "user2":
-            selectedPerson = ReferenceValues.User2Name;
+            selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
             UserButtonLogic();
             break;
 
@@ -180,10 +180,10 @@ public class EditFinancesVM : BaseViewModel {
             AddOrSub = "SUB";
         }
 
-        if (value.Person == ReferenceValues.User1Name) {
-            selectedPerson = ReferenceValues.User1Name;
-        } else if (value.Person == ReferenceValues.User2Name) {
-            selectedPerson = ReferenceValues.User2Name;
+        if (value.Person == ReferenceValues.JsonMasterSettings.User1Name) {
+            selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
+        } else if (value.Person == ReferenceValues.JsonMasterSettings.User2Name) {
+            selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
         } else {
             selectedPerson = value.Person;
         }
@@ -198,9 +198,9 @@ public class EditFinancesVM : BaseViewModel {
         HomeBackgroundColor = "Transparent";
         OtherBackgroundColor = "Transparent";
 
-        if (selectedPerson == ReferenceValues.User1Name) {
+        if (selectedPerson == ReferenceValues.JsonMasterSettings.User1Name) {
             User1BackgroundColor = "Green";
-        } else if (selectedPerson == ReferenceValues.User2Name) {
+        } else if (selectedPerson == ReferenceValues.JsonMasterSettings.User2Name) {
             User2BackgroundColor = "Green";
         } else {
             switch (selectedPerson) {

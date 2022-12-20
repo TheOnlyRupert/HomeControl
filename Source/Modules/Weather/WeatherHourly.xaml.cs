@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using HomeControl.Source.ViewModel.Weather;
+﻿using HomeControl.Source.ViewModel.Weather;
 
 namespace HomeControl.Source.Modules.Weather;
 

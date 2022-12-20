@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Daily;
@@ -9,10 +8,12 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Daily;
 
 public class DailyVM : BaseViewModel {
-    private string _button1BackgroundColor, _button1NameText, _button1CompletedText, _button1ProgressValue, _button1ProgressValueText, _button2BackgroundColor, _button2NameText,
-        _button2CompletedText, _button2ProgressValue, _button2ProgressValueText, _button3BackgroundColor, _button3NameText, _button3CompletedText, _button3ProgressValue,
-        _button3ProgressValueText, _button4BackgroundColor, _button4NameText, _button4CompletedText, _button4ProgressValue, _button4ProgressValueText, _button5BackgroundColor,
-        _button5NameText, _button5CompletedText, _button5ProgressValue, _button5ProgressValueText;
+    private string _button1BackgroundColor, _button1NameText, _button1CompletedText, _button1ProgressValueText, _button2BackgroundColor, _button2NameText,
+        _button2CompletedText, _button2ProgressValueText, _button3BackgroundColor, _button3NameText, _button3CompletedText,
+        _button3ProgressValueText, _button4BackgroundColor, _button4NameText, _button4CompletedText, _button4ProgressValueText, _button5BackgroundColor,
+        _button5NameText, _button5CompletedText, _button5ProgressValueText;
+
+    private int _button1ProgressValue, _button2ProgressValue, _button3ProgressValue, _button4ProgressValue, _button5ProgressValue;
 
     private int[] tasksCompleted;
 
@@ -20,26 +21,11 @@ public class DailyVM : BaseViewModel {
         tasksCompleted = new int[5];
 
         try {
-            Button1NameText = ReferenceValues.User1Name;
-            Button2NameText = ReferenceValues.User2Name;
-            Button3NameText = ReferenceValues.ChildName[0];
-            Button4NameText = ReferenceValues.ChildName[1];
-            Button5NameText = ReferenceValues.ChildName[2];
-            Button1CompletedText = "0/2";
-            Button2CompletedText = "0/3";
-            Button3CompletedText = "0/1";
-            Button4CompletedText = "None";
-            Button5CompletedText = "None";
-            Button1ProgressValue = "0";
-            Button2ProgressValue = "0";
-            Button3ProgressValue = "0";
-            Button4ProgressValue = "100";
-            Button5ProgressValue = "100";
-            Button1ProgressValueText = "0%";
-            Button2ProgressValueText = "0%";
-            Button3ProgressValueText = "0%";
-            Button4ProgressValueText = "100%";
-            Button5ProgressValueText = "100%";
+            Button1NameText = ReferenceValues.JsonMasterSettings.User1Name;
+            Button2NameText = ReferenceValues.JsonMasterSettings.User2Name;
+            Button3NameText = ReferenceValues.JsonMasterSettings.User3Name;
+            Button4NameText = ReferenceValues.JsonMasterSettings.User4Name;
+            Button5NameText = ReferenceValues.JsonMasterSettings.User5Name;
         } catch (Exception) { }
 
         RefreshFields();
@@ -57,15 +43,37 @@ public class DailyVM : BaseViewModel {
     }
 
     private void ButtonLogic(object param) {
+        EditDaily editDaily = null;
+
         switch (param) {
         case "button1":
-            EditDaily editDaily = new();
-            editDaily.ShowDialog();
-            editDaily.Close();
-
-            RefreshFields();
+            ReferenceValues.ActiveUserEdit = 0;
+            editDaily = new EditDaily();
+            break;
+        case "button2":
+            ReferenceValues.ActiveUserEdit = 1;
+            editDaily = new EditDaily();
+            break;
+        case "button3":
+            ReferenceValues.ActiveUserEdit = 2;
+            editDaily = new EditDaily();
+            break;
+        case "button4":
+            ReferenceValues.ActiveUserEdit = 3;
+            editDaily = new EditDaily();
+            break;
+        case "button5":
+            ReferenceValues.ActiveUserEdit = 4;
+            editDaily = new EditDaily();
             break;
         }
+
+        if (editDaily != null) {
+            editDaily.ShowDialog();
+            editDaily.Close();
+        }
+
+        RefreshFields();
     }
 
     private void RefreshFields() {
@@ -73,47 +81,197 @@ public class DailyVM : BaseViewModel {
         DailyFromJson dailyFromJson = new();
         dailyFromJson.DailyDayFromJson(DateTime.Now);
 
-        ReferenceValues.JsonDailyMasterList = new JsonDaily {
-            dailyList = new ObservableCollection<DailyDetails>()
-        };
-
-        foreach (DailyDetails daily in ReferenceValues.JsonDailyMasterList.dailyList) {
-            if (daily.Name == "User1Task1") {
+        foreach (DailyDetails daily in ReferenceValues.JsonDailyMasterList.dailyListUser1) {
+            switch (daily.Name) {
+            case "User1Task1": {
                 if (daily.IsComplete) {
                     tasksCompleted[0]++;
                 }
-            }
 
-            if (daily.Name == "User1Task2") {
+                break;
+            }
+            case "User1Task2": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User1Task3": {
                 if (daily.IsComplete) {
                     tasksCompleted[0]++;
                 }
-            }
 
-            if (daily.Name == "User2Task1") {
-                if (daily.IsComplete) {
-                    tasksCompleted[1]++;
-                }
+                break;
             }
-
-            if (daily.Name == "User2Task2") {
+            case "User1Task4": {
                 if (daily.IsComplete) {
-                    tasksCompleted[1]++;
+                    tasksCompleted[0]++;
                 }
+
+                break;
             }
-
-            if (daily.Name == "User2Task3") {
+            case "User1Task5": {
                 if (daily.IsComplete) {
-                    tasksCompleted[1]++;
+                    tasksCompleted[0]++;
                 }
+
+                break;
             }
-
-            if (daily.Name == "User3Task1") {
+            case "User1Task6": {
                 if (daily.IsComplete) {
-                    tasksCompleted[2]++;
+                    tasksCompleted[0]++;
                 }
+
+                break;
+            }
+            case "User1Task7": {
+                if (daily.IsComplete) {
+                    tasksCompleted[0]++;
+                }
+
+                break;
+            }
+            case "User1Task8": {
+                if (daily.IsComplete) {
+                    tasksCompleted[0]++;
+                }
+
+                break;
+            }
+            case "User1Task9": {
+                if (daily.IsComplete) {
+                    tasksCompleted[0]++;
+                }
+
+                break;
+            }
+            case "User1Task10": {
+                if (daily.IsComplete) {
+                    tasksCompleted[0]++;
+                }
+
+                break;
+            }
             }
         }
+
+        foreach (DailyDetails daily in ReferenceValues.JsonDailyMasterList.dailyListUser2) {
+            switch (daily.Name) {
+            case "User2Task1": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task2": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task3": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task4": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task5": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task6": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task7": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task8": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task9": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            case "User2Task10": {
+                if (daily.IsComplete) {
+                    tasksCompleted[1]++;
+                }
+
+                break;
+            }
+            }
+        }
+
+        Button1CompletedText = tasksCompleted[0] + "/" + ReferenceValues.JsonDailyMasterList.dailyListUser1.Count;
+        Button2CompletedText = tasksCompleted[1] + "/" + ReferenceValues.JsonDailyMasterList.dailyListUser2.Count;
+        Button3CompletedText = tasksCompleted[2] + "/" + ReferenceValues.JsonDailyMasterList.dailyListUser3.Count;
+        Button4CompletedText = tasksCompleted[3] + "/" + ReferenceValues.JsonDailyMasterList.dailyListUser4.Count;
+        Button5CompletedText = tasksCompleted[4] + "/" + ReferenceValues.JsonDailyMasterList.dailyListUser5.Count;
+
+        double progress = Convert.ToDouble(tasksCompleted[0]) / Convert.ToDouble(ReferenceValues.JsonDailyMasterList.dailyListUser1.Count) * 100;
+        try {
+            Button1ProgressValue = Convert.ToInt16(progress);
+            Button1ProgressValueText = Button1ProgressValue + "%";
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(tasksCompleted[1]) / Convert.ToDouble(ReferenceValues.JsonDailyMasterList.dailyListUser2.Count) * 100;
+        try {
+            Button2ProgressValue = Convert.ToInt16(progress);
+            Button2ProgressValueText = Button2ProgressValue + "%";
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(tasksCompleted[2]) / Convert.ToDouble(ReferenceValues.JsonDailyMasterList.dailyListUser3.Count) * 100;
+        try {
+            Button3ProgressValue = Convert.ToInt16(progress);
+            Button3ProgressValueText = Button3ProgressValue + "%";
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(tasksCompleted[3]) / Convert.ToDouble(ReferenceValues.JsonDailyMasterList.dailyListUser4.Count) * 100;
+        try {
+            Button4ProgressValue = Convert.ToInt16(progress);
+            Button4ProgressValueText = Button4ProgressValue + "%";
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(tasksCompleted[4]) / Convert.ToDouble(ReferenceValues.JsonDailyMasterList.dailyListUser5.Count) * 100;
+        try {
+            Button5ProgressValue = Convert.ToInt16(progress);
+            Button5ProgressValueText = Button5ProgressValue + "%";
+        } catch (Exception) { }
+
+        Button1BackgroundColor = tasksCompleted[0] == ReferenceValues.JsonDailyMasterList.dailyListUser1.Count ? "Green" : "Transparent";
+        Button2BackgroundColor = tasksCompleted[1] == ReferenceValues.JsonDailyMasterList.dailyListUser2.Count ? "Green" : "Transparent";
+        Button3BackgroundColor = tasksCompleted[2] == ReferenceValues.JsonDailyMasterList.dailyListUser3.Count ? "Green" : "Transparent";
+        Button4BackgroundColor = tasksCompleted[3] == ReferenceValues.JsonDailyMasterList.dailyListUser4.Count ? "Green" : "Transparent";
+        Button5BackgroundColor = tasksCompleted[4] == ReferenceValues.JsonDailyMasterList.dailyListUser5.Count ? "Green" : "Transparent";
     }
 
     #region Fields
@@ -142,7 +300,7 @@ public class DailyVM : BaseViewModel {
         }
     }
 
-    public string Button1ProgressValue {
+    public int Button1ProgressValue {
         get => _button1ProgressValue;
         set {
             _button1ProgressValue = value;
@@ -182,7 +340,7 @@ public class DailyVM : BaseViewModel {
         }
     }
 
-    public string Button2ProgressValue {
+    public int Button2ProgressValue {
         get => _button2ProgressValue;
         set {
             _button2ProgressValue = value;
@@ -222,7 +380,7 @@ public class DailyVM : BaseViewModel {
         }
     }
 
-    public string Button3ProgressValue {
+    public int Button3ProgressValue {
         get => _button3ProgressValue;
         set {
             _button3ProgressValue = value;
@@ -262,7 +420,7 @@ public class DailyVM : BaseViewModel {
         }
     }
 
-    public string Button4ProgressValue {
+    public int Button4ProgressValue {
         get => _button4ProgressValue;
         set {
             _button4ProgressValue = value;
@@ -302,7 +460,7 @@ public class DailyVM : BaseViewModel {
         }
     }
 
-    public string Button5ProgressValue {
+    public int Button5ProgressValue {
         get => _button5ProgressValue;
         set {
             _button5ProgressValue = value;

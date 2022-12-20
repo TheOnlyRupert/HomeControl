@@ -21,9 +21,17 @@ public class PlaySound {
         }
     }
 
-    public void Play() {
+    public void Play(bool isLooping) {
         if (_canPlay) {
-            _audio.Play();
+            if (isLooping) {
+                _audio.Play();
+            } else {
+                _audio.PlayLooping();
+            }
         }
+    }
+
+    public void Stop() {
+        _audio.Stop();
     }
 }

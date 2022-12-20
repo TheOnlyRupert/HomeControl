@@ -28,8 +28,8 @@ public class EditCalendarVM : BaseViewModel {
         EventText = "";
         _jsonCalendar = new JsonCalendar();
         selectedPerson = "Home";
-        User1NameText = ReferenceValues.User1Name;
-        User2NameText = ReferenceValues.User2Name;
+        User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
+        User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
         CalendarEventSelected = new CalendarEvents();
         UserButtonLogic();
 
@@ -71,10 +71,10 @@ public class EditCalendarVM : BaseViewModel {
         StartTimeText = value.startTime;
         EndTimeText = value.endTime;
 
-        if (value.person == ReferenceValues.User1Name) {
-            selectedPerson = ReferenceValues.User1Name;
-        } else if (value.person == ReferenceValues.User2Name) {
-            selectedPerson = ReferenceValues.User2Name;
+        if (value.person == ReferenceValues.JsonMasterSettings.User1Name) {
+            selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
+        } else if (value.person == ReferenceValues.JsonMasterSettings.User2Name) {
+            selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
         } else if (string.IsNullOrEmpty(value.person)) {
             selectedPerson = "Home";
         } else {
@@ -91,9 +91,9 @@ public class EditCalendarVM : BaseViewModel {
         HomeBackgroundColor = "Transparent";
         OtherBackgroundColor = "Transparent";
 
-        if (selectedPerson == ReferenceValues.User1Name) {
+        if (selectedPerson == ReferenceValues.JsonMasterSettings.User1Name) {
             User1BackgroundColor = "Green";
-        } else if (selectedPerson == ReferenceValues.User2Name) {
+        } else if (selectedPerson == ReferenceValues.JsonMasterSettings.User2Name) {
             User2BackgroundColor = "Green";
         } else {
             switch (selectedPerson) {
@@ -183,12 +183,12 @@ public class EditCalendarVM : BaseViewModel {
             break;
 
         case "user1":
-            selectedPerson = ReferenceValues.User1Name;
+            selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
             UserButtonLogic();
             break;
 
         case "user2":
-            selectedPerson = ReferenceValues.User2Name;
+            selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
             UserButtonLogic();
             break;
 

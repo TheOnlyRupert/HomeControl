@@ -21,26 +21,17 @@ public class MainWindowVM : BaseViewModel {
         currentDate = DateTime.Now;
 
         /* Get Settings */
-        string[] settings = CsvParser.GetSettings();
-        ReferenceValues.UserAgent = settings[0];
-        ReferenceValues.User1Name = settings[1];
-        ReferenceValues.User2Name = settings[2];
-        ReferenceValues.ChildName = new string[3];
-        ReferenceValues.ChildName[0] = settings[3];
-        ReferenceValues.ChildName[1] = settings[4];
-        ReferenceValues.ChildName[2] = settings[5];
+        new SettingsFromJson();
 
         ReferenceValues.LockUI = true;
 
         LockedColor = "Transparent";
         LockedText = "LOCKED";
 
-        if (ReferenceValues.UserAgent == "null") {
-            do {
-                Settings settingsDialog = new();
-                settingsDialog.ShowDialog();
-                settingsDialog.Close();
-            } while (string.IsNullOrEmpty(ReferenceValues.UserAgent));
+        if (string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.UserAgent)) {
+            Settings settingsDialog = new();
+            settingsDialog.ShowDialog();
+            settingsDialog.Close();
         }
 
         ApiStatus();
@@ -184,7 +175,7 @@ public class MainWindowVM : BaseViewModel {
         try {
             using WebClient client1 = new();
             const string hostUrl = "https://api.weather.gov/";
-            client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
+            client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
             string apiStatusString = client1.DownloadString(hostUrl);
             ApiStatus apiStatus = JsonSerializer.Deserialize<ApiStatus>(apiStatusString, options);
 

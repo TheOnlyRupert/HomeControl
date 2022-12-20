@@ -69,7 +69,7 @@ public class PictionaryVM : BaseViewModel {
         if (isGameActive) {
             if (isTimerActive) {
                 if (timerCountdownNum == 0) {
-                    soundBuzzer.Play();
+                    soundBuzzer.Play(false);
                     isTimerActive = false;
                     ProgressBarValue = "100";
                     progressBarAdditive = 0;

@@ -73,7 +73,7 @@ public class WeatherVM : BaseViewModel {
             try {
                 using WebClient client1 = new();
                 Uri weatherForecastURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast");
-                client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
+                client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
                 string weatherForecast = client1.DownloadString(weatherForecastURL);
                 forecast = JsonSerializer.Deserialize<JsonWeatherForecast>(weatherForecast, options);
                 updateForecast = false;
@@ -84,7 +84,7 @@ public class WeatherVM : BaseViewModel {
             try {
                 using WebClient client2 = new();
                 Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
-                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
+                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
                 string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
                 forecastHourly = JsonSerializer.Deserialize<JsonWeatherForecastHourly>(weatherForecastHourly, options);
                 updateForecast = false;
@@ -107,7 +107,7 @@ public class WeatherVM : BaseViewModel {
         CurrentWeatherTempText = forecastHourly.properties.periods[0].temperature + "°";
         CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(forecastHourly.properties.periods[0].windDirection);
         CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
-        CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
+        CurrentWeatherDescription = forecast.properties.periods[0].detailedForecast;
         CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime);
 
         try {

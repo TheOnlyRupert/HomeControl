@@ -9,27 +9,33 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class EditBehaviorVM : BaseViewModel {
-    private string _childName, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3, _rewardButtonVisibility;
+    private string _childName, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3, _rewardButtonVisibility,
+        _progressBarChildValueText;
+
     private int _progressBarChildValue, stars, strikes;
 
     public EditBehaviorVM() {
-        ChildName = ReferenceValues.ChildName[ReferenceValues.ActiveChild];
-
         switch (ReferenceValues.ActiveChild) {
         case 0:
+            ChildName = ReferenceValues.JsonMasterSettings.User3Name;
             stars = ReferenceValues.JsonBehaviorMaster.Child1Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.Child1Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child1Progress;
+            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.Child1Progress + "/5";
             break;
         case 1:
+            ChildName = ReferenceValues.JsonMasterSettings.User4Name;
             stars = ReferenceValues.JsonBehaviorMaster.Child2Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.Child2Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child2Progress;
+            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.Child2Progress + "/5";
             break;
         case 2:
+            ChildName = ReferenceValues.JsonMasterSettings.User5Name;
             stars = ReferenceValues.JsonBehaviorMaster.Child3Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.Child3Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child3Progress;
+            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.Child3Progress + "/5";
             break;
         }
 
@@ -164,6 +170,14 @@ public class EditBehaviorVM : BaseViewModel {
                 if (result == MessageBoxResult.Yes) {
                     strikes++;
                     ProgressBarChildValue = 0;
+                    ProgressBarChildValueText = "0/5";
+
+                    if (strikes == 3) {
+                        stars--;
+                        if (stars < 0) {
+                            stars = 0;
+                        }
+                    }
                 }
             }
 
@@ -180,82 +194,47 @@ public class EditBehaviorVM : BaseViewModel {
             break;
 
         case "add1":
-            ProgressBarChildValue++;
-            if (ProgressBarChildValue > 99) {
-                if (stars < 5) {
-                    stars++;
-                    ProgressBarChildValue = 0;
-                } else {
-                    ProgressBarChildValue = 100;
+            if (strikes != 3) {
+                ProgressBarChildValue++;
+                ProgressBarChildValueText = ProgressBarChildValue + "/5";
+                if (ProgressBarChildValue > 4) {
+                    if (stars < 5) {
+                        stars++;
+                        ProgressBarChildValue = 0;
+                        ProgressBarChildValueText = "0/5";
+                    } else {
+                        ProgressBarChildValue = 5;
+                        ProgressBarChildValueText = "5/5";
+                    }
                 }
             }
 
             break;
-        case "add10":
-            ProgressBarChildValue += 10;
-            if (ProgressBarChildValue > 99) {
-                if (stars < 5) {
-                    stars++;
-                    ProgressBarChildValue = 0;
-                } else {
-                    ProgressBarChildValue = 100;
-                }
-            }
-
-            break;
-        case "add25":
-            ProgressBarChildValue += 25;
-            if (ProgressBarChildValue > 99) {
-                if (stars < 5) {
-                    stars++;
-                    ProgressBarChildValue = 0;
-                } else {
-                    ProgressBarChildValue = 100;
-                }
-            }
-
-            break;
-
         case "remove1":
-            ProgressBarChildValue--;
-            if (ProgressBarChildValue < 0) {
-                if (stars > 0) {
-                    stars--;
-                    ProgressBarChildValue = 90;
-                } else {
-                    ProgressBarChildValue = 0;
-                }
-            }
-
-            break;
-        case "remove10":
-            ProgressBarChildValue -= 10;
-            if (ProgressBarChildValue < 0) {
-                if (stars > 0) {
-                    stars--;
-                    ProgressBarChildValue = 90;
-                } else {
-                    ProgressBarChildValue = 0;
-                }
-            }
-
-            break;
-        case "remove25":
-            ProgressBarChildValue -= 25;
-            if (ProgressBarChildValue < 0) {
-                if (stars > 0) {
-                    stars--;
-                    ProgressBarChildValue = 90;
-                } else {
-                    ProgressBarChildValue = 0;
+            if (strikes != 3) {
+                ProgressBarChildValue--;
+                ProgressBarChildValueText = ProgressBarChildValue + "/5";
+                if (ProgressBarChildValue < 0) {
+                    if (stars > 0) {
+                        stars--;
+                        ProgressBarChildValue = 4;
+                        ProgressBarChildValueText = "4/5";
+                    } else {
+                        ProgressBarChildValue = 0;
+                        ProgressBarChildValueText = "0/5";
+                    }
                 }
             }
 
             break;
         case "reward":
             if (stars == 5) {
-                
+                stars = 0;
+                ProgressBarChildValue = 0;
+                ProgressBarChildValueText = "0/5";
+                RewardButtonVisibility = "HIDDEN";
             }
+
             break;
         }
 
@@ -343,7 +322,15 @@ public class EditBehaviorVM : BaseViewModel {
             RaisePropertyChangedEvent("ProgressBarChildValue");
         }
     }
-    
+
+    public string ProgressBarChildValueText {
+        get => _progressBarChildValueText;
+        set {
+            _progressBarChildValueText = value;
+            RaisePropertyChangedEvent("ProgressBarChildValueText");
+        }
+    }
+
     public string RewardButtonVisibility {
         get => _rewardButtonVisibility;
         set {

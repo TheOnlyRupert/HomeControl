@@ -54,7 +54,7 @@ public class WeatherHourlyVM : BaseViewModel {
             try {
                 using WebClient client2 = new();
                 Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
-                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.UserAgent);
+                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
                 string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
                 JsonWeatherForecastHourly forecastHourly = JsonSerializer.Deserialize<JsonWeatherForecastHourly>(weatherForecastHourly, options);
 

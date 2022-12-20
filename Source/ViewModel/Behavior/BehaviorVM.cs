@@ -15,9 +15,9 @@ public class BehaviorVM : BaseViewModel {
     private int _progressBarChild1Value, _progressBarChild2Value, _progressBarChild3Value;
 
     public BehaviorVM() {
-        Child1Name = ReferenceValues.ChildName[0];
-        Child2Name = ReferenceValues.ChildName[1];
-        Child3Name = ReferenceValues.ChildName[2];
+        Child1Name = ReferenceValues.JsonMasterSettings.User3Name;
+        Child2Name = ReferenceValues.JsonMasterSettings.User4Name;
+        Child3Name = ReferenceValues.JsonMasterSettings.User5Name;
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;

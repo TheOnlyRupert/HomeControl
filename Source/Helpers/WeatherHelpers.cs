@@ -44,16 +44,19 @@ public static class WeatherHelpers {
         case "Widespread Frost":
             return "../../../Resources/Images/weather/weather_frost.png";
         case "Snow Showers":
+        case "Chance Snow Showers":
             return "../../../Resources/Images/weather/weather_snow_heavy.png";
         case "Isolated Snow Showers":
         case "Scattered Snow Showers":
-        case "Chance Snow Showers":
+        case "Chance Light Snow":
         case "Slight Chance Snow Showers":
+        case "Slight Chance Light Snow":
             return "../../../Resources/Images/weather/weather_snow_light.png";
         case "Slight Chance Rain And Snow Showers":
         case "Slight Chance Rain And Snow":
         case "Chance Rain And Snow Showers":
         case "Rain And Snow Showers":
+        case "Rain And Snow Showers Likely":
             return "../../../Resources/Images/weather/weather_snow_rain_mixed.png";
         default:
             return "null";
@@ -110,10 +113,11 @@ public static class WeatherHelpers {
         switch (input) {
         case "Snow Showers":
         case "Chance Snow Showers":
-        case "Chance Rain And Snow Showers":
         case "Scattered Snow Showers":
         case "Isolated Snow Showers":
         case "Slight Chance Snow Showers":
+        case "Slight Chance Light Snow":
+        case "Chance Light Snow":
             return "../../../Resources/Images/weather/weather_snow_heavy.png";
         default:
             return "../../../Resources/Images/weather/rain_drop.png";

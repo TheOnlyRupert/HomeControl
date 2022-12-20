@@ -37,40 +37,141 @@ public class DailyFromJson {
             }
         } catch (Exception) {
             JsonDaily JsonDaily = new();
-            ObservableCollection<DailyDetails> dailyList = new() {
+            ObservableCollection<DailyDetails> dailyListUser1 = new() {
                 new DailyDetails {
                     Name = "User1Task1",
                     IsComplete = false,
-                    Time = "0000"
+                    Time = ""
                 },
                 new DailyDetails {
                     Name = "User1Task2",
                     IsComplete = false,
-                    Time = "0000"
+                    Time = ""
                 },
+                new DailyDetails {
+                    Name = "User1Task3",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User1Task4",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User1Task5",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User1Task6",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User1Task7",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User1Task8",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User1Task9",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User1Task10",
+                    IsComplete = false,
+                    Time = ""
+                }
+            };
+
+            ObservableCollection<DailyDetails> dailyListUser2 = new() {
                 new DailyDetails {
                     Name = "User2Task1",
                     IsComplete = false,
-                    Time = "0000"
+                    Time = ""
                 },
                 new DailyDetails {
                     Name = "User2Task2",
                     IsComplete = false,
-                    Time = "0000"
+                    Time = ""
                 },
                 new DailyDetails {
                     Name = "User2Task3",
                     IsComplete = false,
-                    Time = "0000"
+                    Time = ""
                 },
                 new DailyDetails {
-                    Name = "User3Task1",
+                    Name = "User2Task4",
                     IsComplete = false,
-                    Time = "0000"
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User2Task5",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User2Task6",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User2Task7",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User2Task8",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User2Task9",
+                    IsComplete = false,
+                    Time = ""
+                },
+                new DailyDetails {
+                    Name = "User2Task10",
+                    IsComplete = false,
+                    Time = ""
                 }
             };
 
-            JsonDaily.dailyList = dailyList;
+            ObservableCollection<DailyDetails> dailyListUser3 = new() {
+                new DailyDetails {
+                    Name = "User3Task1",
+                    IsComplete = false,
+                    Time = ""
+                }
+            };
+
+            ObservableCollection<DailyDetails> dailyListUser4 = new() {
+                new DailyDetails {
+                    Name = "User4Task1",
+                    IsComplete = false,
+                    Time = ""
+                }
+            };
+
+            ObservableCollection<DailyDetails> dailyListUser5 = new() {
+                new DailyDetails {
+                    Name = "User5Task1",
+                    IsComplete = false,
+                    Time = ""
+                }
+            };
+
+            JsonDaily.dailyListUser1 = dailyListUser1;
+            JsonDaily.dailyListUser2 = dailyListUser2;
+            JsonDaily.dailyListUser3 = dailyListUser3;
+            JsonDaily.dailyListUser4 = dailyListUser4;
+            JsonDaily.dailyListUser5 = dailyListUser5;
             ReferenceValues.JsonDailyMasterList = JsonDaily;
 
             try {

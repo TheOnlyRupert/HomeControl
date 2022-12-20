@@ -1,8 +1,5 @@
-﻿using System;
-using System.Media;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Resources;
+﻿using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.Modules.Timer;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -10,7 +7,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Timer;
 
 public class TimerVM : BaseViewModel {
-    private readonly SoundPlayer player;
+    private readonly PlaySound timerDoneSound;
     private string _timer1Text, _timer2Text, _timer3Text, _timer4Text, _timer1Color, _timer2Color, _timer3Color, _timer4Color;
 
     public TimerVM() {
@@ -27,10 +24,7 @@ public class TimerVM : BaseViewModel {
         ReferenceValues.TimerSeconds = new int[4];
         ReferenceValues.SwitchTimerDirection = new bool[4];
 
-        StreamResourceInfo sri = Application.GetResourceStream(new Uri("pack://application:,,,/HomeControl;component/Resources/Sounds/alarm.wav"));
-        if (sri != null) {
-            player = new SoundPlayer(sri.Stream);
-        }
+        timerDoneSound = new PlaySound("alarm");
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -61,10 +55,9 @@ public class TimerVM : BaseViewModel {
             }
 
             if (ReferenceValues.IsTimerAlarmActive) {
-                player.Load();
-                player.PlayLooping();
+                timerDoneSound.Play(true);
             } else {
-                player.Stop();
+                timerDoneSound.Stop();
             }
         }
     }
