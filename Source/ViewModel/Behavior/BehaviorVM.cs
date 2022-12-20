@@ -10,7 +10,7 @@ namespace HomeControl.Source.ViewModel.Behavior;
 public class BehaviorVM : BaseViewModel {
     private string _child1Name, _child2Name, _child3Name, _child1Star1, _child1Star2, _child1Star3, _child1Star4, _child1Star5, _child2Star1, _child2Star2, _child2Star3,
         _child2Star4, _child2Star5, _child3Star1, _child3Star2, _child3Star3, _child3Star4, _child3Star5, _child1Strike1, _child1Strike2, _child1Strike3, _child2Strike1,
-        _child2Strike2, _child2Strike3, _child3Strike1, _child3Strike2, _child3Strike3;
+        _child2Strike2, _child2Strike3, _child3Strike1, _child3Strike2, _child3Strike3, _progressBarChild1ValueText, _progressBarChild2ValueText, _progressBarChild3ValueText;
 
     private int _progressBarChild1Value, _progressBarChild2Value, _progressBarChild3Value;
 
@@ -196,8 +196,11 @@ public class BehaviorVM : BaseViewModel {
         }
 
         ProgressBarChild1Value = ReferenceValues.JsonBehaviorMaster.Child1Progress;
+        ProgressBarChild1ValueText = ReferenceValues.JsonBehaviorMaster.Child1Progress + "/5";
         ProgressBarChild2Value = ReferenceValues.JsonBehaviorMaster.Child2Progress;
+        ProgressBarChild2ValueText = ReferenceValues.JsonBehaviorMaster.Child2Progress + "/5";
         ProgressBarChild3Value = ReferenceValues.JsonBehaviorMaster.Child3Progress;
+        ProgressBarChild3ValueText = ReferenceValues.JsonBehaviorMaster.Child3Progress + "/5";
     }
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
@@ -467,6 +470,30 @@ public class BehaviorVM : BaseViewModel {
         set {
             _progressBarChild3Value = value;
             RaisePropertyChangedEvent("ProgressBarChild3Value");
+        }
+    }
+
+    public string ProgressBarChild1ValueText {
+        get => _progressBarChild1ValueText;
+        set {
+            _progressBarChild1ValueText = value;
+            RaisePropertyChangedEvent("ProgressBarChild1ValueText");
+        }
+    }
+
+    public string ProgressBarChild2ValueText {
+        get => _progressBarChild2ValueText;
+        set {
+            _progressBarChild2ValueText = value;
+            RaisePropertyChangedEvent("ProgressBarChild2ValueText");
+        }
+    }
+
+    public string ProgressBarChild3ValueText {
+        get => _progressBarChild3ValueText;
+        set {
+            _progressBarChild3ValueText = value;
+            RaisePropertyChangedEvent("ProgressBarChild3ValueText");
         }
     }
 

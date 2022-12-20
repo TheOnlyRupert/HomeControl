@@ -66,7 +66,10 @@
                     </Grid>
 
                     <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ProgressBarChild1Value}" IsIndeterminate="False"
-                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" HorizontalContentAlignment="Stretch"/>
+                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" HorizontalContentAlignment="Stretch" Maximum="5"/>
+
+                    <TextBlock Grid.Row="2" Text="{Binding ProgressBarChild1ValueText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"
+                               Foreground="GreenYellow" Focusable="False"/>
 
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
@@ -131,7 +134,10 @@
                     </Grid>
 
                     <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ProgressBarChild2Value}" IsIndeterminate="False"
-                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" HorizontalContentAlignment="Stretch"/>
+                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" HorizontalContentAlignment="Stretch" Maximum="5"/>
+
+                    <TextBlock Grid.Row="2" Text="{Binding ProgressBarChild2ValueText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"
+                               Foreground="GreenYellow" Focusable="False"/>
 
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
@@ -196,7 +202,10 @@
                     </Grid>
 
                     <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ProgressBarChild3Value}" IsIndeterminate="False"
-                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" HorizontalContentAlignment="Stretch"/>
+                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" HorizontalContentAlignment="Stretch" Maximum="5"/>
+
+                    <TextBlock Grid.Row="2" Text="{Binding ProgressBarChild3ValueText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"
+                               Foreground="GreenYellow" Focusable="False"/>
 
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
