@@ -46,7 +46,8 @@ public class CalendarVM : BaseViewModel {
         _button33BackgroundColor, _button34BackgroundColor, _button35BackgroundColor, _button36BackgroundColor, _button37BackgroundColor, _button38BackgroundColor,
         _button39BackgroundColor, _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor;
 
-    private ObservableCollection<string> _button1EventList, _button2EventList, _button3EventList, _button4EventList, _button5EventList, _button6EventList, _button7EventList,
+    private ObservableCollection<CalendarEventsCustom> _button1EventList, _button2EventList, _button3EventList, _button4EventList, _button5EventList, _button6EventList,
+        _button7EventList,
         _button8EventList, _button9EventList, _button10EventList, _button11EventList, _button12EventList, _button13EventList, _button14EventList, _button15EventList,
         _button16EventList, _button17EventList, _button18EventList, _button19EventList, _button20EventList, _button21EventList, _button22EventList, _button23EventList,
         _button24EventList, _button25EventList, _button26EventList, _button27EventList, _button28EventList, _button29EventList, _button30EventList, _button31EventList,
@@ -56,48 +57,48 @@ public class CalendarVM : BaseViewModel {
     private DateTime currentDateTime, button1DateTime;
 
     public CalendarVM() {
-        Button1EventList = new ObservableCollection<string>();
-        Button2EventList = new ObservableCollection<string>();
-        Button3EventList = new ObservableCollection<string>();
-        Button4EventList = new ObservableCollection<string>();
-        Button5EventList = new ObservableCollection<string>();
-        Button6EventList = new ObservableCollection<string>();
-        Button7EventList = new ObservableCollection<string>();
-        Button8EventList = new ObservableCollection<string>();
-        Button9EventList = new ObservableCollection<string>();
-        Button10EventList = new ObservableCollection<string>();
-        Button11EventList = new ObservableCollection<string>();
-        Button12EventList = new ObservableCollection<string>();
-        Button13EventList = new ObservableCollection<string>();
-        Button14EventList = new ObservableCollection<string>();
-        Button15EventList = new ObservableCollection<string>();
-        Button16EventList = new ObservableCollection<string>();
-        Button17EventList = new ObservableCollection<string>();
-        Button18EventList = new ObservableCollection<string>();
-        Button19EventList = new ObservableCollection<string>();
-        Button20EventList = new ObservableCollection<string>();
-        Button21EventList = new ObservableCollection<string>();
-        Button22EventList = new ObservableCollection<string>();
-        Button23EventList = new ObservableCollection<string>();
-        Button24EventList = new ObservableCollection<string>();
-        Button25EventList = new ObservableCollection<string>();
-        Button26EventList = new ObservableCollection<string>();
-        Button27EventList = new ObservableCollection<string>();
-        Button28EventList = new ObservableCollection<string>();
-        Button29EventList = new ObservableCollection<string>();
-        Button30EventList = new ObservableCollection<string>();
-        Button31EventList = new ObservableCollection<string>();
-        Button32EventList = new ObservableCollection<string>();
-        Button33EventList = new ObservableCollection<string>();
-        Button34EventList = new ObservableCollection<string>();
-        Button35EventList = new ObservableCollection<string>();
-        Button36EventList = new ObservableCollection<string>();
-        Button37EventList = new ObservableCollection<string>();
-        Button38EventList = new ObservableCollection<string>();
-        Button39EventList = new ObservableCollection<string>();
-        Button40EventList = new ObservableCollection<string>();
-        Button41EventList = new ObservableCollection<string>();
-        Button42EventList = new ObservableCollection<string>();
+        Button1EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button2EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button3EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button4EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button5EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button6EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button7EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button8EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button9EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button10EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button11EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button12EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button13EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button14EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button15EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button16EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button17EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button18EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button19EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button20EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button21EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button22EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button23EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button24EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button25EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button26EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button27EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button28EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button29EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button30EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button31EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button32EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button33EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button34EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button35EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button36EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button37EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button38EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button39EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button40EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button41EventList = new ObservableCollection<CalendarEventsCustom>();
+        Button42EventList = new ObservableCollection<CalendarEventsCustom>();
 
         currentDateTime = DateTime.Now;
         CurrentMonthAndYear = currentDateTime.ToString("MMMM, yyyy");
@@ -768,255 +769,397 @@ public class CalendarVM : BaseViewModel {
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[0].eventsList) {
-                Button1EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button1EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[1].eventsList) {
-                Button2EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button2EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[2].eventsList) {
-                Button3EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button3EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[3].eventsList) {
-                Button4EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button4EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[4].eventsList) {
-                Button5EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button5EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[5].eventsList) {
-                Button6EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button6EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[6].eventsList) {
-                Button7EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button7EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[7].eventsList) {
-                Button8EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button8EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[8].eventsList) {
-                Button9EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button9EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[9].eventsList) {
-                Button10EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button10EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[10].eventsList) {
-                Button11EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button11EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[11].eventsList) {
-                Button12EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button12EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[12].eventsList) {
-                Button13EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button13EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[13].eventsList) {
-                Button14EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button14EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[14].eventsList) {
-                Button15EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button15EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[15].eventsList) {
-                Button16EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button16EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[16].eventsList) {
-                Button17EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button17EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[17].eventsList) {
-                Button18EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button18EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[18].eventsList) {
-                Button19EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button19EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[19].eventsList) {
-                Button20EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button20EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[20].eventsList) {
-                Button21EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button21EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[21].eventsList) {
-                Button22EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button22EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[22].eventsList) {
-                Button23EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button23EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[23].eventsList) {
-                Button24EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button24EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[24].eventsList) {
-                Button25EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button25EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[25].eventsList) {
-                Button26EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button26EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[26].eventsList) {
-                Button27EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button27EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[27].eventsList) {
-                Button28EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button28EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[28].eventsList) {
-                Button29EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button29EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[29].eventsList) {
-                Button30EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button30EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[30].eventsList) {
-                Button31EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button31EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[31].eventsList) {
-                Button32EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button32EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[32].eventsList) {
-                Button33EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button33EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[33].eventsList) {
-                Button34EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button34EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[34].eventsList) {
-                Button35EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button35EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[35].eventsList) {
-                Button36EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button36EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[36].eventsList) {
-                Button37EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button37EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[37].eventsList) {
-                Button38EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button38EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[38].eventsList) {
-                Button39EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button39EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[39].eventsList) {
-                Button40EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button40EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[40].eventsList) {
-                Button41EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button41EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[41].eventsList) {
-                Button42EventList.Add(t.startTime + " - " + t.endTime + "  " + t.name);
+                Button42EventList.Add(new CalendarEventsCustom {
+                    name = t.startTime + " - " + t.endTime + "  " + t.name,
+                    person = GetIdFromPerson(t.person)
+                });
             }
         } catch (Exception) { }
+    }
+
+    private static int GetIdFromPerson(string tPerson) {
+        if (tPerson == ReferenceValues.JsonMasterSettings.User1Name) {
+            return 1;
+        }
+
+        if (tPerson == ReferenceValues.JsonMasterSettings.User2Name) {
+            return 2;
+        }
+
+        return tPerson switch {
+            "Children" => 3,
+            "Home" => 4,
+            _ => 5
+        };
     }
 
     private static List<HolidayBlock> GetHolidays(int year) {
@@ -2229,7 +2372,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button1EventList {
+    public ObservableCollection<CalendarEventsCustom> Button1EventList {
         get => _button1EventList;
         set {
             _button1EventList = value;
@@ -2237,7 +2380,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button2EventList {
+    public ObservableCollection<CalendarEventsCustom> Button2EventList {
         get => _button2EventList;
         set {
             _button2EventList = value;
@@ -2245,7 +2388,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button3EventList {
+    public ObservableCollection<CalendarEventsCustom> Button3EventList {
         get => _button3EventList;
         set {
             _button3EventList = value;
@@ -2253,7 +2396,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button4EventList {
+    public ObservableCollection<CalendarEventsCustom> Button4EventList {
         get => _button4EventList;
         set {
             _button4EventList = value;
@@ -2261,7 +2404,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button5EventList {
+    public ObservableCollection<CalendarEventsCustom> Button5EventList {
         get => _button5EventList;
         set {
             _button5EventList = value;
@@ -2269,7 +2412,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button6EventList {
+    public ObservableCollection<CalendarEventsCustom> Button6EventList {
         get => _button6EventList;
         set {
             _button6EventList = value;
@@ -2277,7 +2420,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button7EventList {
+    public ObservableCollection<CalendarEventsCustom> Button7EventList {
         get => _button7EventList;
         set {
             _button7EventList = value;
@@ -2285,7 +2428,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button8EventList {
+    public ObservableCollection<CalendarEventsCustom> Button8EventList {
         get => _button8EventList;
         set {
             _button8EventList = value;
@@ -2293,7 +2436,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button9EventList {
+    public ObservableCollection<CalendarEventsCustom> Button9EventList {
         get => _button9EventList;
         set {
             _button9EventList = value;
@@ -2301,7 +2444,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button10EventList {
+    public ObservableCollection<CalendarEventsCustom> Button10EventList {
         get => _button10EventList;
         set {
             _button10EventList = value;
@@ -2309,7 +2452,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button11EventList {
+    public ObservableCollection<CalendarEventsCustom> Button11EventList {
         get => _button11EventList;
         set {
             _button11EventList = value;
@@ -2317,7 +2460,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button12EventList {
+    public ObservableCollection<CalendarEventsCustom> Button12EventList {
         get => _button12EventList;
         set {
             _button12EventList = value;
@@ -2325,7 +2468,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button13EventList {
+    public ObservableCollection<CalendarEventsCustom> Button13EventList {
         get => _button13EventList;
         set {
             _button13EventList = value;
@@ -2333,7 +2476,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button14EventList {
+    public ObservableCollection<CalendarEventsCustom> Button14EventList {
         get => _button14EventList;
         set {
             _button14EventList = value;
@@ -2341,7 +2484,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button15EventList {
+    public ObservableCollection<CalendarEventsCustom> Button15EventList {
         get => _button15EventList;
         set {
             _button15EventList = value;
@@ -2349,7 +2492,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button16EventList {
+    public ObservableCollection<CalendarEventsCustom> Button16EventList {
         get => _button16EventList;
         set {
             _button16EventList = value;
@@ -2357,7 +2500,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button17EventList {
+    public ObservableCollection<CalendarEventsCustom> Button17EventList {
         get => _button17EventList;
         set {
             _button17EventList = value;
@@ -2365,7 +2508,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button18EventList {
+    public ObservableCollection<CalendarEventsCustom> Button18EventList {
         get => _button18EventList;
         set {
             _button18EventList = value;
@@ -2373,7 +2516,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button19EventList {
+    public ObservableCollection<CalendarEventsCustom> Button19EventList {
         get => _button19EventList;
         set {
             _button19EventList = value;
@@ -2381,7 +2524,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button20EventList {
+    public ObservableCollection<CalendarEventsCustom> Button20EventList {
         get => _button20EventList;
         set {
             _button20EventList = value;
@@ -2389,7 +2532,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button21EventList {
+    public ObservableCollection<CalendarEventsCustom> Button21EventList {
         get => _button21EventList;
         set {
             _button21EventList = value;
@@ -2397,7 +2540,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button22EventList {
+    public ObservableCollection<CalendarEventsCustom> Button22EventList {
         get => _button22EventList;
         set {
             _button22EventList = value;
@@ -2405,7 +2548,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button23EventList {
+    public ObservableCollection<CalendarEventsCustom> Button23EventList {
         get => _button23EventList;
         set {
             _button23EventList = value;
@@ -2413,7 +2556,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button24EventList {
+    public ObservableCollection<CalendarEventsCustom> Button24EventList {
         get => _button24EventList;
         set {
             _button24EventList = value;
@@ -2421,7 +2564,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button25EventList {
+    public ObservableCollection<CalendarEventsCustom> Button25EventList {
         get => _button25EventList;
         set {
             _button25EventList = value;
@@ -2429,7 +2572,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button26EventList {
+    public ObservableCollection<CalendarEventsCustom> Button26EventList {
         get => _button26EventList;
         set {
             _button26EventList = value;
@@ -2437,7 +2580,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button27EventList {
+    public ObservableCollection<CalendarEventsCustom> Button27EventList {
         get => _button27EventList;
         set {
             _button27EventList = value;
@@ -2445,7 +2588,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button28EventList {
+    public ObservableCollection<CalendarEventsCustom> Button28EventList {
         get => _button28EventList;
         set {
             _button28EventList = value;
@@ -2453,7 +2596,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button29EventList {
+    public ObservableCollection<CalendarEventsCustom> Button29EventList {
         get => _button29EventList;
         set {
             _button29EventList = value;
@@ -2461,7 +2604,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button30EventList {
+    public ObservableCollection<CalendarEventsCustom> Button30EventList {
         get => _button30EventList;
         set {
             _button30EventList = value;
@@ -2469,7 +2612,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button31EventList {
+    public ObservableCollection<CalendarEventsCustom> Button31EventList {
         get => _button31EventList;
         set {
             _button31EventList = value;
@@ -2477,7 +2620,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button32EventList {
+    public ObservableCollection<CalendarEventsCustom> Button32EventList {
         get => _button32EventList;
         set {
             _button32EventList = value;
@@ -2485,7 +2628,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button33EventList {
+    public ObservableCollection<CalendarEventsCustom> Button33EventList {
         get => _button33EventList;
         set {
             _button33EventList = value;
@@ -2493,7 +2636,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button34EventList {
+    public ObservableCollection<CalendarEventsCustom> Button34EventList {
         get => _button34EventList;
         set {
             _button34EventList = value;
@@ -2501,7 +2644,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button35EventList {
+    public ObservableCollection<CalendarEventsCustom> Button35EventList {
         get => _button35EventList;
         set {
             _button35EventList = value;
@@ -2509,7 +2652,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button36EventList {
+    public ObservableCollection<CalendarEventsCustom> Button36EventList {
         get => _button36EventList;
         set {
             _button36EventList = value;
@@ -2517,7 +2660,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button37EventList {
+    public ObservableCollection<CalendarEventsCustom> Button37EventList {
         get => _button37EventList;
         set {
             _button37EventList = value;
@@ -2525,7 +2668,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button38EventList {
+    public ObservableCollection<CalendarEventsCustom> Button38EventList {
         get => _button38EventList;
         set {
             _button38EventList = value;
@@ -2533,7 +2676,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button39EventList {
+    public ObservableCollection<CalendarEventsCustom> Button39EventList {
         get => _button39EventList;
         set {
             _button39EventList = value;
@@ -2541,7 +2684,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button40EventList {
+    public ObservableCollection<CalendarEventsCustom> Button40EventList {
         get => _button40EventList;
         set {
             _button40EventList = value;
@@ -2549,7 +2692,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button41EventList {
+    public ObservableCollection<CalendarEventsCustom> Button41EventList {
         get => _button41EventList;
         set {
             _button41EventList = value;
@@ -2557,7 +2700,7 @@ public class CalendarVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<string> Button42EventList {
+    public ObservableCollection<CalendarEventsCustom> Button42EventList {
         get => _button42EventList;
         set {
             _button42EventList = value;

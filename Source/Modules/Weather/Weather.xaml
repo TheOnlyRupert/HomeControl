@@ -39,7 +39,8 @@
 
                     <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3">
                         <Image Source="{Binding CurrentWeatherCloudIcon}" Height="96"/>
-                        <TextBlock Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Top" Foreground="White"/>
+                        <TextBlock Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Top" TextWrapping="Wrap"
+                                   Foreground="White"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right">
@@ -80,7 +81,6 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
 
@@ -99,29 +99,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed1}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon1}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon1a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon1b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription1}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription1}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -143,29 +132,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed2}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon2}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon2a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon2b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription2}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription2}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" Grid.Row="0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -187,29 +165,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed3}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon3}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon3a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon3b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription3}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription3}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="3" Grid.Row="0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -231,29 +198,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed4}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon4}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon4a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon4b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription4}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription4}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="4" Grid.Row="0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -275,29 +231,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed5}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon5}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon5a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon5b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription5}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription5}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="5" Grid.Row="0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -319,29 +264,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed6}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon6}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon6a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon6b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription6}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription6}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="6" Grid.Row="0">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -363,29 +297,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed7}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon7}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon7a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon7b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription7}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription7}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -407,29 +330,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed8}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon8}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon8a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon8b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription8}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription8}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -451,29 +363,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed9}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon9}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon9a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon9b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription9}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription9}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -495,29 +396,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed10}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon10}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon10a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon10b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription10}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription10}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="3" Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -539,29 +429,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed11}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon11}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon11a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon11b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription11}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription11}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="4" Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -583,29 +462,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed12}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon12}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon12a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon12b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription12}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription12}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="5" Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -627,29 +495,18 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed13}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon13}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon13a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon13b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription13}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription13}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="6" Grid.Row="1">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -671,22 +528,12 @@
                             </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding SevenDayForecastWindSpeed14}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="48" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5"
-                                   HorizontalAlignment="Left" Margin="-12 0 0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding SevenDayForecastWindDirectionIcon14}"/>
-                                </Image.RenderTransform>
-                            </Image>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Image Source="{Binding SevenDayForecastWeatherIcon14a}" HorizontalAlignment="Center"/>
                             <Image Source="{Binding SevenDayForecastWeatherIcon14b}" HorizontalAlignment="Center"/>
                         </StackPanel>
 
-                        <TextBlock Grid.Row="4" Text="{Binding SevenDayForecastDescription14}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription14}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
             </Grid>

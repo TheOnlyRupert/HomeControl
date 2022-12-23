@@ -174,7 +174,7 @@
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Frame Grid.Column="0" Source="Source/Modules/Calendar/TodayCalendar.xaml" Focusable="False"/>
+                    <Frame Grid.Column="0" Focusable="False"/>
                     <Frame Grid.Column="1" Source="Source/Modules/Behavior/Behavior.xaml" Focusable="False"/>
                 </Grid>
             </Grid>

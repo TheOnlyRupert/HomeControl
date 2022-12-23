@@ -144,9 +144,6 @@
         <Compile Include="Source\Modules\Calendar\EditCalendar.xaml.cs">
             <DependentUpon>EditCalendar.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Calendar\TodayCalendar.xaml.cs">
-            <DependentUpon>TodayCalendar.xaml</DependentUpon>
-        </Compile>
         <Compile Include="Source\Modules\Chores\Chores.xaml.cs">
             <DependentUpon>Chores.xaml</DependentUpon>
         </Compile>
@@ -195,7 +192,6 @@
         <Compile Include="Source\ViewModel\Behavior\BehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditCalendarVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\CalendarVM.cs"/>
-        <Compile Include="Source\ViewModel\Calendar\TodayCalendarVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresMonthVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresWeekVM.cs"/>
@@ -233,7 +229,6 @@
         <Page Include="Source\Modules\Behavior\EditBehavior.xaml"/>
         <Page Include="Source\Modules\Calendar\Calendar.xaml"/>
         <Page Include="Source\Modules\Calendar\EditCalendar.xaml"/>
-        <Page Include="Source\Modules\Calendar\TodayCalendar.xaml"/>
         <Page Include="Source\Modules\Chores\Chores.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresMonth.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresWeek.xaml"/>

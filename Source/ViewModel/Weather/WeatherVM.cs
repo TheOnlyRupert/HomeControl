@@ -308,20 +308,20 @@ public class WeatherVM : BaseViewModel {
 
 
         /* Update thermometer image */
-        if (forecast.properties.periods[0].temperature < 20) {
+        if (forecast.properties.periods[0].temperature < 10) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_freezing.png";
-            WeatherOverlay = "../../../Resources/Images/weather/cold_border.png";
-        } else if (forecast.properties.periods[0].temperature is >= 20 and < 35) {
+            //WeatherOverlay = "../../../Resources/Images/weather/cold_border.png";
+        } else if (forecast.properties.periods[0].temperature is >= 11 and < 32) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_cold.png";
-        } else if (forecast.properties.periods[0].temperature is >= 35 and < 60) {
+        } else if (forecast.properties.periods[0].temperature is >= 33 and < 69) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_cool.png";
-        } else if (forecast.properties.periods[0].temperature is >= 60 and < 85) {
+        } else if (forecast.properties.periods[0].temperature is >= 70 and < 89) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_warm.png";
-        } else if (forecast.properties.periods[0].temperature is >= 85 and < 100) {
+        } else if (forecast.properties.periods[0].temperature is >= 90 and < 99) {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_hot.png";
         } else {
             ThermometerDisplayIcon = "../../../Resources/Images/Icons/temp_burning.png";
-            WeatherOverlay = "../../../Resources/Images/weather/fire_border.png";
+            //WeatherOverlay = "../../../Resources/Images/weather/fire_border.png";
         }
     }
 

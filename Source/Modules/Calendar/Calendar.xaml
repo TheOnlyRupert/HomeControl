@@ -231,8 +231,32 @@
                         <ListView ItemsSource="{Binding Button1EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -247,6 +271,13 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -285,8 +316,32 @@
                         <ListView ItemsSource="{Binding Button2EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -301,6 +356,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -339,8 +400,32 @@
                         <ListView ItemsSource="{Binding Button3EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -355,6 +440,13 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -393,8 +485,32 @@
                         <ListView ItemsSource="{Binding Button4EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -409,6 +525,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -446,8 +568,32 @@
                         <ListView ItemsSource="{Binding Button5EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -462,6 +608,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -499,8 +651,32 @@
                         <ListView ItemsSource="{Binding Button6EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -515,6 +691,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -552,8 +734,32 @@
                         <ListView ItemsSource="{Binding Button7EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -568,6 +774,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -605,8 +817,32 @@
                         <ListView ItemsSource="{Binding Button8EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -621,6 +857,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -658,8 +900,32 @@
                         <ListView ItemsSource="{Binding Button9EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -674,6 +940,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -711,8 +983,32 @@
                         <ListView ItemsSource="{Binding Button10EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -727,6 +1023,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -764,8 +1066,32 @@
                         <ListView ItemsSource="{Binding Button11EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -780,6 +1106,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -817,8 +1149,32 @@
                         <ListView ItemsSource="{Binding Button12EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -833,6 +1189,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -870,8 +1232,32 @@
                         <ListView ItemsSource="{Binding Button13EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -886,6 +1272,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -923,8 +1315,32 @@
                         <ListView ItemsSource="{Binding Button14EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -939,6 +1355,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -976,8 +1398,32 @@
                         <ListView ItemsSource="{Binding Button15EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -992,6 +1438,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1029,8 +1481,32 @@
                         <ListView ItemsSource="{Binding Button16EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1045,6 +1521,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1082,8 +1564,32 @@
                         <ListView ItemsSource="{Binding Button17EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1098,6 +1604,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1137,8 +1649,32 @@
                         <ListView ItemsSource="{Binding Button18EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1153,6 +1689,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1190,8 +1732,32 @@
                         <ListView ItemsSource="{Binding Button19EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1206,6 +1772,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1243,8 +1815,32 @@
                         <ListView ItemsSource="{Binding Button20EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1259,6 +1855,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1296,8 +1898,32 @@
                         <ListView ItemsSource="{Binding Button21EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1312,6 +1938,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1349,8 +1981,32 @@
                         <ListView ItemsSource="{Binding Button22EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1365,6 +2021,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1402,8 +2064,32 @@
                         <ListView ItemsSource="{Binding Button23EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1418,6 +2104,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1455,8 +2147,32 @@
                         <ListView ItemsSource="{Binding Button24EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1471,6 +2187,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1508,8 +2230,32 @@
                         <ListView ItemsSource="{Binding Button25EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1524,6 +2270,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1561,8 +2313,32 @@
                         <ListView ItemsSource="{Binding Button26EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1577,6 +2353,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1614,8 +2396,32 @@
                         <ListView ItemsSource="{Binding Button27EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1630,6 +2436,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1667,8 +2479,32 @@
                         <ListView ItemsSource="{Binding Button28EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1683,6 +2519,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1720,8 +2562,32 @@
                         <ListView ItemsSource="{Binding Button29EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1736,6 +2602,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1773,8 +2645,32 @@
                         <ListView ItemsSource="{Binding Button30EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1789,6 +2685,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1826,8 +2728,32 @@
                         <ListView ItemsSource="{Binding Button31EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1842,6 +2768,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1879,8 +2811,32 @@
                         <ListView ItemsSource="{Binding Button32EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1895,6 +2851,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1932,8 +2894,32 @@
                         <ListView ItemsSource="{Binding Button33EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -1948,6 +2934,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -1985,8 +2977,32 @@
                         <ListView ItemsSource="{Binding Button34EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2001,6 +3017,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -2038,8 +3060,32 @@
                         <ListView ItemsSource="{Binding Button35EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2054,6 +3100,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -2091,8 +3143,32 @@
                         <ListView ItemsSource="{Binding Button36EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2107,6 +3183,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -2144,8 +3226,32 @@
                         <ListView ItemsSource="{Binding Button37EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2160,6 +3266,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -2197,8 +3309,32 @@
                         <ListView ItemsSource="{Binding Button38EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2213,6 +3349,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -2250,8 +3392,32 @@
                         <ListView ItemsSource="{Binding Button39EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2266,6 +3432,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -2303,8 +3475,32 @@
                         <ListView ItemsSource="{Binding Button40EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2319,6 +3515,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -2356,8 +3558,32 @@
                         <ListView ItemsSource="{Binding Button41EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2372,6 +3598,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>
@@ -2409,8 +3641,32 @@
                         <ListView ItemsSource="{Binding Button42EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
                                   Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding person}" Value="1">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="2">
+                                            <Setter Property="Foreground" Value="Pink"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="3">
+                                            <Setter Property="Foreground" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="4">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="Navy"/>
+                                        </DataTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
@@ -2425,6 +3681,12 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.Resources>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="false">
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </DockPanel>
                 </Button>

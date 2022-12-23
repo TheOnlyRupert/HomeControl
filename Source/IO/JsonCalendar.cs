@@ -14,3 +14,8 @@ public class CalendarEvents {
     public string location { get; set; }
     public string person { get; set; }
 }
+
+public class CalendarEventsCustom {
+    public string name { get; set; }
+    public int person { get; set; }
+}

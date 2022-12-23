@@ -28,6 +28,7 @@ public static class WeatherHelpers {
         case "Slight Chance Light Rain":
         case "Chance Very Light Rain":
         case "Chance Light Rain":
+        case "Light Rain":
         case "Areas Of Drizzle":
             return "../../../Resources/Images/weather/weather_rain_light.png";
         case "Rain Showers Likely":
@@ -45,9 +46,11 @@ public static class WeatherHelpers {
             return "../../../Resources/Images/weather/weather_frost.png";
         case "Snow Showers":
         case "Chance Snow Showers":
+        case "Snow Showers Likely":
             return "../../../Resources/Images/weather/weather_snow_heavy.png";
         case "Isolated Snow Showers":
         case "Scattered Snow Showers":
+        case "Light Snow":
         case "Chance Light Snow":
         case "Slight Chance Snow Showers":
         case "Slight Chance Light Snow":
@@ -118,6 +121,7 @@ public static class WeatherHelpers {
         case "Slight Chance Snow Showers":
         case "Slight Chance Light Snow":
         case "Chance Light Snow":
+        case "Snow Showers Likely":
             return "../../../Resources/Images/weather/weather_snow_heavy.png";
         default:
             return "../../../Resources/Images/weather/rain_drop.png";
