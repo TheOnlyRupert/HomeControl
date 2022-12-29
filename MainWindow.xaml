@@ -37,7 +37,6 @@
                             </Grid.ColumnDefinitions>
 
                             <Frame Grid.Column="0" Source="Source/Modules/Notes.xaml" Focusable="False"/>
-                            <Frame Grid.Column="1" Source="Source/Modules/Daily/Daily.xaml" Focusable="False"/>
                         </Grid>
                     </Grid>
 

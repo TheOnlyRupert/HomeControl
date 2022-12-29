@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Finances.EditFinances" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="Add Finance" Height="600" Width="900" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="Black" BorderThickness="4">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control" mc:Ignorable="d" Title="Add Finance" Height="600"
+        Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="Black" BorderThickness="4">
     <Window.Resources>
         <Style x:Key="styleCalendar" TargetType="Calendar"/>
 
@@ -80,7 +80,7 @@
 
             <Grid Grid.Column="0" Margin="8">
                 <ListView Grid.Row="0" ItemsSource="{Binding FinanceList}" Foreground="White" SelectedItem="{Binding FinanceSelected}" SelectionMode="Single"
-                          Background="Transparent" BorderBrush="Black">
+                          Background="Transparent" BorderBrush="Black" IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -121,12 +121,12 @@
 
                     <ListView.View>
                         <GridView AllowsColumnReorder="false">
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=AddSub}" Header="+/-" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Description" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=AddSub}" Header="+/-" Width="Auto" control:GridViewSort.PropertyName="AddSub"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="Auto" control:GridViewSort.PropertyName="Cost"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Person}" Header="Person" Width="Auto" control:GridViewSort.PropertyName="Person"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Description" Width="Auto" control:GridViewSort.PropertyName="Item"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto" control:GridViewSort.PropertyName="Date"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

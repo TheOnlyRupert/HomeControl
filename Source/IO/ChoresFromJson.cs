@@ -11,6 +11,69 @@ public class ChoresFromJson {
         Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "chores/");
     }
 
+    public void ChoresDayFromJson(DateTime dateTime) {
+        string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_day_" + dateTime.ToString("yyyy_MM_dd") + ".json";
+
+        JsonSerializerOptions options = new() {
+            IncludeFields = true
+        };
+
+        try {
+            StreamReader streamReader = new(fileName);
+            string choresListString = null;
+            while (!streamReader.EndOfStream) {
+                choresListString = streamReader.ReadToEnd();
+            }
+
+            streamReader.Close();
+
+            if (choresListString != null) {
+                try {
+                    JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
+                    ReferenceValues.JsonChoreDayMasterList = jsonChores;
+                } catch (Exception e) {
+                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                }
+            }
+        } catch (Exception) {
+            JsonChores jsonChores = new();
+            ObservableCollection<ChoreDetails> choreList = new() {
+                new ChoreDetails {
+                    Name = "Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Task4",
+                    IsComplete = false,
+                    Date = ""
+                }
+            };
+
+            jsonChores.choreList = choreList;
+            ReferenceValues.JsonChoreDayMasterList = jsonChores;
+
+            try {
+                string jsonString = JsonSerializer.Serialize(jsonChores);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(fileName, jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            }
+        }
+    }
+
     public void ChoresWeekFromJson(DateTime dateTime) {
         string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_week_" + dateTime.ToString("yyyy_MM_dd") + ".json";
 

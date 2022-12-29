@@ -10,10 +10,12 @@ using static HomeControl.Source.Reference.ReferenceValues;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresVM : BaseViewModel {
-    private string _currentMonthText, _currentWeekText, _choresCompletedWeekText, _choresCompletedMonthText, _choresTitleText, _currentWeekSpanText,
-        _choresCompletedWeekProgressText, _projectedFundMonthText, _projectedFundLevelText, _projectedFundCashText;
+    private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _choresTitleText,
+        _choresCompletedWeekProgressText, _projectedFundMonthText, _projectedFundLevelText, _projectedFundCashText, _choresCompletedDayProgressText,
+        _choresCompletedMonthProgressText, _dayButtonColor, _weekButtonColor, _monthButtonColor;
 
-    private int choresCompletedWeek, choresCompletedMonth, _choresCompletedWeekProgressValue;
+    private int choresCompletedDay, choresCompletedWeek, choresCompletedMonth, _choresCompletedDayProgressValue, _choresCompletedWeekProgressValue,
+        _choresCompletedMonthProgressValue;
 
     public ChoresVM() {
         RefreshFields();
@@ -32,6 +34,13 @@ public class ChoresVM : BaseViewModel {
 
     private void ButtonLogic(object param) {
         switch (param) {
+        case "choresDay":
+            ChoresDay choresDay = new();
+            choresDay.ShowDialog();
+            choresDay.Close();
+
+            RefreshFields();
+            break;
         case "choresWeek":
             ChoresWeek choresWeek = new();
             choresWeek.ShowDialog();
@@ -45,6 +54,13 @@ public class ChoresVM : BaseViewModel {
             choresMonth.Close();
 
             RefreshFields();
+            break;
+        case "choresSpecial":
+            //ChoresSpecial choresSpecial = new();
+            //choresSpecial.ShowDialog();
+            //choresSpecial.Close();
+
+            //RefreshFields();
             break;
         case "funds":
             ChoresFunds choresFunds = new();
@@ -64,6 +80,7 @@ public class ChoresVM : BaseViewModel {
             choreList = new ObservableCollection<ChoreDetails>()
         };
 
+        choresCompletedDay = 0;
         choresCompletedWeek = 0;
         choresCompletedMonth = 0;
 
@@ -72,17 +89,26 @@ public class ChoresVM : BaseViewModel {
         }
 
         ChoresFromJson choresFromJson = new();
+        choresFromJson.ChoresDayFromJson(DateTime.Now);
         choresFromJson.ChoresWeekFromJson(ChoreWeekStartDate);
         choresFromJson.ChoresMonthFromJson(ChoreMonthStartDate);
 
+        CurrentDayText = dateTime.ToString("dddd");
         CurrentMonthText = dateTime.ToString("MMMM");
         CurrentWeekText = "Week: " + calendar.GetWeekOfYear(dateTime, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
 
-        ChoresTitleText = JsonMasterSettings.User2Name + " Monthly Chores";
+        ChoresTitleText = JsonMasterSettings.User2Name + " Chores";
 
-        CurrentWeekSpanText = ChoreWeekStartDate.ToString("MMM dd") + " - " + ChoreWeekStartDate.AddDays(6).ToString("MMM dd");
         ProjectedFundMonthText = dateTime.AddMonths(1).ToString("MMM") + " Projected Funds";
         ChoresCompletedWeekProgressText = "0%";
+        ChoresCompletedMonthProgressText = "0%";
+        ChoresCompletedDayProgressText = "0%";
+
+        foreach (ChoreDetails choreDetails in JsonChoreDayMasterList.choreList) {
+            if (choreDetails.IsComplete) {
+                choresCompletedDay++;
+            }
+        }
 
         foreach (ChoreDetails choreDetails in JsonChoreWeekMasterList.choreList) {
             if (choreDetails.IsComplete) {
@@ -96,6 +122,7 @@ public class ChoresVM : BaseViewModel {
             }
         }
 
+        ChoresCompletedDayText = choresCompletedDay + " / " + JsonChoreDayMasterList.choreList.Count;
         ChoresCompletedWeekText = choresCompletedWeek + " / " + JsonChoreWeekMasterList.choreList.Count;
         ChoresCompletedMonthText = choresCompletedMonth + " / " + JsonChoreMonthMasterList.choreList.Count;
 
@@ -104,6 +131,34 @@ public class ChoresVM : BaseViewModel {
             ChoresCompletedWeekProgressText = Convert.ToInt16(progress) + "%";
             ChoresCompletedWeekProgressValue = Convert.ToInt16(progress);
         } catch (Exception) { }
+
+        progress = Convert.ToDouble(choresCompletedDay) / Convert.ToDouble(JsonChoreDayMasterList.choreList.Count) * 100;
+        try {
+            ChoresCompletedDayProgressText = Convert.ToInt16(progress) + "%";
+            ChoresCompletedDayProgressValue = Convert.ToInt16(progress);
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(choresCompletedMonth) / Convert.ToDouble(JsonChoreMonthMasterList.choreList.Count) * 100;
+        try {
+            ChoresCompletedMonthProgressText = Convert.ToInt16(progress) + "%";
+            ChoresCompletedMonthProgressValue = Convert.ToInt16(progress);
+        } catch (Exception) { }
+
+        DayButtonColor = "Transparent";
+        WeekButtonColor = "Transparent";
+        MonthButtonColor = "Transparent";
+
+        if (ChoresCompletedDayProgressValue == 100) {
+            DayButtonColor = "Green";
+        }
+
+        if (ChoresCompletedWeekProgressValue == 100) {
+            WeekButtonColor = "Green";
+        }
+
+        if (ChoresCompletedMonthProgressValue == 100) {
+            MonthButtonColor = "Green";
+        }
     }
 
     #region Fields
@@ -121,6 +176,22 @@ public class ChoresVM : BaseViewModel {
         set {
             _currentWeekText = value;
             RaisePropertyChangedEvent("CurrentWeekText");
+        }
+    }
+
+    public string CurrentDayText {
+        get => _currentDayText;
+        set {
+            _currentDayText = value;
+            RaisePropertyChangedEvent("CurrentDayText");
+        }
+    }
+
+    public string ChoresCompletedDayText {
+        get => _choresCompletedDayText;
+        set {
+            _choresCompletedDayText = value;
+            RaisePropertyChangedEvent("ChoresCompletedDayText");
         }
     }
 
@@ -148,14 +219,6 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string CurrentWeekSpanText {
-        get => _currentWeekSpanText;
-        set {
-            _currentWeekSpanText = value;
-            RaisePropertyChangedEvent("CurrentWeekSpanText");
-        }
-    }
-
     public string ChoresCompletedWeekProgressText {
         get => _choresCompletedWeekProgressText;
         set {
@@ -164,11 +227,43 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
+    public string ChoresCompletedDayProgressText {
+        get => _choresCompletedDayProgressText;
+        set {
+            _choresCompletedDayProgressText = value;
+            RaisePropertyChangedEvent("ChoresCompletedDayProgressText");
+        }
+    }
+
     public int ChoresCompletedWeekProgressValue {
         get => _choresCompletedWeekProgressValue;
         set {
             _choresCompletedWeekProgressValue = value;
             RaisePropertyChangedEvent("ChoresCompletedWeekProgressValue");
+        }
+    }
+
+    public string ChoresCompletedMonthProgressText {
+        get => _choresCompletedMonthProgressText;
+        set {
+            _choresCompletedMonthProgressText = value;
+            RaisePropertyChangedEvent("ChoresCompletedMonthProgressText");
+        }
+    }
+
+    public int ChoresCompletedDayProgressValue {
+        get => _choresCompletedDayProgressValue;
+        set {
+            _choresCompletedDayProgressValue = value;
+            RaisePropertyChangedEvent("ChoresCompletedDayProgressValue");
+        }
+    }
+
+    public int ChoresCompletedMonthProgressValue {
+        get => _choresCompletedMonthProgressValue;
+        set {
+            _choresCompletedMonthProgressValue = value;
+            RaisePropertyChangedEvent("ChoresCompletedMonthProgressValue");
         }
     }
 
@@ -193,6 +288,30 @@ public class ChoresVM : BaseViewModel {
         set {
             _projectedFundCashText = value;
             RaisePropertyChangedEvent("ProjectedFundCashText");
+        }
+    }
+
+    public string DayButtonColor {
+        get => _dayButtonColor;
+        set {
+            _dayButtonColor = value;
+            RaisePropertyChangedEvent("DayButtonColor");
+        }
+    }
+
+    public string WeekButtonColor {
+        get => _weekButtonColor;
+        set {
+            _weekButtonColor = value;
+            RaisePropertyChangedEvent("WeekButtonColor");
+        }
+    }
+
+    public string MonthButtonColor {
+        get => _monthButtonColor;
+        set {
+            _monthButtonColor = value;
+            RaisePropertyChangedEvent("MonthButtonColor");
         }
     }
 

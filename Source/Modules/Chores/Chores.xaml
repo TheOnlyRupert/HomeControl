@@ -2,11 +2,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
     <Border BorderBrush="Black" BorderThickness="1" Margin=" 4 0 4 4">
         <Grid Margin="4">
-            <StackPanel HorizontalAlignment="Right">
-                <Button Command="{Binding ButtonCommand}" CommandParameter="choresWeek" HorizontalContentAlignment="Stretch" Padding="12 6">
+            <StackPanel HorizontalAlignment="Left">
+                <Button Command="{Binding ButtonCommand}" CommandParameter="choresDay" HorizontalContentAlignment="Stretch" Padding="12 6">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Background" Value="{Binding DayButtonColor}"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
@@ -26,16 +26,53 @@
                     </Button.Style>
 
                     <StackPanel>
-                        <TextBlock Text="{Binding CurrentMonthText}" FontSize="16" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding CurrentWeekText}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding CurrentDayText}" FontSize="16" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding ChoresCompletedDayText}" HorizontalAlignment="Center"/>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <ProgressBar Value="{Binding ChoresCompletedDayProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+                                         BorderBrush="Black" BorderThickness="1"/>
+                            <TextBlock Text="{Binding ChoresCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding ButtonCommand}" CommandParameter="choresWeek" HorizontalContentAlignment="Stretch" Padding="12 6">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding WeekButtonColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" Padding="8" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <StackPanel>
+                        <TextBlock Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" FontSize="16"/>
                         <TextBlock Text="{Binding ChoresCompletedWeekText}" HorizontalAlignment="Center"/>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <ProgressBar Value="{Binding ChoresCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+                                         BorderBrush="Black" BorderThickness="1"/>
+                            <TextBlock Text="{Binding ChoresCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
                     </StackPanel>
                 </Button>
 
                 <Button Command="{Binding ButtonCommand}" CommandParameter="choresMonth" HorizontalContentAlignment="Stretch">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Background" Value="{Binding MonthButtonColor}"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
@@ -56,38 +93,24 @@
 
                     <StackPanel>
                         <TextBlock Text="{Binding CurrentMonthText}" FontSize="16" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Deep Clean" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding ChoresCompletedMonthText}" HorizontalAlignment="Center"/>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <ProgressBar Value="{Binding ChoresCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+                                         BorderBrush="Black" BorderThickness="1"/>
+                            <TextBlock Text="{Binding ChoresCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
                     </StackPanel>
                 </Button>
-            </StackPanel>
 
-            <Grid>
-                <Image Source="../../Resources/Images/icons/chores.png" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock Text="{Binding ChoresTitleText}" Foreground="White" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-            </Grid>
-
-            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 24 0 0">
-                <TextBlock Text="Current Week:" FontSize="18" Foreground="White"/>
-                <TextBlock Text="{Binding CurrentWeekSpanText}" FontSize="18" Foreground="White"/>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ProgressBar Value="{Binding ChoresCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
-                                 BorderBrush="Black" BorderThickness="1"/>
-                    <TextBlock Text="{Binding ChoresCompletedWeekProgressText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Grid>
-            </StackPanel>
-
-            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                <TextBlock Text="{Binding ProjectedFundMonthText}" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
-                <Button HorizontalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="funds">
+                <Button Command="{Binding ButtonCommand}" CommandParameter="choresSpecial" HorizontalContentAlignment="Stretch">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Background" Value="{Binding SpecialButtonColor}"/>
                             <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" Padding="8" BorderBrush="Black" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -101,12 +124,67 @@
                         </Style>
                     </Button.Style>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding ProjectedFundLevelText}" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
-                        <Image Source="../../../Resources/Images/icons/money.png" Width="32" Height="32" Margin="8 0"/>
-                        <TextBlock Text="{Binding ProjectedFundCashText}" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
+                    <StackPanel>
+                        <TextBlock Text="Special" FontSize="16" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right">
+                <TextBlock Text="Funds Expire" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="2 Days" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+
+                <TextBlock Text="Target Day" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="Unclaimed" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+
+                <TextBlock Text="Treat-yo-Self" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="Unclaimed" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+
+                <TextBlock Text="Current Mode" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="Normal" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            </StackPanel>
+
+            <Grid>
+                <Image Source="../../Resources/Images/icons/chores.png" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Text="{Binding ChoresTitleText}" Foreground="White" FontSize="18" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            </Grid>
+
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="funds"
+                    BorderBrush="CornflowerBlue" BorderThickness="4">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Available" FontSize="18" Foreground="White" VerticalAlignment="Center" Padding="12 12 12 0"/>
+                    <TextBlock Text="$50" FontSize="36" Foreground="White" VerticalAlignment="Center" Padding="12 0 12 12"/>
+                </StackPanel>
+            </Button>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <TextBlock Text="{Binding ProjectedFundMonthText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid Width="256">
+                    <ProgressBar Value="{Binding FundsProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent" BorderBrush="Black"
+                                 BorderThickness="1"/>
+                    <TextBlock Text="{Binding FundsProgressText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
             </StackPanel>
         </Grid>
     </Border>
