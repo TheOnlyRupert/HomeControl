@@ -116,16 +116,16 @@
 
             <ListView.View>
                 <GridView AllowsColumnReorder="false">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Width="Auto"/>
-                    <GridViewColumn Width="Auto">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Width="96"/>
+                    <GridViewColumn Width="32">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding WeatherIcon}" Height="24"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Temp}" Width="Auto"/>
-                    <GridViewColumn Width="Auto">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Temp}" Width="32"/>
+                    <GridViewColumn Width="48">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -135,7 +135,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="Auto">
+                    <GridViewColumn Width="96">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

@@ -52,7 +52,7 @@ public class ChoresDayVM : BaseViewModel {
     private void SwitchButtonLogic(string value) {
         int index = ReferenceValues.JsonChoreDayMasterList.choreList.IndexOf(ReferenceValues.JsonChoreDayMasterList.choreList.First(i => i.Name == value));
         if (ReferenceValues.JsonChoreDayMasterList.choreList[index].IsComplete) {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset this chore?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Stop);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset this task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Stop);
             if (result == MessageBoxResult.Yes) {
                 ReferenceValues.JsonChoreDayMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreDayMasterList.choreList[index].IsComplete;
                 ReferenceValues.JsonChoreDayMasterList.choreList[index].Date = "";

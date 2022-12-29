@@ -199,7 +199,7 @@ public class ChoresWeekVM : BaseViewModel {
     private void SwitchButtonLogic(string value) {
         int index = ReferenceValues.JsonChoreWeekMasterList.choreList.IndexOf(ReferenceValues.JsonChoreWeekMasterList.choreList.First(i => i.Name == value));
         if (ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete) {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset this chore?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Stop);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset this task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Stop);
             if (result == MessageBoxResult.Yes) {
                 ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete;
                 ReferenceValues.JsonChoreWeekMasterList.choreList[index].Date = "";

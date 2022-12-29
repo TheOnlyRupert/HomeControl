@@ -116,6 +116,9 @@
         <Compile Include="Source\Modules\Chores\ChoresFunds.xaml.cs">
             <DependentUpon>ChoresFunds.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Chores\ChoresSpecial.xaml.cs">
+            <DependentUpon>ChoresSpecial.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Contacts.xaml.cs">
             <DependentUpon>Contacts.xaml</DependentUpon>
         </Compile>
@@ -176,6 +179,7 @@
         <Compile Include="Source\Reference\VerifyInput.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresDayVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresFundsVM.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresSpecialVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
@@ -215,6 +219,7 @@
         </Compile>
         <Page Include="Source\Modules\Chores\ChoresDay.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresFunds.xaml"/>
+        <Page Include="Source\Modules\Chores\ChoresSpecial.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
         <Page Include="Source\Modules\MealPrep.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>

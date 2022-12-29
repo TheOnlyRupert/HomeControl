@@ -56,11 +56,11 @@ public class ChoresVM : BaseViewModel {
             RefreshFields();
             break;
         case "choresSpecial":
-            //ChoresSpecial choresSpecial = new();
-            //choresSpecial.ShowDialog();
-            //choresSpecial.Close();
+            ChoresSpecial choresSpecial = new();
+            choresSpecial.ShowDialog();
+            choresSpecial.Close();
 
-            //RefreshFields();
+            RefreshFields();
             break;
         case "funds":
             ChoresFunds choresFunds = new();
