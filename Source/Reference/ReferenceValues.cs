@@ -25,6 +25,7 @@ public static class ReferenceValues {
         "Home Improvement",
         "Alcohol",
         "Firearms",
+        "Brittany Fund",
         "Stupid/Dumb",
         "Interest",
         "Other"
@@ -48,6 +49,8 @@ public static class ReferenceValues {
     public static JsonChores JsonChoreDayMasterList { get; set; }
     public static JsonChores JsonChoreWeekMasterList { get; set; }
     public static JsonChores JsonChoreMonthMasterList { get; set; }
+    public static JsonChores JsonChoreSpecialMasterList { get; set; }
+    public static JsonChoreFunds JsonChoreFundsMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
 
     public static DateTime ChoreWeekStartDate { get; set; }

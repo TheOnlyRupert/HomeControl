@@ -99,10 +99,12 @@
         <Compile Include="Source\Helpers\WeatherHelpers.cs"/>
         <Compile Include="Source\IO\BehaviorFromJson.cs"/>
         <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
+        <Compile Include="Source\IO\ChoreFundsFromJson.cs"/>
         <Compile Include="Source\IO\ChoresFromJson.cs"/>
         <Compile Include="Source\IO\FinancesFromJson.cs"/>
         <Compile Include="Source\IO\JsonBehavior.cs"/>
         <Compile Include="Source\IO\JsonCalendar.cs"/>
+        <Compile Include="Source\IO\JsonChoreFunds.cs"/>
         <Compile Include="Source\IO\JsonChores.cs"/>
         <Compile Include="Source\IO\JsonFinances.cs"/>
         <Compile Include="Source\IO\JsonSettings.cs"/>

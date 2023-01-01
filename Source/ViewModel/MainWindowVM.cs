@@ -13,6 +13,7 @@ namespace HomeControl.Source.ViewModel;
 public class MainWindowVM : BaseViewModel {
     private readonly CrossViewMessenger simpleMessenger;
     private string _iconImage, _lockedText, _lockedColor, _onlineText, _onlineColor;
+    private bool changeDate;
     private DateTime currentDate;
 
     public MainWindowVM() {
@@ -63,16 +64,34 @@ public class MainWindowVM : BaseViewModel {
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
-        /* Date Changes */
-        if (!currentDate.Day.Equals(DateTime.Now.Day)) {
-            currentDate = DateTime.Now;
-            simpleMessenger.PushMessage("DateChanged", null);
-        }
-
+        changeDate = false;
+        /* Min Changes */
         if (!currentDate.Minute.Equals(DateTime.Now.Minute)) {
-            currentDate = DateTime.Now;
             simpleMessenger.PushMessage("MinChanged", null);
             ApiStatus();
+            changeDate = true;
+        }
+
+        if (!currentDate.Hour.Equals(DateTime.Now.Hour)) {
+            simpleMessenger.PushMessage("HourChanged", null);
+            changeDate = true;
+        }
+
+        /* Date Changes */
+        if (!currentDate.Day.Equals(DateTime.Now.Day)) {
+            simpleMessenger.PushMessage("DateChanged", null);
+            changeDate = true;
+        }
+
+        /* Month Changes */
+        if (!currentDate.Month.Equals(DateTime.Now.Month)) {
+            simpleMessenger.PushMessage("MonthChanged", null);
+            changeDate = true;
+        }
+
+        if (changeDate) {
+            currentDate = DateTime.Now;
+            changeDate = false;
         }
 
         /* Alarms Module - Prevents dupes between different windows */

@@ -50,9 +50,7 @@ public class EditFinancesVM : BaseViewModel {
             CategoryList.Add(VARIABLE);
         }
 
-        if (string.IsNullOrWhiteSpace(CategorySelected)) {
-            CategorySelected = "Billing";
-        }
+        CategorySelected = "Billing";
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -154,10 +152,24 @@ public class EditFinancesVM : BaseViewModel {
                 SwitchModeButtonText = "Income  ☺";
                 SwitchModeButtonColor = "Green";
                 AddOrSub = "ADD";
+
+                CategoryList.Clear();
+                foreach (string VARIABLE in ReferenceValues.CategoryProfitList) {
+                    CategoryList.Add(VARIABLE);
+                }
+
+                CategorySelected = "Paycheck";
             } else {
                 SwitchModeButtonText = "Expense  ☹";
                 SwitchModeButtonColor = "Red";
                 AddOrSub = "SUB";
+
+                CategoryList.Clear();
+                foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
+                    CategoryList.Add(VARIABLE);
+                }
+
+                CategorySelected = "Billing";
             }
 
             break;
@@ -168,17 +180,28 @@ public class EditFinancesVM : BaseViewModel {
         DescriptionText = value.Item;
         DateText = value.Date;
         CostText = value.Cost;
-        CategorySelected = value.Category;
 
         if (value.AddSub == "ADD") {
             SwitchModeButtonText = "Income  ☺";
             SwitchModeButtonColor = "Green";
             AddOrSub = "ADD";
+
+            CategoryList.Clear();
+            foreach (string VARIABLE in ReferenceValues.CategoryProfitList) {
+                CategoryList.Add(VARIABLE);
+            }
         } else {
             SwitchModeButtonText = "Expense  ☹";
             SwitchModeButtonColor = "Red";
             AddOrSub = "SUB";
+
+            CategoryList.Clear();
+            foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
+                CategoryList.Add(VARIABLE);
+            }
         }
+
+        CategorySelected = value.Category;
 
         if (value.Person == ReferenceValues.JsonMasterSettings.User1Name) {
             selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;

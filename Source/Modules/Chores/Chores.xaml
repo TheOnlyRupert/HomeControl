@@ -157,32 +157,36 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Special" FontSize="16" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="Completed" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding ChoresCompletedSpecialText}" HorizontalAlignment="Center"/>
+                    <ProgressBar Grid.Row="2" Value="{Binding ChoresCompletedSpecialProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+                                 BorderBrush="Black" BorderThickness="1"/>
+                    <TextBlock Grid.Row="2" Text="{Binding ChoresCompletedSpecialProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
 
             <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center">
                 <TextBlock Text="Funds Expire" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="2 Days" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+                <TextBlock Text="{Binding FundsExpire}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
                 <TextBlock Text="Target Day" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="Unclaimed" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+                <TextBlock Text="{Binding SpecialDay1Text}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">
                 <TextBlock Text="Treat-yo-Self" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="Unclaimed" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+                <TextBlock Text="{Binding SpecialDay2Text}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
             </StackPanel>
 
             <StackPanel Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center">
                 <TextBlock Text="Current Mode" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="Normal" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+                <TextBlock Text="{Binding CurrentModeText}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
             </StackPanel>
 
             <Button Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" HorizontalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="funds" Margin="16">
@@ -214,7 +218,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Available" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="$50" FontSize="48" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding CashAvailable}" FontSize="48" Foreground="White" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
 
@@ -222,7 +226,7 @@
                 <TextBlock Text="{Binding ProjectedFundMonthText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Grid>
                     <ProgressBar Value="{Binding FundsProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent" BorderBrush="Black"
-                                 BorderThickness="1"/>
+                                 BorderThickness="1" Maximum="500"/>
                     <TextBlock Text="{Binding FundsProgressText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </StackPanel>

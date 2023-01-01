@@ -1,6 +1,7 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Contacts" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="Edit Timer"
-        Height="750" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="Black" BorderThickness="4">
+        Height="750" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue"
+        BorderThickness="4">
     <Grid Focusable="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

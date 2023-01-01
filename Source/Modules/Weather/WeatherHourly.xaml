@@ -125,7 +125,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Temp}" Width="32"/>
-                    <GridViewColumn Width="48">
+                    <GridViewColumn Width="64">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
