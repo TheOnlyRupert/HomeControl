@@ -17,9 +17,10 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="2"/>
@@ -34,6 +35,10 @@
             <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
             <Border Grid.Column="2" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
             <Border Grid.Column="3" Grid.Row="2" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="0" Grid.Row="3" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="1" Grid.Row="3" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="2" Grid.Row="3" BorderBrush="Black" BorderThickness="2"/>
+            <Border Grid.Column="3" Grid.Row="3" BorderBrush="Black" BorderThickness="2"/>
 
             <Grid Grid.Column="0" Grid.Row="0" Margin="8">
                 <StackPanel>
@@ -331,7 +336,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
-                            <TextBlock Grid.Column="1" Text="Clean - AC Filter"/>
+                            <TextBlock Grid.Column="1" Text="Scrub - Toys"/>
                             <TextBlock Grid.Column="2" Text="{Binding Room1Task9DateText}"/>
                         </Grid>
                     </Button>
@@ -1081,7 +1086,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
-                            <TextBlock Grid.Column="1" Text="Clean - Hot Water Filter"/>
+                            <TextBlock Grid.Column="1" Text="Organize - Food Expiration"/>
                             <TextBlock Grid.Column="2" Text="{Binding Room5Task2DateText}"/>
                         </Grid>
                     </Button>
@@ -1556,6 +1561,31 @@
             <Grid Grid.Column="3" Grid.Row="2" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Garage" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+
+
+            <Grid Grid.Column="0" Grid.Row="3" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Front Yard" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="3" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Back Yard" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="3" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Vehicles" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="3" Grid.Row="3" Margin="8">
+                <StackPanel>
+                    <TextBlock Text="Misc" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Grid>
         </Grid>

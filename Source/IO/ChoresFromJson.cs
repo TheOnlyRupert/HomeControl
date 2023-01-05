@@ -13,6 +13,7 @@ public class ChoresFromJson {
 
     public void ChoresDayFromJson(DateTime dateTime) {
         string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_day_" + dateTime.ToString("yyyy_MM_dd") + ".json";
+        string fileNameUser1 = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_day_" + dateTime.ToString("yyyy_MM_dd") + ".json";
 
         JsonSerializerOptions options = new() {
             IncludeFields = true
@@ -72,10 +73,66 @@ public class ChoresFromJson {
                 Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
             }
         }
+
+        try {
+            StreamReader streamReader = new(fileNameUser1);
+            string choresListString = null;
+            while (!streamReader.EndOfStream) {
+                choresListString = streamReader.ReadToEnd();
+            }
+
+            streamReader.Close();
+
+            if (choresListString != null) {
+                try {
+                    JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
+                    ReferenceValues.JsonChoreDayUser1MasterList = jsonChores;
+                } catch (Exception e) {
+                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                }
+            }
+        } catch (Exception) {
+            JsonChores jsonChores = new();
+            ObservableCollection<ChoreDetails> choreList = new() {
+                new ChoreDetails {
+                    Name = "Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Task4",
+                    IsComplete = false,
+                    Date = ""
+                }
+            };
+
+            jsonChores.choreList = choreList;
+            ReferenceValues.JsonChoreDayUser1MasterList = jsonChores;
+
+            try {
+                string jsonString = JsonSerializer.Serialize(jsonChores);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(fileNameUser1, jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save " + fileNameUser1 + "... " + e.Message);
+            }
+        }
     }
 
     public void ChoresWeekFromJson(DateTime dateTime) {
         string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_week_" + dateTime.ToString("yyyy_MM_dd") + ".json";
+        string fileNameUser1 = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_week_" + dateTime.ToString("yyyy_MM_dd") + ".json";
 
         JsonSerializerOptions options = new() {
             IncludeFields = true
@@ -355,10 +412,51 @@ public class ChoresFromJson {
                 Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
             }
         }
+
+        try {
+            StreamReader streamReader = new(fileNameUser1);
+            string choresListString = null;
+            while (!streamReader.EndOfStream) {
+                choresListString = streamReader.ReadToEnd();
+            }
+
+            streamReader.Close();
+
+            if (choresListString != null) {
+                try {
+                    JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
+                    ReferenceValues.JsonChoreWeekUser1MasterList = jsonChores;
+                } catch (Exception e) {
+                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                }
+            }
+        } catch (Exception) {
+            JsonChores jsonChores = new();
+            ObservableCollection<ChoreDetails> choreList = new() {
+                new ChoreDetails {
+                    Name = "Room1Task1",
+                    IsComplete = false,
+                    Date = ""
+                }
+            };
+
+            jsonChores.choreList = choreList;
+            ReferenceValues.JsonChoreWeekUser1MasterList = jsonChores;
+
+            try {
+                string jsonString = JsonSerializer.Serialize(jsonChores);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(fileNameUser1, jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save " + fileNameUser1 + "... " + e.Message);
+            }
+        }
     }
 
     public void ChoresMonthFromJson(DateTime dateTime) {
         string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + dateTime.ToString("yyyy_MM") + ".json";
+        string fileNameUser1 = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_month_" + dateTime.ToString("yyyy_MM") + ".json";
 
         JsonSerializerOptions options = new() {
             IncludeFields = true
@@ -618,10 +716,61 @@ public class ChoresFromJson {
                 Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
             }
         }
+
+        try {
+            StreamReader streamReader = new(fileNameUser1);
+            string choresListString = null;
+            while (!streamReader.EndOfStream) {
+                choresListString = streamReader.ReadToEnd();
+            }
+
+            streamReader.Close();
+
+            if (choresListString != null) {
+                try {
+                    JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
+                    ReferenceValues.JsonChoreMonthUser1MasterList = jsonChores;
+                } catch (Exception e) {
+                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                }
+            }
+        } catch (Exception) {
+            JsonChores jsonChores = new();
+            ObservableCollection<ChoreDetails> choreList = new() {
+                new ChoreDetails {
+                    Name = "Room1Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room5Task1",
+                    IsComplete = false,
+                    Date = ""
+                }
+            };
+
+            jsonChores.choreList = choreList;
+            ReferenceValues.JsonChoreMonthUser1MasterList = jsonChores;
+
+            try {
+                string jsonString = JsonSerializer.Serialize(jsonChores);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(fileNameUser1, jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save " + fileNameUser1 + "... " + e.Message);
+            }
+        }
     }
 
     public void ChoresSpecialFromJson(DateTime dateTime) {
         string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_special_" + dateTime.ToString("yyyy_MM") + ".json";
+        string fileNameUser1 = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_special_" + dateTime.ToString("yyyy_MM") + ".json";
 
         JsonSerializerOptions options = new() {
             IncludeFields = true
@@ -669,6 +818,51 @@ public class ChoresFromJson {
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
                 Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            }
+        }
+
+        try {
+            StreamReader streamReader = new(fileNameUser1);
+            string choresListString = null;
+            while (!streamReader.EndOfStream) {
+                choresListString = streamReader.ReadToEnd();
+            }
+
+            streamReader.Close();
+
+            if (choresListString != null) {
+                try {
+                    JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
+                    ReferenceValues.JsonChoreSpecialUser1MasterList = jsonChores;
+                } catch (Exception e) {
+                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                }
+            }
+        } catch (Exception) {
+            JsonChores jsonChores = new();
+            ObservableCollection<ChoreDetails> choreList = new() {
+                new ChoreDetails {
+                    Name = "Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Task2",
+                    IsComplete = false,
+                    Date = ""
+                }
+            };
+
+            jsonChores.choreList = choreList;
+            ReferenceValues.JsonChoreSpecialUser1MasterList = jsonChores;
+
+            try {
+                string jsonString = JsonSerializer.Serialize(jsonChores);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(fileNameUser1, jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save " + fileNameUser1 + "... " + e.Message);
             }
         }
     }

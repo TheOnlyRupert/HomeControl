@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
@@ -12,12 +11,17 @@ using static HomeControl.Source.Reference.ReferenceValues;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresVM : BaseViewModel {
-    private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _choresTitleText,
-        _choresCompletedWeekProgressText, _projectedFundMonthText, _choresCompletedDayProgressText,
-        _choresCompletedMonthProgressText, _choresCompletedSpecialProgressText, _dayButtonColor, _weekButtonColor, _monthButtonColor, _specialButtonColor,
-        _choresCompletedSpecialText, _cashAvailable, _fundsProgressText, _fundsExpire, _specialDay1Text, _specialDay2Text, _currentModeText;
+    private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _user1Text,
+        _choresCompletedWeekProgressText, _projectedFundMonthText, _choresCompletedDayProgressText, _user2Text, _choresCompletedMonthProgressText,
+        _choresCompletedSpecialProgressText, _dayButtonColor, _weekButtonColor, _monthButtonColor, _specialButtonColor, _choresCompletedSpecialText, _cashAvailable,
+        _fundsProgressText, _fundsExpire, _specialDay1Text, _specialDay2Text, _currentModeText, _choresCompletedDayTextUser1, _choresCompletedWeekTextUser1,
+        _choresCompletedMonthTextUser1, _choresCompletedSpecialTextUser1, _choresCompletedDayProgressTextUser1, _choresCompletedWeekProgressTextUser1,
+        _choresCompletedMonthProgressTextUser1, _choresCompletedSpecialProgressTextUser1, _dayButtonColorUser1, _weekButtonColorUser1, _monthButtonColorUser1,
+        _specialButtonColorUser1;
 
-    private int choresCompletedDay, choresCompletedWeek, choresCompletedMonth, choresCompletedSpecial, _choresCompletedDayProgressValue, _choresCompletedWeekProgressValue,
+    private int choresCompletedDay, choresCompletedWeek, choresCompletedMonth, choresCompletedSpecial, choresCompletedDayUser1, choresCompletedWeekUser1, choresCompletedMonthUser1,
+        choresCompletedSpecialUser1, _choresCompletedDayProgressValue, _choresCompletedWeekProgressValue, _choresCompletedDayProgressValueUser1,
+        _choresCompletedWeekProgressValueUser1, _choresCompletedMonthProgressValueUser1, _choresCompletedSpecialProgressValueUser1,
         _choresCompletedMonthProgressValue, _choresCompletedSpecialProgressValue, calculatedReleaseFunds, _fundsProgressValue;
 
     public ChoresVM() {
@@ -82,6 +86,36 @@ public class ChoresVM : BaseViewModel {
             choresFunds.ShowDialog();
             choresFunds.Close();
             break;
+
+
+        case "choresDayUser1":
+            ChoresDayUser1 choresDayUser1 = new();
+            choresDayUser1.ShowDialog();
+            choresDayUser1.Close();
+
+            RefreshFields();
+            break;
+        case "choresWeekUser1":
+            ChoresWeekUser1 choresWeekUser1 = new();
+            choresWeekUser1.ShowDialog();
+            choresWeekUser1.Close();
+
+            RefreshFields();
+            break;
+        case "choresMonthUser1":
+            ChoresMonthUser1 choresMonthUser1 = new();
+            choresMonthUser1.ShowDialog();
+            choresMonthUser1.Close();
+
+            RefreshFields();
+            break;
+        case "choresSpecialUser1":
+            ChoresSpecialUser1 choresSpecialUser1 = new();
+            choresSpecialUser1.ShowDialog();
+            choresSpecialUser1.Close();
+
+            RefreshFields();
+            break;
         }
     }
 
@@ -91,14 +125,15 @@ public class ChoresVM : BaseViewModel {
         DateTime dateTime = DateTime.Now;
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
         System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
-        JsonChoreWeekMasterList = new JsonChores {
-            choreList = new ObservableCollection<ChoreDetails>()
-        };
 
         choresCompletedDay = 0;
         choresCompletedWeek = 0;
         choresCompletedMonth = 0;
         choresCompletedSpecial = 0;
+        choresCompletedDayUser1 = 0;
+        choresCompletedWeekUser1 = 0;
+        choresCompletedMonthUser1 = 0;
+        choresCompletedSpecialUser1 = 0;
 
         while (ChoreWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
             ChoreWeekStartDate = ChoreWeekStartDate.AddDays(-1);
@@ -114,7 +149,8 @@ public class ChoresVM : BaseViewModel {
         CurrentMonthText = dateTime.ToString("MMMM");
         CurrentWeekText = "Week: " + calendar.GetWeekOfYear(dateTime, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
 
-        ChoresTitleText = JsonMasterSettings.User2Name + " Tasks";
+        User1Text = JsonMasterSettings.User1Name;
+        User2Text = JsonMasterSettings.User2Name;
 
         ProjectedFundMonthText = dateTime.AddMonths(1).ToString("MMM") + " Projected Funds";
         ChoresCompletedWeekProgressText = "0%";
@@ -146,10 +182,38 @@ public class ChoresVM : BaseViewModel {
             }
         }
 
+        foreach (ChoreDetails choreDetails in JsonChoreDayUser1MasterList.choreList) {
+            if (choreDetails.IsComplete) {
+                choresCompletedDayUser1++;
+            }
+        }
+
+        foreach (ChoreDetails choreDetails in JsonChoreWeekUser1MasterList.choreList) {
+            if (choreDetails.IsComplete) {
+                choresCompletedWeekUser1++;
+            }
+        }
+
+        foreach (ChoreDetails choreDetails in JsonChoreMonthUser1MasterList.choreList) {
+            if (choreDetails.IsComplete) {
+                choresCompletedMonthUser1++;
+            }
+        }
+
+        foreach (ChoreDetails choreDetails in JsonChoreSpecialUser1MasterList.choreList) {
+            if (choreDetails.IsComplete) {
+                choresCompletedSpecialUser1++;
+            }
+        }
+
         ChoresCompletedDayText = choresCompletedDay + " / " + JsonChoreDayMasterList.choreList.Count;
         ChoresCompletedWeekText = choresCompletedWeek + " / " + JsonChoreWeekMasterList.choreList.Count;
         ChoresCompletedMonthText = choresCompletedMonth + " / " + JsonChoreMonthMasterList.choreList.Count;
         ChoresCompletedSpecialText = choresCompletedSpecial + " / " + JsonChoreSpecialMasterList.choreList.Count;
+        ChoresCompletedDayTextUser1 = choresCompletedDayUser1 + " / " + JsonChoreDayUser1MasterList.choreList.Count;
+        ChoresCompletedWeekTextUser1 = choresCompletedWeekUser1 + " / " + JsonChoreWeekUser1MasterList.choreList.Count;
+        ChoresCompletedMonthTextUser1 = choresCompletedMonthUser1 + " / " + JsonChoreMonthUser1MasterList.choreList.Count;
+        ChoresCompletedSpecialTextUser1 = choresCompletedSpecialUser1 + " / " + JsonChoreSpecialUser1MasterList.choreList.Count;
 
         double progress = Convert.ToDouble(choresCompletedWeek) / Convert.ToDouble(JsonChoreWeekMasterList.choreList.Count) * 100;
         try {
@@ -175,10 +239,39 @@ public class ChoresVM : BaseViewModel {
             ChoresCompletedSpecialProgressValue = Convert.ToInt16(progress);
         } catch (Exception) { }
 
+        progress = Convert.ToDouble(choresCompletedWeekUser1) / Convert.ToDouble(JsonChoreWeekUser1MasterList.choreList.Count) * 100;
+        try {
+            ChoresCompletedWeekProgressTextUser1 = Convert.ToInt16(progress) + "%";
+            ChoresCompletedWeekProgressValueUser1 = Convert.ToInt16(progress);
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(choresCompletedDayUser1) / Convert.ToDouble(JsonChoreDayUser1MasterList.choreList.Count) * 100;
+        try {
+            ChoresCompletedDayProgressTextUser1 = Convert.ToInt16(progress) + "%";
+            ChoresCompletedDayProgressValueUser1 = Convert.ToInt16(progress);
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(choresCompletedMonthUser1) / Convert.ToDouble(JsonChoreMonthUser1MasterList.choreList.Count) * 100;
+        try {
+            ChoresCompletedMonthProgressTextUser1 = Convert.ToInt16(progress) + "%";
+            ChoresCompletedMonthProgressValueUser1 = Convert.ToInt16(progress);
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(choresCompletedSpecialUser1) / Convert.ToDouble(JsonChoreSpecialUser1MasterList.choreList.Count) * 100;
+        try {
+            ChoresCompletedSpecialProgressTextUser1 = Convert.ToInt16(progress) + "%";
+            ChoresCompletedSpecialProgressValueUser1 = Convert.ToInt16(progress);
+        } catch (Exception) { }
+
         DayButtonColor = "Transparent";
         WeekButtonColor = "Transparent";
         MonthButtonColor = "Transparent";
         SpecialButtonColor = "Transparent";
+
+        DayButtonColorUser1 = "Transparent";
+        WeekButtonColorUser1 = "Transparent";
+        MonthButtonColorUser1 = "Transparent";
+        SpecialButtonColorUser1 = "Transparent";
 
         if (ChoresCompletedDayProgressValue == 100) {
             DayButtonColor = "Green";
@@ -194,6 +287,22 @@ public class ChoresVM : BaseViewModel {
 
         if (choresCompletedSpecial > 0) {
             SpecialButtonColor = "Green";
+        }
+
+        if (ChoresCompletedDayProgressValueUser1 == 100) {
+            DayButtonColorUser1 = "Green";
+        }
+
+        if (ChoresCompletedWeekProgressValueUser1 == 100) {
+            WeekButtonColorUser1 = "Green";
+        }
+
+        if (ChoresCompletedMonthProgressValueUser1 == 100) {
+            MonthButtonColorUser1 = "Green";
+        }
+
+        if (choresCompletedSpecialUser1 > 0) {
+            SpecialButtonColorUser1 = "Green";
         }
 
         try {
@@ -384,11 +493,19 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string ChoresTitleText {
-        get => _choresTitleText;
+    public string User1Text {
+        get => _user1Text;
         set {
-            _choresTitleText = value;
-            RaisePropertyChangedEvent("ChoresTitleText");
+            _user1Text = value;
+            RaisePropertyChangedEvent("User1Text");
+        }
+    }
+
+    public string User2Text {
+        get => _user2Text;
+        set {
+            _user2Text = value;
+            RaisePropertyChangedEvent("User2Text");
         }
     }
 
@@ -557,6 +674,134 @@ public class ChoresVM : BaseViewModel {
         set {
             _currentModeText = value;
             RaisePropertyChangedEvent("CurrentModeText");
+        }
+    }
+
+    public string ChoresCompletedDayTextUser1 {
+        get => _choresCompletedDayTextUser1;
+        set {
+            _choresCompletedDayTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedDayTextUser1");
+        }
+    }
+
+    public string ChoresCompletedWeekTextUser1 {
+        get => _choresCompletedWeekTextUser1;
+        set {
+            _choresCompletedWeekTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedWeekTextUser1");
+        }
+    }
+
+    public string ChoresCompletedMonthTextUser1 {
+        get => _choresCompletedMonthTextUser1;
+        set {
+            _choresCompletedMonthTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedMonthTextUser1");
+        }
+    }
+
+    public string ChoresCompletedSpecialTextUser1 {
+        get => _choresCompletedSpecialTextUser1;
+        set {
+            _choresCompletedSpecialTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedSpecialTextUser1");
+        }
+    }
+
+    public string ChoresCompletedDayProgressTextUser1 {
+        get => _choresCompletedDayProgressTextUser1;
+        set {
+            _choresCompletedDayProgressTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedDayProgressTextUser1");
+        }
+    }
+
+    public string ChoresCompletedWeekProgressTextUser1 {
+        get => _choresCompletedWeekProgressTextUser1;
+        set {
+            _choresCompletedWeekProgressTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedWeekProgressTextUser1");
+        }
+    }
+
+    public string ChoresCompletedMonthProgressTextUser1 {
+        get => _choresCompletedMonthProgressTextUser1;
+        set {
+            _choresCompletedMonthProgressTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedMonthProgressTextUser1");
+        }
+    }
+
+    public string ChoresCompletedSpecialProgressTextUser1 {
+        get => _choresCompletedSpecialProgressTextUser1;
+        set {
+            _choresCompletedSpecialProgressTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedSpecialProgressTextUser1");
+        }
+    }
+
+    public int ChoresCompletedDayProgressValueUser1 {
+        get => _choresCompletedDayProgressValueUser1;
+        set {
+            _choresCompletedDayProgressValueUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedDayProgressValueUser1");
+        }
+    }
+
+    public int ChoresCompletedWeekProgressValueUser1 {
+        get => _choresCompletedWeekProgressValueUser1;
+        set {
+            _choresCompletedWeekProgressValueUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedWeekProgressValueUser1");
+        }
+    }
+
+    public int ChoresCompletedMonthProgressValueUser1 {
+        get => _choresCompletedMonthProgressValueUser1;
+        set {
+            _choresCompletedMonthProgressValueUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedMonthProgressValueUser1");
+        }
+    }
+
+    public int ChoresCompletedSpecialProgressValueUser1 {
+        get => _choresCompletedSpecialProgressValueUser1;
+        set {
+            _choresCompletedSpecialProgressValueUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedSpecialProgressValueUser1");
+        }
+    }
+
+    public string DayButtonColorUser1 {
+        get => _dayButtonColorUser1;
+        set {
+            _dayButtonColorUser1 = value;
+            RaisePropertyChangedEvent("DayButtonColorUser1");
+        }
+    }
+
+    public string WeekButtonColorUser1 {
+        get => _weekButtonColorUser1;
+        set {
+            _weekButtonColorUser1 = value;
+            RaisePropertyChangedEvent("WeekButtonColorUser1");
+        }
+    }
+
+    public string MonthButtonColorUser1 {
+        get => _monthButtonColorUser1;
+        set {
+            _monthButtonColorUser1 = value;
+            RaisePropertyChangedEvent("MonthButtonColorUser1");
+        }
+    }
+
+    public string SpecialButtonColorUser1 {
+        get => _specialButtonColorUser1;
+        set {
+            _specialButtonColorUser1 = value;
+            RaisePropertyChangedEvent("SpecialButtonColorUser1");
         }
     }
 
