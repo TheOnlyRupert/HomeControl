@@ -23,7 +23,7 @@ public class EditFinancesVM : BaseViewModel {
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
-        _financeSelected = new FinanceBlock();
+
         selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
         User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
         User2NameText = ReferenceValues.JsonMasterSettings.User2Name;

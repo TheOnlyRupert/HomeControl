@@ -31,6 +31,9 @@ public class ChoresVM : BaseViewModel {
         SpecialDay2Text = "Not Complete";
         CurrentModeText = "Normal";
 
+        FinancesFromJson financesFromJson = new();
+        financesFromJson.FinancesFromJsonShort();
+
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }

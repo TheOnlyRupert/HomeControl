@@ -274,7 +274,7 @@
 
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -358,7 +358,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -443,7 +443,7 @@
 
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -527,7 +527,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -610,7 +610,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -693,7 +693,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -776,7 +776,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -859,7 +859,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -942,7 +942,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1025,7 +1025,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1108,7 +1108,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1191,7 +1191,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1274,7 +1274,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1357,7 +1357,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1440,7 +1440,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1523,7 +1523,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1606,7 +1606,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1691,7 +1691,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1774,7 +1774,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1857,7 +1857,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1940,7 +1940,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2023,7 +2023,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2106,7 +2106,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2189,7 +2189,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2272,7 +2272,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2355,7 +2355,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2438,7 +2438,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2521,7 +2521,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2604,7 +2604,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2687,7 +2687,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2770,7 +2770,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2853,7 +2853,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2936,7 +2936,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3019,7 +3019,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3102,7 +3102,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3185,7 +3185,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3268,7 +3268,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3351,7 +3351,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3434,7 +3434,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3517,7 +3517,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3600,7 +3600,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3683,7 +3683,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>

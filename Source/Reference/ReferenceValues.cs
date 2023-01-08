@@ -46,6 +46,7 @@ public static class ReferenceValues {
 
     public static JsonCalendar[] JsonCalendarMasterEventList { get; set; }
     public static JsonFinances JsonFinanceMasterList { get; set; }
+    public static JsonFinancesShort JsonFinanceShortMasterList { get; set; }
     public static JsonChores JsonChoreDayMasterList { get; set; }
     public static JsonChores JsonChoreDayUser1MasterList { get; set; }
     public static JsonChores JsonChoreWeekMasterList { get; set; }

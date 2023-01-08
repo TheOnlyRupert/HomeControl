@@ -9,7 +9,7 @@
 
             <Image Grid.Row="0" Source="{Binding ThermometerDisplayIcon}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="48"/>
 
-            <Grid Grid.Row="0" Margin="64 0">
+            <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>

@@ -20,7 +20,8 @@ public class FinancesVM : BaseViewModel {
         income = 0;
         available = 0;
         CashAvailableTextColor = "CornflowerBlue";
-        new FinancesFromJson();
+        FinancesFromJson financesFromJson = new();
+        financesFromJson.FinancesFromJsonMain();
         RefreshFinances();
     }
 
