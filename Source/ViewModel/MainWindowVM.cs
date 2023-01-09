@@ -3,6 +3,7 @@ using System.Net;
 using System.Text.Json;
 using System.Windows.Input;
 using System.Windows.Threading;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Reference;
@@ -20,6 +21,7 @@ public class MainWindowVM : BaseViewModel {
         IconImage = "../../Resources/Images/icon.png";
         simpleMessenger = CrossViewMessenger.Instance;
         currentDate = DateTime.Now;
+        ReferenceValues.TimerSound = new PlaySound("alarm1");
 
         /* Get Settings */
         new SettingsFromJson();
@@ -181,6 +183,10 @@ public class MainWindowVM : BaseViewModel {
                     ++ReferenceValues.TimerMinutes[3];
                 }
             }
+        }
+
+        if (ReferenceValues.IsTimerAlarmActive && !ReferenceValues.TimerSound.IsPlaying()) {
+            ReferenceValues.TimerSound.Play(true);
         }
 
         simpleMessenger.PushMessage("Refresh", null);

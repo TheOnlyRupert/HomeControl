@@ -104,6 +104,8 @@ public class EditTimerVM : BaseViewModel {
             ReferenceValues.IsTimerAlarmActive = false;
             ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
             ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] = 0;
+            ReferenceValues.TimerSound.Stop();
+
             break;
         case "button1":
             if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {

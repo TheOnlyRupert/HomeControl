@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -12,6 +13,7 @@ namespace HomeControl.Source.ViewModel.Finances;
 
 public class EditFinancesVM : BaseViewModel {
     private readonly string fileName;
+    private readonly PlaySound money1Sound, money2Sound;
     private ObservableCollection<string> _categoryList;
 
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
@@ -23,6 +25,8 @@ public class EditFinancesVM : BaseViewModel {
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
+        money1Sound = new PlaySound("money1");
+        money2Sound = new PlaySound("money2");
 
         selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
         User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
@@ -72,6 +76,12 @@ public class EditFinancesVM : BaseViewModel {
                     Category = CategorySelected,
                     Person = selectedPerson
                 });
+
+                if (AddOrSub == "ADD") {
+                    money2Sound.Play(false);
+                } else {
+                    money1Sound.Play(false);
+                }
 
                 DateText = DateTime.Now.ToShortDateString();
                 DescriptionText = "";

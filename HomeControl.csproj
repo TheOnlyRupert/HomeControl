@@ -427,9 +427,6 @@
         <Resource Include="Resources\Images\icons\open_tickets.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\alarm.wav"/>
-    </ItemGroup>
-    <ItemGroup>
         <Resource Include="Resources\Images\behavior\strike_black.png"/>
         <Resource Include="Resources\Images\behavior\strike_red.png"/>
     </ItemGroup>
@@ -438,6 +435,15 @@
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\icons\workout.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Sounds\achievement1.wav"/>
+        <Resource Include="Resources\Sounds\achievement2.wav"/>
+        <Resource Include="Resources\Sounds\alarm1.wav"/>
+        <Resource Include="Resources\Sounds\alarm2.wav"/>
+        <Resource Include="Resources\Sounds\money1.wav"/>
+        <Resource Include="Resources\Sounds\money2.wav"/>
+        <Resource Include="Resources\Sounds\yay.wav"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')"/>

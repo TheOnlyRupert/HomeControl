@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 
 namespace HomeControl.Source.Reference;
@@ -68,6 +69,7 @@ public static class ReferenceValues {
     public static bool IsTimerAlarmActive { get; set; }
     public static bool[] IsTimerRunning { get; set; }
     public static bool[] SwitchTimerDirection { get; set; }
+    public static PlaySound TimerSound { get; set; }
 
     public static int ActiveChild { get; set; }
     public static JsonSettings JsonMasterSettings { get; set; }

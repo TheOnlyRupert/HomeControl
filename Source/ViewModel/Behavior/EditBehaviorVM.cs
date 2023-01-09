@@ -3,18 +3,24 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class EditBehaviorVM : BaseViewModel {
+    private readonly PlaySound strikeSound, rewardSound;
+
     private string _childName, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3, _rewardButtonVisibility,
         _progressBarChildValueText;
 
     private int _progressBarChildValue, stars, strikes;
 
     public EditBehaviorVM() {
+        strikeSound = new PlaySound("buzzer");
+        rewardSound = new PlaySound("yay");
+
         switch (ReferenceValues.ActiveChild) {
         case 0:
             ChildName = ReferenceValues.JsonMasterSettings.User3Name;
@@ -171,6 +177,7 @@ public class EditBehaviorVM : BaseViewModel {
                     strikes++;
                     ProgressBarChildValue = 0;
                     ProgressBarChildValueText = "0/5";
+                    strikeSound.Play(false);
 
                     if (strikes == 3) {
                         stars--;
@@ -233,6 +240,7 @@ public class EditBehaviorVM : BaseViewModel {
                 ProgressBarChildValue = 0;
                 ProgressBarChildValueText = "0/5";
                 RewardButtonVisibility = "HIDDEN";
+                rewardSound.Play(false);
             }
 
             break;

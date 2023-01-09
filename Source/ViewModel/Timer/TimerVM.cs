@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using HomeControl.Source.Control;
 using HomeControl.Source.Modules.Timer;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -7,7 +6,6 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Timer;
 
 public class TimerVM : BaseViewModel {
-    private readonly PlaySound timerDoneSound;
     private string _timer1Text, _timer2Text, _timer3Text, _timer4Text, _timer1Color, _timer2Color, _timer3Color, _timer4Color;
 
     public TimerVM() {
@@ -23,8 +21,6 @@ public class TimerVM : BaseViewModel {
         ReferenceValues.TimerMinutes = new int[4];
         ReferenceValues.TimerSeconds = new int[4];
         ReferenceValues.SwitchTimerDirection = new bool[4];
-
-        timerDoneSound = new PlaySound("alarm");
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -52,12 +48,6 @@ public class TimerVM : BaseViewModel {
             if (ReferenceValues.IsTimerRunning[3]) {
                 Timer4Text = $"{ReferenceValues.TimerMinutes[3]:000}:{ReferenceValues.TimerSeconds[3]:00}";
                 Timer4Color = ReferenceValues.SwitchTimerDirection[3] ? "Red" : "YellowGreen";
-            }
-
-            if (ReferenceValues.IsTimerAlarmActive) {
-                timerDoneSound.Play(true);
-            } else {
-                timerDoneSound.Stop();
             }
         }
     }

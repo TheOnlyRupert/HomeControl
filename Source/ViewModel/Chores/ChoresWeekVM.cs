@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -11,6 +12,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresWeekVM : BaseViewModel {
+    private readonly PlaySound completeSound;
     private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_week_" + ReferenceValues.ChoreWeekStartDate.ToString("yyyy_MM_dd") + ".json";
 
     private string _room1Task1Color, _room1Task2Color, _room1Task3Color, _room1Task4Color, _room1Task5Color, _room2Task1Color, _room2Task2Color, _room2Task3Color, _room2Task4Color,
@@ -32,6 +34,8 @@ public class ChoresWeekVM : BaseViewModel {
         _room12Task1Color, _room12Task2Color;
 
     public ChoresWeekVM() {
+        completeSound = new PlaySound("achievement1");
+
         GetButtonColors();
     }
 
@@ -220,6 +224,7 @@ public class ChoresWeekVM : BaseViewModel {
         } else {
             ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete;
             ReferenceValues.JsonChoreWeekMasterList.choreList[index].Date = DateTime.Now.ToString("yyyy-MM-dd");
+            completeSound.Play(false);
         }
     }
 
