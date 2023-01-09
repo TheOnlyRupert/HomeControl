@@ -52,9 +52,10 @@ public static class ReferenceValues {
     public static JsonChores JsonChoreWeekMasterList { get; set; }
     public static JsonChores JsonChoreWeekUser1MasterList { get; set; }
     public static JsonChores JsonChoreMonthMasterList { get; set; }
+    public static JsonChores JsonChoreQuarterMasterList { get; set; }
+    public static JsonChores JsonChoreQuarterUser1MasterList { get; set; }
     public static JsonChores JsonChoreMonthUser1MasterList { get; set; }
     public static JsonChores JsonChoreSpecialMasterList { get; set; }
-    public static JsonChores JsonChoreSpecialUser1MasterList { get; set; }
     public static JsonChoreFunds JsonChoreFundsMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
 

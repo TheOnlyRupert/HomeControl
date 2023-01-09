@@ -397,6 +397,26 @@ public class ChoresFromJson {
                     Name = "Room10Task5",
                     IsComplete = false,
                     Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room11Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room11Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room12Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room12Task2",
+                    IsComplete = false,
+                    Date = ""
                 }
             };
 
@@ -434,7 +454,57 @@ public class ChoresFromJson {
             JsonChores jsonChores = new();
             ObservableCollection<ChoreDetails> choreList = new() {
                 new ChoreDetails {
-                    Name = "Room1Task1",
+                    Name = "Room4Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room8Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room13Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room13Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room13Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room14Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room14Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room14Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room14Task4",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room14Task5",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room14Task6",
                     IsComplete = false,
                     Date = ""
                 }
@@ -701,6 +771,66 @@ public class ChoresFromJson {
                     Name = "Room8Task5",
                     IsComplete = false,
                     Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room9Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room9Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room9Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room9Task4",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room9Task5",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task4",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task5",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room11Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room15Task1",
+                    IsComplete = false,
+                    Date = ""
                 }
             };
 
@@ -738,17 +868,12 @@ public class ChoresFromJson {
             JsonChores jsonChores = new();
             ObservableCollection<ChoreDetails> choreList = new() {
                 new ChoreDetails {
-                    Name = "Room1Task1",
+                    Name = "Room15Task1",
                     IsComplete = false,
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Room4Task1",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
-                    Name = "Room5Task1",
+                    Name = "Room15Task2",
                     IsComplete = false,
                     Date = ""
                 }
@@ -768,9 +893,13 @@ public class ChoresFromJson {
         }
     }
 
-    public void ChoresSpecialFromJson(DateTime dateTime) {
-        string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_special_" + dateTime.ToString("yyyy_MM") + ".json";
-        string fileNameUser1 = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_special_" + dateTime.ToString("yyyy_MM") + ".json";
+    public void ChoresQuarterFromJson(DateTime dateTime) {
+        string fileName = dateTime.Month switch {
+            > 0 and < 3 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter1_" + dateTime.ToString("yyyy") + ".json",
+            > 2 and < 6 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter2_" + dateTime.ToString("yyyy") + ".json",
+            > 5 and < 9 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter3_" + dateTime.ToString("yyyy") + ".json",
+            _ => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter4_" + dateTime.ToString("yyyy") + ".json"
+        };
 
         JsonSerializerOptions options = new() {
             IncludeFields = true
@@ -788,7 +917,7 @@ public class ChoresFromJson {
             if (choresListString != null) {
                 try {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
-                    ReferenceValues.JsonChoreSpecialMasterList = jsonChores;
+                    ReferenceValues.JsonChoreQuarterMasterList = jsonChores;
                 } catch (Exception e) {
                     Console.WriteLine("Failed to Deserialize chores.json..." + e);
                 }
@@ -797,19 +926,119 @@ public class ChoresFromJson {
             JsonChores jsonChores = new();
             ObservableCollection<ChoreDetails> choreList = new() {
                 new ChoreDetails {
-                    Name = "Task1",
+                    Name = "Room1Task1",
                     IsComplete = false,
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Task2",
+                    Name = "Room2Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room2Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room2Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room2Task4",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room3Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task4",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task5",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task6",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task7",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room6Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room6Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room6Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room6Task4",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room7Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room9Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room11Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room11Task2",
                     IsComplete = false,
                     Date = ""
                 }
             };
 
             jsonChores.choreList = choreList;
-            ReferenceValues.JsonChoreSpecialMasterList = jsonChores;
+            ReferenceValues.JsonChoreQuarterMasterList = jsonChores;
 
             try {
                 string jsonString = JsonSerializer.Serialize(jsonChores);
@@ -821,8 +1050,15 @@ public class ChoresFromJson {
             }
         }
 
+        fileName = dateTime.Month switch {
+            > 0 and < 3 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter1User1_" + dateTime.ToString("yyyy") + ".json",
+            > 2 and < 6 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter2User1_" + dateTime.ToString("yyyy") + ".json",
+            > 5 and < 9 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter3User1_" + dateTime.ToString("yyyy") + ".json",
+            _ => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter4User1_" + dateTime.ToString("yyyy") + ".json"
+        };
+
         try {
-            StreamReader streamReader = new(fileNameUser1);
+            StreamReader streamReader = new(fileName);
             string choresListString = null;
             while (!streamReader.EndOfStream) {
                 choresListString = streamReader.ReadToEnd();
@@ -833,7 +1069,7 @@ public class ChoresFromJson {
             if (choresListString != null) {
                 try {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
-                    ReferenceValues.JsonChoreSpecialUser1MasterList = jsonChores;
+                    ReferenceValues.JsonChoreQuarterUser1MasterList = jsonChores;
                 } catch (Exception e) {
                     Console.WriteLine("Failed to Deserialize chores.json..." + e);
                 }
@@ -842,27 +1078,162 @@ public class ChoresFromJson {
             JsonChores jsonChores = new();
             ObservableCollection<ChoreDetails> choreList = new() {
                 new ChoreDetails {
-                    Name = "Task1",
+                    Name = "Room1Task1",
                     IsComplete = false,
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Task2",
+                    Name = "Room1Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room1Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room2Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room2Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room3Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room3Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room4Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room5Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room5Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room5Task3",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room6Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room6Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room7Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room7Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room8Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room8Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room9Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room9Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room11Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room11Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room12Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room12Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room16Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room16Task2",
                     IsComplete = false,
                     Date = ""
                 }
             };
 
             jsonChores.choreList = choreList;
-            ReferenceValues.JsonChoreSpecialUser1MasterList = jsonChores;
+            ReferenceValues.JsonChoreQuarterUser1MasterList = jsonChores;
 
             try {
                 string jsonString = JsonSerializer.Serialize(jsonChores);
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-                File.WriteAllText(fileNameUser1, jsonString);
+                File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileNameUser1 + "... " + e.Message);
+                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
             }
         }
     }

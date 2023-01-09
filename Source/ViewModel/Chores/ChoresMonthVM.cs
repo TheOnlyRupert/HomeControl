@@ -11,7 +11,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresMonthVM : BaseViewModel {
-    private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy_MM") + ".json";
+    private readonly string fileName;
 
     private string _room1Task1Color, _room1Task2Color, _room1Task3Color, _room1Task4Color, _room1Task5Color, _room1Task6Color, _room1Task7Color, _room1Task8Color, _room1Task9Color,
         _room1Task10Color, _room2Task1Color, _room2Task2Color, _room2Task3Color, _room2Task4Color, _room2Task5Color, _room3Task1Color, _room3Task2Color, _room3Task3Color,
@@ -25,9 +25,13 @@ public class ChoresMonthVM : BaseViewModel {
         _room3Task5DateText, _room3Task6DateText, _room3Task7DateText, _room4Task1DateText, _room4Task2DateText, _room4Task3DateText, _room4Task4DateText, _room4Task5DateText,
         _room4Task6DateText, _room4Task7DateText, _room5Task1DateText, _room5Task2DateText, _room5Task3DateText, _room6Task1DateText, _room6Task2DateText, _room6Task3DateText,
         _room6Task4DateText, _room6Task5DateText, _room7Task1DateText, _room7Task2DateText, _room8Task1DateText, _room8Task2DateText, _room8Task3DateText, _room8Task4DateText,
-        _room8Task5DateText;
+        _room8Task5DateText, _room9Task1DateText, _room9Task2DateText, _room9Task3DateText, _room9Task4DateText, _room9Task5DateText, _room10Task1DateText, _room10Task2DateText,
+        _room10Task3DateText, _room10Task4DateText, _room10Task5DateText, _room11Task1DateText, _room15Task1DateText, _room9Task1Color, _room9Task2Color, _room9Task3Color,
+        _room9Task4Color, _room9Task5Color, _room10Task1Color, _room10Task2Color, _room10Task3Color, _room10Task4Color, _room10Task5Color, _room11Task1Color, _room15Task1Color;
 
     public ChoresMonthVM() {
+        fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy_MM") + ".json";
+
         GetButtonColors();
     }
 
@@ -166,6 +170,42 @@ public class ChoresMonthVM : BaseViewModel {
             break;
         case "room8Task5":
             SwitchButtonLogic("Room8Task5");
+            break;
+        case "room9Task1":
+            SwitchButtonLogic("Room9Task1");
+            break;
+        case "room9Task2":
+            SwitchButtonLogic("Room9Task2");
+            break;
+        case "room9Task3":
+            SwitchButtonLogic("Room9Task3");
+            break;
+        case "room9Task4":
+            SwitchButtonLogic("Room9Task4");
+            break;
+        case "room9Task5":
+            SwitchButtonLogic("Room9Task5");
+            break;
+        case "room10Task1":
+            SwitchButtonLogic("Room10Task1");
+            break;
+        case "room10Task2":
+            SwitchButtonLogic("Room10Task2");
+            break;
+        case "room10Task3":
+            SwitchButtonLogic("Room10Task3");
+            break;
+        case "room10Task4":
+            SwitchButtonLogic("Room10Task4");
+            break;
+        case "room10Task5":
+            SwitchButtonLogic("Room10Task5");
+            break;
+        case "room11Task1":
+            SwitchButtonLogic("Room11Task1");
+            break;
+        case "room15Task1":
+            SwitchButtonLogic("Room15Task1");
             break;
         }
 
@@ -374,6 +414,54 @@ public class ChoresMonthVM : BaseViewModel {
                 case "Room8Task5":
                     Room8Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room8Task5DateText = choreDetails.Date;
+                    break;
+                case "Room9Task1":
+                    Room9Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room9Task1DateText = choreDetails.Date;
+                    break;
+                case "Room9Task2":
+                    Room9Task2Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room9Task2DateText = choreDetails.Date;
+                    break;
+                case "Room9Task3":
+                    Room9Task3Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room9Task3DateText = choreDetails.Date;
+                    break;
+                case "Room9Task4":
+                    Room9Task4Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room9Task4DateText = choreDetails.Date;
+                    break;
+                case "Room9Task5":
+                    Room9Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room9Task5DateText = choreDetails.Date;
+                    break;
+                case "Room10Task1":
+                    Room10Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room10Task1DateText = choreDetails.Date;
+                    break;
+                case "Room10Task2":
+                    Room10Task2Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room10Task2DateText = choreDetails.Date;
+                    break;
+                case "Room10Task3":
+                    Room10Task3Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room10Task3DateText = choreDetails.Date;
+                    break;
+                case "Room10Task4":
+                    Room10Task4Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room10Task4DateText = choreDetails.Date;
+                    break;
+                case "Room10Task5":
+                    Room10Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room10Task5DateText = choreDetails.Date;
+                    break;
+                case "Room11Task1":
+                    Room11Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room11Task1DateText = choreDetails.Date;
+                    break;
+                case "Room15Task1":
+                    Room15Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room15Task1DateText = choreDetails.Date;
                     break;
                 }
             }
@@ -1083,6 +1171,198 @@ public class ChoresMonthVM : BaseViewModel {
         set {
             _room8Task5DateText = value;
             RaisePropertyChangedEvent("Room8Task5DateText");
+        }
+    }
+
+    public string Room9Task1DateText {
+        get => _room9Task1DateText;
+        set {
+            _room9Task1DateText = value;
+            RaisePropertyChangedEvent("Room9Task1DateText");
+        }
+    }
+
+    public string Room9Task2DateText {
+        get => _room9Task2DateText;
+        set {
+            _room9Task2DateText = value;
+            RaisePropertyChangedEvent("Room9Task2DateText");
+        }
+    }
+
+    public string Room9Task3DateText {
+        get => _room9Task3DateText;
+        set {
+            _room9Task3DateText = value;
+            RaisePropertyChangedEvent("Room9Task3DateText");
+        }
+    }
+
+    public string Room9Task4DateText {
+        get => _room9Task4DateText;
+        set {
+            _room9Task4DateText = value;
+            RaisePropertyChangedEvent("Room9Task4DateText");
+        }
+    }
+
+    public string Room9Task5DateText {
+        get => _room9Task5DateText;
+        set {
+            _room9Task5DateText = value;
+            RaisePropertyChangedEvent("Room9Task5DateText");
+        }
+    }
+
+    public string Room10Task1DateText {
+        get => _room10Task1DateText;
+        set {
+            _room10Task1DateText = value;
+            RaisePropertyChangedEvent("Room10Task1DateText");
+        }
+    }
+
+    public string Room10Task2DateText {
+        get => _room10Task2DateText;
+        set {
+            _room10Task2DateText = value;
+            RaisePropertyChangedEvent("Room10Task2DateText");
+        }
+    }
+
+    public string Room10Task3DateText {
+        get => _room10Task3DateText;
+        set {
+            _room10Task3DateText = value;
+            RaisePropertyChangedEvent("Room10Task3DateText");
+        }
+    }
+
+    public string Room10Task4DateText {
+        get => _room10Task4DateText;
+        set {
+            _room10Task4DateText = value;
+            RaisePropertyChangedEvent("Room10Task4DateText");
+        }
+    }
+
+    public string Room10Task5DateText {
+        get => _room10Task5DateText;
+        set {
+            _room10Task5DateText = value;
+            RaisePropertyChangedEvent("Room10Task5DateText");
+        }
+    }
+
+    public string Room11Task1DateText {
+        get => _room11Task1DateText;
+        set {
+            _room11Task1DateText = value;
+            RaisePropertyChangedEvent("Room11Task1DateText");
+        }
+    }
+
+    public string Room15Task1DateText {
+        get => _room15Task1DateText;
+        set {
+            _room15Task1DateText = value;
+            RaisePropertyChangedEvent("Room15Task1DateText");
+        }
+    }
+
+    public string Room9Task1Color {
+        get => _room9Task1Color;
+        set {
+            _room9Task1Color = value;
+            RaisePropertyChangedEvent("Room9Task1Color");
+        }
+    }
+
+    public string Room9Task2Color {
+        get => _room9Task2Color;
+        set {
+            _room9Task2Color = value;
+            RaisePropertyChangedEvent("Room9Task2Color");
+        }
+    }
+
+    public string Room9Task3Color {
+        get => _room9Task3Color;
+        set {
+            _room9Task3Color = value;
+            RaisePropertyChangedEvent("Room9Task3Color");
+        }
+    }
+
+    public string Room9Task4Color {
+        get => _room9Task4Color;
+        set {
+            _room9Task4Color = value;
+            RaisePropertyChangedEvent("Room9Task4Color");
+        }
+    }
+
+    public string Room9Task5Color {
+        get => _room9Task5Color;
+        set {
+            _room9Task5Color = value;
+            RaisePropertyChangedEvent("Room9Task5Color");
+        }
+    }
+
+    public string Room10Task1Color {
+        get => _room10Task1Color;
+        set {
+            _room10Task1Color = value;
+            RaisePropertyChangedEvent("Room10Task1Color");
+        }
+    }
+
+    public string Room10Task2Color {
+        get => _room10Task2Color;
+        set {
+            _room10Task2Color = value;
+            RaisePropertyChangedEvent("Room10Task2Color");
+        }
+    }
+
+    public string Room10Task3Color {
+        get => _room10Task3Color;
+        set {
+            _room10Task3Color = value;
+            RaisePropertyChangedEvent("Room10Task3Color");
+        }
+    }
+
+    public string Room10Task4Color {
+        get => _room10Task4Color;
+        set {
+            _room10Task4Color = value;
+            RaisePropertyChangedEvent("Room10Task4Color");
+        }
+    }
+
+    public string Room10Task5Color {
+        get => _room10Task5Color;
+        set {
+            _room10Task5Color = value;
+            RaisePropertyChangedEvent("Room10Task5Color");
+        }
+    }
+
+    public string Room11Task1Color {
+        get => _room11Task1Color;
+        set {
+            _room11Task1Color = value;
+            RaisePropertyChangedEvent("Room11Task1Color");
+        }
+    }
+
+    public string Room15Task1Color {
+        get => _room15Task1Color;
+        set {
+            _room15Task1Color = value;
+            RaisePropertyChangedEvent("Room15Task1Color");
         }
     }
 

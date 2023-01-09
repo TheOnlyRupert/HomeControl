@@ -13,7 +13,7 @@ namespace HomeControl.Source.ViewModel.Chores;
 public class ChoresMonthUser1VM : BaseViewModel {
     private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_month_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy_MM") + ".json";
 
-    private string _room1Task1Color, _room4Task1Color, _room5Task1Color, _room1Task1DateText, _room4Task1DateText, _room5Task1DateText;
+    private string _room15Task1Color, _room15Task2Color, _room15Task1DateText, _room15Task2DateText;
 
     public ChoresMonthUser1VM() {
         GetButtonColors();
@@ -23,14 +23,11 @@ public class ChoresMonthUser1VM : BaseViewModel {
 
     private void ButtonLogic(object param) {
         switch (param) {
-        case "room1Task1":
-            SwitchButtonLogic("Room1Task1");
+        case "room15Task1":
+            SwitchButtonLogic("Room15Task1");
             break;
-        case "room4Task1":
-            SwitchButtonLogic("Room4Task1");
-            break;
-        case "room5Task1":
-            SwitchButtonLogic("Room5Task1");
+        case "room15Task2":
+            SwitchButtonLogic("Room15Task2");
             break;
         }
 
@@ -64,17 +61,13 @@ public class ChoresMonthUser1VM : BaseViewModel {
         if (ReferenceValues.JsonChoreMonthUser1MasterList != null) {
             foreach (ChoreDetails choreDetails in ReferenceValues.JsonChoreMonthUser1MasterList.choreList) {
                 switch (choreDetails.Name) {
-                case "Room1Task1":
-                    Room1Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room1Task1DateText = choreDetails.Date;
+                case "Room15Task1":
+                    Room15Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room15Task1DateText = choreDetails.Date;
                     break;
-                case "Room4Task1":
-                    Room4Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room4Task1DateText = choreDetails.Date;
-                    break;
-                case "Room5Task1":
-                    Room5Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room5Task1DateText = choreDetails.Date;
+                case "Room15Task2":
+                    Room15Task2Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room15Task2DateText = choreDetails.Date;
                     break;
                 }
             }
@@ -83,51 +76,35 @@ public class ChoresMonthUser1VM : BaseViewModel {
 
     #region Fields
 
-    public string Room1Task1Color {
-        get => _room1Task1Color;
+    public string Room15Task1Color {
+        get => _room15Task1Color;
         set {
-            _room1Task1Color = value;
-            RaisePropertyChangedEvent("Room1Task1Color");
+            _room15Task1Color = value;
+            RaisePropertyChangedEvent("Room15Task1Color");
         }
     }
 
-    public string Room5Task1Color {
-        get => _room5Task1Color;
+    public string Room15Task2Color {
+        get => _room15Task2Color;
         set {
-            _room5Task1Color = value;
-            RaisePropertyChangedEvent("Room5Task1Color");
+            _room15Task2Color = value;
+            RaisePropertyChangedEvent("Room15Task2Color");
         }
     }
 
-    public string Room4Task1Color {
-        get => _room4Task1Color;
+    public string Room15Task1DateText {
+        get => _room15Task1DateText;
         set {
-            _room4Task1Color = value;
-            RaisePropertyChangedEvent("Room4Task1Color");
+            _room15Task1DateText = value;
+            RaisePropertyChangedEvent("Room15Task1DateText");
         }
     }
 
-    public string Room1Task1DateText {
-        get => _room1Task1DateText;
+    public string Room15Task2DateText {
+        get => _room15Task2DateText;
         set {
-            _room1Task1DateText = value;
-            RaisePropertyChangedEvent("Room1Task1DateText");
-        }
-    }
-
-    public string Room4Task1DateText {
-        get => _room4Task1DateText;
-        set {
-            _room4Task1DateText = value;
-            RaisePropertyChangedEvent("Room4Task1DateText");
-        }
-    }
-
-    public string Room5Task1DateText {
-        get => _room5Task1DateText;
-        set {
-            _room5Task1DateText = value;
-            RaisePropertyChangedEvent("Room5Task1DateText");
+            _room15Task2DateText = value;
+            RaisePropertyChangedEvent("Room15Task2DateText");
         }
     }
 

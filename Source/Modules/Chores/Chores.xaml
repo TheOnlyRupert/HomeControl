@@ -131,10 +131,10 @@
                 </Grid>
             </Button>
 
-            <Button Grid.Row="4" Grid.Column="0" Command="{Binding ButtonCommand}" CommandParameter="choresSpecialUser1" HorizontalContentAlignment="Stretch">
+            <Button Grid.Row="4" Grid.Column="0" Command="{Binding ButtonCommand}" CommandParameter="choresQuarterUser1" HorizontalContentAlignment="Stretch">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="{Binding SpecialButtonColorUser1}"/>
+                        <Setter Property="Background" Value="{Binding QuarterButtonColorUser1}"/>
                         <Setter Property="Foreground" Value="White"/>
                         <Setter Property="Template">
                             <Setter.Value>
@@ -160,11 +160,11 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Special" FontSize="16" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="{Binding ChoresCompletedSpecialTextUser1}" HorizontalAlignment="Center"/>
-                    <ProgressBar Grid.Row="2" Value="{Binding ChoresCompletedSpecialProgressValueUser1}" IsIndeterminate="False" Foreground="CornflowerBlue"
+                    <TextBlock Grid.Row="0" Text="Quarter" FontSize="16" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding ChoresCompletedQuarterTextUser1}" HorizontalAlignment="Center"/>
+                    <ProgressBar Grid.Row="2" Value="{Binding ChoresCompletedQuarterProgressValueUser1}" IsIndeterminate="False" Foreground="CornflowerBlue"
                                  Background="Transparent" BorderBrush="Black" BorderThickness="1"/>
-                    <TextBlock Grid.Row="2" Text="{Binding ChoresCompletedSpecialProgressTextUser1}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Text="{Binding ChoresCompletedQuarterProgressTextUser1}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
 
@@ -282,10 +282,10 @@
                 </Grid>
             </Button>
 
-            <Button Grid.Row="4" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="choresSpecial" HorizontalContentAlignment="Stretch">
+            <Button Grid.Row="4" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="choresQuarter" HorizontalContentAlignment="Stretch">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="{Binding SpecialButtonColor}"/>
+                        <Setter Property="Background" Value="{Binding QuarterButtonColor}"/>
                         <Setter Property="Foreground" Value="White"/>
                         <Setter Property="Template">
                             <Setter.Value>
@@ -311,11 +311,11 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Special" FontSize="16" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="{Binding ChoresCompletedSpecialText}" HorizontalAlignment="Center"/>
-                    <ProgressBar Grid.Row="2" Value="{Binding ChoresCompletedSpecialProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+                    <TextBlock Grid.Row="0" Text="Quarter" FontSize="16" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding ChoresCompletedQuarterText}" HorizontalAlignment="Center"/>
+                    <ProgressBar Grid.Row="2" Value="{Binding ChoresCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
                                  BorderBrush="Black" BorderThickness="1"/>
-                    <TextBlock Grid.Row="2" Text="{Binding ChoresCompletedSpecialProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Text="{Binding ChoresCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Button>
 

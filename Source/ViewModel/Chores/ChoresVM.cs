@@ -13,16 +13,16 @@ namespace HomeControl.Source.ViewModel.Chores;
 public class ChoresVM : BaseViewModel {
     private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _user1Text,
         _choresCompletedWeekProgressText, _projectedFundMonthText, _choresCompletedDayProgressText, _user2Text, _choresCompletedMonthProgressText,
-        _choresCompletedSpecialProgressText, _dayButtonColor, _weekButtonColor, _monthButtonColor, _specialButtonColor, _choresCompletedSpecialText, _cashAvailable,
+        _choresCompletedQuarterProgressText, _dayButtonColor, _weekButtonColor, _monthButtonColor, _quarterButtonColor, _choresCompletedQuarterText, _cashAvailable,
         _fundsProgressText, _fundsExpire, _specialDay1Text, _specialDay2Text, _currentModeText, _choresCompletedDayTextUser1, _choresCompletedWeekTextUser1,
-        _choresCompletedMonthTextUser1, _choresCompletedSpecialTextUser1, _choresCompletedDayProgressTextUser1, _choresCompletedWeekProgressTextUser1,
-        _choresCompletedMonthProgressTextUser1, _choresCompletedSpecialProgressTextUser1, _dayButtonColorUser1, _weekButtonColorUser1, _monthButtonColorUser1,
-        _specialButtonColorUser1;
+        _choresCompletedMonthTextUser1, _choresCompletedQuarterTextUser1, _choresCompletedDayProgressTextUser1, _choresCompletedWeekProgressTextUser1,
+        _choresCompletedMonthProgressTextUser1, _choresCompletedQuarterProgressTextUser1, _dayButtonColorUser1, _weekButtonColorUser1, _monthButtonColorUser1,
+        _quarterButtonColorUser1;
 
-    private int choresCompletedDay, choresCompletedWeek, choresCompletedMonth, choresCompletedSpecial, choresCompletedDayUser1, choresCompletedWeekUser1, choresCompletedMonthUser1,
-        choresCompletedSpecialUser1, _choresCompletedDayProgressValue, _choresCompletedWeekProgressValue, _choresCompletedDayProgressValueUser1,
-        _choresCompletedWeekProgressValueUser1, _choresCompletedMonthProgressValueUser1, _choresCompletedSpecialProgressValueUser1,
-        _choresCompletedMonthProgressValue, _choresCompletedSpecialProgressValue, calculatedReleaseFunds, _fundsProgressValue;
+    private int choresCompletedDay, choresCompletedWeek, choresCompletedMonth, choresCompletedQuarter, choresCompletedDayUser1, choresCompletedWeekUser1, choresCompletedMonthUser1,
+        _choresCompletedDayProgressValue, _choresCompletedWeekProgressValue, _choresCompletedDayProgressValueUser1, choresCompletedQuarterUser1,
+        _choresCompletedWeekProgressValueUser1, _choresCompletedMonthProgressValueUser1, _choresCompletedQuarterProgressValueUser1,
+        _choresCompletedMonthProgressValue, _choresCompletedQuarterProgressValue, calculatedReleaseFunds, _fundsProgressValue;
 
     public ChoresVM() {
         RefreshFields();
@@ -77,10 +77,10 @@ public class ChoresVM : BaseViewModel {
 
             RefreshFields();
             break;
-        case "choresSpecial":
-            ChoresSpecial choresSpecial = new();
-            choresSpecial.ShowDialog();
-            choresSpecial.Close();
+        case "choresQuarter":
+            ChoresQuarter choresQuarter = new();
+            choresQuarter.ShowDialog();
+            choresQuarter.Close();
 
             RefreshFields();
             break;
@@ -88,9 +88,8 @@ public class ChoresVM : BaseViewModel {
             ChoresFunds choresFunds = new();
             choresFunds.ShowDialog();
             choresFunds.Close();
+
             break;
-
-
         case "choresDayUser1":
             ChoresDayUser1 choresDayUser1 = new();
             choresDayUser1.ShowDialog();
@@ -112,10 +111,10 @@ public class ChoresVM : BaseViewModel {
 
             RefreshFields();
             break;
-        case "choresSpecialUser1":
-            ChoresSpecialUser1 choresSpecialUser1 = new();
-            choresSpecialUser1.ShowDialog();
-            choresSpecialUser1.Close();
+        case "choresQuarterUser1":
+            ChoresQuarterUser1 choresQuarterUser1 = new();
+            choresQuarterUser1.ShowDialog();
+            choresQuarterUser1.Close();
 
             RefreshFields();
             break;
@@ -132,11 +131,11 @@ public class ChoresVM : BaseViewModel {
         choresCompletedDay = 0;
         choresCompletedWeek = 0;
         choresCompletedMonth = 0;
-        choresCompletedSpecial = 0;
+        choresCompletedQuarter = 0;
         choresCompletedDayUser1 = 0;
         choresCompletedWeekUser1 = 0;
         choresCompletedMonthUser1 = 0;
-        choresCompletedSpecialUser1 = 0;
+        choresCompletedQuarterUser1 = 0;
 
         while (ChoreWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
             ChoreWeekStartDate = ChoreWeekStartDate.AddDays(-1);
@@ -146,7 +145,7 @@ public class ChoresVM : BaseViewModel {
         choresFromJson.ChoresDayFromJson(ChoreMonthStartDate);
         choresFromJson.ChoresWeekFromJson(ChoreWeekStartDate);
         choresFromJson.ChoresMonthFromJson(ChoreMonthStartDate);
-        choresFromJson.ChoresSpecialFromJson(ChoreMonthStartDate);
+        choresFromJson.ChoresQuarterFromJson(ChoreMonthStartDate);
 
         CurrentDayText = dateTime.ToString("dddd");
         CurrentMonthText = dateTime.ToString("MMMM");
@@ -159,7 +158,7 @@ public class ChoresVM : BaseViewModel {
         ChoresCompletedWeekProgressText = "0%";
         ChoresCompletedMonthProgressText = "0%";
         ChoresCompletedDayProgressText = "0%";
-        ChoresCompletedSpecialProgressText = "0%";
+        ChoresCompletedQuarterProgressText = "0%";
 
         foreach (ChoreDetails choreDetails in JsonChoreDayMasterList.choreList) {
             if (choreDetails.IsComplete) {
@@ -179,9 +178,9 @@ public class ChoresVM : BaseViewModel {
             }
         }
 
-        foreach (ChoreDetails choreDetails in JsonChoreSpecialMasterList.choreList) {
+        foreach (ChoreDetails choreDetails in JsonChoreQuarterMasterList.choreList) {
             if (choreDetails.IsComplete) {
-                choresCompletedSpecial++;
+                choresCompletedQuarter++;
             }
         }
 
@@ -203,20 +202,20 @@ public class ChoresVM : BaseViewModel {
             }
         }
 
-        foreach (ChoreDetails choreDetails in JsonChoreSpecialUser1MasterList.choreList) {
+        foreach (ChoreDetails choreDetails in JsonChoreQuarterUser1MasterList.choreList) {
             if (choreDetails.IsComplete) {
-                choresCompletedSpecialUser1++;
+                choresCompletedQuarterUser1++;
             }
         }
 
         ChoresCompletedDayText = choresCompletedDay + " / " + JsonChoreDayMasterList.choreList.Count;
         ChoresCompletedWeekText = choresCompletedWeek + " / " + JsonChoreWeekMasterList.choreList.Count;
         ChoresCompletedMonthText = choresCompletedMonth + " / " + JsonChoreMonthMasterList.choreList.Count;
-        ChoresCompletedSpecialText = choresCompletedSpecial + " / " + JsonChoreSpecialMasterList.choreList.Count;
+        ChoresCompletedQuarterText = choresCompletedQuarter + " / " + JsonChoreQuarterMasterList.choreList.Count;
         ChoresCompletedDayTextUser1 = choresCompletedDayUser1 + " / " + JsonChoreDayUser1MasterList.choreList.Count;
         ChoresCompletedWeekTextUser1 = choresCompletedWeekUser1 + " / " + JsonChoreWeekUser1MasterList.choreList.Count;
         ChoresCompletedMonthTextUser1 = choresCompletedMonthUser1 + " / " + JsonChoreMonthUser1MasterList.choreList.Count;
-        ChoresCompletedSpecialTextUser1 = choresCompletedSpecialUser1 + " / " + JsonChoreSpecialUser1MasterList.choreList.Count;
+        ChoresCompletedQuarterTextUser1 = choresCompletedQuarterUser1 + " / " + JsonChoreQuarterUser1MasterList.choreList.Count;
 
         double progress = Convert.ToDouble(choresCompletedWeek) / Convert.ToDouble(JsonChoreWeekMasterList.choreList.Count) * 100;
         try {
@@ -236,10 +235,16 @@ public class ChoresVM : BaseViewModel {
             ChoresCompletedMonthProgressValue = Convert.ToInt16(progress);
         } catch (Exception) { }
 
-        progress = Convert.ToDouble(choresCompletedSpecial) / Convert.ToDouble(JsonChoreSpecialMasterList.choreList.Count) * 100;
+        progress = Convert.ToDouble(choresCompletedQuarter) / Convert.ToDouble(JsonChoreQuarterMasterList.choreList.Count) * 100;
         try {
-            ChoresCompletedSpecialProgressText = Convert.ToInt16(progress) + "%";
-            ChoresCompletedSpecialProgressValue = Convert.ToInt16(progress);
+            ChoresCompletedQuarterProgressText = Convert.ToInt16(progress) + "%";
+            ChoresCompletedQuarterProgressValue = Convert.ToInt16(progress);
+        } catch (Exception) { }
+
+        progress = Convert.ToDouble(choresCompletedQuarterUser1) / Convert.ToDouble(JsonChoreQuarterUser1MasterList.choreList.Count) * 100;
+        try {
+            ChoresCompletedQuarterProgressTextUser1 = Convert.ToInt16(progress) + "%";
+            ChoresCompletedQuarterProgressValueUser1 = Convert.ToInt16(progress);
         } catch (Exception) { }
 
         progress = Convert.ToDouble(choresCompletedWeekUser1) / Convert.ToDouble(JsonChoreWeekUser1MasterList.choreList.Count) * 100;
@@ -260,21 +265,15 @@ public class ChoresVM : BaseViewModel {
             ChoresCompletedMonthProgressValueUser1 = Convert.ToInt16(progress);
         } catch (Exception) { }
 
-        progress = Convert.ToDouble(choresCompletedSpecialUser1) / Convert.ToDouble(JsonChoreSpecialUser1MasterList.choreList.Count) * 100;
-        try {
-            ChoresCompletedSpecialProgressTextUser1 = Convert.ToInt16(progress) + "%";
-            ChoresCompletedSpecialProgressValueUser1 = Convert.ToInt16(progress);
-        } catch (Exception) { }
-
         DayButtonColor = "Transparent";
         WeekButtonColor = "Transparent";
         MonthButtonColor = "Transparent";
-        SpecialButtonColor = "Transparent";
+        QuarterButtonColor = "Transparent";
 
         DayButtonColorUser1 = "Transparent";
         WeekButtonColorUser1 = "Transparent";
         MonthButtonColorUser1 = "Transparent";
-        SpecialButtonColorUser1 = "Transparent";
+        QuarterButtonColorUser1 = "Transparent";
 
         if (ChoresCompletedDayProgressValue == 100) {
             DayButtonColor = "Green";
@@ -288,8 +287,8 @@ public class ChoresVM : BaseViewModel {
             MonthButtonColor = "Green";
         }
 
-        if (choresCompletedSpecial > 0) {
-            SpecialButtonColor = "Green";
+        if (ChoresCompletedQuarterProgressValue == 100) {
+            QuarterButtonColor = "Green";
         }
 
         if (ChoresCompletedDayProgressValueUser1 == 100) {
@@ -304,17 +303,11 @@ public class ChoresVM : BaseViewModel {
             MonthButtonColorUser1 = "Green";
         }
 
-        if (choresCompletedSpecialUser1 > 0) {
-            SpecialButtonColorUser1 = "Green";
+        if (ChoresCompletedQuarterProgressValueUser1 == 100) {
+            QuarterButtonColorUser1 = "Green";
         }
 
-        try {
-            SpecialDay1Text = JsonChoreFundsMaster.SpecialDay1Completed ? "Completed" : "Not Complete";
-            SpecialDay2Text = JsonChoreFundsMaster.SpecialDay2Completed ? "Completed" : "Not Complete";
-        } catch (Exception) { }
-
         RefreshCountdown();
-
         CalculateFunds();
     }
 
@@ -399,28 +392,7 @@ public class ChoresVM : BaseViewModel {
         } catch (Exception) { }
 
         //check special file. add $100 per completed task.
-        try {
-            StreamReader streamReader = new(FILE_DIRECTORY + "chores/chores_special_" + DateTime.Now.ToString("yyyy_MM") + ".json");
-            string fileString = null;
-            while (!streamReader.EndOfStream) {
-                fileString = streamReader.ReadToEnd();
-            }
 
-            streamReader.Close();
-
-            if (fileString != null) {
-                JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(fileString, options);
-
-                int specialCompleted = 0;
-                foreach (ChoreDetails choreDetails in jsonChores.choreList) {
-                    if (choreDetails.IsComplete) {
-                        specialCompleted++;
-                    }
-                }
-
-                calculatedReleaseFunds += 100 * specialCompleted;
-            }
-        } catch (Exception) { }
 
         FundsProgressValue = calculatedReleaseFunds;
         FundsProgressText = "$" + calculatedReleaseFunds;
@@ -512,11 +484,11 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string ChoresCompletedSpecialText {
-        get => _choresCompletedSpecialText;
+    public string ChoresCompletedQuarterText {
+        get => _choresCompletedQuarterText;
         set {
-            _choresCompletedSpecialText = value;
-            RaisePropertyChangedEvent("ChoresCompletedSpecialText");
+            _choresCompletedQuarterText = value;
+            RaisePropertyChangedEvent("ChoresCompletedQuarterText");
         }
     }
 
@@ -552,11 +524,11 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string ChoresCompletedSpecialProgressText {
-        get => _choresCompletedSpecialProgressText;
+    public string ChoresCompletedQuarterProgressText {
+        get => _choresCompletedQuarterProgressText;
         set {
-            _choresCompletedSpecialProgressText = value;
-            RaisePropertyChangedEvent("ChoresCompletedSpecialProgressText");
+            _choresCompletedQuarterProgressText = value;
+            RaisePropertyChangedEvent("ChoresCompletedQuarterProgressText");
         }
     }
 
@@ -576,11 +548,11 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public int ChoresCompletedSpecialProgressValue {
-        get => _choresCompletedSpecialProgressValue;
+    public int ChoresCompletedQuarterProgressValue {
+        get => _choresCompletedQuarterProgressValue;
         set {
-            _choresCompletedSpecialProgressValue = value;
-            RaisePropertyChangedEvent("ChoresCompletedSpecialProgressValue");
+            _choresCompletedQuarterProgressValue = value;
+            RaisePropertyChangedEvent("ChoresCompletedQuarterProgressValue");
         }
     }
 
@@ -616,11 +588,11 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string SpecialButtonColor {
-        get => _specialButtonColor;
+    public string QuarterButtonColor {
+        get => _quarterButtonColor;
         set {
-            _specialButtonColor = value;
-            RaisePropertyChangedEvent("SpecialButtonColor");
+            _quarterButtonColor = value;
+            RaisePropertyChangedEvent("QuarterButtonColor");
         }
     }
 
@@ -704,11 +676,11 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string ChoresCompletedSpecialTextUser1 {
-        get => _choresCompletedSpecialTextUser1;
+    public string ChoresCompletedQuarterTextUser1 {
+        get => _choresCompletedQuarterTextUser1;
         set {
-            _choresCompletedSpecialTextUser1 = value;
-            RaisePropertyChangedEvent("ChoresCompletedSpecialTextUser1");
+            _choresCompletedQuarterTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedQuarterTextUser1");
         }
     }
 
@@ -736,11 +708,11 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string ChoresCompletedSpecialProgressTextUser1 {
-        get => _choresCompletedSpecialProgressTextUser1;
+    public string ChoresCompletedQuarterProgressTextUser1 {
+        get => _choresCompletedQuarterProgressTextUser1;
         set {
-            _choresCompletedSpecialProgressTextUser1 = value;
-            RaisePropertyChangedEvent("ChoresCompletedSpecialProgressTextUser1");
+            _choresCompletedQuarterProgressTextUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedQuarterProgressTextUser1");
         }
     }
 
@@ -768,11 +740,11 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public int ChoresCompletedSpecialProgressValueUser1 {
-        get => _choresCompletedSpecialProgressValueUser1;
+    public int ChoresCompletedQuarterProgressValueUser1 {
+        get => _choresCompletedQuarterProgressValueUser1;
         set {
-            _choresCompletedSpecialProgressValueUser1 = value;
-            RaisePropertyChangedEvent("ChoresCompletedSpecialProgressValueUser1");
+            _choresCompletedQuarterProgressValueUser1 = value;
+            RaisePropertyChangedEvent("ChoresCompletedQuarterProgressValueUser1");
         }
     }
 
@@ -800,11 +772,11 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string SpecialButtonColorUser1 {
-        get => _specialButtonColorUser1;
+    public string QuarterButtonColorUser1 {
+        get => _quarterButtonColorUser1;
         set {
-            _specialButtonColorUser1 = value;
-            RaisePropertyChangedEvent("SpecialButtonColorUser1");
+            _quarterButtonColorUser1 = value;
+            RaisePropertyChangedEvent("QuarterButtonColorUser1");
         }
     }
 

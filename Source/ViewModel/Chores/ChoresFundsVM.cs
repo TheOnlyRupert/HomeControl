@@ -14,9 +14,8 @@ namespace HomeControl.Source.ViewModel.Chores;
 public class ChoresFundsVM : BaseViewModel {
     private readonly string fileName;
 
-    private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _leastCompliant1, _leastCompliant2,
-        _leastCompliant3,
-        _fundsPrior, _fundsAverage, _fundsTotal, _fundsReturnRate, _cashRemaining, _descriptionText, _costText;
+    private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsAverage, _fundsTotal,
+        _fundsReturnRate, _cashRemaining, _descriptionText, _costText;
 
     private ObservableCollection<FinanceBlockShort> _financeList;
     private FinanceBlockShort _financeSelected;
@@ -51,10 +50,6 @@ public class ChoresFundsVM : BaseViewModel {
         FundsAverage = "Average: $0";
         FundsTotal = "Total: $0";
         FundsReturnRate = "Return Rate: 1x";
-
-        LeastCompliant1 = "null";
-        LeastCompliant2 = "null";
-        LeastCompliant3 = "null";
 
         CashRemaining = "Cash Remaining: $0";
     }
@@ -241,30 +236,6 @@ public class ChoresFundsVM : BaseViewModel {
         set {
             _special3 = value;
             RaisePropertyChangedEvent("Special3");
-        }
-    }
-
-    public string LeastCompliant1 {
-        get => _leastCompliant1;
-        set {
-            _leastCompliant1 = value;
-            RaisePropertyChangedEvent("LeastCompliant1");
-        }
-    }
-
-    public string LeastCompliant2 {
-        get => _leastCompliant2;
-        set {
-            _leastCompliant2 = value;
-            RaisePropertyChangedEvent("LeastCompliant2");
-        }
-    }
-
-    public string LeastCompliant3 {
-        get => _leastCompliant3;
-        set {
-            _leastCompliant3 = value;
-            RaisePropertyChangedEvent("LeastCompliant3");
         }
     }
 

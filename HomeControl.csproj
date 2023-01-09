@@ -124,11 +124,14 @@
         <Compile Include="Source\Modules\Chores\ChoresMonthUser1.xaml.cs">
             <DependentUpon>ChoresMonthUser1.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Chores\ChoresQuarter.xaml.cs">
+            <DependentUpon>ChoresQuarter.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Chores\ChoresQuarterUser1.xaml.cs">
+            <DependentUpon>ChoresQuarterUser1.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Chores\ChoresSpecial.xaml.cs">
             <DependentUpon>ChoresSpecial.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Chores\ChoresSpecialUser1.xaml.cs">
-            <DependentUpon>ChoresSpecialUser1.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Chores\ChoresStatsDay.xaml.cs">
             <DependentUpon>ChoresStatsDay.xaml</DependentUpon>
@@ -207,7 +210,8 @@
         <Compile Include="Source\ViewModel\Chores\ChoresDayVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresFundsVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresMonthUser1VM.cs"/>
-        <Compile Include="Source\ViewModel\Chores\ChoresSpecialUser1VM.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresQuarterUser1VM.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresQuarterVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresSpecialVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresStatsDayVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresStatsMonthVM.cs"/>
@@ -255,8 +259,9 @@
         <Page Include="Source\Modules\Chores\ChoresDayUser1.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresFunds.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresMonthUser1.xaml"/>
+        <Page Include="Source\Modules\Chores\ChoresQuarter.xaml"/>
+        <Page Include="Source\Modules\Chores\ChoresQuarterUser1.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresSpecial.xaml"/>
-        <Page Include="Source\Modules\Chores\ChoresSpecialUser1.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresStatsDay.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresStatsMonth.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresStatsSpecial.xaml"/>

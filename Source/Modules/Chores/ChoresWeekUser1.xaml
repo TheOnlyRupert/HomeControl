@@ -1,6 +1,6 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Chores.ChoresWeekUser1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="Weekly Tasks" Height="900" Width="1200" WindowStartupLocation="CenterScreen"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="Weekly Tasks" Height="900" Width="1600" WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
     <Grid>
         <Grid.RowDefinitions>
@@ -61,6 +61,39 @@
             <Grid Grid.Column="3" Grid.Row="0" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Kitchen" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+                    <Button Background="{Binding Room4Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room4Task1" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean - Trash Can"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room4Task1DateText}"/>
+                        </Grid>
+                    </Button>
                 </StackPanel>
             </Grid>
 
@@ -85,6 +118,39 @@
             <Grid Grid.Column="3" Grid.Row="1" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Daycare/Computer Room" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+                    <Button Background="{Binding Room8Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room8Task1" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Clean - Trash Can"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room8Task1DateText}"/>
+                        </Grid>
+                    </Button>
                 </StackPanel>
             </Grid>
 
@@ -116,12 +182,309 @@
             <Grid Grid.Column="0" Grid.Row="3" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Front Yard" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+                    <Button Background="{Binding Room13Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room13Task1" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Season - Cut Grass"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room13Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room13Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room13Task2" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Trash Around Property"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room13Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room13Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room13Task3" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room11Task1DateText}"/>
+                        </Grid>
+                    </Button>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Column="1" Grid.Row="3" Margin="8">
                 <StackPanel>
                     <TextBlock Text="Back Yard" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
+                    <Button Background="{Binding Room14Task1Color}" Command="{Binding ButtonCommand}" CommandParameter="room14Task1" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Season - Cut Grass"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room14Task1DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room14Task2Color}" Command="{Binding ButtonCommand}" CommandParameter="room14Task2" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Season - Check Pool Chlorine"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room14Task2DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room14Task3Color}" Command="{Binding ButtonCommand}" CommandParameter="room14Task3" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Season - Check Hot Tub Bromine"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room14Task3DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room14Task4Color}" Command="{Binding ButtonCommand}" CommandParameter="room14Task4" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Season - Check Hot Tub Filter"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room14Task4DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room14Task5Color}" Command="{Binding ButtonCommand}" CommandParameter="room14Task5" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Trash Around Property"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room14Task5DateText}"/>
+                        </Grid>
+                    </Button>
+                    <Button Background="{Binding Room14Task6Color}" Command="{Binding ButtonCommand}" CommandParameter="room14Task6" HorizontalContentAlignment="Stretch">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="../../../Resources/Images/icons/alarms.png" MaxHeight="24"/>
+                            <TextBlock Grid.Column="1" Text="Remove - Items Not Belonging"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Room14Task6DateText}"/>
+                        </Grid>
+                    </Button>
                 </StackPanel>
             </Grid>
 

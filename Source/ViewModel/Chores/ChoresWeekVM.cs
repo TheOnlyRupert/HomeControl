@@ -28,7 +28,8 @@ public class ChoresWeekVM : BaseViewModel {
         _room7Task4DateText, _room8Task1DateText,
         _room8Task2DateText, _room8Task3DateText, _room8Task4DateText, _room9Task1DateText, _room9Task2DateText, _room9Task3DateText, _room9Task4DateText, _room10Task1DateText,
         _room10Task2DateText, _room10Task3DateText,
-        _room10Task4DateText, _room10Task5DateText;
+        _room10Task4DateText, _room10Task5DateText, _room11Task1DateText, _room11Task2DateText, _room12Task1DateText, _room12Task2DateText, _room11Task1Color, _room11Task2Color,
+        _room12Task1Color, _room12Task2Color;
 
     public ChoresWeekVM() {
         GetButtonColors();
@@ -181,6 +182,18 @@ public class ChoresWeekVM : BaseViewModel {
             break;
         case "room10Task5":
             SwitchButtonLogic("Room10Task5");
+            break;
+        case "room11Task1":
+            SwitchButtonLogic("Room11Task1");
+            break;
+        case "room11Task2":
+            SwitchButtonLogic("Room11Task2");
+            break;
+        case "room12Task1":
+            SwitchButtonLogic("Room12Task1");
+            break;
+        case "room12Task2":
+            SwitchButtonLogic("Room12Task2");
             break;
         }
 
@@ -405,6 +418,22 @@ public class ChoresWeekVM : BaseViewModel {
                 case "Room10Task5":
                     Room10Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room10Task5DateText = choreDetails.Date;
+                    break;
+                case "Room11Task1":
+                    Room11Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room11Task1DateText = choreDetails.Date;
+                    break;
+                case "Room11Task2":
+                    Room11Task2Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room11Task2DateText = choreDetails.Date;
+                    break;
+                case "Room12Task1":
+                    Room12Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room12Task1DateText = choreDetails.Date;
+                    break;
+                case "Room12Task2":
+                    Room12Task2Color = choreDetails.IsComplete ? "Green" : "Transparent";
+                    Room12Task2DateText = choreDetails.Date;
                     break;
                 }
             }
@@ -1178,6 +1207,70 @@ public class ChoresWeekVM : BaseViewModel {
         set {
             _room10Task5DateText = value;
             RaisePropertyChangedEvent("Room10Task5DateText");
+        }
+    }
+
+    public string Room11Task1DateText {
+        get => _room11Task1DateText;
+        set {
+            _room11Task1DateText = value;
+            RaisePropertyChangedEvent("Room11Task1DateText");
+        }
+    }
+
+    public string Room11Task2DateText {
+        get => _room11Task2DateText;
+        set {
+            _room11Task2DateText = value;
+            RaisePropertyChangedEvent("Room11Task2DateText");
+        }
+    }
+
+    public string Room12Task1DateText {
+        get => _room12Task1DateText;
+        set {
+            _room12Task1DateText = value;
+            RaisePropertyChangedEvent("Room12Task1DateText");
+        }
+    }
+
+    public string Room12Task2DateText {
+        get => _room12Task2DateText;
+        set {
+            _room12Task2DateText = value;
+            RaisePropertyChangedEvent("Room12Task2DateText");
+        }
+    }
+
+    public string Room11Task1Color {
+        get => _room11Task1Color;
+        set {
+            _room11Task1Color = value;
+            RaisePropertyChangedEvent("Room11Task1Color");
+        }
+    }
+
+    public string Room11Task2Color {
+        get => _room11Task2Color;
+        set {
+            _room11Task2Color = value;
+            RaisePropertyChangedEvent("Room11Task2Color");
+        }
+    }
+
+    public string Room12Task1Color {
+        get => _room12Task1Color;
+        set {
+            _room12Task1Color = value;
+            RaisePropertyChangedEvent("Room12Task1Color");
+        }
+    }
+
+    public string Room12Task2Color {
+        get => _room12Task2Color;
+        set {
+            _room12Task2Color = value;
+            RaisePropertyChangedEvent("Room12Task2Color");
         }
     }
 
