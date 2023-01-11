@@ -18,6 +18,7 @@ public class ChoresDayUser1VM : BaseViewModel {
     private string _Task1Color, _Task2Color, _Task3Color, _Task4Color, _Task1DateText, _Task2DateText, _Task3DateText, _Task4DateText;
 
     public ChoresDayUser1VM() {
+        completeSound = new PlaySound("achievement1");
         GetButtonColors();
     }
 

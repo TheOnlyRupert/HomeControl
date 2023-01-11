@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Timer.EditTimer" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="Edit Timer" Height="400" Width="600" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="400" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
     <Grid Focusable="False" Margin="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -9,7 +9,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="{Binding TimerNumberText}" FontSize="32" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="False"/>
+        <TextBlock Grid.Row="0" Text="{Binding TimerNumberText}" Foreground="White" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="False"/>
 
         <Button Grid.Row="0" Content="18:00 - Pizza" Foreground="White" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="8 8 0 8" FontSize="32"
                 Command="{Binding ButtonCommand}" CommandParameter="button1">
@@ -118,8 +118,8 @@
                 </Button.Style>
             </Button>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding MainTimerOutput}" FontSize="48" Background="Transparent" Foreground="White"
-                       IsEnabled="{Binding IsEditingEnabled}" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding MainTimerOutput}" FontSize="48" Background="Transparent"
+                       Foreground="{Binding TimerNumberColor}" HorizontalAlignment="Center"/>
 
             <Button Grid.Row="2" Grid.Column="0" Content="▼" Background="Transparent" BorderThickness="0" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}"
                     CommandParameter="timerMinSub15">

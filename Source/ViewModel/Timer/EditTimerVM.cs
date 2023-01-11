@@ -5,11 +5,12 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Timer;
 
 public class EditTimerVM : BaseViewModel {
-    private string _mainTimerOutput, _timerNumberText;
+    private string _mainTimerOutput, _timerNumberText, _timerNumberColor;
 
     public EditTimerVM() {
         MainTimerOutput = $"{ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]:000}:{ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]:00}";
         TimerNumberText = "Timer " + ReferenceValues.ActiveTimerEdit;
+        TimerNumberColor = ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] ? "Red" : "YellowGreen";
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -21,6 +22,7 @@ public class EditTimerVM : BaseViewModel {
         if (e.PropertyName == "Refresh") {
             if (ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
                 MainTimerOutput = $"{ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]:000}:{ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]:00}";
+                TimerNumberColor = ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] ? "Red" : "YellowGreen";
             }
         }
     }
@@ -93,6 +95,8 @@ public class EditTimerVM : BaseViewModel {
 
             ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
             ReferenceValues.IsTimerAlarmActive = false;
+            ReferenceValues.TimerSound.Stop();
+            TimerNumberColor = "YellowGreen";
 
             break;
         case "timerStop":
@@ -105,6 +109,7 @@ public class EditTimerVM : BaseViewModel {
             ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
             ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] = 0;
             ReferenceValues.TimerSound.Stop();
+            TimerNumberColor = "YellowGreen";
 
             break;
         case "button1":
@@ -134,7 +139,15 @@ public class EditTimerVM : BaseViewModel {
         get => _timerNumberText;
         set {
             _timerNumberText = value;
-            RaisePropertyChangedEvent("AlarmNumberText");
+            RaisePropertyChangedEvent("TimerNumberText");
+        }
+    }
+
+    public string TimerNumberColor {
+        get => _timerNumberColor;
+        set {
+            _timerNumberColor = value;
+            RaisePropertyChangedEvent("TimerNumberColor");
         }
     }
 

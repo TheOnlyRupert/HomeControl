@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -14,6 +15,7 @@ public class EditCalendarVM : BaseViewModel {
     private readonly JsonCalendar _jsonCalendar;
 
     private readonly string fileName;
+    private readonly PlaySound scribble1Sound, scribble2Sound, scribble3Sound;
     private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
@@ -22,6 +24,10 @@ public class EditCalendarVM : BaseViewModel {
     private ObservableCollection<CalendarEvents> _eventList;
 
     public EditCalendarVM() {
+        scribble1Sound = new PlaySound("scribble1");
+        scribble2Sound = new PlaySound("scribble2");
+        scribble3Sound = new PlaySound("scribble3");
+
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
         fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
         EventList = new ObservableCollection<CalendarEvents>();
@@ -127,6 +133,7 @@ public class EditCalendarVM : BaseViewModel {
                     endTime = EndTimeText
                 });
 
+                scribble1Sound.Play(false);
                 EventText = "";
                 DescriptionText = "";
                 LocationText = "";
@@ -155,6 +162,7 @@ public class EditCalendarVM : BaseViewModel {
                             });
                             EventList.Remove(CalendarEventSelected);
 
+                            scribble2Sound.Play(false);
                             EventText = "";
                             DescriptionText = "";
                             LocationText = "";
@@ -174,6 +182,7 @@ public class EditCalendarVM : BaseViewModel {
                     confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (confirmation == MessageBoxResult.Yes) {
                         EventList.Remove(CalendarEventSelected);
+                        scribble3Sound.Play(false);
 
                         SaveJson();
                     }

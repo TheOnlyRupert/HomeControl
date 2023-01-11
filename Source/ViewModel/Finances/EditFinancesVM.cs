@@ -12,8 +12,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class EditFinancesVM : BaseViewModel {
+    private readonly PlaySound cashSound;
     private readonly string fileName;
-    private readonly PlaySound money1Sound, money2Sound;
     private ObservableCollection<string> _categoryList;
 
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
@@ -25,8 +25,7 @@ public class EditFinancesVM : BaseViewModel {
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
-        money1Sound = new PlaySound("money1");
-        money2Sound = new PlaySound("money2");
+        cashSound = new PlaySound("cash");
 
         selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
         User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
@@ -77,12 +76,7 @@ public class EditFinancesVM : BaseViewModel {
                     Person = selectedPerson
                 });
 
-                if (AddOrSub == "ADD") {
-                    money2Sound.Play(false);
-                } else {
-                    money1Sound.Play(false);
-                }
-
+                cashSound.Play(false);
                 DateText = DateTime.Now.ToShortDateString();
                 DescriptionText = "";
                 CostText = "";

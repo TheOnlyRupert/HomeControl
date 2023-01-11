@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
 using HomeControl.Source.ViewModel.Base;
@@ -11,6 +12,8 @@ using static HomeControl.Source.Reference.ReferenceValues;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresVM : BaseViewModel {
+    private readonly PlaySound completeSound;
+
     private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _user1Text,
         _choresCompletedWeekProgressText, _projectedFundMonthText, _choresCompletedDayProgressText, _user2Text, _choresCompletedMonthProgressText,
         _choresCompletedQuarterProgressText, _dayButtonColor, _weekButtonColor, _monthButtonColor, _quarterButtonColor, _choresCompletedQuarterText, _cashAvailable,
@@ -25,6 +28,8 @@ public class ChoresVM : BaseViewModel {
         _choresCompletedMonthProgressValue, _choresCompletedQuarterProgressValue, calculatedReleaseFunds, _fundsProgressValue;
 
     public ChoresVM() {
+        completeSound = new PlaySound("achievement2");
+
         RefreshFields();
 
         SpecialDay1Text = "Not Complete";
@@ -399,6 +404,10 @@ public class ChoresVM : BaseViewModel {
 
         ChoreFundsFromJson choreFundsFromJson = new();
         CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+
+        if (JsonChoreFundsMaster.FundsLocked < calculatedReleaseFunds) {
+            completeSound.Play(false);
+        }
 
         JsonChoreFundsMaster.FundsLocked = calculatedReleaseFunds;
 

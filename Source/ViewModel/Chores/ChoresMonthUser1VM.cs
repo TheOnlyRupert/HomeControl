@@ -18,6 +18,7 @@ public class ChoresMonthUser1VM : BaseViewModel {
     private string _room15Task1Color, _room15Task2Color, _room15Task1DateText, _room15Task2DateText;
 
     public ChoresMonthUser1VM() {
+        completeSound = new PlaySound("achievement1");
         GetButtonColors();
     }
 

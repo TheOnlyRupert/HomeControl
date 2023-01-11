@@ -10,7 +10,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class EditBehaviorVM : BaseViewModel {
-    private readonly PlaySound strikeSound, rewardSound;
+    private readonly PlaySound strikeSound, rewardSound, progressSound, starSound, awwSound, errorSound;
 
     private string _childName, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3, _rewardButtonVisibility,
         _progressBarChildValueText;
@@ -19,7 +19,11 @@ public class EditBehaviorVM : BaseViewModel {
 
     public EditBehaviorVM() {
         strikeSound = new PlaySound("buzzer");
-        rewardSound = new PlaySound("yay");
+        rewardSound = new PlaySound("reward");
+        progressSound = new PlaySound("ding");
+        starSound = new PlaySound("yay");
+        awwSound = new PlaySound("aww");
+        errorSound = new PlaySound("error");
 
         switch (ReferenceValues.ActiveChild) {
         case 0:
@@ -148,77 +152,60 @@ public class EditBehaviorVM : BaseViewModel {
     }
 
     private void ButtonLogic(object param) {
-        MessageBoxResult result;
-
         switch (param) {
-        case "addStar":
-            if (stars < 5) {
-                result = MessageBox.Show("Are you sure you want to add a star?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes) {
-                    stars++;
-                }
-            }
-
-            break;
-        case "removeStar":
-            if (stars > 0) {
-                result = MessageBox.Show("Are you sure you want to remove a star?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes) {
-                    stars--;
-                }
-            }
-
-            break;
         case "addStrike":
-            if (strikes < 3) {
-                result = MessageBox.Show("Are you sure you want to add a strike?\nThis will reset all progress (but not stars)", "Confirmation", MessageBoxButton.YesNo,
-                    MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes) {
-                    strikes++;
-                    ProgressBarChildValue = 0;
-                    ProgressBarChildValueText = "0/5";
-                    strikeSound.Play(false);
+            if (RewardButtonVisibility == "HIDDEN") {
+                if (strikes < 3) {
+                    MessageBoxResult result = MessageBox.Show("Are you sure you want to add a strike?\nThis will reset all progress (but not stars)", "Confirmation",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes) {
+                        strikes++;
+                        ProgressBarChildValue = 0;
+                        ProgressBarChildValueText = "0/5";
+                        strikeSound.Play(false);
 
-                    if (strikes == 3) {
-                        stars--;
-                        if (stars < 0) {
-                            stars = 0;
+                        if (strikes == 3) {
+                            stars--;
+                            if (stars < 0) {
+                                stars = 0;
+                            }
                         }
                     }
                 }
             }
 
             break;
-        case "removeStrike":
-            if (strikes > 0) {
-                result = MessageBox.Show("Are you sure you want to remove a strike?\nNote: Strikes get removed at midnight", "Confirmation", MessageBoxButton.YesNo,
-                    MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes) {
-                    strikes--;
-                }
-            }
-
-            break;
-
         case "add1":
-            if (strikes != 3) {
-                ProgressBarChildValue++;
-                ProgressBarChildValueText = ProgressBarChildValue + "/5";
-                if (ProgressBarChildValue > 4) {
-                    if (stars < 5) {
-                        stars++;
-                        ProgressBarChildValue = 0;
-                        ProgressBarChildValueText = "0/5";
+            if (RewardButtonVisibility == "HIDDEN") {
+                if (strikes != 3) {
+                    ProgressBarChildValue++;
+                    ProgressBarChildValueText = ProgressBarChildValue + "/5";
+                    if (ProgressBarChildValue > 4) {
+                        if (stars < 5) {
+                            stars++;
+                            ProgressBarChildValue = 0;
+                            ProgressBarChildValueText = "0/5";
+
+                            if (stars == 5) {
+                                ProgressBarChildValue = 5;
+                                ProgressBarChildValueText = "5/5";
+                            }
+
+                            starSound.Play(false);
+                        } else {
+                            ProgressBarChildValue = 5;
+                            ProgressBarChildValueText = "5/5";
+                        }
                     } else {
-                        ProgressBarChildValue = 5;
-                        ProgressBarChildValueText = "5/5";
+                        progressSound.Play(false);
                     }
                 }
             }
 
             break;
         case "remove1":
-            if (strikes != 3) {
+            if (RewardButtonVisibility == "HIDDEN" && strikes != 3) {
                 ProgressBarChildValue--;
                 ProgressBarChildValueText = ProgressBarChildValue + "/5";
                 if (ProgressBarChildValue < 0) {
@@ -226,23 +213,23 @@ public class EditBehaviorVM : BaseViewModel {
                         stars--;
                         ProgressBarChildValue = 4;
                         ProgressBarChildValueText = "4/5";
+                        awwSound.Play(false);
                     } else {
                         ProgressBarChildValue = 0;
                         ProgressBarChildValueText = "0/5";
                     }
+                } else {
+                    errorSound.Play(false);
                 }
             }
 
             break;
         case "reward":
-            if (stars == 5) {
-                stars = 0;
-                ProgressBarChildValue = 0;
-                ProgressBarChildValueText = "0/5";
-                RewardButtonVisibility = "HIDDEN";
-                rewardSound.Play(false);
-            }
-
+            stars = 0;
+            ProgressBarChildValue = 0;
+            ProgressBarChildValueText = "0/5";
+            RewardButtonVisibility = "HIDDEN";
+            rewardSound.Play(false);
             break;
         }
 

@@ -35,7 +35,6 @@ public class ChoresWeekVM : BaseViewModel {
 
     public ChoresWeekVM() {
         completeSound = new PlaySound("achievement1");
-
         GetButtonColors();
     }
 

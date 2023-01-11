@@ -21,6 +21,7 @@ public class ChoresWeekUser1VM : BaseViewModel {
         _room14Task2DateText, _room14Task3DateText, _room14Task4DateText, _room14Task5DateText, _room14Task6DateText;
 
     public ChoresWeekUser1VM() {
+        completeSound = new PlaySound("achievement1");
         GetButtonColors();
     }
 

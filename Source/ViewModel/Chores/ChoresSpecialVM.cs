@@ -18,6 +18,7 @@ public class ChoresSpecialVM : BaseViewModel {
     private string _Task1Color, _Task2Color, _Task1DateText, _Task2DateText;
 
     public ChoresSpecialVM() {
+        completeSound = new PlaySound("achievement1");
         GetButtonColors();
     }
 

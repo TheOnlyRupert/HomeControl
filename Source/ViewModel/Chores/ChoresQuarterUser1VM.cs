@@ -31,6 +31,7 @@ public class ChoresQuarterUser1VM : BaseViewModel {
             _ => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter4User1_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy") + ".json"
         };
 
+        completeSound = new PlaySound("achievement1");
         GetButtonColors();
     }
 

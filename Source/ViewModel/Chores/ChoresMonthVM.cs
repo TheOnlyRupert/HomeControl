@@ -34,6 +34,7 @@ public class ChoresMonthVM : BaseViewModel {
     public ChoresMonthVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy_MM") + ".json";
 
+        completeSound = new PlaySound("achievement1");
         GetButtonColors();
     }
 

@@ -441,9 +441,24 @@
         <Resource Include="Resources\Sounds\achievement2.wav"/>
         <Resource Include="Resources\Sounds\alarm1.wav"/>
         <Resource Include="Resources\Sounds\alarm2.wav"/>
-        <Resource Include="Resources\Sounds\money1.wav"/>
-        <Resource Include="Resources\Sounds\money2.wav"/>
         <Resource Include="Resources\Sounds\yay.wav"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Sounds\reward.wav"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Sounds\aww.wav"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Sounds\error.wav"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Sounds\cash.wav"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Sounds\scribble1.wav"/>
+        <Resource Include="Resources\Sounds\scribble2.wav"/>
+        <Resource Include="Resources\Sounds\scribble3.wav"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')"/>
