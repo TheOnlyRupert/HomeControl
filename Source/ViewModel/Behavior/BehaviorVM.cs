@@ -213,22 +213,24 @@ public class BehaviorVM : BaseViewModel {
     }
 
     private void ButtonLogic(object param) {
-        switch (param) {
-        case "child1":
-            ReferenceValues.ActiveChild = 0;
-            break;
-        case "child2":
-            ReferenceValues.ActiveChild = 1;
-            break;
-        case "child3":
-            ReferenceValues.ActiveChild = 2;
-            break;
-        }
+        if (!ReferenceValues.LockUI) {
+            switch (param) {
+            case "child1":
+                ReferenceValues.ActiveChild = 0;
+                break;
+            case "child2":
+                ReferenceValues.ActiveChild = 1;
+                break;
+            case "child3":
+                ReferenceValues.ActiveChild = 2;
+                break;
+            }
 
-        EditBehavior editBehavior = new();
-        editBehavior.ShowDialog();
-        editBehavior.Close();
-        RefreshBehavior();
+            EditBehavior editBehavior = new();
+            editBehavior.ShowDialog();
+            editBehavior.Close();
+            RefreshBehavior();
+        }
     }
 
     #region Fields

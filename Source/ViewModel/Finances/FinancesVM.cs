@@ -23,21 +23,31 @@ public class FinancesVM : BaseViewModel {
         FinancesFromJson financesFromJson = new();
         financesFromJson.FinancesFromJsonMain();
         RefreshFinances();
+
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void ButtonCommandLogic(object param) {
-        switch (param) {
-        case "edit":
-            EditFinances editFinances = new();
-            editFinances.ShowDialog();
-            editFinances.Close();
-            RefreshFinances();
-            break;
+        if (!ReferenceValues.LockUI) {
+            switch (param) {
+            case "edit":
+                EditFinances editFinances = new();
+                editFinances.ShowDialog();
+                editFinances.Close();
+                RefreshFinances();
+                break;
+            }
         }
     }
 
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        if (e.PropertyName == "RefreshFundAmount") {
+            RefreshFinances();
+        }
+    }
 
     private void RefreshFinances() {
         expense = 0;

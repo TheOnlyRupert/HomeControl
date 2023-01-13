@@ -320,23 +320,23 @@
             </Button>
 
             <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center">
-                <TextBlock Text="Funds Expire" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="{Binding FundsExpire}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+                <TextBlock Text="Remaining (Week)" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="{Binding RemainingWeek}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center">
-                <TextBlock Text="Target Day" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="{Binding SpecialDay1Text}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+                <TextBlock Text="Remaining (Month)" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="{Binding RemainingMonth}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
             </StackPanel>
 
             <StackPanel Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center">
-                <TextBlock Text="Treat-yo-Self" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="{Binding SpecialDay2Text}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
+                <TextBlock Text="Remaining (Quarter)" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="{Binding RemainingQuarter}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
             </StackPanel>
 
             <StackPanel Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center">
-                <TextBlock Text="Current Mode" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Text="{Binding CurrentModeText}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+                <TextBlock Text="Remaining (Year)" HorizontalAlignment="Center" Foreground="White"/>
+                <TextBlock Text="{Binding RemainingYear}" HorizontalAlignment="Center" FontSize="18" Margin="0 0 0 24" Foreground="White"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
@@ -373,9 +373,8 @@
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Available" FontSize="18" Foreground="White" VerticalAlignment="Center" Padding="8 4"/>
-                    <TextBlock Grid.Row="1" Text="{Binding CashAvailable}" FontSize="48" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
-                               Padding="8 0 8 4"/>
+                    <TextBlock Grid.Row="0" Text="Available" FontSize="18" Foreground="White" Padding="16 8 16 0" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding CashAvailable}" FontSize="48" Foreground="White" HorizontalAlignment="Center" Padding="16 0 16 8"/>
                 </Grid>
             </Button>
 

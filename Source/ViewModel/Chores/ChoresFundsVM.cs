@@ -14,7 +14,7 @@ namespace HomeControl.Source.ViewModel.Chores;
 public class ChoresFundsVM : BaseViewModel {
     private readonly string fileName;
 
-    private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsAverage, _fundsTotal,
+    private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsTotal,
         _fundsReturnRate, _cashRemaining, _descriptionText, _costText;
 
     private ObservableCollection<FinanceBlockShort> _financeList;
@@ -32,11 +32,14 @@ public class ChoresFundsVM : BaseViewModel {
             };
         }
 
-        DescriptionText = "";
-        CostText = "";
-
         CurrentMonth = DateTime.Now.ToString("MMMM");
 
+        Refresh();
+    }
+
+    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+
+    private void Refresh() {
         ComplianceDay = "Daily: 0%";
         ComplianceWeek = "Weekly: 0%";
         ComplianceMonth = "Monthly: 0%";
@@ -46,15 +49,29 @@ public class ChoresFundsVM : BaseViewModel {
         Special2 = "Any: 0";
         Special3 = "New: 0";
 
-        FundsPrior = "Prior: $0";
-        FundsAverage = "Average: $0";
-        FundsTotal = "Total: $0";
+        FundsPrior = "Prior Month: $" + ReferenceValues.JsonChoreFundsMaster.FundsPrior;
+        FundsTotal = "This Month: $" + ReferenceValues.JsonChoreFundsMaster.FundsTotal;
         FundsReturnRate = "Return Rate: 1x";
 
-        CashRemaining = "Cash Remaining: $0";
-    }
+        int cash = 0;
+        foreach (FinanceBlockShort financeBlockShort in ReferenceValues.JsonFinanceShortMasterList.financeListShort) {
+            cash += int.Parse(financeBlockShort.Cost);
+        }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+        ReferenceValues.JsonChoreFundsMaster.FundsAvailable = ReferenceValues.JsonChoreFundsMaster.FundsTotal;
+        ReferenceValues.JsonChoreFundsMaster.FundsAvailable -= cash;
+
+        CashRemaining = "Cash Remaining: $" + ReferenceValues.JsonChoreFundsMaster.FundsAvailable;
+
+        try {
+            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreFundsMaster);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "chorefunds.json", jsonString);
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
+        }
+    }
 
     private void ButtonLogic(object param) {
         MessageBoxResult confirmation;
@@ -73,6 +90,7 @@ public class ChoresFundsVM : BaseViewModel {
                 DescriptionText = "";
                 CostText = "";
                 SaveJson();
+                Refresh();
             }
 
             break;
@@ -94,6 +112,7 @@ public class ChoresFundsVM : BaseViewModel {
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
                             CostText = "";
+                            Refresh();
                             SaveJson();
                         }
                     }
@@ -108,6 +127,7 @@ public class ChoresFundsVM : BaseViewModel {
                     if (confirmation == MessageBoxResult.Yes) {
                         FinanceList.Remove(FinanceSelected);
                         SaveJson();
+                        Refresh();
                     }
                 }
             } catch (Exception) { }
@@ -244,14 +264,6 @@ public class ChoresFundsVM : BaseViewModel {
         set {
             _fundsPrior = value;
             RaisePropertyChangedEvent("FundsPrior");
-        }
-    }
-
-    public string FundsAverage {
-        get => _fundsAverage;
-        set {
-            _fundsAverage = value;
-            RaisePropertyChangedEvent("FundsAverage");
         }
     }
 

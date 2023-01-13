@@ -36,7 +36,9 @@ public static class ReferenceValues {
         "Paycheck",
         "Gift",
         "Government",
-        "Child Support"
+        "Child Support",
+        "Refund",
+        "Other"
     };
 
     public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";

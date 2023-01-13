@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
-using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
 using HomeControl.Source.ViewModel.Base;
@@ -12,12 +12,12 @@ using static HomeControl.Source.Reference.ReferenceValues;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresVM : BaseViewModel {
-    private readonly PlaySound completeSound;
+    private readonly CrossViewMessenger simpleMessenger;
 
     private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _user1Text,
         _choresCompletedWeekProgressText, _projectedFundMonthText, _choresCompletedDayProgressText, _user2Text, _choresCompletedMonthProgressText,
         _choresCompletedQuarterProgressText, _dayButtonColor, _weekButtonColor, _monthButtonColor, _quarterButtonColor, _choresCompletedQuarterText, _cashAvailable,
-        _fundsProgressText, _fundsExpire, _specialDay1Text, _specialDay2Text, _currentModeText, _choresCompletedDayTextUser1, _choresCompletedWeekTextUser1,
+        _fundsProgressText, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _choresCompletedDayTextUser1, _choresCompletedWeekTextUser1,
         _choresCompletedMonthTextUser1, _choresCompletedQuarterTextUser1, _choresCompletedDayProgressTextUser1, _choresCompletedWeekProgressTextUser1,
         _choresCompletedMonthProgressTextUser1, _choresCompletedQuarterProgressTextUser1, _dayButtonColorUser1, _weekButtonColorUser1, _monthButtonColorUser1,
         _quarterButtonColorUser1;
@@ -28,18 +28,12 @@ public class ChoresVM : BaseViewModel {
         _choresCompletedMonthProgressValue, _choresCompletedQuarterProgressValue, calculatedReleaseFunds, _fundsProgressValue;
 
     public ChoresVM() {
-        completeSound = new PlaySound("achievement2");
-
         RefreshFields();
-
-        SpecialDay1Text = "Not Complete";
-        SpecialDay2Text = "Not Complete";
-        CurrentModeText = "Normal";
 
         FinancesFromJson financesFromJson = new();
         financesFromJson.FinancesFromJsonShort();
 
-        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
@@ -60,69 +54,72 @@ public class ChoresVM : BaseViewModel {
     }
 
     private void ButtonLogic(object param) {
-        switch (param) {
-        case "choresDay":
-            ChoresDay choresDay = new();
-            choresDay.ShowDialog();
-            choresDay.Close();
+        if (!LockUI) {
+            switch (param) {
+            case "choresDay":
+                ChoresDay choresDay = new();
+                choresDay.ShowDialog();
+                choresDay.Close();
 
-            RefreshFields();
-            break;
-        case "choresWeek":
-            ChoresWeek choresWeek = new();
-            choresWeek.ShowDialog();
-            choresWeek.Close();
+                RefreshFields();
+                break;
+            case "choresWeek":
+                ChoresWeek choresWeek = new();
+                choresWeek.ShowDialog();
+                choresWeek.Close();
 
-            RefreshFields();
-            break;
-        case "choresMonth":
-            ChoresMonth choresMonth = new();
-            choresMonth.ShowDialog();
-            choresMonth.Close();
+                RefreshFields();
+                break;
+            case "choresMonth":
+                ChoresMonth choresMonth = new();
+                choresMonth.ShowDialog();
+                choresMonth.Close();
 
-            RefreshFields();
-            break;
-        case "choresQuarter":
-            ChoresQuarter choresQuarter = new();
-            choresQuarter.ShowDialog();
-            choresQuarter.Close();
+                RefreshFields();
+                break;
+            case "choresQuarter":
+                ChoresQuarter choresQuarter = new();
+                choresQuarter.ShowDialog();
+                choresQuarter.Close();
 
-            RefreshFields();
-            break;
-        case "funds":
-            ChoresFunds choresFunds = new();
-            choresFunds.ShowDialog();
-            choresFunds.Close();
+                RefreshFields();
+                break;
+            case "funds":
+                ChoresFunds choresFunds = new();
+                choresFunds.ShowDialog();
+                choresFunds.Close();
 
-            break;
-        case "choresDayUser1":
-            ChoresDayUser1 choresDayUser1 = new();
-            choresDayUser1.ShowDialog();
-            choresDayUser1.Close();
+                CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+                break;
+            case "choresDayUser1":
+                ChoresDayUser1 choresDayUser1 = new();
+                choresDayUser1.ShowDialog();
+                choresDayUser1.Close();
 
-            RefreshFields();
-            break;
-        case "choresWeekUser1":
-            ChoresWeekUser1 choresWeekUser1 = new();
-            choresWeekUser1.ShowDialog();
-            choresWeekUser1.Close();
+                RefreshFields();
+                break;
+            case "choresWeekUser1":
+                ChoresWeekUser1 choresWeekUser1 = new();
+                choresWeekUser1.ShowDialog();
+                choresWeekUser1.Close();
 
-            RefreshFields();
-            break;
-        case "choresMonthUser1":
-            ChoresMonthUser1 choresMonthUser1 = new();
-            choresMonthUser1.ShowDialog();
-            choresMonthUser1.Close();
+                RefreshFields();
+                break;
+            case "choresMonthUser1":
+                ChoresMonthUser1 choresMonthUser1 = new();
+                choresMonthUser1.ShowDialog();
+                choresMonthUser1.Close();
 
-            RefreshFields();
-            break;
-        case "choresQuarterUser1":
-            ChoresQuarterUser1 choresQuarterUser1 = new();
-            choresQuarterUser1.ShowDialog();
-            choresQuarterUser1.Close();
+                RefreshFields();
+                break;
+            case "choresQuarterUser1":
+                ChoresQuarterUser1 choresQuarterUser1 = new();
+                choresQuarterUser1.ShowDialog();
+                choresQuarterUser1.Close();
 
-            RefreshFields();
-            break;
+                RefreshFields();
+                break;
+            }
         }
     }
 
@@ -317,21 +314,73 @@ public class ChoresVM : BaseViewModel {
     }
 
     private void RefreshCountdown() {
-        DateTime dateNextMonth = DateTime.Now;
-        while (DateTime.Now.Month == dateNextMonth.Month) {
-            dateNextMonth = dateNextMonth.AddDays(1);
+        DateTime dateNext = DateTime.Now;
+        while (DateTime.Now.Month == dateNext.Month) {
+            dateNext = dateNext.AddDays(1);
         }
 
-        FundsExpire = (dateNextMonth.Date - DateTime.Now.Date).Days + " Days";
+        RemainingMonth = (dateNext.Date - DateTime.Now.Date).Days + " Days";
 
-        if (FundsExpire == "1 Days") {
+        if (RemainingMonth == "1 Days") {
             TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
-            FundsExpire = timeSpan.Hours + " Hours";
+            RemainingMonth = timeSpan.Hours + " Hours";
         }
 
-        if (FundsExpire == "1 Hours") {
-            FundsExpire = "1 Hour";
+        if (RemainingMonth == "1 Hours") {
+            RemainingMonth = "1 Hour";
         }
+
+        dateNext = DateTime.Now;
+        while (dateNext.DayOfWeek != DayOfWeek.Sunday) {
+            dateNext = dateNext.AddDays(1);
+        }
+
+        RemainingWeek = (dateNext.Date - DateTime.Now.Date).Days + " Days";
+
+        dateNext = DateTime.Now;
+        switch (dateNext.Month) {
+        case 1:
+        case 2:
+        case 3:
+            while (dateNext.Month != 4) {
+                dateNext = dateNext.AddDays(1);
+            }
+
+            break;
+        case 4:
+        case 5:
+        case 6:
+            while (dateNext.Month != 7) {
+                dateNext = dateNext.AddDays(1);
+            }
+
+            break;
+        case 7:
+        case 8:
+        case 9:
+            while (dateNext.Month != 10) {
+                dateNext = dateNext.AddDays(1);
+            }
+
+            break;
+        case 10:
+        case 11:
+        case 12:
+            while (dateNext.Month != 1) {
+                dateNext = dateNext.AddDays(1);
+            }
+
+            break;
+        }
+
+        RemainingQuarter = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
+
+        dateNext = DateTime.Now;
+        while (dateNext.Year == DateTime.Now.Year) {
+            dateNext = dateNext.AddDays(1);
+        }
+
+        RemainingYear = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
     }
 
     private void CalculateFunds() {
@@ -405,10 +454,6 @@ public class ChoresVM : BaseViewModel {
         ChoreFundsFromJson choreFundsFromJson = new();
         CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
 
-        if (JsonChoreFundsMaster.FundsLocked < calculatedReleaseFunds) {
-            completeSound.Play(false);
-        }
-
         JsonChoreFundsMaster.FundsLocked = calculatedReleaseFunds;
 
         try {
@@ -419,12 +464,81 @@ public class ChoresVM : BaseViewModel {
         } catch (Exception e) {
             Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
         }
+
+        /* In case program was off when month changed */
+        if (JsonChoreFundsMaster.UpdatedDate.Month != DateTime.Now.Month) {
+            ReleaseFunds();
+        }
     }
 
     private void ReleaseFunds() {
+        Console.WriteLine("Releasing Funds");
         int switchCash = JsonChoreFundsMaster.FundsLocked;
-        JsonChoreFundsMaster.FundsLocked = 0;
         CashAvailable = "$" + switchCash;
+
+        JsonChoreFundsMaster.FundsLocked = 0;
+        JsonChoreFundsMaster.FundsAvailable = switchCash;
+        JsonChoreFundsMaster.FundsTotal = switchCash;
+        JsonChoreFundsMaster.SpecialDay1Completed = false;
+        JsonChoreFundsMaster.SpecialDay2Completed = false;
+        JsonFinanceShortMasterList = new JsonFinancesShort {
+            financeListShort = new ObservableCollection<FinanceBlockShort>()
+        };
+        JsonFinanceShortMasterList.financeListShort.Clear();
+        JsonChoreFundsMaster.UpdatedDate = DateTime.Now;
+
+        if (JsonFinanceMasterList.financeList != null) {
+            JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                AddSub = "SUB",
+                Date = DateTime.Now.ToShortDateString(),
+                Item = "Brittany Fund (auto)",
+                Cost = switchCash.ToString(),
+                Category = "Brittany Fund",
+                Person = JsonMasterSettings.User2Name
+            });
+        } else {
+            JsonFinanceMasterList = new JsonFinances {
+                financeList = new ObservableCollection<FinanceBlock> {
+                    new() {
+                        AddSub = "SUB",
+                        Date = DateTime.Now.ToShortDateString(),
+                        Item = "Brittany Fund (auto)",
+                        Cost = switchCash.ToString(),
+                        Category = "Brittany Fund",
+                        Person = JsonMasterSettings.User2Name
+                    }
+                }
+            };
+        }
+
+        try {
+            string jsonString = JsonSerializer.Serialize(JsonFinanceShortMasterList);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(FILE_DIRECTORY + "financesChoreFund.json", jsonString);
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save financesChoreFund.json... " + e.Message);
+        }
+
+        try {
+            string jsonString = JsonSerializer.Serialize(JsonChoreFundsMaster);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(FILE_DIRECTORY + "chorefunds.json", jsonString);
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
+        }
+
+        try {
+            string jsonString = JsonSerializer.Serialize(JsonFinanceMasterList);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(FILE_DIRECTORY + "finances.json", jsonString);
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save finances.json... " + e.Message);
+        }
+
+        simpleMessenger.PushMessage("RefreshFundAmount", null);
     }
 
     #region Fields
@@ -629,35 +743,35 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string FundsExpire {
-        get => _fundsExpire;
+    public string RemainingWeek {
+        get => _remainingWeek;
         set {
-            _fundsExpire = value;
-            RaisePropertyChangedEvent("FundsExpire");
+            _remainingWeek = value;
+            RaisePropertyChangedEvent("RemainingWeek");
         }
     }
 
-    public string SpecialDay1Text {
-        get => _specialDay1Text;
+    public string RemainingMonth {
+        get => _remainingMonth;
         set {
-            _specialDay1Text = value;
-            RaisePropertyChangedEvent("SpecialDay1Text");
+            _remainingMonth = value;
+            RaisePropertyChangedEvent("RemainingMonth");
         }
     }
 
-    public string SpecialDay2Text {
-        get => _specialDay2Text;
+    public string RemainingQuarter {
+        get => _remainingQuarter;
         set {
-            _specialDay2Text = value;
-            RaisePropertyChangedEvent("SpecialDay2Text");
+            _remainingQuarter = value;
+            RaisePropertyChangedEvent("RemainingQuarter");
         }
     }
 
-    public string CurrentModeText {
-        get => _currentModeText;
+    public string RemainingYear {
+        get => _remainingYear;
         set {
-            _currentModeText = value;
-            RaisePropertyChangedEvent("CurrentModeText");
+            _remainingYear = value;
+            RaisePropertyChangedEvent("RemainingYear");
         }
     }
 

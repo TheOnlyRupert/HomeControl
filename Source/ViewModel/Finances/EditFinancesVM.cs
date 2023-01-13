@@ -27,7 +27,7 @@ public class EditFinancesVM : BaseViewModel {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
         cashSound = new PlaySound("cash");
 
-        selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
+        selectedPerson = "Home";
         User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
         User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
         DescriptionText = "";

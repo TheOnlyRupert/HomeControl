@@ -30,6 +30,7 @@ public static class WeatherHelpers {
         case "Chance Light Rain":
         case "Light Rain":
         case "Areas Of Drizzle":
+        case "Patchy Drizzle":
             return "../../../Resources/Images/weather/weather_rain_light.png";
         case "Rain Showers Likely":
         case "Rain Likely":

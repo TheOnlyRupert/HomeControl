@@ -136,172 +136,298 @@ public class CalendarVM : BaseViewModel {
             PopulateCalendar(currentDateTime);
             break;
         case "button1":
-            ReferenceValues.CalendarEventDate = button1DateTime;
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime;
+                OpenEventDialog();
+            }
+
             break;
         case "button2":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(1);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(1);
+                OpenEventDialog();
+            }
+
             break;
         case "button3":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(2);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(2);
+                OpenEventDialog();
+            }
+
             break;
         case "button4":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(3);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(3);
+                OpenEventDialog();
+            }
+
             break;
         case "button5":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(4);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(4);
+                OpenEventDialog();
+            }
+
             break;
         case "button6":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(5);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(5);
+                OpenEventDialog();
+            }
+
             break;
         case "button7":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(6);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(6);
+                OpenEventDialog();
+            }
+
             break;
         case "button8":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(7);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(7);
+                OpenEventDialog();
+            }
+
             break;
         case "button9":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(8);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(8);
+                OpenEventDialog();
+            }
+
             break;
         case "button10":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(9);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(9);
+                OpenEventDialog();
+            }
+
             break;
         case "button11":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(10);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(10);
+                OpenEventDialog();
+            }
+
             break;
         case "button12":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(11);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(11);
+                OpenEventDialog();
+            }
+
             break;
         case "button13":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(12);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(12);
+                OpenEventDialog();
+            }
+
             break;
         case "button14":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(13);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(13);
+                OpenEventDialog();
+            }
+
             break;
         case "button15":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(14);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(14);
+                OpenEventDialog();
+            }
+
             break;
         case "button16":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(15);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(15);
+                OpenEventDialog();
+            }
+
             break;
         case "button17":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(16);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(16);
+                OpenEventDialog();
+            }
+
             break;
         case "button18":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(17);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(17);
+                OpenEventDialog();
+            }
+
             break;
         case "button19":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(18);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(18);
+                OpenEventDialog();
+            }
+
             break;
         case "button20":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(19);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(19);
+                OpenEventDialog();
+            }
+
             break;
         case "button21":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(20);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(20);
+                OpenEventDialog();
+            }
+
             break;
         case "button22":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(21);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(21);
+                OpenEventDialog();
+            }
+
             break;
         case "button23":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(22);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(22);
+                OpenEventDialog();
+            }
+
             break;
         case "button24":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(23);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(23);
+                OpenEventDialog();
+            }
+
             break;
         case "button25":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(24);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(24);
+                OpenEventDialog();
+            }
+
             break;
         case "button26":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(25);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(25);
+                OpenEventDialog();
+            }
+
             break;
         case "button27":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(26);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(26);
+                OpenEventDialog();
+            }
+
             break;
         case "button28":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(27);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(27);
+                OpenEventDialog();
+            }
+
             break;
         case "button29":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(28);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(28);
+                OpenEventDialog();
+            }
+
             break;
         case "button30":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(29);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(29);
+                OpenEventDialog();
+            }
+
             break;
         case "button31":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(30);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(30);
+                OpenEventDialog();
+            }
+
             break;
         case "button32":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(31);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(31);
+                OpenEventDialog();
+            }
+
             break;
         case "button33":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(32);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(32);
+                OpenEventDialog();
+            }
+
             break;
         case "button34":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(33);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(33);
+                OpenEventDialog();
+            }
+
             break;
         case "button35":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(34);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(34);
+                OpenEventDialog();
+            }
+
             break;
         case "button36":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(35);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(35);
+                OpenEventDialog();
+            }
+
             break;
         case "button37":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(36);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(36);
+                OpenEventDialog();
+            }
+
             break;
         case "button38":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(37);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(37);
+                OpenEventDialog();
+            }
+
             break;
         case "button39":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(38);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(38);
+                OpenEventDialog();
+            }
+
             break;
         case "button40":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(39);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(39);
+                OpenEventDialog();
+            }
+
             break;
         case "button41":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(40);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(40);
+                OpenEventDialog();
+            }
+
             break;
         case "button42":
-            ReferenceValues.CalendarEventDate = button1DateTime.AddDays(41);
-            OpenEventDialog();
+            if (!ReferenceValues.LockUI) {
+                ReferenceValues.CalendarEventDate = button1DateTime.AddDays(41);
+                OpenEventDialog();
+            }
+
             break;
         }
     }
