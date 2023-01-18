@@ -12,17 +12,13 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresFundsVM : BaseViewModel {
-    private readonly string fileName;
-
     private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsTotal,
-        _fundsReturnRate, _cashRemaining, _descriptionText, _costText;
+        _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color;
 
     private ObservableCollection<FinanceBlockShort> _financeList;
     private FinanceBlockShort _financeSelected;
 
     public ChoresFundsVM() {
-        fileName = ReferenceValues.FILE_DIRECTORY + "financesChoreFund.json";
-
         FinanceList = new ObservableCollection<FinanceBlockShort>();
         try {
             FinanceList = ReferenceValues.JsonFinanceShortMasterList.financeListShort;
@@ -33,6 +29,9 @@ public class ChoresFundsVM : BaseViewModel {
         }
 
         CurrentMonth = DateTime.Now.ToString("MMMM");
+
+        SpecialDay1Color = ReferenceValues.JsonChoreFundsMaster.SpecialDay1Completed ? "Green" : "Transparent";
+        SpecialDay2Color = ReferenceValues.JsonChoreFundsMaster.SpecialDay2Completed ? "Green" : "Transparent";
 
         Refresh();
     }
@@ -63,14 +62,7 @@ public class ChoresFundsVM : BaseViewModel {
 
         CashRemaining = "Cash Remaining: $" + ReferenceValues.JsonChoreFundsMaster.FundsAvailable;
 
-        try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreFundsMaster);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "chorefunds.json", jsonString);
-        } catch (Exception e) {
-            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
-        }
+        SaveJson();
     }
 
     private void ButtonLogic(object param) {
@@ -89,7 +81,6 @@ public class ChoresFundsVM : BaseViewModel {
 
                 DescriptionText = "";
                 CostText = "";
-                SaveJson();
                 Refresh();
             }
 
@@ -113,7 +104,6 @@ public class ChoresFundsVM : BaseViewModel {
                             DescriptionText = "";
                             CostText = "";
                             Refresh();
-                            SaveJson();
                         }
                     }
                 }
@@ -126,7 +116,6 @@ public class ChoresFundsVM : BaseViewModel {
                     confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
                         FinanceList.Remove(FinanceSelected);
-                        SaveJson();
                         Refresh();
                     }
                 }
@@ -158,6 +147,47 @@ public class ChoresFundsVM : BaseViewModel {
             choresStatsSpecial.Close();
 
             break;
+        case "specialDay1":
+            if (SpecialDay1Color == "Transparent") {
+                SpecialDay1Color = "Green";
+                ReferenceValues.JsonChoreFundsMaster.SpecialDay1Completed = true;
+            } else {
+                confirmation = MessageBox.Show("Are you sure you want to reset special day?", "Confirmation", MessageBoxButton.YesNo);
+                if (confirmation == MessageBoxResult.Yes) {
+                    SpecialDay1Color = "Transparent";
+                    ReferenceValues.JsonChoreFundsMaster.SpecialDay1Completed = false;
+                }
+            }
+
+            Refresh();
+
+            break;
+        case "specialDay2":
+            if (SpecialDay2Color == "Transparent") {
+                SpecialDay2Color = "Green";
+                ReferenceValues.JsonChoreFundsMaster.SpecialDay2Completed = true;
+            } else {
+                confirmation = MessageBox.Show("Are you sure you want to reset special day?", "Confirmation", MessageBoxButton.YesNo);
+                if (confirmation == MessageBoxResult.Yes) {
+                    SpecialDay2Color = "Transparent";
+                    ReferenceValues.JsonChoreFundsMaster.SpecialDay2Completed = false;
+                }
+            }
+
+            Refresh();
+
+            break;
+        case "special":
+            Refresh();
+
+            break;
+        case "savings":
+            ChoresSavings choresSavings = new();
+            choresSavings.ShowDialog();
+            choresSavings.Close();
+            Refresh();
+
+            break;
         }
     }
 
@@ -173,7 +203,7 @@ public class ChoresFundsVM : BaseViewModel {
                 string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceShortMasterList);
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-                File.WriteAllText(fileName, jsonString);
+                File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "financesChoreFund.json", jsonString);
             } catch (Exception e) {
                 Console.WriteLine("Unable to save financesChoreFund.json... " + e.Message);
             }
@@ -181,10 +211,19 @@ public class ChoresFundsVM : BaseViewModel {
             try {
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-                File.Delete(fileName);
+                File.Delete(ReferenceValues.FILE_DIRECTORY + "financesChoreFund.json");
             } catch (Exception e) {
                 Console.WriteLine("Unable to delete financesChoreFund.json... " + e.Message);
             }
+        }
+
+        try {
+            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreFundsMaster);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "chorefunds.json", jsonString);
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
         }
     }
 
@@ -296,6 +335,22 @@ public class ChoresFundsVM : BaseViewModel {
         set {
             _descriptionText = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("DescriptionText");
+        }
+    }
+
+    public string SpecialDay1Color {
+        get => _specialDay1Color;
+        set {
+            _specialDay1Color = value;
+            RaisePropertyChangedEvent("SpecialDay1Color");
+        }
+    }
+
+    public string SpecialDay2Color {
+        get => _specialDay2Color;
+        set {
+            _specialDay2Color = value;
+            RaisePropertyChangedEvent("SpecialDay2Color");
         }
     }
 

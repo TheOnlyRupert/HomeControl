@@ -290,7 +290,7 @@
             </Grid>
         </Grid>
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="8 0 0 8">
-            <Button Content="Add Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="add">
+            <Button Content="Add Event" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="add">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -312,7 +312,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="Delete Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="delete">
+            <Button Content="Delete Event" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="delete">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -334,7 +334,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="Update Event" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="update">
+            <Button Content="Update Event" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="update">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>

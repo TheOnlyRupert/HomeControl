@@ -313,7 +313,7 @@
         </Grid>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="8 0 0 8">
-            <Button Content="Add Charge" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="0 0 4 0" CommandParameter="add">
+            <Button Content="Add Charge" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="0 0 4 0" CommandParameter="add">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -335,7 +335,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="Delete Charge" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="4 0 4 0" CommandParameter="delete">
+            <Button Content="Delete Charge" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="4 0 4 0" CommandParameter="delete">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -357,7 +357,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="Update Charge" FontSize="24" Padding="8 0" Command="{Binding ButtonCommand}" Margin="4 0 0 0" CommandParameter="update">
+            <Button Content="Update Charge" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="4 0 0 0" CommandParameter="update">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>

@@ -245,7 +245,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Save" HorizontalAlignment="Stretch" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="save">
+            <Button Grid.Column="0" Content="Save" HorizontalAlignment="Stretch" FontSize="24" Command="{Binding ButtonCommand}" CommandParameter="save">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -267,7 +267,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Grid.Column="1" Content="Exit" HorizontalAlignment="Stretch" FontSize="18" IsCancel="True">
+            <Button Grid.Column="1" Content="Exit" HorizontalAlignment="Stretch" FontSize="24" IsCancel="True">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>

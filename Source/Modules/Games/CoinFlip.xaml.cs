@@ -2,9 +2,9 @@
 
 namespace HomeControl.Source.Modules.Games;
 
-public partial class Pictionary {
-    public Pictionary() {
+public partial class CoinFlip {
+    public CoinFlip() {
         InitializeComponent();
-        DataContext = new PictionaryVM();
+        DataContext = new CoinFlipVM();
     }
 }

@@ -200,6 +200,8 @@
                         CommandParameter="button1">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button1BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -209,7 +211,6 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="Background" Value="{Binding Button1BackgroundColor}"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="Black"/>
@@ -282,10 +283,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="1" Background="{Binding Button2BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button2">
+                <Button Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button2">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button2BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -366,10 +369,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="2" Background="{Binding Button3BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button3">
+                <Button Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button3">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button3BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -451,10 +456,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="3" Background="{Binding Button4BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button4">
+                <Button Grid.Row="0" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button4">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button4BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -535,10 +542,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="4" Background="{Binding Button5BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button5">
+                <Button Grid.Row="0" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button5">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button5BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -618,10 +627,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="5" Background="{Binding Button6BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button6">
+                <Button Grid.Row="0" Grid.Column="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button6">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button6BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -701,10 +712,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="6" Background="{Binding Button7BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button7">
+                <Button Grid.Row="0" Grid.Column="6" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button7">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button7BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -784,10 +797,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="0" Background="{Binding Button8BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button8">
+                <Button Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button8">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button8BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -867,10 +882,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="1" Background="{Binding Button9BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button9">
+                <Button Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button9">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button9BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -950,10 +967,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="2" Background="{Binding Button10BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button10">
+                <Button Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button10">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button10BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1033,10 +1052,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="3" Background="{Binding Button11BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button11">
+                <Button Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button11">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button11BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1116,10 +1137,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="4" Background="{Binding Button12BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button12">
+                <Button Grid.Row="1" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button12">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button12BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1199,10 +1222,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="5" Background="{Binding Button13BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button13">
+                <Button Grid.Row="1" Grid.Column="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button13">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button13BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1282,10 +1307,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="1" Grid.Column="6" Background="{Binding Button14BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button14">
+                <Button Grid.Row="1" Grid.Column="6" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button14">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button14BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1365,10 +1392,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="0" Background="{Binding Button15BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button15">
+                <Button Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button15">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button15BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1448,10 +1477,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="1" Background="{Binding Button16BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button16">
+                <Button Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button16">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button16BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1531,10 +1562,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="2" Background="{Binding Button17BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button17">
+                <Button Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button17">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button17BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1614,12 +1647,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="3" Background="{Binding Button18BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button18">
+                <Button Grid.Row="2" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button18">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-
-
+                            <Setter Property="Background" Value="{Binding Button18BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1699,10 +1732,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="4" Background="{Binding Button19BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button19">
+                <Button Grid.Row="2" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button19">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button19BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1782,10 +1817,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="5" Background="{Binding Button20BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button20">
+                <Button Grid.Row="2" Grid.Column="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button20">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button20BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1865,10 +1902,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="6" Background="{Binding Button21BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button21">
+                <Button Grid.Row="2" Grid.Column="6" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button21">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button21BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -1948,10 +1987,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="3" Grid.Column="0" Background="{Binding Button22BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button22">
+                <Button Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button22">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button22BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2031,10 +2072,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="3" Grid.Column="1" Background="{Binding Button23BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button23">
+                <Button Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button23">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button23BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2114,10 +2157,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="3" Grid.Column="2" Background="{Binding Button24BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button24">
+                <Button Grid.Row="3" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button24">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button24BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2197,10 +2242,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="3" Grid.Column="3" Background="{Binding Button25BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button25">
+                <Button Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button25">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button25BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2280,10 +2327,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="3" Grid.Column="4" Background="{Binding Button26BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button26">
+                <Button Grid.Row="3" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button26">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button26BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2363,10 +2412,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="3" Grid.Column="5" Background="{Binding Button27BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button27">
+                <Button Grid.Row="3" Grid.Column="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button27">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button27BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2446,10 +2497,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="3" Grid.Column="6" Background="{Binding Button28BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button28">
+                <Button Grid.Row="3" Grid.Column="6" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button28">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button28BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2529,10 +2582,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="4" Grid.Column="0" Background="{Binding Button29BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button29">
+                <Button Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button29">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button29BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2612,10 +2667,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="4" Grid.Column="1" Background="{Binding Button30BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button30">
+                <Button Grid.Row="4" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button30">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button30BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2695,10 +2752,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="4" Grid.Column="2" Background="{Binding Button31BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button31">
+                <Button Grid.Row="4" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button31">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button31BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2778,10 +2837,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="4" Grid.Column="3" Background="{Binding Button32BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button32">
+                <Button Grid.Row="4" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button32">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button32BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2861,10 +2922,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="4" Grid.Column="4" Background="{Binding Button33BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button33">
+                <Button Grid.Row="4" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button33">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button33BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -2944,10 +3007,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="4" Grid.Column="5" Background="{Binding Button34BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button34">
+                <Button Grid.Row="4" Grid.Column="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button34">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button34BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -3027,10 +3092,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="4" Grid.Column="6" Background="{Binding Button35BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button35">
+                <Button Grid.Row="4" Grid.Column="6" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button35">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button35BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -3110,10 +3177,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="5" Grid.Column="0" Background="{Binding Button36BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button36">
+                <Button Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button36">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button36BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -3193,10 +3262,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="5" Grid.Column="1" Background="{Binding Button37BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button37">
+                <Button Grid.Row="5" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button37">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button37BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -3276,10 +3347,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="5" Grid.Column="2" Background="{Binding Button38BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button38">
+                <Button Grid.Row="5" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button38">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button38BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -3359,10 +3432,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="5" Grid.Column="3" Background="{Binding Button39BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button39">
+                <Button Grid.Row="5" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button39">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button39BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -3442,10 +3517,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="5" Grid.Column="4" Background="{Binding Button40BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button40">
+                <Button Grid.Row="5" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button40">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button40BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -3525,10 +3602,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="5" Grid.Column="5" Background="{Binding Button41BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button41">
+                <Button Grid.Row="5" Grid.Column="5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button41">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button41BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -3608,10 +3687,12 @@
                     </DockPanel>
                 </Button>
 
-                <Button Grid.Row="5" Grid.Column="6" Background="{Binding Button42BackgroundColor}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                        Foreground="White" Command="{Binding ButtonCommand}" CommandParameter="button42">
+                <Button Grid.Row="5" Grid.Column="6" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
+                        CommandParameter="button42">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding Button42BackgroundColor}"/>
+                            <Setter Property="Foreground" Value="White"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">

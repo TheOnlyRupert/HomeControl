@@ -331,11 +331,24 @@ public class ChoresVM : BaseViewModel {
         }
 
         dateNext = DateTime.Now;
+        if (dateNext.DayOfWeek == DayOfWeek.Sunday) {
+            dateNext = dateNext.AddDays(1);
+        }
+
         while (dateNext.DayOfWeek != DayOfWeek.Sunday) {
             dateNext = dateNext.AddDays(1);
         }
 
         RemainingWeek = (dateNext.Date - DateTime.Now.Date).Days + " Days";
+
+        if (RemainingWeek == "1 Days") {
+            TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
+            RemainingWeek = timeSpan.Hours + " Hours";
+        }
+
+        if (RemainingWeek == "1 Hours") {
+            RemainingWeek = "1 Hour";
+        }
 
         dateNext = DateTime.Now;
         switch (dateNext.Month) {
@@ -375,12 +388,30 @@ public class ChoresVM : BaseViewModel {
 
         RemainingQuarter = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
 
+        if (RemainingQuarter == "1 Days") {
+            TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
+            RemainingQuarter = timeSpan.Hours + " Hours";
+        }
+
+        if (RemainingQuarter == "1 Hours") {
+            RemainingQuarter = "1 Hour";
+        }
+
         dateNext = DateTime.Now;
         while (dateNext.Year == DateTime.Now.Year) {
             dateNext = dateNext.AddDays(1);
         }
 
         RemainingYear = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
+
+        if (RemainingYear == "1 Days") {
+            TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
+            RemainingYear = timeSpan.Hours + " Hours";
+        }
+
+        if (RemainingYear == "1 Hours") {
+            RemainingYear = "1 Hour";
+        }
     }
 
     private void CalculateFunds() {

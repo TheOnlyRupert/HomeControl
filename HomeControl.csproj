@@ -130,6 +130,9 @@
         <Compile Include="Source\Modules\Chores\ChoresQuarterUser1.xaml.cs">
             <DependentUpon>ChoresQuarterUser1.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Chores\ChoresSavings.xaml.cs">
+            <DependentUpon>ChoresSavings.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Chores\ChoresSpecial.xaml.cs">
             <DependentUpon>ChoresSpecial.xaml</DependentUpon>
         </Compile>
@@ -150,6 +153,9 @@
         </Compile>
         <Compile Include="Source\Modules\Contacts.xaml.cs">
             <DependentUpon>Contacts.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Games\CoinFlip.xaml.cs">
+            <DependentUpon>CoinFlip.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\MealPrep.xaml.cs">
             <DependentUpon>MealPrep.xaml</DependentUpon>
@@ -212,6 +218,7 @@
         <Compile Include="Source\ViewModel\Chores\ChoresMonthUser1VM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresQuarterUser1VM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresQuarterVM.cs"/>
+        <Compile Include="Source\ViewModel\Chores\ChoresSavingsVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresSpecialVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresStatsDayVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresStatsMonthVM.cs"/>
@@ -219,6 +226,7 @@
         <Compile Include="Source\ViewModel\Chores\ChoresStatsWeekVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresWeekUser1VM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
+        <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
         <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
@@ -261,6 +269,7 @@
         <Page Include="Source\Modules\Chores\ChoresMonthUser1.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresQuarter.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresQuarterUser1.xaml"/>
+        <Page Include="Source\Modules\Chores\ChoresSavings.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresSpecial.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresStatsDay.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresStatsMonth.xaml"/>
@@ -268,6 +277,7 @@
         <Page Include="Source\Modules\Chores\ChoresStatsWeek.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresWeekUser1.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
+        <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
         <Page Include="Source\Modules\MealPrep.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
         <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
