@@ -255,12 +255,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -275,7 +284,7 @@
 
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -342,12 +351,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -361,7 +379,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -428,12 +446,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -448,7 +475,7 @@
 
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -515,12 +542,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -534,7 +570,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -600,12 +636,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -619,7 +664,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -685,12 +730,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -704,7 +758,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -770,12 +824,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -789,7 +852,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -855,12 +918,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -874,7 +946,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -940,12 +1012,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -959,7 +1040,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1025,12 +1106,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1044,7 +1134,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1110,12 +1200,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1129,7 +1228,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1195,12 +1294,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1214,7 +1322,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1280,12 +1388,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1299,7 +1416,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1365,12 +1482,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1384,7 +1510,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1450,12 +1576,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1469,7 +1604,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1535,12 +1670,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1554,7 +1698,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1620,12 +1764,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1639,7 +1792,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1705,12 +1858,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1724,7 +1886,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1790,12 +1952,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1809,7 +1980,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1875,12 +2046,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1894,7 +2074,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -1960,12 +2140,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -1979,7 +2168,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2045,12 +2234,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2064,7 +2262,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2130,12 +2328,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2149,7 +2356,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2215,12 +2422,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2234,7 +2450,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2300,12 +2516,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2319,7 +2544,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2385,12 +2610,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2404,7 +2638,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2470,12 +2704,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2489,7 +2732,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2555,12 +2798,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2574,7 +2826,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2640,12 +2892,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2659,7 +2920,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2725,12 +2986,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2744,7 +3014,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2810,12 +3080,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2829,7 +3108,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2895,12 +3174,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2914,7 +3202,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -2980,12 +3268,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -2999,7 +3296,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3065,12 +3362,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3084,7 +3390,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3150,12 +3456,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3169,7 +3484,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3235,12 +3550,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3254,7 +3578,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3320,12 +3644,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3339,7 +3672,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3405,12 +3738,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3424,7 +3766,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3490,12 +3832,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3509,7 +3860,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3575,12 +3926,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3594,7 +3954,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3660,12 +4020,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3679,7 +4048,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>
@@ -3745,12 +4114,21 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
-                                            <Setter Property="Foreground" Value="Navy"/>
+                                            <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsSelected" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <MultiTrigger.Setters>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Focusable" Value="False"/>
+                                            </MultiTrigger.Setters>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
                                             <MultiTrigger.Setters>
@@ -3764,7 +4142,7 @@
                             </ListView.Resources>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="256"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="128"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
                                 </GridView>
                             </ListView.View>

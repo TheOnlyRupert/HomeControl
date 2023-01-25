@@ -90,7 +90,9 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Source\Control\AppActivityTimer.cs"/>
         <Compile Include="Source\Control\DisableNavigation.cs"/>
+        <Compile Include="Source\Control\GridViewScroll.cs"/>
         <Compile Include="Source\Control\GridViewSort.cs"/>
         <Compile Include="Source\Control\PlaySound.cs"/>
         <Compile Include="Source\Control\SnowEngine.cs"/>
@@ -469,6 +471,20 @@
         <Resource Include="Resources\Sounds\scribble1.wav"/>
         <Resource Include="Resources\Sounds\scribble2.wav"/>
         <Resource Include="Resources\Sounds\scribble3.wav"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\weather\wind_direction2.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\clock\clockface.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\icons\clock.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\clock\hand_hour.png"/>
+        <Resource Include="Resources\Images\clock\hand_min.png"/>
+        <Resource Include="Resources\Images\clock\hand_sec.png"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')"/>

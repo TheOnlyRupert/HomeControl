@@ -9,6 +9,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Weather;
 
 public class WeatherVM : BaseViewModel {
+    private double _clockHourRotation, _clockMinRotation, _clockSecRotation;
+
     private int _currentWindDirectionRotation, _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
         _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
         _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10, _sevenDayForecastWindDirectionIcon11,
@@ -55,6 +57,10 @@ public class WeatherVM : BaseViewModel {
             if (updateForecast) {
                 UpdateWeatherForecastPart1();
             }
+
+            ClockSecRotation = DateTime.Now.Second * 6;
+            ClockMinRotation = DateTime.Now.Minute * 6;
+            ClockHourRotation = DateTime.Now.Hour * 30 + DateTime.Now.Minute * 0.5;
         }
 
         /* Update weather every minute */
@@ -107,7 +113,7 @@ public class WeatherVM : BaseViewModel {
         CurrentWeatherTempText = forecastHourly.properties.periods[0].temperature + "°";
         CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(forecastHourly.properties.periods[0].windDirection);
         CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
-        CurrentWeatherDescription = forecast.properties.periods[0].detailedForecast;
+        CurrentWeatherDescription = forecast.properties.periods[0].shortForecast;
         CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime);
 
         try {
@@ -1312,6 +1318,30 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindDirectionIcon14 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindDirectionIcon14");
+        }
+    }
+
+    public double ClockHourRotation {
+        get => _clockHourRotation;
+        set {
+            _clockHourRotation = value;
+            RaisePropertyChangedEvent("ClockHourRotation");
+        }
+    }
+
+    public double ClockMinRotation {
+        get => _clockMinRotation;
+        set {
+            _clockMinRotation = value;
+            RaisePropertyChangedEvent("ClockMinRotation");
+        }
+    }
+
+    public double ClockSecRotation {
+        get => _clockSecRotation;
+        set {
+            _clockSecRotation = value;
+            RaisePropertyChangedEvent("ClockSecRotation");
         }
     }
 

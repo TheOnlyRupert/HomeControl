@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
+using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Finances;
@@ -23,6 +25,7 @@ public class FinancesVM : BaseViewModel {
         FinancesFromJson financesFromJson = new();
         financesFromJson.FinancesFromJsonMain();
         RefreshFinances();
+        BackupFinances();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -46,6 +49,10 @@ public class FinancesVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "RefreshFundAmount") {
             RefreshFinances();
+        }
+
+        if (e.PropertyName == "DateChanged") {
+            BackupFinances();
         }
     }
 
@@ -81,6 +88,20 @@ public class FinancesVM : BaseViewModel {
         CashAvailableText = string.Format(culture, "{0:C}", available);
 
         CashAvailableTextColor = CashAvailableText.StartsWith("-") ? "Red" : "CornflowerBlue";
+    }
+
+    private void BackupFinances() {
+        Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "finances_backup/");
+        string fileName = ReferenceValues.FILE_DIRECTORY + "finances_backup/finances_" + DateTime.Now.ToString("yyyy_MM_dd") + ".json";
+
+        try {
+            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceMasterList);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(fileName, jsonString);
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+        }
     }
 
     #region Fields

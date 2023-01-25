@@ -22,6 +22,7 @@ public class MainWindowVM : BaseViewModel {
         simpleMessenger = CrossViewMessenger.Instance;
         currentDate = DateTime.Now;
         ReferenceValues.TimerSound = new PlaySound("alarm1");
+        ReferenceValues.IsScreenSaverEnabled = false;
 
         /* Get Settings */
         new SettingsFromJson();
@@ -44,6 +45,18 @@ public class MainWindowVM : BaseViewModel {
         dispatcherTimer.Tick += dispatcherTimer_Tick;
         dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
         dispatcherTimer.Start();
+
+        //AppActivityTimer activityTimer = new(360000, 360000, false);
+        //activityTimer.OnInactive += activityTimer_OnInactive;
+        //activityTimer.OnActive += activityTimer_OnActive;
+
+        //void activityTimer_OnInactive(object sender, EventArgs e) {
+        //    Console.WriteLine("Start ScreenSaver: " + DateTime.Now);
+        //}
+
+        //void activityTimer_OnActive(object sender, EventArgs e) {
+        //    Console.WriteLine("End ScreenSaver: " + DateTime.Now);
+        //}
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -61,6 +74,8 @@ public class MainWindowVM : BaseViewModel {
                 LockedText = "LOCKED";
             }
 
+            break;
+        case "panic":
             break;
         }
     }

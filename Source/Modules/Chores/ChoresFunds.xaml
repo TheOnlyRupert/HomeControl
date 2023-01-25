@@ -130,8 +130,9 @@
 
                 <TextBlock Grid.Row="1" Text="{Binding CashRemaining}" Margin="0 12" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
 
-                <ListView Grid.Row="2" ItemsSource="{Binding FinanceList}" Foreground="White" SelectedItem="{Binding FinanceSelected}" SelectionMode="Single"
-                          Background="Transparent" BorderBrush="Black" IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True">
+                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="2" ItemsSource="{Binding FinanceList}" Foreground="White"
+                                        SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="Black"
+                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -172,7 +173,7 @@
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="Auto" control:GridViewSort.PropertyName="Cost"/>
                         </GridView>
                     </ListView.View>
-                </ListView>
+                </control:CustomListView>
 
                 <StackPanel Grid.Row="3">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>

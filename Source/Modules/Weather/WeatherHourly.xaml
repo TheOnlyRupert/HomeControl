@@ -93,8 +93,8 @@
                                 <Condition Property="IsSelected" Value="True"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter Property="Background" Value="Black"/>
-                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="Focusable" Value="False"/>
                             </MultiTrigger.Setters>
@@ -105,7 +105,7 @@
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter Property="Focusable" Value="False"/>
                             </MultiTrigger.Setters>
@@ -116,7 +116,7 @@
 
             <ListView.View>
                 <GridView AllowsColumnReorder="false">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Width="96"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Width="80"/>
                     <GridViewColumn Width="32">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -129,7 +129,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding RainIcon}" Height="24"/>
+                                    <Image Source="{Binding RainIcon}" Height="24" Margin="0 0 4 0"/>
                                     <TextBlock Text="{Binding RainChance}"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -139,12 +139,12 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding WindSpeed}"/>
-                                    <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="24" RenderTransformOrigin="0.5, 0.5">
+                                    <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="24" RenderTransformOrigin="0.5, 0.5" Margin="0 0 4 0">
                                         <Image.RenderTransform>
                                             <RotateTransform Angle="{Binding WindDirectionIcon}"/>
                                         </Image.RenderTransform>
                                     </Image>
+                                    <TextBlock Text="{Binding WindSpeed}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

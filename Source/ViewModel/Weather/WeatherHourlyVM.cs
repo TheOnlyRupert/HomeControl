@@ -63,7 +63,7 @@ public class WeatherHourlyVM : BaseViewModel {
                 if (forecastHourly != null) {
                     foreach (JsonWeatherForecastHourly.Periods period in forecastHourly.properties.periods) {
                         ForecastHourlyList.Add(new WeatherHourlyBlock {
-                            Time = period.startTime.ToString("M/d, ") + period.startTime.ToString("HH:mm"),
+                            Time = period.startTime.ToString("MM/dd  ") + period.startTime.ToString("HH:mm"),
                             WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime),
                             Temp = period.temperature + "°",
                             RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),

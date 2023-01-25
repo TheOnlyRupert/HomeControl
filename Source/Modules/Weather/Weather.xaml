@@ -1,61 +1,97 @@
 ﻿<Page x:Class="HomeControl.Source.Modules.Weather.Weather" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
     <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-        <Grid>
+        <Grid Margin="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" Source="{Binding ThermometerDisplayIcon}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="48"/>
+            <Grid Grid.Row="0" Margin="0 0 0 4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding WeatherOverlay}" Focusable="False" Stretch="Fill" Opacity="0.25" Margin="-8 0"/>
+                    <Image Grid.Row="0" Source="../../../Resources/Images/icons/clock.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="24"/>
 
-                <StackPanel Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical">
-                    <TextBlock Text="{Binding CurrentDateText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="{Binding CurrentTimeText}" FontSize="36" Foreground="White"/>
-                        <TextBlock Text="{Binding CurrentTimeSecondsText}" FontSize="24" Foreground="Gray" VerticalAlignment="Center" Margin="2"/>
+                    <StackPanel Grid.Row="0" Orientation="Vertical">
+                        <TextBlock Text="{Binding CurrentDateText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding CurrentTimeText}" FontSize="36" Foreground="White"/>
+                            <TextBlock Text="{Binding CurrentTimeSecondsText}" FontSize="24" Foreground="Gray" VerticalAlignment="Center" Margin="2"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <Image Grid.Column="1" Source="../../../Resources/Images/clock/clockface.png" Stretch="Uniform" Margin="8"/>
+                <Image Grid.Column="1" Source="../../../Resources/Images/clock/hand_hour.png" RenderTransformOrigin="0.5, 0.5" Stretch="Uniform" Margin="8">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="{Binding ClockHourRotation}"/>
+                    </Image.RenderTransform>
+                </Image>
+                <Image Grid.Column="1" Source="../../../Resources/Images/clock/hand_min.png" RenderTransformOrigin="0.5, 0.5" Stretch="Uniform" Margin="8">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="{Binding ClockMinRotation}"/>
+                    </Image.RenderTransform>
+                </Image>
+                <Image Grid.Column="1" Source="../../../Resources/Images/clock/hand_sec.png" RenderTransformOrigin="0.5, 0.5" Stretch="Uniform" Margin="8">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="{Binding ClockSecRotation}"/>
+                    </Image.RenderTransform>
+                </Image>
 
-                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                        <TextBlock Text="{Binding CurrentWeatherLocationText}" FontSize="18" Foreground="White"/>
-                        <TextBlock Text="{Binding CurrentWeatherTempText}" FontSize="36" Foreground="White"/>
-                    </StackPanel>
+                <Grid Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3">
-                        <Image Source="{Binding CurrentWeatherCloudIcon}" Height="96"/>
-                        <TextBlock Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Top" TextWrapping="Wrap"
-                                   Foreground="White"/>
-                    </StackPanel>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right">
-                        <Image Source="../../../Resources/Images/weather/wind_compass.png" Width="64" Height="64" HorizontalAlignment="Center"/>
-                        <TextBlock Text="" HorizontalAlignment="Center" FontSize="16" Foreground="White"/>
-                    </StackPanel>
+                        <Image Grid.Column="1" Grid.Row="0" Source="{Binding ThermometerDisplayIcon}" VerticalAlignment="Top" HorizontalAlignment="Right" Height="32"/>
 
-                    <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right">
-                        <Image Width="64" Height="64" HorizontalAlignment="Center" Source="../../../Resources/Images/weather/wind_direction.png" RenderTransformOrigin="0.5, 0.5">
-                            <Image.RenderTransform>
-                                <RotateTransform Angle="{Binding CurrentWindDirectionRotation}"/>
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock Text="{Binding CurrentWindSpeedText}" HorizontalAlignment="Center" FontSize="16" Foreground="White"/>
-                    </StackPanel>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding CurrentWeatherLocationText}" FontSize="24" HorizontalAlignment="Center"
+                                   Foreground="White" Margin="8 0 0 0"/>
+                        <Image Grid.Column="0" Grid.Row="1" Source="{Binding CurrentWeatherCloudIcon}" HorizontalAlignment="Right" Focusable="False" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CurrentWeatherTempText}" FontSize="60" HorizontalAlignment="Left" Foreground="White"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16"
+                                   TextWrapping="Wrap" Foreground="White" VerticalAlignment="Bottom"/>
+
+                        <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="Wind" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" Foreground="CornflowerBlue"/>
+
+                            <Image Grid.Column="1" HorizontalAlignment="Center" Stretch="Uniform" Source="../../../Resources/Images/weather/wind_direction.png"
+                                   VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5" Margin="8 0">
+                                <Image.RenderTransform>
+                                    <RotateTransform Angle="{Binding CurrentWindDirectionRotation}"/>
+                                </Image.RenderTransform>
+                            </Image>
+
+                            <TextBlock Grid.Column="2" Text="{Binding CurrentWindSpeedText}" HorizontalAlignment="Left" FontSize="14" Foreground="CornflowerBlue"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
 

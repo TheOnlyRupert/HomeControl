@@ -79,8 +79,9 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" Margin="8">
-                <ListView Grid.Row="0" ItemsSource="{Binding FinanceList}" Foreground="White" SelectedItem="{Binding FinanceSelected}" SelectionMode="Single"
-                          Background="Transparent" BorderBrush="Black" IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True">
+                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding FinanceList}" Foreground="White"
+                                        SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="Black"
+                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -129,7 +130,7 @@
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
                         </GridView>
                     </ListView.View>
-                </ListView>
+                </control:CustomListView>
             </Grid>
 
             <Grid Grid.Column="1" Margin="8">
@@ -168,12 +169,12 @@
 
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="24"/>
+                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Amount ($)" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="12" FontSize="24"/>
+                    <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">
@@ -182,7 +183,7 @@
                 </StackPanel>
 
                 <Viewbox Grid.Row="4" Height="48" Margin="0 8" HorizontalAlignment="Left">
-                    <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2022-11-10"/>
+                    <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
                 </Viewbox>
 
                 <Grid Grid.Row="5">

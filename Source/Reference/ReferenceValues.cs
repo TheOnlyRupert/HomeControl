@@ -76,4 +76,5 @@ public static class ReferenceValues {
     public static int ActiveChild { get; set; }
     public static JsonSettings JsonMasterSettings { get; set; }
     public static int ActiveUserEdit { get; set; }
+    public static bool IsScreenSaverEnabled { get; set; }
 }
