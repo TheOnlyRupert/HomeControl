@@ -29,6 +29,7 @@ public static class ReferenceValues {
         "Brittany Fund",
         "Stupid/Dumb",
         "Interest",
+        "Carry Over",
         "Other"
     };
 

@@ -251,10 +251,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -347,10 +351,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -442,10 +450,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -538,10 +550,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -632,10 +648,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -726,10 +746,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -820,10 +844,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -914,10 +942,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1008,10 +1040,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1102,10 +1138,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1196,10 +1236,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1290,10 +1334,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1384,10 +1432,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1478,10 +1530,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1572,10 +1628,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1666,10 +1726,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1760,10 +1824,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1854,10 +1922,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -1948,10 +2020,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2042,10 +2118,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2136,10 +2216,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2230,10 +2314,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2324,10 +2412,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2418,10 +2510,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2512,10 +2608,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2606,10 +2706,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2700,10 +2804,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2794,10 +2902,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2888,10 +3000,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -2982,10 +3098,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3076,10 +3196,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3170,10 +3294,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3264,10 +3392,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3358,10 +3490,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3452,10 +3588,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3546,10 +3686,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3640,10 +3784,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3734,10 +3882,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3828,10 +3980,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -3922,10 +4078,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -4016,10 +4176,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 
@@ -4110,10 +4274,14 @@
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Foreground" Value="Yellow"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
                                         </DataTrigger>
 

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Calendar.EditCalendar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control" mc:Ignorable="d" Title="View Events" Height="600"
-        Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control" mc:Ignorable="d" Height="640" Width="1024"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
     <Window.Resources>
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -172,9 +172,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="{Binding User1NameText}" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="user1"
+                    <Button Grid.Column="0" Content="{Binding User1NameText}" Command="{Binding ButtonCommand}" FontSize="16" CommandParameter="user1"
                             Background="{Binding User1BackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -197,7 +198,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Grid.Column="1" Content="{Binding User2NameText}" Command="{Binding ButtonCommand}" CommandParameter="user2" FontSize="18"
+                    <Button Grid.Column="1" Content="{Binding User2NameText}" Command="{Binding ButtonCommand}" CommandParameter="user2" FontSize="16"
                             Background="{Binding User2BackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -220,7 +221,30 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Grid.Column="2" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children" FontSize="18"
+                    <Button Grid.Column="2" Content="Parents" Command="{Binding ButtonCommand}" CommandParameter="parents" FontSize="16"
+                            Background="{Binding ParentsBackgroundColor}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Black"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Grid.Column="3" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children" FontSize="16"
                             Background="{Binding ChildrenBackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -243,7 +267,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Grid.Column="3" Content="Home" Command="{Binding ButtonCommand}" CommandParameter="home" FontSize="18" Background="{Binding HomeBackgroundColor}">
+                    <Button Grid.Column="4" Content="Home" Command="{Binding ButtonCommand}" CommandParameter="home" FontSize="16" Background="{Binding HomeBackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -265,7 +289,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Grid.Column="4" Content="Other" Command="{Binding ButtonCommand}" CommandParameter="other" FontSize="18" Background="{Binding OtherBackgroundColor}">
+                    <Button Grid.Column="5" Content="Other" Command="{Binding ButtonCommand}" CommandParameter="other" FontSize="16" Background="{Binding OtherBackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>

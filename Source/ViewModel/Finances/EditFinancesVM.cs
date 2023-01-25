@@ -17,7 +17,7 @@ public class EditFinancesVM : BaseViewModel {
     private ObservableCollection<string> _categoryList;
 
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText;
+        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor;
 
     private ObservableCollection<FinanceBlock> _financeList;
     private FinanceBlock _financeSelected;
@@ -102,6 +102,8 @@ public class EditFinancesVM : BaseViewModel {
                                 Category = CategorySelected,
                                 Person = selectedPerson
                             });
+
+                            cashSound.Play(false);
                             FinanceList.Remove(FinanceSelected);
                             DateText = DateTime.Now.ToShortDateString();
                             DescriptionText = "";
@@ -118,6 +120,7 @@ public class EditFinancesVM : BaseViewModel {
                 if (FinanceSelected.Item != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
+                        cashSound.Play(false);
                         FinanceList.Remove(FinanceSelected);
                         SaveJson();
                     }
@@ -133,6 +136,11 @@ public class EditFinancesVM : BaseViewModel {
 
         case "user2":
             selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
+            UserButtonLogic();
+            break;
+
+        case "parents":
+            selectedPerson = "Parents";
             UserButtonLogic();
             break;
 
@@ -221,6 +229,7 @@ public class EditFinancesVM : BaseViewModel {
     private void UserButtonLogic() {
         User1BackgroundColor = "Transparent";
         User2BackgroundColor = "Transparent";
+        ParentsBackgroundColor = "Transparent";
         ChildrenBackgroundColor = "Transparent";
         HomeBackgroundColor = "Transparent";
         OtherBackgroundColor = "Transparent";
@@ -231,6 +240,9 @@ public class EditFinancesVM : BaseViewModel {
             User2BackgroundColor = "Green";
         } else {
             switch (selectedPerson) {
+            case "Parents":
+                ParentsBackgroundColor = "Green";
+                break;
             case "Children":
                 ChildrenBackgroundColor = "Green";
                 break;
@@ -359,6 +371,14 @@ public class EditFinancesVM : BaseViewModel {
         set {
             _user2BackgroundColor = value;
             RaisePropertyChangedEvent("User2BackgroundColor");
+        }
+    }
+
+    public string ParentsBackgroundColor {
+        get => _parentsBackgroundColor;
+        set {
+            _parentsBackgroundColor = value;
+            RaisePropertyChangedEvent("ParentsBackgroundColor");
         }
     }
 

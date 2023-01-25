@@ -19,7 +19,7 @@ public class EditCalendarVM : BaseViewModel {
     private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText, _startTimeText, _endTimeText;
+        _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText, _startTimeText, _endTimeText, _parentsBackgroundColor;
 
     private ObservableCollection<CalendarEvents> _eventList;
 
@@ -93,6 +93,7 @@ public class EditCalendarVM : BaseViewModel {
     private void UserButtonLogic() {
         User1BackgroundColor = "Transparent";
         User2BackgroundColor = "Transparent";
+        ParentsBackgroundColor = "Transparent";
         ChildrenBackgroundColor = "Transparent";
         HomeBackgroundColor = "Transparent";
         OtherBackgroundColor = "Transparent";
@@ -103,6 +104,9 @@ public class EditCalendarVM : BaseViewModel {
             User2BackgroundColor = "Green";
         } else {
             switch (selectedPerson) {
+            case "Parents":
+                ParentsBackgroundColor = "Green";
+                break;
             case "Children":
                 ChildrenBackgroundColor = "Green";
                 break;
@@ -206,6 +210,11 @@ public class EditCalendarVM : BaseViewModel {
             UserButtonLogic();
             break;
 
+        case "parents":
+            selectedPerson = "Parents";
+            UserButtonLogic();
+            break;
+
         case "home":
             selectedPerson = "Home";
             UserButtonLogic();
@@ -304,6 +313,14 @@ public class EditCalendarVM : BaseViewModel {
         set {
             _user2BackgroundColor = value;
             RaisePropertyChangedEvent("User2BackgroundColor");
+        }
+    }
+
+    public string ParentsBackgroundColor {
+        get => _parentsBackgroundColor;
+        set {
+            _parentsBackgroundColor = value;
+            RaisePropertyChangedEvent("ParentsBackgroundColor");
         }
     }
 

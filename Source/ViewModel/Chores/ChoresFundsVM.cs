@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
 using HomeControl.Source.Reference;
@@ -12,6 +13,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresFundsVM : BaseViewModel {
+    private readonly PlaySound cashSound;
+
     private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsTotal,
         _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color;
 
@@ -19,6 +22,8 @@ public class ChoresFundsVM : BaseViewModel {
     private FinanceBlockShort _financeSelected;
 
     public ChoresFundsVM() {
+        cashSound = new PlaySound("cash");
+
         FinanceList = new ObservableCollection<FinanceBlockShort>();
         try {
             FinanceList = ReferenceValues.JsonFinanceShortMasterList.financeListShort;
@@ -79,6 +84,7 @@ public class ChoresFundsVM : BaseViewModel {
                     Cost = CostText
                 });
 
+                cashSound.Play(false);
                 DescriptionText = "";
                 CostText = "";
                 Refresh();
@@ -100,6 +106,7 @@ public class ChoresFundsVM : BaseViewModel {
                                 Cost = CostText
                             });
 
+                            cashSound.Play(false);
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
                             CostText = "";
@@ -115,6 +122,7 @@ public class ChoresFundsVM : BaseViewModel {
                 if (FinanceSelected.Item != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
+                        cashSound.Play(false);
                         FinanceList.Remove(FinanceSelected);
                         Refresh();
                     }
