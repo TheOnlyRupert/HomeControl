@@ -62,6 +62,7 @@ public static class WeatherHelpers {
         case "Slight Chance Rain And Snow Showers":
         case "Slight Chance Rain And Snow":
         case "Chance Rain And Snow Showers":
+        case "Chance Freezing Rain":
         case "Rain And Snow Showers":
         case "Rain And Snow Showers Likely":
             return "../../../Resources/Images/weather/weather_snow_rain_mixed.png";

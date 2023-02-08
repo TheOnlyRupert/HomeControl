@@ -28,13 +28,21 @@ public class ChoresVM : BaseViewModel {
         _choresCompletedMonthProgressValue, _choresCompletedQuarterProgressValue, calculatedReleaseFunds, _fundsProgressValue;
 
     public ChoresVM() {
-        RefreshFields();
-
-        FinancesFromJson financesFromJson = new();
-        financesFromJson.FinancesFromJsonShort();
-
         simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
+
+        ChoreFundsFromJson choreFundsFromJson = new();
+        if (JsonChoreFundsMaster.FinanceBlockChoreFundList == null) {
+            Console.WriteLine("true");
+            JsonChoreFundsMaster.FinanceBlockChoreFundList = new ObservableCollection<FinanceBlockChoreFund>();
+        }
+
+        /* In case program was off when month changed */
+        if (JsonChoreFundsMaster.UpdatedDate.Month != DateTime.Now.Month) {
+            ReleaseFunds();
+        }
+
+        RefreshFields();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
@@ -421,36 +429,44 @@ public class ChoresVM : BaseViewModel {
             IncludeFields = true
         };
 
-        //check all files in week directory. If they start with the current month: open, calculate,
-        //then add $50 if task compliance is >= 95%.
-        foreach (string fileName in Directory.GetFiles(FILE_DIRECTORY + "chores/", "chores_week_" + DateTime.Now.ToString("yyyy_MM") + "*.json")) {
+        //check all files in week directory. If the week ends on the current month add $50 if task compliance is >= 95%.
+        foreach (string fileName in Directory.GetFiles(FILE_DIRECTORY + "chores/", "chores_week_*.json")) {
             try {
-                StreamReader streamReader = new(fileName);
-                string fileString = null;
-                while (!streamReader.EndOfStream) {
-                    fileString = streamReader.ReadToEnd();
-                }
+                DateTime date = new(int.Parse(fileName.Substring(fileName.Length - 15, 4)),
+                    int.Parse(fileName.Substring(fileName.Length - 10, 2)),
+                    int.Parse(fileName.Substring(fileName.Length - 7, 2)));
+                date = date.AddDays(6);
 
-                streamReader.Close();
+                if (date.Year == DateTime.Now.Year && date.Month == DateTime.Now.Month) {
+                    StreamReader streamReader = new(fileName);
+                    string fileString = null;
+                    while (!streamReader.EndOfStream) {
+                        fileString = streamReader.ReadToEnd();
+                    }
 
-                if (fileString != null) {
-                    JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(fileString, options);
+                    streamReader.Close();
 
-                    int weekCompleted = 0;
-                    foreach (ChoreDetails choreDetails in jsonChores.choreList) {
-                        if (choreDetails.IsComplete) {
-                            weekCompleted++;
+                    if (fileString != null) {
+                        JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(fileString, options);
+
+                        int weekCompleted = 0;
+                        foreach (ChoreDetails choreDetails in jsonChores.choreList) {
+                            if (choreDetails.IsComplete) {
+                                weekCompleted++;
+                            }
+                        }
+
+                        if (Convert.ToDouble(weekCompleted) / Convert.ToDouble(jsonChores.choreList.Count) * 100 >= 95) {
+                            calculatedReleaseFunds += 50;
                         }
                     }
-
-                    if (Convert.ToDouble(weekCompleted) / Convert.ToDouble(jsonChores.choreList.Count) * 100 >= 95) {
-                        calculatedReleaseFunds += 50;
-                    }
                 }
-            } catch (Exception) { }
+            } catch (Exception e) {
+                Console.WriteLine(e);
+            }
         }
 
-        //check month file. open, calculate, then add $100 if task compliance is >= 95%.
+        //check month file. open, calculate, then add $100 if task compliance is == 100%.
         try {
             StreamReader streamReader = new(FILE_DIRECTORY + "chores/chores_month_" + DateTime.Now.ToString("yyyy_MM") + ".json");
             string fileString = null;
@@ -470,21 +486,15 @@ public class ChoresVM : BaseViewModel {
                     }
                 }
 
-                if (Convert.ToDouble(monthCompleted) / Convert.ToDouble(jsonChores.choreList.Count) * 100 >= 95) {
+                if (Convert.ToDouble(monthCompleted) / Convert.ToDouble(jsonChores.choreList.Count) * 100 > 99) {
                     calculatedReleaseFunds += 100;
                 }
             }
         } catch (Exception) { }
 
-        //check special file. add $100 per completed task.
-
-
         FundsProgressValue = calculatedReleaseFunds;
         FundsProgressText = "$" + calculatedReleaseFunds;
-
-        ChoreFundsFromJson choreFundsFromJson = new();
         CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
-
         JsonChoreFundsMaster.FundsLocked = calculatedReleaseFunds;
 
         try {
@@ -495,28 +505,21 @@ public class ChoresVM : BaseViewModel {
         } catch (Exception e) {
             Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
         }
-
-        /* In case program was off when month changed */
-        if (JsonChoreFundsMaster.UpdatedDate.Month != DateTime.Now.Month) {
-            ReleaseFunds();
-        }
     }
 
     private void ReleaseFunds() {
-        Console.WriteLine("Releasing Funds");
+        Console.WriteLine("Releasing Funds: " + JsonChoreFundsMaster.FundsLocked);
         int switchCash = JsonChoreFundsMaster.FundsLocked;
         CashAvailable = "$" + switchCash;
 
         JsonChoreFundsMaster.FundsLocked = 0;
+        JsonChoreFundsMaster.FundsPrior = switchCash;
         JsonChoreFundsMaster.FundsAvailable = switchCash;
-        JsonChoreFundsMaster.FundsTotal = switchCash;
         JsonChoreFundsMaster.SpecialDay1Completed = false;
         JsonChoreFundsMaster.SpecialDay2Completed = false;
-        JsonFinanceShortMasterList = new JsonFinancesShort {
-            financeListShort = new ObservableCollection<FinanceBlockShort>()
-        };
-        JsonFinanceShortMasterList.financeListShort.Clear();
+        JsonChoreFundsMaster.FinanceBlockChoreFundList.Clear();
         JsonChoreFundsMaster.UpdatedDate = DateTime.Now;
+        JsonChoreFundsMaster.FundsTotal += switchCash;
 
         if (JsonFinanceMasterList.financeList != null) {
             JsonFinanceMasterList.financeList.Add(new FinanceBlock {
@@ -527,28 +530,6 @@ public class ChoresVM : BaseViewModel {
                 Category = "Brittany Fund",
                 Person = JsonMasterSettings.User2Name
             });
-        } else {
-            JsonFinanceMasterList = new JsonFinances {
-                financeList = new ObservableCollection<FinanceBlock> {
-                    new() {
-                        AddSub = "SUB",
-                        Date = DateTime.Now.ToShortDateString(),
-                        Item = "Brittany Fund (auto)",
-                        Cost = switchCash.ToString(),
-                        Category = "Brittany Fund",
-                        Person = JsonMasterSettings.User2Name
-                    }
-                }
-            };
-        }
-
-        try {
-            string jsonString = JsonSerializer.Serialize(JsonFinanceShortMasterList);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(FILE_DIRECTORY + "financesChoreFund.json", jsonString);
-        } catch (Exception e) {
-            Console.WriteLine("Unable to save financesChoreFund.json... " + e.Message);
         }
 
         try {

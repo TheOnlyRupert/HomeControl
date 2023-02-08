@@ -3,7 +3,7 @@
 namespace HomeControl.Source.ViewModel.Games;
 
 public static class WordList {
-    public static List<string> PictionaryEasyList = new() {
+    public static readonly List<string> PictionaryEasyList = new() {
         "Earth",
         "Christmas",
         "Mickey Mouse",
@@ -362,7 +362,7 @@ public static class WordList {
         "Zigzag"
     };
 
-    public static List<string> PictionaryMediumList = new() {
+    public static readonly List<string> PictionaryMediumList = new() {
         "Friday",
         "Jupiter",
         "Segway",
@@ -780,7 +780,7 @@ public static class WordList {
         "Zoo"
     };
 
-    public static List<string> PictionaryHardList = new() {
+    public static readonly List<string> PictionaryHardList = new() {
         "Bff",
         "Cd",
         "Heinz 57",
@@ -1181,7 +1181,7 @@ public static class WordList {
         "Zoom"
     };
 
-    public static List<string> PictionaryAdultList = new() {
+    public static readonly List<string> PictionaryAdultList = new() {
         "69",
         "Baby Maker",
         "Bad Ass",

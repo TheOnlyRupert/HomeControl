@@ -19,7 +19,7 @@ public class EditCalendarVM : BaseViewModel {
     private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText, _startTimeText, _endTimeText, _parentsBackgroundColor;
+        _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText, _startTimeText, _endTimeText, _parentsBackgroundColor, _dupeButtonBackgroundColor, _dupeText;
 
     private ObservableCollection<CalendarEvents> _eventList;
 
@@ -38,6 +38,29 @@ public class EditCalendarVM : BaseViewModel {
         User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
         CalendarEventSelected = new CalendarEvents();
         UserButtonLogic();
+
+        if (ReferenceValues.IsCalendarDupeModeEnabled) {
+            DupeText = "Duplicate Mode Enabled\n" + ReferenceValues.DupeEvent.startTime + " - " + ReferenceValues.DupeEvent.endTime + "  " + ReferenceValues.DupeEvent.name;
+            DupeButtonBackgroundColor = "Green";
+            EventText = ReferenceValues.DupeEvent.name;
+            LocationText = ReferenceValues.DupeEvent.location;
+            DescriptionText = ReferenceValues.DupeEvent.description;
+            StartTimeText = ReferenceValues.DupeEvent.startTime;
+            EndTimeText = ReferenceValues.DupeEvent.endTime;
+
+            if (ReferenceValues.DupeEvent.person == ReferenceValues.JsonMasterSettings.User1Name) {
+                selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
+            } else if (ReferenceValues.DupeEvent.person == ReferenceValues.JsonMasterSettings.User2Name) {
+                selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
+            } else if (string.IsNullOrEmpty(ReferenceValues.DupeEvent.person)) {
+                selectedPerson = "Home";
+            } else {
+                selectedPerson = ReferenceValues.DupeEvent.person;
+            }
+        } else {
+            DupeText = "";
+            DupeButtonBackgroundColor = "Transparent";
+        }
 
         if (File.Exists(fileName)) {
             JsonSerializerOptions options = new() {
@@ -192,6 +215,33 @@ public class EditCalendarVM : BaseViewModel {
                     }
                 }
             } catch (Exception) { }
+
+            break;
+
+        case "dupe":
+            if (ReferenceValues.IsCalendarDupeModeEnabled) {
+                ReferenceValues.IsCalendarDupeModeEnabled = false;
+                DupeButtonBackgroundColor = "Transparent";
+                DupeText = "";
+            } else {
+                if (string.IsNullOrWhiteSpace(EventText)) {
+                    MessageBox.Show("Missing Event", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                } else {
+                    ReferenceValues.IsCalendarDupeModeEnabled = true;
+                    DupeButtonBackgroundColor = "Green";
+
+                    ReferenceValues.DupeEvent = new CalendarEvents {
+                        name = EventText,
+                        description = DescriptionText,
+                        location = LocationText,
+                        person = selectedPerson,
+                        startTime = StartTimeText,
+                        endTime = EndTimeText
+                    };
+
+                    DupeText = "Duplicate Mode Enabled\n" + StartTimeText + " - " + EndTimeText + "  " + EventText;
+                }
+            }
 
             break;
 
@@ -377,6 +427,22 @@ public class EditCalendarVM : BaseViewModel {
         set {
             _endTimeText = VerifyInput.VerifyTextNumeric(value);
             RaisePropertyChangedEvent("EndTimeText");
+        }
+    }
+
+    public string DupeButtonBackgroundColor {
+        get => _dupeButtonBackgroundColor;
+        set {
+            _dupeButtonBackgroundColor = value;
+            RaisePropertyChangedEvent("DupeButtonBackgroundColor");
+        }
+    }
+
+    public string DupeText {
+        get => _dupeText;
+        set {
+            _dupeText = value;
+            RaisePropertyChangedEvent("DupeText");
         }
     }
 

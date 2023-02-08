@@ -14,12 +14,3 @@ public class FinanceBlock {
     public string Category { get; set; }
     public string Person { get; set; }
 }
-
-public class JsonFinancesShort {
-    public ObservableCollection<FinanceBlockShort> financeListShort { get; set; }
-}
-
-public class FinanceBlockShort {
-    public string Item { get; set; }
-    public string Cost { get; set; }
-}

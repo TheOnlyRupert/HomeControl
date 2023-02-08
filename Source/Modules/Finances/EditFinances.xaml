@@ -169,7 +169,7 @@
 
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32"/>
+                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">

@@ -44,7 +44,7 @@ public class CalendarVM : BaseViewModel {
         _button21BackgroundColor, _button22BackgroundColor, _button23BackgroundColor, _button24BackgroundColor, _button25BackgroundColor, _button26BackgroundColor,
         _button27BackgroundColor, _button28BackgroundColor, _button29BackgroundColor, _button30BackgroundColor, _button31BackgroundColor, _button32BackgroundColor,
         _button33BackgroundColor, _button34BackgroundColor, _button35BackgroundColor, _button36BackgroundColor, _button37BackgroundColor, _button38BackgroundColor,
-        _button39BackgroundColor, _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor;
+        _button39BackgroundColor, _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor, _dupeText;
 
     private ObservableCollection<CalendarEventsCustom> _button1EventList, _button2EventList, _button3EventList, _button4EventList, _button5EventList, _button6EventList,
         _button7EventList,
@@ -568,6 +568,12 @@ public class CalendarVM : BaseViewModel {
         Button40EventList.Clear();
         Button41EventList.Clear();
         Button42EventList.Clear();
+
+        if (ReferenceValues.IsCalendarDupeModeEnabled) {
+            DupeText = "Duplicate Mode Enabled";
+        } else {
+            DupeText = "";
+        }
 
         /* Constant */
         DateTime startingYear = new(dateTime.Year, 1, 1);
@@ -2831,6 +2837,14 @@ public class CalendarVM : BaseViewModel {
         set {
             _button42EventList = value;
             RaisePropertyChangedEvent("Button42EventList");
+        }
+    }
+
+    public string DupeText {
+        get => _dupeText;
+        set {
+            _dupeText = value;
+            RaisePropertyChangedEvent("DupeText");
         }
     }
 

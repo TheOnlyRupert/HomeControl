@@ -18,23 +18,14 @@ public class ChoresFundsVM : BaseViewModel {
     private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsTotal,
         _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color;
 
-    private ObservableCollection<FinanceBlockShort> _financeList;
-    private FinanceBlockShort _financeSelected;
+    private ObservableCollection<FinanceBlockChoreFund> _financeList;
+    private FinanceBlockChoreFund _financeSelected;
 
     public ChoresFundsVM() {
         cashSound = new PlaySound("cash");
-
-        FinanceList = new ObservableCollection<FinanceBlockShort>();
-        try {
-            FinanceList = ReferenceValues.JsonFinanceShortMasterList.financeListShort;
-        } catch (Exception) {
-            ReferenceValues.JsonFinanceShortMasterList = new JsonFinancesShort {
-                financeListShort = new ObservableCollection<FinanceBlockShort>()
-            };
-        }
-
         CurrentMonth = DateTime.Now.ToString("MMMM");
 
+        FinanceList = ReferenceValues.JsonChoreFundsMaster.FinanceBlockChoreFundList;
         SpecialDay1Color = ReferenceValues.JsonChoreFundsMaster.SpecialDay1Completed ? "Green" : "Transparent";
         SpecialDay2Color = ReferenceValues.JsonChoreFundsMaster.SpecialDay2Completed ? "Green" : "Transparent";
 
@@ -58,8 +49,9 @@ public class ChoresFundsVM : BaseViewModel {
         FundsReturnRate = "Return Rate: 1x";
 
         int cash = 0;
-        foreach (FinanceBlockShort financeBlockShort in ReferenceValues.JsonFinanceShortMasterList.financeListShort) {
-            cash += int.Parse(financeBlockShort.Cost);
+
+        foreach (FinanceBlockChoreFund financeBlockShort in ReferenceValues.JsonChoreFundsMaster.FinanceBlockChoreFundList) {
+            cash += financeBlockShort.Cost;
         }
 
         ReferenceValues.JsonChoreFundsMaster.FundsAvailable = ReferenceValues.JsonChoreFundsMaster.FundsTotal;
@@ -79,9 +71,9 @@ public class ChoresFundsVM : BaseViewModel {
             } else if (string.IsNullOrWhiteSpace(CostText)) {
                 MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
-                FinanceList.Add(new FinanceBlockShort {
+                FinanceList.Add(new FinanceBlockChoreFund {
                     Item = DescriptionText,
-                    Cost = CostText
+                    Cost = int.Parse(CostText)
                 });
 
                 cashSound.Play(false);
@@ -101,9 +93,9 @@ public class ChoresFundsVM : BaseViewModel {
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
-                            FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlockShort {
+                            FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlockChoreFund {
                                 Item = DescriptionText,
-                                Cost = CostText
+                                Cost = int.Parse(CostText)
                             });
 
                             cashSound.Play(false);
@@ -200,31 +192,6 @@ public class ChoresFundsVM : BaseViewModel {
     }
 
     private void SaveJson() {
-        if (FinanceList.Count > 0) {
-            try {
-                ReferenceValues.JsonFinanceShortMasterList.financeListShort = FinanceList;
-            } catch (Exception) {
-                Console.WriteLine("ReferenceValues Doesnt exist");
-            }
-
-            try {
-                string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceShortMasterList);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "financesChoreFund.json", jsonString);
-            } catch (Exception e) {
-                Console.WriteLine("Unable to save financesChoreFund.json... " + e.Message);
-            }
-        } else {
-            try {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.Delete(ReferenceValues.FILE_DIRECTORY + "financesChoreFund.json");
-            } catch (Exception e) {
-                Console.WriteLine("Unable to delete financesChoreFund.json... " + e.Message);
-            }
-        }
-
         try {
             string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreFundsMaster);
             GC.Collect();
@@ -235,9 +202,9 @@ public class ChoresFundsVM : BaseViewModel {
         }
     }
 
-    private void PopulateDetailedView(FinanceBlockShort value) {
+    private void PopulateDetailedView(FinanceBlockChoreFund value) {
         DescriptionText = value.Item;
-        CostText = value.Cost;
+        CostText = value.Cost.ToString();
     }
 
     #region Fields
@@ -370,7 +337,7 @@ public class ChoresFundsVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<FinanceBlockShort> FinanceList {
+    public ObservableCollection<FinanceBlockChoreFund> FinanceList {
         get => _financeList;
         set {
             _financeList = value;
@@ -378,7 +345,7 @@ public class ChoresFundsVM : BaseViewModel {
         }
     }
 
-    public FinanceBlockShort FinanceSelected {
+    public FinanceBlockChoreFund FinanceSelected {
         get => _financeSelected;
         set {
             _financeSelected = value;

@@ -50,7 +50,6 @@ public static class ReferenceValues {
 
     public static JsonCalendar[] JsonCalendarMasterEventList { get; set; }
     public static JsonFinances JsonFinanceMasterList { get; set; }
-    public static JsonFinancesShort JsonFinanceShortMasterList { get; set; }
     public static JsonChores JsonChoreDayMasterList { get; set; }
     public static JsonChores JsonChoreDayUser1MasterList { get; set; }
     public static JsonChores JsonChoreWeekMasterList { get; set; }
@@ -76,6 +75,10 @@ public static class ReferenceValues {
 
     public static int ActiveChild { get; set; }
     public static JsonSettings JsonMasterSettings { get; set; }
-    public static int ActiveUserEdit { get; set; }
     public static bool IsScreenSaverEnabled { get; set; }
+
+    public static bool IsCalendarDupeModeEnabled { get; set; }
+    public static CalendarEvents DupeEvent { get; set; }
+
+    public static bool IsGameTimerRunning { get; set; }
 }

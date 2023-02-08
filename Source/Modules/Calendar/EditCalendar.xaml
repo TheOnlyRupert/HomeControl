@@ -312,6 +312,7 @@
                         </Button.Style>
                     </Button>
                 </Grid>
+                <TextBlock Grid.Row="7" Foreground="White" FontSize="18" Text="{Binding DupeText}"/>
             </Grid>
         </Grid>
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="8 0 0 8">
@@ -363,6 +364,28 @@
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Duplicate Event (Mode)" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="8 0" CommandParameter="dupe">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{Binding DupeButtonBackgroundColor}"/>
                         <Setter Property="Foreground" Value="White"/>
                         <Setter Property="Template">
                             <Setter.Value>

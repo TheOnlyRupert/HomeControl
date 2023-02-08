@@ -41,6 +41,15 @@
             <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
             <Private>True</Private>
         </Reference>
+        <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1518.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+            <HintPath>packages\Microsoft.Web.WebView2.1.0.1518.46\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1518.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+            <HintPath>packages\Microsoft.Web.WebView2.1.0.1518.46\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+        </Reference>
+        <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1518.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+            <HintPath>packages\Microsoft.Web.WebView2.1.0.1518.46\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+        </Reference>
         <Reference Include="mscorlib"/>
         <Reference Include="System"/>
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
@@ -159,6 +168,9 @@
         <Compile Include="Source\Modules\Games\CoinFlip.xaml.cs">
             <DependentUpon>CoinFlip.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Groceries.xaml.cs">
+            <DependentUpon>Groceries.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\MealPrep.xaml.cs">
             <DependentUpon>MealPrep.xaml</DependentUpon>
         </Compile>
@@ -229,6 +241,7 @@
         <Compile Include="Source\ViewModel\Chores\ChoresWeekUser1VM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
+        <Compile Include="Source\ViewModel\GroceriesVM.cs"/>
         <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
@@ -280,6 +293,7 @@
         <Page Include="Source\Modules\Chores\ChoresWeekUser1.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
         <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
+        <Page Include="Source\Modules\Groceries.xaml"/>
         <Page Include="Source\Modules\MealPrep.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
         <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
@@ -486,6 +500,23 @@
         <Resource Include="Resources\Images\clock\hand_min.png"/>
         <Resource Include="Resources\Images\clock\hand_sec.png"/>
     </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\weather\weather_rain_very_light.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\groceries\aldi.png"/>
+        <Resource Include="Resources\Images\groceries\kroger.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\groceries\food_lion.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\games\quarter_head.png"/>
+        <Resource Include="Resources\Images\games\quarter_tail.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Sounds\coin_flip.wav"/>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')"/>
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -493,5 +524,7 @@
             <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
         </PropertyGroup>
         <Error Condition="!Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Text.Json.6.0.6\build\System.Text.Json.targets'))"/>
+        <Error Condition="!Exists('packages\Microsoft.Web.WebView2.1.0.1518.46\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Web.WebView2.1.0.1518.46\build\Microsoft.Web.WebView2.targets'))"/>
     </Target>
+    <Import Project="packages\Microsoft.Web.WebView2.1.0.1518.46\build\Microsoft.Web.WebView2.targets" Condition="Exists('packages\Microsoft.Web.WebView2.1.0.1518.46\build\Microsoft.Web.WebView2.targets')"/>
 </Project>

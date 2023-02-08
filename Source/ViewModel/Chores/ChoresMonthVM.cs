@@ -69,9 +69,6 @@ public class ChoresMonthVM : BaseViewModel {
         case "room1Task9":
             SwitchButtonLogic("Room1Task9");
             break;
-        case "room1Task10":
-            SwitchButtonLogic("Room1Task10");
-            break;
         case "room2Task1":
             SwitchButtonLogic("Room2Task1");
             break;
@@ -83,9 +80,6 @@ public class ChoresMonthVM : BaseViewModel {
             break;
         case "room2Task4":
             SwitchButtonLogic("Room2Task4");
-            break;
-        case "room2Task5":
-            SwitchButtonLogic("Room2Task5");
             break;
         case "room3Task1":
             SwitchButtonLogic("Room3Task1");
@@ -105,9 +99,6 @@ public class ChoresMonthVM : BaseViewModel {
         case "room3Task6":
             SwitchButtonLogic("Room3Task6");
             break;
-        case "room3Task7":
-            SwitchButtonLogic("Room3Task7");
-            break;
         case "room4Task1":
             SwitchButtonLogic("Room4Task1");
             break;
@@ -126,17 +117,11 @@ public class ChoresMonthVM : BaseViewModel {
         case "room4Task6":
             SwitchButtonLogic("Room4Task6");
             break;
-        case "room4Task7":
-            SwitchButtonLogic("Room4Task7");
-            break;
         case "room5Task1":
             SwitchButtonLogic("Room5Task1");
             break;
         case "room5Task2":
             SwitchButtonLogic("Room5Task2");
-            break;
-        case "room5Task3":
-            SwitchButtonLogic("Room5Task3");
             break;
         case "room6Task1":
             SwitchButtonLogic("Room6Task1");
@@ -150,14 +135,8 @@ public class ChoresMonthVM : BaseViewModel {
         case "room6Task4":
             SwitchButtonLogic("Room6Task4");
             break;
-        case "room6Task5":
-            SwitchButtonLogic("Room6Task5");
-            break;
         case "room7Task1":
             SwitchButtonLogic("Room7Task1");
-            break;
-        case "room7Task2":
-            SwitchButtonLogic("Room7Task2");
             break;
         case "room8Task1":
             SwitchButtonLogic("Room8Task1");
@@ -171,9 +150,6 @@ public class ChoresMonthVM : BaseViewModel {
         case "room8Task4":
             SwitchButtonLogic("Room8Task4");
             break;
-        case "room8Task5":
-            SwitchButtonLogic("Room8Task5");
-            break;
         case "room9Task1":
             SwitchButtonLogic("Room9Task1");
             break;
@@ -186,9 +162,6 @@ public class ChoresMonthVM : BaseViewModel {
         case "room9Task4":
             SwitchButtonLogic("Room9Task4");
             break;
-        case "room9Task5":
-            SwitchButtonLogic("Room9Task5");
-            break;
         case "room10Task1":
             SwitchButtonLogic("Room10Task1");
             break;
@@ -200,9 +173,6 @@ public class ChoresMonthVM : BaseViewModel {
             break;
         case "room10Task4":
             SwitchButtonLogic("Room10Task4");
-            break;
-        case "room10Task5":
-            SwitchButtonLogic("Room10Task5");
             break;
         case "room11Task1":
             SwitchButtonLogic("Room11Task1");
@@ -279,10 +249,6 @@ public class ChoresMonthVM : BaseViewModel {
                     Room1Task9Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room1Task9DateText = choreDetails.Date;
                     break;
-                case "Room1Task10":
-                    Room1Task10Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room1Task10DateText = choreDetails.Date;
-                    break;
                 case "Room2Task1":
                     Room2Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room2Task1DateText = choreDetails.Date;
@@ -298,10 +264,6 @@ public class ChoresMonthVM : BaseViewModel {
                 case "Room2Task4":
                     Room2Task4Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room2Task4DateText = choreDetails.Date;
-                    break;
-                case "Room2Task5":
-                    Room2Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room2Task5DateText = choreDetails.Date;
                     break;
                 case "Room3Task1":
                     Room3Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
@@ -327,10 +289,6 @@ public class ChoresMonthVM : BaseViewModel {
                     Room3Task6Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room3Task6DateText = choreDetails.Date;
                     break;
-                case "Room3Task7":
-                    Room3Task7Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room3Task7DateText = choreDetails.Date;
-                    break;
                 case "Room4Task1":
                     Room4Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room4Task1DateText = choreDetails.Date;
@@ -355,10 +313,6 @@ public class ChoresMonthVM : BaseViewModel {
                     Room4Task6Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room4Task6DateText = choreDetails.Date;
                     break;
-                case "Room4Task7":
-                    Room4Task7Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room4Task7DateText = choreDetails.Date;
-                    break;
                 case "Room5Task1":
                     Room5Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room5Task1DateText = choreDetails.Date;
@@ -366,10 +320,6 @@ public class ChoresMonthVM : BaseViewModel {
                 case "Room5Task2":
                     Room5Task2Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room5Task2DateText = choreDetails.Date;
-                    break;
-                case "Room5Task3":
-                    Room5Task3Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room5Task3DateText = choreDetails.Date;
                     break;
                 case "Room6Task1":
                     Room6Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
@@ -387,17 +337,9 @@ public class ChoresMonthVM : BaseViewModel {
                     Room6Task4Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room6Task4DateText = choreDetails.Date;
                     break;
-                case "Room6Task5":
-                    Room6Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room6Task5DateText = choreDetails.Date;
-                    break;
                 case "Room7Task1":
                     Room7Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room7Task1DateText = choreDetails.Date;
-                    break;
-                case "Room7Task2":
-                    Room7Task2Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room7Task2DateText = choreDetails.Date;
                     break;
                 case "Room8Task1":
                     Room8Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
@@ -415,10 +357,6 @@ public class ChoresMonthVM : BaseViewModel {
                     Room8Task4Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room8Task4DateText = choreDetails.Date;
                     break;
-                case "Room8Task5":
-                    Room8Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room8Task5DateText = choreDetails.Date;
-                    break;
                 case "Room9Task1":
                     Room9Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room9Task1DateText = choreDetails.Date;
@@ -435,10 +373,6 @@ public class ChoresMonthVM : BaseViewModel {
                     Room9Task4Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room9Task4DateText = choreDetails.Date;
                     break;
-                case "Room9Task5":
-                    Room9Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room9Task5DateText = choreDetails.Date;
-                    break;
                 case "Room10Task1":
                     Room10Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room10Task1DateText = choreDetails.Date;
@@ -454,10 +388,6 @@ public class ChoresMonthVM : BaseViewModel {
                 case "Room10Task4":
                     Room10Task4Color = choreDetails.IsComplete ? "Green" : "Transparent";
                     Room10Task4DateText = choreDetails.Date;
-                    break;
-                case "Room10Task5":
-                    Room10Task5Color = choreDetails.IsComplete ? "Green" : "Transparent";
-                    Room10Task5DateText = choreDetails.Date;
                     break;
                 case "Room11Task1":
                     Room11Task1Color = choreDetails.IsComplete ? "Green" : "Transparent";
@@ -538,14 +468,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room1Task10Color {
-        get => _room1Task10Color;
-        set {
-            _room1Task10Color = value;
-            RaisePropertyChangedEvent("Room1Task10Color");
-        }
-    }
-
     public string Room1Task5Color {
         get => _room1Task5Color;
         set {
@@ -583,14 +505,6 @@ public class ChoresMonthVM : BaseViewModel {
         set {
             _room2Task4Color = value;
             RaisePropertyChangedEvent("Room2Task4Color");
-        }
-    }
-
-    public string Room2Task5Color {
-        get => _room2Task5Color;
-        set {
-            _room2Task5Color = value;
-            RaisePropertyChangedEvent("Room2Task5Color");
         }
     }
 
@@ -642,14 +556,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room3Task7Color {
-        get => _room3Task7Color;
-        set {
-            _room3Task7Color = value;
-            RaisePropertyChangedEvent("Room3Task7Color");
-        }
-    }
-
     public string Room4Task1Color {
         get => _room4Task1Color;
         set {
@@ -698,14 +604,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room4Task7Color {
-        get => _room4Task7Color;
-        set {
-            _room4Task7Color = value;
-            RaisePropertyChangedEvent("Room4Task7Color");
-        }
-    }
-
     public string Room5Task1Color {
         get => _room5Task1Color;
         set {
@@ -719,14 +617,6 @@ public class ChoresMonthVM : BaseViewModel {
         set {
             _room5Task2Color = value;
             RaisePropertyChangedEvent("Room5Task2Color");
-        }
-    }
-
-    public string Room5Task3Color {
-        get => _room5Task3Color;
-        set {
-            _room5Task3Color = value;
-            RaisePropertyChangedEvent("Room5Task3Color");
         }
     }
 
@@ -762,27 +652,11 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room6Task5Color {
-        get => _room6Task5Color;
-        set {
-            _room6Task5Color = value;
-            RaisePropertyChangedEvent("Room6Task5Color");
-        }
-    }
-
     public string Room7Task1Color {
         get => _room7Task1Color;
         set {
             _room7Task1Color = value;
             RaisePropertyChangedEvent("Room7Task1Color");
-        }
-    }
-
-    public string Room7Task2Color {
-        get => _room7Task2Color;
-        set {
-            _room7Task2Color = value;
-            RaisePropertyChangedEvent("Room7Task2Color");
         }
     }
 
@@ -815,14 +689,6 @@ public class ChoresMonthVM : BaseViewModel {
         set {
             _room8Task4Color = value;
             RaisePropertyChangedEvent("Room8Task4Color");
-        }
-    }
-
-    public string Room8Task5Color {
-        get => _room8Task5Color;
-        set {
-            _room8Task5Color = value;
-            RaisePropertyChangedEvent("Room8Task5Color");
         }
     }
 
@@ -890,14 +756,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room1Task10DateText {
-        get => _room1Task10DateText;
-        set {
-            _room1Task10DateText = value;
-            RaisePropertyChangedEvent("Room1Task10DateText");
-        }
-    }
-
     public string Room1Task5DateText {
         get => _room1Task5DateText;
         set {
@@ -935,14 +793,6 @@ public class ChoresMonthVM : BaseViewModel {
         set {
             _room2Task4DateText = value;
             RaisePropertyChangedEvent("Room2Task4DateText");
-        }
-    }
-
-    public string Room2Task5DateText {
-        get => _room2Task5DateText;
-        set {
-            _room2Task5DateText = value;
-            RaisePropertyChangedEvent("Room2Task5DateText");
         }
     }
 
@@ -994,14 +844,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room3Task7DateText {
-        get => _room3Task7DateText;
-        set {
-            _room3Task7DateText = value;
-            RaisePropertyChangedEvent("Room3Task7DateText");
-        }
-    }
-
     public string Room4Task1DateText {
         get => _room4Task1DateText;
         set {
@@ -1050,14 +892,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room4Task7DateText {
-        get => _room4Task7DateText;
-        set {
-            _room4Task7DateText = value;
-            RaisePropertyChangedEvent("Room4Task7DateText");
-        }
-    }
-
     public string Room5Task1DateText {
         get => _room5Task1DateText;
         set {
@@ -1071,14 +905,6 @@ public class ChoresMonthVM : BaseViewModel {
         set {
             _room5Task2DateText = value;
             RaisePropertyChangedEvent("Room5Task2DateText");
-        }
-    }
-
-    public string Room5Task3DateText {
-        get => _room5Task3DateText;
-        set {
-            _room5Task3DateText = value;
-            RaisePropertyChangedEvent("Room5Task3DateText");
         }
     }
 
@@ -1114,27 +940,11 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room6Task5DateText {
-        get => _room6Task5DateText;
-        set {
-            _room6Task5DateText = value;
-            RaisePropertyChangedEvent("Room6Task5DateText");
-        }
-    }
-
     public string Room7Task1DateText {
         get => _room7Task1DateText;
         set {
             _room7Task1DateText = value;
             RaisePropertyChangedEvent("Room7Task1DateText");
-        }
-    }
-
-    public string Room7Task2DateText {
-        get => _room7Task2DateText;
-        set {
-            _room7Task2DateText = value;
-            RaisePropertyChangedEvent("Room7Task2DateText");
         }
     }
 
@@ -1170,14 +980,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room8Task5DateText {
-        get => _room8Task5DateText;
-        set {
-            _room8Task5DateText = value;
-            RaisePropertyChangedEvent("Room8Task5DateText");
-        }
-    }
-
     public string Room9Task1DateText {
         get => _room9Task1DateText;
         set {
@@ -1210,14 +1012,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room9Task5DateText {
-        get => _room9Task5DateText;
-        set {
-            _room9Task5DateText = value;
-            RaisePropertyChangedEvent("Room9Task5DateText");
-        }
-    }
-
     public string Room10Task1DateText {
         get => _room10Task1DateText;
         set {
@@ -1247,14 +1041,6 @@ public class ChoresMonthVM : BaseViewModel {
         set {
             _room10Task4DateText = value;
             RaisePropertyChangedEvent("Room10Task4DateText");
-        }
-    }
-
-    public string Room10Task5DateText {
-        get => _room10Task5DateText;
-        set {
-            _room10Task5DateText = value;
-            RaisePropertyChangedEvent("Room10Task5DateText");
         }
     }
 
@@ -1306,14 +1092,6 @@ public class ChoresMonthVM : BaseViewModel {
         }
     }
 
-    public string Room9Task5Color {
-        get => _room9Task5Color;
-        set {
-            _room9Task5Color = value;
-            RaisePropertyChangedEvent("Room9Task5Color");
-        }
-    }
-
     public string Room10Task1Color {
         get => _room10Task1Color;
         set {
@@ -1343,14 +1121,6 @@ public class ChoresMonthVM : BaseViewModel {
         set {
             _room10Task4Color = value;
             RaisePropertyChangedEvent("Room10Task4Color");
-        }
-    }
-
-    public string Room10Task5Color {
-        get => _room10Task5Color;
-        set {
-            _room10Task5Color = value;
-            RaisePropertyChangedEvent("Room10Task5Color");
         }
     }
 

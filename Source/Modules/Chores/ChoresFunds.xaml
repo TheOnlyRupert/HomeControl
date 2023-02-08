@@ -177,12 +177,12 @@
 
                 <StackPanel Grid.Row="3">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="24"/>
+                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="4">
                     <TextBlock Text="Amount ($)" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="12" FontSize="24"/>
+                    <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24"/>
                 </StackPanel>
             </Grid>
 

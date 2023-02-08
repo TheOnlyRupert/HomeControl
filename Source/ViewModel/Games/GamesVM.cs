@@ -14,6 +14,11 @@ public class GamesVM : BaseViewModel {
             pictionary.ShowDialog();
             pictionary.Close();
             break;
+        case "coinFlip":
+            CoinFlip coinFlip = new();
+            coinFlip.ShowDialog();
+            coinFlip.Close();
+            break;
         }
     }
 }

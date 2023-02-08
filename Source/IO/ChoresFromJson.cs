@@ -598,11 +598,6 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Room1Task10",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
                     Name = "Room2Task1",
                     IsComplete = false,
                     Date = ""
@@ -619,11 +614,6 @@ public class ChoresFromJson {
                 },
                 new ChoreDetails {
                     Name = "Room2Task4",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
-                    Name = "Room2Task5",
                     IsComplete = false,
                     Date = ""
                 },
@@ -658,11 +648,6 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Room3Task7",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
                     Name = "Room4Task1",
                     IsComplete = false,
                     Date = ""
@@ -693,22 +678,12 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Room4Task7",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
                     Name = "Room5Task1",
                     IsComplete = false,
                     Date = ""
                 },
                 new ChoreDetails {
                     Name = "Room5Task2",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
-                    Name = "Room5Task3",
                     IsComplete = false,
                     Date = ""
                 },
@@ -733,17 +708,7 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Room6Task5",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
                     Name = "Room7Task1",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
-                    Name = "Room7Task2",
                     IsComplete = false,
                     Date = ""
                 },
@@ -768,11 +733,6 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Room8Task5",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
                     Name = "Room9Task1",
                     IsComplete = false,
                     Date = ""
@@ -793,11 +753,6 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
-                    Name = "Room9Task5",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
                     Name = "Room10Task1",
                     IsComplete = false,
                     Date = ""
@@ -814,11 +769,6 @@ public class ChoresFromJson {
                 },
                 new ChoreDetails {
                     Name = "Room10Task4",
-                    IsComplete = false,
-                    Date = ""
-                },
-                new ChoreDetails {
-                    Name = "Room10Task5",
                     IsComplete = false,
                     Date = ""
                 },
@@ -931,6 +881,11 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
+                    Name = "Room1Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
                     Name = "Room2Task1",
                     IsComplete = false,
                     Date = ""
@@ -951,7 +906,17 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
+                    Name = "Room2Task5",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
                     Name = "Room3Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room3Task2",
                     IsComplete = false,
                     Date = ""
                 },
@@ -991,6 +956,16 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
+                    Name = "Room4Task8",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room5Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
                     Name = "Room6Task1",
                     IsComplete = false,
                     Date = ""
@@ -1011,7 +986,22 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
+                    Name = "Room6Task5",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
                     Name = "Room7Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room7Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room8Task1",
                     IsComplete = false,
                     Date = ""
                 },
@@ -1021,7 +1011,17 @@ public class ChoresFromJson {
                     Date = ""
                 },
                 new ChoreDetails {
+                    Name = "Room9Task2",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
                     Name = "Room10Task1",
+                    IsComplete = false,
+                    Date = ""
+                },
+                new ChoreDetails {
+                    Name = "Room10Task2",
                     IsComplete = false,
                     Date = ""
                 },

@@ -1,86 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using HomeControl.Source.Control;
 using HomeControl.Source.Helpers;
+using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Games;
 
 public class PictionaryVM : BaseViewModel {
-    private static bool isTimerActive, isGameActive;
+    private static bool isGameActive;
 
-    private static DispatcherTimer dispatcherTimer;
-    private readonly PlaySound soundBuzzer, soundDing, soundTap;
+    private readonly PlaySound soundBuzzer, soundTap;
 
-    private string _progressBarValue, _progressBarValueMaster, _progressBarVisibility, _menuVisibility, _timerAmountText, _wordsAmountText, _wordsEasyColor, _wordsMediumColor,
-        _wordsHardColor, _wordsAdultColor, _realTime, _gameVisibility, _outputText;
+    private string _menuVisibility, _wordsEasyColor, _wordsMediumColor, _wordsHardColor, _wordsAdultColor, _gameVisibility, _outputText,
+        _button1Text, _button2Text, _enableCountdownColor;
 
-    private bool includeEasyWords, includeMediumWords, includeHardWords, includeAdultWords;
+    private int _timerAmount, _wordsAmount, timerMaster_sec;
+
     private List<string> playableWords;
-    private double progressBarAdditive, progressBarRate, progressBarAdditiveMaster, progressBarRateMaster;
-    private int timerCountdownNum, wordsAmountInt;
+    private double progressBarAdditive, progressBarRate, _progressBarValue;
 
     public PictionaryVM() {
         soundBuzzer = new PlaySound("buzzer");
-        soundDing = new PlaySound("ding");
         soundTap = new PlaySound("tap");
-        isTimerActive = includeEasyWords = includeMediumWords = includeHardWords = includeAdultWords = false;
-        timerCountdownNum = 60;
-        WordsAmountText = "1";
-        TimerAmountText = "60";
-        ProgressBarVisibility = "VISIBLE";
+        TimerAmount = 120;
+
         MenuVisibility = "VISIBLE";
         GameVisibility = "HIDDEN";
+
+        Button1Text = "Play";
+        Button2Text = "Play";
+
         WordsEasyColor = "Green";
         WordsMediumColor = "Transparent";
         WordsHardColor = "Transparent";
         WordsAdultColor = "Transparent";
-        wordsAmountInt = 1;
-        progressBarRate = 60;
+        EnableCountdownColor = "Green";
+        WordsAmount = 3;
         isGameActive = false;
         OutputText = "";
         playableWords = new List<string>();
 
-        dispatcherTimer = new DispatcherTimer();
-        dispatcherTimer.Tick += dispatcherTimer_Tick;
-        dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-        dispatcherTimer.Start();
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
-
-    public ICommand GlobalKeyboardListener => new DelegateCommand(GlobalKeyboardListenerLogic, true);
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
-    public static void DisposeWindow() {
-        isTimerActive = false;
-        dispatcherTimer.Stop();
-    }
 
-    private void GlobalKeyboardListenerLogic(object obj) {
-        switch (obj) { }
-    }
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        if (e.PropertyName == "Refresh") {
+            if (ReferenceValues.IsGameTimerRunning && EnableCountdownColor == "Green") {
+                /* Plays a sound with 5 - 1 seconds remaining */
+                if (timerMaster_sec < 6) {
+                    soundTap.Play(false);
+                }
 
-    /* Called every second while program is running */
-    private void dispatcherTimer_Tick(object sender, EventArgs e) {
-        if (isGameActive) {
-            if (isTimerActive) {
-                if (timerCountdownNum == 0) {
+                if (timerMaster_sec == 0) {
+                    ReferenceValues.IsGameTimerRunning = false;
                     soundBuzzer.Play(false);
-                    isTimerActive = false;
-                    ProgressBarValue = "100";
-                    progressBarAdditive = 0;
-                    double conversion = timerCountdownNum;
-                    progressBarAdditive = 0;
-                    progressBarRate = 100 / conversion;
                 } else {
-                    timerCountdownNum--;
-                    TimerAmountText = timerCountdownNum.ToString();
-                    progressBarAdditiveMaster += progressBarRateMaster;
-                    ProgressBarValueMaster = progressBarAdditiveMaster.ToString(CultureInfo.InvariantCulture);
+                    timerMaster_sec--;
+                    progressBarAdditive += progressBarRate;
+                    ProgressBarValue = (int)progressBarAdditive;
                 }
             }
         }
@@ -90,73 +74,109 @@ public class PictionaryVM : BaseViewModel {
         switch (param) {
         case "wordsEasy":
             WordsEasyColor = WordsEasyColor == "Green" ? "Transparent" : "Green";
+
             break;
         case "wordsMedium":
             WordsMediumColor = WordsMediumColor == "Green" ? "Transparent" : "Green";
+
             break;
         case "wordsHard":
             WordsHardColor = WordsHardColor == "Green" ? "Transparent" : "Green";
+
             break;
         case "wordsAdult":
             WordsAdultColor = WordsAdultColor == "Green" ? "Transparent" : "Green";
+
+            break;
+        case "enableCountdown":
+            EnableCountdownColor = EnableCountdownColor == "Green" ? "Transparent" : "Green";
+
             break;
         case "wordsAdd":
-            if (wordsAmountInt < 9) {
-                wordsAmountInt++;
-                WordsAmountText = wordsAmountInt.ToString();
+            if (WordsAmount < 9) {
+                WordsAmount++;
             }
 
             break;
         case "wordsSub":
-            if (wordsAmountInt > 1) {
-                wordsAmountInt--;
-                WordsAmountText = wordsAmountInt.ToString();
+            if (WordsAmount > 1) {
+                WordsAmount--;
             }
 
             break;
         case "timerAdd":
-            if (timerCountdownNum < 999) {
-                timerCountdownNum++;
-                TimerAmountText = timerCountdownNum.ToString();
+            if (TimerAmount < 999) {
+                TimerAmount++;
             }
 
             break;
         case "timerSub":
-            if (timerCountdownNum > 1) {
-                timerCountdownNum--;
-                TimerAmountText = timerCountdownNum.ToString();
+            if (TimerAmount > 1) {
+                TimerAmount--;
             }
 
             break;
-        case "play":
-            if (WordsEasyColor == "Transparent" && WordsMediumColor == "Transparent" && WordsHardColor == "Transparent" && WordsAdultColor == "Transparent") {
-                MessageBox.Show("At least one word level must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        case "button1":
+            if (isGameActive) {
+                ReferenceValues.IsGameTimerRunning = false;
+                NextWord();
             } else {
-                isTimerActive = true;
+                if (WordsEasyColor == "Transparent" && WordsMediumColor == "Transparent" && WordsHardColor == "Transparent" && WordsAdultColor == "Transparent") {
+                    MessageBox.Show("At least one word level must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                } else {
+                    ReferenceValues.IsGameTimerRunning = false;
+                    isGameActive = true;
+                    MenuVisibility = "HIDDEN";
+                    GameVisibility = "VISIBLE";
+                    Button1Text = "Next Word";
+                    Button2Text = "Main Menu";
+
+                    GeneratePlayableWords();
+                    NextWord();
+                }
+            }
+
+            break;
+        case "button2":
+            if (isGameActive) {
+                isGameActive = false;
+                ReferenceValues.IsGameTimerRunning = false;
+                ProgressBarValue = 0;
+
+                MenuVisibility = "VISIBLE";
+                GameVisibility = "HIDDEN";
+                Button1Text = "Play";
+                Button2Text = "Play";
+            } else {
+                ReferenceValues.IsGameTimerRunning = false;
                 isGameActive = true;
                 MenuVisibility = "HIDDEN";
                 GameVisibility = "VISIBLE";
+                Button1Text = "Next Word";
+                Button2Text = "Main Menu";
 
                 GeneratePlayableWords();
                 NextWord();
             }
 
             break;
-        case "nextWord":
-            NextWord();
-            break;
         }
     }
 
     private void NextWord() {
         OutputText = "";
-        int i = 4;
-        try {
-            i = int.Parse(WordsAmountText);
-        } catch (Exception) { }
+
+        if (EnableCountdownColor == "Green") {
+            timerMaster_sec = TimerAmount;
+            double conversion = TimerAmount;
+            progressBarAdditive = 0;
+            progressBarRate = 100 / conversion;
+
+            ReferenceValues.IsGameTimerRunning = true;
+        }
 
         try {
-            for (int i2 = 0; i2 < i; i2++) {
+            for (int i2 = 0; i2 < WordsAmount; i2++) {
                 OutputText += i2 + 1 + ":  " + playableWords[i2] + "\n";
                 playableWords.RemoveAt(i2);
             }
@@ -199,27 +219,11 @@ public class PictionaryVM : BaseViewModel {
 
     #region Fields
 
-    public string ProgressBarValue {
+    public double ProgressBarValue {
         get => _progressBarValue;
         set {
             _progressBarValue = value;
             RaisePropertyChangedEvent("ProgressBarValue");
-        }
-    }
-
-    public string ProgressBarVisibility {
-        get => _progressBarVisibility;
-        set {
-            _progressBarVisibility = value;
-            RaisePropertyChangedEvent("ProgressBarVisibility");
-        }
-    }
-
-    public string ProgressBarValueMaster {
-        get => _progressBarValueMaster;
-        set {
-            _progressBarValueMaster = value;
-            RaisePropertyChangedEvent("ProgressBarValueMaster");
         }
     }
 
@@ -236,22 +240,6 @@ public class PictionaryVM : BaseViewModel {
         set {
             _gameVisibility = value;
             RaisePropertyChangedEvent("GameVisibility");
-        }
-    }
-
-    public string WordsAmountText {
-        get => _wordsAmountText;
-        set {
-            _wordsAmountText = value;
-            RaisePropertyChangedEvent("WordsAmountText");
-        }
-    }
-
-    public string TimerAmountText {
-        get => _timerAmountText;
-        set {
-            _timerAmountText = value;
-            RaisePropertyChangedEvent("TimerAmountText");
         }
     }
 
@@ -287,11 +275,11 @@ public class PictionaryVM : BaseViewModel {
         }
     }
 
-    public string RealTime {
-        get => _realTime;
+    public string EnableCountdownColor {
+        get => _enableCountdownColor;
         set {
-            _realTime = value;
-            RaisePropertyChangedEvent("RealTime");
+            _enableCountdownColor = value;
+            RaisePropertyChangedEvent("EnableCountdownColor");
         }
     }
 
@@ -300,6 +288,38 @@ public class PictionaryVM : BaseViewModel {
         set {
             _outputText = value;
             RaisePropertyChangedEvent("OutputText");
+        }
+    }
+
+    public string Button1Text {
+        get => _button1Text;
+        set {
+            _button1Text = value;
+            RaisePropertyChangedEvent("Button1Text");
+        }
+    }
+
+    public string Button2Text {
+        get => _button2Text;
+        set {
+            _button2Text = value;
+            RaisePropertyChangedEvent("Button2Text");
+        }
+    }
+
+    public int WordsAmount {
+        get => _wordsAmount;
+        set {
+            _wordsAmount = value;
+            RaisePropertyChangedEvent("WordsAmount");
+        }
+    }
+
+    public int TimerAmount {
+        get => _timerAmount;
+        set {
+            _timerAmount = value;
+            RaisePropertyChangedEvent("TimerAmount");
         }
     }
 

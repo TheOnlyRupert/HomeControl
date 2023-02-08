@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace HomeControl.Source.IO;
 
@@ -10,4 +11,10 @@ public class JsonChoreFunds {
     public int FundsTotal { get; set; }
     public bool SpecialDay1Completed { get; set; }
     public bool SpecialDay2Completed { get; set; }
+    public ObservableCollection<FinanceBlockChoreFund> FinanceBlockChoreFundList { get; set; }
+}
+
+public class FinanceBlockChoreFund {
+    public string Item { get; set; }
+    public int Cost { get; set; }
 }

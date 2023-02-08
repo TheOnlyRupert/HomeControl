@@ -27,7 +27,7 @@ public class ChoreFundsFromJson {
                     JsonChoreFunds jsonSettings = JsonSerializer.Deserialize<JsonChoreFunds>(settingsString, options);
                     ReferenceValues.JsonChoreFundsMaster = jsonSettings;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize settings.json..." + e);
+                    Console.WriteLine("Failed to Deserialize chorefunds.json..." + e);
                 }
             }
         } catch (Exception) { }

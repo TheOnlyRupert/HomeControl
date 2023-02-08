@@ -8,7 +8,7 @@
             <RowDefinition Height="64"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="{Binding OutputText}" Foreground="White" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Grid.Row="0" Source="{Binding ImageSource}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="64"/>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="8 0 0 8">
             <Button Content="Flip Coin" FontSize="24" Command="{Binding ButtonCommand}" MinWidth="128" Margin="0 0 4 0" CommandParameter="flip">
