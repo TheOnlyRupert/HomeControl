@@ -19,6 +19,11 @@ public class GamesVM : BaseViewModel {
             coinFlip.ShowDialog();
             coinFlip.Close();
             break;
+        case "tamagotchi":
+            Tamagotchi tamagotchi = new();
+            tamagotchi.ShowDialog();
+            tamagotchi.Close();
+            break;
         }
     }
 }

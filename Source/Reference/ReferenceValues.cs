@@ -9,7 +9,7 @@ public static class ReferenceValues {
     public const string COPYRIGHT = "Copyright © 2022  Robert Higgins";
     public const string VERSION = "1.0.0";
 
-    public const bool EnableWeather = true;
+    public const bool EnableWeather = false;
 
     public static readonly List<string> CategorySpendingList = new() {
         "Billing",
