@@ -9,7 +9,7 @@ public static class ReferenceValues {
     public const string COPYRIGHT = "Copyright © 2022  Robert Higgins";
     public const string VERSION = "1.0.0";
 
-    public const bool EnableWeather = false;
+    public const bool EnableWeather = true;
 
     public static readonly List<string> CategorySpendingList = new() {
         "Billing",
@@ -42,6 +42,22 @@ public static class ReferenceValues {
         "Other"
     };
 
+    public static readonly List<string> RecurringMonth = new() {
+        "MONTHLY",
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    };
+
     public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 
     public static bool LockUI;
@@ -50,6 +66,7 @@ public static class ReferenceValues {
 
     public static JsonCalendar[] JsonCalendarMasterEventList { get; set; }
     public static JsonFinances JsonFinanceMasterList { get; set; }
+    public static JsonRecurringFinances JsonRecurringFinanceMasterList { get; set; }
     public static JsonChores JsonChoreDayMasterList { get; set; }
     public static JsonChores JsonChoreDayUser1MasterList { get; set; }
     public static JsonChores JsonChoreWeekMasterList { get; set; }

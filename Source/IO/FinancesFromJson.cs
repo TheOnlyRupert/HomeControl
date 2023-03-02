@@ -29,5 +29,24 @@ public class FinancesFromJson {
                 }
             }
         } catch (Exception) { }
+
+        try {
+            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "bills.json");
+            string financeListString = null;
+            while (!streamReader.EndOfStream) {
+                financeListString = streamReader.ReadToEnd();
+            }
+
+            streamReader.Close();
+
+            if (financeListString != null) {
+                try {
+                    JsonRecurringFinances jsonRecurringFinances = JsonSerializer.Deserialize<JsonRecurringFinances>(financeListString, options);
+                    ReferenceValues.JsonRecurringFinanceMasterList = jsonRecurringFinances;
+                } catch (Exception e) {
+                    Console.WriteLine("Failed to Deserialize bills.json..." + e);
+                }
+            }
+        } catch (Exception) { }
     }
 }

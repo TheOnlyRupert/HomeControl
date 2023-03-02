@@ -6,55 +6,50 @@ using System.Windows;
 using System.Windows.Input;
 using HomeControl.Source.Control;
 using HomeControl.Source.IO;
-using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Finances;
 
-public class EditFinancesVM : BaseViewModel {
-    private readonly PlaySound cashSound;
+public class EditBillsVM : BaseViewModel {
     private readonly string fileName;
-    private ObservableCollection<string> _categoryList;
+   
+    private string _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor, selectedPerson, _descriptionText,
+        _otherBackgroundColor, _user1NameText, _user2NameText, _costText, _parentsBackgroundColor, _recurringMonthSelected;
 
-    private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor;
+    private int _recurringDayText;
 
-    private ObservableCollection<FinanceBlock> _financeList;
-    private FinanceBlock _financeSelected;
-    private string selectedPerson, _categorySelected, _descriptionText;
+    private ObservableCollection<RecurringFinanceBlock> _financeList;
+    private RecurringFinanceBlock _financeSelected;
+    private ObservableCollection<string> _recurringMonthList;
 
-    public EditFinancesVM() {
-        fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
-        cashSound = new PlaySound("cash");
+    public EditBillsVM() {
+        fileName = ReferenceValues.FILE_DIRECTORY + "bills.json";
 
         selectedPerson = "Home";
         User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
         User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
         DescriptionText = "";
         CostText = "";
+        RecurringDayText = 1;
         UserButtonLogic();
-        FinanceList = new ObservableCollection<FinanceBlock>();
+        
+        /* Populate drop down box with spending categories and set default */
+        RecurringMonthList = new ObservableCollection<string>();
+        foreach (string VARIABLE in ReferenceValues.RecurringMonth) {
+            RecurringMonthList.Add(VARIABLE);
+        }
+
+        RecurringMonthSelected = "MONTHLY";
+        
+        FinanceList = new ObservableCollection<RecurringFinanceBlock>();
         try {
-            FinanceList = ReferenceValues.JsonFinanceMasterList.financeList;
+            FinanceList = ReferenceValues.JsonRecurringFinanceMasterList.recurringFinanceList;
         } catch (Exception) {
-            ReferenceValues.JsonFinanceMasterList = new JsonFinances {
-                financeList = new ObservableCollection<FinanceBlock>()
+            ReferenceValues.JsonRecurringFinanceMasterList = new JsonRecurringFinances {
+                recurringFinanceList = new ObservableCollection<RecurringFinanceBlock>()
             };
         }
-
-        DateText = DateTime.Now.ToShortDateString();
-        SwitchModeButtonText = "Expense  ☹";
-        SwitchModeButtonColor = "Red";
-        AddOrSub = "SUB";
-
-        /* Populate drop down box with spending categories and set default */
-        CategoryList = new ObservableCollection<string>();
-        foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
-            CategoryList.Add(VARIABLE);
-        }
-
-        CategorySelected = "Billing";
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -68,20 +63,19 @@ public class EditFinancesVM : BaseViewModel {
             } else if (string.IsNullOrWhiteSpace(CostText)) {
                 MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
-                FinanceList.Add(new FinanceBlock {
-                    AddSub = AddOrSub,
-                    Date = DateTime.Parse(DateText).ToShortDateString(),
-                    Item = DescriptionText,
-                    Cost = CostText,
-                    Category = CategorySelected,
-                    Person = selectedPerson
-                });
+                try {
+                    FinanceList.Add(new RecurringFinanceBlock {
+                        Item = DescriptionText,
+                        Cost = CostText,
+                        Person = selectedPerson,
+                        RecurringMonth = RecurringMonthSelected,
+                        RecurringDay = RecurringDayText
+                    });
 
-                cashSound.Play(false);
-                DateText = DateTime.Now.ToShortDateString();
-                DescriptionText = "";
-                CostText = "";
-                SaveJson();
+                    DescriptionText = "";
+                    CostText = "";
+                    SaveJson();
+                } catch (Exception) { }
             }
 
             break;
@@ -93,23 +87,22 @@ public class EditFinancesVM : BaseViewModel {
                     } else if (string.IsNullOrWhiteSpace(CostText)) {
                         MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
                     } else {
-                        confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
+                        confirmation = MessageBox.Show("Are you sure you want to update recurring charge?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
-                            FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
-                                AddSub = AddOrSub,
-                                Date = DateTime.Parse(DateText).ToShortDateString(),
-                                Item = DescriptionText,
-                                Cost = CostText,
-                                Category = CategorySelected,
-                                Person = selectedPerson
-                            });
+                            try {
+                                FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new RecurringFinanceBlock {
+                                    Item = DescriptionText,
+                                    Cost = CostText,
+                                    Person = selectedPerson,
+                                    RecurringMonth = RecurringMonthSelected,
+                                    RecurringDay = RecurringDayText
+                                });
 
-                            cashSound.Play(false);
-                            FinanceList.Remove(FinanceSelected);
-                            DateText = DateTime.Now.ToShortDateString();
-                            DescriptionText = "";
-                            CostText = "";
-                            SaveJson();
+                                FinanceList.Remove(FinanceSelected);
+                                DescriptionText = "";
+                                CostText = "";
+                                SaveJson();
+                            } catch (Exception) {}
                         }
                     }
                 }
@@ -119,9 +112,8 @@ public class EditFinancesVM : BaseViewModel {
         case "delete":
             try {
                 if (FinanceSelected.Item != null) {
-                    confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
+                    confirmation = MessageBox.Show("Are you sure you want to delete recurring charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
-                        cashSound.Play(false);
                         FinanceList.Remove(FinanceSelected);
                         SaveJson();
                     }
@@ -159,67 +151,26 @@ public class EditFinancesVM : BaseViewModel {
             selectedPerson = "Other";
             UserButtonLogic();
             break;
-
-        case "switchMode":
-            if (AddOrSub == "SUB") {
-                SwitchModeButtonText = "Income  ☺";
-                SwitchModeButtonColor = "Green";
-                AddOrSub = "ADD";
-
-                CategoryList.Clear();
-                foreach (string VARIABLE in ReferenceValues.CategoryProfitList) {
-                    CategoryList.Add(VARIABLE);
-                }
-
-                CategorySelected = "Paycheck";
-            } else {
-                SwitchModeButtonText = "Expense  ☹";
-                SwitchModeButtonColor = "Red";
-                AddOrSub = "SUB";
-
-                CategoryList.Clear();
-                foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
-                    CategoryList.Add(VARIABLE);
-                }
-
-                CategorySelected = "Billing";
+        
+        case "subDate":
+            if (RecurringDayText > 1) {
+                RecurringDayText--;
             }
-
             break;
-        case "bills":
-            EditBills editBills = new();
-            editBills.ShowDialog();
-            editBills.Close();
+        
+        case "addDate":
+            if (RecurringDayText < 28) {
+                RecurringDayText++;
+            }
             break;
         }
     }
 
-    private void PopulateDetailedView(FinanceBlock value) {
+    private void PopulateDetailedView(RecurringFinanceBlock value) {
         DescriptionText = value.Item;
-        DateText = value.Date;
         CostText = value.Cost;
-
-        if (value.AddSub == "ADD") {
-            SwitchModeButtonText = "Income  ☺";
-            SwitchModeButtonColor = "Green";
-            AddOrSub = "ADD";
-
-            CategoryList.Clear();
-            foreach (string VARIABLE in ReferenceValues.CategoryProfitList) {
-                CategoryList.Add(VARIABLE);
-            }
-        } else {
-            SwitchModeButtonText = "Expense  ☹";
-            SwitchModeButtonColor = "Red";
-            AddOrSub = "SUB";
-
-            CategoryList.Clear();
-            foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
-                CategoryList.Add(VARIABLE);
-            }
-        }
-
-        CategorySelected = value.Category;
+        RecurringMonthSelected = value.RecurringMonth;
+        RecurringDayText = value.RecurringDay;
 
         if (value.Person == ReferenceValues.JsonMasterSettings.User1Name) {
             selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
@@ -265,18 +216,18 @@ public class EditFinancesVM : BaseViewModel {
     private void SaveJson() {
         if (FinanceList.Count > 0) {
             try {
-                ReferenceValues.JsonFinanceMasterList.financeList = FinanceList;
+                ReferenceValues.JsonRecurringFinanceMasterList.recurringFinanceList = FinanceList;
             } catch (Exception) {
                 Console.WriteLine("ReferenceValues Doesnt exist");
             }
 
             try {
-                string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceMasterList);
+                string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonRecurringFinanceMasterList);
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save finances.json... " + e.Message);
+                Console.WriteLine("Unable to save bills.json... " + e.Message);
             }
         } else {
             try {
@@ -284,7 +235,7 @@ public class EditFinancesVM : BaseViewModel {
                 GC.WaitForPendingFinalizers();
                 File.Delete(fileName);
             } catch (Exception e) {
-                Console.WriteLine("Unable to delete finances.json... " + e.Message);
+                Console.WriteLine("Unable to delete bills.json... " + e.Message);
             }
         }
     }
@@ -299,14 +250,6 @@ public class EditFinancesVM : BaseViewModel {
         }
     }
 
-    public string DateText {
-        get => _dateText;
-        set {
-            _dateText = value;
-            RaisePropertyChangedEvent("DateText");
-        }
-    }
-
     public string CostText {
         get => _costText;
         set {
@@ -315,31 +258,31 @@ public class EditFinancesVM : BaseViewModel {
         }
     }
 
-    public string SwitchModeButtonText {
-        get => _switchModeButtonText;
+    public ObservableCollection<string> RecurringMonthList {
+        get => _recurringMonthList;
         set {
-            _switchModeButtonText = value;
-            RaisePropertyChangedEvent("SwitchModeButtonText");
+            _recurringMonthList = value;
+            RaisePropertyChangedEvent("RecurringMonthList");
         }
     }
 
-    public ObservableCollection<string> CategoryList {
-        get => _categoryList;
+    public string RecurringMonthSelected {
+        get => _recurringMonthSelected;
         set {
-            _categoryList = value;
-            RaisePropertyChangedEvent("CategoryList");
+            _recurringMonthSelected = value;
+            RaisePropertyChangedEvent("RecurringMonthSelected");
+        }
+    }
+    
+    public int RecurringDayText {
+        get => _recurringDayText;
+        set {
+            _recurringDayText = value;
+            RaisePropertyChangedEvent("RecurringDayText");
         }
     }
 
-    public string CategorySelected {
-        get => _categorySelected;
-        set {
-            _categorySelected = value;
-            RaisePropertyChangedEvent("CategorySelected");
-        }
-    }
-
-    public ObservableCollection<FinanceBlock> FinanceList {
+    public ObservableCollection<RecurringFinanceBlock> FinanceList {
         get => _financeList;
         set {
             _financeList = value;
@@ -347,20 +290,12 @@ public class EditFinancesVM : BaseViewModel {
         }
     }
 
-    public FinanceBlock FinanceSelected {
+    public RecurringFinanceBlock FinanceSelected {
         get => _financeSelected;
         set {
             _financeSelected = value;
             PopulateDetailedView(value);
             RaisePropertyChangedEvent("FinanceSelected");
-        }
-    }
-
-    public string SwitchModeButtonColor {
-        get => _switchModeButtonColor;
-        set {
-            _switchModeButtonColor = value;
-            RaisePropertyChangedEvent("SwitchModeButtonColor");
         }
     }
 
