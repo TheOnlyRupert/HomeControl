@@ -4,7 +4,6 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -13,15 +12,15 @@ namespace HomeControl.Source.ViewModel.Finances;
 
 public class EditBillsVM : BaseViewModel {
     private readonly string fileName;
-   
-    private string _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor, selectedPerson, _descriptionText,
-        _otherBackgroundColor, _user1NameText, _user2NameText, _costText, _parentsBackgroundColor, _recurringMonthSelected;
-
-    private int _recurringDayText;
 
     private ObservableCollection<RecurringFinanceBlock> _financeList;
     private RecurringFinanceBlock _financeSelected;
+
+    private int _recurringDayText;
     private ObservableCollection<string> _recurringMonthList;
+
+    private string _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor, selectedPerson, _descriptionText,
+        _otherBackgroundColor, _user1NameText, _user2NameText, _costText, _parentsBackgroundColor, _recurringMonthSelected;
 
     public EditBillsVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "bills.json";
@@ -33,7 +32,7 @@ public class EditBillsVM : BaseViewModel {
         CostText = "";
         RecurringDayText = 1;
         UserButtonLogic();
-        
+
         /* Populate drop down box with spending categories and set default */
         RecurringMonthList = new ObservableCollection<string>();
         foreach (string VARIABLE in ReferenceValues.RecurringMonth) {
@@ -41,7 +40,7 @@ public class EditBillsVM : BaseViewModel {
         }
 
         RecurringMonthSelected = "MONTHLY";
-        
+
         FinanceList = new ObservableCollection<RecurringFinanceBlock>();
         try {
             FinanceList = ReferenceValues.JsonRecurringFinanceMasterList.recurringFinanceList;
@@ -102,7 +101,7 @@ public class EditBillsVM : BaseViewModel {
                                 DescriptionText = "";
                                 CostText = "";
                                 SaveJson();
-                            } catch (Exception) {}
+                            } catch (Exception) { }
                         }
                     }
                 }
@@ -151,17 +150,19 @@ public class EditBillsVM : BaseViewModel {
             selectedPerson = "Other";
             UserButtonLogic();
             break;
-        
+
         case "subDate":
             if (RecurringDayText > 1) {
                 RecurringDayText--;
             }
+
             break;
-        
+
         case "addDate":
             if (RecurringDayText < 28) {
                 RecurringDayText++;
             }
+
             break;
         }
     }
@@ -273,7 +274,7 @@ public class EditBillsVM : BaseViewModel {
             RaisePropertyChangedEvent("RecurringMonthSelected");
         }
     }
-    
+
     public int RecurringDayText {
         get => _recurringDayText;
         set {

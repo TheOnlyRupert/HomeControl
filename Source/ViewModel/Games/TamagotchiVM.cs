@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using HomeControl.Source.Control;
 using HomeControl.Source.Modules.Games;
+using HomeControl.Source.ModulesTesting.TamagotchiTests;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Games;
@@ -49,6 +50,9 @@ public class TamagotchiVM : BaseViewModel {
             RandomizeAnimal();
             break;
         case "debug3":
+            ItemTest itemTest = new();
+            itemTest.ShowDialog();
+            itemTest.Close();
             break;
         case "debug4":
             break;

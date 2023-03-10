@@ -33,7 +33,6 @@ public class ChoresVM : BaseViewModel {
 
         ChoreFundsFromJson choreFundsFromJson = new();
         if (JsonChoreFundsMaster.FinanceBlockChoreFundList == null) {
-            Console.WriteLine("true");
             JsonChoreFundsMaster.FinanceBlockChoreFundList = new ObservableCollection<FinanceBlockChoreFund>();
         }
 
@@ -508,49 +507,50 @@ public class ChoresVM : BaseViewModel {
     }
 
     private void ReleaseFunds() {
-        Console.WriteLine("Releasing Funds: " + JsonChoreFundsMaster.FundsLocked);
-        int switchCash = JsonChoreFundsMaster.FundsLocked;
-        CashAvailable = "$" + switchCash;
-
-        JsonChoreFundsMaster.FundsLocked = 0;
-        JsonChoreFundsMaster.FundsPrior = switchCash;
-        JsonChoreFundsMaster.FundsAvailable = switchCash;
-        JsonChoreFundsMaster.SpecialDay1Completed = false;
-        JsonChoreFundsMaster.SpecialDay2Completed = false;
-        JsonChoreFundsMaster.FinanceBlockChoreFundList.Clear();
-        JsonChoreFundsMaster.UpdatedDate = DateTime.Now;
-        JsonChoreFundsMaster.FundsTotal += switchCash;
-
-        if (JsonFinanceMasterList.financeList != null) {
-            JsonFinanceMasterList.financeList.Add(new FinanceBlock {
-                AddSub = "SUB",
-                Date = DateTime.Now.ToShortDateString(),
-                Item = "Brittany Fund (auto)",
-                Cost = switchCash.ToString(),
-                Category = "Brittany Fund",
-                Person = JsonMasterSettings.User2Name
-            });
-        }
-
         try {
-            string jsonString = JsonSerializer.Serialize(JsonChoreFundsMaster);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(FILE_DIRECTORY + "chorefunds.json", jsonString);
-        } catch (Exception e) {
-            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
-        }
+            int switchCash = JsonChoreFundsMaster.FundsLocked;
+            CashAvailable = "$" + switchCash;
 
-        try {
-            string jsonString = JsonSerializer.Serialize(JsonFinanceMasterList);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(FILE_DIRECTORY + "finances.json", jsonString);
-        } catch (Exception e) {
-            Console.WriteLine("Unable to save finances.json... " + e.Message);
-        }
+            JsonChoreFundsMaster.FundsLocked = 0;
+            JsonChoreFundsMaster.FundsPrior = switchCash;
+            JsonChoreFundsMaster.FundsAvailable = switchCash;
+            JsonChoreFundsMaster.SpecialDay1Completed = false;
+            JsonChoreFundsMaster.SpecialDay2Completed = false;
+            JsonChoreFundsMaster.FinanceBlockChoreFundList.Clear();
+            JsonChoreFundsMaster.UpdatedDate = DateTime.Now;
+            JsonChoreFundsMaster.FundsTotal += switchCash;
 
-        simpleMessenger.PushMessage("RefreshFundAmount", null);
+            if (JsonFinanceMasterList.financeList != null) {
+                JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                    AddSub = "SUB",
+                    Date = DateTime.Now.ToShortDateString(),
+                    Item = "Brittany Fund (auto)",
+                    Cost = switchCash.ToString(),
+                    Category = "Brittany Fund",
+                    Person = JsonMasterSettings.User2Name
+                });
+            }
+
+            try {
+                string jsonString = JsonSerializer.Serialize(JsonChoreFundsMaster);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(FILE_DIRECTORY + "chorefunds.json", jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
+            }
+
+            try {
+                string jsonString = JsonSerializer.Serialize(JsonFinanceMasterList);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                File.WriteAllText(FILE_DIRECTORY + "finances.json", jsonString);
+            } catch (Exception e) {
+                Console.WriteLine("Unable to save finances.json... " + e.Message);
+            }
+
+            simpleMessenger.PushMessage("RefreshFundAmount", null);
+        } catch (Exception) { }
     }
 
     #region Fields

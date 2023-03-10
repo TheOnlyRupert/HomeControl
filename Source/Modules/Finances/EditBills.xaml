@@ -147,12 +147,12 @@
                         <ColumnDefinition Width="8"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="Recurring Month" FontSize="24" Foreground="White"/>
                         <ComboBox FontSize="24" ItemsSource="{Binding RecurringMonthList}" SelectedItem="{Binding RecurringMonthSelected}"/>
                     </StackPanel>
-                    
+
                     <StackPanel Grid.Column="2">
                         <TextBlock Text="Recurring Day" FontSize="24" Foreground="White"/>
                         <Grid>
@@ -161,7 +161,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <Button Grid.Column="0" Content="-" Command="{Binding ButtonCommand}" CommandParameter="subDate" FontSize="24">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
@@ -184,7 +184,8 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-                            <TextBlock Grid.Column="1" Text="{Binding RecurringDayText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{Binding RecurringDayText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" Foreground="White"
+                                       HorizontalAlignment="Center"/>
                             <Button Grid.Column="2" Content="+" Command="{Binding ButtonCommand}" CommandParameter="addDate" FontSize="24">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">

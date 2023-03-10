@@ -21,7 +21,6 @@ public class JsonRecurringFinances {
     public DateTime dateUpdated { get; set; }
 }
 
-
 public class RecurringFinanceBlock {
     public string RecurringMonth { get; set; }
     public int RecurringDay { get; set; }

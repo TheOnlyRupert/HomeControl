@@ -404,7 +404,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            
+
             <Button Content="Recurring Charges (Bills)" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="4 0 0 0" CommandParameter="bills">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

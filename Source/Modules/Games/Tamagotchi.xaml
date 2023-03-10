@@ -210,14 +210,14 @@
                 <Image Grid.Column="0" Grid.Row="0" Source="../../../Resources/Images/games/health.png"/>
                 <ProgressBar Grid.Column="1" Grid.Row="0" Margin="8" Background="Transparent" Foreground="CornflowerBlue" Value="{Binding HealthAmount}"/>
 
-                <Image Grid.Column="0" Grid.Row="1" Source="../../../Resources/Images/games/feed.png"/>
-                <ProgressBar Grid.Column="1" Grid.Row="1" Margin="8" Background="Transparent" Foreground="CornflowerBlue" Value="{Binding FeedAmount}"/>
+                <Image Grid.Column="0" Grid.Row="1" Source="../../../Resources/Images/games/hunger.png"/>
+                <ProgressBar Grid.Column="1" Grid.Row="1" Margin="8" Background="Transparent" Foreground="CornflowerBlue" Value="{Binding HungerAmount}"/>
 
-                <Image Grid.Column="0" Grid.Row="2" Source="../../../Resources/Images/games/train.png"/>
-                <ProgressBar Grid.Column="1" Grid.Row="2" Margin="8" Background="Transparent" Foreground="CornflowerBlue" Value="{Binding TrainAmount}"/>
+                <Image Grid.Column="0" Grid.Row="2" Source="../../../Resources/Images/games/worry.png"/>
+                <ProgressBar Grid.Column="1" Grid.Row="2" Margin="8" Background="Transparent" Foreground="CornflowerBlue" Value="{Binding WorryAmount}"/>
 
-                <Image Grid.Column="0" Grid.Row="3" Source="../../../Resources/Images/icons/money.png"/>
-                <ProgressBar Grid.Column="1" Grid.Row="3" Margin="8" Background="Transparent" Foreground="CornflowerBlue" Value="{Binding MoneyAmount}"/>
+                <Image Grid.Column="0" Grid.Row="3" Source="../../../Resources/Images/icons/training.png"/>
+                <ProgressBar Grid.Column="1" Grid.Row="3" Margin="8" Background="Transparent" Foreground="CornflowerBlue" Value="{Binding TrainingAmount}"/>
             </Grid>
         </Grid>
 
@@ -364,7 +364,7 @@
 
             <Button Grid.Row="0" Grid.Column="0" Content="Hatch" Command="{Binding ButtonCommand}" CommandParameter="debug1"/>
             <Button Grid.Row="0" Grid.Column="1" Content="Randomize" Command="{Binding ButtonCommand}" CommandParameter="debug2"/>
-            <Button Grid.Row="0" Grid.Column="2" Content="" Command="{Binding ButtonCommand}" CommandParameter="debug3"/>
+            <Button Grid.Row="0" Grid.Column="2" Content="Item Testing" Command="{Binding ButtonCommand}" CommandParameter="debug3"/>
             <Button Grid.Row="0" Grid.Column="3" Content="" Command="{Binding ButtonCommand}" CommandParameter="debug4"/>
             <Button Grid.Row="0" Grid.Column="4" Content="" Command="{Binding ButtonCommand}" CommandParameter="debug5"/>
             <Button Grid.Row="0" Grid.Column="5" Content="" Command="{Binding ButtonCommand}" CommandParameter="debug6"/>
