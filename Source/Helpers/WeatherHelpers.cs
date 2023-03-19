@@ -48,6 +48,8 @@ public static class WeatherHelpers {
         case "Chance Showers And Thunderstorms":
         case "Slight Chance Showers And Thunderstorms":
             return "../../../Resources/Images/weather/weather_storm.png";
+        case "Patchy Frost":
+        case "Areas Of Frost":
         case "Widespread Frost":
             return "../../../Resources/Images/weather/weather_frost.png";
         case "Snow Showers":
