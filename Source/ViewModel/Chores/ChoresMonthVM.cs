@@ -32,7 +32,7 @@ public class ChoresMonthVM : BaseViewModel {
         _room9Task4Color, _room9Task5Color, _room10Task1Color, _room10Task2Color, _room10Task3Color, _room10Task4Color, _room10Task5Color, _room11Task1Color, _room15Task1Color;
 
     public ChoresMonthVM() {
-        fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy_MM") + ".json";
+        fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + DateTime.Now.ToString("yyyy_MM") + ".json";
 
         completeSound = new PlaySound("achievement1");
         GetButtonColors();

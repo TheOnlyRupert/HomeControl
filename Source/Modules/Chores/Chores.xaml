@@ -304,8 +304,7 @@
                 <TextBlock Text="Task Master" FontSize="18" Foreground="White"/>
             </StackPanel>
 
-            <Button Grid.Row="1" Grid.Column="2" Grid.RowSpan="3" Command="{Binding ButtonCommand}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                    CommandParameter="funds">
+            <Button Grid.Row="1" Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="funds" Margin="8 0" VerticalContentAlignment="Center">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -324,23 +323,50 @@
 
                 <Grid HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Available" FontSize="18" Foreground="White" Padding="16 8 16 0" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="{Binding CashAvailable}" FontSize="48" Foreground="White" HorizontalAlignment="Center" Padding="16 0 16 8"/>
+                    <TextBlock Grid.Row="0" Text="Available Funds" FontSize="18" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding CashAvailable}" FontSize="18" Foreground="White" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
 
-            <StackPanel Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <TextBlock Text="{Binding ProjectedFundMonthText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Grid>
-                    <ProgressBar Value="{Binding FundsProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent" BorderBrush="Black"
-                                 BorderThickness="1" Maximum="500"/>
-                    <TextBlock Text="{Binding FundsProgressText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Grid>
-            </StackPanel>
+            <Grid Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="8 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="End of Day Release" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ProgressBar Grid.Row="1" Value="{Binding FundsProgressDayValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent" BorderBrush="Black"
+                             BorderThickness="1" Maximum="10" HorizontalAlignment="Stretch"/>
+                <TextBlock Grid.Row="1" Text="{Binding FundsProgressDayText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="8 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="End of Week Release" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ProgressBar Grid.Row="1" Value="{Binding FundsProgressWeekValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent" BorderBrush="Black"
+                             BorderThickness="1" Maximum="50"/>
+                <TextBlock Grid.Row="1" Text="{Binding FundsProgressWeekText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="8 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="End of Month Release" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ProgressBar Grid.Row="1" Value="{Binding FundsProgressMonthValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+                             BorderBrush="Black" BorderThickness="1" Maximum="100"/>
+                <TextBlock Grid.Row="1" Text="{Binding FundsProgressMonthText}" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
         </Grid>
     </Border>
 </Page>

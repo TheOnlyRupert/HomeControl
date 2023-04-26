@@ -25,11 +25,11 @@ public class ChoresQuarterVM : BaseViewModel {
         _room9Task2DateText, _room10Task1DateText, _room10Task2DateText, _room11Task1DateText, _room11Task2DateText;
 
     public ChoresQuarterVM() {
-        fileName = ReferenceValues.ChoreMonthStartDate.Month switch {
-            > 0 and < 3 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter1_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy") + ".json",
-            > 2 and < 6 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter2_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy") + ".json",
-            > 5 and < 9 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter3_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy") + ".json",
-            _ => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter4_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy") + ".json"
+        fileName = DateTime.Now.Month switch {
+            > 0 and < 3 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter1_" + DateTime.Now.ToString("yyyy") + ".json",
+            > 2 and < 6 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter2_" + DateTime.Now.ToString("yyyy") + ".json",
+            > 5 and < 9 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter3_" + DateTime.Now.ToString("yyyy") + ".json",
+            _ => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter4_" + DateTime.Now.ToString("yyyy") + ".json"
         };
 
         completeSound = new PlaySound("achievement1");

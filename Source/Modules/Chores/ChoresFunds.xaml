@@ -71,7 +71,9 @@
                         </Button.Style>
                     </Button>
 
-                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding CurrentMonth}" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Available Funds" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CashRemaining}" Foreground="White" HorizontalAlignment="Center" FontSize="32"/>
 
                     <Button Grid.Column="2" Grid.Row="0" Content="Special" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="special">
                         <Button.Style>
@@ -109,7 +111,8 @@
                     </Button>
                 </Grid>
 
-                <TextBlock Grid.Row="1" Text="{Binding CashRemaining}" Margin="0 12" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+                <TextBlock Grid.Row="1" Text="Note: Do NOT add these charges to Finances Module" Foreground="DarkRed" HorizontalAlignment="Center" TextWrapping="Wrap"
+                           FontStyle="Italic" FontSize="16"/>
 
                 <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="2" ItemsSource="{Binding FinanceList}" Foreground="White"
                                         SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="Black"

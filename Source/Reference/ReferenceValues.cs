@@ -79,10 +79,7 @@ public static class ReferenceValues {
     public static JsonChores JsonChoreSpecialMasterList { get; set; }
     public static JsonChoreFunds JsonChoreFundsMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
-
     public static DateTime ChoreWeekStartDate { get; set; }
-    public static DateTime ChoreMonthStartDate { get; set; }
-
     public static int[] TimerMinutes { get; set; }
     public static int[] TimerSeconds { get; set; }
     public static int ActiveTimerEdit { get; set; }

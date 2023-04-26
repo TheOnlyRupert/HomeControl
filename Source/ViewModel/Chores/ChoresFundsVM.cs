@@ -46,7 +46,6 @@ public class ChoresFundsVM : BaseViewModel {
         Special2 = "Any: 0";
         Special3 = "New: 0";
 
-        FundsPrior = "Prior Month: $" + ReferenceValues.JsonChoreFundsMaster.FundsPrior;
         FundsTotal = "This Month: $" + ReferenceValues.JsonChoreFundsMaster.FundsTotal;
         FundsReturnRate = "Return Rate: 1x";
 
@@ -59,7 +58,7 @@ public class ChoresFundsVM : BaseViewModel {
         ReferenceValues.JsonChoreFundsMaster.FundsAvailable = ReferenceValues.JsonChoreFundsMaster.FundsTotal;
         ReferenceValues.JsonChoreFundsMaster.FundsAvailable -= cash;
 
-        CashRemaining = "Cash Remaining: $" + ReferenceValues.JsonChoreFundsMaster.FundsAvailable;
+        CashRemaining = "$" + ReferenceValues.JsonChoreFundsMaster.FundsAvailable;
 
         SaveJson();
     }

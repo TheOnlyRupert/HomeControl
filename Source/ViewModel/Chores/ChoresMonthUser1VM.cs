@@ -13,7 +13,7 @@ namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresMonthUser1VM : BaseViewModel {
     private readonly PlaySound completeSound;
-    private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_month_" + ReferenceValues.ChoreMonthStartDate.ToString("yyyy_MM") + ".json";
+    private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_month_" + DateTime.Now.ToString("yyyy_MM") + ".json";
 
     private string _room15Task1Color, _room15Task2Color, _room15Task1DateText, _room15Task2DateText;
 

@@ -18,9 +18,10 @@ public class ChoresVM : BaseViewModel {
     private readonly PlaySound uiLocked;
 
     private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _user1Text,
-        _choresCompletedWeekProgressText, _projectedFundMonthText, _choresCompletedDayProgressText, _user2Text, _choresCompletedMonthProgressText,
+        _choresCompletedWeekProgressText, _choresCompletedDayProgressText, _user2Text, _choresCompletedMonthProgressText,
         _choresCompletedQuarterProgressText, _dayButtonColor, _weekButtonColor, _monthButtonColor, _quarterButtonColor, _choresCompletedQuarterText, _cashAvailable,
-        _fundsProgressText, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _choresCompletedDayTextUser1, _choresCompletedWeekTextUser1,
+        _fundsProgressDayText, _fundsProgressWeekText, _fundsProgressMonthText, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _choresCompletedDayTextUser1,
+        _choresCompletedWeekTextUser1,
         _choresCompletedMonthTextUser1, _choresCompletedQuarterTextUser1, _choresCompletedDayProgressTextUser1, _choresCompletedWeekProgressTextUser1,
         _choresCompletedMonthProgressTextUser1, _choresCompletedQuarterProgressTextUser1, _dayButtonColorUser1, _weekButtonColorUser1, _monthButtonColorUser1,
         _quarterButtonColorUser1;
@@ -28,7 +29,8 @@ public class ChoresVM : BaseViewModel {
     private int choresCompletedDay, choresCompletedWeek, choresCompletedMonth, choresCompletedQuarter, choresCompletedDayUser1, choresCompletedWeekUser1, choresCompletedMonthUser1,
         _choresCompletedDayProgressValue, _choresCompletedWeekProgressValue, _choresCompletedDayProgressValueUser1, choresCompletedQuarterUser1,
         _choresCompletedWeekProgressValueUser1, _choresCompletedMonthProgressValueUser1, _choresCompletedQuarterProgressValueUser1,
-        _choresCompletedMonthProgressValue, _choresCompletedQuarterProgressValue, calculatedReleaseFunds, _fundsProgressValue;
+        _choresCompletedMonthProgressValue, _choresCompletedQuarterProgressValue, calculatedReleaseFundsDay, calculatedReleaseFundsWeek, calculatedReleaseFundsMonth,
+        calculatedReleaseFundsQuarter, _fundsProgressDayValue, _fundsProgressWeekValue, _fundsProgressMonthValue;
 
     public ChoresVM() {
         uiLocked = new PlaySound("locked");
@@ -40,27 +42,21 @@ public class ChoresVM : BaseViewModel {
             JsonChoreFundsMaster.FinanceBlockChoreFundList = new ObservableCollection<FinanceBlockChoreFund>();
         }
 
-        /* In case program was off when month changed */
-        if (JsonChoreFundsMaster.UpdatedDate.Month != DateTime.Now.Month) {
-            ReleaseFunds();
-        }
-
+        ReleaseFunds();
         RefreshFields();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "DateChanged") {
-            RefreshFields();
-        }
-
-        if (e.PropertyName == "HourChanged") {
-            RefreshCountdown();
-        }
-
-        if (e.PropertyName == "MonthChanged") {
+        switch (e.PropertyName) {
+        case "DateChanged":
             ReleaseFunds();
+            RefreshFields();
+            break;
+        case "HourChanged":
+            RefreshCountdown();
+            break;
         }
     }
 
@@ -137,9 +133,6 @@ public class ChoresVM : BaseViewModel {
     }
 
     private void RefreshFields() {
-        ChoreWeekStartDate = DateTime.Now;
-        ChoreMonthStartDate = DateTime.Now;
-        DateTime dateTime = DateTime.Now;
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
         System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
 
@@ -152,24 +145,24 @@ public class ChoresVM : BaseViewModel {
         choresCompletedMonthUser1 = 0;
         choresCompletedQuarterUser1 = 0;
 
+        ChoreWeekStartDate = DateTime.Now;
         while (ChoreWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
             ChoreWeekStartDate = ChoreWeekStartDate.AddDays(-1);
         }
 
         ChoresFromJson choresFromJson = new();
-        choresFromJson.ChoresDayFromJson(ChoreMonthStartDate);
+        choresFromJson.ChoresDayFromJson(DateTime.Now);
         choresFromJson.ChoresWeekFromJson(ChoreWeekStartDate);
-        choresFromJson.ChoresMonthFromJson(ChoreMonthStartDate);
-        choresFromJson.ChoresQuarterFromJson(ChoreMonthStartDate);
+        choresFromJson.ChoresMonthFromJson(DateTime.Now);
+        choresFromJson.ChoresQuarterFromJson(DateTime.Now);
 
-        CurrentDayText = dateTime.ToString("dddd");
-        CurrentMonthText = dateTime.ToString("MMMM");
-        CurrentWeekText = "Week: " + calendar.GetWeekOfYear(dateTime, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
+        CurrentDayText = DateTime.Now.ToString("dddd");
+        CurrentMonthText = DateTime.Now.ToString("MMMM");
+        CurrentWeekText = "Week: " + calendar.GetWeekOfYear(DateTime.Now, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
 
         User1Text = JsonMasterSettings.User1Name;
         User2Text = JsonMasterSettings.User2Name;
 
-        ProjectedFundMonthText = dateTime.AddMonths(1).ToString("MMM") + " Projected Funds";
         ChoresCompletedWeekProgressText = "0%";
         ChoresCompletedMonthProgressText = "0%";
         ChoresCompletedDayProgressText = "0%";
@@ -428,50 +421,68 @@ public class ChoresVM : BaseViewModel {
     }
 
     private void CalculateFunds() {
-        calculatedReleaseFunds = 0;
+        calculatedReleaseFundsDay = 0;
+        calculatedReleaseFundsWeek = 0;
+        calculatedReleaseFundsMonth = 0;
+        calculatedReleaseFundsQuarter = 0;
 
         JsonSerializerOptions options = new() {
             IncludeFields = true
         };
 
-        //check all files in week directory. If the week ends on the current month add $50 if task compliance is >= 95%.
-        foreach (string fileName in Directory.GetFiles(FILE_DIRECTORY + "chores/", "chores_week_*.json")) {
-            try {
-                DateTime date = new(int.Parse(fileName.Substring(fileName.Length - 15, 4)),
-                    int.Parse(fileName.Substring(fileName.Length - 10, 2)),
-                    int.Parse(fileName.Substring(fileName.Length - 7, 2)));
-                date = date.AddDays(6);
+        /* Day */
+        try {
+            StreamReader streamReader = new(FILE_DIRECTORY + "chores/chores_day_" + DateTime.Now.ToString("yyyy_MM_dd") + ".json");
+            string fileString = null;
+            while (!streamReader.EndOfStream) {
+                fileString = streamReader.ReadToEnd();
+            }
 
-                if (date.Year == DateTime.Now.Year && date.Month == DateTime.Now.Month) {
-                    StreamReader streamReader = new(fileName);
-                    string fileString = null;
-                    while (!streamReader.EndOfStream) {
-                        fileString = streamReader.ReadToEnd();
-                    }
+            streamReader.Close();
 
-                    streamReader.Close();
+            if (fileString != null) {
+                JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(fileString, options);
 
-                    if (fileString != null) {
-                        JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(fileString, options);
-
-                        int weekCompleted = 0;
-                        foreach (ChoreDetails choreDetails in jsonChores.choreList) {
-                            if (choreDetails.IsComplete) {
-                                weekCompleted++;
-                            }
-                        }
-
-                        if (Convert.ToDouble(weekCompleted) / Convert.ToDouble(jsonChores.choreList.Count) * 100 >= 95) {
-                            calculatedReleaseFunds += 50;
-                        }
+                int dayCompleted = 0;
+                foreach (ChoreDetails choreDetails in jsonChores.choreList) {
+                    if (choreDetails.IsComplete) {
+                        dayCompleted++;
                     }
                 }
-            } catch (Exception e) {
-                Console.WriteLine(e);
-            }
-        }
 
-        //check month file. open, calculate, then add $100 if task compliance is == 100%.
+                if (Convert.ToDouble(dayCompleted) / Convert.ToDouble(jsonChores.choreList.Count) * 100 > 99) {
+                    calculatedReleaseFundsDay = 10;
+                }
+            }
+        } catch (Exception) { }
+
+        /* Week */
+        try {
+            StreamReader streamReader = new(FILE_DIRECTORY + "chores/chores_week_" + ChoreWeekStartDate.ToString("yyyy_MM_dd") + ".json");
+            string fileString = null;
+            while (!streamReader.EndOfStream) {
+                fileString = streamReader.ReadToEnd();
+            }
+
+            streamReader.Close();
+
+            if (fileString != null) {
+                JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(fileString, options);
+
+                int weekCompleted = 0;
+                foreach (ChoreDetails choreDetails in jsonChores.choreList) {
+                    if (choreDetails.IsComplete) {
+                        weekCompleted++;
+                    }
+                }
+
+                if (Convert.ToDouble(weekCompleted) / Convert.ToDouble(jsonChores.choreList.Count) * 100 > 99) {
+                    calculatedReleaseFundsWeek = 50;
+                }
+            }
+        } catch (Exception) { }
+
+        /* Month */
         try {
             StreamReader streamReader = new(FILE_DIRECTORY + "chores/chores_month_" + DateTime.Now.ToString("yyyy_MM") + ".json");
             string fileString = null;
@@ -492,15 +503,25 @@ public class ChoresVM : BaseViewModel {
                 }
 
                 if (Convert.ToDouble(monthCompleted) / Convert.ToDouble(jsonChores.choreList.Count) * 100 > 99) {
-                    calculatedReleaseFunds += 100;
+                    calculatedReleaseFundsMonth = 100;
                 }
             }
         } catch (Exception) { }
 
-        FundsProgressValue = calculatedReleaseFunds;
-        FundsProgressText = "$" + calculatedReleaseFunds;
+        FundsProgressDayValue = calculatedReleaseFundsDay;
+        FundsProgressDayText = "$" + calculatedReleaseFundsDay;
+
+        FundsProgressWeekValue = calculatedReleaseFundsWeek;
+        FundsProgressWeekText = "$" + calculatedReleaseFundsWeek;
+
+        FundsProgressMonthValue = calculatedReleaseFundsMonth;
+        FundsProgressMonthText = "$" + calculatedReleaseFundsMonth;
+
         CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
-        JsonChoreFundsMaster.FundsLocked = calculatedReleaseFunds;
+
+        JsonChoreFundsMaster.FundsLockedDay = calculatedReleaseFundsDay;
+        JsonChoreFundsMaster.FundsLockedWeek = calculatedReleaseFundsWeek;
+        JsonChoreFundsMaster.FundsLockedMonth = calculatedReleaseFundsMonth;
 
         try {
             string jsonString = JsonSerializer.Serialize(JsonChoreFundsMaster);
@@ -513,50 +534,70 @@ public class ChoresVM : BaseViewModel {
     }
 
     private void ReleaseFunds() {
+        if (JsonChoreFundsMaster.UpdatedDate.Date != DateTime.Now.Date) {
+            Console.WriteLine(DateTime.Now.ToString("g") + " Releasing Day Funds");
+
+            JsonChoreFundsMaster.FundsAvailable += JsonChoreFundsMaster.FundsLockedDay;
+            JsonChoreFundsMaster.FundsTotal += JsonChoreFundsMaster.FundsLockedDay;
+            CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+            JsonChoreFundsMaster.FundsLockedDay = 0;
+        }
+
+        DateTime CompareWeekStartDate1 = DateTime.Now;
+        while (CompareWeekStartDate1.DayOfWeek != DayOfWeek.Sunday) {
+            CompareWeekStartDate1 = CompareWeekStartDate1.AddDays(-1);
+        }
+
+        DateTime CompareWeekStartDate2 = DateTime.Now;
         try {
-            int switchCash = JsonChoreFundsMaster.FundsLocked;
-            CashAvailable = "$" + switchCash;
-
-            JsonChoreFundsMaster.FundsLocked = 0;
-            JsonChoreFundsMaster.FundsPrior = switchCash;
-            JsonChoreFundsMaster.FundsAvailable = switchCash;
-            JsonChoreFundsMaster.SpecialDay1Completed = false;
-            JsonChoreFundsMaster.SpecialDay2Completed = false;
-            JsonChoreFundsMaster.FinanceBlockChoreFundList.Clear();
-            JsonChoreFundsMaster.UpdatedDate = DateTime.Now;
-            JsonChoreFundsMaster.FundsTotal += switchCash;
-
-            if (JsonFinanceMasterList.financeList != null) {
-                JsonFinanceMasterList.financeList.Add(new FinanceBlock {
-                    AddSub = "SUB",
-                    Date = DateTime.Now.ToShortDateString(),
-                    Item = "Brittany Fund (auto)",
-                    Cost = switchCash.ToString(),
-                    Category = "Brittany Fund",
-                    Person = JsonMasterSettings.User2Name
-                });
+            CompareWeekStartDate2 = JsonChoreFundsMaster.UpdatedDate;
+            while (CompareWeekStartDate2.DayOfWeek != DayOfWeek.Sunday) {
+                CompareWeekStartDate2 = CompareWeekStartDate2.AddDays(-1);
             }
-
-            try {
-                string jsonString = JsonSerializer.Serialize(JsonChoreFundsMaster);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.WriteAllText(FILE_DIRECTORY + "chorefunds.json", jsonString);
-            } catch (Exception e) {
-                Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
-            }
-
-            try {
-                string jsonString = JsonSerializer.Serialize(JsonFinanceMasterList);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.WriteAllText(FILE_DIRECTORY + "finances.json", jsonString);
-            } catch (Exception e) {
-                Console.WriteLine("Unable to save finances.json... " + e.Message);
-            }
-
-            simpleMessenger.PushMessage("RefreshFundAmount", null);
         } catch (Exception) { }
+
+        if (CompareWeekStartDate1.Date != CompareWeekStartDate2.Date) {
+            Console.WriteLine(DateTime.Now.ToString("g") + " Releasing Week Funds");
+            try {
+                JsonChoreFundsMaster.FundsAvailable += JsonChoreFundsMaster.FundsLockedWeek;
+                JsonChoreFundsMaster.FundsTotal += JsonChoreFundsMaster.FundsLockedWeek;
+                CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+                JsonChoreFundsMaster.FundsLockedWeek = 0;
+            } catch (Exception) { }
+        }
+
+        if (JsonChoreFundsMaster.UpdatedDate.ToString("yy/M") != DateTime.Now.ToString("yy/M")) {
+            Console.WriteLine(DateTime.Now.ToString("g") + " Releasing Month Funds");
+            try {
+                JsonChoreFundsMaster.FundsAvailable += JsonChoreFundsMaster.FundsLockedMonth;
+                JsonChoreFundsMaster.FundsTotal += JsonChoreFundsMaster.FundsLockedMonth;
+                CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+                JsonChoreFundsMaster.FundsLockedMonth = 0;
+
+                JsonChoreFundsMaster.SpecialDay1Completed = false;
+                JsonChoreFundsMaster.SpecialDay2Completed = false;
+            } catch (Exception) { }
+        }
+
+        JsonChoreFundsMaster.UpdatedDate = DateTime.Now;
+
+        try {
+            string jsonString = JsonSerializer.Serialize(JsonChoreFundsMaster);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(FILE_DIRECTORY + "chorefunds.json", jsonString);
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
+        }
+
+        try {
+            string jsonString = JsonSerializer.Serialize(JsonFinanceMasterList);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(FILE_DIRECTORY + "finances.json", jsonString);
+        } catch (Exception e) {
+            Console.WriteLine("Unable to save finances.json... " + e.Message);
+        }
     }
 
     #region Fields
@@ -697,14 +738,6 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public string ProjectedFundMonthText {
-        get => _projectedFundMonthText;
-        set {
-            _projectedFundMonthText = value;
-            RaisePropertyChangedEvent("ProjectedFundMonthText");
-        }
-    }
-
     public string DayButtonColor {
         get => _dayButtonColor;
         set {
@@ -745,19 +778,51 @@ public class ChoresVM : BaseViewModel {
         }
     }
 
-    public int FundsProgressValue {
-        get => _fundsProgressValue;
+    public int FundsProgressDayValue {
+        get => _fundsProgressDayValue;
         set {
-            _fundsProgressValue = value;
-            RaisePropertyChangedEvent("FundsProgressValue");
+            _fundsProgressDayValue = value;
+            RaisePropertyChangedEvent("FundsProgressDayValue");
         }
     }
 
-    public string FundsProgressText {
-        get => _fundsProgressText;
+    public int FundsProgressWeekValue {
+        get => _fundsProgressWeekValue;
         set {
-            _fundsProgressText = value;
-            RaisePropertyChangedEvent("FundsProgressText");
+            _fundsProgressWeekValue = value;
+            RaisePropertyChangedEvent("FundsProgressWeekValue");
+        }
+    }
+
+    public int FundsProgressMonthValue {
+        get => _fundsProgressMonthValue;
+        set {
+            _fundsProgressMonthValue = value;
+            RaisePropertyChangedEvent("FundsProgressMonthValue");
+        }
+    }
+
+    public string FundsProgressDayText {
+        get => _fundsProgressDayText;
+        set {
+            _fundsProgressDayText = value;
+            RaisePropertyChangedEvent("FundsProgressDayText");
+        }
+    }
+
+    public string FundsProgressWeekText {
+        get => _fundsProgressWeekText;
+        set {
+            _fundsProgressWeekText = value;
+            RaisePropertyChangedEvent("FundsProgressWeekText");
+        }
+    }
+
+    public string FundsProgressMonthText {
+        get => _fundsProgressMonthText;
+        set {
+            _fundsProgressMonthText = value;
+            RaisePropertyChangedEvent("FundsProgressMonthText");
         }
     }
 
