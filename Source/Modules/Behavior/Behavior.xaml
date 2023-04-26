@@ -12,12 +12,140 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Foreground="White" Text="Behavior Tracker" FontSize="18" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Foreground="White" Text="Behavior Tracker" FontSize="18" HorizontalAlignment="Center"/>
             <Image Grid.Column="0" Grid.Row="0" Source="../../Resources/Images/icons/behavior.png" Height="24" HorizontalAlignment="Left"/>
 
-            <Button Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}"
+            <Button Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="4">
+                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="32"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Source="{Binding ImageUser1}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User1Name}" FontSize="18" HorizontalAlignment="Center"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding User1Star1}" Height="48"/>
+                        <Image Grid.Column="1" Source="{Binding User1Star2}" Height="48"/>
+                        <Image Grid.Column="2" Source="{Binding User1Star3}" Height="48"/>
+                        <Image Grid.Column="3" Source="{Binding User1Star4}" Height="48"/>
+                        <Image Grid.Column="4" Source="{Binding User1Star5}" Height="48"/>
+                    </Grid>
+
+                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser1Value}" IsIndeterminate="False"
+                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" HorizontalContentAlignment="Stretch" Maximum="5"/>
+
+                    <TextBlock Grid.Row="2" Text="{Binding ProgressBarUser1ValueText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"
+                               Foreground="GreenYellow" Focusable="False"/>
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding User1Strike1}"/>
+                        <Image Grid.Column="1" Source="{Binding User1Strike2}"/>
+                        <Image Grid.Column="2" Source="{Binding User1Strike3}"/>
+                    </Grid>
+                </Grid>
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user2">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="4">
+                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="32"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Source="{Binding ImageUser2}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User2Name}" FontSize="18" HorizontalAlignment="Center"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding User2Star1}" Height="48"/>
+                        <Image Grid.Column="1" Source="{Binding User2Star2}" Height="48"/>
+                        <Image Grid.Column="2" Source="{Binding User2Star3}" Height="48"/>
+                        <Image Grid.Column="3" Source="{Binding User2Star4}" Height="48"/>
+                        <Image Grid.Column="4" Source="{Binding User2Star5}" Height="48"/>
+                    </Grid>
+
+                    <ProgressBar Grid.Row="2" Height="32" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser2Value}" IsIndeterminate="False"
+                                 Foreground="CornflowerBlue" Background="Transparent" BorderThickness="1" HorizontalContentAlignment="Stretch" Maximum="5"/>
+
+                    <TextBlock Grid.Row="2" Text="{Binding ProgressBarUser2ValueText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"
+                               Foreground="GreenYellow" Focusable="False"/>
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding User2Strike1}"/>
+                        <Image Grid.Column="1" Source="{Binding User2Strike2}"/>
+                        <Image Grid.Column="2" Source="{Binding User2Strike3}"/>
+                    </Grid>
+                </Grid>
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}"
                     CommandParameter="child1">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -32,11 +160,6 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Black"/>
-                            </Trigger>
-                        </Style.Triggers>
                     </Style>
                 </Button.Style>
                 <Grid>
@@ -47,6 +170,7 @@
                         <RowDefinition Height="32"/>
                     </Grid.RowDefinitions>
 
+                    <Image Grid.Row="0" Source="{Binding ImageChild1}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="0" Text="{Binding Child1Name}" FontSize="18" HorizontalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
@@ -85,7 +209,7 @@
                 </Grid>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}"
+            <Button Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}"
                     CommandParameter="child2">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -100,11 +224,6 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Black"/>
-                            </Trigger>
-                        </Style.Triggers>
                     </Style>
                 </Button.Style>
                 <Grid>
@@ -115,6 +234,7 @@
                         <RowDefinition Height="32"/>
                     </Grid.RowDefinitions>
 
+                    <Image Grid.Row="0" Source="{Binding ImageChild2}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="0" Text="{Binding Child2Name}" FontSize="18" HorizontalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
@@ -153,7 +273,7 @@
                 </Grid>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}"
+            <Button Grid.Row="1" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}"
                     CommandParameter="child3">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
@@ -168,11 +288,6 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Black"/>
-                            </Trigger>
-                        </Style.Triggers>
                     </Style>
                 </Button.Style>
                 <Grid>
@@ -183,6 +298,7 @@
                         <RowDefinition Height="32"/>
                     </Grid.RowDefinitions>
 
+                    <Image Grid.Row="0" Source="{Binding ImageChild3}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="0" Text="{Binding Child3Name}" FontSize="18" HorizontalAlignment="Center"/>
 
                     <Grid Grid.Row="1">

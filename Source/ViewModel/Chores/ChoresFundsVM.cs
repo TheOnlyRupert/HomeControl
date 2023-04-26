@@ -13,7 +13,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresFundsVM : BaseViewModel {
-    private readonly PlaySound cashSound;
+    private readonly PlaySound cashSound, missingInfoSound;
 
     private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsTotal,
         _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color;
@@ -23,6 +23,8 @@ public class ChoresFundsVM : BaseViewModel {
 
     public ChoresFundsVM() {
         cashSound = new PlaySound("cash");
+        missingInfoSound = new PlaySound("missing_info");
+
         CurrentMonth = DateTime.Now.ToString("MMMM");
 
         FinanceList = ReferenceValues.JsonChoreFundsMaster.FinanceBlockChoreFundList;
@@ -67,9 +69,9 @@ public class ChoresFundsVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                missingInfoSound.Play(false);
             } else if (string.IsNullOrWhiteSpace(CostText)) {
-                MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                missingInfoSound.Play(false);
             } else {
                 FinanceList.Add(new FinanceBlockChoreFund {
                     Item = DescriptionText,
@@ -87,9 +89,9 @@ public class ChoresFundsVM : BaseViewModel {
             try {
                 if (FinanceSelected.Item != null) {
                     if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                        MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        missingInfoSound.Play(false);
                     } else if (string.IsNullOrWhiteSpace(CostText)) {
-                        MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        missingInfoSound.Play(false);
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {

@@ -4,6 +4,12 @@ namespace HomeControl.Source.IO;
 
 public class JsonBehavior {
     public DateTime Date { get; set; }
+    public int User1Progress { get; set; }
+    public int User1Stars { get; set; }
+    public int User1Strikes { get; set; }
+    public int User2Progress { get; set; }
+    public int User2Stars { get; set; }
+    public int User2Strikes { get; set; }
     public int Child1Progress { get; set; }
     public int Child1Stars { get; set; }
     public int Child1Strikes { get; set; }

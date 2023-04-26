@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
 using HomeControl.Source.ViewModel.Base;
@@ -13,6 +14,8 @@ namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresVM : BaseViewModel {
     private readonly CrossViewMessenger simpleMessenger;
+
+    private readonly PlaySound uiLocked;
 
     private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _user1Text,
         _choresCompletedWeekProgressText, _projectedFundMonthText, _choresCompletedDayProgressText, _user2Text, _choresCompletedMonthProgressText,
@@ -28,6 +31,7 @@ public class ChoresVM : BaseViewModel {
         _choresCompletedMonthProgressValue, _choresCompletedQuarterProgressValue, calculatedReleaseFunds, _fundsProgressValue;
 
     public ChoresVM() {
+        uiLocked = new PlaySound("locked");
         simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
 
@@ -127,6 +131,8 @@ public class ChoresVM : BaseViewModel {
                 RefreshFields();
                 break;
             }
+        } else {
+            uiLocked.Play(false);
         }
     }
 

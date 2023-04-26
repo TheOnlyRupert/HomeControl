@@ -98,11 +98,6 @@
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Black"/>
-                                            </Trigger>
-                                        </Style.Triggers>
                                     </Style>
                                 </Button.Style>
                                 <StackPanel Orientation="Horizontal">
@@ -124,11 +119,6 @@
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Black"/>
-                                            </Trigger>
-                                        </Style.Triggers>
                                     </Style>
                                 </Button.Style>
                                 <StackPanel Orientation="Horizontal">
@@ -153,11 +143,6 @@
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="Black"/>
-                                        </Trigger>
-                                    </Style.Triggers>
                                 </Style>
                             </Button.Style>
                         </Button>
@@ -165,13 +150,7 @@
                 </Grid>
 
                 <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="3*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Frame Grid.Column="0" Focusable="False"/>
-                    <Frame Grid.Column="1" Source="Source/Modules/Behavior/Behavior.xaml" Focusable="False"/>
+                    <Frame Source="Source/Modules/Behavior/Behavior.xaml" Focusable="False"/>
                 </Grid>
             </Grid>
         </Grid>

@@ -41,7 +41,6 @@ public class CoinFlipVM : BaseViewModel {
     private void Flip() {
         coinFlip.Play(false);
         int rand = _random.Next(0, 2);
-        Console.WriteLine(rand);
 
         ImageSource = rand switch {
             0 => "../../../Resources/Images/games/quarter_head.png",

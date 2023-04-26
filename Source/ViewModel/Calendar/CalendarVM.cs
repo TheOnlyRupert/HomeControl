@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Calendar;
 using HomeControl.Source.Reference;
@@ -11,6 +12,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Calendar;
 
 public class CalendarVM : BaseViewModel {
+    private readonly PlaySound uiLocked;
+
     private string _button1Date, _button1HolidayText, _button1EventText2, _button1EventText3, _button2Date, _button2HolidayText, _button2EventText1,
         _button2EventText2, _button2EventText3, _button3Date, _button3HolidayText, _button3EventText1, _button3EventText2, _button3EventText3, _button4Date,
         _button4HolidayText, _button4EventText1, _button4EventText2, _button4EventText3, _button5Date, _button5HolidayText, _button5EventText1, _button5EventText2,
@@ -57,6 +60,8 @@ public class CalendarVM : BaseViewModel {
     private DateTime currentDateTime, button1DateTime;
 
     public CalendarVM() {
+        uiLocked = new PlaySound("locked");
+
         Button1EventList = new ObservableCollection<CalendarEventsCustom>();
         Button2EventList = new ObservableCollection<CalendarEventsCustom>();
         Button3EventList = new ObservableCollection<CalendarEventsCustom>();
@@ -139,6 +144,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime;
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -146,6 +153,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(1);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -153,6 +162,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(2);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -160,6 +171,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(3);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -167,6 +180,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(4);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -174,6 +189,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(5);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -181,6 +198,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(6);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -188,6 +207,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(7);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -195,6 +216,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(8);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -202,6 +225,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(9);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -209,6 +234,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(10);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -216,6 +243,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(11);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -223,6 +252,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(12);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -230,6 +261,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(13);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -237,6 +270,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(14);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -244,6 +279,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(15);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -251,6 +288,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(16);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -258,6 +297,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(17);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -265,6 +306,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(18);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -272,6 +315,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(19);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -279,6 +324,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(20);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -286,6 +333,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(21);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -293,6 +342,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(22);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -300,6 +351,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(23);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -307,6 +360,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(24);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -314,6 +369,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(25);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -321,6 +378,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(26);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -328,6 +387,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(27);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -335,6 +396,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(28);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -342,6 +405,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(29);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -349,6 +414,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(30);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -356,6 +423,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(31);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -363,6 +432,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(32);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -370,6 +441,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(33);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -377,6 +450,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(34);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -384,6 +459,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(35);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -391,6 +468,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(36);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -398,6 +477,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(37);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -405,6 +486,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(38);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -412,6 +495,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(39);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -419,6 +504,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(40);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;
@@ -426,6 +513,8 @@ public class CalendarVM : BaseViewModel {
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(41);
                 OpenEventDialog();
+            } else {
+                uiLocked.Play(false);
             }
 
             break;

@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.Reference;
@@ -11,10 +12,12 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesVM : BaseViewModel {
+    private readonly PlaySound uiLocked;
     private string _cashIncomeText, _cashExpenseText, _cashAvailableText, _cashAvailableTextColor;
     private int expense, income, available;
 
     public FinancesVM() {
+        uiLocked = new PlaySound("locked");
         CashIncomeText = "";
         CashExpenseText = "";
         CashAvailableText = "";
@@ -43,6 +46,8 @@ public class FinancesVM : BaseViewModel {
                 RefreshFinances();
                 break;
             }
+        } else {
+            uiLocked.Play(false);
         }
     }
 

@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -12,6 +13,7 @@ namespace HomeControl.Source.ViewModel.Finances;
 
 public class EditBillsVM : BaseViewModel {
     private readonly string fileName;
+    private readonly PlaySound missingInfoSound;
 
     private ObservableCollection<RecurringFinanceBlock> _financeList;
     private RecurringFinanceBlock _financeSelected;
@@ -23,6 +25,7 @@ public class EditBillsVM : BaseViewModel {
         _otherBackgroundColor, _user1NameText, _user2NameText, _costText, _parentsBackgroundColor, _recurringMonthSelected;
 
     public EditBillsVM() {
+        missingInfoSound = new PlaySound("missing_info");
         fileName = ReferenceValues.FILE_DIRECTORY + "bills.json";
 
         selectedPerson = "Home";
@@ -58,9 +61,9 @@ public class EditBillsVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                missingInfoSound.Play(false);
             } else if (string.IsNullOrWhiteSpace(CostText)) {
-                MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                missingInfoSound.Play(false);
             } else {
                 try {
                     FinanceList.Add(new RecurringFinanceBlock {
@@ -82,9 +85,9 @@ public class EditBillsVM : BaseViewModel {
             try {
                 if (FinanceSelected.Item != null) {
                     if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                        MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        missingInfoSound.Play(false);
                     } else if (string.IsNullOrWhiteSpace(CostText)) {
-                        MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        missingInfoSound.Play(false);
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update recurring charge?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {

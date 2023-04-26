@@ -13,7 +13,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class EditFinancesVM : BaseViewModel {
-    private readonly PlaySound cashSound;
+    private readonly PlaySound cashSound, missingInfoSound;
     private readonly string fileName;
     private ObservableCollection<string> _categoryList;
 
@@ -27,6 +27,7 @@ public class EditFinancesVM : BaseViewModel {
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
         cashSound = new PlaySound("cash");
+        missingInfoSound = new PlaySound("missing_info");
 
         selectedPerson = "Home";
         User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
@@ -64,9 +65,9 @@ public class EditFinancesVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                missingInfoSound.Play(false);
             } else if (string.IsNullOrWhiteSpace(CostText)) {
-                MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                missingInfoSound.Play(false);
             } else {
                 FinanceList.Add(new FinanceBlock {
                     AddSub = AddOrSub,
@@ -78,7 +79,6 @@ public class EditFinancesVM : BaseViewModel {
                 });
 
                 cashSound.Play(false);
-                DateText = DateTime.Now.ToShortDateString();
                 DescriptionText = "";
                 CostText = "";
                 SaveJson();
@@ -89,9 +89,9 @@ public class EditFinancesVM : BaseViewModel {
             try {
                 if (FinanceSelected.Item != null) {
                     if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                        MessageBox.Show("Missing Description", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        missingInfoSound.Play(false);
                     } else if (string.IsNullOrWhiteSpace(CostText)) {
-                        MessageBox.Show("Missing Cost", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        missingInfoSound.Play(false);
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -106,7 +106,6 @@ public class EditFinancesVM : BaseViewModel {
 
                             cashSound.Play(false);
                             FinanceList.Remove(FinanceSelected);
-                            DateText = DateTime.Now.ToShortDateString();
                             DescriptionText = "";
                             CostText = "";
                             SaveJson();

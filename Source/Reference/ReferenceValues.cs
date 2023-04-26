@@ -6,7 +6,7 @@ using HomeControl.Source.IO;
 namespace HomeControl.Source.Reference;
 
 public static class ReferenceValues {
-    public const string COPYRIGHT = "Copyright © 2022  Robert Higgins";
+    public const string COPYRIGHT = "Copyright © 2022-2023  Robert Higgins";
     public const string VERSION = "1.0.0";
 
     public const bool EnableWeather = true;
@@ -26,6 +26,7 @@ public static class ReferenceValues {
         "Home Improvement",
         "Alcohol",
         "Firearms",
+        "Streaming Service",
         "Brittany Fund",
         "Stupid/Dumb",
         "Interest",
@@ -90,7 +91,7 @@ public static class ReferenceValues {
     public static bool[] SwitchTimerDirection { get; set; }
     public static PlaySound TimerSound { get; set; }
 
-    public static int ActiveChild { get; set; }
+    public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonMasterSettings { get; set; }
     public static bool IsScreenSaverEnabled { get; set; }
 

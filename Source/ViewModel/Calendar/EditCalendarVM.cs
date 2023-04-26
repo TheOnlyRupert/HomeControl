@@ -15,7 +15,7 @@ public class EditCalendarVM : BaseViewModel {
     private readonly JsonCalendar _jsonCalendar;
 
     private readonly string fileName;
-    private readonly PlaySound scribble1Sound, scribble2Sound, scribble3Sound;
+    private readonly PlaySound scribble1Sound, scribble2Sound, scribble3Sound, missingInfoSound;
     private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
@@ -27,6 +27,7 @@ public class EditCalendarVM : BaseViewModel {
         scribble1Sound = new PlaySound("scribble1");
         scribble2Sound = new PlaySound("scribble2");
         scribble3Sound = new PlaySound("scribble3");
+        missingInfoSound = new PlaySound("missing_info");
 
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
         fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
@@ -149,7 +150,7 @@ public class EditCalendarVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(EventText)) {
-                MessageBox.Show("Missing Event", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                missingInfoSound.Play(false);
             } else {
                 EventList.Add(new CalendarEvents {
                     name = EventText,
@@ -175,7 +176,7 @@ public class EditCalendarVM : BaseViewModel {
             try {
                 if (CalendarEventSelected.name != null) {
                     if (string.IsNullOrWhiteSpace(EventText)) {
-                        MessageBox.Show("Event needs a name.", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        missingInfoSound.Play(false);
                     } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
                         confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -225,7 +226,7 @@ public class EditCalendarVM : BaseViewModel {
                 DupeText = "";
             } else {
                 if (string.IsNullOrWhiteSpace(EventText)) {
-                    MessageBox.Show("Missing Event", "Missing Fields", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    missingInfoSound.Play(false);
                 } else {
                     ReferenceValues.IsCalendarDupeModeEnabled = true;
                     DupeButtonBackgroundColor = "Green";
