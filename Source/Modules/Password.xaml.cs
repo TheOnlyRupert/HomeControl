@@ -2,9 +2,9 @@
 
 namespace HomeControl.Source.Modules;
 
-public partial class Function {
-    public Function() {
+public partial class Password {
+    public Password() {
         InitializeComponent();
-        DataContext = new FunctionVM();
+        DataContext = new PasswordVM();
     }
 }

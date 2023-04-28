@@ -1,7 +1,6 @@
 using System;
 using System.Net;
 using System.Text.Json;
-using System.Windows.Input;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
 using HomeControl.Source.IO;
@@ -21,7 +20,7 @@ public class MainWindowVM : BaseViewModel {
         IconImage = "../../Resources/Images/icon.png";
         simpleMessenger = CrossViewMessenger.Instance;
         currentDate = DateTime.Now;
-        ReferenceValues.TimerSound = new PlaySound("alarm1");
+        ReferenceValues.TimerSound = new PlaySound("timerDone");
         ReferenceValues.IsScreenSaverEnabled = false;
 
         /* Get Settings */
@@ -46,37 +45,19 @@ public class MainWindowVM : BaseViewModel {
         dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
         dispatcherTimer.Start();
 
-        //AppActivityTimer activityTimer = new(360000, 360000, false);
-        //activityTimer.OnInactive += activityTimer_OnInactive;
-        //activityTimer.OnActive += activityTimer_OnActive;
+        AppActivityTimer activityTimer = new(360000, 360000, false);
+        activityTimer.OnInactive += activityTimer_OnInactive;
+        activityTimer.OnActive += activityTimer_OnActive;
 
-        //void activityTimer_OnInactive(object sender, EventArgs e) {
-        //    Console.WriteLine("Start ScreenSaver: " + DateTime.Now);
-        //}
+        void activityTimer_OnInactive(object sender, EventArgs e) {
+            Console.WriteLine("Start ScreenSaver: " + DateTime.Now);
+            simpleMessenger.PushMessage("ScreenSaverOn", null);
+            ReferenceValues.LockUI = true;
+        }
 
-        //void activityTimer_OnActive(object sender, EventArgs e) {
-        //    Console.WriteLine("End ScreenSaver: " + DateTime.Now);
-        //}
-    }
-
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
-
-    private void ButtonCommandLogic(object param) {
-        switch (param) {
-        case "lockUi":
-            if (ReferenceValues.LockUI) {
-                ReferenceValues.LockUI = false;
-                LockedColor = "Red";
-                LockedText = "UNLOCKED";
-            } else {
-                ReferenceValues.LockUI = true;
-                LockedColor = "Transparent";
-                LockedText = "LOCKED";
-            }
-
-            break;
-        case "panic":
-            break;
+        void activityTimer_OnActive(object sender, EventArgs e) {
+            Console.WriteLine("End ScreenSaver: " + DateTime.Now);
+            simpleMessenger.PushMessage("ScreenSaverOff", null);
         }
     }
 
