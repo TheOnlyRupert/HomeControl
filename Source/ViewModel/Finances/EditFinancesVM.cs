@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using HomeControl.Source.Control;
 using HomeControl.Source.IO;
-using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -20,9 +21,17 @@ public class EditFinancesVM : BaseViewModel {
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
         _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor;
 
+    private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock1;
+
     private ObservableCollection<FinanceBlock> _financeList;
     private FinanceBlock _financeSelected;
     private string selectedPerson, _categorySelected, _descriptionText;
+
+    private int totalBilling, totalGrocery, totalPetrol, totalRestaurantTakeout, totalShopping, totalHealth, totalTravel, totalCoffee, totalEntertainment, totalServices,
+        totalPersonalCare,
+        totalHomeImprovement, totalAlcohol, totalAlcoholBar, totalFirearms, totalStreamingService, totalBrittanyFund, totalStupidDumb, totalInterest, totalCarryOver,
+        totalElectricBill, totalWaterBill,
+        totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance;
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
@@ -55,7 +64,14 @@ public class EditFinancesVM : BaseViewModel {
             CategoryList.Add(VARIABLE);
         }
 
+        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
+        view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+
         CategorySelected = "Billing";
+
+        DetailedFinanceBlock1 = new ObservableCollection<DetailedFinanceBlock>();
+
+        RefreshDetailedView();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -80,11 +96,12 @@ public class EditFinancesVM : BaseViewModel {
 
                 ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] ADDING finance: " + AddOrSub + ", " +
                                              DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
-                                             selectedPerson;
+                                             selectedPerson + "\n";
 
                 cashSound.Play(false);
                 DescriptionText = "";
                 CostText = "";
+                RefreshDetailedView();
                 SaveJson();
             }
 
@@ -110,12 +127,13 @@ public class EditFinancesVM : BaseViewModel {
 
                             ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] UPDATING finance: " + AddOrSub + ", " +
                                                          DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
-                                                         selectedPerson;
+                                                         selectedPerson + "\n";
 
                             cashSound.Play(false);
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
                             CostText = "";
+                            RefreshDetailedView();
                             SaveJson();
                         }
                     }
@@ -132,9 +150,10 @@ public class EditFinancesVM : BaseViewModel {
 
                         ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] REMOVING finance: " + AddOrSub + ", " +
                                                      DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
-                                                     selectedPerson;
+                                                     selectedPerson + "\n";
 
                         FinanceList.Remove(FinanceSelected);
+                        RefreshDetailedView();
                         SaveJson();
                     }
                 }
@@ -197,11 +216,6 @@ public class EditFinancesVM : BaseViewModel {
                 CategorySelected = "Billing";
             }
 
-            break;
-        case "bills":
-            EditBills editBills = new();
-            editBills.ShowDialog();
-            editBills.Close();
             break;
         }
     }
@@ -286,9 +300,412 @@ public class EditFinancesVM : BaseViewModel {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/ERROR] Unable to save finances.json... " + e.Message;
+                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/ERROR] Unable to save finances.json... " + e.Message + "\n";
             }
         }
+    }
+
+    private void RefreshDetailedView() {
+        totalAlcohol = 0;
+        totalAlcoholBar = 0;
+        totalBilling = 0;
+        totalBrittanyFund = 0;
+        totalCarryOver = 0;
+        totalChildCare = 0;
+        totalCoffee = 0;
+        totalElectricBill = 0;
+        totalEntertainment = 0;
+        totalFirearms = 0;
+        totalGasBill = 0;
+        totalGrocery = 0;
+        totalHealth = 0;
+        totalHomeImprovement = 0;
+        totalInsurance = 0;
+        totalInterest = 0;
+        totalInternetBill = 0;
+        totalMortgageRent = 0;
+        totalPersonalCare = 0;
+        totalPetrol = 0;
+        totalPhoneBill = 0;
+        totalRestaurantTakeout = 0;
+        totalServices = 0;
+        totalShopping = 0;
+        totalStreamingService = 0;
+        totalStupidDumb = 0;
+        totalTrashBill = 0;
+        totalTravel = 0;
+        totalVehiclePayment = 0;
+        totalWaterBill = 0;
+        DetailedFinanceBlock1.Clear();
+
+        foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+            switch (financeBlock.Category) {
+            case "Billing":
+                try {
+                    totalBilling += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Grocery":
+                try {
+                    totalGrocery += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Petrol":
+                try {
+                    totalPetrol += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Restaurant/Takeout":
+                try {
+                    totalRestaurantTakeout += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Shopping":
+                try {
+                    totalShopping += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Health":
+                try {
+                    totalHealth += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Travel":
+                try {
+                    totalTravel += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Coffee":
+                try {
+                    totalCoffee += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Entertainment":
+                try {
+                    totalEntertainment += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Services":
+                try {
+                    totalServices += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Personal Care":
+                try {
+                    totalPersonalCare += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Home Improvement":
+                try {
+                    totalHomeImprovement += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Alcohol":
+                try {
+                    totalAlcohol += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Alcohol Bar":
+                try {
+                    totalAlcoholBar += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Firearms":
+                try {
+                    totalFirearms += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Streaming Service":
+                try {
+                    totalStreamingService += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Brittany Fund":
+                try {
+                    totalBrittanyFund += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Stupid/Dumb":
+                try {
+                    totalStupidDumb += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Interest":
+                try {
+                    totalInterest += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Carry Over":
+                try {
+                    totalCarryOver += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Electric Bill":
+                try {
+                    totalElectricBill += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Water Bill":
+                try {
+                    totalWaterBill += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Phone Bill":
+                try {
+                    totalPhoneBill += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Gas Bill":
+                try {
+                    totalGasBill += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Mortgage/Rent":
+                try {
+                    totalMortgageRent += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Child Care":
+                try {
+                    totalChildCare += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Vehicle Payment":
+                try {
+                    totalVehiclePayment += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Internet Bill":
+                try {
+                    totalInternetBill += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Trash Bill":
+                try {
+                    totalTrashBill += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Insurance":
+                try {
+                    totalInsurance += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            }
+        }
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Billing",
+            Percentage = 0,
+            Amount = totalBilling
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Grocery",
+            Percentage = 0,
+            Amount = totalGrocery
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Petrol",
+            Percentage = 0,
+            Amount = totalPetrol
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Restaurant/Takeout",
+            Percentage = 0,
+            Amount = totalRestaurantTakeout
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Shopping",
+            Percentage = 0,
+            Amount = totalShopping
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Health",
+            Percentage = 0,
+            Amount = totalHealth
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Travel",
+            Percentage = 0,
+            Amount = totalTravel
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Coffee",
+            Percentage = 0,
+            Amount = totalCoffee
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Entertainment",
+            Percentage = 0,
+            Amount = totalEntertainment
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Services",
+            Percentage = 0,
+            Amount = totalServices
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Personal Care",
+            Percentage = 0,
+            Amount = totalPersonalCare
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Home Improvement",
+            Percentage = 0,
+            Amount = totalHomeImprovement
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Alcohol",
+            Percentage = 0,
+            Amount = totalAlcohol
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Alcohol Bar",
+            Percentage = 0,
+            Amount = totalAlcoholBar
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Firearms",
+            Percentage = 0,
+            Amount = totalFirearms
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Streaming Service",
+            Percentage = 0,
+            Amount = totalStreamingService
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Brittany Fund",
+            Percentage = 0,
+            Amount = totalBrittanyFund
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Stupid/Dumb",
+            Percentage = 0,
+            Amount = totalStupidDumb
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Interest",
+            Percentage = 0,
+            Amount = totalInterest
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Carry Over",
+            Percentage = 0,
+            Amount = totalCarryOver
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Electric Bill",
+            Percentage = 0,
+            Amount = totalElectricBill
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Water Bill",
+            Percentage = 0,
+            Amount = totalWaterBill
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Phone Bill",
+            Percentage = 0,
+            Amount = totalPhoneBill
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Gas Bill",
+            Percentage = 0,
+            Amount = totalGasBill
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Mortgage/Rent",
+            Percentage = 0,
+            Amount = totalMortgageRent
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Child Care",
+            Percentage = 0,
+            Amount = totalChildCare
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Vehicle Payment",
+            Percentage = 0,
+            Amount = totalVehiclePayment
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Internet Bill",
+            Percentage = 0,
+            Amount = totalInternetBill
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Trash Bill",
+            Percentage = 0,
+            Amount = totalTrashBill
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Insurance",
+            Percentage = 0,
+            Amount = totalInsurance
+        });
+
+        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock1);
+        view.SortDescriptions.Add(new SortDescription("Amount", ListSortDirection.Descending));
+        view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
     }
 
     #region Fields
@@ -427,6 +844,14 @@ public class EditFinancesVM : BaseViewModel {
         set {
             _user2NameText = value;
             RaisePropertyChangedEvent("User2NameText");
+        }
+    }
+
+    public ObservableCollection<DetailedFinanceBlock> DetailedFinanceBlock1 {
+        get => _detailedFinanceBlock1;
+        set {
+            _detailedFinanceBlock1 = value;
+            RaisePropertyChangedEvent("DetailedFinanceBlock1");
         }
     }
 

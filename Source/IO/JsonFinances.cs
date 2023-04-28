@@ -28,3 +28,9 @@ public class RecurringFinanceBlock {
     public string Cost { get; set; }
     public string Person { get; set; }
 }
+
+public class DetailedFinanceBlock {
+    public string Category { get; set; }
+    public int Percentage { get; set; }
+    public int Amount { get; set; }
+}

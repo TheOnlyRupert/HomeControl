@@ -200,12 +200,12 @@ public class MainWindowVM : BaseViewModel {
             if (apiStatus is { status: "OK" }) {
                 OnlineColor = "Transparent";
             } else {
-                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Lost internet connection";
+                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Lost internet connection\n";
                 OnlineColor = "Red";
             }
         } catch (Exception) {
             OnlineColor = "Red";
-            ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Lost internet connection";
+            ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Lost internet connection\n";
         }
     }
 

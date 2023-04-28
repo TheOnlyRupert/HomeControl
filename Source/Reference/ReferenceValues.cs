@@ -12,35 +12,44 @@ public static class ReferenceValues {
     public const bool EnableWeather = true;
 
     public static readonly List<string> CategorySpendingList = new() {
-        "Billing",
-        "Grocery",
-        "Petrol",
-        "Takeout",
-        "Shopping",
-        "Health",
-        "Travel",
-        "Coffee",
-        "Entertainment",
-        "Services",
-        "Personal Care",
-        "Home Improvement",
         "Alcohol",
-        "Firearms",
-        "Streaming Service",
+        "Alcohol Bar",
+        "Billing",
         "Brittany Fund",
-        "Stupid/Dumb",
-        "Interest",
         "Carry Over",
-        "Other"
+        "Child Care",
+        "Coffee",
+        "Electric Bill",
+        "Entertainment",
+        "Firearms",
+        "Gas Bill",
+        "Grocery",
+        "Health",
+        "Home Improvement",
+        "Insurance",
+        "Interest",
+        "Internet Bill",
+        "Mortgage/Rent",
+        "Personal Care",
+        "Petrol",
+        "Phone Bill",
+        "Restaurant/Takeout",
+        "Services",
+        "Shopping",
+        "Streaming Service",
+        "Stupid/Dumb",
+        "Trash Bill",
+        "Travel",
+        "Vehicle Payment",
+        "Water Bill"
     };
 
     public static readonly List<string> CategoryProfitList = new() {
-        "Paycheck",
+        "Child Support",
         "Gift",
         "Government",
-        "Child Support",
-        "Refund",
-        "Other"
+        "Paycheck",
+        "Refund"
     };
 
     public static readonly List<string> RecurringMonth = new() {

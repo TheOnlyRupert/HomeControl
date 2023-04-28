@@ -70,8 +70,14 @@
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
 
-                        <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
                         <Frame Name="MainFocusItem" Grid.Column="0" Grid.Row="1" Source="Source/Modules/Password.xaml" Focusable="True"/>
+                        <Frame Grid.Column="1" Grid.Row="1" Source="Source/Modules/Function.xaml" Focusable="False"/>
                     </Grid>
                 </Grid>
 

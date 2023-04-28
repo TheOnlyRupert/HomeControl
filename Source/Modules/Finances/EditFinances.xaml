@@ -1,6 +1,6 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Finances.EditFinances" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control" mc:Ignorable="d" Height="640" Width="1024"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control" mc:Ignorable="d" Height="896" Width="1664"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
         FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
     <Window.Resources>
@@ -75,12 +75,20 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" Margin="8">
-                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding FinanceList}" Foreground="White"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="64"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Finance List" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
+
+                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="1" ItemsSource="{Binding FinanceList}" Foreground="White"
                                         SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="Black"
                                         IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True">
                     <ListView.Resources>
@@ -137,6 +145,7 @@
             <Grid Grid.Column="1" Margin="8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -144,7 +153,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="24" Margin="16"
+                <TextBlock Grid.Row="0" Text="Add/Edit Finance" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
+
+                <Button Grid.Row="1" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="24" Margin="16"
                         Background="{Binding SwitchModeButtonColor}" HorizontalContentAlignment="Center">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -163,26 +174,26 @@
                     </Button.Style>
                 </Button>
 
-                <StackPanel Grid.Row="1">
+                <StackPanel Grid.Row="2">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>
                     <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="2">
+                <StackPanel Grid.Row="3">
                     <TextBlock Text="Amount ($)" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="3">
+                <StackPanel Grid.Row="4">
                     <TextBlock Text="Category" FontSize="24" Foreground="White"/>
                     <ComboBox FontSize="24" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CategorySelected}"/>
                 </StackPanel>
 
-                <Viewbox Grid.Row="4" Height="48" Margin="0 8" HorizontalAlignment="Left">
+                <Viewbox Grid.Row="5" Height="48" Margin="0 8" HorizontalAlignment="Left">
                     <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
                 </Viewbox>
 
-                <Grid Grid.Row="5">
+                <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -301,6 +312,65 @@
                     </Button>
                 </Grid>
             </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="64"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Detailed Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
+
+                <control:CustomListView Grid.Row="1" x:Name="CustomListView2" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White"
+                                        SelectedItem="{Binding DetailedFinanceSelected2}" SelectionMode="Single" Background="Transparent" BorderBrush="Black"
+                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8">
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
+                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Percentage}" Header="Percentage" Width="Auto" control:GridViewSort.PropertyName="Percentage"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="Auto" control:GridViewSort.PropertyName="Amount"/>
+                        </GridView>
+                    </ListView.View>
+                </control:CustomListView>
+            </Grid>
         </Grid>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="8 0 0 8">
@@ -339,24 +409,6 @@
                 </Button.Style>
             </Button>
             <Button Content="Update Charge" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="4 0 0 0" CommandParameter="update">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
-
-            <Button Content="Recurring Charges (Bills)" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="4 0 0 0" CommandParameter="bills">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>

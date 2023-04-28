@@ -97,7 +97,7 @@ public class PasswordVM : BaseViewModel {
             break;
         case "go":
             if (passwordAccepted) {
-                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Unlocking UI with correct password";
+                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Unlocking UI with correct password\n";
                 PasswordText = "";
                 LockButtonText = "Lock UI";
                 ReferenceValues.LockUI = false;
