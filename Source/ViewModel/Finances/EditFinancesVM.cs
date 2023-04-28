@@ -21,7 +21,7 @@ public class EditFinancesVM : BaseViewModel {
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
         _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor;
 
-    private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock1;
+    private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock1, _detailedFinanceBlock2;
 
     private ObservableCollection<FinanceBlock> _financeList;
     private FinanceBlock _financeSelected;
@@ -31,7 +31,8 @@ public class EditFinancesVM : BaseViewModel {
         totalPersonalCare,
         totalHomeImprovement, totalAlcohol, totalAlcoholBar, totalFirearms, totalStreamingService, totalBrittanyFund, totalStupidDumb, totalInterest, totalCarryOver,
         totalElectricBill, totalWaterBill,
-        totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance;
+        totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance, totalChildSupport, totalGift,
+        totalGovernment, totalPaycheck, totalRefund;
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
@@ -70,6 +71,7 @@ public class EditFinancesVM : BaseViewModel {
         CategorySelected = "Billing";
 
         DetailedFinanceBlock1 = new ObservableCollection<DetailedFinanceBlock>();
+        DetailedFinanceBlock2 = new ObservableCollection<DetailedFinanceBlock>();
 
         RefreshDetailedView();
     }
@@ -202,6 +204,9 @@ public class EditFinancesVM : BaseViewModel {
                     CategoryList.Add(VARIABLE);
                 }
 
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
+                view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+
                 CategorySelected = "Paycheck";
             } else {
                 SwitchModeButtonText = "Expense  ☹";
@@ -212,6 +217,9 @@ public class EditFinancesVM : BaseViewModel {
                 foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
                     CategoryList.Add(VARIABLE);
                 }
+
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
+                view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
                 CategorySelected = "Billing";
             }
@@ -234,6 +242,9 @@ public class EditFinancesVM : BaseViewModel {
             foreach (string VARIABLE in ReferenceValues.CategoryProfitList) {
                 CategoryList.Add(VARIABLE);
             }
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
+            view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
         } else {
             SwitchModeButtonText = "Expense  ☹";
             SwitchModeButtonColor = "Red";
@@ -243,6 +254,9 @@ public class EditFinancesVM : BaseViewModel {
             foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
                 CategoryList.Add(VARIABLE);
             }
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
+            view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
         }
 
         CategorySelected = value.Category;
@@ -336,7 +350,15 @@ public class EditFinancesVM : BaseViewModel {
         totalTravel = 0;
         totalVehiclePayment = 0;
         totalWaterBill = 0;
+
+        totalChildSupport = 0;
+        totalGift = 0;
+        totalGovernment = 0;
+        totalPaycheck = 0;
+        totalRefund = 0;
+
         DetailedFinanceBlock1.Clear();
+        DetailedFinanceBlock2.Clear();
 
         foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
             switch (financeBlock.Category) {
@@ -517,6 +539,36 @@ public class EditFinancesVM : BaseViewModel {
             case "Insurance":
                 try {
                     totalInsurance += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Child Support":
+                try {
+                    totalChildSupport += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Gift":
+                try {
+                    totalGift += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Government":
+                try {
+                    totalGovernment += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Paycheck":
+                try {
+                    totalPaycheck += int.Parse(financeBlock.Cost);
+                } catch (Exception) { }
+
+                break;
+            case "Refund":
+                try {
+                    totalRefund += int.Parse(financeBlock.Cost);
                 } catch (Exception) { }
 
                 break;
@@ -703,9 +755,43 @@ public class EditFinancesVM : BaseViewModel {
             Amount = totalInsurance
         });
 
+        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
+            Category = "Child Support",
+            Percentage = 0,
+            Amount = totalChildSupport
+        });
+
+        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
+            Category = "Gift",
+            Percentage = 0,
+            Amount = totalGift
+        });
+
+        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
+            Category = "Government",
+            Percentage = 0,
+            Amount = totalGovernment
+        });
+
+        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
+            Category = "Paycheck",
+            Percentage = 0,
+            Amount = totalPaycheck
+        });
+
+        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
+            Category = "Refund",
+            Percentage = 0,
+            Amount = totalRefund
+        });
+
         CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock1);
         view.SortDescriptions.Add(new SortDescription("Amount", ListSortDirection.Descending));
         view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
+
+        CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock2);
+        view2.SortDescriptions.Add(new SortDescription("Amount", ListSortDirection.Descending));
+        view2.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
     }
 
     #region Fields
@@ -721,6 +807,10 @@ public class EditFinancesVM : BaseViewModel {
     public string DateText {
         get => _dateText;
         set {
+            if (string.IsNullOrWhiteSpace(value)) {
+                value = DateTime.Now.ToShortDateString();
+            }
+
             _dateText = value;
             RaisePropertyChangedEvent("DateText");
         }
@@ -852,6 +942,14 @@ public class EditFinancesVM : BaseViewModel {
         set {
             _detailedFinanceBlock1 = value;
             RaisePropertyChangedEvent("DetailedFinanceBlock1");
+        }
+    }
+
+    public ObservableCollection<DetailedFinanceBlock> DetailedFinanceBlock2 {
+        get => _detailedFinanceBlock2;
+        set {
+            _detailedFinanceBlock2 = value;
+            RaisePropertyChangedEvent("DetailedFinanceBlock2");
         }
     }
 

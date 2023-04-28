@@ -328,7 +328,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Available Funds" FontSize="18" Foreground="White" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="{Binding CashAvailable}" FontSize="18" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding CashAvailable}" FontSize="24" Foreground="{Binding CashAvailableTextColor}" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
 

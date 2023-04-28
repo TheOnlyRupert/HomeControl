@@ -19,4 +19,5 @@ public class JsonChoreFunds {
 public class FinanceBlockChoreFund {
     public string Item { get; set; }
     public int Cost { get; set; }
+    public string Date { get; set; }
 }

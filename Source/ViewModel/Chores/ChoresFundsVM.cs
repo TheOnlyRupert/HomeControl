@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
@@ -16,7 +17,7 @@ public class ChoresFundsVM : BaseViewModel {
     private readonly PlaySound cashSound, missingInfoSound;
 
     private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsTotal,
-        _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color;
+        _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color, _dateText, _cashAvailableTextColor;
 
     private ObservableCollection<FinanceBlockChoreFund> _financeList;
     private FinanceBlockChoreFund _financeSelected;
@@ -26,6 +27,7 @@ public class ChoresFundsVM : BaseViewModel {
         missingInfoSound = new PlaySound("missing_info");
 
         CurrentMonth = DateTime.Now.ToString("MMMM");
+        DateText = DateTime.Now.ToShortDateString();
 
         FinanceList = ReferenceValues.JsonChoreFundsMaster.FinanceBlockChoreFundList;
         SpecialDay1Color = ReferenceValues.JsonChoreFundsMaster.SpecialDay1Completed ? "Green" : "Transparent";
@@ -58,7 +60,11 @@ public class ChoresFundsVM : BaseViewModel {
         ReferenceValues.JsonChoreFundsMaster.FundsAvailable = ReferenceValues.JsonChoreFundsMaster.FundsTotal;
         ReferenceValues.JsonChoreFundsMaster.FundsAvailable -= cash;
 
-        CashRemaining = "$" + ReferenceValues.JsonChoreFundsMaster.FundsAvailable;
+        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        culture.NumberFormat.CurrencyNegativePattern = 1;
+        CashRemaining = string.Format(culture, "{0:C}", ReferenceValues.JsonChoreFundsMaster.FundsAvailable);
+
+        CashAvailableTextColor = CashRemaining.StartsWith("-") ? "Red" : "CornflowerBlue";
 
         SaveJson();
     }
@@ -74,7 +80,8 @@ public class ChoresFundsVM : BaseViewModel {
             } else {
                 FinanceList.Add(new FinanceBlockChoreFund {
                     Item = DescriptionText,
-                    Cost = int.Parse(CostText)
+                    Cost = int.Parse(CostText),
+                    Date = DateTime.Parse(DateText).ToShortDateString()
                 });
 
                 cashSound.Play(false);
@@ -96,7 +103,8 @@ public class ChoresFundsVM : BaseViewModel {
                         if (confirmation == MessageBoxResult.Yes) {
                             FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlockChoreFund {
                                 Item = DescriptionText,
-                                Cost = int.Parse(CostText)
+                                Cost = int.Parse(CostText),
+                                Date = DateTime.Parse(DateText).ToShortDateString()
                             });
 
                             cashSound.Play(false);
@@ -206,6 +214,7 @@ public class ChoresFundsVM : BaseViewModel {
     private void PopulateDetailedView(FinanceBlockChoreFund value) {
         DescriptionText = value.Item;
         CostText = value.Cost.ToString();
+        DateText = value.Date;
     }
 
     #region Fields
@@ -314,6 +323,18 @@ public class ChoresFundsVM : BaseViewModel {
         }
     }
 
+    public string DateText {
+        get => _dateText;
+        set {
+            if (string.IsNullOrWhiteSpace(value)) {
+                value = DateTime.Now.ToShortDateString();
+            }
+
+            _dateText = value;
+            RaisePropertyChangedEvent("DateText");
+        }
+    }
+
     public string SpecialDay1Color {
         get => _specialDay1Color;
         set {
@@ -352,6 +373,14 @@ public class ChoresFundsVM : BaseViewModel {
             _financeSelected = value;
             PopulateDetailedView(value);
             RaisePropertyChangedEvent("FinanceSelected");
+        }
+    }
+
+    public string CashAvailableTextColor {
+        get => _cashAvailableTextColor;
+        set {
+            _cashAvailableTextColor = value;
+            RaisePropertyChangedEvent("CashAvailableTextColor");
         }
     }
 

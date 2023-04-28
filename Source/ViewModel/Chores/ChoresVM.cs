@@ -24,7 +24,7 @@ public class ChoresVM : BaseViewModel {
         _choresCompletedWeekTextUser1,
         _choresCompletedMonthTextUser1, _choresCompletedQuarterTextUser1, _choresCompletedDayProgressTextUser1, _choresCompletedWeekProgressTextUser1,
         _choresCompletedMonthProgressTextUser1, _choresCompletedQuarterProgressTextUser1, _dayButtonColorUser1, _weekButtonColorUser1, _monthButtonColorUser1,
-        _quarterButtonColorUser1;
+        _quarterButtonColorUser1, _cashAvailableTextColor;
 
     private int choresCompletedDay, choresCompletedWeek, choresCompletedMonth, choresCompletedQuarter, choresCompletedDayUser1, choresCompletedWeekUser1, choresCompletedMonthUser1,
         _choresCompletedDayProgressValue, _choresCompletedWeekProgressValue, _choresCompletedDayProgressValueUser1, choresCompletedQuarterUser1,
@@ -96,7 +96,11 @@ public class ChoresVM : BaseViewModel {
                 choresFunds.ShowDialog();
                 choresFunds.Close();
 
-                CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+                CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+                culture.NumberFormat.CurrencyNegativePattern = 1;
+                CashAvailable = string.Format(culture, "{0:C}", JsonChoreFundsMaster.FundsAvailable);
+
+                CashAvailableTextColor = CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
                 break;
             case "choresDayUser1":
                 ChoresDayUser1 choresDayUser1 = new();
@@ -517,7 +521,11 @@ public class ChoresVM : BaseViewModel {
         FundsProgressMonthValue = calculatedReleaseFundsMonth;
         FundsProgressMonthText = "$" + calculatedReleaseFundsMonth;
 
-        CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        culture.NumberFormat.CurrencyNegativePattern = 1;
+        CashAvailable = string.Format(culture, "{0:C}", JsonChoreFundsMaster.FundsAvailable);
+
+        CashAvailableTextColor = CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
 
         JsonChoreFundsMaster.FundsLockedDay = calculatedReleaseFundsDay;
         JsonChoreFundsMaster.FundsLockedWeek = calculatedReleaseFundsWeek;
@@ -529,17 +537,34 @@ public class ChoresVM : BaseViewModel {
             GC.WaitForPendingFinalizers();
             File.WriteAllText(FILE_DIRECTORY + "chorefunds.json", jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
+            DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Chores/ERROR] Unable to save chorefunds.json... " + e.Message + "\n";
         }
     }
 
     private void ReleaseFunds() {
         if (JsonChoreFundsMaster.UpdatedDate.Date != DateTime.Now.Date) {
-            Console.WriteLine(DateTime.Now.ToString("g") + " Releasing Day Funds");
+            DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Chores/INFO] Releasing Daily Funds\n";
+
+            if (JsonChoreFundsMaster.FundsLockedDay > 0) {
+                JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                    AddSub = "SUB",
+                    Date = DateTime.Now.ToShortDateString(),
+                    Item = "Brittany Fund Daily (Auto)",
+                    Cost = JsonChoreFundsMaster.FundsLockedDay.ToString(),
+                    Category = "Brittany Fund",
+                    Person = "Brittany"
+                });
+
+                simpleMessenger.PushMessage("RefreshFinances", null);
+            }
 
             JsonChoreFundsMaster.FundsAvailable += JsonChoreFundsMaster.FundsLockedDay;
             JsonChoreFundsMaster.FundsTotal += JsonChoreFundsMaster.FundsLockedDay;
-            CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+            culture.NumberFormat.CurrencyNegativePattern = 1;
+            CashAvailable = string.Format(culture, "{0:C}", JsonChoreFundsMaster.FundsAvailable);
+
+            CashAvailableTextColor = CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
             JsonChoreFundsMaster.FundsLockedDay = 0;
         }
 
@@ -557,21 +582,57 @@ public class ChoresVM : BaseViewModel {
         } catch (Exception) { }
 
         if (CompareWeekStartDate1.Date != CompareWeekStartDate2.Date) {
-            Console.WriteLine(DateTime.Now.ToString("g") + " Releasing Week Funds");
+            DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Chores/INFO] Releasing Weekly Funds\n";
+
+            if (JsonChoreFundsMaster.FundsLockedWeek > 0) {
+                JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                    AddSub = "SUB",
+                    Date = DateTime.Now.ToShortDateString(),
+                    Item = "Brittany Fund Weekly (Auto)",
+                    Cost = JsonChoreFundsMaster.FundsLockedWeek.ToString(),
+                    Category = "Brittany Fund",
+                    Person = "Brittany"
+                });
+
+                simpleMessenger.PushMessage("RefreshFinances", null);
+            }
+
             try {
                 JsonChoreFundsMaster.FundsAvailable += JsonChoreFundsMaster.FundsLockedWeek;
                 JsonChoreFundsMaster.FundsTotal += JsonChoreFundsMaster.FundsLockedWeek;
-                CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+                CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+                culture.NumberFormat.CurrencyNegativePattern = 1;
+                CashAvailable = string.Format(culture, "{0:C}", JsonChoreFundsMaster.FundsAvailable);
+
+                CashAvailableTextColor = CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
                 JsonChoreFundsMaster.FundsLockedWeek = 0;
             } catch (Exception) { }
         }
 
         if (JsonChoreFundsMaster.UpdatedDate.ToString("yy/M") != DateTime.Now.ToString("yy/M")) {
-            Console.WriteLine(DateTime.Now.ToString("g") + " Releasing Month Funds");
+            DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Chores/INFO] Releasing Monthly Funds\n";
+
+            if (JsonChoreFundsMaster.FundsLockedMonth > 0) {
+                JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                    AddSub = "SUB",
+                    Date = DateTime.Now.ToShortDateString(),
+                    Item = "Brittany Fund Monthly (Auto)",
+                    Cost = JsonChoreFundsMaster.FundsLockedMonth.ToString(),
+                    Category = "Brittany Fund",
+                    Person = "Brittany"
+                });
+
+                simpleMessenger.PushMessage("RefreshFinances", null);
+            }
+
             try {
                 JsonChoreFundsMaster.FundsAvailable += JsonChoreFundsMaster.FundsLockedMonth;
                 JsonChoreFundsMaster.FundsTotal += JsonChoreFundsMaster.FundsLockedMonth;
-                CashAvailable = "$" + JsonChoreFundsMaster.FundsAvailable;
+                CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+                culture.NumberFormat.CurrencyNegativePattern = 1;
+                CashAvailable = string.Format(culture, "{0:C}", JsonChoreFundsMaster.FundsAvailable);
+
+                CashAvailableTextColor = CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
                 JsonChoreFundsMaster.FundsLockedMonth = 0;
 
                 JsonChoreFundsMaster.SpecialDay1Completed = false;
@@ -983,6 +1044,14 @@ public class ChoresVM : BaseViewModel {
         set {
             _quarterButtonColorUser1 = value;
             RaisePropertyChangedEvent("QuarterButtonColorUser1");
+        }
+    }
+
+    public string CashAvailableTextColor {
+        get => _cashAvailableTextColor;
+        set {
+            _cashAvailableTextColor = value;
+            RaisePropertyChangedEvent("CashAvailableTextColor");
         }
     }
 

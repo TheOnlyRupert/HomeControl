@@ -214,7 +214,7 @@
                 </Grid>
 
                 <StackPanel Grid.Row="2">
-                    <TextBlock Text="Description" FontSize="24" Foreground="White"/>
+                    <TextBlock Text="Location/Business Name" FontSize="24" Foreground="White"/>
                     <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
                 </StackPanel>
 

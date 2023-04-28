@@ -51,7 +51,7 @@ public class FinancesVM : BaseViewModel {
     }
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "RefreshFundAmount") {
+        if (e.PropertyName == "RefreshFinances") {
             RefreshFinances();
         }
 

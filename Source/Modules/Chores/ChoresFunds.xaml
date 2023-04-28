@@ -3,6 +3,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control" mc:Ignorable="d" Height="640" Width="1024"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
         FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
+    <Window.Resources>
+        <Style x:Key="styleCalendar" TargetType="Calendar"/>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,6 +24,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="2*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -73,7 +78,7 @@
 
                     <TextBlock Grid.Column="1" Grid.Row="0" Text="Available Funds" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
 
-                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CashRemaining}" Foreground="White" HorizontalAlignment="Center" FontSize="32"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CashRemaining}" Foreground="{Binding CashAvailableTextColor}" HorizontalAlignment="Center" FontSize="32"/>
 
                     <Button Grid.Column="2" Grid.Row="0" Content="Special" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="special">
                         <Button.Style>
@@ -155,12 +160,13 @@
                         <GridView AllowsColumnReorder="false">
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Description" Width="Auto" control:GridViewSort.PropertyName="Description"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="Auto" control:GridViewSort.PropertyName="Cost"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto" control:GridViewSort.PropertyName="Date"/>
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
 
                 <StackPanel Grid.Row="3">
-                    <TextBlock Text="Description" FontSize="24" Foreground="White"/>
+                    <TextBlock Text="Location/Business Name" FontSize="24" Foreground="White"/>
                     <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
                 </StackPanel>
 
@@ -168,6 +174,10 @@
                     <TextBlock Text="Amount ($)" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24"/>
                 </StackPanel>
+
+                <Viewbox Grid.Row="5" Height="48" Margin="0 8" HorizontalAlignment="Left">
+                    <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
+                </Viewbox>
             </Grid>
 
             <Grid Grid.Column="1" Margin="8">
