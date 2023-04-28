@@ -6,7 +6,7 @@ using HomeControl.Source.Reference;
 namespace HomeControl.Source.IO;
 
 public class FinancesFromJson {
-    public void FinancesFromJsonMain() {
+    public FinancesFromJson() {
         JsonSerializerOptions options = new() {
             IncludeFields = true
         };

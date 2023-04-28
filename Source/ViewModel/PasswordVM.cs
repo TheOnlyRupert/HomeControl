@@ -1,14 +1,16 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel;
 
 public class PasswordVM : BaseViewModel {
-    private string _passwordText, _passwordPart1Visibility, _passwordPart2Visibility, _lockButtonText;
     private readonly bool passwordAccepted;
+    private string _passwordText, _passwordPart1Visibility, _passwordPart2Visibility, _lockButtonText;
 
     public PasswordVM() {
+        ReferenceValues.LockUI = true;
         PasswordText = "";
         LockButtonText = "";
         PasswordPart1Visibility = "VISIBLE";
@@ -95,6 +97,7 @@ public class PasswordVM : BaseViewModel {
             break;
         case "go":
             if (passwordAccepted) {
+                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Unlocking UI with correct password";
                 PasswordText = "";
                 LockButtonText = "Lock UI";
                 ReferenceValues.LockUI = false;

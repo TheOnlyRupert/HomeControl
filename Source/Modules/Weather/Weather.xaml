@@ -72,6 +72,25 @@
                         <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16"
                                    TextWrapping="Wrap" Foreground="White" VerticalAlignment="Bottom"/>
 
+                        <Button Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" MinWidth="256" MinHeight="64" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Command="{Binding 
+                        ButtonCommand}" CommandParameter="debug">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
                         <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

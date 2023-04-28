@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Text.Json;
+using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
+using HomeControl.Source.Modules;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -48,6 +50,8 @@ public class WeatherVM : BaseViewModel {
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
+
+    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "Refresh") {
@@ -333,6 +337,16 @@ public class WeatherVM : BaseViewModel {
 
     private string[] RegexWeatherForecast(string input) {
         return input.Split(new[] { " then " }, StringSplitOptions.None);
+    }
+
+    private void ButtonCommandLogic(object param) {
+        switch (param) {
+        case "debug":
+            DebugLog debugLog = new();
+            debugLog.ShowDialog();
+            debugLog.Close();
+            break;
+        }
     }
 
     #region Fields

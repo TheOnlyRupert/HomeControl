@@ -78,6 +78,10 @@ public class EditFinancesVM : BaseViewModel {
                     Person = selectedPerson
                 });
 
+                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] ADDING finance: " + AddOrSub + ", " +
+                                             DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
+                                             selectedPerson;
+
                 cashSound.Play(false);
                 DescriptionText = "";
                 CostText = "";
@@ -104,6 +108,10 @@ public class EditFinancesVM : BaseViewModel {
                                 Person = selectedPerson
                             });
 
+                            ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] UPDATING finance: " + AddOrSub + ", " +
+                                                         DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
+                                                         selectedPerson;
+
                             cashSound.Play(false);
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
@@ -121,6 +129,11 @@ public class EditFinancesVM : BaseViewModel {
                     confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
                         cashSound.Play(false);
+
+                        ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] REMOVING finance: " + AddOrSub + ", " +
+                                                     DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
+                                                     selectedPerson;
+
                         FinanceList.Remove(FinanceSelected);
                         SaveJson();
                     }
@@ -265,9 +278,7 @@ public class EditFinancesVM : BaseViewModel {
         if (FinanceList.Count > 0) {
             try {
                 ReferenceValues.JsonFinanceMasterList.financeList = FinanceList;
-            } catch (Exception) {
-                Console.WriteLine("ReferenceValues Doesnt exist");
-            }
+            } catch (Exception) { }
 
             try {
                 string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceMasterList);
@@ -275,15 +286,7 @@ public class EditFinancesVM : BaseViewModel {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save finances.json... " + e.Message);
-            }
-        } else {
-            try {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.Delete(fileName);
-            } catch (Exception e) {
-                Console.WriteLine("Unable to delete finances.json... " + e.Message);
+                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/ERROR] Unable to save finances.json... " + e.Message;
             }
         }
     }

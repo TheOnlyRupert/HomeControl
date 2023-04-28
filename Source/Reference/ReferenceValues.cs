@@ -96,4 +96,8 @@ public static class ReferenceValues {
     public static CalendarEvents DupeEvent { get; set; }
 
     public static bool IsGameTimerRunning { get; set; }
+
+    public static string DebugText { get; set; }
+
+    public static JsonGameStats JsonGameStatsMaster { get; set; }
 }

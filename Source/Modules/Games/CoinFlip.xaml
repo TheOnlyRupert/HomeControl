@@ -10,6 +10,8 @@
 
         <Image Grid.Row="0" Source="{Binding ImageSource}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="64"/>
 
+        <TextBlock Grid.Row="0" Text="{Binding GameStats}" Foreground="White" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="4"/>
+
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="8 0 0 8">
             <Button Name="MainFocusItem" Content="Flip Coin" FontSize="24" Command="{Binding ButtonCommand}" MinWidth="128" Margin="0 0 4 0" CommandParameter="flip">
                 <Button.Style>

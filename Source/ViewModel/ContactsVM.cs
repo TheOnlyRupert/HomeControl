@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Input;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -39,9 +37,15 @@ public class ContactsVM : BaseViewModel {
         _emergencyContact2Name,
         _emergencyContact2Phone1,
         _emergencyContact2Phone2,
-        _alarmCode;
+        _alarmCode, _privateWifiVisibility;
 
     public ContactsVM() {
+        if (ReferenceValues.LockUI) {
+            PrivateWifiVisibility = "HIDDEN";
+        } else {
+            PrivateWifiVisibility = "VISIBLE";
+        }
+
         try {
             User1Name = ReferenceValues.JsonMasterSettings.User1NameLegal;
             try {
@@ -169,21 +173,9 @@ public class ContactsVM : BaseViewModel {
             } catch (Exception) { }
 
             AlarmCode = ReferenceValues.JsonMasterSettings.AlarmCode;
+            WifiPrivateName = ReferenceValues.JsonMasterSettings.WifiPrivateName;
+            WifiPrivatePassword = ReferenceValues.JsonMasterSettings.WifiPrivatePassword;
         } catch (Exception) { }
-    }
-
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
-
-    private void ButtonCommandLogic(object param) {
-        switch (param) {
-        case "wifi":
-            if (!ReferenceValues.LockUI) {
-                MessageBox.Show("Name:\n" + ReferenceValues.JsonMasterSettings.WifiPrivateName + "\n\nPassword:\n" + ReferenceValues.JsonMasterSettings.WifiPrivatePassword, "Wifi",
-                    MessageBoxButton.OK);
-            }
-
-            break;
-        }
     }
 
     #region Fields
@@ -457,6 +449,14 @@ public class ContactsVM : BaseViewModel {
         set {
             _alarmCode = value;
             RaisePropertyChangedEvent("AlarmCode");
+        }
+    }
+
+    public string PrivateWifiVisibility {
+        get => _privateWifiVisibility;
+        set {
+            _privateWifiVisibility = value;
+            RaisePropertyChangedEvent("PrivateWifiVisibility");
         }
     }
 

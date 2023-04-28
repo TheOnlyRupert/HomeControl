@@ -1,10 +1,16 @@
 ﻿using System.Windows.Input;
+using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Games;
 using HomeControl.Source.ViewModel.Base;
+using Tamagotchi = HomeControl.Source.Modules.Games.Tamagotchi;
 
 namespace HomeControl.Source.ViewModel.Games;
 
 public class GamesVM : BaseViewModel {
+    public GamesVM() {
+        GameStatsFromJson gameStatsFromJson = new();
+    }
+
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void ButtonCommandLogic(object param) {

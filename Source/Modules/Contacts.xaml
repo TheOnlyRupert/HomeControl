@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1.7*"/>
         </Grid.RowDefinitions>
 
         <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Margin="8" BorderBrush="Black" BorderThickness="2">
@@ -100,23 +100,10 @@
                 <Separator/>
                 <TextBlock Text="{Binding WifiGuestName}" Foreground="White" FontSize="18"/>
                 <TextBlock Text="{Binding WifiGuestPassword}" Foreground="White" FontSize="18" Margin="0 0 0 14"/>
-                <Button Content="Private WiFi" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="wifi">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                <TextBlock Text="Private/Household WiFi" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+                <Separator/>
+                <TextBlock Text="{Binding WifiPrivateName}" Foreground="White" FontSize="18" Visibility="{Binding PrivateWifiVisibility}"/>
+                <TextBlock Text="{Binding WifiPrivatePassword}" Foreground="White" FontSize="18" Margin="0 0 0 14" Visibility="{Binding PrivateWifiVisibility}"/>
             </StackPanel>
         </Border>
         <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="8" BorderBrush="Black" BorderThickness="2">

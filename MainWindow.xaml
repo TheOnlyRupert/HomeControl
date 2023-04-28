@@ -5,7 +5,7 @@
     <Grid Focusable="False">
         <Canvas Name="canvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-        <Grid Focusable="False">
+        <Grid Focusable="False" Background="{Binding OnlineColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

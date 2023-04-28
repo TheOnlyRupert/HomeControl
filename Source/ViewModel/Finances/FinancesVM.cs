@@ -26,7 +26,6 @@ public class FinancesVM : BaseViewModel {
         available = 0;
         CashAvailableTextColor = "CornflowerBlue";
         FinancesFromJson financesFromJson = new();
-        financesFromJson.FinancesFromJsonMain();
         RefreshFinances();
         BackupFinances();
 

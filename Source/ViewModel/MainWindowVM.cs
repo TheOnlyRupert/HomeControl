@@ -23,13 +23,10 @@ public class MainWindowVM : BaseViewModel {
         ReferenceValues.TimerSound = new PlaySound("timerDone");
         ReferenceValues.IsScreenSaverEnabled = false;
 
+        ReferenceValues.DebugText = ReferenceValues.COPYRIGHT + "\nVersion: " + ReferenceValues.VERSION + "\n\n";
+
         /* Get Settings */
         new SettingsFromJson();
-
-        ReferenceValues.LockUI = true;
-
-        LockedColor = "Transparent";
-        LockedText = "LOCKED";
 
         if (string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.UserAgent)) {
             Settings settingsDialog = new();
@@ -202,14 +199,13 @@ public class MainWindowVM : BaseViewModel {
 
             if (apiStatus is { status: "OK" }) {
                 OnlineColor = "Transparent";
-                OnlineText = "ONLINE";
             } else {
+                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Lost internet connection";
                 OnlineColor = "Red";
-                OnlineText = "OFFLINE";
             }
         } catch (Exception) {
             OnlineColor = "Red";
-            OnlineText = "OFFLINE";
+            ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Lost internet connection";
         }
     }
 
@@ -220,30 +216,6 @@ public class MainWindowVM : BaseViewModel {
         set {
             _iconImage = value;
             RaisePropertyChangedEvent("IconImage");
-        }
-    }
-
-    public string LockedText {
-        get => _lockedText;
-        set {
-            _lockedText = value;
-            RaisePropertyChangedEvent("LockedText");
-        }
-    }
-
-    public string LockedColor {
-        get => _lockedColor;
-        set {
-            _lockedColor = value;
-            RaisePropertyChangedEvent("LockedColor");
-        }
-    }
-
-    public string OnlineText {
-        get => _onlineText;
-        set {
-            _onlineText = value;
-            RaisePropertyChangedEvent("OnlineText");
         }
     }
 
