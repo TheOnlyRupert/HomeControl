@@ -29,10 +29,19 @@ public class EditFinancesVM : BaseViewModel {
 
     private int totalBilling, totalGrocery, totalPetrol, totalRestaurantTakeout, totalShopping, totalHealth, totalTravel, totalCoffee, totalEntertainment, totalServices,
         totalPersonalCare,
-        totalHomeImprovement, totalAlcohol, totalAlcoholBar, totalFirearms, totalStreamingService, totalBrittanyFund, totalStupidDumb, totalInterest, totalCarryOver,
+        totalHomeImprovement, totalAlcohol, totalFirearms, totalStreamingService, totalBrittanyFund, totalStupidDumb, totalInterest, totalCarryOver,
         totalElectricBill, totalWaterBill,
         totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance, totalChildSupport, totalGift,
-        totalGovernment, totalPaycheck, totalRefund;
+        totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses;
+
+
+    private double totalPercentageBilling, totalPercentageBrittanyFund, totalPercentageCarryOver, totalPercentageChildCare,
+        totalPercentageCoffee, totalPercentageElectricBill, totalPercentageEntertainment, totalPercentageFirearms, totalPercentageGasBill, totalPercentageGrocery,
+        totalPercentageHealth, totalPercentageAlcohol,
+        totalPercentageHomeImprovement, totalPercentageInsurance, totalPercentageInterest, totalPercentageInternetBill, totalPercentageMortgageRent, totalPercentagePersonalCare,
+        totalPercentagePetrol, totalPercentagePhoneBill, totalPercentageRestaurantTakeout, totalPercentageServices, totalPercentageShopping, totalPercentageStreamingService,
+        totalPercentageStupidDumb, totalPercentageTrashBill, totalPercentageTravel, totalPercentageVehiclePayment, totalPercentageWaterBill, totalPercentageChildSupport,
+        totalPercentageGift, totalPercentageGovernment, totalPercentagePaycheck, totalPercentageRefund;
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
@@ -321,7 +330,6 @@ public class EditFinancesVM : BaseViewModel {
 
     private void RefreshDetailedView() {
         totalAlcohol = 0;
-        totalAlcoholBar = 0;
         totalBilling = 0;
         totalBrittanyFund = 0;
         totalCarryOver = 0;
@@ -437,12 +445,6 @@ public class EditFinancesVM : BaseViewModel {
             case "Alcohol":
                 try {
                     totalAlcohol += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
-
-                break;
-            case "Alcohol Bar":
-                try {
-                    totalAlcoholBar += int.Parse(financeBlock.Cost);
                 } catch (Exception) { }
 
                 break;
@@ -575,213 +577,251 @@ public class EditFinancesVM : BaseViewModel {
             }
         }
 
+        totalAllExpenses = totalAlcohol + totalBilling + totalBrittanyFund + totalChildCare + totalCoffee + totalElectricBill + totalEntertainment + totalFirearms
+                           + totalGasBill + totalGrocery + totalHealth + totalHomeImprovement + totalInsurance + totalInterest + totalInternetBill + totalMortgageRent +
+                           totalPersonalCare
+                           + totalPetrol + totalPhoneBill + totalRestaurantTakeout + totalServices + totalShopping + totalStreamingService + totalStupidDumb + totalTrashBill +
+                           totalTravel
+                           + totalVehiclePayment + totalWaterBill;
+
+        totalPercentageCarryOver = -1;
+        totalPercentageAlcohol = Math.Round((double)(100 * totalAlcohol) / totalAllExpenses, 2);
+        totalPercentageBilling = Math.Round((double)(100 * totalBilling) / totalAllExpenses, 2);
+        totalPercentageBrittanyFund = Math.Round((double)(100 * totalBrittanyFund) / totalAllExpenses, 2);
+        totalPercentageChildCare = Math.Round((double)(100 * totalChildCare) / totalAllExpenses, 2);
+        totalPercentageCoffee = Math.Round((double)(100 * totalCoffee) / totalAllExpenses, 2);
+        totalPercentageElectricBill = Math.Round((double)(100 * totalElectricBill) / totalAllExpenses, 2);
+        totalPercentageEntertainment = Math.Round((double)(100 * totalEntertainment) / totalAllExpenses, 2);
+        totalPercentageFirearms = Math.Round((double)(100 * totalFirearms) / totalAllExpenses, 2);
+        totalPercentageGasBill = Math.Round((double)(100 * totalGasBill) / totalAllExpenses, 2);
+        totalPercentageGrocery = Math.Round((double)(100 * totalGrocery) / totalAllExpenses, 2);
+        totalPercentageHealth = Math.Round((double)(100 * totalHealth) / totalAllExpenses, 2);
+        totalPercentageHomeImprovement = Math.Round((double)(100 * totalHomeImprovement) / totalAllExpenses, 2);
+        totalPercentageInsurance = Math.Round((double)(100 * totalInsurance) / totalAllExpenses, 2);
+        totalPercentageInterest = Math.Round((double)(100 * totalInterest) / totalAllExpenses, 2);
+        totalPercentageInternetBill = Math.Round((double)(100 * totalInternetBill) / totalAllExpenses, 2);
+        totalPercentageMortgageRent = Math.Round((double)(100 * totalMortgageRent) / totalAllExpenses, 2);
+        totalPercentagePersonalCare = Math.Round((double)(100 * totalPersonalCare) / totalAllExpenses, 2);
+        totalPercentagePetrol = Math.Round((double)(100 * totalPetrol) / totalAllExpenses, 2);
+        totalPercentagePhoneBill = Math.Round((double)(100 * totalPhoneBill) / totalAllExpenses, 2);
+        totalPercentageRestaurantTakeout = Math.Round((double)(100 * totalRestaurantTakeout) / totalAllExpenses, 2);
+        totalPercentageServices = Math.Round((double)(100 * totalServices) / totalAllExpenses, 2);
+        totalPercentageShopping = Math.Round((double)(100 * totalShopping) / totalAllExpenses, 2);
+        totalPercentageStreamingService = Math.Round((double)(100 * totalStreamingService) / totalAllExpenses, 2);
+        totalPercentageStupidDumb = Math.Round((double)(100 * totalStupidDumb) / totalAllExpenses, 2);
+        totalPercentageTrashBill = Math.Round((double)(100 * totalTrashBill) / totalAllExpenses, 2);
+        totalPercentageTravel = Math.Round((double)(100 * totalTravel) / totalAllExpenses, 2);
+        totalPercentageVehiclePayment = Math.Round((double)(100 * totalVehiclePayment) / totalAllExpenses, 2);
+        totalPercentageWaterBill = Math.Round((double)(100 * totalWaterBill) / totalAllExpenses, 2);
+
+        totalAllProfit = totalChildSupport + totalGift + totalGovernment + totalPaycheck + totalRefund;
+        totalPercentageChildSupport = Math.Round((double)(100 * totalChildSupport) / totalAllProfit, 2);
+        totalPercentageGift = Math.Round((double)(100 * totalGift) / totalAllProfit, 2);
+        totalPercentageGovernment = Math.Round((double)(100 * totalGovernment) / totalAllProfit, 2);
+        totalPercentagePaycheck = Math.Round((double)(100 * totalPaycheck) / totalAllProfit, 2);
+        totalPercentageRefund = Math.Round((double)(100 * totalRefund) / totalAllProfit, 2);
+
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Billing",
-            Percentage = 0,
+            Percentage = totalPercentageBilling,
             Amount = totalBilling
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Grocery",
-            Percentage = 0,
+            Percentage = totalPercentageGrocery,
             Amount = totalGrocery
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Petrol",
-            Percentage = 0,
+            Percentage = totalPercentagePetrol,
             Amount = totalPetrol
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Restaurant/Takeout",
-            Percentage = 0,
+            Percentage = totalPercentageRestaurantTakeout,
             Amount = totalRestaurantTakeout
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Shopping",
-            Percentage = 0,
+            Percentage = totalPercentageShopping,
             Amount = totalShopping
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Health",
-            Percentage = 0,
+            Percentage = totalPercentageHealth,
             Amount = totalHealth
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Travel",
-            Percentage = 0,
+            Percentage = totalPercentageTravel,
             Amount = totalTravel
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Coffee",
-            Percentage = 0,
+            Percentage = totalPercentageCoffee,
             Amount = totalCoffee
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Entertainment",
-            Percentage = 0,
+            Percentage = totalPercentageEntertainment,
             Amount = totalEntertainment
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Services",
-            Percentage = 0,
+            Percentage = totalPercentageServices,
             Amount = totalServices
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Personal Care",
-            Percentage = 0,
+            Percentage = totalPercentagePersonalCare,
             Amount = totalPersonalCare
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Home Improvement",
-            Percentage = 0,
+            Percentage = totalPercentageHomeImprovement,
             Amount = totalHomeImprovement
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Alcohol",
-            Percentage = 0,
+            Percentage = totalPercentageAlcohol,
             Amount = totalAlcohol
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Alcohol Bar",
-            Percentage = 0,
-            Amount = totalAlcoholBar
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Firearms",
-            Percentage = 0,
+            Percentage = totalPercentageFirearms,
             Amount = totalFirearms
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Streaming Service",
-            Percentage = 0,
+            Percentage = totalPercentageStreamingService,
             Amount = totalStreamingService
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Brittany Fund",
-            Percentage = 0,
+            Percentage = totalPercentageBrittanyFund,
             Amount = totalBrittanyFund
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Stupid/Dumb",
-            Percentage = 0,
+            Percentage = totalPercentageStupidDumb,
             Amount = totalStupidDumb
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Interest",
-            Percentage = 0,
+            Percentage = totalPercentageInterest,
             Amount = totalInterest
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Carry Over",
-            Percentage = 0,
+            Percentage = totalPercentageCarryOver,
             Amount = totalCarryOver
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Electric Bill",
-            Percentage = 0,
+            Percentage = totalPercentageElectricBill,
             Amount = totalElectricBill
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Water Bill",
-            Percentage = 0,
+            Percentage = totalPercentageWaterBill,
             Amount = totalWaterBill
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Phone Bill",
-            Percentage = 0,
+            Percentage = totalPercentagePhoneBill,
             Amount = totalPhoneBill
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Gas Bill",
-            Percentage = 0,
+            Percentage = totalPercentageGasBill,
             Amount = totalGasBill
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Mortgage/Rent",
-            Percentage = 0,
+            Percentage = totalPercentageMortgageRent,
             Amount = totalMortgageRent
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Child Care",
-            Percentage = 0,
+            Percentage = totalPercentageChildCare,
             Amount = totalChildCare
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Vehicle Payment",
-            Percentage = 0,
+            Percentage = totalPercentageVehiclePayment,
             Amount = totalVehiclePayment
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Internet Bill",
-            Percentage = 0,
+            Percentage = totalPercentageInternetBill,
             Amount = totalInternetBill
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Trash Bill",
-            Percentage = 0,
+            Percentage = totalPercentageTrashBill,
             Amount = totalTrashBill
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
             Category = "Insurance",
-            Percentage = 0,
+            Percentage = totalPercentageInsurance,
             Amount = totalInsurance
         });
 
         DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
             Category = "Child Support",
-            Percentage = 0,
+            Percentage = totalPercentageChildSupport,
             Amount = totalChildSupport
         });
 
         DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
             Category = "Gift",
-            Percentage = 0,
+            Percentage = totalPercentageGift,
             Amount = totalGift
         });
 
         DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
             Category = "Government",
-            Percentage = 0,
+            Percentage = totalPercentageGovernment,
             Amount = totalGovernment
         });
 
         DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
             Category = "Paycheck",
-            Percentage = 0,
+            Percentage = totalPercentagePaycheck,
             Amount = totalPaycheck
         });
 
         DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
             Category = "Refund",
-            Percentage = 0,
+            Percentage = totalPercentageRefund,
             Amount = totalRefund
         });
 

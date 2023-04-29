@@ -271,7 +271,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="Quarter" FontSize="16" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="16" HorizontalAlignment="Center"/>
                     <TextBlock Grid.Row="1" Text="{Binding ChoresCompletedQuarterText}" HorizontalAlignment="Center"/>
                     <ProgressBar Grid.Row="2" Value="{Binding ChoresCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
                                  BorderBrush="Black" BorderThickness="1"/>

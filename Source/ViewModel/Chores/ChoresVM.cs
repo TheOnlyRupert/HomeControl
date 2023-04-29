@@ -24,7 +24,7 @@ public class ChoresVM : BaseViewModel {
         _choresCompletedWeekTextUser1,
         _choresCompletedMonthTextUser1, _choresCompletedQuarterTextUser1, _choresCompletedDayProgressTextUser1, _choresCompletedWeekProgressTextUser1,
         _choresCompletedMonthProgressTextUser1, _choresCompletedQuarterProgressTextUser1, _dayButtonColorUser1, _weekButtonColorUser1, _monthButtonColorUser1,
-        _quarterButtonColorUser1, _cashAvailableTextColor;
+        _quarterButtonColorUser1, _cashAvailableTextColor, _currentQuarterText;
 
     private int choresCompletedDay, choresCompletedWeek, choresCompletedMonth, choresCompletedQuarter, choresCompletedDayUser1, choresCompletedWeekUser1, choresCompletedMonthUser1,
         _choresCompletedDayProgressValue, _choresCompletedWeekProgressValue, _choresCompletedDayProgressValueUser1, choresCompletedQuarterUser1,
@@ -163,6 +163,14 @@ public class ChoresVM : BaseViewModel {
         CurrentDayText = DateTime.Now.ToString("dddd");
         CurrentMonthText = DateTime.Now.ToString("MMMM");
         CurrentWeekText = "Week: " + calendar.GetWeekOfYear(DateTime.Now, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
+        CurrentQuarterText = "Quarter 1";
+
+        CurrentQuarterText = DateTime.Now.Month switch {
+            > 0 and < 3 => "Quarter: 1",
+            > 2 and < 6 => "Quarter: 2",
+            > 5 and < 9 => "Quarter: 3",
+            _ => "Quarter: 4"
+        };
 
         User1Text = JsonMasterSettings.User1Name;
         User2Text = JsonMasterSettings.User2Name;
@@ -1052,6 +1060,14 @@ public class ChoresVM : BaseViewModel {
         set {
             _cashAvailableTextColor = value;
             RaisePropertyChangedEvent("CashAvailableTextColor");
+        }
+    }
+
+    public string CurrentQuarterText {
+        get => _currentQuarterText;
+        set {
+            _currentQuarterText = value;
+            RaisePropertyChangedEvent("CurrentQuarterText");
         }
     }
 

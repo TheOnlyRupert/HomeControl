@@ -31,6 +31,6 @@ public class RecurringFinanceBlock {
 
 public class DetailedFinanceBlock {
     public string Category { get; set; }
-    public int Percentage { get; set; }
+    public double Percentage { get; set; }
     public int Amount { get; set; }
 }
