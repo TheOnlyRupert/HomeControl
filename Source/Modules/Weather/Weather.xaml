@@ -16,8 +16,8 @@
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" Source="../../../Resources/Images/icons/clock.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="24"/>
@@ -25,28 +25,15 @@
                     <StackPanel Grid.Row="0" Orientation="Vertical">
                         <TextBlock Text="{Binding CurrentDateText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding CurrentTimeText}" FontSize="36" Foreground="White"/>
+                            <TextBlock Text="{Binding CurrentTimeText}" FontSize="48" Foreground="White"/>
                             <TextBlock Text="{Binding CurrentTimeSecondsText}" FontSize="24" Foreground="Gray" VerticalAlignment="Center" Margin="2"/>
                         </StackPanel>
                     </StackPanel>
+
+                    <Frame Grid.Row="1" Source="../MusicPlayer.xaml" Focusable="False" VerticalAlignment="Bottom"/>
                 </Grid>
 
-                <Image Grid.Column="1" Source="../../../Resources/Images/clock/clockface.png" Stretch="Uniform" Margin="8"/>
-                <Image Grid.Column="1" Source="../../../Resources/Images/clock/hand_hour.png" RenderTransformOrigin="0.5, 0.5" Stretch="Uniform" Margin="8">
-                    <Image.RenderTransform>
-                        <RotateTransform Angle="{Binding ClockHourRotation}"/>
-                    </Image.RenderTransform>
-                </Image>
-                <Image Grid.Column="1" Source="../../../Resources/Images/clock/hand_min.png" RenderTransformOrigin="0.5, 0.5" Stretch="Uniform" Margin="8">
-                    <Image.RenderTransform>
-                        <RotateTransform Angle="{Binding ClockMinRotation}"/>
-                    </Image.RenderTransform>
-                </Image>
-                <Image Grid.Column="1" Source="../../../Resources/Images/clock/hand_sec.png" RenderTransformOrigin="0.5, 0.5" Stretch="Uniform" Margin="8">
-                    <Image.RenderTransform>
-                        <RotateTransform Angle="{Binding ClockSecRotation}"/>
-                    </Image.RenderTransform>
-                </Image>
+                <Frame Grid.Column="1" Source="../Hvac.xaml" Focusable="False"/>
 
                 <Grid Grid.Column="2">
                     <Grid>

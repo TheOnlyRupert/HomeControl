@@ -118,6 +118,7 @@
         <Compile Include="Source\IO\JsonFinances.cs"/>
         <Compile Include="Source\IO\JsonGameStats.cs"/>
         <Compile Include="Source\IO\JsonSettings.cs"/>
+        <Compile Include="Source\IO\JsonSpotify.cs"/>
         <Compile Include="Source\IO\JsonTamagotchi.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecast.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecastHourly.cs"/>
@@ -187,8 +188,14 @@
         <Compile Include="Source\Modules\Groceries.xaml.cs">
             <DependentUpon>Groceries.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Hvac.xaml.cs">
+            <DependentUpon>Hvac.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\MealPrep.xaml.cs">
             <DependentUpon>MealPrep.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\MusicPlayer.xaml.cs">
+            <DependentUpon>MusicPlayer.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Password.xaml.cs">
             <DependentUpon>Password.xaml</DependentUpon>
@@ -264,7 +271,9 @@
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowBedVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowClosetVM.cs"/>
         <Compile Include="Source\ViewModel\GroceriesVM.cs"/>
+        <Compile Include="Source\ViewModel\HvacVM.cs"/>
         <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
+        <Compile Include="Source\ViewModel\MusicPlayerVM.cs"/>
         <Compile Include="Source\ViewModel\PasswordVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
@@ -322,7 +331,9 @@
         <Page Include="Source\Modules\Games\TamagotchiWindowCloset.xaml"/>
         <Page Include="Source\Modules\Games\TamagotchiWindowBed.xaml"/>
         <Page Include="Source\Modules\Groceries.xaml"/>
+        <Page Include="Source\Modules\Hvac.xaml"/>
         <Page Include="Source\Modules\MealPrep.xaml"/>
+        <Page Include="Source\Modules\MusicPlayer.xaml"/>
         <Page Include="Source\Modules\Password.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
         <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
