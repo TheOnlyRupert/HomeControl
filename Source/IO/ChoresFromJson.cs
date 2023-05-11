@@ -33,7 +33,12 @@ public class ChoresFromJson {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
                     ReferenceValues.JsonChoreDayMasterList = jsonChores;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoresFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
         } catch (Exception) {
@@ -70,7 +75,12 @@ public class ChoresFromJson {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFromJson",
+                    Description = e.ToString()
+                });
             }
         }
 
@@ -88,7 +98,12 @@ public class ChoresFromJson {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
                     ReferenceValues.JsonChoreDayUser1MasterList = jsonChores;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoresFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
         } catch (Exception) {
@@ -125,7 +140,12 @@ public class ChoresFromJson {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileNameUser1, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileNameUser1 + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFromJson",
+                    Description = e.ToString()
+                });
             }
         }
     }
@@ -152,7 +172,12 @@ public class ChoresFromJson {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
                     ReferenceValues.JsonChoreWeekMasterList = jsonChores;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoresFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
         } catch (Exception) {
@@ -429,7 +454,12 @@ public class ChoresFromJson {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFromJson",
+                    Description = e.ToString()
+                });
             }
         }
 
@@ -447,7 +477,12 @@ public class ChoresFromJson {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
                     ReferenceValues.JsonChoreWeekUser1MasterList = jsonChores;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoresFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
         } catch (Exception) {
@@ -519,7 +554,12 @@ public class ChoresFromJson {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileNameUser1, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileNameUser1 + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFromJson",
+                    Description = e.ToString()
+                });
             }
         }
     }
@@ -546,7 +586,12 @@ public class ChoresFromJson {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
                     ReferenceValues.JsonChoreMonthMasterList = jsonChores;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoresFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
         } catch (Exception) {
@@ -793,7 +838,12 @@ public class ChoresFromJson {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFromJson",
+                    Description = e.ToString()
+                });
             }
         }
 
@@ -811,7 +861,12 @@ public class ChoresFromJson {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
                     ReferenceValues.JsonChoreMonthUser1MasterList = jsonChores;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoresFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
         } catch (Exception) {
@@ -838,7 +893,12 @@ public class ChoresFromJson {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileNameUser1, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileNameUser1 + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFromJson",
+                    Description = e.ToString()
+                });
             }
         }
     }
@@ -869,7 +929,12 @@ public class ChoresFromJson {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
                     ReferenceValues.JsonChoreQuarterMasterList = jsonChores;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoresFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
         } catch (Exception) {
@@ -1046,7 +1111,12 @@ public class ChoresFromJson {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFromJson",
+                    Description = e.ToString()
+                });
             }
         }
 
@@ -1071,7 +1141,12 @@ public class ChoresFromJson {
                     JsonChores jsonChores = JsonSerializer.Deserialize<JsonChores>(choresListString, options);
                     ReferenceValues.JsonChoreQuarterUser1MasterList = jsonChores;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chores.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoresFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
         } catch (Exception) {
@@ -1233,7 +1308,12 @@ public class ChoresFromJson {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFromJson",
+                    Description = e.ToString()
+                });
             }
         }
     }

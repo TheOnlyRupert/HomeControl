@@ -27,9 +27,21 @@ public class ChoreFundsFromJson {
                     JsonChoreFunds jsonSettings = JsonSerializer.Deserialize<JsonChoreFunds>(settingsString, options);
                     ReferenceValues.JsonChoreFundsMaster = jsonSettings;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize chorefunds.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "ChoreFundsFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoreFundsFromJson",
+                Description = e.ToString()
+            });
+        }
     }
 }

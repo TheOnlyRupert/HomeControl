@@ -1,9 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace HomeControl.Source.IO;
 
 public class JsonCalendar {
     public ObservableCollection<CalendarEvents> eventsList { get; set; }
+}
+
+public class JsonCalendarRecurring {
+    public ObservableCollection<CalendarEventsRecurring> eventsListRecurring { get; set; }
 }
 
 public class CalendarEvents {
@@ -18,4 +23,9 @@ public class CalendarEvents {
 public class CalendarEventsCustom {
     public string name { get; set; }
     public int person { get; set; }
+}
+
+public class CalendarEventsRecurring {
+    public DateTime date { get; set; }
+    public string eventText { get; set; }
 }

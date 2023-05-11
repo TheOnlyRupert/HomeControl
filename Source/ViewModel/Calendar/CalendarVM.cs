@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Calendar;
 using HomeControl.Source.Reference;
@@ -12,56 +14,34 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Calendar;
 
 public class CalendarVM : BaseViewModel {
-    private readonly PlaySound uiLocked;
-
-    private string _button1Date, _button1HolidayText, _button1EventText2, _button1EventText3, _button2Date, _button2HolidayText, _button2EventText1,
-        _button2EventText2, _button2EventText3, _button3Date, _button3HolidayText, _button3EventText1, _button3EventText2, _button3EventText3, _button4Date,
-        _button4HolidayText, _button4EventText1, _button4EventText2, _button4EventText3, _button5Date, _button5HolidayText, _button5EventText1, _button5EventText2,
-        _button5EventText3, _button6Date, _button6HolidayText, _button6EventText1, _button6EventText2, _button6EventText3, _button7Date, _button7HolidayText,
-        _button7EventText1, _button7EventText2, _button7EventText3, _button8Date, _button8HolidayText, _button8EventText1, _button8EventText2, _button8EventText3, _button9Date,
-        _button9HolidayText, _button9EventText1, _button9EventText2, _button9EventText3, _button10Date, _button10HolidayText, _button10EventText1, _button10EventText2,
-        _button10EventText3, _button11Date, _button11HolidayText, _button11EventText1, _button11EventText2, _button11EventText3, _button12Date, _button12HolidayText,
-        _button12EventText1, _button12EventText2, _button12EventText3, _button13Date, _button13HolidayText, _button13EventText1, _button13EventText2, _button13EventText3,
-        _button14Date, _button14HolidayText, _button14EventText1, _button14EventText2, _button14EventText3, _button15Date, _button15HolidayText, _button15EventText1,
-        _button15EventText2, _button15EventText3, _button16Date, _button16HolidayText, _button16EventText1, _button16EventText2, _button16EventText3, _button17Date,
-        _button17HolidayText, _button17EventText1, _button17EventText2, _button17EventText3, _button18Date, _button18HolidayText, _button18EventText1, _button18EventText2,
-        _button18EventText3, _button19Date, _button19HolidayText, _button19EventText1, _button19EventText2, _button19EventText3, _button20Date, _button20HolidayText,
-        _button20EventText1, _button20EventText2, _button20EventText3, _button21Date, _button21HolidayText, _button21EventText1, _button21EventText2, _button21EventText3,
-        _button22Date, _button22HolidayText, _button22EventText1, _button22EventText2, _button22EventText3, _button23Date, _button23HolidayText, _button23EventText1,
-        _button23EventText2, _button23EventText3, _button24Date, _button24HolidayText, _button24EventText1, _button24EventText2, _button24EventText3, _button25Date,
-        _button25HolidayText, _button25EventText1, _button25EventText2, _button25EventText3, _button26Date, _button26HolidayText, _button26EventText1, _button26EventText2,
-        _button26EventText3, _button27Date, _button27HolidayText, _button27EventText1, _button27EventText2, _button27EventText3, _button28Date, _button28HolidayText,
-        _button28EventText1, _button28EventText2, _button28EventText3, _button29Date, _button29HolidayText, _button29EventText1, _button29EventText2, _button29EventText3,
-        _button30Date, _button30HolidayText, _button30EventText1, _button30EventText2, _button30EventText3, _button31Date, _button31HolidayText, _button31EventText1,
-        _button31EventText2, _button31EventText3, _button32Date, _button32HolidayText, _button32EventText1, _button32EventText2, _button32EventText3, _button33Date,
-        _button33HolidayText, _button33EventText1, _button33EventText2, _button33EventText3, _button34Date, _button34HolidayText, _button34EventText1, _button34EventText2,
-        _button34EventText3, _button35Date, _button35HolidayText, _button35EventText1, _button35EventText2, _button35EventText3, _button36Date, _button36HolidayText,
-        _button36EventText1, _button36EventText2, _button36EventText3, _button37Date, _button37HolidayText, _button37EventText1, _button37EventText2, _button37EventText3,
-        _button38Date, _button38HolidayText, _button38EventText1, _button38EventText2, _button38EventText3, _button39Date, _button39HolidayText, _button39EventText1,
-        _button39EventText2, _button39EventText3, _button40Date, _button40HolidayText, _button40EventText1, _button40EventText2, _button40EventText3, _button41Date,
-        _button41HolidayText, _button41EventText1, _button41EventText2, _button41EventText3, _button42Date, _button42HolidayText, _button42EventText1, _button42EventText2,
-        _button42EventText3, _currentMonthAndYear, _button1BackgroundColor, _button2BackgroundColor,
-        _button3BackgroundColor, _button4BackgroundColor, _button5BackgroundColor, _button6BackgroundColor, _button7BackgroundColor, _button8BackgroundColor,
-        _button9BackgroundColor, _button10BackgroundColor, _button11BackgroundColor, _button12BackgroundColor, _button13BackgroundColor, _button14BackgroundColor,
-        _button15BackgroundColor, _button16BackgroundColor, _button17BackgroundColor, _button18BackgroundColor, _button19BackgroundColor, _button20BackgroundColor,
-        _button21BackgroundColor, _button22BackgroundColor, _button23BackgroundColor, _button24BackgroundColor, _button25BackgroundColor, _button26BackgroundColor,
-        _button27BackgroundColor, _button28BackgroundColor, _button29BackgroundColor, _button30BackgroundColor, _button31BackgroundColor, _button32BackgroundColor,
-        _button33BackgroundColor, _button34BackgroundColor, _button35BackgroundColor, _button36BackgroundColor, _button37BackgroundColor, _button38BackgroundColor,
-        _button39BackgroundColor, _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor, _dupeText;
+    private string _button1Date, _button1HolidayText, _button2Date, _button2HolidayText, _button3Date, _button3HolidayText, _button4Date, _button4HolidayText, _button5Date,
+        _button5HolidayText, _button6Date, _button6HolidayText, _button7Date, _button7HolidayText, _button8Date, _button8HolidayText, _button9Date, _button9HolidayText,
+        _button10Date, _button10HolidayText, _button11Date, _button11HolidayText, _button12Date, _button12HolidayText, _button13Date, _button13HolidayText, _button14Date,
+        _button14HolidayText, _button15Date, _button15HolidayText, _button16Date, _button16HolidayText, _button17Date, _button17HolidayText, _button18Date, _button18HolidayText,
+        _button19Date, _button19HolidayText, _button20Date, _button20HolidayText, _button21Date, _button21HolidayText, _button22Date, _button22HolidayText, _button23Date,
+        _button23HolidayText, _button24Date, _button24HolidayText, _button25Date, _button25HolidayText, _button26Date, _button26HolidayText, _button27Date, _button27HolidayText,
+        _button28Date, _button28HolidayText, _button29Date, _button29HolidayText, _button30Date, _button30HolidayText, _button31Date, _button31HolidayText, _button32Date,
+        _button32HolidayText, _button33Date, _button33HolidayText, _button34Date, _button34HolidayText, _button35Date, _button35HolidayText, _button36Date, _button36HolidayText,
+        _button37Date, _button37HolidayText, _button38Date, _button38HolidayText, _button39Date, _button39HolidayText, _button40Date, _button40HolidayText, _button41Date,
+        _button41HolidayText, _button42Date, _button42HolidayText, _currentMonthAndYear, _button1BackgroundColor, _button2BackgroundColor, _button3BackgroundColor,
+        _button4BackgroundColor, _button5BackgroundColor, _button6BackgroundColor, _button7BackgroundColor, _button8BackgroundColor, _button9BackgroundColor,
+        _button10BackgroundColor, _button11BackgroundColor, _button12BackgroundColor, _button13BackgroundColor, _button14BackgroundColor, _button15BackgroundColor,
+        _button16BackgroundColor, _button17BackgroundColor, _button18BackgroundColor, _button19BackgroundColor, _button20BackgroundColor, _button21BackgroundColor,
+        _button22BackgroundColor, _button23BackgroundColor, _button24BackgroundColor, _button25BackgroundColor, _button26BackgroundColor, _button27BackgroundColor,
+        _button28BackgroundColor, _button29BackgroundColor, _button30BackgroundColor, _button31BackgroundColor, _button32BackgroundColor, _button33BackgroundColor,
+        _button34BackgroundColor, _button35BackgroundColor, _button36BackgroundColor, _button37BackgroundColor, _button38BackgroundColor, _button39BackgroundColor,
+        _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor;
 
     private ObservableCollection<CalendarEventsCustom> _button1EventList, _button2EventList, _button3EventList, _button4EventList, _button5EventList, _button6EventList,
-        _button7EventList,
-        _button8EventList, _button9EventList, _button10EventList, _button11EventList, _button12EventList, _button13EventList, _button14EventList, _button15EventList,
-        _button16EventList, _button17EventList, _button18EventList, _button19EventList, _button20EventList, _button21EventList, _button22EventList, _button23EventList,
-        _button24EventList, _button25EventList, _button26EventList, _button27EventList, _button28EventList, _button29EventList, _button30EventList, _button31EventList,
-        _button32EventList, _button33EventList, _button34EventList, _button35EventList, _button36EventList, _button37EventList, _button38EventList, _button39EventList,
-        _button40EventList, _button41EventList, _button42EventList;
+        _button7EventList, _button8EventList, _button9EventList, _button10EventList, _button11EventList, _button12EventList, _button13EventList, _button14EventList,
+        _button15EventList, _button16EventList, _button17EventList, _button18EventList, _button19EventList, _button20EventList, _button21EventList, _button22EventList,
+        _button23EventList, _button24EventList, _button25EventList, _button26EventList, _button27EventList, _button28EventList, _button29EventList, _button30EventList,
+        _button31EventList, _button32EventList, _button33EventList, _button34EventList, _button35EventList, _button36EventList, _button37EventList, _button38EventList,
+        _button39EventList, _button40EventList, _button41EventList, _button42EventList;
 
     private DateTime currentDateTime, button1DateTime;
 
     public CalendarVM() {
-        uiLocked = new PlaySound("locked");
-
         Button1EventList = new ObservableCollection<CalendarEventsCustom>();
         Button2EventList = new ObservableCollection<CalendarEventsCustom>();
         Button3EventList = new ObservableCollection<CalendarEventsCustom>();
@@ -111,6 +91,8 @@ public class CalendarVM : BaseViewModel {
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
+
+        ReferenceValues.JsonCalendarMasterEventList = new JsonCalendar[42];
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -140,12 +122,27 @@ public class CalendarVM : BaseViewModel {
             CurrentMonthAndYear = currentDateTime.ToString("MMMM, yyyy");
             PopulateCalendar(currentDateTime);
             break;
+        case "recurring":
+            if (!ReferenceValues.LockUI) {
+                EditRecurring editRecurring = new();
+                editRecurring.ShowDialog();
+                editRecurring.Close();
+                PopulateCalendar(currentDateTime);
+            } else {
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
+            }
+
+            break;
         case "button1":
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.CalendarEventDate = button1DateTime;
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -154,7 +151,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(1);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -163,7 +162,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(2);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -172,7 +173,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(3);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -181,7 +184,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(4);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -190,7 +195,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(5);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -199,7 +206,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(6);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -208,7 +217,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(7);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -217,7 +228,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(8);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -226,7 +239,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(9);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -235,7 +250,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(10);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -244,7 +261,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(11);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -253,7 +272,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(12);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -262,7 +283,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(13);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -271,7 +294,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(14);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -280,7 +305,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(15);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -289,7 +316,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(16);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -298,7 +327,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(17);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -307,7 +338,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(18);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -316,7 +349,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(19);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -325,7 +360,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(20);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -334,7 +371,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(21);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -343,7 +382,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(22);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -352,7 +393,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(23);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -361,7 +404,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(24);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -370,7 +415,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(25);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -379,7 +426,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(26);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -388,7 +437,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(27);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -397,7 +448,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(28);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -406,7 +459,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(29);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -415,7 +470,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(30);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -424,7 +481,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(31);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -433,7 +492,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(32);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -442,7 +503,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(33);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -451,7 +514,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(34);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -460,7 +525,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(35);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -469,7 +536,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(36);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -478,7 +547,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(37);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -487,7 +558,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(38);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -496,7 +569,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(39);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -505,7 +580,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(40);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -514,7 +591,9 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(41);
                 OpenEventDialog();
             } else {
-                uiLocked.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
             }
 
             break;
@@ -528,7 +607,7 @@ public class CalendarVM : BaseViewModel {
         PopulateCalendar(currentDateTime);
     }
 
-    public void PopulateCalendar(DateTime dateTime) {
+    private void PopulateCalendar(DateTime dateTime) {
         /* Clear Calender */
         Button1HolidayText = "";
         Button2HolidayText = "";
@@ -657,12 +736,6 @@ public class CalendarVM : BaseViewModel {
         Button40EventList.Clear();
         Button41EventList.Clear();
         Button42EventList.Clear();
-
-        if (ReferenceValues.IsCalendarDupeModeEnabled) {
-            DupeText = "Duplicate Mode Enabled";
-        } else {
-            DupeText = "";
-        }
 
         /* Constant */
         DateTime startingYear = new(dateTime.Year, 1, 1);
@@ -985,17 +1058,366 @@ public class CalendarVM : BaseViewModel {
             }
         }
 
-        /* Get Calendar Events */
+        /* Get Recurring Events */
         new CalenderEventsFromJson(button1DateTime);
+        ReferenceValues.JsonCalendarRecurringMaster = new JsonCalendarRecurring {
+            eventsListRecurring = new ObservableCollection<CalendarEventsRecurring>()
+        };
 
-        try {
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[0].eventsList) {
-                Button1EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
+        if (File.Exists(ReferenceValues.FILE_DIRECTORY + "recurringDates.json")) {
+            JsonSerializerOptions options = new() {
+                IncludeFields = true
+            };
+
+            try {
+                StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "recurringDates.json");
+                string eventsListString = null;
+                while (!streamReader.EndOfStream) {
+                    eventsListString = streamReader.ReadToEnd();
+                }
+
+                if (eventsListString != null) {
+                    try {
+                        JsonCalendarRecurring calendar = JsonSerializer.Deserialize<JsonCalendarRecurring>(eventsListString, options);
+
+                        if (calendar != null) {
+                            ReferenceValues.JsonCalendarRecurringMaster.eventsListRecurring = calendar.eventsListRecurring;
+                        }
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "CalendarVM",
+                            Description = e.ToString()
+                        });
+                    }
+                }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "CalendarVM",
+                    Description = e.ToString()
                 });
             }
-        } catch (Exception) { }
+        }
+
+        foreach (CalendarEventsRecurring calendar in ReferenceValues.JsonCalendarRecurringMaster.eventsListRecurring) {
+            if (dateTime.Month == calendar.date.Month && dateTime.Day == calendar.date.Day) {
+                Button1EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(1).Month == calendar.date.Month && dateTime.AddDays(1).Day == calendar.date.Day) {
+                Button2EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(2).Month == calendar.date.Month && dateTime.AddDays(2).Day == calendar.date.Day) {
+                Button3EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(3).Month == calendar.date.Month && dateTime.AddDays(3).Day == calendar.date.Day) {
+                Button4EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(4).Month == calendar.date.Month && dateTime.AddDays(4).Day == calendar.date.Day) {
+                Button5EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(5).Month == calendar.date.Month && dateTime.AddDays(5).Day == calendar.date.Day) {
+                Button6EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(6).Month == calendar.date.Month && dateTime.AddDays(6).Day == calendar.date.Day) {
+                Button7EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(7).Month == calendar.date.Month && dateTime.AddDays(7).Day == calendar.date.Day) {
+                Button8EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(8).Month == calendar.date.Month && dateTime.AddDays(8).Day == calendar.date.Day) {
+                Button9EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(9).Month == calendar.date.Month && dateTime.AddDays(9).Day == calendar.date.Day) {
+                Button10EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(10).Month == calendar.date.Month && dateTime.AddDays(10).Day == calendar.date.Day) {
+                Button11EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(11).Month == calendar.date.Month && dateTime.AddDays(11).Day == calendar.date.Day) {
+                Button12EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(12).Month == calendar.date.Month && dateTime.AddDays(12).Day == calendar.date.Day) {
+                Button13EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(13).Month == calendar.date.Month && dateTime.AddDays(13).Day == calendar.date.Day) {
+                Button14EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(14).Month == calendar.date.Month && dateTime.AddDays(14).Day == calendar.date.Day) {
+                Button15EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(15).Month == calendar.date.Month && dateTime.AddDays(15).Day == calendar.date.Day) {
+                Button16EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(16).Month == calendar.date.Month && dateTime.AddDays(16).Day == calendar.date.Day) {
+                Button17EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(17).Month == calendar.date.Month && dateTime.AddDays(17).Day == calendar.date.Day) {
+                Button18EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(18).Month == calendar.date.Month && dateTime.AddDays(18).Day == calendar.date.Day) {
+                Button19EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(19).Month == calendar.date.Month && dateTime.AddDays(19).Day == calendar.date.Day) {
+                Button20EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(20).Month == calendar.date.Month && dateTime.AddDays(20).Day == calendar.date.Day) {
+                Button21EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(21).Month == calendar.date.Month && dateTime.AddDays(21).Day == calendar.date.Day) {
+                Button22EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(22).Month == calendar.date.Month && dateTime.AddDays(22).Day == calendar.date.Day) {
+                Button23EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(23).Month == calendar.date.Month && dateTime.AddDays(23).Day == calendar.date.Day) {
+                Button24EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(24).Month == calendar.date.Month && dateTime.AddDays(24).Day == calendar.date.Day) {
+                Button25EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(25).Month == calendar.date.Month && dateTime.AddDays(25).Day == calendar.date.Day) {
+                Button26EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(26).Month == calendar.date.Month && dateTime.AddDays(26).Day == calendar.date.Day) {
+                Button27EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(27).Month == calendar.date.Month && dateTime.AddDays(27).Day == calendar.date.Day) {
+                Button28EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(28).Month == calendar.date.Month && dateTime.AddDays(28).Day == calendar.date.Day) {
+                Button29EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(29).Month == calendar.date.Month && dateTime.AddDays(29).Day == calendar.date.Day) {
+                Button30EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(30).Month == calendar.date.Month && dateTime.AddDays(30).Day == calendar.date.Day) {
+                Button31EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(31).Month == calendar.date.Month && dateTime.AddDays(31).Day == calendar.date.Day) {
+                Button32EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(32).Month == calendar.date.Month && dateTime.AddDays(32).Day == calendar.date.Day) {
+                Button33EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(33).Month == calendar.date.Month && dateTime.AddDays(33).Day == calendar.date.Day) {
+                Button34EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(34).Month == calendar.date.Month && dateTime.AddDays(34).Day == calendar.date.Day) {
+                Button35EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(35).Month == calendar.date.Month && dateTime.AddDays(35).Day == calendar.date.Day) {
+                Button36EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(36).Month == calendar.date.Month && dateTime.AddDays(36).Day == calendar.date.Day) {
+                Button37EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(37).Month == calendar.date.Month && dateTime.AddDays(37).Day == calendar.date.Day) {
+                Button38EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(38).Month == calendar.date.Month && dateTime.AddDays(38).Day == calendar.date.Day) {
+                Button39EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(39).Month == calendar.date.Month && dateTime.AddDays(39).Day == calendar.date.Day) {
+                Button40EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(40).Month == calendar.date.Month && dateTime.AddDays(40).Day == calendar.date.Day) {
+                Button41EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+
+            if (dateTime.AddDays(41).Month == calendar.date.Month && dateTime.AddDays(41).Day == calendar.date.Day) {
+                Button42EventList.Add(new CalendarEventsCustom {
+                    name = calendar.eventText,
+                    person = 0
+                });
+            }
+        }
+
+        /* Get Calendar Events */
+        try {
+            if (ReferenceValues.JsonCalendarMasterEventList[0].eventsList != null) {
+                foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[0].eventsList) {
+                    Button1EventList.Add(new CalendarEventsCustom {
+                        name = t.startTime + " - " + t.endTime + "  " + t.name,
+                        person = GetIdFromPerson(t.person)
+                    });
+                }
+            }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[1].eventsList) {
@@ -1004,7 +1426,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[2].eventsList) {
@@ -1013,7 +1444,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[3].eventsList) {
@@ -1022,7 +1462,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[4].eventsList) {
@@ -1031,7 +1480,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[5].eventsList) {
@@ -1040,7 +1498,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[6].eventsList) {
@@ -1049,7 +1516,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[7].eventsList) {
@@ -1058,7 +1534,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[8].eventsList) {
@@ -1067,7 +1552,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[9].eventsList) {
@@ -1076,7 +1570,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[10].eventsList) {
@@ -1085,7 +1588,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[11].eventsList) {
@@ -1094,7 +1606,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[12].eventsList) {
@@ -1103,7 +1624,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[13].eventsList) {
@@ -1112,7 +1642,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[14].eventsList) {
@@ -1121,7 +1660,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[15].eventsList) {
@@ -1130,7 +1678,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[16].eventsList) {
@@ -1139,7 +1696,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[17].eventsList) {
@@ -1148,7 +1714,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[18].eventsList) {
@@ -1157,7 +1732,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[19].eventsList) {
@@ -1166,7 +1750,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[20].eventsList) {
@@ -1175,7 +1768,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[21].eventsList) {
@@ -1184,7 +1786,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[22].eventsList) {
@@ -1193,7 +1804,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[23].eventsList) {
@@ -1202,7 +1822,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[24].eventsList) {
@@ -1211,7 +1840,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[25].eventsList) {
@@ -1220,7 +1858,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[26].eventsList) {
@@ -1229,7 +1876,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[27].eventsList) {
@@ -1238,7 +1894,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[28].eventsList) {
@@ -1247,7 +1912,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[29].eventsList) {
@@ -1256,7 +1930,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[30].eventsList) {
@@ -1265,7 +1948,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[31].eventsList) {
@@ -1274,7 +1966,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[32].eventsList) {
@@ -1283,7 +1984,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[33].eventsList) {
@@ -1292,7 +2002,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[34].eventsList) {
@@ -1301,7 +2020,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[35].eventsList) {
@@ -1310,7 +2038,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[36].eventsList) {
@@ -1319,7 +2056,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[37].eventsList) {
@@ -1328,7 +2074,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[38].eventsList) {
@@ -1337,7 +2092,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[39].eventsList) {
@@ -1346,7 +2110,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[40].eventsList) {
@@ -1355,7 +2128,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[41].eventsList) {
@@ -1364,7 +2146,16 @@ public class CalendarVM : BaseViewModel {
                     person = GetIdFromPerson(t.person)
                 });
             }
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "CalendarVM",
+                Description = e.ToString()
+            });
+        }
     }
 
     private static int GetIdFromPerson(string tPerson) {
@@ -2926,14 +3717,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button42EventList = value;
             RaisePropertyChangedEvent("Button42EventList");
-        }
-    }
-
-    public string DupeText {
-        get => _dupeText;
-        set {
-            _dupeText = value;
-            RaisePropertyChangedEvent("DupeText");
         }
     }
 

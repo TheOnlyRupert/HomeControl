@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -12,29 +12,29 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresMonthVM : BaseViewModel {
-    private readonly PlaySound completeSound;
     private readonly string fileName;
 
     private string _room1Task1Color, _room1Task2Color, _room1Task3Color, _room1Task4Color, _room1Task5Color, _room1Task6Color, _room1Task7Color, _room1Task8Color, _room1Task9Color,
-        _room1Task10Color, _room2Task1Color, _room2Task2Color, _room2Task3Color, _room2Task4Color, _room2Task5Color, _room3Task1Color, _room3Task2Color, _room3Task3Color,
+        _room2Task1Color, _room2Task2Color, _room2Task3Color, _room2Task4Color, _room3Task1Color, _room3Task2Color, _room3Task3Color,
         _room3Task4Color,
-        _room3Task5Color, _room3Task6Color, _room3Task7Color, _room4Task1Color, _room4Task2Color, _room4Task3Color, _room4Task4Color, _room4Task5Color, _room4Task6Color,
-        _room4Task7Color, _room5Task1Color, _room5Task2Color, _room5Task3Color, _room6Task1Color, _room6Task2Color, _room6Task3Color, _room6Task4Color, _room6Task5Color,
-        _room7Task1Color, _room7Task2Color, _room8Task1Color, _room8Task2Color, _room8Task3Color, _room8Task4Color, _room8Task5Color, _room1Task1DateText, _room1Task2DateText,
-        _room1Task3DateText, _room1Task4DateText, _room1Task5DateText, _room1Task6DateText, _room1Task7DateText, _room1Task8DateText, _room1Task9DateText, _room1Task10DateText,
+        _room3Task5Color, _room3Task6Color, _room4Task1Color, _room4Task2Color, _room4Task3Color, _room4Task4Color, _room4Task5Color, _room4Task6Color, _room5Task1Color,
+        _room5Task2Color, _room6Task1Color, _room6Task2Color, _room6Task3Color, _room6Task4Color,
+        _room7Task1Color, _room8Task1Color, _room8Task2Color, _room8Task3Color, _room8Task4Color, _room1Task1DateText, _room1Task2DateText,
+        _room1Task3DateText, _room1Task4DateText, _room1Task5DateText, _room1Task6DateText, _room1Task7DateText, _room1Task8DateText, _room1Task9DateText,
         _room2Task1DateText,
-        _room2Task2DateText, _room2Task3DateText, _room2Task4DateText, _room2Task5DateText, _room3Task1DateText, _room3Task2DateText, _room3Task3DateText, _room3Task4DateText,
-        _room3Task5DateText, _room3Task6DateText, _room3Task7DateText, _room4Task1DateText, _room4Task2DateText, _room4Task3DateText, _room4Task4DateText, _room4Task5DateText,
-        _room4Task6DateText, _room4Task7DateText, _room5Task1DateText, _room5Task2DateText, _room5Task3DateText, _room6Task1DateText, _room6Task2DateText, _room6Task3DateText,
-        _room6Task4DateText, _room6Task5DateText, _room7Task1DateText, _room7Task2DateText, _room8Task1DateText, _room8Task2DateText, _room8Task3DateText, _room8Task4DateText,
-        _room8Task5DateText, _room9Task1DateText, _room9Task2DateText, _room9Task3DateText, _room9Task4DateText, _room9Task5DateText, _room10Task1DateText, _room10Task2DateText,
-        _room10Task3DateText, _room10Task4DateText, _room10Task5DateText, _room11Task1DateText, _room15Task1DateText, _room9Task1Color, _room9Task2Color, _room9Task3Color,
-        _room9Task4Color, _room9Task5Color, _room10Task1Color, _room10Task2Color, _room10Task3Color, _room10Task4Color, _room10Task5Color, _room11Task1Color, _room15Task1Color;
+        _room2Task2DateText, _room2Task3DateText, _room2Task4DateText, _room3Task1DateText, _room3Task2DateText, _room3Task3DateText, _room3Task4DateText,
+        _room3Task5DateText, _room3Task6DateText, _room4Task1DateText, _room4Task2DateText, _room4Task3DateText, _room4Task4DateText, _room4Task5DateText,
+        _room4Task6DateText, _room5Task1DateText, _room5Task2DateText, _room6Task1DateText, _room6Task2DateText, _room6Task3DateText,
+        _room6Task4DateText, _room7Task1DateText, _room8Task1DateText, _room8Task2DateText, _room8Task3DateText, _room8Task4DateText, _room9Task1DateText, _room9Task2DateText,
+        _room9Task3DateText, _room9Task4DateText, _room10Task1DateText, _room10Task2DateText,
+        _room10Task3DateText, _room10Task4DateText, _room11Task1DateText, _room15Task1DateText, _room9Task1Color, _room9Task2Color, _room9Task3Color,
+        _room9Task4Color, _room10Task1Color, _room10Task2Color, _room10Task3Color, _room10Task4Color, _room11Task1Color, _room15Task1Color;
+
+    private bool allowSound;
 
     public ChoresMonthVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_month_" + DateTime.Now.ToString("yyyy_MM") + ".json";
-
-        completeSound = new PlaySound("achievement1");
+        allowSound = false;
         GetButtonColors();
     }
 
@@ -182,13 +182,25 @@ public class ChoresMonthVM : BaseViewModel {
             break;
         }
 
+        if (allowSound) {
+            MediaPlayer sound = new();
+            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/achievement1.wav"));
+            sound.Play();
+            allowSound = false;
+        }
+
         try {
             string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreMonthMasterList);
             GC.Collect();
             GC.WaitForPendingFinalizers();
             File.WriteAllText(fileName, jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresMonthVM",
+                Description = e.ToString()
+            });
         }
 
         GetButtonColors();
@@ -201,11 +213,25 @@ public class ChoresMonthVM : BaseViewModel {
             if (result == MessageBoxResult.Yes) {
                 ReferenceValues.JsonChoreMonthMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreMonthMasterList.choreList[index].IsComplete;
                 ReferenceValues.JsonChoreMonthMasterList.choreList[index].Date = "";
+
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "ChoresMonthVM",
+                    Description = ReferenceValues.JsonMasterSettings.User2Name + " removed monthly task: " + value
+                });
             }
         } else {
             ReferenceValues.JsonChoreMonthMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreMonthMasterList.choreList[index].IsComplete;
             ReferenceValues.JsonChoreMonthMasterList.choreList[index].Date = DateTime.Now.ToString("yyyy-MM-dd");
-            completeSound.Play(false);
+            allowSound = true;
+
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "ChoresMonthVM",
+                Description = ReferenceValues.JsonMasterSettings.User2Name + " completed monthly task: " + value
+            });
         }
     }
 

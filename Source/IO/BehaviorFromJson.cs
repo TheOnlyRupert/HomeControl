@@ -27,9 +27,21 @@ public class BehaviorFromJson {
                     JsonBehavior jsonBehavior = JsonSerializer.Deserialize<JsonBehavior>(behaviorString, options);
                     ReferenceValues.JsonBehaviorMaster = jsonBehavior;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize behavior.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "BehaviorFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "BehaviorFromJson",
+                Description = e.ToString()
+            });
+        }
     }
 }

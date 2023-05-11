@@ -8,7 +8,6 @@ namespace HomeControl.Source.Control;
 public class AppActivityTimer {
     private readonly DispatcherTimer _inactivityTimer;
     private readonly bool _MonitorMousePosition;
-    private readonly TimeSpan _timePassed;
     private readonly DispatcherTimer _timePassedTimer;
     private Point _inactiveMousePosition = new(0, 0);
 
@@ -18,10 +17,10 @@ public class AppActivityTimer {
 
         // Time Passed Timer
         _timePassedTimer = new DispatcherTimer();
-        _timePassed = TimeSpan.FromMilliseconds(timePassedInMS);
+        TimeSpan timePassed = TimeSpan.FromMilliseconds(timePassedInMS);
         // Start the time passed timer
         _timePassedTimer.Tick += OnTimePassedHandler;
-        _timePassedTimer.Interval = _timePassed;
+        _timePassedTimer.Interval = timePassed;
         _timePassedTimer.IsEnabled = true;
 
         // Inactivity Timer
@@ -33,7 +32,7 @@ public class AppActivityTimer {
         _inactivityTimer.IsEnabled = true;
     }
 
-    public TimeSpan InactivityThreshold { get; }
+    private TimeSpan InactivityThreshold { get; }
     public event PreProcessInputEventHandler OnActive;
     public event EventHandler OnInactive;
     public event EventHandler OnTimePassed;
@@ -41,8 +40,7 @@ public class AppActivityTimer {
     private void OnActivity(object sender, PreProcessInputEventArgs e) {
         InputEventArgs inputEventArgs = e.StagingItem.Input;
         if (inputEventArgs is MouseEventArgs || inputEventArgs is KeyboardEventArgs) {
-            if (inputEventArgs is MouseEventArgs) {
-                MouseEventArgs mea = inputEventArgs as MouseEventArgs;
+            if (inputEventArgs is MouseEventArgs mea) {
                 // no button is pressed and the position is still the same as the application became inactive
                 if (mea.LeftButton == MouseButtonState.Released &&
                     mea.RightButton == MouseButtonState.Released &&

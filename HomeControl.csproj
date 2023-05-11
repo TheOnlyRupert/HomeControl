@@ -37,18 +37,17 @@
         <Prefer32bit>false</Prefer32bit>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-            <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-            <Private>True</Private>
+        <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1518.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-            <HintPath>packages\Microsoft.Web.WebView2.1.0.1518.46\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+        <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1774.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+            <HintPath>packages\Microsoft.Web.WebView2.1.0.1774.30\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1518.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-            <HintPath>packages\Microsoft.Web.WebView2.1.0.1518.46\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+        <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1774.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+            <HintPath>packages\Microsoft.Web.WebView2.1.0.1774.30\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1518.46, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-            <HintPath>packages\Microsoft.Web.WebView2.1.0.1518.46\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+        <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1774.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+            <HintPath>packages\Microsoft.Web.WebView2.1.0.1774.30\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
         </Reference>
         <Reference Include="mscorlib"/>
         <Reference Include="System"/>
@@ -70,13 +69,11 @@
             <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
             <Private>True</Private>
         </Reference>
-        <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-            <HintPath>packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
-            <Private>True</Private>
+        <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
         </Reference>
-        <Reference Include="System.Text.Json, Version=6.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-            <HintPath>packages\System.Text.Json.6.0.6\lib\net461\System.Text.Json.dll</HintPath>
-            <Private>True</Private>
+        <Reference Include="System.Text.Json, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+            <HintPath>packages\System.Text.Json.7.0.2\lib\net462\System.Text.Json.dll</HintPath>
         </Reference>
         <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
             <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -103,7 +100,6 @@
         <Compile Include="Source\Control\DisableNavigation.cs"/>
         <Compile Include="Source\Control\GridViewScroll.cs"/>
         <Compile Include="Source\Control\GridViewSort.cs"/>
-        <Compile Include="Source\Control\PlaySound.cs"/>
         <Compile Include="Source\Control\SnowEngine.cs"/>
         <Compile Include="Source\Control\SnowInfo.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
@@ -112,6 +108,7 @@
         <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
         <Compile Include="Source\IO\ChoreFundsFromJson.cs"/>
         <Compile Include="Source\IO\ChoresFromJson.cs"/>
+        <Compile Include="Source\IO\DebugTextBlock.cs"/>
         <Compile Include="Source\IO\FinancesFromJson.cs"/>
         <Compile Include="Source\IO\GameStatsFromJson.cs"/>
         <Compile Include="Source\IO\JsonBehavior.cs"/>
@@ -126,11 +123,9 @@
         <Compile Include="Source\IO\JsonWeatherForecastHourly.cs"/>
         <Compile Include="Source\IO\SettingsFromJson.cs"/>
         <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
-        <Compile Include="Source\ModulesTesting\TamagotchiTests\ItemTest.xaml.cs">
-            <DependentUpon>ItemTest.xaml</DependentUpon>
+        <Compile Include="Source\Modules\Calendar\EditRecurring.xaml.cs">
+            <DependentUpon>EditRecurring.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\ModulesTesting\TamagotchiTests\ItemTestList.cs"/>
-        <Compile Include="Source\ModulesTesting\TamagotchiTests\ItemTestVM.cs"/>
         <Compile Include="Source\Modules\Chores\ChoresDay.xaml.cs">
             <DependentUpon>ChoresDay.xaml</DependentUpon>
         </Compile>
@@ -176,9 +171,6 @@
         <Compile Include="Source\Modules\DebugLog.xaml.cs">
             <DependentUpon>DebugLog.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Finances\EditBills.xaml.cs">
-            <DependentUpon>EditBills.xaml</DependentUpon>
-        </Compile>
         <Compile Include="Source\Modules\Function.xaml.cs"/>
         <Compile Include="Source\Modules\Games\CoinFlip.xaml.cs">
             <DependentUpon>CoinFlip.xaml</DependentUpon>
@@ -186,8 +178,11 @@
         <Compile Include="Source\Modules\Games\Tamagotchi.xaml.cs">
             <DependentUpon>Tamagotchi.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Games\TamagotchiFeed.xaml.cs">
-            <DependentUpon>TamagotchiFeed.xaml</DependentUpon>
+        <Compile Include="Source\Modules\Games\TamagotchiWindowCloset.xaml.cs">
+            <DependentUpon>TamagotchiWindowCloset.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Games\TamagotchiWindowBed.xaml.cs">
+            <DependentUpon>TamagotchiWindowBed.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Groceries.xaml.cs">
             <DependentUpon>Groceries.xaml</DependentUpon>
@@ -247,6 +242,7 @@
         </Compile>
         <Compile Include="Source\Reference\ReferenceValues.cs"/>
         <Compile Include="Source\Reference\VerifyInput.cs"/>
+        <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresDayUser1VM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresDayVM.cs"/>
         <Compile Include="Source\ViewModel\Chores\ChoresFundsVM.cs"/>
@@ -262,11 +258,11 @@
         <Compile Include="Source\ViewModel\Chores\ChoresWeekUser1VM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
-        <Compile Include="Source\ViewModel\Finances\EditBillsVM.cs"/>
         <Compile Include="Source\ViewModel\FunctionVM.cs"/>
         <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
-        <Compile Include="Source\ViewModel\Games\TamagotchiFeedVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiVM.cs"/>
+        <Compile Include="Source\ViewModel\Games\TamagotchiWindowBedVM.cs"/>
+        <Compile Include="Source\ViewModel\Games\TamagotchiWindowClosetVM.cs"/>
         <Compile Include="Source\ViewModel\GroceriesVM.cs"/>
         <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
         <Compile Include="Source\ViewModel\PasswordVM.cs"/>
@@ -304,7 +300,7 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Page Include="Source\ModulesTesting\TamagotchiTests\ItemTest.xaml"/>
+        <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresDay.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresDayUser1.xaml"/>
         <Page Include="Source\Modules\Chores\ChoresFunds.xaml"/>
@@ -320,11 +316,11 @@
         <Page Include="Source\Modules\Chores\ChoresWeekUser1.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
         <Page Include="Source\Modules\DebugLog.xaml"/>
-        <Page Include="Source\Modules\Finances\EditBills.xaml"/>
         <Page Include="Source\Modules\Function.xaml"/>
         <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
         <Page Include="Source\Modules\Games\Tamagotchi.xaml"/>
-        <Page Include="Source\Modules\Games\TamagotchiFeed.xaml"/>
+        <Page Include="Source\Modules\Games\TamagotchiWindowCloset.xaml"/>
+        <Page Include="Source\Modules\Games\TamagotchiWindowBed.xaml"/>
         <Page Include="Source\Modules\Groceries.xaml"/>
         <Page Include="Source\Modules\MealPrep.xaml"/>
         <Page Include="Source\Modules\Password.xaml"/>
@@ -405,9 +401,15 @@
         <Resource Include="Resources\Images\weather\wind_direction.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\buzzer.wav"/>
-        <Resource Include="Resources\Sounds\ding.wav"/>
-        <Resource Include="Resources\Sounds\tap.wav"/>
+        <Content Include="Resources\Sounds\buzzer.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\ding.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\tap.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\icons\pictionary.png"/>
@@ -495,28 +497,52 @@
         <Resource Include="Resources\Images\icons\workout.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\achievement1.wav"/>
-        <Resource Include="Resources\Sounds\achievement2.wav"/>
-        <Resource Include="Resources\Sounds\alarm1.wav"/>
-        <Resource Include="Resources\Sounds\alarm2.wav"/>
-        <Resource Include="Resources\Sounds\yay.wav"/>
+        <Content Include="Resources\Sounds\achievement1.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\achievement2.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\alarm1.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\alarm2.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\yay.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\reward.wav"/>
+        <Content Include="Resources\Sounds\reward.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\aww.wav"/>
+        <Content Include="Resources\Sounds\aww.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\error.wav"/>
+        <Content Include="Resources\Sounds\error.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\cash.wav"/>
+        <Content Include="Resources\Sounds\cash.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\scribble1.wav"/>
-        <Resource Include="Resources\Sounds\scribble2.wav"/>
-        <Resource Include="Resources\Sounds\scribble3.wav"/>
+        <Content Include="Resources\Sounds\scribble1.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\scribble2.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\scribble3.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\weather\wind_direction2.png"/>
@@ -547,7 +573,9 @@
         <Resource Include="Resources\Images\games\quarter_tail.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\coin_flip.wav"/>
+        <Content Include="Resources\Sounds\coin_flip.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\games\eggs_accented\tile000.png"/>
@@ -968,26 +996,40 @@
         <Resource Include="Resources\Images\games\eggs_accented\tile415.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\egg_hatch.wav"/>
+        <Content Include="Resources\Sounds\egg_hatch.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Source\ModulesTesting"/>
+        <Content Include="Resources\Sounds\locked.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\timerDone.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\locked.wav"/>
-        <Resource Include="Resources\Sounds\timerDone.wav"/>
+        <Content Include="Resources\Sounds\missing_info.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Sounds\missing_info.wav"/>
+        <Resource Include="Resources\Images\games\tamagotchi\house.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\Images\games\tamagotchi\inventory.png"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Resources\Sounds\birthday.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
-    <Import Project="packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')"/>
+    <Import Project="packages\Microsoft.Web.WebView2.1.0.1774.30\build\Microsoft.Web.WebView2.targets" Condition="Exists('packages\Microsoft.Web.WebView2.1.0.1774.30\build\Microsoft.Web.WebView2.targets')"/>
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
         <PropertyGroup>
             <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
         </PropertyGroup>
-        <Error Condition="!Exists('packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Text.Json.6.0.6\build\System.Text.Json.targets'))"/>
-        <Error Condition="!Exists('packages\Microsoft.Web.WebView2.1.0.1518.46\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Web.WebView2.1.0.1518.46\build\Microsoft.Web.WebView2.targets'))"/>
+        <Error Condition="!Exists('packages\Microsoft.Web.WebView2.1.0.1774.30\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Web.WebView2.1.0.1774.30\build\Microsoft.Web.WebView2.targets'))"/>
     </Target>
-    <Import Project="packages\Microsoft.Web.WebView2.1.0.1518.46\build\Microsoft.Web.WebView2.targets" Condition="Exists('packages\Microsoft.Web.WebView2.1.0.1518.46\build\Microsoft.Web.WebView2.targets')"/>
 </Project>

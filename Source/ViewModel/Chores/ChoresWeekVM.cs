@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -12,7 +12,6 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresWeekVM : BaseViewModel {
-    private readonly PlaySound completeSound;
     private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/chores_week_" + ReferenceValues.ChoreWeekStartDate.ToString("yyyy_MM_dd") + ".json";
 
     private string _room1Task1Color, _room1Task2Color, _room1Task3Color, _room1Task4Color, _room1Task5Color, _room2Task1Color, _room2Task2Color, _room2Task3Color, _room2Task4Color,
@@ -33,8 +32,10 @@ public class ChoresWeekVM : BaseViewModel {
         _room10Task4DateText, _room10Task5DateText, _room11Task1DateText, _room11Task2DateText, _room12Task1DateText, _room12Task2DateText, _room11Task1Color, _room11Task2Color,
         _room12Task1Color, _room12Task2Color;
 
+    private bool allowSound;
+
     public ChoresWeekVM() {
-        completeSound = new PlaySound("achievement1");
+        allowSound = false;
         GetButtonColors();
     }
 
@@ -200,13 +201,25 @@ public class ChoresWeekVM : BaseViewModel {
             break;
         }
 
+        if (allowSound) {
+            MediaPlayer sound = new();
+            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/achievement1.wav"));
+            sound.Play();
+            allowSound = false;
+        }
+
         try {
             string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreWeekMasterList);
             GC.Collect();
             GC.WaitForPendingFinalizers();
             File.WriteAllText(fileName, jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresWeekVM",
+                Description = e.ToString()
+            });
         }
 
         GetButtonColors();
@@ -219,11 +232,25 @@ public class ChoresWeekVM : BaseViewModel {
             if (result == MessageBoxResult.Yes) {
                 ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete;
                 ReferenceValues.JsonChoreWeekMasterList.choreList[index].Date = "";
+
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "ChoresWeekVM",
+                    Description = ReferenceValues.JsonMasterSettings.User2Name + " removed weekly task: " + value
+                });
             }
         } else {
             ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete;
             ReferenceValues.JsonChoreWeekMasterList.choreList[index].Date = DateTime.Now.ToString("yyyy-MM-dd");
-            completeSound.Play(false);
+            allowSound = true;
+
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "ChoresWeekVM",
+                Description = ReferenceValues.JsonMasterSettings.User2Name + " completed weekly task: " + value
+            });
         }
     }
 

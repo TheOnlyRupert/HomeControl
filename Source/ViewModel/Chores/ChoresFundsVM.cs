@@ -5,7 +5,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
 using HomeControl.Source.Reference;
@@ -14,8 +14,6 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresFundsVM : BaseViewModel {
-    private readonly PlaySound cashSound, missingInfoSound;
-
     private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsTotal,
         _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color, _dateText, _cashAvailableTextColor;
 
@@ -23,9 +21,6 @@ public class ChoresFundsVM : BaseViewModel {
     private FinanceBlockChoreFund _financeSelected;
 
     public ChoresFundsVM() {
-        cashSound = new PlaySound("cash");
-        missingInfoSound = new PlaySound("missing_info");
-
         CurrentMonth = DateTime.Now.ToString("MMMM");
         DateText = DateTime.Now.ToShortDateString();
 
@@ -74,9 +69,13 @@ public class ChoresFundsVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                missingInfoSound.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                sound.Play();
             } else if (string.IsNullOrWhiteSpace(CostText)) {
-                missingInfoSound.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                sound.Play();
             } else {
                 FinanceList.Add(new FinanceBlockChoreFund {
                     Item = DescriptionText,
@@ -84,7 +83,9 @@ public class ChoresFundsVM : BaseViewModel {
                     Date = DateTime.Parse(DateText).ToShortDateString()
                 });
 
-                cashSound.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
+                sound.Play();
                 DescriptionText = "";
                 CostText = "";
                 Refresh();
@@ -95,9 +96,13 @@ public class ChoresFundsVM : BaseViewModel {
             try {
                 if (FinanceSelected.Item != null) {
                     if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                        missingInfoSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                        sound.Play();
                     } else if (string.IsNullOrWhiteSpace(CostText)) {
-                        missingInfoSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                        sound.Play();
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -107,7 +112,9 @@ public class ChoresFundsVM : BaseViewModel {
                                 Date = DateTime.Parse(DateText).ToShortDateString()
                             });
 
-                            cashSound.Play(false);
+                            MediaPlayer sound = new();
+                            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
+                            sound.Play();
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
                             CostText = "";
@@ -115,7 +122,14 @@ public class ChoresFundsVM : BaseViewModel {
                         }
                     }
                 }
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFundsVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
         case "delete":
@@ -123,12 +137,21 @@ public class ChoresFundsVM : BaseViewModel {
                 if (FinanceSelected.Item != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
-                        cashSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
+                        sound.Play();
                         FinanceList.Remove(FinanceSelected);
                         Refresh();
                     }
                 }
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFundsVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
 
@@ -207,7 +230,12 @@ public class ChoresFundsVM : BaseViewModel {
             GC.WaitForPendingFinalizers();
             File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "chorefunds.json", jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresFundsVM",
+                Description = e.ToString()
+            });
         }
     }
 

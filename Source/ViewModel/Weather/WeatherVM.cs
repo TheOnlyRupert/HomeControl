@@ -132,7 +132,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed1 = forecast.properties.periods[0].windSpeed;
             SevenDayForecastDescription1 = forecast.properties.periods[0].shortForecast;
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName2 = forecast.properties.periods[1].name;
@@ -146,7 +153,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed2 = forecast.properties.periods[1].windSpeed;
             SevenDayForecastDescription2 = forecast.properties.periods[1].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName3 = forecast.properties.periods[2].name;
@@ -160,7 +174,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed3 = forecast.properties.periods[2].windSpeed;
             SevenDayForecastDescription3 = forecast.properties.periods[2].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName4 = forecast.properties.periods[3].name;
@@ -174,7 +195,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed4 = forecast.properties.periods[3].windSpeed;
             SevenDayForecastDescription4 = forecast.properties.periods[3].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName5 = forecast.properties.periods[4].name;
@@ -188,7 +216,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed5 = forecast.properties.periods[4].windSpeed;
             SevenDayForecastDescription5 = forecast.properties.periods[4].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName6 = forecast.properties.periods[5].name;
@@ -202,7 +237,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed6 = forecast.properties.periods[5].windSpeed;
             SevenDayForecastDescription6 = forecast.properties.periods[5].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName7 = forecast.properties.periods[6].name;
@@ -216,7 +258,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed7 = forecast.properties.periods[6].windSpeed;
             SevenDayForecastDescription7 = forecast.properties.periods[6].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName8 = forecast.properties.periods[7].name;
@@ -230,7 +279,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed8 = forecast.properties.periods[7].windSpeed;
             SevenDayForecastDescription8 = forecast.properties.periods[7].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName9 = forecast.properties.periods[8].name;
@@ -244,7 +300,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed9 = forecast.properties.periods[8].windSpeed;
             SevenDayForecastDescription9 = forecast.properties.periods[8].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName10 = forecast.properties.periods[9].name;
@@ -258,7 +321,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed10 = forecast.properties.periods[9].windSpeed;
             SevenDayForecastDescription10 = forecast.properties.periods[9].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName11 = forecast.properties.periods[10].name;
@@ -272,7 +342,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed11 = forecast.properties.periods[10].windSpeed;
             SevenDayForecastDescription11 = forecast.properties.periods[10].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName12 = forecast.properties.periods[11].name;
@@ -286,7 +363,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed12 = forecast.properties.periods[11].windSpeed;
             SevenDayForecastDescription12 = forecast.properties.periods[11].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName13 = forecast.properties.periods[12].name;
@@ -300,7 +384,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed13 = forecast.properties.periods[12].windSpeed;
             SevenDayForecastDescription13 = forecast.properties.periods[12].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
         try {
             SevenDayForecastName14 = forecast.properties.periods[13].name;
@@ -314,7 +405,14 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindSpeed14 = forecast.properties.periods[13].windSpeed;
             SevenDayForecastDescription14 = forecast.properties.periods[13].shortForecast;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+        }
 
 
         /* Update thermometer image */

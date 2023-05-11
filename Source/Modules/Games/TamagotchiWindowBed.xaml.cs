@@ -2,9 +2,9 @@
 
 namespace HomeControl.Source.Modules.Games;
 
-public partial class TamagotchiFeed {
-    public TamagotchiFeed() {
+public partial class TamagotchiWindowBed {
+    public TamagotchiWindowBed() {
         InitializeComponent();
-        DataContext = new TamagotchiFeedVM();
+        DataContext = new TamagotchiWindowBedVM();
     }
 }

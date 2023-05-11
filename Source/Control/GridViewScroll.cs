@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Windows.Controls;
+using HomeControl.Source.IO;
+using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.Control;
 
@@ -14,6 +16,15 @@ public class CustomListView : ListView {
             }
 
             base.OnItemsChanged(e);
-        } catch (Exception) { }
+        } catch (NullReferenceException) {
+            // NORMAL
+        } catch (Exception e2) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "GridViewScroll",
+                Description = e2.ToString()
+            });
+        }
     }
 }

@@ -25,9 +25,21 @@ public class GameStatsFromJson {
                     JsonGameStats jsonGameStats = JsonSerializer.Deserialize<JsonGameStats>(gameStatsString, options);
                     ReferenceValues.JsonGameStatsMaster = jsonGameStats;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize gameStats.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "GameStatsFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "GameStatsFromJson",
+                Description = e.ToString()
+            });
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -12,7 +12,6 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresQuarterUser1VM : BaseViewModel {
-    private readonly PlaySound completeSound;
     private readonly string fileName;
 
     private string _room1Task1Color, _room1Task2Color, _room1Task3Color, _room2Task1Color, _room2Task2Color, _room3Task1Color, _room3Task2Color, _room4Task1Color, _room4Task2Color,
@@ -23,6 +22,8 @@ public class ChoresQuarterUser1VM : BaseViewModel {
         _room7Task2DateText, _room8Task1DateText, _room8Task2DateText, _room9Task1DateText, _room9Task2DateText, _room10Task1DateText, _room10Task2DateText, _room11Task1DateText,
         _room11Task2DateText, _room12Task1DateText, _room12Task2DateText, _room16Task1DateText, _room16Task2DateText, _room1Task1DateText, _room1Task2DateText;
 
+    private bool allowSound;
+
     public ChoresQuarterUser1VM() {
         fileName = DateTime.Now.Month switch {
             > 0 and < 3 => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter1User1_" + DateTime.Now.ToString("yyyy") + ".json",
@@ -31,7 +32,8 @@ public class ChoresQuarterUser1VM : BaseViewModel {
             _ => ReferenceValues.FILE_DIRECTORY + "chores/chores_quarter4User1_" + DateTime.Now.ToString("yyyy") + ".json"
         };
 
-        completeSound = new PlaySound("achievement1");
+        allowSound = false;
+
         GetButtonColors();
     }
 
@@ -131,13 +133,25 @@ public class ChoresQuarterUser1VM : BaseViewModel {
             break;
         }
 
+        if (allowSound) {
+            MediaPlayer sound = new();
+            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/achievement1.wav"));
+            sound.Play();
+            allowSound = false;
+        }
+
         try {
             string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreQuarterUser1MasterList);
             GC.Collect();
             GC.WaitForPendingFinalizers();
             File.WriteAllText(fileName, jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresQuarterUser1VM",
+                Description = e.ToString()
+            });
         }
 
         GetButtonColors();
@@ -150,11 +164,25 @@ public class ChoresQuarterUser1VM : BaseViewModel {
             if (result == MessageBoxResult.Yes) {
                 ReferenceValues.JsonChoreQuarterUser1MasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreQuarterUser1MasterList.choreList[index].IsComplete;
                 ReferenceValues.JsonChoreQuarterUser1MasterList.choreList[index].Date = "";
+
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "ChoresQuarterUser1VM",
+                    Description = ReferenceValues.JsonMasterSettings.User1Name + " removed quarterly task: " + value
+                });
             }
         } else {
             ReferenceValues.JsonChoreQuarterUser1MasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreQuarterUser1MasterList.choreList[index].IsComplete;
             ReferenceValues.JsonChoreQuarterUser1MasterList.choreList[index].Date = DateTime.Now.ToString("yyyy-MM-dd");
-            completeSound.Play(false);
+            allowSound = true;
+
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "ChoresQuarterUser1VM",
+                Description = ReferenceValues.JsonMasterSettings.User1Name + " completed quarterly task: " + value
+            });
         }
     }
 

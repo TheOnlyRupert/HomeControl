@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -97,7 +98,12 @@ public class SettingsVM : BaseViewModel {
                     GC.WaitForPendingFinalizers();
                     File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "settings.json", jsonString);
                 } catch (Exception e) {
-                    Console.WriteLine("Unable to save finances.json... " + e.Message);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "SettingsVM",
+                        Description = e.ToString()
+                    });
                 }
             } else {
                 MessageBox.Show("Fields cannot be blank", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);

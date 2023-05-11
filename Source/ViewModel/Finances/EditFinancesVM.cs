@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -14,7 +14,6 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class EditFinancesVM : BaseViewModel {
-    private readonly PlaySound cashSound, missingInfoSound;
     private readonly string fileName;
     private ObservableCollection<string> _categoryList;
 
@@ -45,9 +44,6 @@ public class EditFinancesVM : BaseViewModel {
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
-        cashSound = new PlaySound("cash");
-        missingInfoSound = new PlaySound("missing_info");
-
         selectedPerson = "Home";
         User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
         User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
@@ -92,10 +88,22 @@ public class EditFinancesVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                missingInfoSound.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                sound.Play();
             } else if (string.IsNullOrWhiteSpace(CostText)) {
-                missingInfoSound.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                sound.Play();
             } else {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "EditFinancesVM",
+                    Description = "Adding finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
+                                  CategorySelected + ", " + selectedPerson
+                });
+
                 FinanceList.Add(new FinanceBlock {
                     AddSub = AddOrSub,
                     Date = DateTime.Parse(DateText).ToShortDateString(),
@@ -105,11 +113,9 @@ public class EditFinancesVM : BaseViewModel {
                     Person = selectedPerson
                 });
 
-                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] ADDING finance: " + AddOrSub + ", " +
-                                             DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
-                                             selectedPerson + "\n";
-
-                cashSound.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
+                sound.Play();
                 DescriptionText = "";
                 CostText = "";
                 RefreshDetailedView();
@@ -121,12 +127,25 @@ public class EditFinancesVM : BaseViewModel {
             try {
                 if (FinanceSelected.Item != null) {
                     if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                        missingInfoSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                        sound.Play();
                     } else if (string.IsNullOrWhiteSpace(CostText)) {
-                        missingInfoSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                        sound.Play();
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "EditFinancesVM",
+                                Description = "Updating finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText +
+                                              ", " +
+                                              CategorySelected + ", " + selectedPerson
+                            });
+
                             FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
                                 AddSub = AddOrSub,
                                 Date = DateTime.Parse(DateText).ToShortDateString(),
@@ -136,11 +155,9 @@ public class EditFinancesVM : BaseViewModel {
                                 Person = selectedPerson
                             });
 
-                            ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] UPDATING finance: " + AddOrSub + ", " +
-                                                         DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
-                                                         selectedPerson + "\n";
-
-                            cashSound.Play(false);
+                            MediaPlayer sound = new();
+                            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
+                            sound.Play();
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
                             CostText = "";
@@ -149,7 +166,14 @@ public class EditFinancesVM : BaseViewModel {
                         }
                     }
                 }
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditFinancesVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
         case "delete":
@@ -157,18 +181,30 @@ public class EditFinancesVM : BaseViewModel {
                 if (FinanceSelected.Item != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
-                        cashSound.Play(false);
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "EditFinancesVM",
+                            Description = "Removing finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
+                                          CategorySelected + ", " + selectedPerson
+                        });
 
-                        ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/INFO] REMOVING finance: " + AddOrSub + ", " +
-                                                     DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " + CategorySelected + ", " +
-                                                     selectedPerson + "\n";
-
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
+                        sound.Play();
                         FinanceList.Remove(FinanceSelected);
                         RefreshDetailedView();
                         SaveJson();
                     }
                 }
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditFinancesVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
 
@@ -315,7 +351,14 @@ public class EditFinancesVM : BaseViewModel {
         if (FinanceList.Count > 0) {
             try {
                 ReferenceValues.JsonFinanceMasterList.financeList = FinanceList;
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditFinancesVM",
+                    Description = e.ToString()
+                });
+            }
 
             try {
                 string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceMasterList);
@@ -323,7 +366,12 @@ public class EditFinancesVM : BaseViewModel {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "EditFinances/ERROR] Unable to save finances.json... " + e.Message + "\n";
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditFinancesVM",
+                    Description = e.ToString()
+                });
             }
         }
     }
@@ -373,205 +421,443 @@ public class EditFinancesVM : BaseViewModel {
             case "Billing":
                 try {
                     totalBilling += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Grocery":
                 try {
                     totalGrocery += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Petrol":
                 try {
                     totalPetrol += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Restaurant/Takeout":
                 try {
                     totalRestaurantTakeout += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Shopping":
                 try {
                     totalShopping += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Health":
                 try {
                     totalHealth += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Travel":
                 try {
                     totalTravel += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Coffee":
                 try {
                     totalCoffee += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Entertainment":
                 try {
                     totalEntertainment += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Services":
                 try {
                     totalServices += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Personal Care":
                 try {
                     totalPersonalCare += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Home Improvement":
                 try {
                     totalHomeImprovement += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Alcohol":
                 try {
                     totalAlcohol += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Firearms":
                 try {
                     totalFirearms += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Streaming Service":
                 try {
                     totalStreamingService += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Brittany Fund":
                 try {
                     totalBrittanyFund += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Stupid/Dumb":
                 try {
                     totalStupidDumb += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Interest":
                 try {
                     totalInterest += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Carry Over":
                 try {
                     totalCarryOver += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Electric Bill":
                 try {
                     totalElectricBill += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Water Bill":
                 try {
                     totalWaterBill += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Phone Bill":
                 try {
                     totalPhoneBill += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Gas Bill":
                 try {
                     totalGasBill += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Mortgage/Rent":
                 try {
                     totalMortgageRent += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Child Care":
                 try {
                     totalChildCare += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Vehicle Payment":
                 try {
                     totalVehiclePayment += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Internet Bill":
                 try {
                     totalInternetBill += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Trash Bill":
                 try {
                     totalTrashBill += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Insurance":
                 try {
                     totalInsurance += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Child Support":
                 try {
                     totalChildSupport += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Gift":
                 try {
                     totalGift += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Government":
                 try {
                     totalGovernment += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Paycheck":
                 try {
                     totalPaycheck += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             case "Refund":
                 try {
                     totalRefund += int.Parse(financeBlock.Cost);
-                } catch (Exception) { }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                }
 
                 break;
             }

@@ -16,13 +16,13 @@ public static class DisableNavigation {
         o.SetValue(DisableProperty, value);
     }
 
-    public static void DisableChanged(object sender, DependencyPropertyChangedEventArgs e) {
+    private static void DisableChanged(object sender, DependencyPropertyChangedEventArgs e) {
         Frame frame = (Frame)sender;
         frame.Navigated += DontNavigate;
         frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
     }
 
-    public static void DontNavigate(object sender, NavigationEventArgs e) {
+    private static void DontNavigate(object sender, NavigationEventArgs e) {
         ((Frame)sender).NavigationService.RemoveBackEntry();
     }
 }

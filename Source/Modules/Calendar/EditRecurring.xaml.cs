@@ -1,12 +1,12 @@
 ﻿using System.Windows;
-using HomeControl.Source.ViewModel.Finances;
+using HomeControl.Source.ViewModel.Calendar;
 
-namespace HomeControl.Source.Modules.Finances;
+namespace HomeControl.Source.Modules.Calendar;
 
-public partial class EditBills {
-    public EditBills() {
+public partial class EditRecurring {
+    public EditRecurring() {
         InitializeComponent();
-        DataContext = new EditBillsVM();
+        DataContext = new EditRecurringVM();
     }
 
     private void CustomListLoaded(object sender, RoutedEventArgs e) {

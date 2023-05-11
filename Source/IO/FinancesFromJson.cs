@@ -25,28 +25,21 @@ public class FinancesFromJson {
                     JsonFinances jsonFinances = JsonSerializer.Deserialize<JsonFinances>(financeListString, options);
                     ReferenceValues.JsonFinanceMasterList = jsonFinances;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize finances.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "FinancesFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
-        } catch (Exception) { }
-
-        try {
-            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "bills.json");
-            string financeListString = null;
-            while (!streamReader.EndOfStream) {
-                financeListString = streamReader.ReadToEnd();
-            }
-
-            streamReader.Close();
-
-            if (financeListString != null) {
-                try {
-                    JsonRecurringFinances jsonRecurringFinances = JsonSerializer.Deserialize<JsonRecurringFinances>(financeListString, options);
-                    ReferenceValues.JsonRecurringFinanceMasterList = jsonRecurringFinances;
-                } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize bills.json..." + e);
-                }
-            }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "FinancesFromJson",
+                Description = e.ToString()
+            });
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.Reference;
@@ -12,12 +12,10 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesVM : BaseViewModel {
-    private readonly PlaySound uiLocked;
     private string _cashIncomeText, _cashExpenseText, _cashAvailableText, _cashAvailableTextColor;
     private int expense, income, available;
 
     public FinancesVM() {
-        uiLocked = new PlaySound("locked");
         CashIncomeText = "";
         CashExpenseText = "";
         CashAvailableText = "";
@@ -25,7 +23,7 @@ public class FinancesVM : BaseViewModel {
         income = 0;
         available = 0;
         CashAvailableTextColor = "CornflowerBlue";
-        FinancesFromJson financesFromJson = new();
+        new FinancesFromJson();
         RefreshFinances();
         BackupFinances();
 
@@ -46,7 +44,9 @@ public class FinancesVM : BaseViewModel {
                 break;
             }
         } else {
-            uiLocked.Play(false);
+            MediaPlayer uiLocked = new();
+            uiLocked.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+            uiLocked.Play();
         }
     }
 
@@ -66,22 +66,43 @@ public class FinancesVM : BaseViewModel {
 
         /* Calculate income, expense, and available cash */
         try {
-            for (int i = 0; i < ReferenceValues.JsonFinanceMasterList.financeList.Count; i++) {
-                if (ReferenceValues.JsonFinanceMasterList.financeList[i].AddSub == "SUB") {
+            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMasterList.financeList) {
+                if (t.AddSub == "SUB") {
                     try {
-                        expense += int.Parse(ReferenceValues.JsonFinanceMasterList.financeList[i].Cost);
-                    } catch (Exception) { }
+                        expense += int.Parse(t.Cost);
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "FinancesVM",
+                            Description = e.ToString()
+                        });
+                    }
                 }
             }
 
-            for (int i = 0; i < ReferenceValues.JsonFinanceMasterList.financeList.Count; i++) {
-                if (ReferenceValues.JsonFinanceMasterList.financeList[i].AddSub == "ADD") {
+            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMasterList.financeList) {
+                if (t.AddSub == "ADD") {
                     try {
-                        income += int.Parse(ReferenceValues.JsonFinanceMasterList.financeList[i].Cost);
-                    } catch (Exception) { }
+                        income += int.Parse(t.Cost);
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "FinancesVM",
+                            Description = e.ToString()
+                        });
+                    }
                 }
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "FinancesVM",
+                Description = e.ToString()
+            });
+        }
 
         available = income - expense;
 
@@ -104,7 +125,12 @@ public class FinancesVM : BaseViewModel {
             GC.WaitForPendingFinalizers();
             File.WriteAllText(fileName, jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "FinancesVM",
+                Description = e.ToString()
+            });
         }
     }
 

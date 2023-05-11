@@ -66,7 +66,7 @@
                         <TextBlock Text="To Do" HorizontalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="recipies">
+                <Button Grid.Row="0" Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="recipes">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>

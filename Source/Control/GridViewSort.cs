@@ -18,7 +18,7 @@ public class GridViewSort {
                     if (o is ItemsControl listView) {
                         if (!GetAutoSort(listView)) // Don't change click handler if AutoSort enabled
                         {
-                            if (e.OldValue != null && e.NewValue == null) {
+                            if (e is { OldValue: not null, NewValue: null }) {
                                 listView.RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
                             }
 
@@ -59,7 +59,7 @@ public class GridViewSort {
             typeof(GridViewSort),
             new UIPropertyMetadata(null));
 
-    public static ICommand GetCommand(DependencyObject obj) {
+    private static ICommand GetCommand(DependencyObject obj) {
         return (ICommand)obj.GetValue(CommandProperty);
     }
 
@@ -102,7 +102,7 @@ public class GridViewSort {
         }
     }
 
-    public static T GetAncestor<T>(DependencyObject reference) where T : DependencyObject {
+    private static T GetAncestor<T>(DependencyObject reference) where T : DependencyObject {
         DependencyObject parent = VisualTreeHelper.GetParent(reference);
         while (!(parent is T)) {
             if (parent != null) {
@@ -113,16 +113,12 @@ public class GridViewSort {
         return (T)parent;
     }
 
-    public static void ApplySort(ICollectionView view, string propertyName) {
+    private static void ApplySort(ICollectionView view, string propertyName) {
         ListSortDirection direction = ListSortDirection.Ascending;
         if (view.SortDescriptions.Count > 0) {
             SortDescription currentSort = view.SortDescriptions[0];
             if (currentSort.PropertyName == propertyName) {
-                if (currentSort.Direction == ListSortDirection.Ascending) {
-                    direction = ListSortDirection.Descending;
-                } else {
-                    direction = ListSortDirection.Ascending;
-                }
+                direction = currentSort.Direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             }
 
             view.SortDescriptions.Clear();

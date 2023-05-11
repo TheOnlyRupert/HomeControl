@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using HomeControl.Source.Control;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.Reference;
@@ -10,8 +10,6 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class BehaviorVM : BaseViewModel {
-    private readonly PlaySound uiLocked;
-
     private BitmapImage _imageUser1, _imageUser2, _imageChild1, _imageChild2, _imageChild3;
 
     private int _progressBarUser1Value, _progressBarUser2Value, _progressBarChild1Value, _progressBarChild2Value, _progressBarChild3Value;
@@ -23,8 +21,6 @@ public class BehaviorVM : BaseViewModel {
         _progressBarUser1ValueText, _progressBarUser2ValueText, _progressBarChild1ValueText, _progressBarChild2ValueText, _progressBarChild3ValueText;
 
     public BehaviorVM() {
-        uiLocked = new PlaySound("locked");
-
         User1Name = ReferenceValues.JsonMasterSettings.User1Name;
         User2Name = ReferenceValues.JsonMasterSettings.User2Name;
         Child1Name = ReferenceValues.JsonMasterSettings.User3Name;
@@ -41,7 +37,14 @@ public class BehaviorVM : BaseViewModel {
             ImageChild2 = new BitmapImage(uri);
             uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageChild3 = new BitmapImage(uri);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "BehaviorVM",
+                Description = e.ToString()
+            });
+        }
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -57,7 +60,14 @@ public class BehaviorVM : BaseViewModel {
                 ReferenceValues.JsonBehaviorMaster.Child2Strikes = 0;
                 ReferenceValues.JsonBehaviorMaster.Child3Strikes = 0;
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "BehaviorVM",
+                Description = e.ToString()
+            });
+        }
 
         RefreshBehavior();
     }
@@ -371,7 +381,9 @@ public class BehaviorVM : BaseViewModel {
             editBehavior.Close();
             RefreshBehavior();
         } else {
-            uiLocked.Play(false);
+            MediaPlayer uiLocked = new();
+            uiLocked.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+            uiLocked.Play();
         }
     }
 

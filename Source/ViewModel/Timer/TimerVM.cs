@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using System.Windows.Media;
 using HomeControl.Source.Modules.Timer;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -31,6 +33,94 @@ public class TimerVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "Refresh") {
             if (ReferenceValues.IsTimerRunning[0]) {
+                if (!ReferenceValues.SwitchTimerDirection[0]) {
+                    ReferenceValues.TimerSeconds[0]--;
+                    if (ReferenceValues.TimerSeconds[0] < 0) {
+                        ReferenceValues.TimerSeconds[0] = 59;
+                        --ReferenceValues.TimerMinutes[0];
+                        if (ReferenceValues.TimerMinutes[0] < 0) {
+                            ReferenceValues.TimerMinutes[0] = 0;
+                            ReferenceValues.TimerSeconds[0] = 1;
+                            ReferenceValues.SwitchTimerDirection[0] = true;
+                            ReferenceValues.IsTimerAlarmActive = true;
+                        }
+                    }
+                } else {
+                    ReferenceValues.TimerSeconds[0] = ++ReferenceValues.TimerSeconds[0];
+                    if (ReferenceValues.TimerSeconds[0] > 59) {
+                        ReferenceValues.TimerSeconds[0] = 0;
+                        ++ReferenceValues.TimerMinutes[0];
+                    }
+                }
+            }
+
+            if (ReferenceValues.IsTimerRunning[1]) {
+                if (!ReferenceValues.SwitchTimerDirection[1]) {
+                    ReferenceValues.TimerSeconds[1]--;
+                    if (ReferenceValues.TimerSeconds[1] < 0) {
+                        ReferenceValues.TimerSeconds[1] = 59;
+                        --ReferenceValues.TimerMinutes[1];
+                        if (ReferenceValues.TimerMinutes[1] < 0) {
+                            ReferenceValues.TimerMinutes[1] = 0;
+                            ReferenceValues.TimerSeconds[1] = 1;
+                            ReferenceValues.SwitchTimerDirection[1] = true;
+                            ReferenceValues.IsTimerAlarmActive = true;
+                        }
+                    }
+                } else {
+                    ReferenceValues.TimerSeconds[1] = ++ReferenceValues.TimerSeconds[1];
+                    if (ReferenceValues.TimerSeconds[1] > 59) {
+                        ReferenceValues.TimerSeconds[1] = 0;
+                        ++ReferenceValues.TimerMinutes[1];
+                    }
+                }
+            }
+
+            if (ReferenceValues.IsTimerRunning[2]) {
+                if (!ReferenceValues.SwitchTimerDirection[2]) {
+                    ReferenceValues.TimerSeconds[2]--;
+                    if (ReferenceValues.TimerSeconds[2] < 0) {
+                        ReferenceValues.TimerSeconds[2] = 59;
+                        --ReferenceValues.TimerMinutes[2];
+                        if (ReferenceValues.TimerMinutes[2] < 0) {
+                            ReferenceValues.TimerMinutes[2] = 0;
+                            ReferenceValues.TimerSeconds[2] = 1;
+                            ReferenceValues.SwitchTimerDirection[2] = true;
+                            ReferenceValues.IsTimerAlarmActive = true;
+                        }
+                    }
+                } else {
+                    ReferenceValues.TimerSeconds[2] = ++ReferenceValues.TimerSeconds[2];
+                    if (ReferenceValues.TimerSeconds[2] > 59) {
+                        ReferenceValues.TimerSeconds[2] = 0;
+                        ++ReferenceValues.TimerMinutes[2];
+                    }
+                }
+            }
+
+            if (ReferenceValues.IsTimerRunning[3]) {
+                if (!ReferenceValues.SwitchTimerDirection[3]) {
+                    ReferenceValues.TimerSeconds[3]--;
+                    if (ReferenceValues.TimerSeconds[3] < 0) {
+                        ReferenceValues.TimerSeconds[3] = 59;
+                        --ReferenceValues.TimerMinutes[3];
+                        if (ReferenceValues.TimerMinutes[3] < 0) {
+                            ReferenceValues.TimerMinutes[3] = 0;
+                            ReferenceValues.TimerSeconds[3] = 1;
+                            ReferenceValues.SwitchTimerDirection[3] = true;
+                            ReferenceValues.IsTimerAlarmActive = true;
+                        }
+                    }
+                } else {
+                    ReferenceValues.TimerSeconds[3] = ++ReferenceValues.TimerSeconds[3];
+                    if (ReferenceValues.TimerSeconds[3] > 59) {
+                        ReferenceValues.TimerSeconds[3] = 0;
+                        ++ReferenceValues.TimerMinutes[3];
+                    }
+                }
+            }
+
+            if (ReferenceValues.IsTimerRunning[0]) {
                 Timer1Text = $"{ReferenceValues.TimerMinutes[0]:000}:{ReferenceValues.TimerSeconds[0]:00}";
                 Timer1Color = ReferenceValues.SwitchTimerDirection[0] ? "Red" : "YellowGreen";
             }
@@ -48,6 +138,12 @@ public class TimerVM : BaseViewModel {
             if (ReferenceValues.IsTimerRunning[3]) {
                 Timer4Text = $"{ReferenceValues.TimerMinutes[3]:000}:{ReferenceValues.TimerSeconds[3]:00}";
                 Timer4Color = ReferenceValues.SwitchTimerDirection[3] ? "Red" : "YellowGreen";
+            }
+
+            if (ReferenceValues.IsTimerAlarmActive) {
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/timerDone.wav"));
+                sound.Play();
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -11,8 +11,6 @@ namespace HomeControl.Source.ViewModel.Games;
 
 public class PictionaryVM : BaseViewModel {
     private static bool isGameActive;
-
-    private readonly PlaySound soundBuzzer, soundTap;
 
     private string _menuVisibility, _wordsEasyColor, _wordsMediumColor, _wordsHardColor, _wordsAdultColor, _gameVisibility, _outputText,
         _button1Text, _button2Text, _enableCountdownColor;
@@ -23,8 +21,6 @@ public class PictionaryVM : BaseViewModel {
     private double progressBarAdditive, progressBarRate, _progressBarValue;
 
     public PictionaryVM() {
-        soundBuzzer = new PlaySound("buzzer");
-        soundTap = new PlaySound("tap");
         TimerAmount = 120;
 
         MenuVisibility = "VISIBLE";
@@ -55,12 +51,16 @@ public class PictionaryVM : BaseViewModel {
             if (ReferenceValues.IsGameTimerRunning && EnableCountdownColor == "Green") {
                 /* Plays a sound with 5 - 1 seconds remaining */
                 if (timerMaster_sec < 6) {
-                    soundTap.Play(false);
+                    MediaPlayer sound = new();
+                    sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/tap.wav"));
+                    sound.Play();
                 }
 
                 if (timerMaster_sec == 0) {
                     ReferenceValues.IsGameTimerRunning = false;
-                    soundBuzzer.Play(false);
+                    MediaPlayer sound = new();
+                    sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/buzzer.wav"));
+                    sound.Play();
                 } else {
                     timerMaster_sec--;
                     progressBarAdditive += progressBarRate;

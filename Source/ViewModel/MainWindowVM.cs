@@ -1,6 +1,8 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Text.Json;
+using System.Windows.Media;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
 using HomeControl.Source.IO;
@@ -12,18 +14,25 @@ namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
     private readonly CrossViewMessenger simpleMessenger;
-    private string _iconImage, _lockedText, _lockedColor, _onlineText, _onlineColor;
-    private bool changeDate;
+    private string _iconImage;
+    private string _onlineColor;
+    private bool changeDate, internetMessage;
     private DateTime currentDate;
 
     public MainWindowVM() {
         IconImage = "../../Resources/Images/icon.png";
         simpleMessenger = CrossViewMessenger.Instance;
         currentDate = DateTime.Now;
-        ReferenceValues.TimerSound = new PlaySound("timerDone");
-        ReferenceValues.IsScreenSaverEnabled = false;
+        internetMessage = false;
 
-        ReferenceValues.DebugText = ReferenceValues.COPYRIGHT + "\nVersion: " + ReferenceValues.VERSION + "\n\n";
+        ReferenceValues.DebugTextBlockOutput = new ObservableCollection<DebugTextBlock> {
+            new() {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "MainWindowVM",
+                Description = ReferenceValues.COPYRIGHT + "  Version: " + ReferenceValues.VERSION
+            }
+        };
 
         /* Get Settings */
         new SettingsFromJson();
@@ -47,15 +56,27 @@ public class MainWindowVM : BaseViewModel {
         activityTimer.OnActive += activityTimer_OnActive;
 
         void activityTimer_OnInactive(object sender, EventArgs e) {
-            Console.WriteLine("Start ScreenSaver: " + DateTime.Now);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "MainWindowVM",
+                Description = "Starting Screen Saver"
+            });
             simpleMessenger.PushMessage("ScreenSaverOn", null);
             ReferenceValues.LockUI = true;
+            OnlineColor = "Black";
         }
 
         void activityTimer_OnActive(object sender, EventArgs e) {
-            Console.WriteLine("End ScreenSaver: " + DateTime.Now);
             simpleMessenger.PushMessage("ScreenSaverOff", null);
+            OnlineColor = "Transparent";
         }
+
+        /* Joke DispatcherTimer */
+        DispatcherTimer dispatcherTimer2 = new();
+        dispatcherTimer2.Tick += dispatcherTimer_Tick2;
+        dispatcherTimer2.Interval = new TimeSpan(0, 0, 0, 0, 200);
+        dispatcherTimer2.Start();
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
@@ -67,6 +88,7 @@ public class MainWindowVM : BaseViewModel {
             changeDate = true;
         }
 
+        /* Hour Changes */
         if (!currentDate.Hour.Equals(DateTime.Now.Hour)) {
             simpleMessenger.PushMessage("HourChanged", null);
             changeDate = true;
@@ -89,100 +111,17 @@ public class MainWindowVM : BaseViewModel {
             changeDate = false;
         }
 
-        /* Alarms Module - Prevents dupes between different windows */
-        if (ReferenceValues.IsTimerRunning[0]) {
-            if (!ReferenceValues.SwitchTimerDirection[0]) {
-                ReferenceValues.TimerSeconds[0]--;
-                if (ReferenceValues.TimerSeconds[0] < 0) {
-                    ReferenceValues.TimerSeconds[0] = 59;
-                    --ReferenceValues.TimerMinutes[0];
-                    if (ReferenceValues.TimerMinutes[0] < 0) {
-                        ReferenceValues.TimerMinutes[0] = 0;
-                        ReferenceValues.TimerSeconds[0] = 1;
-                        ReferenceValues.SwitchTimerDirection[0] = true;
-                        ReferenceValues.IsTimerAlarmActive = true;
-                    }
-                }
-            } else {
-                ReferenceValues.TimerSeconds[0] = ++ReferenceValues.TimerSeconds[0];
-                if (ReferenceValues.TimerSeconds[0] > 59) {
-                    ReferenceValues.TimerSeconds[0] = 0;
-                    ++ReferenceValues.TimerMinutes[0];
-                }
-            }
-        }
-
-        if (ReferenceValues.IsTimerRunning[1]) {
-            if (!ReferenceValues.SwitchTimerDirection[1]) {
-                ReferenceValues.TimerSeconds[1]--;
-                if (ReferenceValues.TimerSeconds[1] < 0) {
-                    ReferenceValues.TimerSeconds[1] = 59;
-                    --ReferenceValues.TimerMinutes[1];
-                    if (ReferenceValues.TimerMinutes[1] < 0) {
-                        ReferenceValues.TimerMinutes[1] = 0;
-                        ReferenceValues.TimerSeconds[1] = 1;
-                        ReferenceValues.SwitchTimerDirection[1] = true;
-                        ReferenceValues.IsTimerAlarmActive = true;
-                    }
-                }
-            } else {
-                ReferenceValues.TimerSeconds[1] = ++ReferenceValues.TimerSeconds[1];
-                if (ReferenceValues.TimerSeconds[1] > 59) {
-                    ReferenceValues.TimerSeconds[1] = 0;
-                    ++ReferenceValues.TimerMinutes[1];
-                }
-            }
-        }
-
-        if (ReferenceValues.IsTimerRunning[2]) {
-            if (!ReferenceValues.SwitchTimerDirection[2]) {
-                ReferenceValues.TimerSeconds[2]--;
-                if (ReferenceValues.TimerSeconds[2] < 0) {
-                    ReferenceValues.TimerSeconds[2] = 59;
-                    --ReferenceValues.TimerMinutes[2];
-                    if (ReferenceValues.TimerMinutes[2] < 0) {
-                        ReferenceValues.TimerMinutes[2] = 0;
-                        ReferenceValues.TimerSeconds[2] = 1;
-                        ReferenceValues.SwitchTimerDirection[2] = true;
-                        ReferenceValues.IsTimerAlarmActive = true;
-                    }
-                }
-            } else {
-                ReferenceValues.TimerSeconds[2] = ++ReferenceValues.TimerSeconds[2];
-                if (ReferenceValues.TimerSeconds[2] > 59) {
-                    ReferenceValues.TimerSeconds[2] = 0;
-                    ++ReferenceValues.TimerMinutes[2];
-                }
-            }
-        }
-
-        if (ReferenceValues.IsTimerRunning[3]) {
-            if (!ReferenceValues.SwitchTimerDirection[3]) {
-                ReferenceValues.TimerSeconds[3]--;
-                if (ReferenceValues.TimerSeconds[3] < 0) {
-                    ReferenceValues.TimerSeconds[3] = 59;
-                    --ReferenceValues.TimerMinutes[3];
-                    if (ReferenceValues.TimerMinutes[3] < 0) {
-                        ReferenceValues.TimerMinutes[3] = 0;
-                        ReferenceValues.TimerSeconds[3] = 1;
-                        ReferenceValues.SwitchTimerDirection[3] = true;
-                        ReferenceValues.IsTimerAlarmActive = true;
-                    }
-                }
-            } else {
-                ReferenceValues.TimerSeconds[3] = ++ReferenceValues.TimerSeconds[3];
-                if (ReferenceValues.TimerSeconds[3] > 59) {
-                    ReferenceValues.TimerSeconds[3] = 0;
-                    ++ReferenceValues.TimerMinutes[3];
-                }
-            }
-        }
-
-        if (ReferenceValues.IsTimerAlarmActive && !ReferenceValues.TimerSound.IsPlaying()) {
-            ReferenceValues.TimerSound.Play(true);
-        }
-
         simpleMessenger.PushMessage("Refresh", null);
+    }
+
+    private void dispatcherTimer_Tick2(object sender, EventArgs e) {
+        if (ReferenceValues.IsFunnyModeActive) {
+            Random randomNumber = new();
+            Color myColor = Color.FromRgb((byte)randomNumber.Next(256), (byte)randomNumber.Next(256), (byte)randomNumber.Next(256));
+            OnlineColor = "#FF" + myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
+        } else {
+            OnlineColor = "Transparent";
+        }
     }
 
     private void ApiStatus() {
@@ -199,13 +138,34 @@ public class MainWindowVM : BaseViewModel {
 
             if (apiStatus is { status: "OK" }) {
                 OnlineColor = "Transparent";
+                if (internetMessage) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "INFO",
+                        Module = "MainWindowVM",
+                        Description = "Restored Internet Connection"
+                    });
+                }
+
+                internetMessage = false;
             } else {
-                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Lost internet connection\n";
-                OnlineColor = "Red";
+                LostInternet();
             }
         } catch (Exception) {
+            LostInternet();
+        }
+    }
+
+    private void LostInternet() {
+        if (!internetMessage) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "MainWindowVM",
+                Description = "Lost Internet Connection"
+            });
+            internetMessage = true;
             OnlineColor = "Red";
-            ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Lost internet connection\n";
         }
     }
 

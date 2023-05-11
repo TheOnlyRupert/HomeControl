@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using HomeControl.Source.Control;
+using System.Collections.ObjectModel;
 using HomeControl.Source.IO;
 
 namespace HomeControl.Source.Reference;
@@ -71,6 +71,7 @@ public static class ReferenceValues {
     public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 
     public static bool LockUI;
+    public static bool IsFunnyModeActive { get; set; }
 
     public static DateTime CalendarEventDate { get; set; }
 
@@ -95,18 +96,21 @@ public static class ReferenceValues {
     public static bool IsTimerAlarmActive { get; set; }
     public static bool[] IsTimerRunning { get; set; }
     public static bool[] SwitchTimerDirection { get; set; }
-    public static PlaySound TimerSound { get; set; }
 
     public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonMasterSettings { get; set; }
-    public static bool IsScreenSaverEnabled { get; set; }
 
     public static bool IsCalendarDupeModeEnabled { get; set; }
     public static CalendarEvents DupeEvent { get; set; }
 
     public static bool IsGameTimerRunning { get; set; }
 
-    public static string DebugText { get; set; }
-
     public static JsonGameStats JsonGameStatsMaster { get; set; }
+
+    public static JsonCalendarRecurring JsonCalendarRecurringMaster { get; set; }
+
+    public static ObservableCollection<DebugTextBlock> DebugTextBlockOutput { get; set; }
+
+    //TEMP
+    //public static string DebugText { get; set; }
 }

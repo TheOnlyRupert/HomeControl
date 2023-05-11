@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -13,9 +13,7 @@ namespace HomeControl.Source.ViewModel.Calendar;
 
 public class EditCalendarVM : BaseViewModel {
     private readonly JsonCalendar _jsonCalendar;
-
     private readonly string fileName;
-    private readonly PlaySound scribble1Sound, scribble2Sound, scribble3Sound, missingInfoSound;
     private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
@@ -24,11 +22,6 @@ public class EditCalendarVM : BaseViewModel {
     private ObservableCollection<CalendarEvents> _eventList;
 
     public EditCalendarVM() {
-        scribble1Sound = new PlaySound("scribble1");
-        scribble2Sound = new PlaySound("scribble2");
-        scribble3Sound = new PlaySound("scribble3");
-        missingInfoSound = new PlaySound("missing_info");
-
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
         fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
         EventList = new ObservableCollection<CalendarEvents>();
@@ -83,11 +76,21 @@ public class EditCalendarVM : BaseViewModel {
                             EventList = currentJsonCalendar.eventsList;
                         }
                     } catch (Exception e) {
-                        Console.WriteLine(e);
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "EditCalendarVM",
+                            Description = e.ToString()
+                        });
                     }
                 }
             } catch (Exception e) {
-                Console.WriteLine(e);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditCalendarVM",
+                    Description = e.ToString()
+                });
             }
         }
     }
@@ -150,8 +153,18 @@ public class EditCalendarVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(EventText)) {
-                missingInfoSound.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                sound.Play();
             } else {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "EditCalendarVM",
+                    Description = "Adding calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText + ", " +
+                                  LocationText + ", " + selectedPerson
+                });
+
                 EventList.Add(new CalendarEvents {
                     name = EventText,
                     description = DescriptionText,
@@ -161,7 +174,9 @@ public class EditCalendarVM : BaseViewModel {
                     endTime = EndTimeText
                 });
 
-                scribble1Sound.Play(false);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/scribble1.wav"));
+                sound.Play();
                 EventText = "";
                 DescriptionText = "";
                 LocationText = "";
@@ -176,10 +191,21 @@ public class EditCalendarVM : BaseViewModel {
             try {
                 if (CalendarEventSelected.name != null) {
                     if (string.IsNullOrWhiteSpace(EventText)) {
-                        missingInfoSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                        sound.Play();
                     } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
                         confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (confirmation == MessageBoxResult.Yes) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "EditCalendarVM",
+                                Description = "Updating calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " +
+                                              DescriptionText + ", " +
+                                              LocationText + ", " + selectedPerson
+                            });
+
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
                                 name = EventText,
                                 description = DescriptionText,
@@ -190,7 +216,9 @@ public class EditCalendarVM : BaseViewModel {
                             });
                             EventList.Remove(CalendarEventSelected);
 
-                            scribble2Sound.Play(false);
+                            MediaPlayer sound = new();
+                            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/scribble2.wav"));
+                            sound.Play();
                             EventText = "";
                             DescriptionText = "";
                             LocationText = "";
@@ -201,7 +229,14 @@ public class EditCalendarVM : BaseViewModel {
                         }
                     }
                 }
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditCalendarVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
         case "delete":
@@ -209,13 +244,31 @@ public class EditCalendarVM : BaseViewModel {
                 if (CalendarEventSelected.name != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (confirmation == MessageBoxResult.Yes) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "EditCalendarVM",
+                            Description = "Removing calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText +
+                                          ", " +
+                                          LocationText + ", " + selectedPerson
+                        });
+
                         EventList.Remove(CalendarEventSelected);
-                        scribble3Sound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/scribble3.wav"));
+                        sound.Play();
 
                         SaveJson();
                     }
                 }
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditCalendarVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
 
@@ -226,7 +279,9 @@ public class EditCalendarVM : BaseViewModel {
                 DupeText = "";
             } else {
                 if (string.IsNullOrWhiteSpace(EventText)) {
-                    missingInfoSound.Play(false);
+                    MediaPlayer sound = new();
+                    sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                    sound.Play();
                 } else {
                     ReferenceValues.IsCalendarDupeModeEnabled = true;
                     DupeButtonBackgroundColor = "Green";
@@ -287,7 +342,12 @@ public class EditCalendarVM : BaseViewModel {
                 GC.WaitForPendingFinalizers();
                 File.WriteAllText(fileName, jsonString);
             } catch (Exception e) {
-                Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditCalendarVM",
+                    Description = e.ToString()
+                });
             }
         } else {
             try {
@@ -295,7 +355,12 @@ public class EditCalendarVM : BaseViewModel {
                 GC.WaitForPendingFinalizers();
                 File.Delete(fileName);
             } catch (Exception e) {
-                Console.WriteLine("Unable to delete " + fileName + "... " + e.Message);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditCalendarVM",
+                    Description = e.ToString()
+                });
             }
         }
     }

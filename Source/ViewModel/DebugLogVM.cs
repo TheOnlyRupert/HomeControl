@@ -1,24 +1,38 @@
-﻿using HomeControl.Source.Reference;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using HomeControl.Source.IO;
+using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel;
 
 public class DebugLogVM : BaseViewModel {
-    private string _textOutput;
+    private ObservableCollection<DebugTextBlock> _debugList;
+
 
     public DebugLogVM() {
-        TextOutput = ReferenceValues.DebugText;
+        DebugList = ReferenceValues.DebugTextBlockOutput;
     }
+
+    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     #region Fields
 
-    public string TextOutput {
-        get => _textOutput;
+    public ObservableCollection<DebugTextBlock> DebugList {
+        get => _debugList;
         set {
-            _textOutput = value;
-            RaisePropertyChangedEvent("TextOutput");
+            _debugList = value;
+            RaisePropertyChangedEvent("DebugList");
         }
     }
 
     #endregion
+
+    private void ButtonCommandLogic(object param) {
+        switch (param) {
+        case "party":
+            ReferenceValues.IsFunnyModeActive = ReferenceValues.IsFunnyModeActive != true;
+            break;
+        }
+    }
 }

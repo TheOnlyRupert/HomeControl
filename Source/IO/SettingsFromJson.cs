@@ -27,9 +27,21 @@ public class SettingsFromJson {
                     JsonSettings jsonSettings = JsonSerializer.Deserialize<JsonSettings>(settingsString, options);
                     ReferenceValues.JsonMasterSettings = jsonSettings;
                 } catch (Exception e) {
-                    Console.WriteLine("Failed to Deserialize settings.json..." + e);
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "SettingsFromJson",
+                        Description = e.ToString()
+                    });
                 }
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "SettingsFromJson",
+                Description = e.ToString()
+            });
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -12,13 +12,13 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresMonthUser1VM : BaseViewModel {
-    private readonly PlaySound completeSound;
     private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_month_" + DateTime.Now.ToString("yyyy_MM") + ".json";
 
     private string _room15Task1Color, _room15Task2Color, _room15Task1DateText, _room15Task2DateText;
+    private bool allowSound;
 
     public ChoresMonthUser1VM() {
-        completeSound = new PlaySound("achievement1");
+        allowSound = false;
         GetButtonColors();
     }
 
@@ -34,13 +34,25 @@ public class ChoresMonthUser1VM : BaseViewModel {
             break;
         }
 
+        if (allowSound) {
+            MediaPlayer sound = new();
+            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/achievement1.wav"));
+            sound.Play();
+            allowSound = false;
+        }
+
         try {
             string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonChoreMonthUser1MasterList);
             GC.Collect();
             GC.WaitForPendingFinalizers();
             File.WriteAllText(fileName, jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresMonthUser1VM",
+                Description = e.ToString()
+            });
         }
 
         GetButtonColors();
@@ -53,11 +65,25 @@ public class ChoresMonthUser1VM : BaseViewModel {
             if (result == MessageBoxResult.Yes) {
                 ReferenceValues.JsonChoreMonthUser1MasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreMonthUser1MasterList.choreList[index].IsComplete;
                 ReferenceValues.JsonChoreMonthUser1MasterList.choreList[index].Date = "";
+
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "ChoresMonthUser1VM",
+                    Description = ReferenceValues.JsonMasterSettings.User1Name + " removed monthly task: " + value
+                });
             }
         } else {
             ReferenceValues.JsonChoreMonthUser1MasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreMonthUser1MasterList.choreList[index].IsComplete;
             ReferenceValues.JsonChoreMonthUser1MasterList.choreList[index].Date = DateTime.Now.ToString("yyyy-MM-dd");
-            completeSound.Play(false);
+            allowSound = true;
+
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "ChoresMonthUser1VM",
+                Description = ReferenceValues.JsonMasterSettings.User1Name + " completed monthly task: " + value
+            });
         }
     }
 

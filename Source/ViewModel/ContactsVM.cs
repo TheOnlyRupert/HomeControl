@@ -1,4 +1,5 @@
 ﻿using System;
+using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -40,11 +41,7 @@ public class ContactsVM : BaseViewModel {
         _alarmCode, _privateWifiVisibility;
 
     public ContactsVM() {
-        if (ReferenceValues.LockUI) {
-            PrivateWifiVisibility = "HIDDEN";
-        } else {
-            PrivateWifiVisibility = "VISIBLE";
-        }
+        PrivateWifiVisibility = ReferenceValues.LockUI ? "HIDDEN" : "VISIBLE";
 
         try {
             User1Name = ReferenceValues.JsonMasterSettings.User1NameLegal;
@@ -54,7 +51,14 @@ public class ContactsVM : BaseViewModel {
                               ReferenceValues.JsonMasterSettings.User1Phone1[4] + ReferenceValues.JsonMasterSettings.User1Phone1[5] + "-" +
                               ReferenceValues.JsonMasterSettings.User1Phone1[6] + ReferenceValues.JsonMasterSettings.User1Phone1[7] +
                               ReferenceValues.JsonMasterSettings.User1Phone1[8] + ReferenceValues.JsonMasterSettings.User1Phone1[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             try {
                 User1Phone2 = "(" + ReferenceValues.JsonMasterSettings.User1Phone2[0] + ReferenceValues.JsonMasterSettings.User1Phone2[1] +
@@ -62,7 +66,14 @@ public class ContactsVM : BaseViewModel {
                               ReferenceValues.JsonMasterSettings.User1Phone2[4] + ReferenceValues.JsonMasterSettings.User1Phone2[5] + "-" +
                               ReferenceValues.JsonMasterSettings.User1Phone2[6] + ReferenceValues.JsonMasterSettings.User1Phone2[7] +
                               ReferenceValues.JsonMasterSettings.User1Phone2[8] + ReferenceValues.JsonMasterSettings.User1Phone2[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             User2Name = ReferenceValues.JsonMasterSettings.User2NameLegal;
             try {
@@ -71,7 +82,14 @@ public class ContactsVM : BaseViewModel {
                               ReferenceValues.JsonMasterSettings.User2Phone1[4] + ReferenceValues.JsonMasterSettings.User2Phone1[5] + "-" +
                               ReferenceValues.JsonMasterSettings.User2Phone1[6] + ReferenceValues.JsonMasterSettings.User2Phone1[7] +
                               ReferenceValues.JsonMasterSettings.User2Phone1[8] + ReferenceValues.JsonMasterSettings.User2Phone1[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             try {
                 User2Phone2 = "(" + ReferenceValues.JsonMasterSettings.User2Phone2[0] + ReferenceValues.JsonMasterSettings.User2Phone2[1] +
@@ -79,7 +97,14 @@ public class ContactsVM : BaseViewModel {
                               ReferenceValues.JsonMasterSettings.User2Phone2[4] + ReferenceValues.JsonMasterSettings.User2Phone2[5] + "-" +
                               ReferenceValues.JsonMasterSettings.User2Phone2[6] + ReferenceValues.JsonMasterSettings.User2Phone2[7] +
                               ReferenceValues.JsonMasterSettings.User2Phone2[8] + ReferenceValues.JsonMasterSettings.User2Phone2[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             ChildrenNames = ReferenceValues.JsonMasterSettings.User3NameLegal + ", " + ReferenceValues.JsonMasterSettings.User4NameLegal + ", " +
                             ReferenceValues.JsonMasterSettings.User5NameLegal;
@@ -92,7 +117,14 @@ public class ContactsVM : BaseViewModel {
                                   ReferenceValues.JsonMasterSettings.Neighbor1Phone1[4] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[5] + "-" +
                                   ReferenceValues.JsonMasterSettings.Neighbor1Phone1[6] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[7] +
                                   ReferenceValues.JsonMasterSettings.Neighbor1Phone1[8] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             try {
                 Neighbor1Phone2 = "(" + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[0] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[1] +
@@ -100,7 +132,14 @@ public class ContactsVM : BaseViewModel {
                                   ReferenceValues.JsonMasterSettings.Neighbor1Phone2[4] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[5] + "-" +
                                   ReferenceValues.JsonMasterSettings.Neighbor1Phone2[6] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[7] +
                                   ReferenceValues.JsonMasterSettings.Neighbor1Phone2[8] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             Neighbor2Location = ReferenceValues.JsonMasterSettings.Neighbor2Location;
             Neighbor2Name = ReferenceValues.JsonMasterSettings.Neighbor2Name;
@@ -110,7 +149,14 @@ public class ContactsVM : BaseViewModel {
                                   ReferenceValues.JsonMasterSettings.Neighbor2Phone1[4] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[5] + "-" +
                                   ReferenceValues.JsonMasterSettings.Neighbor2Phone1[6] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[7] +
                                   ReferenceValues.JsonMasterSettings.Neighbor2Phone1[8] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             try {
                 Neighbor2Phone2 = "(" + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[0] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[1] +
@@ -118,7 +164,14 @@ public class ContactsVM : BaseViewModel {
                                   ReferenceValues.JsonMasterSettings.Neighbor2Phone2[4] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[5] + "-" +
                                   ReferenceValues.JsonMasterSettings.Neighbor2Phone2[6] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[7] +
                                   ReferenceValues.JsonMasterSettings.Neighbor2Phone2[8] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             AddressLine1 = ReferenceValues.JsonMasterSettings.AddressLine1;
             AddressLine2 = ReferenceValues.JsonMasterSettings.AddressLine2;
@@ -136,7 +189,14 @@ public class ContactsVM : BaseViewModel {
                               ReferenceValues.JsonMasterSettings.PolicePhone[4] + ReferenceValues.JsonMasterSettings.PolicePhone[5] + "-" +
                               ReferenceValues.JsonMasterSettings.PolicePhone[6] + ReferenceValues.JsonMasterSettings.PolicePhone[7] +
                               ReferenceValues.JsonMasterSettings.PolicePhone[8] + ReferenceValues.JsonMasterSettings.PolicePhone[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             EmergencyContact1Name = ReferenceValues.JsonMasterSettings.EmergencyContact1Name;
             try {
@@ -145,7 +205,14 @@ public class ContactsVM : BaseViewModel {
                                           ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[4] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[5] + "-" +
                                           ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[6] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[7] +
                                           ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[8] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             try {
                 EmergencyContact1Phone2 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[0] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[1] +
@@ -153,7 +220,14 @@ public class ContactsVM : BaseViewModel {
                                           ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[4] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[5] + "-" +
                                           ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[6] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[7] +
                                           ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[8] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             EmergencyContact2Name = ReferenceValues.JsonMasterSettings.EmergencyContact2Name;
             try {
@@ -162,7 +236,14 @@ public class ContactsVM : BaseViewModel {
                                           ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[4] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[5] + "-" +
                                           ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[6] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[7] +
                                           ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[8] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             try {
                 EmergencyContact2Phone2 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[0] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[1] +
@@ -170,12 +251,26 @@ public class ContactsVM : BaseViewModel {
                                           ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[4] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[5] + "-" +
                                           ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[6] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[7] +
                                           ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[8] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[9];
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ContactsVM",
+                    Description = e.ToString()
+                });
+            }
 
             AlarmCode = ReferenceValues.JsonMasterSettings.AlarmCode;
             WifiPrivateName = ReferenceValues.JsonMasterSettings.WifiPrivateName;
             WifiPrivatePassword = ReferenceValues.JsonMasterSettings.WifiPrivatePassword;
-        } catch (Exception) { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ContactsVM",
+                Description = e.ToString()
+            });
+        }
     }
 
     #region Fields

@@ -8,7 +8,7 @@ namespace HomeControl.Source.ViewModel.Games;
 
 public class GamesVM : BaseViewModel {
     public GamesVM() {
-        GameStatsFromJson gameStatsFromJson = new();
+        new GameStatsFromJson();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);

@@ -36,11 +36,21 @@ public class CalenderEventsFromJson {
                                     jsonCalendar[i] = currentJsonCalendar;
                                 }
                             } catch (Exception e) {
-                                Console.WriteLine("Failed to Deserialize event:\n" + eventsListString);
+                                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                    Date = DateTime.Now,
+                                    Level = "WARN",
+                                    Module = "CalenderEventsFromJson",
+                                    Description = e.ToString()
+                                });
                             }
                         }
                     } catch (Exception e) {
-                        Console.WriteLine("Event File Failed " + e);
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "CalenderEventsFromJson",
+                            Description = e.ToString()
+                        });
                     }
                 }
             }

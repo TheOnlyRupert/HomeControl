@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using HomeControl.Source.IO;
+using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.Control;
 
@@ -26,10 +28,8 @@ public class SnowEngine {
     //Maximum flakes. It's calculating at the beginning and after canvas resize and depends on SnowCoverage property
     private int maxFlakes;
 
-    private ushort snowCoverage;
-
     public SnowEngine(Canvas canvas, ushort snowCoverage, params string[] flakeImages) {
-        this.snowCoverage = snowCoverage;
+        SnowCoverage = snowCoverage;
         this.canvas = canvas;
         canvas.IsHitTestVisible = false;
         canvas.SizeChanged += canvas_SizeChanged;
@@ -41,24 +41,15 @@ public class SnowEngine {
         set => MaxRadius = value;
     }
 
-    public int MaxRadius { get; set; } = 30;
+    private int MaxRadius { get; set; } = 30;
 
-    public ushort SnowCoverage {
-        get => snowCoverage;
-        set {
-            if (value > 100 || value < 1) {
-                throw new ArgumentOutOfRangeException("value", "Maximum coverage 100 and minumum 1");
-            }
+    private ushort SnowCoverage { get; }
 
-            snowCoverage = value;
-        }
-    }
+    private double VerticalSpeedRatio { get; } = 0.1;
 
-    public double VerticalSpeedRatio { get; set; } = 0.1;
+    private double HorizontalSpeedRatio { get; } = 0.08;
 
-    public double HorizontalSpeedRatio { get; set; } = 0.08;
-
-    public bool IsWorking { get; private set; }
+    private bool IsWorking { get; set; }
 
     private void canvas_SizeChanged(object sender, SizeChangedEventArgs e) {
         RecalcMaxFlakes();
@@ -91,7 +82,14 @@ public class SnowEngine {
             if (!path.StartsWith("pack://") && !File.Exists(path)) {
                 return null;
             }
-        } catch { }
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "SnowEngine",
+                Description = e.ToString()
+            });
+        }
 
         imgTemp.BeginInit();
         imgTemp.CacheOption = BitmapCacheOption.OnLoad;
@@ -108,17 +106,14 @@ public class SnowEngine {
     private void SetFlakes(bool top = false) {
         int halfCanvasWidth = (int)canvas.ActualWidth / 2;
         Random rand = new();
-        Image flake = null;
-        SnowInfo info = null;
 
         for (int i = flakes.Count; i < maxFlakes; i++) {
-            //Flake creation
-            flake = new Image();
-            //Randomly selecting image
-            flake.Source = CreateImage(flakeImages[rand.Next(0, flakeImages.Count)]);
-            flake.Stretch = Stretch.Uniform;
+            Image flake = new() {
+                Source = CreateImage(flakeImages[rand.Next(0, flakeImages.Count)]),
+                Stretch = Stretch.Uniform
+            };
 
-            info = new SnowInfo(flake, VerticalSpeedRatio * rand.Next(minStartingSpeed, maxStartingSpeed), rand.Next(minRadius, MaxRadius));
+            SnowInfo info = new(flake, VerticalSpeedRatio * rand.Next(minStartingSpeed, maxStartingSpeed), rand.Next(minRadius, MaxRadius));
 
 
             // Placing image  
@@ -145,11 +140,6 @@ public class SnowEngine {
     }
 
     private void CompositionTarget_Rendering(object sender, EventArgs e) {
-        Random random = new();
-        SnowInfo info = null;
-        double left = 0;
-        double top = 0;
-
         if (!IsWorking) {
             return;
         }
@@ -162,9 +152,9 @@ public class SnowEngine {
 
         //Setting position of all flakes
         for (int i = flakes.Count - 1; i >= 0; i--) {
-            info = flakes[i];
-            left = Canvas.GetLeft(info.Flake);
-            top = Canvas.GetTop(info.Flake);
+            SnowInfo info = flakes[i];
+            double left = Canvas.GetLeft(info.Flake);
+            double top = Canvas.GetTop(info.Flake);
 
             //.5 is magic number. Don't use magic numbers! :)
             flakes[i].VelocityX += .5 * HorizontalSpeedRatio;

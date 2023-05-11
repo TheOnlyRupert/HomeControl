@@ -75,7 +75,16 @@ public class WeatherHourlyVM : BaseViewModel {
                 }
 
                 updateForecastHourly = false;
-            } catch (Exception) { }
+            } catch (WebException) {
+                // NORMAL
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "WeatherHourlyVM",
+                    Description = e.ToString()
+                });
+            }
         }
     }
 }

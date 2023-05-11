@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
 using HomeControl.Source.ViewModel.Base;
@@ -14,8 +14,6 @@ namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresVM : BaseViewModel {
     private readonly CrossViewMessenger simpleMessenger;
-
-    private readonly PlaySound uiLocked;
 
     private string _currentMonthText, _currentWeekText, _currentDayText, _choresCompletedDayText, _choresCompletedWeekText, _choresCompletedMonthText, _user1Text,
         _choresCompletedWeekProgressText, _choresCompletedDayProgressText, _user2Text, _choresCompletedMonthProgressText,
@@ -33,14 +31,11 @@ public class ChoresVM : BaseViewModel {
         calculatedReleaseFundsQuarter, _fundsProgressDayValue, _fundsProgressWeekValue, _fundsProgressMonthValue;
 
     public ChoresVM() {
-        uiLocked = new PlaySound("locked");
         simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
 
-        ChoreFundsFromJson choreFundsFromJson = new();
-        if (JsonChoreFundsMaster.FinanceBlockChoreFundList == null) {
-            JsonChoreFundsMaster.FinanceBlockChoreFundList = new ObservableCollection<FinanceBlockChoreFund>();
-        }
+        new ChoreFundsFromJson();
+        JsonChoreFundsMaster.FinanceBlockChoreFundList ??= new ObservableCollection<FinanceBlockChoreFund>();
 
         ReleaseFunds();
         RefreshFields();
@@ -132,7 +127,9 @@ public class ChoresVM : BaseViewModel {
                 break;
             }
         } else {
-            uiLocked.Play(false);
+            MediaPlayer sound = new();
+            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+            sound.Play();
         }
     }
 
@@ -241,49 +238,105 @@ public class ChoresVM : BaseViewModel {
         try {
             ChoresCompletedWeekProgressText = Convert.ToInt16(progress) + "%";
             ChoresCompletedWeekProgressValue = Convert.ToInt16(progress);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         progress = Convert.ToDouble(choresCompletedDay) / Convert.ToDouble(JsonChoreDayMasterList.choreList.Count) * 100;
         try {
             ChoresCompletedDayProgressText = Convert.ToInt16(progress) + "%";
             ChoresCompletedDayProgressValue = Convert.ToInt16(progress);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         progress = Convert.ToDouble(choresCompletedMonth) / Convert.ToDouble(JsonChoreMonthMasterList.choreList.Count) * 100;
         try {
             ChoresCompletedMonthProgressText = Convert.ToInt16(progress) + "%";
             ChoresCompletedMonthProgressValue = Convert.ToInt16(progress);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         progress = Convert.ToDouble(choresCompletedQuarter) / Convert.ToDouble(JsonChoreQuarterMasterList.choreList.Count) * 100;
         try {
             ChoresCompletedQuarterProgressText = Convert.ToInt16(progress) + "%";
             ChoresCompletedQuarterProgressValue = Convert.ToInt16(progress);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         progress = Convert.ToDouble(choresCompletedQuarterUser1) / Convert.ToDouble(JsonChoreQuarterUser1MasterList.choreList.Count) * 100;
         try {
             ChoresCompletedQuarterProgressTextUser1 = Convert.ToInt16(progress) + "%";
             ChoresCompletedQuarterProgressValueUser1 = Convert.ToInt16(progress);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         progress = Convert.ToDouble(choresCompletedWeekUser1) / Convert.ToDouble(JsonChoreWeekUser1MasterList.choreList.Count) * 100;
         try {
             ChoresCompletedWeekProgressTextUser1 = Convert.ToInt16(progress) + "%";
             ChoresCompletedWeekProgressValueUser1 = Convert.ToInt16(progress);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         progress = Convert.ToDouble(choresCompletedDayUser1) / Convert.ToDouble(JsonChoreDayUser1MasterList.choreList.Count) * 100;
         try {
             ChoresCompletedDayProgressTextUser1 = Convert.ToInt16(progress) + "%";
             ChoresCompletedDayProgressValueUser1 = Convert.ToInt16(progress);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         progress = Convert.ToDouble(choresCompletedMonthUser1) / Convert.ToDouble(JsonChoreMonthUser1MasterList.choreList.Count) * 100;
         try {
             ChoresCompletedMonthProgressTextUser1 = Convert.ToInt16(progress) + "%";
             ChoresCompletedMonthProgressValueUser1 = Convert.ToInt16(progress);
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         DayButtonColor = "Transparent";
         WeekButtonColor = "Transparent";
@@ -466,7 +519,14 @@ public class ChoresVM : BaseViewModel {
                     calculatedReleaseFundsDay = 10;
                 }
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         /* Week */
         try {
@@ -492,7 +552,14 @@ public class ChoresVM : BaseViewModel {
                     calculatedReleaseFundsWeek = 50;
                 }
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         /* Month */
         try {
@@ -518,7 +585,14 @@ public class ChoresVM : BaseViewModel {
                     calculatedReleaseFundsMonth = 100;
                 }
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         FundsProgressDayValue = calculatedReleaseFundsDay;
         FundsProgressDayText = "$" + calculatedReleaseFundsDay;
@@ -545,13 +619,23 @@ public class ChoresVM : BaseViewModel {
             GC.WaitForPendingFinalizers();
             File.WriteAllText(FILE_DIRECTORY + "chorefunds.json", jsonString);
         } catch (Exception e) {
-            DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Chores/ERROR] Unable to save chorefunds.json... " + e.Message + "\n";
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
         }
     }
 
     private void ReleaseFunds() {
         if (JsonChoreFundsMaster.UpdatedDate.Date != DateTime.Now.Date) {
-            DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Chores/INFO] Releasing Daily Funds\n";
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "ChoresVM",
+                Description = "Releasing daily funds totaling $" + JsonChoreFundsMaster.FundsLockedDay
+            });
 
             if (JsonChoreFundsMaster.FundsLockedDay > 0) {
                 JsonFinanceMasterList.financeList.Add(new FinanceBlock {
@@ -587,10 +671,22 @@ public class ChoresVM : BaseViewModel {
             while (CompareWeekStartDate2.DayOfWeek != DayOfWeek.Sunday) {
                 CompareWeekStartDate2 = CompareWeekStartDate2.AddDays(-1);
             }
-        } catch (Exception) { }
+        } catch (Exception e) {
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
+        }
 
         if (CompareWeekStartDate1.Date != CompareWeekStartDate2.Date) {
-            DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Chores/INFO] Releasing Weekly Funds\n";
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "ChoresVM",
+                Description = "Releasing weekly funds totaling $" + JsonChoreFundsMaster.FundsLockedWeek
+            });
 
             if (JsonChoreFundsMaster.FundsLockedWeek > 0) {
                 JsonFinanceMasterList.financeList.Add(new FinanceBlock {
@@ -614,11 +710,23 @@ public class ChoresVM : BaseViewModel {
 
                 CashAvailableTextColor = CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
                 JsonChoreFundsMaster.FundsLockedWeek = 0;
-            } catch (Exception) { }
+            } catch (Exception e) {
+                DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresVM",
+                    Description = e.ToString()
+                });
+            }
         }
 
         if (JsonChoreFundsMaster.UpdatedDate.ToString("yy/M") != DateTime.Now.ToString("yy/M")) {
-            DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Chores/INFO] Releasing Monthly Funds\n";
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "ChoresVM",
+                Description = "Releasing monthly funds totaling $" + JsonChoreFundsMaster.FundsLockedMonth
+            });
 
             if (JsonChoreFundsMaster.FundsLockedMonth > 0) {
                 JsonFinanceMasterList.financeList.Add(new FinanceBlock {
@@ -645,7 +753,14 @@ public class ChoresVM : BaseViewModel {
 
                 JsonChoreFundsMaster.SpecialDay1Completed = false;
                 JsonChoreFundsMaster.SpecialDay2Completed = false;
-            } catch (Exception) { }
+            } catch (Exception e) {
+                DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresVM",
+                    Description = e.ToString()
+                });
+            }
         }
 
         JsonChoreFundsMaster.UpdatedDate = DateTime.Now;
@@ -656,7 +771,12 @@ public class ChoresVM : BaseViewModel {
             GC.WaitForPendingFinalizers();
             File.WriteAllText(FILE_DIRECTORY + "chorefunds.json", jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save chorefunds.json... " + e.Message);
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
         }
 
         try {
@@ -665,7 +785,12 @@ public class ChoresVM : BaseViewModel {
             GC.WaitForPendingFinalizers();
             File.WriteAllText(FILE_DIRECTORY + "finances.json", jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save finances.json... " + e.Message);
+            DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresVM",
+                Description = e.ToString()
+            });
         }
     }
 

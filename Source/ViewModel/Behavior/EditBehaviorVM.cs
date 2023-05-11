@@ -3,16 +3,15 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using HomeControl.Source.Control;
+using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class EditBehaviorVM : BaseViewModel {
-    private readonly PlaySound strikeSound, rewardSound, progressSound, starSound, awwSound, errorSound;
-
     private string _childName, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3, _rewardButtonVisibility,
         _progressBarChildValueText;
 
@@ -21,13 +20,6 @@ public class EditBehaviorVM : BaseViewModel {
     private int _progressBarChildValue, stars, strikes;
 
     public EditBehaviorVM() {
-        strikeSound = new PlaySound("buzzer");
-        rewardSound = new PlaySound("reward");
-        progressSound = new PlaySound("ding");
-        starSound = new PlaySound("yay");
-        awwSound = new PlaySound("aww");
-        errorSound = new PlaySound("error");
-
         switch (ReferenceValues.ActiveBehaviorUser) {
         case 0:
             ChildName = ReferenceValues.JsonMasterSettings.User1Name;
@@ -38,7 +30,14 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 Uri uri1 = new(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri1);
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditBehaviorVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
         case 1:
@@ -50,7 +49,14 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 Uri uri2 = new(ReferenceValues.FILE_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri2);
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditBehaviorVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
         case 2:
@@ -62,7 +68,14 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 Uri uri3 = new(ReferenceValues.FILE_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri3);
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditBehaviorVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
         case 3:
@@ -74,7 +87,14 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 Uri uri4 = new(ReferenceValues.FILE_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri4);
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditBehaviorVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
         case 4:
@@ -86,7 +106,14 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 Uri uri5 = new(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri5);
-            } catch (Exception) { }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditBehaviorVM",
+                    Description = e.ToString()
+                });
+            }
 
             break;
         }
@@ -201,7 +228,12 @@ public class EditBehaviorVM : BaseViewModel {
             GC.WaitForPendingFinalizers();
             File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "behavior.json", jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save " + ReferenceValues.FILE_DIRECTORY + "behavior.json" + "... " + e.Message);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "EditBehaviorVM",
+                Description = e.ToString()
+            });
         }
     }
 
@@ -217,7 +249,15 @@ public class EditBehaviorVM : BaseViewModel {
                         strikes++;
                         ProgressBarChildValue = 0;
                         ProgressBarChildValueText = "0/5";
-                        strikeSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/buzzer.wav"));
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "EditBehaviorVM",
+                            Description = "Adding strike to " + ChildName
+                        });
+                        sound.Play();
 
                         if (strikes == 3) {
                             stars--;
@@ -246,13 +286,29 @@ public class EditBehaviorVM : BaseViewModel {
                                 ProgressBarChildValueText = "5/5";
                             }
 
-                            starSound.Play(false);
+                            MediaPlayer sound = new();
+                            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/yay.wav"));
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "EditBehaviorVM",
+                                Description = "Adding progress (which resulted in a star) to " + ChildName
+                            });
+                            sound.Play();
                         } else {
                             ProgressBarChildValue = 5;
                             ProgressBarChildValueText = "5/5";
                         }
                     } else {
-                        progressSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/ding.wav"));
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "EditBehaviorVM",
+                            Description = "Adding progress to " + ChildName
+                        });
+                        sound.Play();
                     }
                 }
             }
@@ -267,23 +323,47 @@ public class EditBehaviorVM : BaseViewModel {
                         stars--;
                         ProgressBarChildValue = 4;
                         ProgressBarChildValueText = "4/5";
-                        awwSound.Play(false);
+                        MediaPlayer sound = new();
+                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/aww.wav"));
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "EditBehaviorVM",
+                            Description = "Removing progress (which resulted in a loss of a star) from " + ChildName
+                        });
+                        sound.Play();
                     } else {
                         ProgressBarChildValue = 0;
                         ProgressBarChildValueText = "0/5";
                     }
                 } else {
-                    errorSound.Play(false);
+                    MediaPlayer sound = new();
+                    sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/error.wav"));
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "INFO",
+                        Module = "EditBehaviorVM",
+                        Description = "Removing progress from " + ChildName
+                    });
+                    sound.Play();
                 }
             }
 
             break;
         case "reward":
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "EditBehaviorVM",
+                Description = ChildName + " claimed their reward!"
+            });
             stars = 0;
             ProgressBarChildValue = 0;
             ProgressBarChildValueText = "0/5";
             RewardButtonVisibility = "HIDDEN";
-            rewardSound.Play(false);
+            MediaPlayer sound2 = new();
+            sound2.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/reward.wav"));
+            sound2.Play();
             break;
         }
 

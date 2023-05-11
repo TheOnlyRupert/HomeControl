@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -97,7 +98,13 @@ public class PasswordVM : BaseViewModel {
             break;
         case "go":
             if (passwordAccepted) {
-                ReferenceValues.DebugText += "[" + DateTime.Now.ToString("yyyy-MM-dd_HHMM") + "] [ " + "Passwords/INFO] Unlocking UI with correct password\n";
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "PasswordVM",
+                    Description = "Unlocking UI with correct password"
+                });
+
                 PasswordText = "";
                 LockButtonText = "Lock UI";
                 ReferenceValues.LockUI = false;

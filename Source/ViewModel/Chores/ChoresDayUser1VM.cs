@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using HomeControl.Source.Control;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -12,13 +12,15 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresDayUser1VM : BaseViewModel {
-    private readonly PlaySound completeSound;
     private readonly string fileName = ReferenceValues.FILE_DIRECTORY + "chores/choresUser1_day_" + DateTime.Now.ToString("yyyy_MM_dd") + ".json";
 
     private string _Task1Color, _Task2Color, _Task3Color, _Task4Color, _Task1DateText, _Task2DateText, _Task3DateText, _Task4DateText;
 
+    private bool allowSound;
+
     public ChoresDayUser1VM() {
-        completeSound = new PlaySound("achievement1");
+        allowSound = false;
+
         GetButtonColors();
     }
 
@@ -28,16 +30,27 @@ public class ChoresDayUser1VM : BaseViewModel {
         switch (param) {
         case "task1":
             SwitchButtonLogic("Task1");
+
             break;
         case "task2":
             SwitchButtonLogic("Task2");
+
             break;
         case "task3":
             SwitchButtonLogic("Task3");
+
             break;
         case "task4":
             SwitchButtonLogic("Task4");
+
             break;
+        }
+
+        if (allowSound) {
+            MediaPlayer sound = new();
+            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/achievement1.wav"));
+            sound.Play();
+            allowSound = false;
         }
 
         try {
@@ -46,7 +59,12 @@ public class ChoresDayUser1VM : BaseViewModel {
             GC.WaitForPendingFinalizers();
             File.WriteAllText(fileName, jsonString);
         } catch (Exception e) {
-            Console.WriteLine("Unable to save " + fileName + "... " + e.Message);
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "ChoresDayUser1VM",
+                Description = e.ToString()
+            });
         }
 
         GetButtonColors();
@@ -59,11 +77,25 @@ public class ChoresDayUser1VM : BaseViewModel {
             if (result == MessageBoxResult.Yes) {
                 ReferenceValues.JsonChoreDayUser1MasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreDayUser1MasterList.choreList[index].IsComplete;
                 ReferenceValues.JsonChoreDayUser1MasterList.choreList[index].Date = "";
+
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "ChoresDayUser1VM",
+                    Description = ReferenceValues.JsonMasterSettings.User1Name + " removed daily task: " + value
+                });
             }
         } else {
             ReferenceValues.JsonChoreDayUser1MasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreDayUser1MasterList.choreList[index].IsComplete;
             ReferenceValues.JsonChoreDayUser1MasterList.choreList[index].Date = DateTime.Now.ToString("HH:mm");
-            completeSound.Play(false);
+            allowSound = true;
+
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "ChoresDayUser1VM",
+                Description = ReferenceValues.JsonMasterSettings.User1Name + " completed daily task: " + value
+            });
         }
     }
 

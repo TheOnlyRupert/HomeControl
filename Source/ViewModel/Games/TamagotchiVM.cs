@@ -1,23 +1,11 @@
-﻿using System;
-using System.Windows.Input;
-using HomeControl.Source.Control;
+﻿using System.Windows.Input;
 using HomeControl.Source.Modules.Games;
-using HomeControl.Source.ModulesTesting.TamagotchiTests;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Games;
 
 public class TamagotchiVM : BaseViewModel {
-    private readonly PlaySound eggHatchSound;
-    private string _imageSource, _imageSourceEggTop, _imageSourceEggBottom, _debugVisibility;
-    private int animalID, hatchStage1, hatchStage2;
-    private bool isHatching;
-
     public TamagotchiVM() {
-        eggHatchSound = new PlaySound("egg_hatch");
-        hatchStage2 = 1;
-        DebugVisibility = "VISIBLE";
-
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
@@ -25,128 +13,57 @@ public class TamagotchiVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "Refresh") {
-            if (isHatching) {
-                HatchLogic();
-            }
-        }
+        if (e.PropertyName == "Refresh") { }
     }
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
-        case "feed":
-            TamagotchiFeed tamagotchiFeed = new();
-            tamagotchiFeed.ShowDialog();
-            tamagotchiFeed.Close();
+        case "bed":
+            TamagotchiWindowBed tamagotchiWindowBed = new();
+            tamagotchiWindowBed.ShowDialog();
+            tamagotchiWindowBed.Close();
             break;
-
-        /* DEBUG SECTION */
-        case "debug1":
-            hatchStage2 = 1;
-            isHatching = true;
-            eggHatchSound.Play(false);
+        case "closet":
+            TamagotchiWindowCloset tamagotchiWindowCloset = new();
+            tamagotchiWindowCloset.ShowDialog();
+            tamagotchiWindowCloset.Close();
             break;
-        case "debug2":
-            RandomizeAnimal();
+        case "tub":
             break;
-        case "debug3":
-            ItemTest itemTest = new();
-            itemTest.ShowDialog();
-            itemTest.Close();
+        case "toilet":
             break;
-        case "debug4":
+        case "sinkBath":
             break;
-        case "debug5":
+        case "couch":
             break;
-        case "debug6":
+        case "table":
             break;
-        case "debug7":
+        case "chairW":
             break;
-        case "debug8":
+        case "chairE":
             break;
-        case "debug9":
+        case "chairN":
             break;
-        case "debug10":
+        case "chairS":
             break;
-        case "debug11":
+        case "counter1":
             break;
-        case "debug12":
+        case "counter2":
             break;
-        }
-    }
-
-    private void RandomizeAnimal() {
-        isHatching = false;
-        hatchStage2 = 1;
-
-        Random random = new();
-        animalID = random.Next(32) * 13;
-        hatchStage1 = random.Next(0, 2);
-        ImageSource = "../../../Resources/Images/games/eggs_accented/tile" + animalID.ToString("D3") + ".png";
-        ImageSourceEggTop = "null";
-        ImageSourceEggBottom = "null";
-    }
-
-    private void HatchLogic() {
-        switch (hatchStage2) {
-        case < 5:
-            ImageSourceEggTop = "";
-            ImageSource = "../../../Resources/Images/games/eggs_accented/tile" + (animalID + hatchStage1 * 6 + hatchStage2).ToString("D3") + ".png";
-            ImageSourceEggBottom = "";
-            hatchStage2++;
+        case "counter3":
             break;
-        case 5:
-            ImageSourceEggTop = "../../../Resources/Images/games/eggs_accented/tile" + (animalID + hatchStage1 * 6 + 5).ToString("D3") + ".png";
-            ImageSource = "ANIMAL TODO!";
-            ImageSourceEggBottom = "../../../Resources/Images/games/eggs_accented/tile" + (animalID + hatchStage1 * 6 + 6).ToString("D3") + ".png";
-            hatchStage2++;
+        case "stove":
             break;
-        case > 8:
-            ImageSourceEggTop = "";
-            ImageSource = "ANIMAL TODO!";
-            ImageSourceEggBottom = "";
-            isHatching = false;
-            hatchStage2 = 1;
+        case "sinkKitchen":
             break;
-        default:
-            hatchStage2++;
+        case "fridge":
+            break;
+        case "washer":
+            break;
+        case "dryer":
+            break;
+        case "pantry":
             break;
         }
     }
-
-    #region Fields
-
-    public string ImageSource {
-        get => _imageSource;
-        set {
-            _imageSource = value;
-            RaisePropertyChangedEvent("ImageSource");
-        }
-    }
-
-    public string ImageSourceEggTop {
-        get => _imageSourceEggTop;
-        set {
-            _imageSourceEggTop = value;
-            RaisePropertyChangedEvent("ImageSourceEggTop");
-        }
-    }
-
-    public string ImageSourceEggBottom {
-        get => _imageSourceEggBottom;
-        set {
-            _imageSourceEggBottom = value;
-            RaisePropertyChangedEvent("ImageSourceEggBottom");
-        }
-    }
-
-    public string DebugVisibility {
-        get => _debugVisibility;
-        set {
-            _debugVisibility = value;
-            RaisePropertyChangedEvent("DebugVisibility");
-        }
-    }
-
-    #endregion
 }

@@ -95,7 +95,7 @@ public class EditTimerVM : BaseViewModel {
 
             ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
             ReferenceValues.IsTimerAlarmActive = false;
-            ReferenceValues.TimerSound.Stop();
+            //ReferenceValues.TimerSound.Stop();
             TimerNumberColor = "YellowGreen";
 
             break;
@@ -108,7 +108,7 @@ public class EditTimerVM : BaseViewModel {
             ReferenceValues.IsTimerAlarmActive = false;
             ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
             ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] = 0;
-            ReferenceValues.TimerSound.Stop();
+            //ReferenceValues.TimerSound.Stop();
             TimerNumberColor = "YellowGreen";
 
             break;
