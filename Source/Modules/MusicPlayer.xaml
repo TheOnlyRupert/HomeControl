@@ -82,9 +82,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Title of This Song" FontSize="20" HorizontalAlignment="Left"/>
-                <TextBlock Grid.Row="0" Text="↺" FontSize="24" HorizontalAlignment="Right"/>
-                <TextBlock Grid.Row="1" Text="Artist Name" FontSize="14" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="0" Text="{Binding SongName}" FontSize="20" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="0" Text="{Binding ShuffleIcon}" FontSize="24" HorizontalAlignment="Right"/>
+                <TextBlock Grid.Row="1" Text="{Binding ArtistName}" FontSize="14" HorizontalAlignment="Left"/>
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -92,9 +92,9 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" Text="02:05" FontSize="12"/>
-                    <ProgressBar Grid.Column="1" Value="80" Foreground="CornflowerBlue" Background="Transparent" Margin="4 4"/>
-                    <TextBlock Grid.Column="2" Text="02:43" FontSize="12"/>
+                    <TextBlock Grid.Column="0" Text="{Binding Timer1Text}" FontSize="12"/>
+                    <ProgressBar Grid.Column="1" Value="{Binding ProgressValue}" Foreground="CornflowerBlue" Background="Transparent" Margin="4 4"/>
+                    <TextBlock Grid.Column="2" Text="{Binding Timer2Text}" FontSize="12"/>
                 </Grid>
             </Grid>
         </Button>

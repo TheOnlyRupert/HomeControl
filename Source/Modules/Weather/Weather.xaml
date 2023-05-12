@@ -17,6 +17,7 @@
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
@@ -30,7 +31,7 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <Frame Grid.Row="1" Source="../MusicPlayer.xaml" Focusable="False" VerticalAlignment="Bottom"/>
+                    <Frame Grid.Row="2" Source="../MusicPlayer.xaml" Focusable="False"/>
                 </Grid>
 
                 <Frame Grid.Column="1" Source="../Hvac.xaml" Focusable="False"/>
