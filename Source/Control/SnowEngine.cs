@@ -7,7 +7,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
-using Image = System.Windows.Controls.Image;
 
 namespace HomeControl.Source.Control;
 
