@@ -90,8 +90,8 @@
                 <TextBlock Grid.Row="0" Text="Finance List" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
                 <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="1" ItemsSource="{Binding FinanceList}" Foreground="White"
-                                        SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="Black"
-                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True">
+                                        SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="White"
+                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -138,6 +138,7 @@
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Description" Width="Auto" control:GridViewSort.PropertyName="Item"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto" control:GridViewSort.PropertyName="Date"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Details}" Header="More Detailed Info" Width="Auto" control:GridViewSort.PropertyName="Details"/>
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
@@ -147,6 +148,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="2*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -194,7 +196,12 @@
                     <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
                 </Viewbox>
 
-                <Grid Grid.Row="6">
+                <StackPanel Grid.Row="6">
+                    <TextBlock Text="More Detailed Info  (optional)" FontSize="24" Foreground="White"/>
+                    <TextBox Text="{Binding DetailsText, UpdateSourceTrigger=PropertyChanged}" MaxLength="64" FontSize="24" Margin="0 0 0 8"/>
+                </StackPanel>
+
+                <Grid Grid.Row="7">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -323,8 +330,8 @@
                 <TextBlock Grid.Row="0" Text="Spending Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
                 <control:CustomListView Grid.Row="1" x:Name="CustomListView2" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White"
-                                        SelectedItem="{Binding DetailedFinanceSelected1}" SelectionMode="Single" Background="Transparent" BorderBrush="Black"
-                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8">
+                                        SelectedItem="{Binding DetailedFinanceSelected1}" SelectionMode="Single" Background="Transparent" BorderBrush="White"
+                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -384,8 +391,8 @@
 
 
                 <control:CustomListView Grid.Row="1" x:Name="CustomListView3" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock2}" Foreground="CornflowerBlue"
-                                        SelectedItem="{Binding DetailedFinanceSelected2}" SelectionMode="Single" Background="Transparent" BorderBrush="Black"
-                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8">
+                                        SelectedItem="{Binding DetailedFinanceSelected2}" SelectionMode="Single" Background="Transparent" BorderBrush="White"
+                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -436,76 +443,84 @@
         </Grid>
 
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="8 0 0 8">
-            <Button Content="Add Charge" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="0 0 4 0" CommandParameter="add">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button Content="Delete Charge" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="4 0 4 0" CommandParameter="delete">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button Content="Update Charge" FontSize="24" MinWidth="128" Command="{Binding ButtonCommand}" Margin="4 0 0 0" CommandParameter="update">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
-        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <Button Grid.Row="1" Content="Exit" FontSize="24" IsCancel="True" Margin="0 0 8 8" MinWidth="128" HorizontalAlignment="Right">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
+            <Button Grid.Column="0" Content="Add Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="8" CommandParameter="add">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Grid.Column="1" Content="Delete Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="0 8" CommandParameter="delete">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Grid.Column="2" Content="Update Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="8" CommandParameter="update">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Column="4" Content="Exit" FontSize="24" IsCancel="True" Margin="8" MinWidth="128" HorizontalAlignment="Right">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

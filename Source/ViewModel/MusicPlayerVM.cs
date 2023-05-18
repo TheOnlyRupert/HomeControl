@@ -1,9 +1,5 @@
-﻿using System;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Threading;
+﻿using System.Windows.Input;
 using HomeControl.Source.ViewModel.Base;
-using TagLib;
 
 namespace HomeControl.Source.ViewModel;
 
@@ -18,23 +14,23 @@ public class MusicPlayerVM : BaseViewModel {
         Timer1Text = null;
         Timer2Text = null;
 
-        File tagFile = File.Create("C:/Users/higgi/OneDrive/Desktop/untitled.mp3");
-        Console.WriteLine(tagFile.Length + ", " + tagFile.Tag.Title + ", " + tagFile.Properties.Duration.Seconds);
+        //File tagFile = File.Create("C:/Users/higgi/OneDrive/Desktop/untitled.mp3");
+        //Console.WriteLine(tagFile.Length + ", " + tagFile.Tag.Title + ", " + tagFile.Properties.Duration.Seconds);
 
-        ThreadedAudioPlayerLogic();
+        //ThreadedAudioPlayerLogic();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
 
     private static void ThreadedAudioPlayerLogic() {
-        Dispatcher.CurrentDispatcher.VerifyAccess();
+        //Dispatcher.CurrentDispatcher.VerifyAccess();
 
-        MediaPlayer mediaPlayer = new();
-        mediaPlayer.Open(new Uri("C:/Users/higgi/OneDrive/Desktop/untitled.mp3"));
-        mediaPlayer.Play();
+        //MediaPlayer mediaPlayer = new();
+        //mediaPlayer.Open(new Uri("C:/Users/higgi/OneDrive/Desktop/untitled.mp3"));
+        //mediaPlayer.Play();
 
-        Dispatcher.Run();
+        //Dispatcher.Run();
     }
 
     private void ButtonCommandLogic(object param) {

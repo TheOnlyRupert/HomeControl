@@ -21,8 +21,6 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source="../../../Resources/Images/icons/clock.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="24"/>
-
                     <StackPanel Grid.Row="0" Orientation="Vertical">
                         <TextBlock Text="{Binding CurrentDateText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -18,10 +18,9 @@ public class EditFinancesVM : BaseViewModel {
     private ObservableCollection<string> _categoryList;
 
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor;
+        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor, _detailsText;
 
     private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock1, _detailedFinanceBlock2;
-
     private ObservableCollection<FinanceBlock> _financeList;
     private FinanceBlock _financeSelected;
     private string selectedPerson, _categorySelected, _descriptionText;
@@ -32,7 +31,6 @@ public class EditFinancesVM : BaseViewModel {
         totalElectricBill, totalWaterBill,
         totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance, totalChildSupport, totalGift,
         totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses;
-
 
     private double totalPercentageBilling, totalPercentageBrittanyFund, totalPercentageCarryOver, totalPercentageChildCare,
         totalPercentageCoffee, totalPercentageElectricBill, totalPercentageEntertainment, totalPercentageFirearms, totalPercentageGasBill, totalPercentageGrocery,
@@ -48,6 +46,7 @@ public class EditFinancesVM : BaseViewModel {
         User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
         User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
         DescriptionText = "";
+        DetailsText = "";
         CostText = "";
         UserButtonLogic();
         FinanceList = new ObservableCollection<FinanceBlock>();
@@ -101,7 +100,7 @@ public class EditFinancesVM : BaseViewModel {
                     Level = "INFO",
                     Module = "EditFinancesVM",
                     Description = "Adding finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
-                                  CategorySelected + ", " + selectedPerson
+                                  CategorySelected + ", " + selectedPerson + ", " + DetailsText
                 });
 
                 FinanceList.Add(new FinanceBlock {
@@ -110,13 +109,15 @@ public class EditFinancesVM : BaseViewModel {
                     Item = DescriptionText,
                     Cost = CostText,
                     Category = CategorySelected,
-                    Person = selectedPerson
+                    Person = selectedPerson,
+                    Details = DetailsText
                 });
 
                 MediaPlayer sound = new();
                 sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
                 sound.Play();
                 DescriptionText = "";
+                DetailsText = "";
                 CostText = "";
                 RefreshDetailedView();
                 SaveJson();
@@ -142,8 +143,7 @@ public class EditFinancesVM : BaseViewModel {
                                 Level = "INFO",
                                 Module = "EditFinancesVM",
                                 Description = "Updating finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText +
-                                              ", " +
-                                              CategorySelected + ", " + selectedPerson
+                                              ", " + CategorySelected + ", " + selectedPerson + ", " + DetailsText
                             });
 
                             FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
@@ -152,7 +152,8 @@ public class EditFinancesVM : BaseViewModel {
                                 Item = DescriptionText,
                                 Cost = CostText,
                                 Category = CategorySelected,
-                                Person = selectedPerson
+                                Person = selectedPerson,
+                                Details = DetailsText
                             });
 
                             MediaPlayer sound = new();
@@ -160,6 +161,7 @@ public class EditFinancesVM : BaseViewModel {
                             sound.Play();
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
+                            DetailsText = "";
                             CostText = "";
                             RefreshDetailedView();
                             SaveJson();
@@ -186,7 +188,7 @@ public class EditFinancesVM : BaseViewModel {
                             Level = "INFO",
                             Module = "EditFinancesVM",
                             Description = "Removing finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
-                                          CategorySelected + ", " + selectedPerson
+                                          CategorySelected + ", " + selectedPerson + ", " + DetailsText
                         });
 
                         MediaPlayer sound = new();
@@ -277,6 +279,7 @@ public class EditFinancesVM : BaseViewModel {
         DescriptionText = value.Item;
         DateText = value.Date;
         CostText = value.Cost;
+        DetailsText = value.Details;
 
         if (value.AddSub == "ADD") {
             SwitchModeButtonText = "Income  ☺";
@@ -1147,6 +1150,14 @@ public class EditFinancesVM : BaseViewModel {
         set {
             _costText = VerifyInput.VerifyTextNumeric(value);
             RaisePropertyChangedEvent("CostText");
+        }
+    }
+
+    public string DetailsText {
+        get => _detailsText;
+        set {
+            _detailsText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            RaisePropertyChangedEvent("DetailsText");
         }
     }
 

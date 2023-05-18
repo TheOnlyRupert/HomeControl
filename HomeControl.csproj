@@ -5,7 +5,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{A8AAB6E4-8B96-4171-A46A-2650B7118841}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <RootNamespace>HomeControl</RootNamespace>
         <AssemblyName>HomeControl</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -196,14 +196,8 @@
         <Compile Include="Source\Modules\Games\TamagotchiWindowBed.xaml.cs">
             <DependentUpon>TamagotchiWindowBed.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Groceries.xaml.cs">
-            <DependentUpon>Groceries.xaml</DependentUpon>
-        </Compile>
         <Compile Include="Source\Modules\Hvac.xaml.cs">
             <DependentUpon>Hvac.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\MealPrep.xaml.cs">
-            <DependentUpon>MealPrep.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\MusicPlayer.xaml.cs">
             <DependentUpon>MusicPlayer.xaml</DependentUpon>
@@ -341,9 +335,7 @@
         <Page Include="Source\Modules\Games\Tamagotchi.xaml"/>
         <Page Include="Source\Modules\Games\TamagotchiWindowCloset.xaml"/>
         <Page Include="Source\Modules\Games\TamagotchiWindowBed.xaml"/>
-        <Page Include="Source\Modules\Groceries.xaml"/>
         <Page Include="Source\Modules\Hvac.xaml"/>
-        <Page Include="Source\Modules\MealPrep.xaml"/>
         <Page Include="Source\Modules\MusicPlayer.xaml"/>
         <Page Include="Source\Modules\Password.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>

@@ -77,7 +77,6 @@ public static class ReferenceValues {
 
     public static JsonCalendar[] JsonCalendarMasterEventList { get; set; }
     public static JsonFinances JsonFinanceMasterList { get; set; }
-    public static JsonRecurringFinances JsonRecurringFinanceMasterList { get; set; }
     public static JsonChores JsonChoreDayMasterList { get; set; }
     public static JsonChores JsonChoreDayUser1MasterList { get; set; }
     public static JsonChores JsonChoreWeekMasterList { get; set; }
@@ -110,7 +109,4 @@ public static class ReferenceValues {
     public static JsonCalendarRecurring JsonCalendarRecurringMaster { get; set; }
 
     public static ObservableCollection<DebugTextBlock> DebugTextBlockOutput { get; set; }
-
-    //TEMP
-    //public static string DebugText { get; set; }
 }

@@ -15,7 +15,7 @@ namespace HomeControl.Source.ViewModel.Chores;
 
 public class ChoresFundsVM : BaseViewModel {
     private string _currentMonth, _complianceDay, _complianceWeek, _complianceMonth, _complianceYear, _special1, _special2, _special3, _fundsPrior, _fundsTotal,
-        _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color, _dateText, _cashAvailableTextColor;
+        _fundsReturnRate, _cashRemaining, _descriptionText, _costText, _specialDay1Color, _specialDay2Color, _dateText, _cashAvailableTextColor, _detailsText;
 
     private ObservableCollection<FinanceBlockChoreFund> _financeList;
     private FinanceBlockChoreFund _financeSelected;
@@ -80,13 +80,15 @@ public class ChoresFundsVM : BaseViewModel {
                 FinanceList.Add(new FinanceBlockChoreFund {
                     Item = DescriptionText,
                     Cost = int.Parse(CostText),
-                    Date = DateTime.Parse(DateText).ToShortDateString()
+                    Date = DateTime.Parse(DateText).ToShortDateString(),
+                    Details = DetailsText
                 });
 
                 MediaPlayer sound = new();
                 sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
                 sound.Play();
                 DescriptionText = "";
+                DetailsText = "";
                 CostText = "";
                 Refresh();
             }
@@ -109,7 +111,8 @@ public class ChoresFundsVM : BaseViewModel {
                             FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlockChoreFund {
                                 Item = DescriptionText,
                                 Cost = int.Parse(CostText),
-                                Date = DateTime.Parse(DateText).ToShortDateString()
+                                Date = DateTime.Parse(DateText).ToShortDateString(),
+                                Details = DetailsText
                             });
 
                             MediaPlayer sound = new();
@@ -117,6 +120,7 @@ public class ChoresFundsVM : BaseViewModel {
                             sound.Play();
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
+                            DetailsText = "";
                             CostText = "";
                             Refresh();
                         }
@@ -243,6 +247,7 @@ public class ChoresFundsVM : BaseViewModel {
         DescriptionText = value.Item;
         CostText = value.Cost.ToString();
         DateText = value.Date;
+        DetailsText = value.Details;
     }
 
     #region Fields
@@ -348,6 +353,14 @@ public class ChoresFundsVM : BaseViewModel {
         set {
             _descriptionText = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("DescriptionText");
+        }
+    }
+
+    public string DetailsText {
+        get => _detailsText;
+        set {
+            _detailsText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            RaisePropertyChangedEvent("DetailsText");
         }
     }
 

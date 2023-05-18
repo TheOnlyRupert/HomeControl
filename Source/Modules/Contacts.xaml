@@ -31,9 +31,6 @@
 
                 <TextBlock Text="Children:" Foreground="White" FontSize="18"/>
                 <TextBlock Text="{Binding ChildrenNames}" Foreground="White" TextWrapping="Wrap" FontSize="18" Margin="0 0 0 14"/>
-
-                <TextBlock Text="Pets:" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding PetNames}" Foreground="White" TextWrapping="Wrap" FontSize="18"/>
             </StackPanel>
         </Border>
 
@@ -118,6 +115,14 @@
                 <TextBlock Text="{Binding EmergencyContact2Name}" Foreground="White" FontSize="18"/>
                 <TextBlock Text="{Binding EmergencyContact2Phone1}" Foreground="White" FontSize="18"/>
                 <TextBlock Text="{Binding EmergencyContact2Phone2}" Foreground="White" FontSize="18"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="2" Grid.Row="3" Margin="8" BorderBrush="Black" BorderThickness="2">
+            <StackPanel Margin="8">
+                <TextBlock Text="Pets" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+                <Separator/>
+                <TextBlock Text="{Binding PetNames}" Foreground="White" FontSize="18"/>
             </StackPanel>
         </Border>
 

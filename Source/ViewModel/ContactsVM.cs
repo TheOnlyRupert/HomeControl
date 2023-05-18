@@ -1,6 +1,4 @@
-﻿using System;
-using HomeControl.Source.IO;
-using HomeControl.Source.Reference;
+﻿using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel;
@@ -42,235 +40,140 @@ public class ContactsVM : BaseViewModel {
 
     public ContactsVM() {
         PrivateWifiVisibility = ReferenceValues.LockUI ? "HIDDEN" : "VISIBLE";
+        User1Name = ReferenceValues.JsonMasterSettings.User1NameLegal;
+        User2Name = ReferenceValues.JsonMasterSettings.User2NameLegal;
 
-        try {
-            User1Name = ReferenceValues.JsonMasterSettings.User1NameLegal;
-            try {
-                User1Phone1 = "(" + ReferenceValues.JsonMasterSettings.User1Phone1[0] + ReferenceValues.JsonMasterSettings.User1Phone1[1] +
-                              ReferenceValues.JsonMasterSettings.User1Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.User1Phone1[3] +
-                              ReferenceValues.JsonMasterSettings.User1Phone1[4] + ReferenceValues.JsonMasterSettings.User1Phone1[5] + "-" +
-                              ReferenceValues.JsonMasterSettings.User1Phone1[6] + ReferenceValues.JsonMasterSettings.User1Phone1[7] +
-                              ReferenceValues.JsonMasterSettings.User1Phone1[8] + ReferenceValues.JsonMasterSettings.User1Phone1[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            try {
-                User1Phone2 = "(" + ReferenceValues.JsonMasterSettings.User1Phone2[0] + ReferenceValues.JsonMasterSettings.User1Phone2[1] +
-                              ReferenceValues.JsonMasterSettings.User1Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.User1Phone2[3] +
-                              ReferenceValues.JsonMasterSettings.User1Phone2[4] + ReferenceValues.JsonMasterSettings.User1Phone2[5] + "-" +
-                              ReferenceValues.JsonMasterSettings.User1Phone2[6] + ReferenceValues.JsonMasterSettings.User1Phone2[7] +
-                              ReferenceValues.JsonMasterSettings.User1Phone2[8] + ReferenceValues.JsonMasterSettings.User1Phone2[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            User2Name = ReferenceValues.JsonMasterSettings.User2NameLegal;
-            try {
-                User2Phone1 = "(" + ReferenceValues.JsonMasterSettings.User2Phone1[0] + ReferenceValues.JsonMasterSettings.User2Phone1[1] +
-                              ReferenceValues.JsonMasterSettings.User2Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.User2Phone1[3] +
-                              ReferenceValues.JsonMasterSettings.User2Phone1[4] + ReferenceValues.JsonMasterSettings.User2Phone1[5] + "-" +
-                              ReferenceValues.JsonMasterSettings.User2Phone1[6] + ReferenceValues.JsonMasterSettings.User2Phone1[7] +
-                              ReferenceValues.JsonMasterSettings.User2Phone1[8] + ReferenceValues.JsonMasterSettings.User2Phone1[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            try {
-                User2Phone2 = "(" + ReferenceValues.JsonMasterSettings.User2Phone2[0] + ReferenceValues.JsonMasterSettings.User2Phone2[1] +
-                              ReferenceValues.JsonMasterSettings.User2Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.User2Phone2[3] +
-                              ReferenceValues.JsonMasterSettings.User2Phone2[4] + ReferenceValues.JsonMasterSettings.User2Phone2[5] + "-" +
-                              ReferenceValues.JsonMasterSettings.User2Phone2[6] + ReferenceValues.JsonMasterSettings.User2Phone2[7] +
-                              ReferenceValues.JsonMasterSettings.User2Phone2[8] + ReferenceValues.JsonMasterSettings.User2Phone2[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            ChildrenNames = ReferenceValues.JsonMasterSettings.User3NameLegal + ", " + ReferenceValues.JsonMasterSettings.User4NameLegal + ", " +
-                            ReferenceValues.JsonMasterSettings.User5NameLegal;
-            PetNames = ReferenceValues.JsonMasterSettings.PetNames;
-            Neighbor1Location = ReferenceValues.JsonMasterSettings.Neighbor1Location;
-            Neighbor1Name = ReferenceValues.JsonMasterSettings.Neighbor1Name;
-            try {
-                Neighbor1Phone1 = "(" + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[0] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[1] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor1Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[3] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor1Phone1[4] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[5] + "-" +
-                                  ReferenceValues.JsonMasterSettings.Neighbor1Phone1[6] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[7] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor1Phone1[8] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            try {
-                Neighbor1Phone2 = "(" + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[0] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[1] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor1Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[3] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor1Phone2[4] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[5] + "-" +
-                                  ReferenceValues.JsonMasterSettings.Neighbor1Phone2[6] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[7] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor1Phone2[8] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            Neighbor2Location = ReferenceValues.JsonMasterSettings.Neighbor2Location;
-            Neighbor2Name = ReferenceValues.JsonMasterSettings.Neighbor2Name;
-            try {
-                Neighbor2Phone1 = "(" + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[0] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[1] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor2Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[3] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor2Phone1[4] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[5] + "-" +
-                                  ReferenceValues.JsonMasterSettings.Neighbor2Phone1[6] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[7] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor2Phone1[8] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            try {
-                Neighbor2Phone2 = "(" + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[0] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[1] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor2Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[3] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor2Phone2[4] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[5] + "-" +
-                                  ReferenceValues.JsonMasterSettings.Neighbor2Phone2[6] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[7] +
-                                  ReferenceValues.JsonMasterSettings.Neighbor2Phone2[8] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            AddressLine1 = ReferenceValues.JsonMasterSettings.AddressLine1;
-            AddressLine2 = ReferenceValues.JsonMasterSettings.AddressLine2;
-            FireExtinguisherLocation = ReferenceValues.JsonMasterSettings.FireExtinguisherLocation;
-            HospitalAddressLine1 = ReferenceValues.JsonMasterSettings.HospitalAddressLine1;
-            HospitalAddressLine2 = ReferenceValues.JsonMasterSettings.HospitalAddressLine2;
-            WifiGuestName = ReferenceValues.JsonMasterSettings.WifiGuestName;
-            WifiGuestPassword = ReferenceValues.JsonMasterSettings.WifiGuestPassword;
-            WifiPrivateName = ReferenceValues.JsonMasterSettings.WifiPrivateName;
-            WifiPrivatePassword = ReferenceValues.JsonMasterSettings.WifiPrivatePassword;
-            PoliceName = ReferenceValues.JsonMasterSettings.PoliceName;
-            try {
-                PolicePhone = "(" + ReferenceValues.JsonMasterSettings.PolicePhone[0] + ReferenceValues.JsonMasterSettings.PolicePhone[1] +
-                              ReferenceValues.JsonMasterSettings.PolicePhone[2] + ") " + ReferenceValues.JsonMasterSettings.PolicePhone[3] +
-                              ReferenceValues.JsonMasterSettings.PolicePhone[4] + ReferenceValues.JsonMasterSettings.PolicePhone[5] + "-" +
-                              ReferenceValues.JsonMasterSettings.PolicePhone[6] + ReferenceValues.JsonMasterSettings.PolicePhone[7] +
-                              ReferenceValues.JsonMasterSettings.PolicePhone[8] + ReferenceValues.JsonMasterSettings.PolicePhone[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            EmergencyContact1Name = ReferenceValues.JsonMasterSettings.EmergencyContact1Name;
-            try {
-                EmergencyContact1Phone1 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[0] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[1] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[3] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[4] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[5] + "-" +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[6] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[7] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[8] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            try {
-                EmergencyContact1Phone2 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[0] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[1] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[3] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[4] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[5] + "-" +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[6] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[7] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[8] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            EmergencyContact2Name = ReferenceValues.JsonMasterSettings.EmergencyContact2Name;
-            try {
-                EmergencyContact2Phone1 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[0] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[1] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[3] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[4] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[5] + "-" +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[6] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[7] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[8] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            try {
-                EmergencyContact2Phone2 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[0] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[1] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[3] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[4] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[5] + "-" +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[6] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[7] +
-                                          ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[8] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[9];
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "ContactsVM",
-                    Description = e.ToString()
-                });
-            }
-
-            AlarmCode = ReferenceValues.JsonMasterSettings.AlarmCode;
-            WifiPrivateName = ReferenceValues.JsonMasterSettings.WifiPrivateName;
-            WifiPrivatePassword = ReferenceValues.JsonMasterSettings.WifiPrivatePassword;
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "ContactsVM",
-                Description = e.ToString()
-            });
+        if (ReferenceValues.JsonMasterSettings.User1Phone1 != null && ReferenceValues.JsonMasterSettings.User1Phone1.Length == 10) {
+            User1Phone1 = "(" + ReferenceValues.JsonMasterSettings.User1Phone1[0] + ReferenceValues.JsonMasterSettings.User1Phone1[1] +
+                          ReferenceValues.JsonMasterSettings.User1Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.User1Phone1[3] +
+                          ReferenceValues.JsonMasterSettings.User1Phone1[4] + ReferenceValues.JsonMasterSettings.User1Phone1[5] + "-" +
+                          ReferenceValues.JsonMasterSettings.User1Phone1[6] + ReferenceValues.JsonMasterSettings.User1Phone1[7] +
+                          ReferenceValues.JsonMasterSettings.User1Phone1[8] + ReferenceValues.JsonMasterSettings.User1Phone1[9];
         }
+
+        if (ReferenceValues.JsonMasterSettings.User1Phone2 != null && ReferenceValues.JsonMasterSettings.User1Phone2.Length == 10) {
+            User1Phone2 = "(" + ReferenceValues.JsonMasterSettings.User1Phone2[0] + ReferenceValues.JsonMasterSettings.User1Phone2[1] +
+                          ReferenceValues.JsonMasterSettings.User1Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.User1Phone2[3] +
+                          ReferenceValues.JsonMasterSettings.User1Phone2[4] + ReferenceValues.JsonMasterSettings.User1Phone2[5] + "-" +
+                          ReferenceValues.JsonMasterSettings.User1Phone2[6] + ReferenceValues.JsonMasterSettings.User1Phone2[7] +
+                          ReferenceValues.JsonMasterSettings.User1Phone2[8] + ReferenceValues.JsonMasterSettings.User1Phone2[9];
+        }
+
+        if (ReferenceValues.JsonMasterSettings.User2Phone1 != null && ReferenceValues.JsonMasterSettings.User2Phone1.Length == 10) {
+            User2Phone1 = "(" + ReferenceValues.JsonMasterSettings.User2Phone1[0] + ReferenceValues.JsonMasterSettings.User2Phone1[1] +
+                          ReferenceValues.JsonMasterSettings.User2Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.User2Phone1[3] +
+                          ReferenceValues.JsonMasterSettings.User2Phone1[4] + ReferenceValues.JsonMasterSettings.User2Phone1[5] + "-" +
+                          ReferenceValues.JsonMasterSettings.User2Phone1[6] + ReferenceValues.JsonMasterSettings.User2Phone1[7] +
+                          ReferenceValues.JsonMasterSettings.User2Phone1[8] + ReferenceValues.JsonMasterSettings.User2Phone1[9];
+        }
+
+        if (ReferenceValues.JsonMasterSettings.User2Phone2 != null && ReferenceValues.JsonMasterSettings.User2Phone2.Length == 10) {
+            User2Phone2 = "(" + ReferenceValues.JsonMasterSettings.User2Phone2[0] + ReferenceValues.JsonMasterSettings.User2Phone2[1] +
+                          ReferenceValues.JsonMasterSettings.User2Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.User2Phone2[3] +
+                          ReferenceValues.JsonMasterSettings.User2Phone2[4] + ReferenceValues.JsonMasterSettings.User2Phone2[5] + "-" +
+                          ReferenceValues.JsonMasterSettings.User2Phone2[6] + ReferenceValues.JsonMasterSettings.User2Phone2[7] +
+                          ReferenceValues.JsonMasterSettings.User2Phone2[8] + ReferenceValues.JsonMasterSettings.User2Phone2[9];
+        }
+
+        ChildrenNames = ReferenceValues.JsonMasterSettings.User3NameLegal + ", " + ReferenceValues.JsonMasterSettings.User4NameLegal + ", " +
+                        ReferenceValues.JsonMasterSettings.User5NameLegal;
+        PetNames = ReferenceValues.JsonMasterSettings.PetNames;
+        Neighbor1Location = ReferenceValues.JsonMasterSettings.Neighbor1Location;
+        Neighbor1Name = ReferenceValues.JsonMasterSettings.Neighbor1Name;
+
+        if (ReferenceValues.JsonMasterSettings.Neighbor1Phone1 != null && ReferenceValues.JsonMasterSettings.Neighbor1Phone1.Length == 10) {
+            Neighbor1Phone1 = "(" + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[0] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[1] +
+                              ReferenceValues.JsonMasterSettings.Neighbor1Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[3] +
+                              ReferenceValues.JsonMasterSettings.Neighbor1Phone1[4] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[5] + "-" +
+                              ReferenceValues.JsonMasterSettings.Neighbor1Phone1[6] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[7] +
+                              ReferenceValues.JsonMasterSettings.Neighbor1Phone1[8] + ReferenceValues.JsonMasterSettings.Neighbor1Phone1[9];
+        }
+
+        if (ReferenceValues.JsonMasterSettings.Neighbor1Phone2 != null && ReferenceValues.JsonMasterSettings.Neighbor1Phone2.Length == 10) {
+            Neighbor1Phone2 = "(" + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[0] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[1] +
+                              ReferenceValues.JsonMasterSettings.Neighbor1Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[3] +
+                              ReferenceValues.JsonMasterSettings.Neighbor1Phone2[4] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[5] + "-" +
+                              ReferenceValues.JsonMasterSettings.Neighbor1Phone2[6] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[7] +
+                              ReferenceValues.JsonMasterSettings.Neighbor1Phone2[8] + ReferenceValues.JsonMasterSettings.Neighbor1Phone2[9];
+        }
+
+        Neighbor2Location = ReferenceValues.JsonMasterSettings.Neighbor2Location;
+        Neighbor2Name = ReferenceValues.JsonMasterSettings.Neighbor2Name;
+
+        if (ReferenceValues.JsonMasterSettings.Neighbor2Phone1 != null && ReferenceValues.JsonMasterSettings.Neighbor2Phone1.Length == 10) {
+            Neighbor2Phone1 = "(" + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[0] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[1] +
+                              ReferenceValues.JsonMasterSettings.Neighbor2Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[3] +
+                              ReferenceValues.JsonMasterSettings.Neighbor2Phone1[4] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[5] + "-" +
+                              ReferenceValues.JsonMasterSettings.Neighbor2Phone1[6] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[7] +
+                              ReferenceValues.JsonMasterSettings.Neighbor2Phone1[8] + ReferenceValues.JsonMasterSettings.Neighbor2Phone1[9];
+        }
+
+        if (ReferenceValues.JsonMasterSettings.Neighbor2Phone2 != null && ReferenceValues.JsonMasterSettings.Neighbor2Phone2.Length == 10) {
+            Neighbor2Phone2 = "(" + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[0] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[1] +
+                              ReferenceValues.JsonMasterSettings.Neighbor2Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[3] +
+                              ReferenceValues.JsonMasterSettings.Neighbor2Phone2[4] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[5] + "-" +
+                              ReferenceValues.JsonMasterSettings.Neighbor2Phone2[6] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[7] +
+                              ReferenceValues.JsonMasterSettings.Neighbor2Phone2[8] + ReferenceValues.JsonMasterSettings.Neighbor2Phone2[9];
+        }
+
+        AddressLine1 = ReferenceValues.JsonMasterSettings.AddressLine1;
+        AddressLine2 = ReferenceValues.JsonMasterSettings.AddressLine2;
+        FireExtinguisherLocation = ReferenceValues.JsonMasterSettings.FireExtinguisherLocation;
+        HospitalAddressLine1 = ReferenceValues.JsonMasterSettings.HospitalAddressLine1;
+        HospitalAddressLine2 = ReferenceValues.JsonMasterSettings.HospitalAddressLine2;
+        WifiGuestName = ReferenceValues.JsonMasterSettings.WifiGuestName;
+        WifiGuestPassword = ReferenceValues.JsonMasterSettings.WifiGuestPassword;
+        WifiPrivateName = ReferenceValues.JsonMasterSettings.WifiPrivateName;
+        WifiPrivatePassword = ReferenceValues.JsonMasterSettings.WifiPrivatePassword;
+        PoliceName = ReferenceValues.JsonMasterSettings.PoliceName;
+
+        if (ReferenceValues.JsonMasterSettings.PolicePhone != null && ReferenceValues.JsonMasterSettings.PolicePhone.Length == 10) {
+            PolicePhone = "(" + ReferenceValues.JsonMasterSettings.PolicePhone[0] + ReferenceValues.JsonMasterSettings.PolicePhone[1] +
+                          ReferenceValues.JsonMasterSettings.PolicePhone[2] + ") " + ReferenceValues.JsonMasterSettings.PolicePhone[3] +
+                          ReferenceValues.JsonMasterSettings.PolicePhone[4] + ReferenceValues.JsonMasterSettings.PolicePhone[5] + "-" +
+                          ReferenceValues.JsonMasterSettings.PolicePhone[6] + ReferenceValues.JsonMasterSettings.PolicePhone[7] +
+                          ReferenceValues.JsonMasterSettings.PolicePhone[8] + ReferenceValues.JsonMasterSettings.PolicePhone[9];
+        }
+
+        EmergencyContact1Name = ReferenceValues.JsonMasterSettings.EmergencyContact1Name;
+
+        if (ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1 != null && ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1.Length == 10) {
+            EmergencyContact1Phone1 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[0] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[1] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[3] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[4] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[5] + "-" +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[6] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[7] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[8] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1[9];
+        }
+
+        if (ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2 != null && ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2.Length == 10) {
+            EmergencyContact1Phone2 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[0] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[1] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[3] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[4] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[5] + "-" +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[6] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[7] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[8] + ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2[9];
+        }
+
+        EmergencyContact2Name = ReferenceValues.JsonMasterSettings.EmergencyContact2Name;
+
+        if (ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1 != null && ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1.Length == 10) {
+            EmergencyContact2Phone1 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[0] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[1] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[2] + ") " + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[3] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[4] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[5] + "-" +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[6] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[7] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[8] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1[9];
+        }
+
+        if (ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2 != null && ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2.Length == 10) {
+            EmergencyContact2Phone2 = "(" + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[0] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[1] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[2] + ") " + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[3] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[4] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[5] + "-" +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[6] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[7] +
+                                      ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[8] + ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2[9];
+        }
+
+        AlarmCode = ReferenceValues.JsonMasterSettings.AlarmCode;
+        WifiPrivateName = ReferenceValues.JsonMasterSettings.WifiPrivateName;
+        WifiPrivatePassword = ReferenceValues.JsonMasterSettings.WifiPrivatePassword;
     }
 
     #region Fields

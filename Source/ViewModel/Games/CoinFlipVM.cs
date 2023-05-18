@@ -14,6 +14,9 @@ public class CoinFlipVM : BaseViewModel {
     private string _imageSource, _gameStats;
 
     public CoinFlipVM() {
+        MediaPlayer coinFlip = new();
+        coinFlip.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/coin_flip.wav"));
+        coinFlip.Play();
         _random = new Random();
         Flip();
         RefreshStats();

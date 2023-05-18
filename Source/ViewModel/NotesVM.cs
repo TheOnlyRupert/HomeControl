@@ -14,16 +14,6 @@ public class NotesVM : BaseViewModel {
             contacts.ShowDialog();
             contacts.Close();
             break;
-        case "mealPrep":
-            MealPrep mealPrep = new();
-            mealPrep.ShowDialog();
-            mealPrep.Close();
-            break;
-        case "groceries":
-            Groceries groceries = new();
-            groceries.ShowDialog();
-            groceries.Close();
-            break;
         }
     }
 }

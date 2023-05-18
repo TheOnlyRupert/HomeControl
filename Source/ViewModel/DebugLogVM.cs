@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using HomeControl.Source.IO;
+using HomeControl.Source.Modules;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -32,6 +33,11 @@ public class DebugLogVM : BaseViewModel {
         switch (param) {
         case "party":
             ReferenceValues.IsFunnyModeActive = ReferenceValues.IsFunnyModeActive != true;
+            break;
+        case "settings":
+            Settings settings = new();
+            settings.ShowDialog();
+            settings.Close();
             break;
         }
     }

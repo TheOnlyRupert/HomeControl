@@ -66,8 +66,8 @@
     <Border BorderBrush="Black" BorderThickness="1" Margin="4 4 0 4">
         <Grid Margin="4">
             <Grid.RowDefinitions>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -75,7 +75,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.2*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
@@ -90,7 +90,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="4">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -102,7 +102,7 @@
 
                 <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DupeText}" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold" FontSize="18"/>
 
-                <Button Grid.Column="1" Content="&lt;" Command="{Binding ButtonCommand}" Width="32" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Right"
+                <Button Grid.Column="1" Content="&lt;" Command="{Binding ButtonCommand}" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Right"
                         CommandParameter="subMonth">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -111,7 +111,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 4">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -121,9 +121,9 @@
                     </Button.Style>
                 </Button>
 
-                <TextBlock Grid.Column="2" Text="{Binding CurrentMonthAndYear}" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+                <TextBlock Grid.Column="2" Text="{Binding CurrentMonthAndYear}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
 
-                <Button Grid.Column="3" Content="&gt;" Command="{Binding ButtonCommand}" Width="32" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Left"
+                <Button Grid.Column="3" Content="&gt;" Command="{Binding ButtonCommand}" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Left"
                         CommandParameter="addMonth">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -132,7 +132,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 4">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -150,7 +150,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="4">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>

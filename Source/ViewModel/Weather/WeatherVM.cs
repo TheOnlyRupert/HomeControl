@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text.Json;
 using System.Windows.Input;
+using System.Windows.Media;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules;
@@ -440,9 +441,16 @@ public class WeatherVM : BaseViewModel {
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "debug":
-            DebugLog debugLog = new();
-            debugLog.ShowDialog();
-            debugLog.Close();
+            if (!ReferenceValues.LockUI) {
+                DebugLog debugLog = new();
+                debugLog.ShowDialog();
+                debugLog.Close();
+            } else {
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
+                sound.Play();
+            }
+
             break;
         }
     }

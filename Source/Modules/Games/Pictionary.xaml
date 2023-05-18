@@ -2,17 +2,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="640" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4" FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
-    <Grid Margin="8">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="64"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <ProgressBar Grid.Row="0" Value="{Binding ProgressBarValue}" IsIndeterminate="False" Foreground="Blue" Background="Transparent" BorderThickness="0"/>
         </Grid>
 
-        <Grid Grid.Row="1" Visibility="{Binding MenuVisibility}">
+        <Grid Grid.Row="1" Visibility="{Binding MenuVisibility}" Margin="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="32"/>
@@ -156,7 +157,6 @@
                 </Button.Style>
             </Button>
 
-
             <TextBlock Grid.Column="0" Grid.Row="6" Foreground="White" Text="Round Minutes" FontSize="24" HorizontalAlignment="Center" Padding="8"/>
 
             <Button Grid.Column="1" Grid.Row="6" Content="◀ " Foreground="White" FontSize="24" Focusable="False" Command="{Binding ButtonCommand}" CommandParameter="timerSub">
@@ -197,64 +197,73 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Button Name="MainFocusItem" Content="{Binding Button1Text}" Foreground="White" MinWidth="128" FontSize="24" VerticalAlignment="Center" Focusable="False"
-                        Command="{Binding ButtonCommand}" CommandParameter="button1">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="8">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Content="{Binding Button2Text}" MinWidth="128" Foreground="White" FontSize="24" VerticalAlignment="Center" Focusable="False"
-                        Command="{Binding ButtonCommand}" CommandParameter="button2">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="8">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Content="Exit" MinWidth="128" Foreground="White" FontSize="24" VerticalAlignment="Center" Focusable="False" IsCancel="True">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="8">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </StackPanel>
+        <TextBlock Grid.Row="1" Text="{Binding OutputText}" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+                   Visibility="{Binding 
+            GameVisibility}"/>
 
-            <TextBlock Text="{Binding OutputText}" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Visibility="{Binding GameVisibility}"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Name="MainFocusItem" Content="{Binding Button1Text}" Foreground="White" FontSize="24" Focusable="False" Margin="8"
+                    Command="{Binding ButtonCommand}" CommandParameter="button1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Column="1" Content="{Binding Button2Text}" Foreground="White" FontSize="24" Focusable="False" Margin="0 8" Command="{Binding ButtonCommand}"
+                    CommandParameter="button2">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Column="3" Content="Exit" MinWidth="128" Foreground="White" FontSize="24" Focusable="False" IsCancel="True" Margin="8">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Grid>
 </Window>

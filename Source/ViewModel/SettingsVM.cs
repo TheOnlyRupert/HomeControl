@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text.Json;
-using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -42,6 +42,51 @@ public class SettingsVM : BaseViewModel {
         _emergencyContact2Phone1,
         _emergencyContact2Phone2,
         _alarmCode;
+
+    public SettingsVM() {
+        UserAgentText = ReferenceValues.JsonMasterSettings.UserAgent;
+        User1Name = ReferenceValues.JsonMasterSettings.User1Name;
+        User2Name = ReferenceValues.JsonMasterSettings.User2Name;
+        User3Name = ReferenceValues.JsonMasterSettings.User3Name;
+        User4Name = ReferenceValues.JsonMasterSettings.User4Name;
+        User5Name = ReferenceValues.JsonMasterSettings.User5Name;
+        User1NameLegal = ReferenceValues.JsonMasterSettings.User1NameLegal;
+        User2NameLegal = ReferenceValues.JsonMasterSettings.User2NameLegal;
+        User3NameLegal = ReferenceValues.JsonMasterSettings.User3NameLegal;
+        User4NameLegal = ReferenceValues.JsonMasterSettings.User4NameLegal;
+        User5NameLegal = ReferenceValues.JsonMasterSettings.User5NameLegal;
+        User1Phone1 = ReferenceValues.JsonMasterSettings.User1Phone1;
+        User1Phone2 = ReferenceValues.JsonMasterSettings.User1Phone2;
+        User2Phone1 = ReferenceValues.JsonMasterSettings.User2Phone1;
+        User2Phone2 = ReferenceValues.JsonMasterSettings.User2Phone2;
+        PetNames = ReferenceValues.JsonMasterSettings.PetNames;
+        Neighbor1Location = ReferenceValues.JsonMasterSettings.Neighbor1Location;
+        Neighbor1Name = ReferenceValues.JsonMasterSettings.Neighbor1Name;
+        Neighbor1Phone1 = ReferenceValues.JsonMasterSettings.Neighbor1Phone1;
+        Neighbor1Phone2 = ReferenceValues.JsonMasterSettings.Neighbor1Phone2;
+        Neighbor2Location = ReferenceValues.JsonMasterSettings.Neighbor2Location;
+        Neighbor2Name = ReferenceValues.JsonMasterSettings.Neighbor2Name;
+        Neighbor2Phone1 = ReferenceValues.JsonMasterSettings.Neighbor2Phone1;
+        Neighbor2Phone2 = ReferenceValues.JsonMasterSettings.Neighbor2Phone2;
+        AddressLine1 = ReferenceValues.JsonMasterSettings.AddressLine1;
+        AddressLine2 = ReferenceValues.JsonMasterSettings.AddressLine2;
+        FireExtinguisherLocation = ReferenceValues.JsonMasterSettings.FireExtinguisherLocation;
+        HospitalAddressLine1 = ReferenceValues.JsonMasterSettings.HospitalAddressLine1;
+        HospitalAddressLine2 = ReferenceValues.JsonMasterSettings.HospitalAddressLine2;
+        WifiGuestName = ReferenceValues.JsonMasterSettings.WifiGuestName;
+        WifiGuestPassword = ReferenceValues.JsonMasterSettings.WifiGuestPassword;
+        WifiPrivateName = ReferenceValues.JsonMasterSettings.WifiPrivateName;
+        WifiPrivatePassword = ReferenceValues.JsonMasterSettings.WifiPrivatePassword;
+        PoliceName = ReferenceValues.JsonMasterSettings.PoliceName;
+        PolicePhone = ReferenceValues.JsonMasterSettings.PolicePhone;
+        EmergencyContact1Name = ReferenceValues.JsonMasterSettings.EmergencyContact1Name;
+        EmergencyContact1Phone1 = ReferenceValues.JsonMasterSettings.EmergencyContact1Phone1;
+        EmergencyContact1Phone2 = ReferenceValues.JsonMasterSettings.EmergencyContact1Phone2;
+        EmergencyContact2Name = ReferenceValues.JsonMasterSettings.EmergencyContact2Name;
+        EmergencyContact2Phone1 = ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1;
+        EmergencyContact2Phone2 = ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2;
+        AlarmCode = ReferenceValues.JsonMasterSettings.AlarmCode;
+    }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
@@ -106,7 +151,9 @@ public class SettingsVM : BaseViewModel {
                     });
                 }
             } else {
-                MessageBox.Show("Fields cannot be blank", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MediaPlayer sound = new();
+                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
+                sound.Play();
             }
 
             break;
