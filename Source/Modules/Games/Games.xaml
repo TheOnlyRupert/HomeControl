@@ -20,11 +20,6 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
                 <Button Grid.Row="0" Grid.Column="0" Command="{Binding ButtonCommand}" CommandParameter="coinFlip" HorizontalContentAlignment="Stretch">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -47,29 +42,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="ticTacToe" HorizontalContentAlignment="Stretch">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                    <StackPanel>
-                        <Image Source="../../../Resources/Images/icons/tic_tac_toe.png" Width="48" Height="48"/>
-                        <TextBlock Text="TicTacToe" HorizontalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
-                </Button>
-
-                <Button Grid.Row="0" Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="tamagotchi" HorizontalContentAlignment="Stretch">
+                <Button Grid.Row="0" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="tamagotchi" HorizontalContentAlignment="Stretch">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -91,7 +64,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="0" Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="pictionary" HorizontalContentAlignment="Stretch">
+                <Button Grid.Row="0" Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="pictionary" HorizontalContentAlignment="Stretch">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -110,6 +83,28 @@
                     <StackPanel>
                         <Image Source="../../../Resources/Images/icons/pictionary.png" Width="48" Height="48"/>
                         <TextBlock Text="Pictionary" HorizontalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Row="0" Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="" HorizontalContentAlignment="Stretch">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel>
+                        <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
             </Grid>

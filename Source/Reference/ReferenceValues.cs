@@ -109,4 +109,6 @@ public static class ReferenceValues {
     public static JsonCalendarRecurring JsonCalendarRecurringMaster { get; set; }
 
     public static ObservableCollection<DebugTextBlock> DebugTextBlockOutput { get; set; }
+
+    public static JsonRecipe JsonRecipesMaster { get; set; }
 }

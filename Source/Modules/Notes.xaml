@@ -18,10 +18,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
                 <Button Grid.Row="0" Grid.Column="0" Command="{Binding ButtonCommand}" CommandParameter="contacts">
                     <Button.Style>
@@ -45,28 +41,7 @@
                         <TextBlock Text="Contacts" HorizontalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="todo">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                    <StackPanel>
-                        <Image Source="../../../Resources/Images/icons/todo.png" Width="48" Height="48"/>
-                        <TextBlock Text="To Do" HorizontalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="0" Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="recipes">
+                <Button Grid.Row="0" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="recipes">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -87,7 +62,8 @@
                         <TextBlock Text="Recipes" HorizontalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="groceries">
+
+                <Button Grid.Row="0" Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="" HorizontalContentAlignment="Stretch">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -104,11 +80,12 @@
                         </Style>
                     </Button.Style>
                     <StackPanel>
-                        <Image Source="../../../Resources/Images/icons/groceries.png" Width="48" Height="48"/>
-                        <TextBlock Text="Groceries" HorizontalAlignment="Center" Foreground="White"/>
+                        <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="0" Command="{Binding ButtonCommand}" CommandParameter="vacation">
+
+                <Button Grid.Row="0" Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="" HorizontalContentAlignment="Stretch">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -125,71 +102,8 @@
                         </Style>
                     </Button.Style>
                     <StackPanel>
-                        <Image Source="../../../Resources/Images/icons/vacation.png" Width="48" Height="48"/>
-                        <TextBlock Text="Vacation" HorizontalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="1" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="mealPrep">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                    <StackPanel>
-                        <Image Source="../../../Resources/Images/icons/meal.png" Width="48" Height="48"/>
-                        <TextBlock Text="Meal Prep" HorizontalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="1" Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="tickets">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                    <StackPanel>
-                        <Image Source="../../../Resources/Images/icons/open_tickets.png" Width="48" Height="48"/>
-                        <TextBlock Text="Open Tickets" HorizontalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Row="1" Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="workOut">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                    <StackPanel>
-                        <Image Source="../../../Resources/Images/icons/workout.png" Width="48" Height="48"/>
-                        <TextBlock Text="Work Out" HorizontalAlignment="Center" Foreground="White"/>
+                        <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
             </Grid>

@@ -5,7 +5,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{A8AAB6E4-8B96-4171-A46A-2650B7118841}</ProjectGuid>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <RootNamespace>HomeControl</RootNamespace>
         <AssemblyName>HomeControl</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -63,6 +63,7 @@
         <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
         </Reference>
+        <Reference Include="System.Net.Http"/>
         <Reference Include="System.Numerics"/>
         <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
             <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -129,10 +130,12 @@
         <Compile Include="Source\IO\JsonChores.cs"/>
         <Compile Include="Source\IO\JsonFinances.cs"/>
         <Compile Include="Source\IO\JsonGameStats.cs"/>
+        <Compile Include="Source\IO\JsonRecipe.cs"/>
         <Compile Include="Source\IO\JsonSettings.cs"/>
         <Compile Include="Source\IO\JsonTamagotchi.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecast.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecastHourly.cs"/>
+        <Compile Include="Source\IO\RecipeFromJson.cs"/>
         <Compile Include="Source\IO\SettingsFromJson.cs"/>
         <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
         <Compile Include="Source\Modules\Calendar\EditRecurring.xaml.cs">
@@ -204,6 +207,9 @@
         </Compile>
         <Compile Include="Source\Modules\Password.xaml.cs">
             <DependentUpon>Password.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Recipes.xaml.cs">
+            <DependentUpon>Recipes.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Timer\Timer.xaml.cs">
             <DependentUpon>Timer.xaml</DependentUpon>
@@ -277,9 +283,9 @@
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowClosetVM.cs"/>
         <Compile Include="Source\ViewModel\GroceriesVM.cs"/>
         <Compile Include="Source\ViewModel\HvacVM.cs"/>
-        <Compile Include="Source\ViewModel\MealPrepVM.cs"/>
         <Compile Include="Source\ViewModel\MusicPlayerVM.cs"/>
         <Compile Include="Source\ViewModel\PasswordVM.cs"/>
+        <Compile Include="Source\ViewModel\RecipesVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
         <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
@@ -338,6 +344,7 @@
         <Page Include="Source\Modules\Hvac.xaml"/>
         <Page Include="Source\Modules\MusicPlayer.xaml"/>
         <Page Include="Source\Modules\Password.xaml"/>
+        <Page Include="Source\Modules\Recipes.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
         <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
         <Page Include="Source\Modules\Behavior\Behavior.xaml"/>
