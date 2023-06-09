@@ -272,6 +272,19 @@ public class EditFinancesVM : BaseViewModel {
             }
 
             break;
+        case "addDay":
+            try {
+                DateText = Convert.ToDateTime(DateText).AddDays(1).ToShortDateString();
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditFinancesVM",
+                    Description = e.ToString()
+                });
+            }
+
+            break;
         }
     }
 

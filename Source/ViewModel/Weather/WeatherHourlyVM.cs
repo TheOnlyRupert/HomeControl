@@ -56,20 +56,22 @@ public class WeatherHourlyVM : BaseViewModel {
                 Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
                 client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
                 string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
-                JsonWeatherForecastHourly forecastHourly = JsonSerializer.Deserialize<JsonWeatherForecastHourly>(weatherForecastHourly, options);
+                JsonWeatherForecast forecast = JsonSerializer.Deserialize<JsonWeatherForecast>(weatherForecastHourly, options);
 
                 ForecastHourlyList.Clear();
 
-                if (forecastHourly != null) {
-                    foreach (JsonWeatherForecastHourly.Periods period in forecastHourly.properties.periods) {
+                if (forecast != null) {
+                    foreach (JsonWeatherForecast.Periods period in forecast.properties.periods) {
                         ForecastHourlyList.Add(new WeatherHourlyBlock {
                             Time = period.startTime.ToString("MM/dd  ") + period.startTime.ToString("HH:mm"),
-                            WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime),
+                            WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, "null"),
                             Temp = period.temperature + "°",
                             RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),
-                            RainChance = WeatherHelpers.GetRainChance(period.icon),
+                            RainChance = period.probabilityOfPrecipitation.value + "%",
                             WindSpeed = period.windSpeed,
-                            WindDirectionIcon = WeatherHelpers.GetWindRotation(period.windDirection)
+                            WindDirectionIcon = WeatherHelpers.GetWindRotation(period.windDirection),
+                            Humidity = "Humidity: " + period.relativeHumidity.value + "%",
+                            ShortForecast = period.shortForecast
                         });
                     }
                 }

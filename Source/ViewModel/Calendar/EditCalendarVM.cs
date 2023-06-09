@@ -12,24 +12,31 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Calendar;
 
 public class EditCalendarVM : BaseViewModel {
-    private readonly JsonCalendar _jsonCalendar;
-    private readonly string fileName;
     private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
         _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText, _startTimeText, _endTimeText, _parentsBackgroundColor, _dupeButtonBackgroundColor, _dupeText;
 
     private ObservableCollection<CalendarEvents> _eventList;
+    private JsonCalendar _jsonCalendar;
+    private string fileName;
 
     public EditCalendarVM() {
+        User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
+        User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
+        EventText = "";
+
+        PopulateEvent();
+    }
+
+    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+
+    private void PopulateEvent() {
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
         fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
         EventList = new ObservableCollection<CalendarEvents>();
-        EventText = "";
         _jsonCalendar = new JsonCalendar();
         selectedPerson = "Home";
-        User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
-        User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
         CalendarEventSelected = new CalendarEvents();
         UserButtonLogic();
 
@@ -94,8 +101,6 @@ public class EditCalendarVM : BaseViewModel {
             }
         }
     }
-
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
     private void PopulateDetailedView(CalendarEvents value) {
         EventText = value.name;
@@ -329,6 +334,14 @@ public class EditCalendarVM : BaseViewModel {
         case "other":
             selectedPerson = "Other";
             UserButtonLogic();
+            break;
+        case "addDay":
+            ReferenceValues.CalendarEventDate = ReferenceValues.CalendarEventDate.AddDays(1);
+            PopulateEvent();
+            break;
+        case "subDay":
+            ReferenceValues.CalendarEventDate = ReferenceValues.CalendarEventDate.AddDays(-1);
+            PopulateEvent();
             break;
         }
     }

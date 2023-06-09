@@ -17,6 +17,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Row="0" Grid.Column="0" Command="{Binding ButtonCommand}" CommandParameter="contacts">
@@ -86,6 +88,50 @@
                 </Button>
 
                 <Button Grid.Row="0" Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="" HorizontalContentAlignment="Stretch">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel>
+                        <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Row="0" Grid.Column="4" Command="{Binding ButtonCommand}" CommandParameter="" HorizontalContentAlignment="Stretch">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel>
+                        <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Grid.Row="0" Grid.Column="5" Command="{Binding ButtonCommand}" CommandParameter="" HorizontalContentAlignment="Stretch">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>

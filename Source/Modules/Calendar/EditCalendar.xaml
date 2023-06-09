@@ -139,7 +139,53 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{Binding EventDate}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Content="&lt;" Command="{Binding ButtonCommand}" CommandParameter="subDay" FontSize="16" HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <TextBlock Grid.Column="1" Text="{Binding EventDate}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Button Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="16" HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
 
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Event" FontSize="24" Foreground="White"/>

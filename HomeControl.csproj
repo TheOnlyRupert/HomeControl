@@ -5,7 +5,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{A8AAB6E4-8B96-4171-A46A-2650B7118841}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <RootNamespace>HomeControl</RootNamespace>
         <AssemblyName>HomeControl</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -103,6 +103,9 @@
         <Reference Include="WindowsBase"/>
         <Reference Include="PresentationCore"/>
         <Reference Include="PresentationFramework"/>
+        <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
+            <HintPath>packages\WpfAnimatedGif.2.0.2\lib\net40\WpfAnimatedGif.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
         <ApplicationDefinition Include="App.xaml">
@@ -134,7 +137,6 @@
         <Compile Include="Source\IO\JsonSettings.cs"/>
         <Compile Include="Source\IO\JsonTamagotchi.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecast.cs"/>
-        <Compile Include="Source\IO\JsonWeatherForecastHourly.cs"/>
         <Compile Include="Source\IO\RecipeFromJson.cs"/>
         <Compile Include="Source\IO\SettingsFromJson.cs"/>
         <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
@@ -395,33 +397,105 @@
         <Resource Include="Resources\Images\icons\tamagotchi.png"/>
         <Resource Include="Resources\Images\icons\tic_tac_toe.png"/>
         <Resource Include="Resources\Images\icons\wifi.png"/>
-        <Resource Include="Resources\Images\weather\rain_drop.png"/>
-        <Resource Include="Resources\Images\weather\weather_clear.png"/>
-        <Resource Include="Resources\Images\weather\weather_clear_night.png"/>
-        <Resource Include="Resources\Images\weather\weather_cloudy.png"/>
-        <Resource Include="Resources\Images\weather\weather_cloudy_night.png"/>
-        <Resource Include="Resources\Images\weather\weather_dust.png"/>
-        <Resource Include="Resources\Images\weather\weather_fog.png"/>
-        <Resource Include="Resources\Images\weather\weather_haze.png"/>
-        <Resource Include="Resources\Images\weather\weather_part_cloudy.png"/>
-        <Resource Include="Resources\Images\weather\weather_rain_hail.png"/>
-        <Resource Include="Resources\Images\weather\weather_rain_heavy.png"/>
-        <Resource Include="Resources\Images\weather\weather_rain_light.png"/>
-        <Resource Include="Resources\Images\weather\weather_rain_medium.png"/>
-        <Resource Include="Resources\Images\weather\weather_rain_tornado.png"/>
-        <Resource Include="Resources\Images\weather\weather_smoke.png"/>
-        <Resource Include="Resources\Images\weather\weather_snow_heavy.png"/>
-        <Resource Include="Resources\Images\weather\weather_snow_light.png"/>
-        <Resource Include="Resources\Images\weather\weather_snow_rain_mixed.png"/>
-        <Resource Include="Resources\Images\weather\weather_snow_windy.png"/>
-        <Resource Include="Resources\Images\weather\weather_storm.png"/>
-        <Resource Include="Resources\Images\weather\weather_sunrise.png"/>
-        <Resource Include="Resources\Images\weather\weather_sunset.png"/>
-        <Resource Include="Resources\Images\weather\weather_windy.png"/>
-        <Resource Include="Resources\Images\weather\wind_compass.png"/>
-        <Resource Include="Resources\Images\weather\wind_direction.png"/>
     </ItemGroup>
     <ItemGroup>
+        <Resource Include="Resources\Images\weather\clear-day.gif"/>
+        <Resource Include="Resources\Images\weather\clear-night.gif"/>
+        <Resource Include="Resources\Images\weather\cloudy.gif"/>
+        <Resource Include="Resources\Images\weather\clear-day.svg"/>
+        <Resource Include="Resources\Images\weather\clear-night.svg"/>
+        <Resource Include="Resources\Images\weather\cloudy.svg"/>
+        <Resource Include="Resources\Images\weather\drizzle.gif"/>
+        <Resource Include="Resources\Images\weather\drizzle.svg"/>
+        <Resource Include="Resources\Images\weather\dust-day.gif"/>
+        <Resource Include="Resources\Images\weather\dust-day.svg"/>
+        <Resource Include="Resources\Images\weather\dust-night.gif"/>
+        <Resource Include="Resources\Images\weather\dust-night.svg"/>
+        <Resource Include="Resources\Images\weather\dust-wind.gif"/>
+        <Resource Include="Resources\Images\weather\dust-wind.svg"/>
+        <Resource Include="Resources\Images\weather\dust.gif"/>
+        <Resource Include="Resources\Images\weather\dust.svg"/>
+        <Resource Include="Resources\Images\weather\falling-stars.gif"/>
+        <Resource Include="Resources\Images\weather\falling-stars.svg"/>
+        <Resource Include="Resources\Images\weather\fog-day.gif"/>
+        <Resource Include="Resources\Images\weather\fog-day.svg"/>
+        <Resource Include="Resources\Images\weather\fog-night.gif"/>
+        <Resource Include="Resources\Images\weather\fog-night.svg"/>
+        <Resource Include="Resources\Images\weather\fog.gif"/>
+        <Resource Include="Resources\Images\weather\fog.svg"/>
+        <Resource Include="Resources\Images\weather\hail.gif"/>
+        <Resource Include="Resources\Images\weather\hail.svg"/>
+        <Resource Include="Resources\Images\weather\haze-day.gif"/>
+        <Resource Include="Resources\Images\weather\haze-day.svg"/>
+        <Resource Include="Resources\Images\weather\haze-night.gif"/>
+        <Resource Include="Resources\Images\weather\haze-night.svg"/>
+        <Resource Include="Resources\Images\weather\haze.gif"/>
+        <Resource Include="Resources\Images\weather\haze.svg"/>
+        <Resource Include="Resources\Images\weather\hurricane.gif"/>
+        <Resource Include="Resources\Images\weather\hurricane.svg"/>
+        <Resource Include="Resources\Images\weather\lightning-bolt.gif"/>
+        <Resource Include="Resources\Images\weather\lightning-bolt.svg"/>
+        <Resource Include="Resources\Images\weather\mist.gif"/>
+        <Resource Include="Resources\Images\weather\mist.svg"/>
+        <Resource Include="Resources\Images\weather\not-available.svg"/>
+        <Resource Include="Resources\Images\weather\overcast.gif"/>
+        <Resource Include="Resources\Images\weather\overcast.svg"/>
+        <Resource Include="Resources\Images\weather\partly-cloudy-day.gif"/>
+        <Resource Include="Resources\Images\weather\partly-cloudy-day.svg"/>
+        <Resource Include="Resources\Images\weather\partly-cloudy-night.gif"/>
+        <Resource Include="Resources\Images\weather\partly-cloudy-night.svg"/>
+        <Resource Include="Resources\Images\weather\pollen-grass.gif"/>
+        <Resource Include="Resources\Images\weather\pollen-grass.svg"/>
+        <Resource Include="Resources\Images\weather\pollen-tree.gif"/>
+        <Resource Include="Resources\Images\weather\pollen-tree.svg"/>
+        <Resource Include="Resources\Images\weather\pollen.gif"/>
+        <Resource Include="Resources\Images\weather\pollen.svg"/>
+        <Resource Include="Resources\Images\weather\rain.gif"/>
+        <Resource Include="Resources\Images\weather\rain.svg"/>
+        <Resource Include="Resources\Images\weather\rainbow-clear.gif"/>
+        <Resource Include="Resources\Images\weather\rainbow-clear.svg"/>
+        <Resource Include="Resources\Images\weather\rainbow.gif"/>
+        <Resource Include="Resources\Images\weather\rainbow.svg"/>
+        <Resource Include="Resources\Images\weather\raindrop.gif"/>
+        <Resource Include="Resources\Images\weather\raindrop.svg"/>
+        <Resource Include="Resources\Images\weather\sleet.gif"/>
+        <Resource Include="Resources\Images\weather\sleet.svg"/>
+        <Resource Include="Resources\Images\weather\smoke.gif"/>
+        <Resource Include="Resources\Images\weather\smoke.svg"/>
+        <Resource Include="Resources\Images\weather\snow.gif"/>
+        <Resource Include="Resources\Images\weather\snow.svg"/>
+        <Resource Include="Resources\Images\weather\snowflake.gif"/>
+        <Resource Include="Resources\Images\weather\snowflake.svg"/>
+        <Resource Include="Resources\Images\weather\solar-eclipse.gif"/>
+        <Resource Include="Resources\Images\weather\solar-eclipse.svg"/>
+        <Resource Include="Resources\Images\weather\starry-night.gif"/>
+        <Resource Include="Resources\Images\weather\starry-night.svg"/>
+        <Resource Include="Resources\Images\weather\sun-hot.gif"/>
+        <Resource Include="Resources\Images\weather\sun-hot.svg"/>
+        <Resource Include="Resources\Images\weather\sunrise.gif"/>
+        <Resource Include="Resources\Images\weather\sunrise.svg"/>
+        <Resource Include="Resources\Images\weather\sunset.gif"/>
+        <Resource Include="Resources\Images\weather\sunset.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-snow.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-snow.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-rain.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-rain.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-snow.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-snow.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms.svg"/>
+        <Resource Include="Resources\Images\weather\tornado.gif"/>
+        <Resource Include="Resources\Images\weather\tornado.svg"/>
+        <Resource Include="Resources\Images\weather\wind-snow.gif"/>
+        <Resource Include="Resources\Images\weather\wind-snow.svg"/>
+        <Resource Include="Resources\Images\weather\wind.gif"/>
+        <Resource Include="Resources\Images\weather\wind.svg"/>
         <Content Include="Resources\Sounds\buzzer.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -465,9 +539,6 @@
         <Resource Include="Resources\Images\snowflakes\snow9.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\weather\cold_border.png"/>
-    </ItemGroup>
-    <ItemGroup>
         <Resource Include="Resources\Images\leaves\leaf1.png"/>
         <Resource Include="Resources\Images\leaves\leaf2.png"/>
         <Resource Include="Resources\Images\leaves\leaf3.png"/>
@@ -476,13 +547,7 @@
         <Resource Include="Resources\Images\leaves\leaf6.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\weather\weather_frost.png"/>
-    </ItemGroup>
-    <ItemGroup>
         <Resource Include="Resources\Images\icons\meal.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\weather\fire_border.png"/>
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\behavior\star_black.png"/>
@@ -566,9 +631,6 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\weather\wind_direction2.png"/>
-    </ItemGroup>
-    <ItemGroup>
         <Resource Include="Resources\Images\clock\clockface.png"/>
     </ItemGroup>
     <ItemGroup>
@@ -578,9 +640,6 @@
         <Resource Include="Resources\Images\clock\hand_hour.png"/>
         <Resource Include="Resources\Images\clock\hand_min.png"/>
         <Resource Include="Resources\Images\clock\hand_sec.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\weather\weather_rain_very_light.png"/>
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\groceries\aldi.png"/>

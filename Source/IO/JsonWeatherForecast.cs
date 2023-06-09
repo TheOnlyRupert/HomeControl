@@ -12,15 +12,25 @@ public class JsonWeatherForecast {
     }
 
     public class Periods {
-        public int number { get; set; }
         public string name { get; set; }
+        public DateTime startTime { get; set; }
+        public DateTime endTime { get; set; }
         public bool isDaytime { get; set; }
         public int temperature { get; set; }
         public string windSpeed { get; set; }
         public string windDirection { get; set; }
         public string shortForecast { get; set; }
         public string detailedForecast { get; set; }
-        public string icon { get; set; }
+        public RelativeHumidity relativeHumidity { get; set; }
+        public ProbabilityOfPrecipitation probabilityOfPrecipitation { get; set; }
+    }
+
+    public class RelativeHumidity {
+        public int value { get; set; }
+    }
+
+    public class ProbabilityOfPrecipitation {
+        public object value { get; set; }
     }
 }
 

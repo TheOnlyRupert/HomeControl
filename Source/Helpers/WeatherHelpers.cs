@@ -1,29 +1,59 @@
-﻿using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System;
+using HomeControl.Source.IO;
+using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.Helpers;
 
 public static class WeatherHelpers {
-    public static string GetWeatherIcon(string weather, bool isDayTime) {
+    public static string GetWeatherIcon(string weather, bool isDayTime, int temp, string windSpeed, string firstText) {
+        switch (firstText) {
+        case "Showers And Thunderstorms":
+        case "Showers And Thunderstorms Likely":
+        case "Rain Likely":
+        case "Rain":
+        case "Rain Showers":
+            switch (weather) {
+            case "Sunny":
+            case "Mostly Sunny":
+                return "../../../Resources/Images/weather/rainbow-clear.gif";
+
+            case "Partly Cloudy":
+            case "Partly Sunny":
+                return "../../../Resources/Images/weather/rainbow.gif";
+            }
+
+            break;
+        }
+
         switch (weather) {
         case "Sunny":
         case "Mostly Sunny":
-        case "Clear":
+            return temp > 89
+                ? "../../../Resources/Images/weather/sun-hot.gif"
+                : "../../../Resources/Images/weather/clear-day.gif";
+
         case "Mostly Clear":
-            return isDayTime
-                ? "../../../Resources/Images/weather/weather_clear.png"
-                : "../../../Resources/Images/weather/weather_clear_night.png";
+            return "../../../Resources/Images/weather/clear-night.gif";
+
+        case "Clear":
+            return "../../../Resources/Images/weather/starry-night.gif";
+
         case "Partly Cloudy":
         case "Partly Sunny":
             return isDayTime
-                ? "../../../Resources/Images/weather/weather_part_cloudy.png"
-                : "../../../Resources/Images/weather/weather_cloudy_night.png";
+                ? "../../../Resources/Images/weather/partly-cloudy-day.gif"
+                : "../../../Resources/Images/weather/partly-cloudy-night.gif";
+
         case "Cloudy":
         case "Mostly Cloudy":
-            return "../../../Resources/Images/weather/weather_cloudy.png";
+            return "../../../Resources/Images/weather/cloudy.gif";
+
         case "Patchy Fog":
         case "Areas Of Fog":
-            return "../../../Resources/Images/weather/weather_fog.png";
+            return isDayTime
+                ? "../../../Resources/Images/weather/fog-day.gif"
+                : "../../../Resources/Images/weather/fog-night.gif";
+
         case "Slight Chance Very Light Rain":
         case "Slight Chance Light Rain":
         case "Chance Very Light Rain":
@@ -34,7 +64,8 @@ public static class WeatherHelpers {
         case "Patchy Drizzle":
         case "Chance Drizzle":
         case "Slight Chance Drizzle":
-            return "../../../Resources/Images/weather/weather_rain_light.png";
+            return "../../../Resources/Images/weather/drizzle.gif";
+
         case "Rain Showers Likely":
         case "Rain Likely":
         case "Rain":
@@ -42,44 +73,62 @@ public static class WeatherHelpers {
         case "Chance Rain":
         case "Chance Rain Showers":
         case "Slight Chance Rain Showers":
-            return "../../../Resources/Images/weather/weather_rain_medium.png";
+            return "../../../Resources/Images/weather/rain.gif";
+
         case "Showers And Thunderstorms":
         case "Showers And Thunderstorms Likely":
         case "Chance Showers And Thunderstorms":
         case "Slight Chance Showers And Thunderstorms":
-            return "../../../Resources/Images/weather/weather_storm.png";
+            return isDayTime
+                ? "../../../Resources/Images/weather/thunderstorms-day-extreme.gif"
+                : "../../../Resources/Images/weather/thunderstorms-night-extreme.gif";
+
         case "Patchy Frost":
         case "Areas Of Frost":
         case "Widespread Frost":
-            return "../../../Resources/Images/weather/weather_frost.png";
+            return "../../../Resources/Images/weather/frost.gif";
+
         case "Snow Showers":
         case "Chance Snow Showers":
         case "Snow Showers Likely":
-            return "../../../Resources/Images/weather/weather_snow_heavy.png";
         case "Isolated Snow Showers":
         case "Scattered Snow Showers":
         case "Light Snow":
         case "Chance Light Snow":
         case "Slight Chance Snow Showers":
         case "Slight Chance Light Snow":
-            return "../../../Resources/Images/weather/weather_snow_light.png";
+            try {
+                int wind = int.Parse(windSpeed);
+                if (wind > 19) {
+                    return "../../../Resources/Images/weather/wind-snow.gif";
+                }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "WeatherHelpers",
+                    Description = e.ToString()
+                });
+            }
+
+            return "../../../Resources/Images/weather/snow.gif";
+
         case "Slight Chance Rain And Snow Showers":
         case "Slight Chance Rain And Snow":
         case "Chance Rain And Snow Showers":
         case "Chance Freezing Rain":
         case "Rain And Snow Showers":
         case "Rain And Snow Showers Likely":
-            return "../../../Resources/Images/weather/weather_snow_rain_mixed.png";
+            return "../../../Resources/Images/weather/sleet.gif";
+
+        case "Haze":
+            return isDayTime
+                ? "../../../Resources/Images/weather/haze-day.gif"
+                : "../../../Resources/Images/weather/haze-night.gif";
+
         default:
-            return "null";
+            return "../../../Resources/Images/weather/na.gif";
         }
-    }
-
-    public static string GetRainChance(string icon) {
-        Regex rg = new(@"[,]\d+");
-        string output = rg.Matches(icon).Cast<Match>().Aggregate("", (current, match) => current + match.Value.Substring(1) + "% - ");
-
-        return string.IsNullOrEmpty(output) ? "0%" : output.Substring(0, output.Length - 2);
     }
 
     public static int GetWindRotation(string direction) {
@@ -131,9 +180,9 @@ public static class WeatherHelpers {
         case "Slight Chance Light Snow":
         case "Chance Light Snow":
         case "Snow Showers Likely":
-            return "../../../Resources/Images/weather/weather_snow_heavy.png";
+            return "../../../Resources/Images/weather/snowflake.gif";
         default:
-            return "../../../Resources/Images/weather/rain_drop.png";
+            return "../../../Resources/Images/weather/raindrop.gif";
         }
     }
 }

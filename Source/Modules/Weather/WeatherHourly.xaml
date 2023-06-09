@@ -1,7 +1,8 @@
-﻿<Page x:Class="HomeControl.Source.Modules.Weather.WeatherHourly" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
-    <Page.Resources>
+﻿<Window x:Class="HomeControl.Source.Modules.Weather.WeatherHourly" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:gif="http://wpfanimatedgif.codeplex.com" mc:Ignorable="d" Height="896" Width="1000"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
+    <Window.Resources>
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -61,10 +62,16 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-    </Page.Resources>
+    </Window.Resources>
 
-    <Border BorderBrush="Black" BorderThickness="1" Margin="0 4 0 0" Focusable="False">
-        <ListView ItemsSource="{Binding ForecastHourlyList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="64"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" ItemsSource="{Binding ForecastHourlyList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
+                  Focusable="False" Margin="8 8 8 0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -116,41 +123,92 @@
 
             <ListView.View>
                 <GridView AllowsColumnReorder="false">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Width="80"/>
+                    <GridViewColumn Width="128">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Time}" FontSize="20"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
                     <GridViewColumn Width="32">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding WeatherIcon}" Height="24"/>
+                                <Image gif:ImageBehavior.AnimatedSource="{Binding WeatherIcon}" Margin="-8"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Temp}" Width="32"/>
-                    <GridViewColumn Width="64">
+
+                    <GridViewColumn Width="48">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding RainIcon}" Height="24" Margin="0 0 4 0"/>
-                                    <TextBlock Text="{Binding RainChance}"/>
-                                </StackPanel>
+                                <TextBlock Text="{Binding Temp}" FontSize="20"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
                     <GridViewColumn Width="96">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="../../../Resources/Images/weather/wind_direction.png" Height="24" RenderTransformOrigin="0.5, 0.5" Margin="0 0 4 0">
+                                    <Image gif:ImageBehavior.AnimatedSource="{Binding RainIcon}" Height="32" Margin="-8 -8 -8 -8"/>
+                                    <TextBlock Text="{Binding RainChance}" FontSize="20"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="128">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image gif:ImageBehavior.AnimatedSource="../../../Resources/Images/weather/wind.gif" Height="32" RenderTransformOrigin="0.5, 0.5"
+                                           Margin="-8 -8 0 -8">
                                         <Image.RenderTransform>
                                             <RotateTransform Angle="{Binding WindDirectionIcon}"/>
                                         </Image.RenderTransform>
                                     </Image>
-                                    <TextBlock Text="{Binding WindSpeed}"/>
+                                    <TextBlock Text="{Binding WindSpeed}" FontSize="20"/>
                                 </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="156">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Humidity}" FontSize="20"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Width="999">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ShortForecast}" FontSize="20"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-    </Border>
-</Page>
+
+        <Button Grid.Row="1" Content="Exit" FontSize="24" IsCancel="True" Margin="8" MinWidth="128" HorizontalAlignment="Right">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 8">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>
