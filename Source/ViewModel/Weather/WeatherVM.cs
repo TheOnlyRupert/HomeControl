@@ -18,7 +18,7 @@ public class WeatherVM : BaseViewModel {
     private int _currentWindDirectionRotation, _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
         _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
         _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10, _sevenDayForecastWindDirectionIcon11,
-        _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14;
+        _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14, _updateWeatherTimer;
 
     private string _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText, _currentTimeSecondsText, _currentWeatherLocationText,
         _currentWeatherTempText, _currentWeatherCloudIcon, _sevenDayForecastDescription1, _sevenDayForecastWindSpeed1, _sevenDayForecastWeatherIcon1a,
@@ -46,6 +46,7 @@ public class WeatherVM : BaseViewModel {
 
     public WeatherVM() {
         updateForecast = true;
+        _updateWeatherTimer = 0;
         UpdateWeatherForecastPart1();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -62,15 +63,21 @@ public class WeatherVM : BaseViewModel {
             if (updateForecast) {
                 UpdateWeatherForecastPart1();
             }
-
-            ClockSecRotation = DateTime.Now.Second * 6;
-            ClockMinRotation = DateTime.Now.Minute * 6;
-            ClockHourRotation = DateTime.Now.Hour * 30 + DateTime.Now.Minute * 0.5;
         }
 
-        /* Update weather every minute */
-        if (e.PropertyName == "MinChanged") {
+        /* Update weather on the hour */
+        if (e.PropertyName == "HourChanged") {
+            _updateWeatherTimer = 0;
             updateForecast = true;
+        }
+
+        /* Update weather every 15 minutes */
+        if (e.PropertyName == "MinChanged") {
+            _updateWeatherTimer++;
+            if (_updateWeatherTimer >= 15) {
+                _updateWeatherTimer = 0;
+                updateForecast = true;
+            }
         }
     }
 

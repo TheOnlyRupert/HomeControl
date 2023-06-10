@@ -1,18 +1,23 @@
 using System;
 using System.Collections.ObjectModel;
+using System.IO.Ports;
 using System.Net;
+using System.Text;
 using System.Text.Json;
 using System.Windows.Media;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
+using HomeControl.Source.ViewModel.Hvac;
 
 namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
+    private static bool comPortMessage;
     private readonly CrossViewMessenger simpleMessenger;
     private string _iconImage;
     private string _onlineColor;
@@ -24,6 +29,7 @@ public class MainWindowVM : BaseViewModel {
         simpleMessenger = CrossViewMessenger.Instance;
         currentDate = DateTime.Now;
         internetMessage = false;
+        comPortMessage = false;
 
         ReferenceValues.DebugTextBlockOutput = new ObservableCollection<DebugTextBlock> {
             new() {
@@ -44,6 +50,15 @@ public class MainWindowVM : BaseViewModel {
         }
 
         ApiStatus();
+
+        /* HVAC Serial Port */
+        new HvacFromJson();
+        if (string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.ComPort)) {
+            ReferenceValues.JsonMasterSettings.ComPort = "COM5";
+        }
+
+        ReferenceValues.SerialPortMaster = new SerialPort(ReferenceValues.JsonMasterSettings.ComPort, 9600);
+        Work();
 
         /* Global DispatcherTimer */
         DispatcherTimer dispatcherTimer = new();
@@ -84,7 +99,12 @@ public class MainWindowVM : BaseViewModel {
         /* Min Changes */
         if (!currentDate.Minute.Equals(DateTime.Now.Minute)) {
             simpleMessenger.PushMessage("MinChanged", null);
+            CrossPlay.UpdateHvacState();
             ApiStatus();
+            if (!ReferenceValues.IsHvacComEstablished) {
+                Work();
+            }
+
             changeDate = true;
         }
 
@@ -166,6 +186,44 @@ public class MainWindowVM : BaseViewModel {
             });
             internetMessage = true;
             OnlineColor = "Red";
+        }
+    }
+
+    private static async void Work() {
+        try {
+            if (!ReferenceValues.SerialPortMaster.IsOpen) {
+                ReferenceValues.SerialPortMaster.Open();
+                ReferenceValues.IsHvacComEstablished = true;
+                comPortMessage = false;
+            }
+        } catch (Exception) {
+            if (!comPortMessage) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "MainWindowVM",
+                    Description = "Unable to open port: " + ReferenceValues.JsonMasterSettings.ComPort
+                });
+                comPortMessage = true;
+            }
+
+            ReferenceValues.IsHvacComEstablished = false;
+        }
+
+        if (ReferenceValues.IsHvacComEstablished) {
+            try {
+                while (true) {
+                    byte[] data = await ReferenceValues.SerialPortMaster.ReadAsync(128);
+                    Console.WriteLine("Data: " + Encoding.UTF8.GetString(data, 0, data.Length));
+                }
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "MainWindowVM",
+                    Description = e.ToString()
+                });
+            }
         }
     }
 

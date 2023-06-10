@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.Ports;
 using HomeControl.Source.IO;
 
 namespace HomeControl.Source.Reference;
@@ -51,26 +52,14 @@ public static class ReferenceValues {
         "Refund"
     };
 
-    public static readonly List<string> RecurringMonth = new() {
-        "MONTHLY",
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    };
-
     public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 
     public static bool LockUI;
+
+    public static SerialPort SerialPortMaster { get; set; }
     public static bool IsFunnyModeActive { get; set; }
+
+    public static int InteriorTemp { get; set; }
 
     public static DateTime CalendarEventDate { get; set; }
 
@@ -97,6 +86,9 @@ public static class ReferenceValues {
 
     public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonMasterSettings { get; set; }
+
+    public static JsonHvac JsonHvacSettings { get; set; }
+    public static bool IsHvacComEstablished { get; set; }
 
     public static bool IsCalendarDupeModeEnabled { get; set; }
     public static CalendarEvents DupeEvent { get; set; }

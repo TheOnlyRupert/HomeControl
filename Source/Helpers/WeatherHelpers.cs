@@ -79,9 +79,15 @@ public static class WeatherHelpers {
         case "Showers And Thunderstorms Likely":
         case "Chance Showers And Thunderstorms":
         case "Slight Chance Showers And Thunderstorms":
+            if (temp > 35) {
+                return isDayTime
+                    ? "../../../Resources/Images/weather/thunderstorms-day-extreme-rain.gif"
+                    : "../../../Resources/Images/weather/thunderstorms-night-extreme-rain.gif";
+            }
+
             return isDayTime
-                ? "../../../Resources/Images/weather/thunderstorms-day-extreme.gif"
-                : "../../../Resources/Images/weather/thunderstorms-night-extreme.gif";
+                ? "../../../Resources/Images/weather/thunderstorms-day-extreme-snow.gif"
+                : "../../../Resources/Images/weather/thunderstorms-night-extreme-snow.gif";
 
         case "Patchy Frost":
         case "Areas Of Frost":
@@ -125,6 +131,10 @@ public static class WeatherHelpers {
             return isDayTime
                 ? "../../../Resources/Images/weather/haze-day.gif"
                 : "../../../Resources/Images/weather/haze-night.gif";
+
+        case "Smoke":
+        case "PatchySmoke":
+            return "../../../Resources/Images/weather/smoke.gif";
 
         default:
             return "../../../Resources/Images/weather/na.gif";

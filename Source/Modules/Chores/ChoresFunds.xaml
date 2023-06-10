@@ -177,9 +177,35 @@
                     <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24"/>
                 </StackPanel>
 
-                <Viewbox Grid.Row="5" Height="48" Margin="0 8" HorizontalAlignment="Left">
-                    <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
-                </Viewbox>
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Viewbox Grid.Column="0" Height="48" Margin="0 8 16 8" HorizontalAlignment="Left">
+                        <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
+                    </Viewbox>
+
+                    <Button Grid.Column="1" Content="+" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="32" VerticalAlignment="Center"
+                            VerticalContentAlignment="Center" Background="{Binding ParentsBackgroundColor}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 0">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
 
                 <StackPanel Grid.Row="6">
                     <TextBlock Text="More Detailed Info  (optional)" FontSize="24" Foreground="White"/>

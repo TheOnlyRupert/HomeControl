@@ -241,6 +241,11 @@
             <TextBox Text="{Binding EmergencyContact2Phone2, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
+        <StackPanel Grid.Column="0" Grid.Row="16">
+            <TextBlock Text="HVAC ComPort" Foreground="White"/>
+            <TextBox Text="{Binding Comport, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
         <Grid Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

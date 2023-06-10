@@ -224,6 +224,19 @@ public class ChoresFundsVM : BaseViewModel {
             Refresh();
 
             break;
+        case "addDay":
+            try {
+                DateText = Convert.ToDateTime(DateText).AddDays(1).ToShortDateString();
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "ChoresFundsVM",
+                    Description = e.ToString()
+                });
+            }
+
+            break;
         }
     }
 

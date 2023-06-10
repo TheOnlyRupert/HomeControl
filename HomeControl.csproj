@@ -5,7 +5,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{A8AAB6E4-8B96-4171-A46A-2650B7118841}</ProjectGuid>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <RootNamespace>HomeControl</RootNamespace>
         <AssemblyName>HomeControl</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -119,6 +119,7 @@
         <Compile Include="Source\Control\SnowEngine.cs"/>
         <Compile Include="Source\Control\SnowInfo.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
+        <Compile Include="Source\Helpers\SerialPortExtensions.cs"/>
         <Compile Include="Source\Helpers\WeatherHelpers.cs"/>
         <Compile Include="Source\IO\BehaviorFromJson.cs"/>
         <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
@@ -127,12 +128,14 @@
         <Compile Include="Source\IO\DebugTextBlock.cs"/>
         <Compile Include="Source\IO\FinancesFromJson.cs"/>
         <Compile Include="Source\IO\GameStatsFromJson.cs"/>
+        <Compile Include="Source\IO\HvacFromJson.cs"/>
         <Compile Include="Source\IO\JsonBehavior.cs"/>
         <Compile Include="Source\IO\JsonCalendar.cs"/>
         <Compile Include="Source\IO\JsonChoreFunds.cs"/>
         <Compile Include="Source\IO\JsonChores.cs"/>
         <Compile Include="Source\IO\JsonFinances.cs"/>
         <Compile Include="Source\IO\JsonGameStats.cs"/>
+        <Compile Include="Source\IO\JsonHvac.cs"/>
         <Compile Include="Source\IO\JsonRecipe.cs"/>
         <Compile Include="Source\IO\JsonSettings.cs"/>
         <Compile Include="Source\IO\JsonTamagotchi.cs"/>
@@ -201,7 +204,10 @@
         <Compile Include="Source\Modules\Games\TamagotchiWindowBed.xaml.cs">
             <DependentUpon>TamagotchiWindowBed.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Hvac.xaml.cs">
+        <Compile Include="Source\Modules\Hvac\EditHvac.xaml.cs">
+            <DependentUpon>EditHvac.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Hvac\Hvac.xaml.cs">
             <DependentUpon>Hvac.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\MusicPlayer.xaml.cs">
@@ -284,7 +290,9 @@
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowBedVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowClosetVM.cs"/>
         <Compile Include="Source\ViewModel\GroceriesVM.cs"/>
-        <Compile Include="Source\ViewModel\HvacVM.cs"/>
+        <Compile Include="Source\ViewModel\Hvac\CrossPlay.cs"/>
+        <Compile Include="Source\ViewModel\Hvac\EditHvacVM.cs"/>
+        <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>
         <Compile Include="Source\ViewModel\MusicPlayerVM.cs"/>
         <Compile Include="Source\ViewModel\PasswordVM.cs"/>
         <Compile Include="Source\ViewModel\RecipesVM.cs"/>
@@ -343,7 +351,8 @@
         <Page Include="Source\Modules\Games\Tamagotchi.xaml"/>
         <Page Include="Source\Modules\Games\TamagotchiWindowCloset.xaml"/>
         <Page Include="Source\Modules\Games\TamagotchiWindowBed.xaml"/>
-        <Page Include="Source\Modules\Hvac.xaml"/>
+        <Page Include="Source\Modules\Hvac\EditHvac.xaml"/>
+        <Page Include="Source\Modules\Hvac\Hvac.xaml"/>
         <Page Include="Source\Modules\MusicPlayer.xaml"/>
         <Page Include="Source\Modules\Password.xaml"/>
         <Page Include="Source\Modules\Recipes.xaml"/>
@@ -496,6 +505,15 @@
         <Resource Include="Resources\Images\weather\wind-snow.svg"/>
         <Resource Include="Resources\Images\weather\wind.gif"/>
         <Resource Include="Resources\Images\weather\wind.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-rain.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-rain.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-snow.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-snow.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-rain.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-rain.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-snow.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-snow.svg"/>
+        <Resource Include="Resources\Images\hvac\hvac.gif"/>
         <Content Include="Resources\Sounds\buzzer.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>

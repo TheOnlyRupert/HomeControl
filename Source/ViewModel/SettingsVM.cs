@@ -11,37 +11,10 @@ namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
     private string _userAgentText, _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1NameLegal, _user2NameLegal, _user3NameLegal, _user4NameLegal, _user5NameLegal,
-        _user1Phone1,
-        _user1Phone2,
-        _user2Phone1,
-        _user2Phone2,
-        _petNames,
-        _neighbor1Location,
-        _neighbor1Name,
-        _neighbor1Phone1,
-        _neighbor1Phone2,
-        _neighbor2Location,
-        _neighbor2Name,
-        _neighbor2Phone1,
-        _neighbor2Phone2,
-        _addressLine1,
-        _addressLine2,
-        _fireExtinguisherLocation,
-        _hospitalAddressLine1,
-        _hospitalAddressLine2,
-        _wifiGuestName,
-        _wifiGuestPassword,
-        _wifiPrivateName,
-        _wifiPrivatePassword,
-        _policeName,
-        _policePhone,
-        _emergencyContact1Name,
-        _emergencyContact1Phone1,
-        _emergencyContact1Phone2,
-        _emergencyContact2Name,
-        _emergencyContact2Phone1,
-        _emergencyContact2Phone2,
-        _alarmCode;
+        _user1Phone1, _user1Phone2, _user2Phone1, _user2Phone2, _petNames, _neighbor1Location, _neighbor1Name, _neighbor1Phone1, _neighbor1Phone2, _neighbor2Location,
+        _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
+        _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
+        _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort;
 
     public SettingsVM() {
         UserAgentText = ReferenceValues.JsonMasterSettings.UserAgent;
@@ -86,6 +59,7 @@ public class SettingsVM : BaseViewModel {
         EmergencyContact2Phone1 = ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1;
         EmergencyContact2Phone2 = ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2;
         AlarmCode = ReferenceValues.JsonMasterSettings.AlarmCode;
+        ComPort = ReferenceValues.JsonMasterSettings.ComPort;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -136,6 +110,7 @@ public class SettingsVM : BaseViewModel {
                 ReferenceValues.JsonMasterSettings.EmergencyContact2Phone1 = EmergencyContact2Phone1;
                 ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2 = EmergencyContact2Phone2;
                 ReferenceValues.JsonMasterSettings.AlarmCode = AlarmCode;
+                ReferenceValues.JsonMasterSettings.ComPort = ComPort;
 
                 try {
                     string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonMasterSettings);
@@ -495,6 +470,14 @@ public class SettingsVM : BaseViewModel {
         set {
             _alarmCode = VerifyInput.VerifyTextNumeric(value);
             RaisePropertyChangedEvent("AlarmCode");
+        }
+    }
+
+    public string ComPort {
+        get => _comPort;
+        set {
+            _comPort = value;
+            RaisePropertyChangedEvent("ComPort");
         }
     }
 

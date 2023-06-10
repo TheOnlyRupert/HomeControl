@@ -1,6 +1,6 @@
-﻿using HomeControl.Source.ViewModel;
+﻿using HomeControl.Source.ViewModel.Hvac;
 
-namespace HomeControl.Source.Modules;
+namespace HomeControl.Source.Modules.Hvac;
 
 public partial class Hvac {
     public Hvac() {
