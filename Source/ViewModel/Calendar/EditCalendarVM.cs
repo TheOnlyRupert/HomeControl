@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -158,9 +158,8 @@ public class EditCalendarVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(EventText)) {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "missing_info";
+                SoundDispatcher.PlaySound();
             } else {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -179,9 +178,8 @@ public class EditCalendarVM : BaseViewModel {
                     endTime = EndTimeText
                 });
 
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/scribble1.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "scribble1";
+                SoundDispatcher.PlaySound();
                 EventText = "";
                 DescriptionText = "";
                 LocationText = "";
@@ -196,9 +194,8 @@ public class EditCalendarVM : BaseViewModel {
             try {
                 if (CalendarEventSelected.name != null) {
                     if (string.IsNullOrWhiteSpace(EventText)) {
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                        sound.Play();
+                        ReferenceValues.SoundToPlay = "missing_info";
+                        SoundDispatcher.PlaySound();
                     } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
                         confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -221,9 +218,8 @@ public class EditCalendarVM : BaseViewModel {
                             });
                             EventList.Remove(CalendarEventSelected);
 
-                            MediaPlayer sound = new();
-                            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/scribble2.wav"));
-                            sound.Play();
+                            ReferenceValues.SoundToPlay = "scribble2";
+                            SoundDispatcher.PlaySound();
                             EventText = "";
                             DescriptionText = "";
                             LocationText = "";
@@ -259,9 +255,8 @@ public class EditCalendarVM : BaseViewModel {
                         });
 
                         EventList.Remove(CalendarEventSelected);
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/scribble3.wav"));
-                        sound.Play();
+                        ReferenceValues.SoundToPlay = "scribble3";
+                        SoundDispatcher.PlaySound();
 
                         SaveJson();
                     }
@@ -284,9 +279,8 @@ public class EditCalendarVM : BaseViewModel {
                 DupeText = "";
             } else {
                 if (string.IsNullOrWhiteSpace(EventText)) {
-                    MediaPlayer sound = new();
-                    sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                    sound.Play();
+                    ReferenceValues.SoundToPlay = "missing_info";
+                    SoundDispatcher.PlaySound();
                 } else {
                     ReferenceValues.IsCalendarDupeModeEnabled = true;
                     DupeButtonBackgroundColor = "Green";

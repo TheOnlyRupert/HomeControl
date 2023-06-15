@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Input;
-using System.Windows.Media;
+﻿using System.Windows.Input;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.Modules.Timer;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -141,9 +140,8 @@ public class TimerVM : BaseViewModel {
             }
 
             if (ReferenceValues.IsTimerAlarmActive) {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/timerDone.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "timerDone";
+                SoundDispatcher.PlaySound();
             }
         }
     }

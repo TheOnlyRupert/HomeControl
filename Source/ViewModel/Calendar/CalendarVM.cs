@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Calendar;
 using HomeControl.Source.Reference;
@@ -129,9 +129,8 @@ public class CalendarVM : BaseViewModel {
                 editRecurring.Close();
                 PopulateCalendar(currentDateTime);
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -140,9 +139,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime;
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -151,9 +149,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(1);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -162,9 +159,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(2);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -173,9 +169,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(3);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -184,9 +179,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(4);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -195,9 +189,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(5);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -206,9 +199,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(6);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -217,9 +209,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(7);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -228,9 +219,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(8);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -239,9 +229,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(9);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -250,9 +239,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(10);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -261,9 +249,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(11);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -272,9 +259,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(12);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -283,9 +269,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(13);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -294,9 +279,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(14);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -305,9 +289,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(15);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -316,9 +299,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(16);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -327,9 +309,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(17);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -338,9 +319,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(18);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -349,9 +329,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(19);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -360,9 +339,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(20);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -371,9 +349,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(21);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -382,9 +359,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(22);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -393,9 +369,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(23);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -404,9 +379,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(24);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -415,9 +389,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(25);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -426,9 +399,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(26);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -437,9 +409,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(27);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -448,9 +419,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(28);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -459,9 +429,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(29);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -470,9 +439,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(30);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -481,9 +449,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(31);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -492,9 +459,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(32);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -503,9 +469,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(33);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -514,9 +479,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(34);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -525,9 +489,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(35);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -536,9 +499,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(36);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -547,9 +509,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(37);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -558,9 +519,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(38);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -569,9 +529,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(39);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -580,9 +539,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(40);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -591,9 +549,8 @@ public class CalendarVM : BaseViewModel {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(41);
                 OpenEventDialog();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;

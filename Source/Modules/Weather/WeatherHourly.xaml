@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Weather.WeatherHourly" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:gif="http://wpfanimatedgif.codeplex.com" mc:Ignorable="d" Height="896" Width="1000"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="896" Width="1664" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
     <Window.Resources>
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -134,7 +134,7 @@
                     <GridViewColumn Width="32">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image gif:ImageBehavior.AnimatedSource="{Binding WeatherIcon}" Margin="-8"/>
+                                <Image Source="{Binding WeatherIcon}" Margin="-8"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -151,7 +151,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image gif:ImageBehavior.AnimatedSource="{Binding RainIcon}" Height="32" Margin="-8 -8 -8 -8"/>
+                                    <Image Source="{Binding RainIcon}" Height="32" Margin="-8 -8 -8 -8"/>
                                     <TextBlock Text="{Binding RainChance}" FontSize="20"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -162,8 +162,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image gif:ImageBehavior.AnimatedSource="../../../Resources/Images/weather/wind.gif" Height="32" RenderTransformOrigin="0.5, 0.5"
-                                           Margin="-8 -8 0 -8">
+                                    <Image Source="../../../Resources/Images/weather/wind.gif" Height="32" RenderTransformOrigin="0.5, 0.5" Margin="-8 -8 0 -8">
                                         <Image.RenderTransform>
                                             <RotateTransform Angle="{Binding WindDirectionIcon}"/>
                                         </Image.RenderTransform>

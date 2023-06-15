@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -70,9 +70,8 @@ public class EditRecurringVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(HolidayText)) {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "missing_info";
+                SoundDispatcher.PlaySound();
             } else {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -86,9 +85,8 @@ public class EditRecurringVM : BaseViewModel {
                     eventText = HolidayText
                 });
 
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/birthday.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "birthday";
+                SoundDispatcher.PlaySound();
                 HolidayText = "";
 
                 SaveJson();
@@ -99,9 +97,8 @@ public class EditRecurringVM : BaseViewModel {
             try {
                 if (CalendarEventSelected.eventText != null) {
                     if (string.IsNullOrWhiteSpace(HolidayText)) {
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                        sound.Play();
+                        ReferenceValues.SoundToPlay = "missing_info";
+                        SoundDispatcher.PlaySound();
                     } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.eventText)) {
                         confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -118,9 +115,8 @@ public class EditRecurringVM : BaseViewModel {
                             });
                             EventList.Remove(CalendarEventSelected);
 
-                            MediaPlayer sound = new();
-                            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/birthday.wav"));
-                            sound.Play();
+                            ReferenceValues.SoundToPlay = "birthday";
+                            SoundDispatcher.PlaySound();
                             HolidayText = "";
 
                             SaveJson();

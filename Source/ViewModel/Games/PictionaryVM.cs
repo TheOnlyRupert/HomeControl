@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -51,16 +50,14 @@ public class PictionaryVM : BaseViewModel {
             if (ReferenceValues.IsGameTimerRunning && EnableCountdownColor == "Green") {
                 /* Plays a sound with 5 - 1 seconds remaining */
                 if (timerMaster_sec < 6) {
-                    MediaPlayer sound = new();
-                    sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/tap.wav"));
-                    sound.Play();
+                    ReferenceValues.SoundToPlay = "tap";
+                    SoundDispatcher.PlaySound();
                 }
 
                 if (timerMaster_sec == 0) {
                     ReferenceValues.IsGameTimerRunning = false;
-                    MediaPlayer sound = new();
-                    sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/buzzer.wav"));
-                    sound.Play();
+                    ReferenceValues.SoundToPlay = "buzzer";
+                    SoundDispatcher.PlaySound();
                 } else {
                     timerMaster_sec--;
                     progressBarAdditive += progressBarRate;

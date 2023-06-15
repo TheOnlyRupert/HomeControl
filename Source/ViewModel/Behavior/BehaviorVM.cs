@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.Reference;
@@ -381,9 +381,8 @@ public class BehaviorVM : BaseViewModel {
             editBehavior.Close();
             RefreshBehavior();
         } else {
-            MediaPlayer uiLocked = new();
-            uiLocked.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-            uiLocked.Play();
+            ReferenceValues.SoundToPlay = "locked";
+            SoundDispatcher.PlaySound();
         }
     }
 

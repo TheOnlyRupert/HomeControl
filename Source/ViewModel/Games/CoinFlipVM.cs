@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -14,9 +14,8 @@ public class CoinFlipVM : BaseViewModel {
     private string _imageSource, _gameStats;
 
     public CoinFlipVM() {
-        MediaPlayer coinFlip = new();
-        coinFlip.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/coin_flip.wav"));
-        coinFlip.Play();
+        ReferenceValues.SoundToPlay = "coin_flip";
+        SoundDispatcher.PlaySound();
         _random = new Random();
         Flip();
         RefreshStats();
@@ -59,9 +58,8 @@ public class CoinFlipVM : BaseViewModel {
     }
 
     private void Flip() {
-        MediaPlayer coinFlip = new();
-        coinFlip.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/coin_flip.wav"));
-        coinFlip.Play();
+        ReferenceValues.SoundToPlay = "coin_flip";
+        SoundDispatcher.PlaySound();
         int rand = _random.Next(0, 2);
 
         switch (rand) {

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.Reference;
@@ -44,9 +44,8 @@ public class FinancesVM : BaseViewModel {
                 break;
             }
         } else {
-            MediaPlayer uiLocked = new();
-            uiLocked.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-            uiLocked.Play();
+            ReferenceValues.SoundToPlay = "locked";
+            SoundDispatcher.PlaySound();
         }
     }
 

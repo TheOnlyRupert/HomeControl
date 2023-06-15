@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -140,9 +140,8 @@ public class ChoresQuarterVM : BaseViewModel {
         }
 
         if (allowSound) {
-            MediaPlayer sound = new();
-            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/achievement1.wav"));
-            sound.Play();
+            ReferenceValues.SoundToPlay = "achievement1";
+            SoundDispatcher.PlaySound();
             allowSound = false;
         }
 

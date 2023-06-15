@@ -33,9 +33,9 @@
                     <Frame Grid.Row="2" Source="../MusicPlayer.xaml" Focusable="False"/>
                 </Grid>
 
-                <Frame Grid.Column="1" Source="../Hvac/Hvac.xaml" Focusable="False"/>
+                <Frame Grid.Column="2" Source="../Hvac/Hvac.xaml" Focusable="False"/>
 
-                <Grid Grid.Column="2">
+                <Grid Grid.Column="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

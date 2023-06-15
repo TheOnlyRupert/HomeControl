@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -87,13 +87,11 @@ public class EditFinancesVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "missing_info";
+                SoundDispatcher.PlaySound();
             } else if (string.IsNullOrWhiteSpace(CostText)) {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "missing_info";
+                SoundDispatcher.PlaySound();
             } else {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -113,9 +111,8 @@ public class EditFinancesVM : BaseViewModel {
                     Details = DetailsText
                 });
 
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "cash";
+                SoundDispatcher.PlaySound();
                 DescriptionText = "";
                 DetailsText = "";
                 CostText = "";
@@ -128,13 +125,11 @@ public class EditFinancesVM : BaseViewModel {
             try {
                 if (FinanceSelected.Item != null) {
                     if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                        sound.Play();
+                        ReferenceValues.SoundToPlay = "missing_info";
+                        SoundDispatcher.PlaySound();
                     } else if (string.IsNullOrWhiteSpace(CostText)) {
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                        sound.Play();
+                        ReferenceValues.SoundToPlay = "missing_info";
+                        SoundDispatcher.PlaySound();
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -156,9 +151,8 @@ public class EditFinancesVM : BaseViewModel {
                                 Details = DetailsText
                             });
 
-                            MediaPlayer sound = new();
-                            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
-                            sound.Play();
+                            ReferenceValues.SoundToPlay = "cash";
+                            SoundDispatcher.PlaySound();
                             FinanceList.Remove(FinanceSelected);
                             DescriptionText = "";
                             DetailsText = "";
@@ -191,9 +185,8 @@ public class EditFinancesVM : BaseViewModel {
                                           CategorySelected + ", " + selectedPerson + ", " + DetailsText
                         });
 
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/cash.wav"));
-                        sound.Play();
+                        ReferenceValues.SoundToPlay = "cash";
+                        SoundDispatcher.PlaySound();
                         FinanceList.Remove(FinanceSelected);
                         RefreshDetailedView();
                         SaveJson();

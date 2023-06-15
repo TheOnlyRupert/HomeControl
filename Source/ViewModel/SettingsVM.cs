@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -126,9 +126,8 @@ public class SettingsVM : BaseViewModel {
                     });
                 }
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/missing_info.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "missing_info";
+                SoundDispatcher.PlaySound();
             }
 
             break;

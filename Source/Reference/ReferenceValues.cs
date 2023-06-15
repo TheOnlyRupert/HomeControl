@@ -102,4 +102,5 @@ public static class ReferenceValues {
     public static ObservableCollection<DebugTextBlock> DebugTextBlockOutput { get; set; }
 
     public static JsonRecipe JsonRecipesMaster { get; set; }
+    public static string SoundToPlay { get; set; }
 }

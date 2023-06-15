@@ -3,8 +3,8 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -249,15 +249,14 @@ public class EditBehaviorVM : BaseViewModel {
                         strikes++;
                         ProgressBarChildValue = 0;
                         ProgressBarChildValueText = "0/5";
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/buzzer.wav"));
+                        ReferenceValues.SoundToPlay = "buzzer";
+                        SoundDispatcher.PlaySound();
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditBehaviorVM",
                             Description = "Adding strike to " + ChildName
                         });
-                        sound.Play();
 
                         if (strikes == 3) {
                             stars--;
@@ -286,29 +285,27 @@ public class EditBehaviorVM : BaseViewModel {
                                 ProgressBarChildValueText = "5/5";
                             }
 
-                            MediaPlayer sound = new();
-                            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/yay.wav"));
+                            ReferenceValues.SoundToPlay = "yay";
+                            SoundDispatcher.PlaySound();
                             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "EditBehaviorVM",
                                 Description = "Adding progress (which resulted in a star) to " + ChildName
                             });
-                            sound.Play();
                         } else {
                             ProgressBarChildValue = 5;
                             ProgressBarChildValueText = "5/5";
                         }
                     } else {
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/ding.wav"));
+                        ReferenceValues.SoundToPlay = "ding";
+                        SoundDispatcher.PlaySound();
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditBehaviorVM",
                             Description = "Adding progress to " + ChildName
                         });
-                        sound.Play();
                     }
                 }
             }
@@ -323,29 +320,27 @@ public class EditBehaviorVM : BaseViewModel {
                         stars--;
                         ProgressBarChildValue = 4;
                         ProgressBarChildValueText = "4/5";
-                        MediaPlayer sound = new();
-                        sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/aww.wav"));
+                        ReferenceValues.SoundToPlay = "aww";
+                        SoundDispatcher.PlaySound();
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditBehaviorVM",
                             Description = "Removing progress (which resulted in a loss of a star) from " + ChildName
                         });
-                        sound.Play();
                     } else {
                         ProgressBarChildValue = 0;
                         ProgressBarChildValueText = "0/5";
                     }
                 } else {
-                    MediaPlayer sound = new();
-                    sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/error.wav"));
+                    ReferenceValues.SoundToPlay = "error";
+                    SoundDispatcher.PlaySound();
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "INFO",
                         Module = "EditBehaviorVM",
                         Description = "Removing progress from " + ChildName
                     });
-                    sound.Play();
                 }
             }
 
@@ -361,9 +356,8 @@ public class EditBehaviorVM : BaseViewModel {
             ProgressBarChildValue = 0;
             ProgressBarChildValueText = "0/5";
             RewardButtonVisibility = "HIDDEN";
-            MediaPlayer sound2 = new();
-            sound2.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/reward.wav"));
-            sound2.Play();
+            ReferenceValues.SoundToPlay = "reward";
+            SoundDispatcher.PlaySound();
             break;
         }
 

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
-using System.Windows.Media;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Chores;
 using HomeControl.Source.ViewModel.Base;
@@ -127,9 +127,9 @@ public class ChoresVM : BaseViewModel {
                 break;
             }
         } else {
-            MediaPlayer sound = new();
-            sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-            sound.Play();
+            SoundToPlay = "locked";
+            SoundDispatcher soundDispatcher = new();
+            SoundDispatcher.PlaySound();
         }
     }
 

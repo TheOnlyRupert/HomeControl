@@ -120,6 +120,7 @@
         <Compile Include="Source\Control\SnowInfo.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
         <Compile Include="Source\Helpers\SerialPortExtensions.cs"/>
+        <Compile Include="Source\Helpers\SoundDispatcher.cs"/>
         <Compile Include="Source\Helpers\WeatherHelpers.cs"/>
         <Compile Include="Source\IO\BehaviorFromJson.cs"/>
         <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
