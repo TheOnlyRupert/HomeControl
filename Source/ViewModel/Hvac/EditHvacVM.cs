@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text.Json;
-using System.Windows.Input;
-using HomeControl.Source.IO;
+﻿using System.Windows.Input;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -13,9 +9,7 @@ public class EditHvacVM : BaseViewModel {
 
     public EditHvacVM() {
         TemperatureSet = ReferenceValues.JsonHvacSettings.TemperatureSet + "°";
-
         GetButtonColors();
-        SaveJson();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
@@ -24,10 +18,16 @@ public class EditHvacVM : BaseViewModel {
         switch (param) {
         case "programStatus":
             if (ReferenceValues.IsHvacComEstablished) {
-                if (ReferenceValues.JsonHvacSettings.ProgramState == 0) {
-                    ReferenceValues.JsonHvacSettings.ProgramState = 1;
+                if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {
+                    ReferenceValues.JsonHvacSettings.IsProgramRunning = false;
+                    ReferenceValues.SerialPortMaster.Write("5");
                 } else {
-                    ReferenceValues.JsonHvacSettings.ProgramState = 0;
+                    ReferenceValues.JsonHvacSettings.IsProgramRunning = true;
+                    if (ReferenceValues.IsHvacComEstablished) {
+                        char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 15);
+                        ReferenceValues.SerialPortMaster.Write(c.ToString());
+                        ReferenceValues.SerialPortMaster.Write(ReferenceValues.JsonHvacSettings.IsHeatingMode ? "4" : "3");
+                    }
                 }
 
                 GetButtonColors();
@@ -36,7 +36,13 @@ public class EditHvacVM : BaseViewModel {
             break;
         case "fanStatus":
             if (ReferenceValues.IsHvacComEstablished) {
-                ReferenceValues.JsonHvacSettings.IsFanOnMode = !ReferenceValues.JsonHvacSettings.IsFanOnMode;
+                if (ReferenceValues.JsonHvacSettings.IsFanAuto) {
+                    ReferenceValues.JsonHvacSettings.IsFanAuto = false;
+                    ReferenceValues.SerialPortMaster.Write("1");
+                } else {
+                    ReferenceValues.JsonHvacSettings.IsFanAuto = true;
+                    ReferenceValues.SerialPortMaster.Write("2");
+                }
 
                 GetButtonColors();
             }
@@ -53,19 +59,30 @@ public class EditHvacVM : BaseViewModel {
         case "subTemp":
             if (ReferenceValues.JsonHvacSettings.TemperatureSet > 50) {
                 ReferenceValues.JsonHvacSettings.TemperatureSet--;
+
+                if (ReferenceValues.IsHvacComEstablished) {
+                    char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 15);
+                    ReferenceValues.SerialPortMaster.Write(c.ToString());
+                }
             }
+
 
             break;
         case "addTemp":
             if (ReferenceValues.JsonHvacSettings.TemperatureSet < 80) {
                 ReferenceValues.JsonHvacSettings.TemperatureSet++;
+
+                if (ReferenceValues.IsHvacComEstablished) {
+                    char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 15);
+                    ReferenceValues.SerialPortMaster.Write(c.ToString());
+                }
             }
 
             break;
         }
 
         TemperatureSet = ReferenceValues.JsonHvacSettings.TemperatureSet + "°";
-        SaveJson();
+        HvacCrossPlay.SaveJson();
     }
 
     private void GetButtonColors() {
@@ -79,24 +96,20 @@ public class EditHvacVM : BaseViewModel {
             return;
         }
 
-        switch (ReferenceValues.JsonHvacSettings.ProgramState) {
-        case 0:
+        if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {
+            ProgramStatus = "System: On";
+            ProgramStatusColor = "Green";
+        } else {
             ProgramStatus = "System: Off";
             ProgramStatusColor = "Transparent";
-            break;
-        case 1:
-        case 2:
-            ProgramStatus = "System: Running";
-            ProgramStatusColor = "Green";
-            break;
         }
 
-        if (ReferenceValues.JsonHvacSettings.IsFanOnMode) {
-            FanStatus = "Fan Mode: On";
-            FanStatusColor = "Green";
-        } else {
+        if (ReferenceValues.JsonHvacSettings.IsFanAuto) {
             FanStatus = "Fan Mode: Auto";
             FanStatusColor = "Transparent";
+        } else {
+            FanStatus = "Fan Mode: On";
+            FanStatusColor = "Green";
         }
 
         if (ReferenceValues.JsonHvacSettings.IsHeatingMode) {
@@ -105,22 +118,6 @@ public class EditHvacVM : BaseViewModel {
         } else {
             HeatingCoolingStatus = "Temperature Status: Cooling";
             HeatingCoolingStatusColor = "CornflowerBlue";
-        }
-    }
-
-    private void SaveJson() {
-        try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonHvacSettings);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "hvac.json", jsonString);
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "EditHvacVM",
-                Description = e.ToString()
-            });
         }
     }
 

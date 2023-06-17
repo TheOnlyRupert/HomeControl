@@ -79,6 +79,7 @@ public static class WeatherHelpers {
         case "Showers And Thunderstorms Likely":
         case "Chance Showers And Thunderstorms":
         case "Slight Chance Showers And Thunderstorms":
+        case "Slight Chance T-storms":
             if (temp > 35) {
                 return isDayTime
                     ? "../../../Resources/Images/weather/thunderstorms-day-extreme-rain.gif"

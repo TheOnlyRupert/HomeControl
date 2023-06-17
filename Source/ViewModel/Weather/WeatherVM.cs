@@ -2,7 +2,6 @@
 using System.Net;
 using System.Text.Json;
 using System.Windows.Input;
-using System.Windows.Media;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules;
@@ -165,7 +164,7 @@ public class WeatherVM : BaseViewModel {
         CurrentWeatherTempText = forecastHourly.properties.periods[0].temperature + "°";
         CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(forecastHourly.properties.periods[0].windDirection);
         CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
-        CurrentWeatherDescription = forecast.properties.periods[0].shortForecast;
+        CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
         CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime,
             forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "null");
 
@@ -622,9 +621,8 @@ public class WeatherVM : BaseViewModel {
                 debugLog.ShowDialog();
                 debugLog.Close();
             } else {
-                MediaPlayer sound = new();
-                sound.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/locked.wav"));
-                sound.Play();
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
             }
 
             break;

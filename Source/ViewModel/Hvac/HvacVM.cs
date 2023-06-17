@@ -14,9 +14,8 @@ public class HvacVM : BaseViewModel {
             ReferenceValues.JsonHvacSettings.TemperatureSet = 70;
         }
 
-        /* Test */
-        ReferenceValues.InteriorTemp = 70;
         TempInsideColor = "White";
+        ReferenceValues.JsonHvacSettings.IsStandby = true;
 
         GetButtonColors();
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -26,7 +25,7 @@ public class HvacVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "MinChanged") {
+        if (e.PropertyName == "HvacUpdated") {
             GetButtonColors();
         }
     }
@@ -50,35 +49,34 @@ public class HvacVM : BaseViewModel {
         TempInside = ReferenceValues.InteriorTemp + "°";
         TempAdjustedColor = "White";
 
-        switch (ReferenceValues.JsonHvacSettings.ProgramState) {
-        case 0:
-            ProgramStatus = "System Off";
-            ProgramStatusColor = "Red";
+
+        if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {
+            if (ReferenceValues.JsonHvacSettings.IsStandby) {
+                ProgramStatus = "Standby";
+                ProgramStatusColor = "Yellow";
+                HvacIcon = "../../../Resources/Images/hvac/hvac.gif";
+            } else {
+                ProgramStatus = "Running";
+                ProgramStatusColor = "Green";
+                HvacIcon = "../../../Resources/Images/hvac/hvac.gif";
+            }
+        } else {
+            ProgramStatus = "Off";
+            ProgramStatusColor = "White";
             HvacIcon = "../../../Resources/Images/hvac/hvac.gif";
-            break;
-        case 1:
-            ProgramStatus = "Standby";
-            ProgramStatusColor = "Yellow";
-            HvacIcon = "../../../Resources/Images/hvac/hvac.gif";
-            break;
-        case 2:
-            ProgramStatus = "Running";
-            ProgramStatusColor = "Green";
-            HvacIcon = "../../../Resources/Images/hvac/hvac.gif";
-            break;
         }
 
-        if (ReferenceValues.JsonHvacSettings.IsFanOnMode) {
-            FanStatus = "On";
-            FanStatusColor = "White";
-        } else {
+        if (ReferenceValues.JsonHvacSettings.IsFanAuto) {
             FanStatus = "Auto";
             FanStatusColor = "White";
+        } else {
+            FanStatus = "On";
+            FanStatusColor = "Green";
         }
 
         if (ReferenceValues.JsonHvacSettings.IsHeatingMode) {
             HeatingCoolingStatus = "Heating";
-            HeatingCoolingStatusColor = "Red";
+            HeatingCoolingStatusColor = "White";
             HeatingCoolingText = "Heating To";
         } else {
             HeatingCoolingStatus = "Cooling";
@@ -93,6 +91,7 @@ public class HvacVM : BaseViewModel {
             EditHvac editHvac = new();
             editHvac.ShowDialog();
             editHvac.Close();
+
             GetButtonColors();
             break;
         }

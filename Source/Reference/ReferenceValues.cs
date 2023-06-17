@@ -11,6 +11,7 @@ public static class ReferenceValues {
     public const string VERSION = "1.0.0";
 
     public const bool EnableWeather = true;
+    public const bool EnableHvacSafetyTimer = false;
 
     public static readonly List<string> CategorySpendingList = new() {
         "Alcohol",
@@ -60,6 +61,9 @@ public static class ReferenceValues {
     public static bool IsFunnyModeActive { get; set; }
 
     public static int InteriorTemp { get; set; }
+    public static int InteriorHumidity { get; set; }
+    public static int ExteriorTemp { get; set; }
+    public static int ExteriorHumidity { get; set; }
 
     public static DateTime CalendarEventDate { get; set; }
 

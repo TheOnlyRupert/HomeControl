@@ -291,7 +291,7 @@
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowBedVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowClosetVM.cs"/>
         <Compile Include="Source\ViewModel\GroceriesVM.cs"/>
-        <Compile Include="Source\ViewModel\Hvac\CrossPlay.cs"/>
+        <Compile Include="Source\ViewModel\Hvac\HvacCrossPlay.cs"/>
         <Compile Include="Source\ViewModel\Hvac\EditHvacVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>
         <Compile Include="Source\ViewModel\MusicPlayerVM.cs"/>
