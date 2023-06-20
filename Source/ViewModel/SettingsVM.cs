@@ -124,6 +124,7 @@ public class SettingsVM : BaseViewModel {
                         Module = "SettingsVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             } else {
                 ReferenceValues.SoundToPlay = "missing_info";

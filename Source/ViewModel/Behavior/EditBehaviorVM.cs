@@ -37,6 +37,7 @@ public class EditBehaviorVM : BaseViewModel {
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -56,6 +57,7 @@ public class EditBehaviorVM : BaseViewModel {
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -75,6 +77,7 @@ public class EditBehaviorVM : BaseViewModel {
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -94,6 +97,7 @@ public class EditBehaviorVM : BaseViewModel {
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -113,6 +117,7 @@ public class EditBehaviorVM : BaseViewModel {
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -234,6 +239,7 @@ public class EditBehaviorVM : BaseViewModel {
                 Module = "EditBehaviorVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 
@@ -257,6 +263,7 @@ public class EditBehaviorVM : BaseViewModel {
                             Module = "EditBehaviorVM",
                             Description = "Adding strike to " + ChildName
                         });
+                        SaveDebugFile.Save();
 
                         if (strikes == 3) {
                             stars--;
@@ -293,6 +300,7 @@ public class EditBehaviorVM : BaseViewModel {
                                 Module = "EditBehaviorVM",
                                 Description = "Adding progress (which resulted in a star) to " + ChildName
                             });
+                            SaveDebugFile.Save();
                         } else {
                             ProgressBarChildValue = 5;
                             ProgressBarChildValueText = "5/5";
@@ -306,6 +314,7 @@ public class EditBehaviorVM : BaseViewModel {
                             Module = "EditBehaviorVM",
                             Description = "Adding progress to " + ChildName
                         });
+                        SaveDebugFile.Save();
                     }
                 }
             }
@@ -328,6 +337,7 @@ public class EditBehaviorVM : BaseViewModel {
                             Module = "EditBehaviorVM",
                             Description = "Removing progress (which resulted in a loss of a star) from " + ChildName
                         });
+                        SaveDebugFile.Save();
                     } else {
                         ProgressBarChildValue = 0;
                         ProgressBarChildValueText = "0/5";
@@ -341,6 +351,7 @@ public class EditBehaviorVM : BaseViewModel {
                         Module = "EditBehaviorVM",
                         Description = "Removing progress from " + ChildName
                     });
+                    SaveDebugFile.Save();
                 }
             }
 
@@ -352,6 +363,7 @@ public class EditBehaviorVM : BaseViewModel {
                 Module = "EditBehaviorVM",
                 Description = ChildName + " claimed their reward!"
             });
+            SaveDebugFile.Save();
             stars = 0;
             ProgressBarChildValue = 0;
             ProgressBarChildValueText = "0/5";

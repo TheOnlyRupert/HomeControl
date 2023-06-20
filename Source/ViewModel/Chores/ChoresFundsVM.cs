@@ -127,6 +127,7 @@ public class ChoresFundsVM : BaseViewModel {
                     Module = "ChoresFundsVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -148,6 +149,7 @@ public class ChoresFundsVM : BaseViewModel {
                     Module = "ChoresFundsVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -227,6 +229,7 @@ public class ChoresFundsVM : BaseViewModel {
                     Module = "ChoresFundsVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -246,6 +249,7 @@ public class ChoresFundsVM : BaseViewModel {
                 Module = "ChoresFundsVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 

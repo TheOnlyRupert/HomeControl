@@ -52,6 +52,7 @@ public class ChoresSpecialVM : BaseViewModel {
                 Module = "ChoresSpecialVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         GetButtonColors();
@@ -71,6 +72,7 @@ public class ChoresSpecialVM : BaseViewModel {
                     Module = "ChoresSpecialVM",
                     Description = ReferenceValues.JsonMasterSettings.User2Name + " removed special task: " + value
                 });
+                SaveDebugFile.Save();
             }
         } else {
             ReferenceValues.JsonChoreSpecialMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreSpecialMasterList.choreList[index].IsComplete;
@@ -83,6 +85,7 @@ public class ChoresSpecialVM : BaseViewModel {
                 Module = "ChoresSpecialVM",
                 Description = ReferenceValues.JsonMasterSettings.User2Name + " completed special task: " + value
             });
+            SaveDebugFile.Save();
         }
     }
 

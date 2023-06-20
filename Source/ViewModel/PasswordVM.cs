@@ -104,6 +104,7 @@ public class PasswordVM : BaseViewModel {
                     Module = "PasswordVM",
                     Description = "Unlocking UI with correct password"
                 });
+                SaveDebugFile.Save();
 
                 PasswordText = "";
                 LockButtonText = "Lock UI";

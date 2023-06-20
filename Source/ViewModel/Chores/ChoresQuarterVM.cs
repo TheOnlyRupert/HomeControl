@@ -157,6 +157,7 @@ public class ChoresQuarterVM : BaseViewModel {
                 Module = "ChoresQuarterVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         GetButtonColors();
@@ -176,6 +177,7 @@ public class ChoresQuarterVM : BaseViewModel {
                     Module = "ChoresQuarterVM",
                     Description = ReferenceValues.JsonMasterSettings.User2Name + " removed quarterly task: " + value
                 });
+                SaveDebugFile.Save();
             }
         } else {
             ReferenceValues.JsonChoreQuarterMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreQuarterMasterList.choreList[index].IsComplete;
@@ -188,6 +190,7 @@ public class ChoresQuarterVM : BaseViewModel {
                 Module = "ChoresQuarterVM",
                 Description = ReferenceValues.JsonMasterSettings.User2Name + " completed quarterly task: " + value
             });
+            SaveDebugFile.Save();
         }
     }
 

@@ -31,6 +31,7 @@ public class RecipeFromJson {
                         Module = "RecipeFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception e) {
@@ -40,6 +41,7 @@ public class RecipeFromJson {
                 Module = "RecipeFromJson",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 }

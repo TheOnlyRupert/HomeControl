@@ -126,6 +126,7 @@
         <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
         <Compile Include="Source\IO\ChoreFundsFromJson.cs"/>
         <Compile Include="Source\IO\ChoresFromJson.cs"/>
+        <Compile Include="Source\IO\DebugFromJson.cs"/>
         <Compile Include="Source\IO\DebugTextBlock.cs"/>
         <Compile Include="Source\IO\FinancesFromJson.cs"/>
         <Compile Include="Source\IO\GameStatsFromJson.cs"/>

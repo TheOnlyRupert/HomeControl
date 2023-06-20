@@ -33,6 +33,7 @@ public class BehaviorFromJson {
                         Module = "BehaviorFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception e) {
@@ -42,6 +43,7 @@ public class BehaviorFromJson {
                 Module = "BehaviorFromJson",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 }

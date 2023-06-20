@@ -39,6 +39,7 @@ public class ChoresFromJson {
                         Module = "ChoresFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception) {
@@ -81,6 +82,7 @@ public class ChoresFromJson {
                     Module = "ChoresFromJson",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
 
@@ -104,6 +106,7 @@ public class ChoresFromJson {
                         Module = "ChoresFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception) {
@@ -146,6 +149,7 @@ public class ChoresFromJson {
                     Module = "ChoresFromJson",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }
@@ -178,6 +182,7 @@ public class ChoresFromJson {
                         Module = "ChoresFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception) {
@@ -460,6 +465,7 @@ public class ChoresFromJson {
                     Module = "ChoresFromJson",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
 
@@ -483,6 +489,7 @@ public class ChoresFromJson {
                         Module = "ChoresFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception) {
@@ -560,6 +567,7 @@ public class ChoresFromJson {
                     Module = "ChoresFromJson",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }
@@ -592,6 +600,7 @@ public class ChoresFromJson {
                         Module = "ChoresFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception) {
@@ -844,6 +853,7 @@ public class ChoresFromJson {
                     Module = "ChoresFromJson",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
 
@@ -867,6 +877,7 @@ public class ChoresFromJson {
                         Module = "ChoresFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception) {
@@ -899,6 +910,7 @@ public class ChoresFromJson {
                     Module = "ChoresFromJson",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }
@@ -935,6 +947,7 @@ public class ChoresFromJson {
                         Module = "ChoresFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception) {
@@ -1117,6 +1130,7 @@ public class ChoresFromJson {
                     Module = "ChoresFromJson",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
 
@@ -1147,6 +1161,7 @@ public class ChoresFromJson {
                         Module = "ChoresFromJson",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
             }
         } catch (Exception) {
@@ -1314,6 +1329,7 @@ public class ChoresFromJson {
                     Module = "ChoresFromJson",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }

@@ -106,6 +106,7 @@ public class WeatherVM : BaseViewModel {
                         Module = "WeatherVM",
                         Description = "7-day weather forcast request failed... Possibly offline"
                     });
+                    SaveDebugFile.Save();
                 }
 
                 messageSent = true;
@@ -117,6 +118,7 @@ public class WeatherVM : BaseViewModel {
                     Module = "WeatherVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             try {
@@ -136,6 +138,7 @@ public class WeatherVM : BaseViewModel {
                         Module = "WeatherVM",
                         Description = "Hourly weather forcast request failed... Possibly offline"
                     });
+                    SaveDebugFile.Save();
                 }
 
                 messageSentHourly = true;
@@ -147,6 +150,7 @@ public class WeatherVM : BaseViewModel {
                     Module = "WeatherVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             if (!errored) {
@@ -197,6 +201,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -228,6 +233,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -259,6 +265,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -290,6 +297,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -321,6 +329,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -352,6 +361,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -383,6 +393,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -414,6 +425,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -445,6 +457,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -476,6 +489,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -507,6 +521,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -538,6 +553,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -569,6 +585,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -600,6 +617,7 @@ public class WeatherVM : BaseViewModel {
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 

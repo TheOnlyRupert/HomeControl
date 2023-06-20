@@ -245,6 +245,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         progress = Convert.ToDouble(choresCompletedDay) / Convert.ToDouble(JsonChoreDayMasterList.choreList.Count) * 100;
@@ -258,6 +259,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         progress = Convert.ToDouble(choresCompletedMonth) / Convert.ToDouble(JsonChoreMonthMasterList.choreList.Count) * 100;
@@ -271,6 +273,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         progress = Convert.ToDouble(choresCompletedQuarter) / Convert.ToDouble(JsonChoreQuarterMasterList.choreList.Count) * 100;
@@ -284,6 +287,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         progress = Convert.ToDouble(choresCompletedQuarterUser1) / Convert.ToDouble(JsonChoreQuarterUser1MasterList.choreList.Count) * 100;
@@ -297,6 +301,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         progress = Convert.ToDouble(choresCompletedWeekUser1) / Convert.ToDouble(JsonChoreWeekUser1MasterList.choreList.Count) * 100;
@@ -310,6 +315,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         progress = Convert.ToDouble(choresCompletedDayUser1) / Convert.ToDouble(JsonChoreDayUser1MasterList.choreList.Count) * 100;
@@ -323,6 +329,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         progress = Convert.ToDouble(choresCompletedMonthUser1) / Convert.ToDouble(JsonChoreMonthUser1MasterList.choreList.Count) * 100;
@@ -336,6 +343,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         DayButtonColor = "Transparent";
@@ -526,6 +534,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         /* Week */
@@ -559,6 +568,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         /* Month */
@@ -592,6 +602,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         FundsProgressDayValue = calculatedReleaseFundsDay;
@@ -625,6 +636,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 
@@ -636,6 +648,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = "Releasing daily funds totaling $" + JsonChoreFundsMaster.FundsLockedDay
             });
+            SaveDebugFile.Save();
 
             if (JsonChoreFundsMaster.FundsLockedDay > 0) {
                 JsonFinanceMasterList.financeList.Add(new FinanceBlock {
@@ -678,6 +691,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         if (CompareWeekStartDate1.Date != CompareWeekStartDate2.Date) {
@@ -687,6 +701,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = "Releasing weekly funds totaling $" + JsonChoreFundsMaster.FundsLockedWeek
             });
+            SaveDebugFile.Save();
 
             if (JsonChoreFundsMaster.FundsLockedWeek > 0) {
                 JsonFinanceMasterList.financeList.Add(new FinanceBlock {
@@ -717,6 +732,7 @@ public class ChoresVM : BaseViewModel {
                     Module = "ChoresVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
 
@@ -727,6 +743,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = "Releasing monthly funds totaling $" + JsonChoreFundsMaster.FundsLockedMonth
             });
+            SaveDebugFile.Save();
 
             if (JsonChoreFundsMaster.FundsLockedMonth > 0) {
                 JsonFinanceMasterList.financeList.Add(new FinanceBlock {
@@ -760,6 +777,7 @@ public class ChoresVM : BaseViewModel {
                     Module = "ChoresVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
 
@@ -777,6 +795,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -791,6 +810,7 @@ public class ChoresVM : BaseViewModel {
                 Module = "ChoresVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 

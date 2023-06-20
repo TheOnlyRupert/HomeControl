@@ -49,6 +49,7 @@ public class EditRecurringVM : BaseViewModel {
                             Module = "EditRecurringVM",
                             Description = e.ToString()
                         });
+                        SaveDebugFile.Save();
                     }
                 }
             } catch (Exception e) {
@@ -58,6 +59,7 @@ public class EditRecurringVM : BaseViewModel {
                     Module = "EditRecurringVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }
@@ -79,6 +81,7 @@ public class EditRecurringVM : BaseViewModel {
                     Module = "EditRecurringVM",
                     Description = "Adding recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                 });
+                SaveDebugFile.Save();
 
                 EventList.Add(new CalendarEventsRecurring {
                     date = Convert.ToDateTime(DateText),
@@ -108,6 +111,7 @@ public class EditRecurringVM : BaseViewModel {
                                 Module = "EditRecurringVM",
                                 Description = "Updating recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                             });
+                            SaveDebugFile.Save();
 
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEventsRecurring {
                                 date = Convert.ToDateTime(DateText),
@@ -130,6 +134,7 @@ public class EditRecurringVM : BaseViewModel {
                     Module = "EditRecurringVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -144,6 +149,7 @@ public class EditRecurringVM : BaseViewModel {
                             Module = "EditRecurringVM",
                             Description = "Adding recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                         });
+                        SaveDebugFile.Save();
 
                         EventList.Remove(CalendarEventSelected);
                         HolidayText = "";
@@ -158,6 +164,7 @@ public class EditRecurringVM : BaseViewModel {
                     Module = "EditRecurringVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -183,6 +190,7 @@ public class EditRecurringVM : BaseViewModel {
                 Module = "EditRecurringVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 

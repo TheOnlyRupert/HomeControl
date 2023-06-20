@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Net;
 using System.Text.Json;
@@ -26,15 +25,18 @@ public class MainWindowVM : BaseViewModel {
         simpleMessenger = CrossViewMessenger.Instance;
         currentDate = DateTime.Now;
         internetMessage = false;
+        OnlineColor = "Transparent";
 
-        ReferenceValues.DebugTextBlockOutput = new ObservableCollection<DebugTextBlock> {
-            new() {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "MainWindowVM",
-                Description = ReferenceValues.COPYRIGHT + "  Version: " + ReferenceValues.VERSION
-            }
-        };
+        /* Get Debug */
+        new DebugFromJson();
+
+        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            Date = DateTime.Now,
+            Level = "INFO",
+            Module = "MainWindowVM",
+            Description = ReferenceValues.COPYRIGHT + "  Version: " + ReferenceValues.VERSION
+        });
+        SaveDebugFile.Save();
 
         /* Get Settings */
         new SettingsFromJson();
@@ -73,6 +75,7 @@ public class MainWindowVM : BaseViewModel {
                 Module = "MainWindowVM",
                 Description = "Starting Screen Saver"
             });
+            SaveDebugFile.Save();
             simpleMessenger.PushMessage("ScreenSaverOn", null);
             ReferenceValues.LockUI = true;
             OnlineColor = "Black";
@@ -80,7 +83,9 @@ public class MainWindowVM : BaseViewModel {
 
         void activityTimer_OnActive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOff", null);
-            OnlineColor = "Transparent";
+            if (!ReferenceValues.IsFunnyModeActive) {
+                OnlineColor = internetMessage ? "DarkRed" : "Transparent";
+            }
         }
 
         /* Joke DispatcherTimer */
@@ -135,8 +140,6 @@ public class MainWindowVM : BaseViewModel {
             Random randomNumber = new();
             Color myColor = Color.FromRgb((byte)randomNumber.Next(256), (byte)randomNumber.Next(256), (byte)randomNumber.Next(256));
             OnlineColor = "#FF" + myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
-        } else {
-            OnlineColor = "Transparent";
         }
     }
 
@@ -161,6 +164,7 @@ public class MainWindowVM : BaseViewModel {
                         Module = "MainWindowVM",
                         Description = "Restored Internet Connection"
                     });
+                    SaveDebugFile.Save();
                 }
 
                 internetMessage = false;
@@ -180,8 +184,9 @@ public class MainWindowVM : BaseViewModel {
                 Module = "MainWindowVM",
                 Description = "Lost Internet Connection"
             });
+            SaveDebugFile.Save();
             internetMessage = true;
-            OnlineColor = "Red";
+            OnlineColor = "DarkRed";
         }
     }
 

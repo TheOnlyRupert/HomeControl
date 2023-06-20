@@ -42,6 +42,7 @@ public class CalenderEventsFromJson {
                                     Module = "CalenderEventsFromJson",
                                     Description = e.ToString()
                                 });
+                                SaveDebugFile.Save();
                             }
                         }
                     } catch (Exception e) {
@@ -51,6 +52,7 @@ public class CalenderEventsFromJson {
                             Module = "CalenderEventsFromJson",
                             Description = e.ToString()
                         });
+                        SaveDebugFile.Save();
                     }
                 }
             }

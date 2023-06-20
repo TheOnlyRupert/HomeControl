@@ -38,6 +38,7 @@ public class CoinFlipVM : BaseViewModel {
                     Module = "CoinFlipVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         } catch (Exception e) {
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -46,6 +47,7 @@ public class CoinFlipVM : BaseViewModel {
                 Module = "CoinFlipVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 

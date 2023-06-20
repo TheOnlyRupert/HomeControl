@@ -86,6 +86,7 @@ public class WeatherHourlyVM : BaseViewModel {
                     Module = "WeatherHourlyVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }

@@ -44,6 +44,7 @@ public class BehaviorVM : BaseViewModel {
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -67,6 +68,7 @@ public class BehaviorVM : BaseViewModel {
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         RefreshBehavior();

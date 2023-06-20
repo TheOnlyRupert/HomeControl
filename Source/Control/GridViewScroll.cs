@@ -25,6 +25,7 @@ public class CustomListView : ListView {
                 Module = "GridViewScroll",
                 Description = e2.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 }

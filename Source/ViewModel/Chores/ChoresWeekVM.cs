@@ -219,6 +219,7 @@ public class ChoresWeekVM : BaseViewModel {
                 Module = "ChoresWeekVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         GetButtonColors();
@@ -238,6 +239,7 @@ public class ChoresWeekVM : BaseViewModel {
                     Module = "ChoresWeekVM",
                     Description = ReferenceValues.JsonMasterSettings.User2Name + " removed weekly task: " + value
                 });
+                SaveDebugFile.Save();
             }
         } else {
             ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreWeekMasterList.choreList[index].IsComplete;
@@ -250,6 +252,7 @@ public class ChoresWeekVM : BaseViewModel {
                 Module = "ChoresWeekVM",
                 Description = ReferenceValues.JsonMasterSettings.User2Name + " completed weekly task: " + value
             });
+            SaveDebugFile.Save();
         }
     }
 

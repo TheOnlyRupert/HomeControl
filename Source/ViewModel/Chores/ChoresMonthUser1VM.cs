@@ -52,6 +52,7 @@ public class ChoresMonthUser1VM : BaseViewModel {
                 Module = "ChoresMonthUser1VM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         GetButtonColors();
@@ -71,6 +72,7 @@ public class ChoresMonthUser1VM : BaseViewModel {
                     Module = "ChoresMonthUser1VM",
                     Description = ReferenceValues.JsonMasterSettings.User1Name + " removed monthly task: " + value
                 });
+                SaveDebugFile.Save();
             }
         } else {
             ReferenceValues.JsonChoreMonthUser1MasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreMonthUser1MasterList.choreList[index].IsComplete;
@@ -83,6 +85,7 @@ public class ChoresMonthUser1VM : BaseViewModel {
                 Module = "ChoresMonthUser1VM",
                 Description = ReferenceValues.JsonMasterSettings.User1Name + " completed monthly task: " + value
             });
+            SaveDebugFile.Save();
         }
     }
 

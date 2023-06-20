@@ -151,6 +151,7 @@ public class ChoresQuarterUser1VM : BaseViewModel {
                 Module = "ChoresQuarterUser1VM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         GetButtonColors();
@@ -170,6 +171,7 @@ public class ChoresQuarterUser1VM : BaseViewModel {
                     Module = "ChoresQuarterUser1VM",
                     Description = ReferenceValues.JsonMasterSettings.User1Name + " removed quarterly task: " + value
                 });
+                SaveDebugFile.Save();
             }
         } else {
             ReferenceValues.JsonChoreQuarterUser1MasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreQuarterUser1MasterList.choreList[index].IsComplete;
@@ -182,6 +184,7 @@ public class ChoresQuarterUser1VM : BaseViewModel {
                 Module = "ChoresQuarterUser1VM",
                 Description = ReferenceValues.JsonMasterSettings.User1Name + " completed quarterly task: " + value
             });
+            SaveDebugFile.Save();
         }
     }
 

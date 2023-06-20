@@ -31,6 +31,7 @@ public static class HvacCrossPlay {
                     Module = "HvacCrossPlay",
                     Description = "Unable to open port: " + ReferenceValues.JsonMasterSettings.ComPort
                 });
+                SaveDebugFile.Save();
                 comPortMessage = true;
             }
 
@@ -59,6 +60,7 @@ public static class HvacCrossPlay {
                     Module = "HvacCrossPlay",
                     Description = "Unable to receive serial data"
                 });
+                SaveDebugFile.Save();
 
                 ReferenceValues.IsHvacComEstablished = false;
                 simpleMessenger.PushMessage("HvacUpdated", null);
@@ -97,6 +99,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Changing Fan Mode to On"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Fan Auto>")) {
             ReferenceValues.JsonHvacSettings.IsFanAuto = true;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -105,6 +108,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Changing Fan Mode to Auto"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Cooling Mode>")) {
             ReferenceValues.JsonHvacSettings.IsHeatingMode = false;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -113,6 +117,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Changing to Cooling Mode"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Heating Mode>")) {
             ReferenceValues.JsonHvacSettings.IsHeatingMode = true;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -121,6 +126,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Changing to Heating Mode"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Program Off>")) {
             ReferenceValues.JsonHvacSettings.IsProgramRunning = false;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -129,6 +135,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Program Off"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Override TRUE>")) {
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -136,6 +143,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Override TRUE"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Override FALSE>")) {
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -143,6 +151,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Override FALSE"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Heating Running>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = false;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -151,6 +160,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Heating Running"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Heating Standby>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = true;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -159,6 +169,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Heating Standby"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Cooling Running>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = false;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -167,6 +178,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Cooling Running"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Cooling Standby>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = true;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -175,6 +187,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Cooling Standby"
             });
+            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: TEMP_SET_")) {
             try {
                 data = data.Substring(data.IndexOf('<'));
@@ -201,6 +214,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 }

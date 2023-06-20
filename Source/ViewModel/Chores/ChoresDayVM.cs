@@ -58,6 +58,7 @@ public class ChoresDayVM : BaseViewModel {
                 Module = "ChoresDayVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         GetButtonColors();
@@ -77,6 +78,7 @@ public class ChoresDayVM : BaseViewModel {
                     Module = "ChoresDayVM",
                     Description = ReferenceValues.JsonMasterSettings.User2Name + " removed daily task: " + value
                 });
+                SaveDebugFile.Save();
             }
         } else {
             ReferenceValues.JsonChoreDayMasterList.choreList[index].IsComplete = !ReferenceValues.JsonChoreDayMasterList.choreList[index].IsComplete;
@@ -89,6 +91,7 @@ public class ChoresDayVM : BaseViewModel {
                 Module = "ChoresDayVM",
                 Description = ReferenceValues.JsonMasterSettings.User2Name + " completed daily task: " + value
             });
+            SaveDebugFile.Save();
         }
     }
 

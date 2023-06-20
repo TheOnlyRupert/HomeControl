@@ -10,7 +10,6 @@ namespace HomeControl.Source.ViewModel;
 public class DebugLogVM : BaseViewModel {
     private ObservableCollection<DebugTextBlock> _debugList;
 
-
     public DebugLogVM() {
         DebugList = ReferenceValues.DebugTextBlockOutput;
     }

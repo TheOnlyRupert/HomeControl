@@ -100,6 +100,7 @@ public class EditFinancesVM : BaseViewModel {
                     Description = "Adding finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
                                   CategorySelected + ", " + selectedPerson + ", " + DetailsText
                 });
+                SaveDebugFile.Save();
 
                 FinanceList.Add(new FinanceBlock {
                     AddSub = AddOrSub,
@@ -140,6 +141,7 @@ public class EditFinancesVM : BaseViewModel {
                                 Description = "Updating finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText +
                                               ", " + CategorySelected + ", " + selectedPerson + ", " + DetailsText
                             });
+                            SaveDebugFile.Save();
 
                             FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
                                 AddSub = AddOrSub,
@@ -169,6 +171,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -184,6 +187,7 @@ public class EditFinancesVM : BaseViewModel {
                             Description = "Removing finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
                                           CategorySelected + ", " + selectedPerson + ", " + DetailsText
                         });
+                        SaveDebugFile.Save();
 
                         ReferenceValues.SoundToPlay = "cash";
                         SoundDispatcher.PlaySound();
@@ -199,6 +203,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -275,6 +280,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -367,6 +373,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             try {
@@ -381,6 +388,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }
@@ -437,6 +445,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -450,6 +459,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -463,6 +473,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -476,6 +487,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -489,6 +501,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -502,6 +515,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -515,6 +529,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -528,6 +543,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -541,6 +557,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -554,6 +571,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -567,6 +585,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -580,6 +599,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -593,6 +613,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -606,6 +627,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -619,6 +641,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -632,6 +655,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -645,6 +669,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -658,6 +683,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -671,6 +697,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -684,6 +711,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -697,6 +725,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -710,6 +739,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -723,6 +753,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -736,6 +767,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -749,6 +781,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -762,6 +795,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -775,6 +809,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -788,6 +823,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -801,6 +837,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -814,6 +851,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -827,6 +865,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -840,6 +879,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -853,6 +893,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;
@@ -866,6 +907,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
+                    SaveDebugFile.Save();
                 }
 
                 break;

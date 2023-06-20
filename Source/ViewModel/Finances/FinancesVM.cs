@@ -76,6 +76,7 @@ public class FinancesVM : BaseViewModel {
                             Module = "FinancesVM",
                             Description = e.ToString()
                         });
+                        SaveDebugFile.Save();
                     }
                 }
             }
@@ -91,6 +92,7 @@ public class FinancesVM : BaseViewModel {
                             Module = "FinancesVM",
                             Description = e.ToString()
                         });
+                        SaveDebugFile.Save();
                     }
                 }
             }
@@ -101,6 +103,7 @@ public class FinancesVM : BaseViewModel {
                 Module = "FinancesVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         available = income - expense;
@@ -130,6 +133,7 @@ public class FinancesVM : BaseViewModel {
                 Module = "FinancesVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 

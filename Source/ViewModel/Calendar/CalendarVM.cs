@@ -1047,6 +1047,7 @@ public class CalendarVM : BaseViewModel {
                             Module = "CalendarVM",
                             Description = e.ToString()
                         });
+                        SaveDebugFile.Save();
                     }
                 }
             } catch (Exception e) {
@@ -1056,6 +1057,7 @@ public class CalendarVM : BaseViewModel {
                     Module = "CalendarVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
 
@@ -1374,6 +1376,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1392,6 +1395,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1410,6 +1414,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1428,6 +1433,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1446,6 +1452,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1464,6 +1471,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1482,6 +1490,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1500,6 +1509,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1518,6 +1528,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1536,6 +1547,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1554,6 +1566,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1572,6 +1585,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1590,6 +1604,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1608,6 +1623,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1626,6 +1642,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1644,6 +1661,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1662,6 +1680,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1680,6 +1699,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1698,6 +1718,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1716,6 +1737,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1734,6 +1756,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1752,6 +1775,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1770,6 +1794,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1788,6 +1813,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1806,6 +1832,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1824,6 +1851,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1842,6 +1870,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1860,6 +1889,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1878,6 +1908,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1896,6 +1927,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1914,6 +1946,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1932,6 +1965,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1950,6 +1984,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1968,6 +2003,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -1986,6 +2022,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -2004,6 +2041,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -2022,6 +2060,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -2040,6 +2079,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -2058,6 +2098,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -2076,6 +2117,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -2094,6 +2136,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
 
         try {
@@ -2112,6 +2155,7 @@ public class CalendarVM : BaseViewModel {
                 Module = "CalendarVM",
                 Description = e.ToString()
             });
+            SaveDebugFile.Save();
         }
     }
 

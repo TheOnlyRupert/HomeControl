@@ -15,6 +15,7 @@ public static class ReferenceValues {
 
     public static readonly List<string> CategorySpendingList = new() {
         "Alcohol",
+        "Animals/Pets",
         "Billing",
         "Brittany Fund",
         "Carry Over",

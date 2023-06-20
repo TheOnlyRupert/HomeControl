@@ -89,6 +89,7 @@ public class EditCalendarVM : BaseViewModel {
                             Module = "EditCalendarVM",
                             Description = e.ToString()
                         });
+                        SaveDebugFile.Save();
                     }
                 }
             } catch (Exception e) {
@@ -98,6 +99,7 @@ public class EditCalendarVM : BaseViewModel {
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }
@@ -168,6 +170,7 @@ public class EditCalendarVM : BaseViewModel {
                     Description = "Adding calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText + ", " +
                                   LocationText + ", " + selectedPerson
                 });
+                SaveDebugFile.Save();
 
                 EventList.Add(new CalendarEvents {
                     name = EventText,
@@ -207,6 +210,7 @@ public class EditCalendarVM : BaseViewModel {
                                               DescriptionText + ", " +
                                               LocationText + ", " + selectedPerson
                             });
+                            SaveDebugFile.Save();
 
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
                                 name = EventText,
@@ -237,6 +241,7 @@ public class EditCalendarVM : BaseViewModel {
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -253,6 +258,7 @@ public class EditCalendarVM : BaseViewModel {
                                           ", " +
                                           LocationText + ", " + selectedPerson
                         });
+                        SaveDebugFile.Save();
 
                         EventList.Remove(CalendarEventSelected);
                         ReferenceValues.SoundToPlay = "scribble3";
@@ -268,6 +274,7 @@ public class EditCalendarVM : BaseViewModel {
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
 
             break;
@@ -355,6 +362,7 @@ public class EditCalendarVM : BaseViewModel {
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         } else {
             try {
@@ -368,6 +376,7 @@ public class EditCalendarVM : BaseViewModel {
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
+                SaveDebugFile.Save();
             }
         }
     }
