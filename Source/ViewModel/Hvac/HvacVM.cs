@@ -46,9 +46,13 @@ public class HvacVM : BaseViewModel {
         }
 
         TempAdjusted = ReferenceValues.JsonHvacSettings.TemperatureSet + "°";
-        TempInside = ReferenceValues.InteriorTemp + "°";
-        TempAdjustedColor = "White";
+        if (ReferenceValues.InteriorTemp == -99) {
+            TempInside = "??";
+        } else {
+            TempInside = ReferenceValues.InteriorTemp + "°";
+        }
 
+        TempAdjustedColor = "White";
 
         if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {
             if (ReferenceValues.JsonHvacSettings.IsStandby) {

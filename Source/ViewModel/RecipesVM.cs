@@ -30,7 +30,6 @@ public class RecipesVM : BaseViewModel {
         using HttpResponseMessage response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
         Task<string> body = response.Content.ReadAsStringAsync();
-        Console.WriteLine("test:" + await body);
         return await body;
     }
 

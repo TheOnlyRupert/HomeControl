@@ -77,8 +77,24 @@ public static class HvacCrossPlay {
 
                 ReferenceValues.InteriorTemp = (int)float.Parse(parts[0].Trim());
                 ReferenceValues.InteriorHumidity = (int)float.Parse(parts[1].Trim());
+            } catch (FormatException) {
+                ReferenceValues.InteriorTemp = -99;
+                ReferenceValues.InteriorHumidity = -99;
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "HvacCrossPlay",
+                    Description = "Unable to get interior temp/humidity... Possibly offline?"
+                });
+                SaveDebugFile.Save();
             } catch (Exception e) {
-                Console.WriteLine(e.ToString());
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "HvacCrossPlay",
+                    Description = e.ToString()
+                });
+                SaveDebugFile.Save();
             }
         } else if (data.Contains("<EXT:")) {
             try {
@@ -88,8 +104,24 @@ public static class HvacCrossPlay {
 
                 ReferenceValues.ExteriorTemp = (int)float.Parse(parts[0].Trim());
                 ReferenceValues.ExteriorHumidity = (int)float.Parse(parts[1].Trim());
+            } catch (FormatException) {
+                ReferenceValues.ExteriorTemp = -99;
+                ReferenceValues.ExteriorHumidity = -99;
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "HvacCrossPlay",
+                    Description = "Unable to get exterior temp/humidity... Possibly offline?"
+                });
+                SaveDebugFile.Save();
             } catch (Exception e) {
-                Console.WriteLine(e.ToString());
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "HvacCrossPlay",
+                    Description = e.ToString()
+                });
+                SaveDebugFile.Save();
             }
         } else if (data.Contains("<HVAC: Fan On>")) {
             ReferenceValues.JsonHvacSettings.IsFanAuto = false;

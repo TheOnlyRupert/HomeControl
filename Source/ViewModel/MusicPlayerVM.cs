@@ -9,10 +9,11 @@ public class MusicPlayerVM : BaseViewModel {
 
     public MusicPlayerVM() {
         ImageName = null;
-        ArtistName = null;
-        SongName = null;
-        Timer1Text = null;
-        Timer2Text = null;
+        ArtistName = "Lynyrd Skynyrd";
+        SongName = "Free Bird";
+        Timer1Text = "00:44";
+        Timer2Text = "09:07";
+        ProgressValue = 12;
 
         //File tagFile = File.Create("C:/Users/higgi/OneDrive/Desktop/untitled.mp3");
         //Console.WriteLine(tagFile.Length + ", " + tagFile.Tag.Title + ", " + tagFile.Properties.Duration.Seconds);
