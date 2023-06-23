@@ -1125,9 +1125,6 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <ClCompile Include="Source\IO\ArduinoHvacController\ArduinoHvacController.ino"/>
-    </ItemGroup>
-    <ItemGroup>
         <Folder Include="ArduinoHvacController\"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>

@@ -28,7 +28,6 @@ public class PasswordVM : BaseViewModel {
         if (e.PropertyName == "ScreenSaverOn") {
             PasswordText = "";
             LockButtonText = "";
-            ReferenceValues.LockUI = true;
             PasswordPart1Visibility = "VISIBLE";
             PasswordPart2Visibility = "HIDDEN";
         }

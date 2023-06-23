@@ -1,7 +1,7 @@
 #include <DHT.h>;
 
-DHT dhtInt(7, DHT22);
-DHT dhtExt(8, DHT22);
+DHT dhtInt(8, DHT22);
+DHT dhtExt(9, DHT22);
 
 float humInt;
 float humExt;
@@ -15,7 +15,7 @@ bool isHeatingMode;
 bool overrideDebug;
 unsigned long previousMillis;
 
-/* PINS: 13 -> Fan, 12 -> Cooling, 11 -> Heating */
+/* PINS: 4 -> Fan, 5 -> Cooling, 6 -> Heating */
 void setup() {
   previousMillis = 60000;
   isFanAuto = true;
@@ -28,15 +28,15 @@ void setup() {
   dhtInt.begin();
   dhtExt.begin();
 
-  pinMode(13, OUTPUT);
-  pinMode(12, OUTPUT);
-  pinMode(11, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
 }
 
 void loop() {
   unsigned long currentMillis = millis();
 
-  if (currentMillis - previousMillis >= 60000) {
+  if (currentMillis - previousMillis >= 10000) {
     previousMillis = currentMillis;
 
     humInt = dhtInt.readHumidity();
@@ -119,7 +119,7 @@ void loop() {
         isFanAuto = false;
 
         Serial.print("<HVAC: Fan On>");
-        digitalWrite(13, HIGH);
+        digitalWrite(4, HIGH);
 
         break;
       /* Fan Mode: Auto */
@@ -128,18 +128,18 @@ void loop() {
 
         Serial.print("<HVAC: Fan Auto>");
         if (!isProgramRunning) {
-          digitalWrite(11, LOW);
+          digitalWrite(6, LOW);
           delay(2000);
-          digitalWrite(12, LOW);
+          digitalWrite(5, LOW);
           delay(2000);
-          digitalWrite(13, LOW);
+          digitalWrite(4, LOW);
         }
 
         break;
       /* Cooling On */
       case '3':
         if (isHeatingMode) {
-          digitalWrite(11, LOW);
+          digitalWrite(6, LOW);
           delay(2000);
         }
 
@@ -153,7 +153,7 @@ void loop() {
       /* Heating On */
       case '4':
         if (!isHeatingMode) {
-          digitalWrite(12, LOW);
+          digitalWrite(5, LOW);
           delay(2000);
         }
 
@@ -169,12 +169,12 @@ void loop() {
         isProgramRunning = false;
 
         Serial.print("<HVAC: Program Off>");
-        digitalWrite(11, LOW);
+        digitalWrite(6, LOW);
         delay(2000);
-        digitalWrite(12, LOW);
+        digitalWrite(5, LOW);
         if (isFanAuto) {
           delay(2000);
-          digitalWrite(13, LOW);
+          digitalWrite(4, LOW);
         }
         break;
       case '6':
@@ -238,60 +238,60 @@ void UpdateHvacState() {
     if (isHeatingMode) {
       if (isStandby) {
         if (isFanAuto) {
-          digitalWrite(13, LOW);
+          digitalWrite(4, LOW);
         }
 
         if (tempSet - tempInt > 2) {
           isStandby = false;
           Serial.print("<HVAC: Heating Running>");
 
-          digitalWrite(13, HIGH);
+          digitalWrite(4, HIGH);
           delay(2000);
-          digitalWrite(12, LOW);
+          digitalWrite(5, LOW);
           delay(2000);
-          digitalWrite(11, HIGH);
+          digitalWrite(6, HIGH);
         }
       } else {
         if (tempSet - tempInt <= 1) {
           isStandby = true;
           Serial.print("<HVAC: Heating Standby>");
 
-          digitalWrite(12, LOW);
+          digitalWrite(5, LOW);
           delay(2000);
-          digitalWrite(11, LOW);
+          digitalWrite(6, LOW);
           if (isFanAuto) {
             delay(2000);
-            digitalWrite(13, LOW);
+            digitalWrite(4, LOW);
           }
         }
       }
     } else {
       if (isStandby) {
         if (isFanAuto) {
-          digitalWrite(13, LOW);
+          digitalWrite(4, LOW);
         }
 
         if (tempInt - tempSet > 2) {
           isStandby = false;
           Serial.print("<HVAC: Cooling Running>");
 
-          digitalWrite(13, HIGH);
+          digitalWrite(4, HIGH);
           delay(2000);
-          digitalWrite(11, LOW);
+          digitalWrite(6, LOW);
           delay(2000);
-          digitalWrite(12, HIGH);
+          digitalWrite(5, HIGH);
         }
       } else {
         if (tempInt - tempSet <= 1) {
           isStandby = true;
           Serial.print("<HVAC: Cooling Standby>");
 
-          digitalWrite(11, LOW);
+          digitalWrite(6, LOW);
           delay(2000);
-          digitalWrite(12, LOW);
+          digitalWrite(5, LOW);
           if (isFanAuto) {
             delay(2000);
-            digitalWrite(13, LOW);
+            digitalWrite(4, LOW);
           }
         }
       }

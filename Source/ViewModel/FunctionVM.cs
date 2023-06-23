@@ -7,7 +7,7 @@ public class FunctionVM : BaseViewModel {
     private bool switchColor;
 
     public FunctionVM() {
-        Color1 = "Transparent";
+        Color1 = "DarkSlateGray";
         Color2 = "Black";
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -18,12 +18,12 @@ public class FunctionVM : BaseViewModel {
         if (e.PropertyName == "Refresh") {
             /*  Function Module */
             if (switchColor) {
-                Color1 = "Transparent";
+                Color1 = "DarkSlateGray";
                 Color2 = "Black";
                 switchColor = false;
             } else {
                 Color1 = "Black";
-                Color2 = "Transparent";
+                Color2 = "DarkSlateGray";
                 switchColor = true;
             }
         }

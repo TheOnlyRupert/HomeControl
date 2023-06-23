@@ -11,7 +11,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public static class HvacCrossPlay {
-    private static bool comPortMessage;
+    private static bool comPortMessage, intMessageSent, extMessageSent;
     private static readonly CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
 
     /* 1 = fan on, 2 = fan off, 3 = cooling on, 4 = cooling off, 5 = heat on, 6 = heat off */
@@ -21,6 +21,8 @@ public static class HvacCrossPlay {
                 ReferenceValues.SerialPortMaster.Open();
                 ReferenceValues.IsHvacComEstablished = true;
                 comPortMessage = false;
+                intMessageSent = false;
+                extMessageSent = false;
                 ReferenceValues.SerialPortMaster.Write("0");
             }
         } catch (Exception) {
@@ -77,16 +79,21 @@ public static class HvacCrossPlay {
 
                 ReferenceValues.InteriorTemp = (int)float.Parse(parts[0].Trim());
                 ReferenceValues.InteriorHumidity = (int)float.Parse(parts[1].Trim());
+                intMessageSent = false;
             } catch (FormatException) {
                 ReferenceValues.InteriorTemp = -99;
                 ReferenceValues.InteriorHumidity = -99;
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "HvacCrossPlay",
-                    Description = "Unable to get interior temp/humidity... Possibly offline?"
-                });
-                SaveDebugFile.Save();
+                if (!intMessageSent) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "HvacCrossPlay",
+                        Description = "Unable to get interior temp/humidity... Possibly offline?"
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                intMessageSent = true;
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -104,16 +111,21 @@ public static class HvacCrossPlay {
 
                 ReferenceValues.ExteriorTemp = (int)float.Parse(parts[0].Trim());
                 ReferenceValues.ExteriorHumidity = (int)float.Parse(parts[1].Trim());
+                extMessageSent = false;
             } catch (FormatException) {
                 ReferenceValues.ExteriorTemp = -99;
                 ReferenceValues.ExteriorHumidity = -99;
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "HvacCrossPlay",
-                    Description = "Unable to get exterior temp/humidity... Possibly offline?"
-                });
-                SaveDebugFile.Save();
+                if (!extMessageSent) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "HvacCrossPlay",
+                        Description = "Unable to get exterior temp/humidity... Possibly offline?"
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                extMessageSent = true;
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,

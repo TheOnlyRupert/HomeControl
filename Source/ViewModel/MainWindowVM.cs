@@ -25,7 +25,7 @@ public class MainWindowVM : BaseViewModel {
         simpleMessenger = CrossViewMessenger.Instance;
         currentDate = DateTime.Now;
         internetMessage = false;
-        OnlineColor = "Transparent";
+        OnlineColor = "Black";
 
         /* Get Debug */
         new DebugFromJson();
@@ -63,28 +63,22 @@ public class MainWindowVM : BaseViewModel {
         dispatcherTimer.Tick += dispatcherTimer_Tick;
         dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
         dispatcherTimer.Start();
-
-        AppActivityTimer activityTimer = new(360000, 360000, false);
+        
+        /* Screen Saver */
+        AppActivityTimer activityTimer = new(60000, 60000, false);
         activityTimer.OnInactive += activityTimer_OnInactive;
         activityTimer.OnActive += activityTimer_OnActive;
 
         void activityTimer_OnInactive(object sender, EventArgs e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "MainWindowVM",
-                Description = "Starting Screen Saver"
-            });
-            SaveDebugFile.Save();
             simpleMessenger.PushMessage("ScreenSaverOn", null);
             ReferenceValues.LockUI = true;
-            OnlineColor = "Black";
+            OnlineColor = internetMessage ? "DarkRed" : "Black";
         }
 
         void activityTimer_OnActive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOff", null);
             if (!ReferenceValues.IsFunnyModeActive) {
-                OnlineColor = internetMessage ? "DarkRed" : "Transparent";
+                OnlineColor = internetMessage ? "DarkRed" : "Black";
             }
         }
 
@@ -156,7 +150,6 @@ public class MainWindowVM : BaseViewModel {
             ApiStatus apiStatus = JsonSerializer.Deserialize<ApiStatus>(apiStatusString, options);
 
             if (apiStatus is { status: "OK" }) {
-                OnlineColor = "Transparent";
                 if (internetMessage) {
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,

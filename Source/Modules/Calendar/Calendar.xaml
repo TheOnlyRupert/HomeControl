@@ -63,7 +63,7 @@
         </Style>
     </Page.Resources>
 
-    <Border BorderBrush="Black" BorderThickness="1" Margin="4 4 0 4">
+    <Border BorderBrush="DarkSlateGray" BorderThickness="1" Margin="4 4 0 4">
         <Grid Margin="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -90,7 +90,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="4">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -111,7 +111,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 4">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="16 4">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -132,7 +132,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="16 4">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="16 4">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -150,7 +150,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1" Padding="4">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Border>
                                     </ControlTemplate>
@@ -210,7 +210,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -305,7 +305,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -399,7 +399,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -494,7 +494,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -588,7 +588,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -681,7 +681,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -774,7 +774,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -867,7 +867,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -960,7 +960,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1053,7 +1053,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1146,7 +1146,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1239,7 +1239,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1332,7 +1332,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1425,7 +1425,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1518,7 +1518,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1611,7 +1611,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1704,7 +1704,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1797,7 +1797,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1890,7 +1890,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -1983,7 +1983,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2076,7 +2076,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2169,7 +2169,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2262,7 +2262,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2355,7 +2355,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2448,7 +2448,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2541,7 +2541,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2634,7 +2634,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2727,7 +2727,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2820,7 +2820,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -2913,7 +2913,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3006,7 +3006,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3099,7 +3099,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3192,7 +3192,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3285,7 +3285,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3378,7 +3378,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3471,7 +3471,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3564,7 +3564,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3657,7 +3657,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3750,7 +3750,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3843,7 +3843,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -3936,7 +3936,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
@@ -4029,7 +4029,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                         </Border>
                                     </ControlTemplate>
