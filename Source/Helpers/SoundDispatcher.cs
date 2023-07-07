@@ -5,7 +5,7 @@ using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.Helpers;
 
-public class SoundDispatcher {
+public static class SoundDispatcher {
     private static MediaPlayer mplayer;
 
     public static void PlaySound() {

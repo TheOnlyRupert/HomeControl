@@ -128,7 +128,6 @@ public class ChoresVM : BaseViewModel {
             }
         } else {
             SoundToPlay = "locked";
-            SoundDispatcher soundDispatcher = new();
             SoundDispatcher.PlaySound();
         }
     }

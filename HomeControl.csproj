@@ -522,6 +522,18 @@
         <Content Include="Resources\Sounds\ding.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <Content Include="Resources\Sounds\loud1.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\loud2.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\loud3.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\loud4.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Content Include="Resources\Sounds\tap.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -593,7 +605,6 @@
         <Resource Include="Resources\Images\icons\open_tickets.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\behavior\strike_black.png"/>
         <Resource Include="Resources\Images\behavior\strike_red.png"/>
     </ItemGroup>
     <ItemGroup>

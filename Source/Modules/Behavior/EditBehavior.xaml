@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Behavior.EditBehavior" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Title="Edit Behavior" Height="640" Width="640" WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" Background="DarkSlateGray" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
+        ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
         FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
     <Grid Focusable="False">
         <Grid.RowDefinitions>
@@ -58,7 +58,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -76,7 +76,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -87,7 +87,7 @@
         </Button>
 
         <ProgressBar Grid.Column="1" Grid.Row="3" Margin="0 16" FontSize="16" HorizontalAlignment="Stretch" Value="{Binding ProgressBarChildValue}" IsIndeterminate="False"
-                     Foreground="CornflowerBlue" Maximum="5" Background="Transparent" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Stretch"/>
+                     Foreground="CornflowerBlue" Maximum="5" Background="Transparent" BorderThickness="1" BorderBrush="White" HorizontalContentAlignment="Stretch"/>
 
         <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding ProgressBarChildValueText}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"
                    Foreground="GreenYellow" Focusable="False"/>
@@ -101,7 +101,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -120,7 +120,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
@@ -139,7 +139,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>

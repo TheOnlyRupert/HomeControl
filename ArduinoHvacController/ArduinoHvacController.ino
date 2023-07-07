@@ -15,7 +15,8 @@ bool isHeatingMode;
 bool overrideDebug;
 unsigned long previousMillis;
 
-/* PINS: 4 -> Fan, 5 -> Cooling, 6 -> Heating */
+/* PINS: 4 -> Fan, 5 -> Cooling, 6 -> Heating, 8 -> Interior Temp Input */
+/* Relay 4 -> Fan, Relay 3 -> Cooling, Relay 2 -> Heating */
 void setup() {
   previousMillis = 60000;
   isFanAuto = true;
@@ -23,7 +24,7 @@ void setup() {
   isProgramRunning = false;
   overrideDebug = false;
   isStandby = true;
-  tempSet = 70;
+  tempSet = 21; //70F
   Serial.begin(9600);
   dhtInt.begin();
   dhtExt.begin();
@@ -39,30 +40,7 @@ void loop() {
   if (currentMillis - previousMillis >= 10000) {
     previousMillis = currentMillis;
 
-    humInt = dhtInt.readHumidity();
-    tempInt = dhtInt.readTemperature() * 9 / 5 + 32;
-    humExt = dhtExt.readHumidity();
-    tempExt = dhtExt.readTemperature() * 9 / 5 + 32;
-
-    char buffer[4];
-    dtostrf(tempInt, -5, 2, buffer);
-    Serial.print("<INT: ");
-    Serial.print(buffer);
-    Serial.print(",");
-
-    dtostrf(humInt, -5, 2, buffer);
-    Serial.print(buffer);
-    Serial.print(">");
-
-    dtostrf(tempExt, -5, 2, buffer);
-    Serial.print("<EXT: ");
-    Serial.print(buffer);
-    Serial.print(",");
-
-    dtostrf(humExt, -5, 2, buffer);
-    Serial.print(buffer);
-    Serial.print(">");
-
+    GetTemps();
     UpdateHvacState();
   }
 
@@ -72,7 +50,6 @@ void loop() {
     switch (readWpf) {
       /* Force Refresh */
       case '0':
-        previousMillis = 60000;
         if (isFanAuto) {
           Serial.print("<HVAC: Fan Auto>");
         } else {
@@ -189,6 +166,9 @@ void loop() {
         Serial.print("<HVAC: Override FALSE>");
 
         break;
+      case '8':
+      isHeatingMode = !isHeatingMode;
+      break;
       case 'A':
       case 'B':
       case 'C':
@@ -205,25 +185,8 @@ void loop() {
       case 'N':
       case 'O':
       case 'P':
-      case 'Q':
-      case 'R':
-      case 'S':
-      case 'T':
-      case 'U':
-      case 'V':
-      case 'W':
-      case 'X':
-      case 'Y':
-      case 'Z':
-      case '[':
-      case '\\':
-      case ']':
-      case '^':
-      case '_':
-        int index = readWpf;
-        tempSet = index - 15;
         Serial.print("<TEMP SET: ");
-        Serial.print(tempSet);
+        Serial.print(readWpf - 50);
         Serial.print(">");
 
         break;
@@ -231,6 +194,25 @@ void loop() {
 
     UpdateHvacState();
   }
+}
+
+void GetTemps() {
+  humInt = dhtInt.readHumidity();
+  tempInt = dhtInt.readTemperature();
+  humExt = dhtExt.readHumidity();
+  tempExt = dhtExt.readTemperature();
+
+  Serial.print("<INT: ");
+  Serial.print(tempInt);
+  Serial.print(",");
+  Serial.print(humInt);
+  Serial.print(">");
+
+  Serial.print("<EXT: ");
+  Serial.print(tempExt);
+  Serial.print(",");
+  Serial.print(humExt);
+  Serial.print(">");
 }
 
 void UpdateHvacState() {

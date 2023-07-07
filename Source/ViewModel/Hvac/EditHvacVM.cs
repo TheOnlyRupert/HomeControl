@@ -18,17 +18,7 @@ public class EditHvacVM : BaseViewModel {
         switch (param) {
         case "programStatus":
             if (ReferenceValues.IsHvacComEstablished) {
-                if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {
-                    ReferenceValues.JsonHvacSettings.IsProgramRunning = false;
-                    ReferenceValues.SerialPortMaster.Write("5");
-                } else {
-                    ReferenceValues.JsonHvacSettings.IsProgramRunning = true;
-                    if (ReferenceValues.IsHvacComEstablished) {
-                        char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 15);
-                        ReferenceValues.SerialPortMaster.Write(c.ToString());
-                        ReferenceValues.SerialPortMaster.Write(ReferenceValues.JsonHvacSettings.IsHeatingMode ? "4" : "3");
-                    }
-                }
+                ReferenceValues.JsonHvacSettings.IsProgramRunning = !ReferenceValues.JsonHvacSettings.IsProgramRunning;
 
                 GetButtonColors();
             }
@@ -36,13 +26,7 @@ public class EditHvacVM : BaseViewModel {
             break;
         case "fanStatus":
             if (ReferenceValues.IsHvacComEstablished) {
-                if (ReferenceValues.JsonHvacSettings.IsFanAuto) {
-                    ReferenceValues.JsonHvacSettings.IsFanAuto = false;
-                    ReferenceValues.SerialPortMaster.Write("1");
-                } else {
-                    ReferenceValues.JsonHvacSettings.IsFanAuto = true;
-                    ReferenceValues.SerialPortMaster.Write("2");
-                }
+                ReferenceValues.JsonHvacSettings.IsFanAuto = !ReferenceValues.JsonHvacSettings.IsFanAuto;
 
                 GetButtonColors();
             }
@@ -51,36 +35,25 @@ public class EditHvacVM : BaseViewModel {
         case "heatingCoolingStatus":
             if (ReferenceValues.IsHvacComEstablished) {
                 ReferenceValues.JsonHvacSettings.IsHeatingMode = !ReferenceValues.JsonHvacSettings.IsHeatingMode;
-
-                GetButtonColors();
             }
 
             break;
         case "subTemp":
-            if (ReferenceValues.JsonHvacSettings.TemperatureSet > 50) {
+            if (ReferenceValues.JsonHvacSettings.TemperatureSet > 15) {
                 ReferenceValues.JsonHvacSettings.TemperatureSet--;
-
-                if (ReferenceValues.IsHvacComEstablished) {
-                    char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 15);
-                    ReferenceValues.SerialPortMaster.Write(c.ToString());
-                }
             }
 
 
             break;
         case "addTemp":
-            if (ReferenceValues.JsonHvacSettings.TemperatureSet < 80) {
+            if (ReferenceValues.JsonHvacSettings.TemperatureSet < 30) {
                 ReferenceValues.JsonHvacSettings.TemperatureSet++;
-
-                if (ReferenceValues.IsHvacComEstablished) {
-                    char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 15);
-                    ReferenceValues.SerialPortMaster.Write(c.ToString());
-                }
             }
 
             break;
         }
 
+        GetButtonColors();
         TemperatureSet = ReferenceValues.JsonHvacSettings.TemperatureSet + "°";
         HvacCrossPlay.SaveJson();
     }

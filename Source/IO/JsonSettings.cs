@@ -44,4 +44,5 @@ public class JsonSettings {
     public string EmergencyContact2Phone2 { get; set; }
     public string AlarmCode { get; set; }
     public string ComPort { get; set; }
+    public bool IsImperialMode { get; set; }
 }

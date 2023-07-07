@@ -63,7 +63,7 @@ public class MainWindowVM : BaseViewModel {
         dispatcherTimer.Tick += dispatcherTimer_Tick;
         dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
         dispatcherTimer.Start();
-        
+
         /* Screen Saver */
         AppActivityTimer activityTimer = new(60000, 60000, false);
         activityTimer.OnInactive += activityTimer_OnInactive;
@@ -161,6 +161,7 @@ public class MainWindowVM : BaseViewModel {
                 }
 
                 internetMessage = false;
+                OnlineColor = "Black";
             } else {
                 LostInternet();
             }
