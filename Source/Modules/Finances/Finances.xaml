@@ -10,7 +10,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" Source="../../../Resources/Images/icons/money.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="24"/>
+            <!--Image Grid.Column="0" Source="" VerticalAlignment="Top" HorizontalAlignment="Left" Height="24"/-->
 
             <StackPanel Grid.Column="0" HorizontalAlignment="Right">
                 <TextBlock Text="Income" FontSize="24" Foreground="White"/>

@@ -18,14 +18,27 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Frame Grid.Row="0" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Row="1">
+                        <Frame Grid.Column="0" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
+                        <Frame Grid.Column="1" Source="Source/Modules/Password.xaml" Focusable="False"/>
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -34,6 +47,8 @@
                         <Frame Grid.Column="0" Source="Source/Modules/Notes.xaml" Focusable="False"/>
                         <Frame Grid.Column="1" Source="Source/Modules/Games/Games.xaml" Focusable="False"/>
                     </Grid>
+
+                    <Frame Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
                 </Grid>
 
                 <Frame Grid.Column="0" Grid.Row="1" Source="Source/Modules/Calendar/Calendar.xaml" Focusable="False"/>
@@ -41,41 +56,13 @@
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Weather/Weather.xaml" Focusable="False"/>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Frame Grid.Column="0" Source="Source/Modules/Chores/Chores.xaml" Focusable="False"/>
-
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="2*"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
-                        <Frame Name="MainFocusItem" Grid.Column="0" Grid.Row="1" Source="Source/Modules/Password.xaml" Focusable="True"/>
-                        <Frame Grid.Column="1" Grid.Row="1" Source="Source/Modules/Function.xaml" Focusable="False"/>
-                    </Grid>
-                </Grid>
-
-                <Grid Grid.Row="2">
-                    <Frame Source="Source/Modules/Behavior/Behavior.xaml" Focusable="False"/>
-                </Grid>
+                <Frame Grid.Row="1" Source="Source/Modules/Behavior/Behavior.xaml" Focusable="False"/>
             </Grid>
         </Grid>
     </Grid>

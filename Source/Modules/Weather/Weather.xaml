@@ -8,6 +8,8 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
+            <Image Grid.Column="0" Grid.Row="0" Source="../../../Resources/Images/icons/clock.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24"/>
+
             <Grid Grid.Row="0" Margin="0 0 0 4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*"/>
@@ -89,8 +91,8 @@
 
                             <TextBlock Grid.Column="0" Text="Wind" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" Foreground="CornflowerBlue"/>
 
-                            <Image Grid.Column="1" HorizontalAlignment="Center" Stretch="Uniform" Source="../../../Resources/Images/weather/wind.gif" VerticalAlignment="Center"
-                                   RenderTransformOrigin="0.5, 0.5" Margin="8 0">
+                            <Image Grid.Column="1" HorizontalAlignment="Center" Stretch="Uniform" gif:ImageBehavior.AnimatedSource="../../../Resources/Images/weather/wind.gif"
+                                   VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5" Margin="8 0">
                                 <Image.RenderTransform>
                                     <RotateTransform Angle="{Binding CurrentWindDirectionRotation}"/>
                                 </Image.RenderTransform>

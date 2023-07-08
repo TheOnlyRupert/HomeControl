@@ -3,7 +3,11 @@
 namespace HomeControl.Source.IO;
 
 public class JsonChores {
-    public ObservableCollection<ChoreDetails> choreList { get; set; }
+    public ObservableCollection<ChoreDetails> user1ChoreList { get; set; }
+    public ObservableCollection<ChoreDetails> user2ChoreList { get; set; }
+    public ObservableCollection<ChoreDetails> user3ChoreList { get; set; }
+    public ObservableCollection<ChoreDetails> user4ChoreList { get; set; }
+    public ObservableCollection<ChoreDetails> user5ChoreList { get; set; }
 }
 
 public class ChoreDetails {

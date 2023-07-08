@@ -234,7 +234,7 @@ void UpdateHvacState() {
           digitalWrite(6, HIGH);
         }
       } else {
-        if (tempSet - tempInt <= 1) {
+        if (tempSet - tempInt <= 0) {
           isStandby = true;
           Serial.print("<HVAC: Heating Standby>");
 
@@ -264,7 +264,7 @@ void UpdateHvacState() {
           digitalWrite(5, HIGH);
         }
       } else {
-        if (tempInt - tempSet <= 1) {
+        if (tempInt - tempSet <= 0) {
           isStandby = true;
           Serial.print("<HVAC: Cooling Standby>");
 

@@ -63,10 +63,10 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         case 2:
             ChildName = ReferenceValues.JsonMasterSettings.User3Name;
-            stars = ReferenceValues.JsonBehaviorMaster.Child1Stars;
-            strikes = ReferenceValues.JsonBehaviorMaster.Child1Strikes;
-            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child1Progress;
-            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.Child1Progress + "/5";
+            stars = ReferenceValues.JsonBehaviorMaster.User3Stars;
+            strikes = ReferenceValues.JsonBehaviorMaster.User3Strikes;
+            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User3Progress;
+            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User3Progress + "/5";
             try {
                 Uri uri3 = new(ReferenceValues.FILE_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri3);
@@ -83,10 +83,10 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         case 3:
             ChildName = ReferenceValues.JsonMasterSettings.User4Name;
-            stars = ReferenceValues.JsonBehaviorMaster.Child2Stars;
-            strikes = ReferenceValues.JsonBehaviorMaster.Child2Strikes;
-            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child2Progress;
-            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.Child2Progress + "/5";
+            stars = ReferenceValues.JsonBehaviorMaster.User4Stars;
+            strikes = ReferenceValues.JsonBehaviorMaster.User4Strikes;
+            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User4Progress;
+            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User4Progress + "/5";
             try {
                 Uri uri4 = new(ReferenceValues.FILE_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri4);
@@ -103,10 +103,10 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         case 4:
             ChildName = ReferenceValues.JsonMasterSettings.User5Name;
-            stars = ReferenceValues.JsonBehaviorMaster.Child3Stars;
-            strikes = ReferenceValues.JsonBehaviorMaster.Child3Strikes;
-            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.Child3Progress;
-            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.Child3Progress + "/5";
+            stars = ReferenceValues.JsonBehaviorMaster.User5Stars;
+            strikes = ReferenceValues.JsonBehaviorMaster.User5Strikes;
+            ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User5Progress;
+            ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User5Progress + "/5";
             try {
                 Uri uri5 = new(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri5);
@@ -135,9 +135,9 @@ public class EditBehaviorVM : BaseViewModel {
         if (e.PropertyName == "DateChanged") {
             ReferenceValues.JsonBehaviorMaster.User1Strikes = 0;
             ReferenceValues.JsonBehaviorMaster.User2Strikes = 0;
-            ReferenceValues.JsonBehaviorMaster.Child1Strikes = 0;
-            ReferenceValues.JsonBehaviorMaster.Child2Strikes = 0;
-            ReferenceValues.JsonBehaviorMaster.Child3Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.User3Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.User4Strikes = 0;
+            ReferenceValues.JsonBehaviorMaster.User5Strikes = 0;
             strikes = 0;
             RefreshBehavior();
         }
@@ -209,19 +209,19 @@ public class EditBehaviorVM : BaseViewModel {
             ReferenceValues.JsonBehaviorMaster.User2Progress = ProgressBarChildValue;
             break;
         case 2:
-            ReferenceValues.JsonBehaviorMaster.Child1Stars = stars;
-            ReferenceValues.JsonBehaviorMaster.Child1Strikes = strikes;
-            ReferenceValues.JsonBehaviorMaster.Child1Progress = ProgressBarChildValue;
+            ReferenceValues.JsonBehaviorMaster.User3Stars = stars;
+            ReferenceValues.JsonBehaviorMaster.User3Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.User3Progress = ProgressBarChildValue;
             break;
         case 3:
-            ReferenceValues.JsonBehaviorMaster.Child2Stars = stars;
-            ReferenceValues.JsonBehaviorMaster.Child2Strikes = strikes;
-            ReferenceValues.JsonBehaviorMaster.Child2Progress = ProgressBarChildValue;
+            ReferenceValues.JsonBehaviorMaster.User4Stars = stars;
+            ReferenceValues.JsonBehaviorMaster.User4Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.User4Progress = ProgressBarChildValue;
             break;
         case 4:
-            ReferenceValues.JsonBehaviorMaster.Child3Stars = stars;
-            ReferenceValues.JsonBehaviorMaster.Child3Strikes = strikes;
-            ReferenceValues.JsonBehaviorMaster.Child3Progress = ProgressBarChildValue;
+            ReferenceValues.JsonBehaviorMaster.User5Stars = stars;
+            ReferenceValues.JsonBehaviorMaster.User5Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.User5Progress = ProgressBarChildValue;
             break;
         }
 

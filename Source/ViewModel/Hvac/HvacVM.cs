@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules.Hvac;
 using HomeControl.Source.Reference;
@@ -8,14 +9,14 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public class HvacVM : BaseViewModel {
-    private string _tempInside, _heatingCoolingText, _tempAdjusted, _hvacIcon, _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor,
-        _tempInsideColor, _tempAdjustedColor, _fanStatusColor, _heatingCoolingStatusColor;
+    private string _tempInside, _heatingCoolingText, _tempAdjusted, _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor,
+        _tempInsideColor, _tempAdjustedColor, _fanStatusColor, _heatingCoolingStatusColor, _intHumidity;
 
     public HvacVM() {
         ReferenceValues.JsonHvacSettings.IsFanAuto = true;
         ReferenceValues.JsonHvacSettings.IsProgramRunning = false;
         ReferenceValues.JsonHvacSettings.IsHeatingMode = false;
-        if (ReferenceValues.JsonHvacSettings.TemperatureSet == 21) {
+        if (ReferenceValues.JsonHvacSettings.TemperatureSet == 0) {
             ReferenceValues.JsonHvacSettings.TemperatureSet = 26;
         }
 
@@ -47,27 +48,38 @@ public class HvacVM : BaseViewModel {
             HeatingCoolingText = "Adjust To";
             HeatingCoolingStatus = "Offline";
             HeatingCoolingStatusColor = "Red";
+            IntHumidity = "Humidity: Offline";
             return;
         }
 
         TempAdjusted = ReferenceValues.JsonHvacSettings.TemperatureSet + "°";
-        TempInside = ReferenceValues.InteriorTemp + "°";
         TempAdjustedColor = "White";
+
+        if (ReferenceValues.InteriorTemp == -99) {
+            TempInside = "??";
+            TempInsideColor = "Red";
+        } else {
+            TempInside = ReferenceValues.InteriorTemp + "°";
+            TempInsideColor = "White";
+        }
+
+        if (ReferenceValues.InteriorHumidity == -99) {
+            IntHumidity = "??";
+        } else {
+            IntHumidity = ReferenceValues.InteriorHumidity + "%";
+        }
 
         if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {
             if (ReferenceValues.JsonHvacSettings.IsStandby) {
                 ProgramStatus = "Standby";
                 ProgramStatusColor = "Yellow";
-                HvacIcon = "../../../Resources/Images/hvac/hvac.gif";
             } else {
                 ProgramStatus = "Running";
                 ProgramStatusColor = "Green";
-                HvacIcon = "../../../Resources/Images/hvac/hvac.gif";
             }
         } else {
             ProgramStatus = "Off";
             ProgramStatusColor = "White";
-            HvacIcon = "../../../Resources/Images/hvac/hvac.gif";
         }
 
         if (ReferenceValues.JsonHvacSettings.IsFanAuto) {
@@ -97,7 +109,6 @@ public class HvacVM : BaseViewModel {
                 bool isProgramRunning = ReferenceValues.JsonHvacSettings.IsProgramRunning;
                 bool isHeatingMode = ReferenceValues.JsonHvacSettings.IsHeatingMode;
                 int temp = ReferenceValues.JsonHvacSettings.TemperatureSet;
-
 
                 EditHvac editHvac = new();
                 editHvac.ShowDialog();
@@ -156,6 +167,9 @@ public class HvacVM : BaseViewModel {
                 }
 
                 GetButtonColors();
+            } else {
+                ReferenceValues.SoundToPlay = "offline";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -204,14 +218,6 @@ public class HvacVM : BaseViewModel {
         }
     }
 
-    public string HvacIcon {
-        get => _hvacIcon;
-        set {
-            _hvacIcon = value;
-            RaisePropertyChangedEvent("HvacIcon");
-        }
-    }
-
     public string ProgramStatus {
         get => _programStatus;
         set {
@@ -257,6 +263,14 @@ public class HvacVM : BaseViewModel {
         set {
             _heatingCoolingStatusColor = value;
             RaisePropertyChangedEvent("HeatingCoolingStatusColor");
+        }
+    }
+
+    public string IntHumidity {
+        get => _intHumidity;
+        set {
+            _intHumidity = value;
+            RaisePropertyChangedEvent("IntHumidity");
         }
     }
 
