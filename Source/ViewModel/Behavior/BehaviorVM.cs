@@ -470,7 +470,7 @@ public class BehaviorVM : BaseViewModel {
         User1ChoresCompletedDayProgressText = User1ChoresCompletedDayProgressValue + "%";
         User1ChoresCompletedQuarterProgressValue = 100;
         User1ChoresCompletedQuarterProgressText = User1ChoresCompletedQuarterProgressValue + "%";
-        
+
         User2ChoresCompletedWeekProgressValue = 10;
         User2ChoresCompletedWeekProgressText = User2ChoresCompletedWeekProgressValue + "%";
         User2ChoresCompletedMonthProgressValue = 25;
@@ -479,7 +479,7 @@ public class BehaviorVM : BaseViewModel {
         User2ChoresCompletedDayProgressText = User2ChoresCompletedDayProgressValue + "%";
         User2ChoresCompletedQuarterProgressValue = 100;
         User2ChoresCompletedQuarterProgressText = User2ChoresCompletedQuarterProgressValue + "%";
-        
+
         User3ChoresCompletedWeekProgressValue = 10;
         User3ChoresCompletedWeekProgressText = User3ChoresCompletedWeekProgressValue + "%";
         User3ChoresCompletedMonthProgressValue = 25;
@@ -497,7 +497,7 @@ public class BehaviorVM : BaseViewModel {
         User4ChoresCompletedDayProgressText = User4ChoresCompletedDayProgressValue + "%";
         User4ChoresCompletedQuarterProgressValue = 100;
         User4ChoresCompletedQuarterProgressText = User4ChoresCompletedQuarterProgressValue + "%";
-        
+
         User5ChoresCompletedWeekProgressValue = 10;
         User5ChoresCompletedWeekProgressText = User5ChoresCompletedWeekProgressValue + "%";
         User5ChoresCompletedMonthProgressValue = 25;
@@ -511,22 +511,22 @@ public class BehaviorVM : BaseViewModel {
         User1ChoresCompletedWeekProgressColor = User1ChoresCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
         User1ChoresCompletedMonthProgressColor = User1ChoresCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
         User1ChoresCompletedQuarterProgressColor = User1ChoresCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-        
+
         User2ChoresCompletedDayProgressColor = User2ChoresCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
         User2ChoresCompletedWeekProgressColor = User2ChoresCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
         User2ChoresCompletedMonthProgressColor = User2ChoresCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
         User2ChoresCompletedQuarterProgressColor = User2ChoresCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-        
+
         User3ChoresCompletedDayProgressColor = User3ChoresCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
         User3ChoresCompletedWeekProgressColor = User3ChoresCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
         User3ChoresCompletedMonthProgressColor = User3ChoresCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
         User3ChoresCompletedQuarterProgressColor = User3ChoresCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-        
+
         User4ChoresCompletedDayProgressColor = User4ChoresCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
         User4ChoresCompletedWeekProgressColor = User4ChoresCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
         User4ChoresCompletedMonthProgressColor = User4ChoresCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
         User4ChoresCompletedQuarterProgressColor = User4ChoresCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-        
+
         User5ChoresCompletedDayProgressColor = User5ChoresCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
         User5ChoresCompletedWeekProgressColor = User5ChoresCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
         User5ChoresCompletedMonthProgressColor = User5ChoresCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
@@ -541,7 +541,7 @@ public class BehaviorVM : BaseViewModel {
         if (RemainingDay == "1 Hours") {
             RemainingDay = "1 Hour";
         }
-        
+
         /* Week */
         dateNext = DateTime.Now;
         if (dateNext.DayOfWeek == DayOfWeek.Sunday) {
@@ -562,7 +562,7 @@ public class BehaviorVM : BaseViewModel {
         if (RemainingWeek == "1 Hours") {
             RemainingWeek = "1 Hour";
         }
-        
+
         /* Month */
         dateNext = DateTime.Now;
         while (DateTime.Now.Month == dateNext.Month) {
@@ -616,7 +616,7 @@ public class BehaviorVM : BaseViewModel {
 
             break;
         }
-        
+
         RemainingQuarter = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
 
         if (RemainingQuarter == "1 Days") {
@@ -1552,7 +1552,7 @@ public class BehaviorVM : BaseViewModel {
             RaisePropertyChangedEvent("User1ChoresCompletedQuarterProgressColor");
         }
     }
-    
+
     public string User2ChoresCompletedDayProgressColor {
         get => _user2ChoresCompletedDayProgressColor;
         set {
@@ -1616,7 +1616,7 @@ public class BehaviorVM : BaseViewModel {
             RaisePropertyChangedEvent("User3ChoresCompletedQuarterProgressColor");
         }
     }
-    
+
     public string User4ChoresCompletedDayProgressColor {
         get => _user4ChoresCompletedDayProgressColor;
         set {

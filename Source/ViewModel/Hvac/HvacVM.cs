@@ -64,9 +64,9 @@ public class HvacVM : BaseViewModel {
         }
 
         if (ReferenceValues.InteriorHumidity == -99) {
-            IntHumidity = "??";
+            IntHumidity = "Humidity: ??";
         } else {
-            IntHumidity = ReferenceValues.InteriorHumidity + "%";
+            IntHumidity = "Humidity: " + ReferenceValues.InteriorHumidity + "%";
         }
 
         if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {

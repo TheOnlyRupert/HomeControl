@@ -73,8 +73,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source="{Binding ImageUser1}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="0" Text="{Binding User1Name}" Foreground="White" FontSize="18" HorizontalAlignment="Right" Margin="8 0"/>
+                    <Image Grid.Row="0" Source="{Binding ImageUser1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Image Grid.Row="0" Source="../../../Resources/Images/behavior/crown.png" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16 -32 16 0"/>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -105,7 +105,7 @@
                     </Grid>
 
 
-                    <TextBlock Grid.Row="3" Text="{Binding User1CashAvailable}" FontSize="24" Foreground="{Binding User1CashAvailableTextColor}" HorizontalAlignment="Center"
+                    <TextBlock Grid.Row="3" Text="{Binding User1CashAvailable}" FontSize="32" Foreground="{Binding User1CashAvailableTextColor}" HorizontalAlignment="Center"
                                Margin="0 4"/>
 
                     <Grid Grid.Row="4" Margin="4">
@@ -115,8 +115,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" FontSize="16" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User1ChoresCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User1ChoresCompletedDayProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                        <ProgressBar Grid.Row="1" Value="{Binding User1ChoresCompletedDayProgressValue}" IsIndeterminate="False"
+                                     Foreground="{Binding User1ChoresCompletedDayProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
                         <TextBlock Grid.Row="1" Text="{Binding User1ChoresCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
@@ -128,8 +128,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" FontSize="16"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User1ChoresCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User1ChoresCompletedWeekProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                        <ProgressBar Grid.Row="1" Value="{Binding User1ChoresCompletedWeekProgressValue}" IsIndeterminate="False"
+                                     Foreground="{Binding User1ChoresCompletedWeekProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
                         <TextBlock Grid.Row="1" Text="{Binding User1ChoresCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
@@ -140,8 +140,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="16" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User1ChoresCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User1ChoresCompletedMonthProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                        <ProgressBar Grid.Row="1" Value="{Binding User1ChoresCompletedMonthProgressValue}" IsIndeterminate="False"
+                                     Foreground="{Binding User1ChoresCompletedMonthProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
                         <TextBlock Grid.Row="1" Text="{Binding User1ChoresCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
@@ -152,8 +152,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="16" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User1ChoresCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User1ChoresCompletedQuarterProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                        <ProgressBar Grid.Row="1" Value="{Binding User1ChoresCompletedQuarterProgressValue}" IsIndeterminate="False"
+                                     Foreground="{Binding User1ChoresCompletedQuarterProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
                         <TextBlock Grid.Row="1" Text="{Binding User1ChoresCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
@@ -187,8 +187,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source="{Binding ImageUser2}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="0" Text="{Binding User2Name}" Foreground="White" FontSize="18" HorizontalAlignment="Right" Margin="8 0"/>
+                    <Image Grid.Row="0" Source="{Binding ImageUser2}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -218,7 +217,7 @@
                         <Image Grid.Column="2" Source="{Binding User2Strike3}"/>
                     </Grid>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User2CashAvailable}" FontSize="24" Foreground="{Binding User2CashAvailableTextColor}" HorizontalAlignment="Center"
+                    <TextBlock Grid.Row="3" Text="{Binding User2CashAvailable}" FontSize="32" Foreground="{Binding User2CashAvailableTextColor}" HorizontalAlignment="Center"
                                Margin="0 4"/>
 
                     <Grid Grid.Row="4" Margin="4">
@@ -228,8 +227,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" FontSize="16" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User2ChoresCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User2ChoresCompletedDayProgressColor}" 
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                        <ProgressBar Grid.Row="1" Value="{Binding User2ChoresCompletedDayProgressValue}" IsIndeterminate="False"
+                                     Foreground="{Binding User2ChoresCompletedDayProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
                         <TextBlock Grid.Row="1" Text="{Binding User2ChoresCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
@@ -241,8 +240,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" FontSize="16"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User2ChoresCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User2ChoresCompletedWeekProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                        <ProgressBar Grid.Row="1" Value="{Binding User2ChoresCompletedWeekProgressValue}" IsIndeterminate="False"
+                                     Foreground="{Binding User2ChoresCompletedWeekProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
                         <TextBlock Grid.Row="1" Text="{Binding User2ChoresCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
@@ -253,8 +252,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="16" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User2ChoresCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User2ChoresCompletedMonthProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                        <ProgressBar Grid.Row="1" Value="{Binding User2ChoresCompletedMonthProgressValue}" IsIndeterminate="False"
+                                     Foreground="{Binding User2ChoresCompletedMonthProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
                         <TextBlock Grid.Row="1" Text="{Binding User2ChoresCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     </Grid>
@@ -266,8 +265,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="16" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User2ChoresCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User2ChoresCompletedQuarterProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                        <ProgressBar Grid.Row="1" Value="{Binding User2ChoresCompletedQuarterProgressValue}" IsIndeterminate="False"
+                                     Foreground="{Binding User2ChoresCompletedQuarterProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
                         <TextBlock Grid.Row="1" Text="{Binding User2ChoresCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
@@ -301,8 +300,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source="{Binding ImageUser3}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="0" Text="{Binding User3Name}" Foreground="White" FontSize="18" HorizontalAlignment="Right" Margin="8 0"/>
+                    <Image Grid.Row="0" Source="{Binding ImageUser3}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -332,7 +330,7 @@
                         <Image Grid.Column="2" Source="{Binding User3Strike3}"/>
                     </Grid>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User3CashAvailable}" FontSize="24" Foreground="{Binding User3CashAvailableTextColor}" HorizontalAlignment="Center"
+                    <TextBlock Grid.Row="3" Text="{Binding User3CashAvailable}" FontSize="32" Foreground="{Binding User3CashAvailableTextColor}" HorizontalAlignment="Center"
                                Margin="0 4"/>
 
                     <Grid Grid.Row="4" Margin="4">
@@ -415,8 +413,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source="{Binding ImageUser4}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="0" Text="{Binding User4Name}" Foreground="White" FontSize="18" HorizontalAlignment="Right" Margin="8 0"/>
+                    <Image Grid.Row="0" Source="{Binding ImageUser4}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -446,7 +443,7 @@
                         <Image Grid.Column="2" Source="{Binding User4Strike3}"/>
                     </Grid>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User4CashAvailable}" FontSize="24" Foreground="{Binding User4CashAvailableTextColor}" HorizontalAlignment="Center"
+                    <TextBlock Grid.Row="3" Text="{Binding User4CashAvailable}" FontSize="32" Foreground="{Binding User4CashAvailableTextColor}" HorizontalAlignment="Center"
                                Margin="0 4"/>
 
                     <Grid Grid.Row="4" Margin="4">
@@ -529,8 +526,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source="{Binding ImageUser5}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="0" Text="{Binding User5Name}" Foreground="White" FontSize="18" HorizontalAlignment="Right" Margin="8 0"/>
+                    <Image Grid.Row="0" Source="{Binding ImageUser5}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -560,7 +556,7 @@
                         <Image Grid.Column="2" Source="{Binding User5Strike3}"/>
                     </Grid>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User5CashAvailable}" FontSize="24" Foreground="{Binding User5CashAvailableTextColor}" HorizontalAlignment="Center"
+                    <TextBlock Grid.Row="3" Text="{Binding User5CashAvailable}" FontSize="32" Foreground="{Binding User5CashAvailableTextColor}" HorizontalAlignment="Center"
                                Margin="0 4"/>
 
                     <Grid Grid.Row="4" Margin="4">

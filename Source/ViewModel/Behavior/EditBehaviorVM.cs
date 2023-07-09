@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
+using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -272,6 +273,9 @@ public class EditBehaviorVM : BaseViewModel {
                             }
                         }
                     }
+                } else {
+                    ReferenceValues.SoundToPlay = "unable";
+                    SoundDispatcher.PlaySound();
                 }
             }
 
@@ -316,6 +320,9 @@ public class EditBehaviorVM : BaseViewModel {
                         });
                         SaveDebugFile.Save();
                     }
+                } else {
+                    ReferenceValues.SoundToPlay = "unable";
+                    SoundDispatcher.PlaySound();
                 }
             }
 
@@ -353,6 +360,9 @@ public class EditBehaviorVM : BaseViewModel {
                     });
                     SaveDebugFile.Save();
                 }
+            } else {
+                ReferenceValues.SoundToPlay = "unable";
+                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -370,6 +380,11 @@ public class EditBehaviorVM : BaseViewModel {
             RewardButtonVisibility = "HIDDEN";
             ReferenceValues.SoundToPlay = "reward";
             SoundDispatcher.PlaySound();
+            break;
+        case "daily":
+            TasksDaily tasksDaily = new();
+            tasksDaily.ShowDialog();
+            tasksDaily.Close();
             break;
         }
 

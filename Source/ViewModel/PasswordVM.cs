@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -55,6 +56,9 @@ public class PasswordVM : BaseViewModel {
                 ReferenceValues.LockUI = false;
                 Image = "./../../Resources/Images/icons/key_unlocked.png";
             }
+
+            ReferenceValues.SoundToPlay = "unlock";
+            SoundDispatcher.PlaySound();
 
             break;
         }

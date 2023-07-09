@@ -198,6 +198,7 @@ public static class HvacCrossPlay {
             SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Heating Running>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = false;
+            ReferenceValues.JsonHvacSettings.IsProgramRunning = true;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -207,6 +208,7 @@ public static class HvacCrossPlay {
             SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Heating Standby>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = true;
+            ReferenceValues.JsonHvacSettings.IsProgramRunning = true;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -216,6 +218,7 @@ public static class HvacCrossPlay {
             SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Cooling Running>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = false;
+            ReferenceValues.JsonHvacSettings.IsProgramRunning = true;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -225,6 +228,7 @@ public static class HvacCrossPlay {
             SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Cooling Standby>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = true;
+            ReferenceValues.JsonHvacSettings.IsProgramRunning = true;
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
