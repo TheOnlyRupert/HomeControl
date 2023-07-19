@@ -1,17 +1,50 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace HomeControl.Source.IO;
 
-public class JsonChores {
-    public ObservableCollection<ChoreDetails> user1ChoreList { get; set; }
-    public ObservableCollection<ChoreDetails> user2ChoreList { get; set; }
-    public ObservableCollection<ChoreDetails> user3ChoreList { get; set; }
-    public ObservableCollection<ChoreDetails> user4ChoreList { get; set; }
-    public ObservableCollection<ChoreDetails> user5ChoreList { get; set; }
+public class JsonTasks {
+    public JsonTasksDaily JsonTasksDaily { get; set; }
+    public JsonTasksWeekly JsonTasksWeekly { get; set; }
+    public JsonTasksMonthly JsonTasksMonthly { get; set; }
+    public JsonTasksQuarterly JsonTasksQuarterly { get; set; }
 }
 
-public class ChoreDetails {
-    public string Name { get; set; }
-    public bool IsComplete { get; set; }
-    public string Date { get; set; }
+public class JsonTasksDaily {
+    public ObservableCollection<Task> TaskListDailyUser1 { get; set; }
+    public ObservableCollection<Task> TaskListDailyUser2 { get; set; }
+    public ObservableCollection<Task> TaskListDailyUser3 { get; set; }
+    public ObservableCollection<Task> TaskListDailyUser4 { get; set; }
+    public ObservableCollection<Task> TaskListDailyUser5 { get; set; }
+}
+
+public class JsonTasksWeekly {
+    public ObservableCollection<Task> TaskListWeeklyUser1 { get; set; }
+    public ObservableCollection<Task> TaskListWeeklyUser2 { get; set; }
+    public ObservableCollection<Task> TaskListWeeklyUser3 { get; set; }
+    public ObservableCollection<Task> TaskListWeeklyUser4 { get; set; }
+    public ObservableCollection<Task> TaskListWeeklyUser5 { get; set; }
+}
+
+public class JsonTasksMonthly {
+    public ObservableCollection<Task> TaskListMonthlyUser1 { get; set; }
+    public ObservableCollection<Task> TaskListMonthlyUser2 { get; set; }
+    public ObservableCollection<Task> TaskListMonthlyUser3 { get; set; }
+    public ObservableCollection<Task> TaskListMonthlyUser4 { get; set; }
+    public ObservableCollection<Task> TaskListMonthlyUser5 { get; set; }
+}
+
+public class JsonTasksQuarterly {
+    public ObservableCollection<Task> TaskListQuarterlyUser1 { get; set; }
+    public ObservableCollection<Task> TaskListQuarterlyUser2 { get; set; }
+    public ObservableCollection<Task> TaskListQuarterlyUser3 { get; set; }
+    public ObservableCollection<Task> TaskListQuarterlyUser4 { get; set; }
+    public ObservableCollection<Task> TaskListQuarterlyUser5 { get; set; }
+}
+
+public class Task {
+    public string taskName { get; set; }
+    public string imageName { get; set; }
+    public bool isCompleted { get; set; }
+    public DateTime dateTimeCompleted { get; set; }
 }

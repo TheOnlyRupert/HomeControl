@@ -2,68 +2,70 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         Icon="{Binding IconImage}" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" WindowState="Maximized" WindowStyle="None"
         FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
-    <Grid Focusable="False">
-        <Canvas Name="canvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    <Border BorderBrush="{Binding OnlineColor}" BorderThickness="4">
+        <Grid Focusable="False">
+            <Canvas Name="canvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-        <Grid Focusable="False" Background="{Binding OnlineColor}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <Grid Focusable="False" Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" Grid.Column="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
+                <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid Grid.Row="0" Grid.Column="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Frame Grid.Column="0" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
-                        <Frame Grid.Column="1" Source="Source/Modules/Password.xaml" Focusable="False"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Column="0" Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Column="0" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
+                            <Frame Grid.Column="1" Source="Source/Modules/Password.xaml" Focusable="False"/>
+                        </Grid>
+
+                        <Grid Grid.Column="0" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Column="0" Source="Source/Modules/Notes.xaml" Focusable="False"/>
+                            <Frame Grid.Column="1" Source="Source/Modules/Games/Games.xaml" Focusable="False"/>
+                        </Grid>
+
+                        <Frame Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
                     </Grid>
 
-                    <Grid Grid.Column="0" Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Frame Grid.Column="0" Source="Source/Modules/Notes.xaml" Focusable="False"/>
-                        <Frame Grid.Column="1" Source="Source/Modules/Games/Games.xaml" Focusable="False"/>
-                    </Grid>
-
-                    <Frame Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
+                    <Frame Grid.Column="0" Grid.Row="1" Source="Source/Modules/Calendar/Calendar.xaml" Focusable="False"/>
                 </Grid>
 
-                <Frame Grid.Column="0" Grid.Row="1" Source="Source/Modules/Calendar/Calendar.xaml" Focusable="False"/>
-            </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                    <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Weather/Weather.xaml" Focusable="False"/>
 
-                <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Weather/Weather.xaml" Focusable="False"/>
-
-                <Frame Grid.Row="1" Source="Source/Modules/Behavior/Behavior.xaml" Focusable="False"/>
+                    <Frame Grid.Row="1" Source="Source/Modules/Behavior/Behavior.xaml" Focusable="False"/>
+                </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Window>

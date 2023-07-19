@@ -41,8 +41,8 @@
                         <RowDefinition Height=".8*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Chore Funds" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
-                    <TextBlock Grid.Row="1" Text="{Binding AvailableFunds}" Foreground="{Binding AvailableFundsTextColor}" HorizontalAlignment="Center" FontSize="32"/>
+                    <TextBlock Grid.Row="0" Text="Task Funds" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+                    <TextBlock Grid.Row="1" Text="{Binding CashAvailable}" Foreground="{Binding CashAvailableColor}" HorizontalAlignment="Center" FontSize="32"/>
                 </Grid>
 
                 <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="1" ItemsSource="{Binding FinanceList}" Foreground="White"
@@ -330,13 +330,73 @@
 
             <Grid Grid.Column="2" Margin="8">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Chore Overview" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
+                <TextBlock Grid.Row="0" Text="Task Overview" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
 
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedDay}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding TasksCompletedDayProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" Foreground="White" FontSize="16"/>
+                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedWeek}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding TasksCompletedWeekProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="16" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedMonth}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding TasksCompletedMonthProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="4" Margin="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="16" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedQuarter}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedQuarterProgressValue}" IsIndeterminate="False"
+                                 Foreground="{Binding TasksCompletedQuarterProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>

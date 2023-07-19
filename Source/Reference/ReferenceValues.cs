@@ -59,7 +59,6 @@ public static class ReferenceValues {
     public static bool LockUI;
 
     public static SerialPort SerialPortMaster { get; set; }
-    public static bool IsFunnyModeActive { get; set; }
 
     public static int InteriorTemp { get; set; }
     public static int InteriorHumidity { get; set; }
@@ -70,9 +69,8 @@ public static class ReferenceValues {
 
     public static JsonCalendar[] JsonCalendarMasterEventList { get; set; }
     public static JsonFinances JsonFinanceMasterList { get; set; }
-    public static JsonChoreFunds JsonChoreFundsMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
-    public static DateTime ChoreWeekStartDate { get; set; }
+    public static DateTime TaskWeekStartDate { get; set; }
     public static int[] TimerMinutes { get; set; }
     public static int[] TimerSeconds { get; set; }
     public static int ActiveTimerEdit { get; set; }
@@ -99,4 +97,5 @@ public static class ReferenceValues {
 
     public static JsonRecipe JsonRecipesMaster { get; set; }
     public static string SoundToPlay { get; set; }
+    public static JsonTasks JsonTasksMaster { get; set; }
 }

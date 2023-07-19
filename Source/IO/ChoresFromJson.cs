@@ -5,32 +5,32 @@ using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.IO;
 
-public class ChoreFundsFromJson {
-    public ChoreFundsFromJson() {
-        ReferenceValues.JsonChoreFundsMaster = new JsonChoreFunds();
+public class TasksFromJson {
+    public TasksFromJson() {
+        ReferenceValues.JsonTasksMaster = new JsonTasks();
 
         JsonSerializerOptions options = new() {
             IncludeFields = true
         };
 
         try {
-            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "chorefunds.json");
-            string settingsString = null;
+            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "tasks.json");
+            string tasksString = null;
             while (!streamReader.EndOfStream) {
-                settingsString = streamReader.ReadToEnd();
+                tasksString = streamReader.ReadToEnd();
             }
 
             streamReader.Close();
 
-            if (settingsString != null) {
+            if (tasksString != null) {
                 try {
-                    JsonChoreFunds jsonSettings = JsonSerializer.Deserialize<JsonChoreFunds>(settingsString, options);
-                    ReferenceValues.JsonChoreFundsMaster = jsonSettings;
+                    JsonTasks jsonTasks = JsonSerializer.Deserialize<JsonTasks>(tasksString, options);
+                    ReferenceValues.JsonTasksMaster = jsonTasks;
                 } catch (Exception e) {
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "WARN",
-                        Module = "ChoreFundsFromJson",
+                        Module = "TasksFromJson",
                         Description = e.ToString()
                     });
                     SaveDebugFile.Save();
@@ -40,7 +40,7 @@ public class ChoreFundsFromJson {
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
-                Module = "ChoreFundsFromJson",
+                Module = "TasksFromJson",
                 Description = e.ToString()
             });
             SaveDebugFile.Save();

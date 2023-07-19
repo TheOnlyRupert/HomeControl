@@ -2,7 +2,6 @@ using System;
 using System.IO.Ports;
 using System.Net;
 using System.Text.Json;
-using System.Windows.Media;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
 using HomeControl.Source.IO;
@@ -72,21 +71,11 @@ public class MainWindowVM : BaseViewModel {
         void activityTimer_OnInactive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOn", null);
             ReferenceValues.LockUI = true;
-            OnlineColor = internetMessage ? "DarkRed" : "Black";
         }
 
         void activityTimer_OnActive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOff", null);
-            if (!ReferenceValues.IsFunnyModeActive) {
-                OnlineColor = internetMessage ? "DarkRed" : "Black";
-            }
         }
-
-        /* Joke DispatcherTimer */
-        DispatcherTimer dispatcherTimer2 = new();
-        dispatcherTimer2.Tick += dispatcherTimer_Tick2;
-        dispatcherTimer2.Interval = new TimeSpan(0, 0, 0, 0, 200);
-        dispatcherTimer2.Start();
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
@@ -127,14 +116,6 @@ public class MainWindowVM : BaseViewModel {
         }
 
         simpleMessenger.PushMessage("Refresh", null);
-    }
-
-    private void dispatcherTimer_Tick2(object sender, EventArgs e) {
-        if (ReferenceValues.IsFunnyModeActive) {
-            Random randomNumber = new();
-            Color myColor = Color.FromRgb((byte)randomNumber.Next(256), (byte)randomNumber.Next(256), (byte)randomNumber.Next(256));
-            OnlineColor = "#FF" + myColor.R.ToString("X2") + myColor.G.ToString("X2") + myColor.B.ToString("X2");
-        }
     }
 
     private void ApiStatus() {
@@ -180,7 +161,7 @@ public class MainWindowVM : BaseViewModel {
             });
             SaveDebugFile.Save();
             internetMessage = true;
-            OnlineColor = "DarkRed";
+            OnlineColor = "Yellow";
         }
     }
 

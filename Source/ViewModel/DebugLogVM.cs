@@ -30,9 +30,6 @@ public class DebugLogVM : BaseViewModel {
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
-        case "party":
-            ReferenceValues.IsFunnyModeActive = ReferenceValues.IsFunnyModeActive != true;
-            break;
         case "settings":
             Settings settings = new();
             settings.ShowDialog();
