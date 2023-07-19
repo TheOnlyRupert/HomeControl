@@ -12,7 +12,7 @@ namespace HomeControl.Source.ViewModel.Behavior;
 
 public class BehaviorVM : BaseViewModel {
     /* Integrating Tasks */
-    private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5, _imageUser;
+    private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5;
 
     private string _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1Star1, _user1Star2, _user1Star3, _user1Star4, _user1Star5, _user2Star1, _user2Star2,
         _user2Star3, _user2Star4, _user2Star5, _user3Star1, _user3Star2, _user3Star3, _user3Star4, _user3Star5, _user4Star1, _user4Star2, _user4Star3, _user4Star4,
@@ -23,16 +23,15 @@ public class BehaviorVM : BaseViewModel {
         _user3TasksCompletedDayProgressColor, _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor, _user3TasksCompletedQuarterProgressColor,
         _user4TasksCompletedDayProgressColor, _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor, _user4TasksCompletedQuarterProgressColor,
         _user5TasksCompletedDayProgressColor, _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor, _user5TasksCompletedQuarterProgressColor,
-        _rewardButtonVisibility, _progressBarChildValueText, _childName, _cashAvailable, _cashAvailableColor, _currentMonthText, _currentWeekText, _currentDayText,
+        _currentMonthText, _currentWeekText, _currentDayText, _user1CashAvailableColor, _user2CashAvailableColor, _user3CashAvailableColor, _user4CashAvailableColor,
+        _user5CashAvailableColor,
         _currentQuarterText, _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText,
         _user1TasksCompletedQuarterProgressText, _user1CashAvailable, _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText,
         _user2TasksCompletedMonthProgressText, _user2TasksCompletedQuarterProgressText, _user2CashAvailable, _user3TasksCompletedWeekProgressText,
         _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText, _user3CashAvailable,
         _user4TasksCompletedWeekProgressText, _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText,
         _user4CashAvailable, _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText,
-        _user5TasksCompletedQuarterProgressText, _user5CashAvailable, _user1CashAvailableTextColor, _user2CashAvailableTextColor, _user3CashAvailableTextColor,
-        _user4CashAvailableTextColor, _user5CashAvailableTextColor, _remainingDay, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _childStar1, _childStar2,
-        _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3;
+        _user5TasksCompletedQuarterProgressText, _user5CashAvailable, _remainingDay, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear;
 
     private int user1TasksCompletedDay, user1TasksCompletedWeek, user1TasksCompletedMonth, user1TasksCompletedQuarter, _user1TasksCompletedDayProgressValue,
         _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue, user2TasksCompletedDay,
@@ -42,24 +41,11 @@ public class BehaviorVM : BaseViewModel {
         _user3TasksCompletedQuarterProgressValue, user4TasksCompletedDay, user4TasksCompletedWeek, user4TasksCompletedMonth, user4TasksCompletedQuarter,
         _user4TasksCompletedDayProgressValue, _user4TasksCompletedWeekProgressValue, _user4TasksCompletedMonthProgressValue, _user4TasksCompletedQuarterProgressValue,
         user5TasksCompletedDay, user5TasksCompletedWeek, user5TasksCompletedMonth, user5TasksCompletedQuarter, _user5TasksCompletedDayProgressValue,
-        _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue, _progressBarChildValue, stars, strikes;
+        _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue;
 
     public BehaviorVM() {
         new BehaviorFromJson();
-
-        DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
-        System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
-        CurrentDayText = DateTime.Now.ToString("dddd");
-        CurrentMonthText = DateTime.Now.ToString("MMMM");
-        CurrentWeekText = "Week " + calendar.GetWeekOfYear(DateTime.Now, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
-        CurrentQuarterText = DateTime.Now.Month switch {
-            > 0 and < 3 => "Quarter 1",
-            > 2 and < 6 => "Quarter 2",
-            > 5 and < 9 => "Quarter 3",
-            _ => "Quarter 4"
-        };
-
-        RefreshBehavior();
+        new TasksFromJson();
 
         User1Name = ReferenceValues.JsonMasterSettings.User1Name;
         User2Name = ReferenceValues.JsonMasterSettings.User2Name;
@@ -111,11 +97,119 @@ public class BehaviorVM : BaseViewModel {
         }
 
         RefreshBehavior();
-        RefreshFields();
+        RefreshTasks();
         RefreshCountdown();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+
+    private void RefreshTasks() {
+        User1CashAvailable = "$0";
+        User1CashAvailableColor = "White";
+        user1TasksCompletedDay = 0;
+        user1TasksCompletedWeek = 0;
+        user1TasksCompletedMonth = 0;
+        user1TasksCompletedQuarter = 0;
+
+        User2CashAvailable = "$0";
+        User2CashAvailableColor = "White";
+        user2TasksCompletedDay = 0;
+        user2TasksCompletedWeek = 0;
+        user2TasksCompletedMonth = 0;
+        user2TasksCompletedQuarter = 0;
+
+        User3CashAvailable = "$0";
+        User3CashAvailableColor = "White";
+        user3TasksCompletedDay = 0;
+        user3TasksCompletedWeek = 0;
+        user3TasksCompletedMonth = 0;
+        user3TasksCompletedQuarter = 0;
+
+        User4CashAvailable = "$0";
+        User4CashAvailableColor = "White";
+        user4TasksCompletedDay = 0;
+        user4TasksCompletedWeek = 0;
+        user4TasksCompletedMonth = 0;
+        user4TasksCompletedQuarter = 0;
+
+        User5CashAvailable = "$0";
+        User5CashAvailableColor = "White";
+        user5TasksCompletedDay = 0;
+        user5TasksCompletedWeek = 0;
+        user5TasksCompletedMonth = 0;
+        user5TasksCompletedQuarter = 0;
+
+        User1TasksCompletedWeekProgressValue = 0;
+        User1TasksCompletedWeekProgressText = User1TasksCompletedWeekProgressValue + "%";
+        User1TasksCompletedMonthProgressValue = 0;
+        User1TasksCompletedMonthProgressText = User1TasksCompletedMonthProgressValue + "%";
+        User1TasksCompletedDayProgressValue = 0;
+        User1TasksCompletedDayProgressText = User1TasksCompletedDayProgressValue + "%";
+        User1TasksCompletedQuarterProgressValue = 0;
+        User1TasksCompletedQuarterProgressText = User1TasksCompletedQuarterProgressValue + "%";
+
+        User2TasksCompletedWeekProgressValue = 0;
+        User2TasksCompletedWeekProgressText = User2TasksCompletedWeekProgressValue + "%";
+        User2TasksCompletedMonthProgressValue = 0;
+        User2TasksCompletedMonthProgressText = User2TasksCompletedMonthProgressValue + "%";
+        User2TasksCompletedDayProgressValue = 0;
+        User2TasksCompletedDayProgressText = User2TasksCompletedDayProgressValue + "%";
+        User2TasksCompletedQuarterProgressValue = 0;
+        User2TasksCompletedQuarterProgressText = User2TasksCompletedQuarterProgressValue + "%";
+
+        User3TasksCompletedWeekProgressValue = 0;
+        User3TasksCompletedWeekProgressText = User3TasksCompletedWeekProgressValue + "%";
+        User3TasksCompletedMonthProgressValue = 0;
+        User3TasksCompletedMonthProgressText = User3TasksCompletedMonthProgressValue + "%";
+        User3TasksCompletedDayProgressValue = 0;
+        User3TasksCompletedDayProgressText = User3TasksCompletedDayProgressValue + "%";
+        User3TasksCompletedQuarterProgressValue = 0;
+        User3TasksCompletedQuarterProgressText = User3TasksCompletedQuarterProgressValue + "%";
+
+        User4TasksCompletedWeekProgressValue = 0;
+        User4TasksCompletedWeekProgressText = User4TasksCompletedWeekProgressValue + "%";
+        User4TasksCompletedMonthProgressValue = 0;
+        User4TasksCompletedMonthProgressText = User4TasksCompletedMonthProgressValue + "%";
+        User4TasksCompletedDayProgressValue = 0;
+        User4TasksCompletedDayProgressText = User4TasksCompletedDayProgressValue + "%";
+        User4TasksCompletedQuarterProgressValue = 0;
+        User4TasksCompletedQuarterProgressText = User4TasksCompletedQuarterProgressValue + "%";
+
+        User5TasksCompletedWeekProgressValue = 0;
+        User5TasksCompletedWeekProgressText = User5TasksCompletedWeekProgressValue + "%";
+        User5TasksCompletedMonthProgressValue = 0;
+        User5TasksCompletedMonthProgressText = User5TasksCompletedMonthProgressValue + "%";
+        User5TasksCompletedDayProgressValue = 0;
+        User5TasksCompletedDayProgressText = User5TasksCompletedDayProgressValue + "%";
+        User5TasksCompletedQuarterProgressValue = 0;
+        User5TasksCompletedQuarterProgressText = User5TasksCompletedQuarterProgressValue + "%";
+
+        /* Check for all chores completed */
+        User1TasksCompletedDayProgressColor = User1TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User1TasksCompletedWeekProgressColor = User1TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User1TasksCompletedMonthProgressColor = User1TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User1TasksCompletedQuarterProgressColor = User1TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+        User2TasksCompletedDayProgressColor = User2TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User2TasksCompletedWeekProgressColor = User2TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User2TasksCompletedMonthProgressColor = User2TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User2TasksCompletedQuarterProgressColor = User2TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+        User3TasksCompletedDayProgressColor = User3TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User3TasksCompletedWeekProgressColor = User3TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User3TasksCompletedMonthProgressColor = User3TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User3TasksCompletedQuarterProgressColor = User3TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+        User4TasksCompletedDayProgressColor = User4TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User4TasksCompletedWeekProgressColor = User4TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User4TasksCompletedMonthProgressColor = User4TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User4TasksCompletedQuarterProgressColor = User4TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+        User5TasksCompletedDayProgressColor = User5TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User5TasksCompletedWeekProgressColor = User5TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User5TasksCompletedMonthProgressColor = User5TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+        User5TasksCompletedQuarterProgressColor = User5TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+    }
 
     private void RefreshBehavior() {
         ReferenceValues.JsonBehaviorMaster.Date = DateTime.Now;
@@ -385,6 +479,8 @@ public class BehaviorVM : BaseViewModel {
             ReferenceValues.JsonBehaviorMaster.User4Strikes = 0;
             ReferenceValues.JsonBehaviorMaster.User5Strikes = 0;
             RefreshBehavior();
+            RefreshCountdown();
+            RefreshTasks();
         }
     }
 
@@ -430,44 +526,9 @@ public class BehaviorVM : BaseViewModel {
         }
     }
 
-    private void RefreshFields() {
+    private void RefreshCountdown() {
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
         System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
-
-        User1CashAvailable = "$0";
-        user1TasksCompletedDay = 0;
-        user1TasksCompletedWeek = 0;
-        user1TasksCompletedMonth = 0;
-        user1TasksCompletedQuarter = 0;
-        User1CashAvailableTextColor = "White";
-
-        User2CashAvailable = "$0";
-        user2TasksCompletedDay = 0;
-        user2TasksCompletedWeek = 0;
-        user2TasksCompletedMonth = 0;
-        user2TasksCompletedQuarter = 0;
-        User2CashAvailableTextColor = "White";
-
-        User3CashAvailable = "$0";
-        user3TasksCompletedDay = 0;
-        user3TasksCompletedWeek = 0;
-        user3TasksCompletedMonth = 0;
-        user3TasksCompletedQuarter = 0;
-        User3CashAvailableTextColor = "White";
-
-        User4CashAvailable = "$0";
-        user4TasksCompletedDay = 0;
-        user4TasksCompletedWeek = 0;
-        user4TasksCompletedMonth = 0;
-        user4TasksCompletedQuarter = 0;
-        User4CashAvailableTextColor = "White";
-
-        User5CashAvailable = "$0";
-        user5TasksCompletedDay = 0;
-        user5TasksCompletedWeek = 0;
-        user5TasksCompletedMonth = 0;
-        user5TasksCompletedQuarter = 0;
-        User5CashAvailableTextColor = "White";
 
         ReferenceValues.TaskWeekStartDate = DateTime.Now;
         while (ReferenceValues.TaskWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
@@ -484,78 +545,6 @@ public class BehaviorVM : BaseViewModel {
             _ => "Quarter 4"
         };
 
-        User1TasksCompletedWeekProgressValue = 10;
-        User1TasksCompletedWeekProgressText = User1TasksCompletedWeekProgressValue + "%";
-        User1TasksCompletedMonthProgressValue = 25;
-        User1TasksCompletedMonthProgressText = User1TasksCompletedMonthProgressValue + "%";
-        User1TasksCompletedDayProgressValue = 50;
-        User1TasksCompletedDayProgressText = User1TasksCompletedDayProgressValue + "%";
-        User1TasksCompletedQuarterProgressValue = 100;
-        User1TasksCompletedQuarterProgressText = User1TasksCompletedQuarterProgressValue + "%";
-
-        User2TasksCompletedWeekProgressValue = 10;
-        User2TasksCompletedWeekProgressText = User2TasksCompletedWeekProgressValue + "%";
-        User2TasksCompletedMonthProgressValue = 25;
-        User2TasksCompletedMonthProgressText = User2TasksCompletedMonthProgressValue + "%";
-        User2TasksCompletedDayProgressValue = 50;
-        User2TasksCompletedDayProgressText = User2TasksCompletedDayProgressValue + "%";
-        User2TasksCompletedQuarterProgressValue = 100;
-        User2TasksCompletedQuarterProgressText = User2TasksCompletedQuarterProgressValue + "%";
-
-        User3TasksCompletedWeekProgressValue = 10;
-        User3TasksCompletedWeekProgressText = User3TasksCompletedWeekProgressValue + "%";
-        User3TasksCompletedMonthProgressValue = 25;
-        User3TasksCompletedMonthProgressText = User3TasksCompletedMonthProgressValue + "%";
-        User3TasksCompletedDayProgressValue = 50;
-        User3TasksCompletedDayProgressText = User3TasksCompletedDayProgressValue + "%";
-        User3TasksCompletedQuarterProgressValue = 100;
-        User3TasksCompletedQuarterProgressText = User3TasksCompletedQuarterProgressValue + "%";
-
-        User4TasksCompletedWeekProgressValue = 10;
-        User4TasksCompletedWeekProgressText = User4TasksCompletedWeekProgressValue + "%";
-        User4TasksCompletedMonthProgressValue = 25;
-        User4TasksCompletedMonthProgressText = User4TasksCompletedMonthProgressValue + "%";
-        User4TasksCompletedDayProgressValue = 50;
-        User4TasksCompletedDayProgressText = User4TasksCompletedDayProgressValue + "%";
-        User4TasksCompletedQuarterProgressValue = 100;
-        User4TasksCompletedQuarterProgressText = User4TasksCompletedQuarterProgressValue + "%";
-
-        User5TasksCompletedWeekProgressValue = 10;
-        User5TasksCompletedWeekProgressText = User5TasksCompletedWeekProgressValue + "%";
-        User5TasksCompletedMonthProgressValue = 25;
-        User5TasksCompletedMonthProgressText = User5TasksCompletedMonthProgressValue + "%";
-        User5TasksCompletedDayProgressValue = 50;
-        User5TasksCompletedDayProgressText = User5TasksCompletedDayProgressValue + "%";
-        User5TasksCompletedQuarterProgressValue = 100;
-        User5TasksCompletedQuarterProgressText = User5TasksCompletedQuarterProgressValue + "%";
-
-        User1TasksCompletedDayProgressColor = User1TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User1TasksCompletedWeekProgressColor = User1TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User1TasksCompletedMonthProgressColor = User1TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User1TasksCompletedQuarterProgressColor = User1TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-        User2TasksCompletedDayProgressColor = User2TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User2TasksCompletedWeekProgressColor = User2TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User2TasksCompletedMonthProgressColor = User2TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User2TasksCompletedQuarterProgressColor = User2TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-        User3TasksCompletedDayProgressColor = User3TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User3TasksCompletedWeekProgressColor = User3TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User3TasksCompletedMonthProgressColor = User3TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User3TasksCompletedQuarterProgressColor = User3TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-        User4TasksCompletedDayProgressColor = User4TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User4TasksCompletedWeekProgressColor = User4TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User4TasksCompletedMonthProgressColor = User4TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User4TasksCompletedQuarterProgressColor = User4TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-        User5TasksCompletedDayProgressColor = User5TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User5TasksCompletedWeekProgressColor = User5TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User5TasksCompletedMonthProgressColor = User5TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User5TasksCompletedQuarterProgressColor = User5TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-    }
-
-    private void RefreshCountdown() {
         /* Day */
         DateTime dateNext = DateTime.Now;
         RemainingDay = (TimeSpan.FromHours(24) - dateNext.TimeOfDay).Hours + " Hours";
@@ -1111,6 +1100,14 @@ public class BehaviorVM : BaseViewModel {
         }
     }
 
+    public string User1CashAvailableColor {
+        get => _user1CashAvailableColor;
+        set {
+            _user1CashAvailableColor = value;
+            RaisePropertyChangedEvent("User1CashAvailableColor");
+        }
+    }
+
     public int User1TasksCompletedDayProgressValue {
         get => _user1TasksCompletedDayProgressValue;
         set {
@@ -1180,6 +1177,14 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user2CashAvailable = value;
             RaisePropertyChangedEvent("User2CashAvailable");
+        }
+    }
+
+    public string User2CashAvailableColor {
+        get => _user2CashAvailableColor;
+        set {
+            _user2CashAvailableColor = value;
+            RaisePropertyChangedEvent("User2CashAvailableColor");
         }
     }
 
@@ -1255,6 +1260,14 @@ public class BehaviorVM : BaseViewModel {
         }
     }
 
+    public string User3CashAvailableColor {
+        get => _user3CashAvailableColor;
+        set {
+            _user3CashAvailableColor = value;
+            RaisePropertyChangedEvent("User3CashAvailableColor");
+        }
+    }
+
     public int User3TasksCompletedDayProgressValue {
         get => _user3TasksCompletedDayProgressValue;
         set {
@@ -1316,6 +1329,14 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user3TasksCompletedQuarterProgressText = value;
             RaisePropertyChangedEvent("User3TasksCompletedQuarterProgressText");
+        }
+    }
+
+    public string User4CashAvailableColor {
+        get => _user4CashAvailableColor;
+        set {
+            _user4CashAvailableColor = value;
+            RaisePropertyChangedEvent("User4CashAvailableColor");
         }
     }
 
@@ -1399,6 +1420,14 @@ public class BehaviorVM : BaseViewModel {
         }
     }
 
+    public string User5CashAvailableColor {
+        get => _user5CashAvailableColor;
+        set {
+            _user5CashAvailableColor = value;
+            RaisePropertyChangedEvent("User5CashAvailableColor");
+        }
+    }
+
     public int User5TasksCompletedDayProgressValue {
         get => _user5TasksCompletedDayProgressValue;
         set {
@@ -1460,46 +1489,6 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5TasksCompletedQuarterProgressText = value;
             RaisePropertyChangedEvent("User5TasksCompletedQuarterProgressText");
-        }
-    }
-
-    public string User1CashAvailableTextColor {
-        get => _user1CashAvailableTextColor;
-        set {
-            _user1CashAvailableTextColor = value;
-            RaisePropertyChangedEvent("User1CashAvailableTextColor");
-        }
-    }
-
-    public string User2CashAvailableTextColor {
-        get => _user2CashAvailableTextColor;
-        set {
-            _user2CashAvailableTextColor = value;
-            RaisePropertyChangedEvent("User2CashAvailableTextColor");
-        }
-    }
-
-    public string User3CashAvailableTextColor {
-        get => _user3CashAvailableTextColor;
-        set {
-            _user3CashAvailableTextColor = value;
-            RaisePropertyChangedEvent("User3CashAvailableTextColor");
-        }
-    }
-
-    public string User4CashAvailableTextColor {
-        get => _user4CashAvailableTextColor;
-        set {
-            _user4CashAvailableTextColor = value;
-            RaisePropertyChangedEvent("User4CashAvailableTextColor");
-        }
-    }
-
-    public string User5CashAvailableTextColor {
-        get => _user5CashAvailableTextColor;
-        set {
-            _user5CashAvailableTextColor = value;
-            RaisePropertyChangedEvent("User5CashAvailableTextColor");
         }
     }
 
@@ -1700,126 +1689,6 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5TasksCompletedQuarterProgressColor = value;
             RaisePropertyChangedEvent("User5TasksCompletedQuarterProgressColor");
-        }
-    }
-
-    public string ChildName {
-        get => _childName;
-        set {
-            _childName = value;
-            RaisePropertyChangedEvent("ChildName");
-        }
-    }
-
-    public int ProgressBarChildValue {
-        get => _progressBarChildValue;
-        set {
-            _progressBarChildValue = value;
-            RaisePropertyChangedEvent("ProgressBarChildValue");
-        }
-    }
-
-    public string ProgressBarChildValueText {
-        get => _progressBarChildValueText;
-        set {
-            _progressBarChildValueText = value;
-            RaisePropertyChangedEvent("ProgressBarChildValueText");
-        }
-    }
-
-    public string RewardButtonVisibility {
-        get => _rewardButtonVisibility;
-        set {
-            _rewardButtonVisibility = value;
-            RaisePropertyChangedEvent("RewardButtonVisibility");
-        }
-    }
-
-    public BitmapImage ImageUser {
-        get => _imageUser;
-        set {
-            _imageUser = value;
-            RaisePropertyChangedEvent("ImageUser");
-        }
-    }
-
-    public string CashAvailable {
-        get => _cashAvailable;
-        set {
-            _cashAvailable = value;
-            RaisePropertyChangedEvent("CashAvailable");
-        }
-    }
-
-    public string CashAvailableColor {
-        get => _cashAvailableColor;
-        set {
-            _cashAvailableColor = value;
-            RaisePropertyChangedEvent("CashAvailableColor");
-        }
-    }
-
-    public string ChildStar1 {
-        get => _childStar1;
-        set {
-            _childStar1 = value;
-            RaisePropertyChangedEvent("ChildStar1");
-        }
-    }
-
-    public string ChildStar2 {
-        get => _childStar2;
-        set {
-            _childStar2 = value;
-            RaisePropertyChangedEvent("ChildStar2");
-        }
-    }
-
-    public string ChildStar3 {
-        get => _childStar3;
-        set {
-            _childStar3 = value;
-            RaisePropertyChangedEvent("ChildStar3");
-        }
-    }
-
-    public string ChildStar4 {
-        get => _childStar4;
-        set {
-            _childStar4 = value;
-            RaisePropertyChangedEvent("ChildStar4");
-        }
-    }
-
-    public string ChildStar5 {
-        get => _childStar5;
-        set {
-            _childStar5 = value;
-            RaisePropertyChangedEvent("ChildStar5");
-        }
-    }
-
-    public string ChildStrike1 {
-        get => _childStrike1;
-        set {
-            _childStrike1 = value;
-            RaisePropertyChangedEvent("ChildStrike1");
-        }
-    }
-
-    public string ChildStrike2 {
-        get => _childStrike2;
-        set {
-            _childStrike2 = value;
-            RaisePropertyChangedEvent("ChildStrike2");
-        }
-    }
-
-    public string ChildStrike3 {
-        get => _childStrike3;
-        set {
-            _childStrike3 = value;
-            RaisePropertyChangedEvent("ChildStrike3");
         }
     }
 

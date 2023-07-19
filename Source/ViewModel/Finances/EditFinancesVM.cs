@@ -27,7 +27,7 @@ public class EditFinancesVM : BaseViewModel {
 
     private int totalBilling, totalGrocery, totalPetrol, totalRestaurantTakeout, totalShopping, totalHealth, totalTravel, totalCoffee, totalEntertainment, totalServices,
         totalPersonalCare,
-        totalHomeImprovement, totalAlcohol, totalFirearms, totalStreamingService, totalBrittanyFund, totalStupidDumb, totalInterest, totalCarryOver,
+        totalHomeImprovement, totalAlcohol, totalFirearms, totalStreamingService, totalBrittanyFund, totalInterest, totalCarryOver,
         totalElectricBill, totalWaterBill,
         totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance, totalChildSupport, totalGift,
         totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses;
@@ -37,7 +37,7 @@ public class EditFinancesVM : BaseViewModel {
         totalPercentageHealth, totalPercentageAlcohol,
         totalPercentageHomeImprovement, totalPercentageInsurance, totalPercentageInterest, totalPercentageInternetBill, totalPercentageMortgageRent, totalPercentagePersonalCare,
         totalPercentagePetrol, totalPercentagePhoneBill, totalPercentageRestaurantTakeout, totalPercentageServices, totalPercentageShopping, totalPercentageStreamingService,
-        totalPercentageStupidDumb, totalPercentageTrashBill, totalPercentageTravel, totalPercentageVehiclePayment, totalPercentageWaterBill, totalPercentageChildSupport,
+        totalPercentageTrashBill, totalPercentageTravel, totalPercentageVehiclePayment, totalPercentageWaterBill, totalPercentageChildSupport,
         totalPercentageGift, totalPercentageGovernment, totalPercentagePaycheck, totalPercentageRefund;
 
     public EditFinancesVM() {
@@ -418,7 +418,6 @@ public class EditFinancesVM : BaseViewModel {
         totalServices = 0;
         totalShopping = 0;
         totalStreamingService = 0;
-        totalStupidDumb = 0;
         totalTrashBill = 0;
         totalTravel = 0;
         totalVehiclePayment = 0;
@@ -648,20 +647,6 @@ public class EditFinancesVM : BaseViewModel {
             case "Brittany Fund":
                 try {
                     totalBrittanyFund += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    SaveDebugFile.Save();
-                }
-
-                break;
-            case "Stupid/Dumb":
-                try {
-                    totalStupidDumb += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -917,7 +902,7 @@ public class EditFinancesVM : BaseViewModel {
         totalAllExpenses = totalAlcohol + totalBilling + totalBrittanyFund + totalChildCare + totalCoffee + totalElectricBill + totalEntertainment + totalFirearms
                            + totalGasBill + totalGrocery + totalHealth + totalHomeImprovement + totalInsurance + totalInterest + totalInternetBill + totalMortgageRent +
                            totalPersonalCare
-                           + totalPetrol + totalPhoneBill + totalRestaurantTakeout + totalServices + totalShopping + totalStreamingService + totalStupidDumb + totalTrashBill +
+                           + totalPetrol + totalPhoneBill + totalRestaurantTakeout + totalServices + totalShopping + totalStreamingService + totalTrashBill +
                            totalTravel
                            + totalVehiclePayment + totalWaterBill;
 
@@ -945,7 +930,6 @@ public class EditFinancesVM : BaseViewModel {
         totalPercentageServices = Math.Round((double)(100 * totalServices) / totalAllExpenses, 2);
         totalPercentageShopping = Math.Round((double)(100 * totalShopping) / totalAllExpenses, 2);
         totalPercentageStreamingService = Math.Round((double)(100 * totalStreamingService) / totalAllExpenses, 2);
-        totalPercentageStupidDumb = Math.Round((double)(100 * totalStupidDumb) / totalAllExpenses, 2);
         totalPercentageTrashBill = Math.Round((double)(100 * totalTrashBill) / totalAllExpenses, 2);
         totalPercentageTravel = Math.Round((double)(100 * totalTravel) / totalAllExpenses, 2);
         totalPercentageVehiclePayment = Math.Round((double)(100 * totalVehiclePayment) / totalAllExpenses, 2);
@@ -1052,12 +1036,6 @@ public class EditFinancesVM : BaseViewModel {
             Category = "Brittany Fund",
             Percentage = totalPercentageBrittanyFund,
             Amount = totalBrittanyFund
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Stupid/Dumb",
-            Percentage = totalPercentageStupidDumb,
-            Amount = totalStupidDumb
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {

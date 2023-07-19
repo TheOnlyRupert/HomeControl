@@ -202,16 +202,17 @@
                 </Grid.RowDefinitions>
 
                 <Button Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
-                        CommandParameter="button1">
+                        CommandParameter="button1" Focusable="False">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="{Binding Button1BackgroundColor}"/>
                             <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Focusable" Value="False"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -240,26 +241,32 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding person}" Value="1">
                                             <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                            <Setter Property="Focusable" Value="False"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="2">
                                             <Setter Property="Foreground" Value="Pink"/>
+                                            <Setter Property="Focusable" Value="False"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="3">
                                             <Setter Property="Foreground" Value="Yellow"/>
+                                            <Setter Property="Focusable" Value="False"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="4">
                                             <Setter Property="Foreground" Value="Yellow"/>
+                                            <Setter Property="Focusable" Value="False"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="5">
                                             <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="Focusable" Value="False"/>
                                         </DataTrigger>
 
                                         <DataTrigger Binding="{Binding person}" Value="6">
                                             <Setter Property="Foreground" Value="Green"/>
+                                            <Setter Property="Focusable" Value="False"/>
                                         </DataTrigger>
 
                                         <MultiTrigger>

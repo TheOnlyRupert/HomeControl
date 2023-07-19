@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace HomeControl.Source.IO;
 
@@ -43,8 +42,8 @@ public class JsonTasksQuarterly {
 }
 
 public class Task {
-    public string taskName { get; set; }
-    public string imageName { get; set; }
-    public bool isCompleted { get; set; }
-    public DateTime dateTimeCompleted { get; set; }
+    public string TaskName { get; set; }
+    public string ImageName { get; set; }
+    public bool IsCompleted { get; set; }
+    public string DateCompleted { get; set; }
 }

@@ -42,6 +42,10 @@ public class EditBehaviorVM : BaseViewModel {
             strikes = ReferenceValues.JsonBehaviorMaster.User1Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User1Progress;
             ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User1Progress + "/5";
+
+            /* WIP Tasks */
+
+
             try {
                 Uri uri1 = new(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri1);
