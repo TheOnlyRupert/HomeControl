@@ -30,7 +30,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="Sunday Tasks" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Text="{Binding TaskHeaderText}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Complete Task" Command="{Binding ButtonCommand}" CommandParameter="complete" FontSize="16">

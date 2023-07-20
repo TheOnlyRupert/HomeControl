@@ -12,9 +12,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class TasksDailyVM : BaseViewModel {
-    private bool _isCompleted;
+    private string _taskHeaderText, _taskName, _imageName;
     private ObservableCollection<Task> _taskList;
-    private string _taskName, _imageName;
     private Task _taskSelected;
 
     public TasksDailyVM() {
@@ -27,7 +26,7 @@ public class TasksDailyVM : BaseViewModel {
             };
         }
 
-        IsCompleted = true;
+        TaskHeaderText = ReferenceValues.ActiveBehaviorUser + " " + DateTime.Now.DayOfWeek + " Tasks";
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -136,7 +135,6 @@ public class TasksDailyVM : BaseViewModel {
         case "complete":
             if (TaskSelected.TaskName != null) {
                 if (!TaskSelected.IsCompleted) {
-                    IsCompleted = true;
                     ReferenceValues.SoundToPlay = "achievement1";
                     SoundDispatcher.PlaySound();
 
@@ -156,13 +154,11 @@ public class TasksDailyVM : BaseViewModel {
         case "reset":
             if (TaskSelected.TaskName != null) {
                 if (TaskSelected.IsCompleted) {
-                    IsCompleted = false;
                     TaskSelected.IsCompleted = false;
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
                         ImageName = ImageName,
-                        IsCompleted = false,
                         DateCompleted = ""
                     });
 
@@ -209,10 +205,17 @@ public class TasksDailyVM : BaseViewModel {
     private void PopulateDetailedView(Task value) {
         TaskName = value.TaskName;
         ImageName = value.ImageName;
-        IsCompleted = value.IsCompleted;
     }
 
     #region Fields
+
+    public string TaskHeaderText {
+        get => _taskHeaderText;
+        set {
+            _taskHeaderText = value;
+            RaisePropertyChangedEvent("TaskHeaderText");
+        }
+    }
 
     public string TaskName {
         get => _taskName;
@@ -227,14 +230,6 @@ public class TasksDailyVM : BaseViewModel {
         set {
             _imageName = VerifyInput.VerifyTextAlphaNumericSpace(value);
             RaisePropertyChangedEvent("ImageName");
-        }
-    }
-
-    public bool IsCompleted {
-        get => _isCompleted;
-        set {
-            _isCompleted = value;
-            RaisePropertyChangedEvent("IsCompleted");
         }
     }
 

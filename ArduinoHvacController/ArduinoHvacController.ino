@@ -1,4 +1,4 @@
-#include <DHT.h>;
+#include <DHT.h>
 
 DHT dhtInt(8, DHT22);
 DHT dhtExt(9, DHT22);

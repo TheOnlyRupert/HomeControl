@@ -115,7 +115,7 @@ public class HvacVM : BaseViewModel {
                 editHvac.Close();
 
                 if (isFanAuto != ReferenceValues.JsonHvacSettings.IsFanAuto) {
-                    ReferenceValues.SerialPortMaster.Write(ReferenceValues.JsonHvacSettings.IsFanAuto ? "1" : "2");
+                    ReferenceValues.SerialPortMaster.Write(ReferenceValues.JsonHvacSettings.IsFanAuto ? "2" : "1");
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "INFO",

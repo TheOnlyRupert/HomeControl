@@ -82,25 +82,16 @@
                             </Button.Style>
                         </Button>
 
-                        <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Grid.Column="0" Text="Wind" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" Foreground="CornflowerBlue"/>
-
-                            <Image Grid.Column="1" HorizontalAlignment="Center" Stretch="Uniform" gif:ImageBehavior.AnimatedSource="../../../Resources/Images/weather/wind.gif"
-                                   VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5" Margin="8 0">
+                        <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image HorizontalAlignment="Center" Stretch="Uniform" gif:ImageBehavior.AnimatedSource="../../../Resources/Images/weather/wind.gif"
+                                   VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5" Margin="0 0">
                                 <Image.RenderTransform>
                                     <RotateTransform Angle="{Binding CurrentWindDirectionRotation}"/>
                                 </Image.RenderTransform>
                             </Image>
 
-                            <TextBlock Grid.Column="2" Text="{Binding CurrentWindSpeedText}" HorizontalAlignment="Left" FontSize="14" Foreground="CornflowerBlue"
-                                       VerticalAlignment="Center"/>
-                        </Grid>
+                            <TextBlock Text="{Binding CurrentWindSpeedText}" HorizontalAlignment="Left" FontSize="14" Foreground="CornflowerBlue" VerticalAlignment="Center"/>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Grid>
