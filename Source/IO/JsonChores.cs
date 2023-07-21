@@ -44,6 +44,7 @@ public class JsonTasksQuarterly {
 public class Task {
     public string TaskName { get; set; }
     public string ImageName { get; set; }
+    public int RoomNumber { get; set; }
     public bool IsCompleted { get; set; }
     public string DateCompleted { get; set; }
 }

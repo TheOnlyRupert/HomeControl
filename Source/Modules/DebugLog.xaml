@@ -71,7 +71,7 @@
         </Grid.RowDefinitions>
 
         <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding DebugList}" Foreground="White" SelectionMode="Single"
-                                Background="Transparent" BorderBrush="White" IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" BorderThickness="2">
+                                Background="Transparent" BorderBrush="DarkSlateGray" IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" BorderThickness="2">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Background" Value="Transparent"/>

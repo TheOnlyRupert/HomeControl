@@ -1,0 +1,1143 @@
+﻿<Window x:Class="HomeControl.Source.Modules.Behavior.TasksWeekly" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="800" Width="1664" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
+    <Grid Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="64"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Visibility="{Binding EditVisibility}">
+            <StackPanel>
+                <TextBlock Text="Task Name:" FontSize="18" Foreground="White"/>
+                <TextBox Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged}" FontSize="18" MaxLength="64"/>
+                <TextBlock Text="Image:" FontSize="18" Foreground="White" Margin="0 8 0 0"/>
+                <ComboBox ItemsSource="{Binding ImageList}" SelectedItem="{Binding ImageSelected}" FontSize="18"/>
+                <TextBlock Text="Room:" FontSize="18" Foreground="White" Margin="0 8 0 0"/>
+                <ComboBox ItemsSource="{Binding RoomList}" SelectedItem="{Binding RoomSelected}" SelectedIndex="{Binding RoomSelectedIndex}" FontSize="18"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Button Content="Add Task" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="add"/>
+                <Button Content="Delete Task" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="delete"/>
+                <Button Content="Update Task" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="update"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding TaskHeaderText}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Complete Task" Command="{Binding ButtonCommand}" CommandParameter="complete" FontSize="16">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Yellow"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="8">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Content="Reset Task" Command="{Binding ButtonCommand}" CommandParameter="reset" FontSize="16">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="8">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Kitchen" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Room1TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room1TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Living Room" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Room2TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room2TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="Master Bedroom" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Room3TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room3TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="3" Grid.Row="0" Text="Upstairs Bathroom" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding Room4TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room4TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Pantry/Stairs" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="3" Grid.Column="0" ItemsSource="{Binding Room5TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room5TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="Mac Mac Room" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Room6TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room6TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="Twins Room" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="3" Grid.Column="2" ItemsSource="{Binding Room7TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room7TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="3" Grid.Row="2" Text="Downstairs Bathroom" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="3" Grid.Column="3" ItemsSource="{Binding Room8TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room8TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Family/Computer Room" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="5" Grid.Column="0" ItemsSource="{Binding Room9TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room9TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="Downstairs Closet" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Room10TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room10TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="2" Grid.Row="4" Text="Laundry Room" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="5" Grid.Column="2" ItemsSource="{Binding Room11TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room11TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="3" Grid.Row="4" Text="Garage" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="5" Grid.Column="3" ItemsSource="{Binding Room12TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room12TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="0" Grid.Row="6" Text="Outside Front Yard" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="7" Grid.Column="0" ItemsSource="{Binding Room13TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room13TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="1" Grid.Row="6" Text="Outside Back Yard" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="7" Grid.Column="1" ItemsSource="{Binding Room14TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room14TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="2" Grid.Row="6" Text="Vehicles" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="7" Grid.Column="2" ItemsSource="{Binding Room15TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room15TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Column="3" Grid.Row="6" Text="Miscellaneous" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
+
+                <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="7" Grid.Column="3" ItemsSource="{Binding Room16TaskList}" Foreground="White"
+                          SelectedItem="{Binding TaskSelected}" SelectedIndex="{Binding Room16TaskSelectedIndex}" SelectionMode="Single" BorderBrush="DarkSlateGray"
+                          Background="Transparent" BorderThickness="1">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="32"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCompleted}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="16">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Path=ImageName}" Margin="-8 0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TaskName}"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateCompleted}" Width="44"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+        </Grid>
+
+        <Button Grid.Row="1" Grid.Column="1" Content="Exit" FontSize="24" IsCancel="True" Margin="8" MinWidth="128" HorizontalAlignment="Right">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>

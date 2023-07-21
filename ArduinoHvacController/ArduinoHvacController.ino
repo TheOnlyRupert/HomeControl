@@ -12,17 +12,17 @@ bool isFanAuto;
 bool isProgramRunning;
 bool isStandby;
 bool isHeatingMode;
-bool overrideDebug;
 unsigned long previousMillis;
+unsigned long coolDown;
 
 /* PINS: 4 -> Fan, 5 -> Cooling, 6 -> Heating, 8 -> Interior Temp Input */
 /* Relay 4 -> Fan, Relay 3 -> Cooling, Relay 2 -> Heating */
 void setup() {
   previousMillis = 60000;
+  coolDown = 0;
   isFanAuto = true;
   isHeatingMode = false;
   isProgramRunning = false;
-  overrideDebug = false;
   isStandby = true;
   tempSet = 21; //70F
   Serial.begin(9600);
@@ -78,12 +78,6 @@ void loop() {
           } else {
             Serial.print("<HVAC: Program Off>");
           }
-        }
-
-        if (overrideDebug) {
-          Serial.print("<HVAC: Override TRUE>");
-        } else {
-          Serial.print("<HVAC: Override FALSE>");
         }
 
         Serial.print("<HVAC: TEMP_SET_");
@@ -155,18 +149,6 @@ void loop() {
         }
         break;
       case '6':
-        overrideDebug = true;
-
-        Serial.print("<HVAC: Override TRUE>");
-
-        break;
-      case '7':
-        overrideDebug = false;
-
-        Serial.print("<HVAC: Override FALSE>");
-
-        break;
-      case '8':
       isHeatingMode = !isHeatingMode;
       break;
       case 'A':
@@ -185,7 +167,8 @@ void loop() {
       case 'N':
       case 'O':
       case 'P':
-        Serial.print("<TEMP SET: ");
+      tempSet = readWpf - 50;
+        Serial.print("<HVAC: TEMP_SET_");
         Serial.print(readWpf - 50);
         Serial.print(">");
 

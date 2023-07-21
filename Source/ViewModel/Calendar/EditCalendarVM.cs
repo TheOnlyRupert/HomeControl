@@ -394,7 +394,7 @@ public class EditCalendarVM : BaseViewModel {
     public string EventText {
         get => _eventText;
         set {
-            _eventText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            _eventText = value;
             RaisePropertyChangedEvent("EventText");
         }
     }
@@ -402,7 +402,7 @@ public class EditCalendarVM : BaseViewModel {
     public string LocationText {
         get => _locationText;
         set {
-            _locationText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            _locationText = value;
             RaisePropertyChangedEvent("LocationText");
         }
     }
@@ -410,7 +410,7 @@ public class EditCalendarVM : BaseViewModel {
     public string DescriptionText {
         get => _descriptionText;
         set {
-            _descriptionText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            _descriptionText = value;
             RaisePropertyChangedEvent("DescriptionText");
         }
     }

@@ -13,15 +13,11 @@ public class HvacVM : BaseViewModel {
         _tempInsideColor, _tempAdjustedColor, _fanStatusColor, _heatingCoolingStatusColor, _intHumidity;
 
     public HvacVM() {
-        ReferenceValues.JsonHvacSettings.IsFanAuto = true;
-        ReferenceValues.JsonHvacSettings.IsProgramRunning = false;
-        ReferenceValues.JsonHvacSettings.IsHeatingMode = false;
         if (ReferenceValues.JsonHvacSettings.TemperatureSet == 0) {
-            ReferenceValues.JsonHvacSettings.TemperatureSet = 26;
+            ReferenceValues.JsonHvacSettings.TemperatureSet = 21;
         }
 
         TempInsideColor = "White";
-        ReferenceValues.JsonHvacSettings.IsStandby = true;
 
         GetButtonColors();
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -52,14 +48,26 @@ public class HvacVM : BaseViewModel {
             return;
         }
 
-        TempAdjusted = ReferenceValues.JsonHvacSettings.TemperatureSet + "°";
+        if (ReferenceValues.JsonMasterSettings.IsImperialMode) {
+            double f = ReferenceValues.JsonHvacSettings.TemperatureSet * 1.8 + 32;
+            TempAdjusted = (int)f + "°";
+        } else {
+            TempAdjusted = ReferenceValues.JsonHvacSettings.TemperatureSet + "°";
+        }
+
         TempAdjustedColor = "White";
 
         if (ReferenceValues.InteriorTemp == -99) {
             TempInside = "??";
             TempInsideColor = "Red";
         } else {
-            TempInside = ReferenceValues.InteriorTemp + "°";
+            if (ReferenceValues.JsonMasterSettings.IsImperialMode) {
+                double f = ReferenceValues.InteriorTemp * 1.8 + 32;
+                TempInside = (int)f + "°";
+            } else {
+                TempInside = ReferenceValues.InteriorTemp + "°";
+            }
+
             TempInsideColor = "White";
         }
 
@@ -142,7 +150,7 @@ public class HvacVM : BaseViewModel {
                 }
 
                 if (isHeatingMode != ReferenceValues.JsonHvacSettings.IsHeatingMode) {
-                    ReferenceValues.SerialPortMaster.Write("8");
+                    ReferenceValues.SerialPortMaster.Write("6");
 
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -154,7 +162,7 @@ public class HvacVM : BaseViewModel {
                 }
 
                 if (temp != ReferenceValues.JsonHvacSettings.TemperatureSet) {
-                    char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 15);
+                    char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 50);
                     ReferenceValues.SerialPortMaster.Write(c.ToString());
 
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {

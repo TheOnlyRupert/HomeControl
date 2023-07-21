@@ -98,4 +98,5 @@ public static class ReferenceValues {
     public static JsonRecipe JsonRecipesMaster { get; set; }
     public static string SoundToPlay { get; set; }
     public static JsonTasks JsonTasksMaster { get; set; }
+    public static ObservableCollection<string> IconImageList { get; set; }
 }

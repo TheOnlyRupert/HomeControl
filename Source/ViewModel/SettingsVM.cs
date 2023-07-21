@@ -16,6 +16,8 @@ public class SettingsVM : BaseViewModel {
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
         _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort;
 
+    private bool _valueImperialChecked, _valueMetricChecked, _isEditTasksMode, _isNormalMode, _isDebugMode;
+
     public SettingsVM() {
         UserAgentText = ReferenceValues.JsonMasterSettings.UserAgent;
         User1Name = ReferenceValues.JsonMasterSettings.User1Name;
@@ -60,6 +62,15 @@ public class SettingsVM : BaseViewModel {
         EmergencyContact2Phone2 = ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2;
         AlarmCode = ReferenceValues.JsonMasterSettings.AlarmCode;
         ComPort = ReferenceValues.JsonMasterSettings.ComPort;
+        ValueImperialChecked = ReferenceValues.JsonMasterSettings.IsImperialMode;
+        ValueMetricChecked = !ValueImperialChecked;
+        IsNormalMode = ReferenceValues.JsonMasterSettings.IsNormalMode;
+        IsEditTasksMode = ReferenceValues.JsonMasterSettings.IsEditTasksMode;
+        IsDebugMode = ReferenceValues.JsonMasterSettings.IsDebugMode;
+
+        if (!IsNormalMode && !IsEditTasksMode && !IsDebugMode) {
+            IsNormalMode = true;
+        }
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -111,6 +122,11 @@ public class SettingsVM : BaseViewModel {
                 ReferenceValues.JsonMasterSettings.EmergencyContact2Phone2 = EmergencyContact2Phone2;
                 ReferenceValues.JsonMasterSettings.AlarmCode = AlarmCode;
                 ReferenceValues.JsonMasterSettings.ComPort = ComPort;
+                ReferenceValues.JsonMasterSettings.IsImperialMode = ValueImperialChecked;
+                ValueMetricChecked = !ValueImperialChecked;
+                ReferenceValues.JsonMasterSettings.IsNormalMode = IsNormalMode;
+                ReferenceValues.JsonMasterSettings.IsEditTasksMode = IsEditTasksMode;
+                ReferenceValues.JsonMasterSettings.IsDebugMode = IsDebugMode;
 
                 try {
                     string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonMasterSettings);
@@ -140,7 +156,7 @@ public class SettingsVM : BaseViewModel {
     public string UserAgentText {
         get => _userAgentText;
         set {
-            _userAgentText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            _userAgentText = value;
             RaisePropertyChangedEvent("UserAgentText");
         }
     }
@@ -478,6 +494,46 @@ public class SettingsVM : BaseViewModel {
         set {
             _comPort = value;
             RaisePropertyChangedEvent("ComPort");
+        }
+    }
+
+    public bool ValueImperialChecked {
+        get => _valueImperialChecked;
+        set {
+            _valueImperialChecked = value;
+            RaisePropertyChangedEvent("ValueImperialChecked");
+        }
+    }
+
+    public bool ValueMetricChecked {
+        get => _valueMetricChecked;
+        set {
+            _valueMetricChecked = value;
+            RaisePropertyChangedEvent("ValueMetricChecked");
+        }
+    }
+
+    public bool IsNormalMode {
+        get => _isNormalMode;
+        set {
+            _isNormalMode = value;
+            RaisePropertyChangedEvent("IsNormalMode");
+        }
+    }
+
+    public bool IsEditTasksMode {
+        get => _isEditTasksMode;
+        set {
+            _isEditTasksMode = value;
+            RaisePropertyChangedEvent("IsEditTasksMode");
+        }
+    }
+
+    public bool IsDebugMode {
+        get => _isDebugMode;
+        set {
+            _isDebugMode = value;
+            RaisePropertyChangedEvent("IsDebugMode");
         }
     }
 

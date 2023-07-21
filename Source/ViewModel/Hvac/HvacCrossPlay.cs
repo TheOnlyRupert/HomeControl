@@ -180,22 +180,6 @@ public static class HvacCrossPlay {
                 Description = "HVAC: Program Off"
             });
             SaveDebugFile.Save();
-        } else if (data.Contains("<HVAC: Override TRUE>")) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "HvacCrossPlay",
-                Description = "HVAC: Override TRUE"
-            });
-            SaveDebugFile.Save();
-        } else if (data.Contains("<HVAC: Override FALSE>")) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "HvacCrossPlay",
-                Description = "HVAC: Override FALSE"
-            });
-            SaveDebugFile.Save();
         } else if (data.Contains("<HVAC: Heating Running>")) {
             ReferenceValues.JsonHvacSettings.IsStandby = false;
             ReferenceValues.JsonHvacSettings.IsProgramRunning = true;
@@ -241,8 +225,21 @@ public static class HvacCrossPlay {
                 data = data.Substring(data.IndexOf('<'));
                 data = data.Substring(16, data.Length - 17);
                 ReferenceValues.JsonHvacSettings.TemperatureSet = int.Parse(data);
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "HvacCrossPlay",
+                    Description = "HVAC: Changing Set Temperature to: " + ReferenceValues.JsonHvacSettings.TemperatureSet + "°C"
+                });
+                SaveDebugFile.Save();
             } catch (Exception e) {
-                Console.WriteLine(e.ToString());
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "HvacCrossPlay",
+                    Description = e.ToString()
+                });
+                SaveDebugFile.Save();
             }
         }
 

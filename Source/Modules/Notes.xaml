@@ -43,7 +43,7 @@
                         <TextBlock Text="Contacts" HorizontalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="recipes">
+                <Button Grid.Row="0" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -60,8 +60,8 @@
                         </Style>
                     </Button.Style>
                     <StackPanel>
-                        <Image Source="../../../Resources/Images/icons/recipes.png" Width="48" Height="48"/>
-                        <TextBlock Text="Recipes" HorizontalAlignment="Center" Foreground="White"/>
+                        <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
+                        <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
 

@@ -90,7 +90,7 @@
                 <TextBlock Grid.Row="0" Text="Finance List" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
                 <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="1" ItemsSource="{Binding FinanceList}" Foreground="White"
-                                        SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="White"
+                                        SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
                                         IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -196,14 +196,34 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Viewbox Grid.Column="0" Height="48" Margin="0 8 16 8" HorizontalAlignment="Left">
+                    <Button Grid.Column="0" Content="&lt;" Command="{Binding ButtonCommand}" CommandParameter="subDay" FontSize="32" VerticalAlignment="Center"
+                            VerticalContentAlignment="Center">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 0">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Viewbox Grid.Column="1" Height="48" Margin="16 8" HorizontalAlignment="Left">
                         <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
                     </Viewbox>
 
-                    <Button Grid.Column="1" Content="+" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="32" VerticalAlignment="Center"
-                            VerticalContentAlignment="Center" Background="{Binding ParentsBackgroundColor}">
+                    <Button Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="32" VerticalAlignment="Center"
+                            VerticalContentAlignment="Center">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -356,7 +376,7 @@
                 <TextBlock Grid.Row="0" Text="Spending Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
                 <control:CustomListView Grid.Row="1" x:Name="CustomListView2" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White"
-                                        SelectedItem="{Binding DetailedFinanceSelected1}" SelectionMode="Single" Background="Transparent" BorderBrush="White"
+                                        SelectedItem="{Binding DetailedFinanceSelected1}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
                                         IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -417,7 +437,7 @@
 
 
                 <control:CustomListView Grid.Row="1" x:Name="CustomListView3" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock2}" Foreground="CornflowerBlue"
-                                        SelectedItem="{Binding DetailedFinanceSelected2}" SelectionMode="Single" Background="Transparent" BorderBrush="White"
+                                        SelectedItem="{Binding DetailedFinanceSelected2}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
                                         IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">

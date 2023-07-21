@@ -14,11 +14,6 @@ public class NotesVM : BaseViewModel {
             contacts.ShowDialog();
             contacts.Close();
             break;
-        case "recipes":
-            Recipes recipes = new();
-            recipes.ShowDialog();
-            recipes.Close();
-            break;
         }
     }
 }

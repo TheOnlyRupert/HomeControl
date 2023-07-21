@@ -270,6 +270,20 @@ public class EditFinancesVM : BaseViewModel {
             }
 
             break;
+        case "subDay":
+            try {
+                DateText = Convert.ToDateTime(DateText).AddDays(-1).ToShortDateString();
+            } catch (Exception e) {
+                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "EditFinancesVM",
+                    Description = e.ToString()
+                });
+                SaveDebugFile.Save();
+            }
+
+            break;
         case "addDay":
             try {
                 DateText = Convert.ToDateTime(DateText).AddDays(1).ToShortDateString();
@@ -1154,7 +1168,7 @@ public class EditFinancesVM : BaseViewModel {
     public string DescriptionText {
         get => _descriptionText;
         set {
-            _descriptionText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            _descriptionText = value;
             RaisePropertyChangedEvent("DescriptionText");
         }
     }
@@ -1182,7 +1196,7 @@ public class EditFinancesVM : BaseViewModel {
     public string DetailsText {
         get => _detailsText;
         set {
-            _detailsText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            _detailsText = value;
             RaisePropertyChangedEvent("DetailsText");
         }
     }

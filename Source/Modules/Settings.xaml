@@ -20,6 +20,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -246,7 +248,18 @@
             <TextBox Text="{Binding ComPort, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
-        <Grid Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="4">
+        <StackPanel Grid.Column="0" Grid.Row="17">
+            <RadioButton GroupName="metric" IsChecked="{Binding ValueImperialChecked}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Imperial</RadioButton>
+            <RadioButton GroupName="metric" IsChecked="{Binding ValueMetricChecked}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Metric</RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="17">
+            <RadioButton GroupName="debug" IsChecked="{Binding IsNormalMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Normal Mode</RadioButton>
+            <RadioButton GroupName="debug" IsChecked="{Binding IsEditTasksMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Edit Tasks Mode</RadioButton>
+            <RadioButton GroupName="debug" IsChecked="{Binding IsDebugMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Debug Mode</RadioButton>
+        </StackPanel>
+
+        <Grid Grid.Column="0" Grid.Row="19" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

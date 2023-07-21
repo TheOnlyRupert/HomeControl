@@ -12,21 +12,51 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class TasksDailyVM : BaseViewModel {
-    private string _taskHeaderText, _taskName, _imageName;
+    private ObservableCollection<string> _imageList;
+    private string _taskHeaderText, _taskName, _imageSelected, _editVisibility;
     private ObservableCollection<Task> _taskList;
     private Task _taskSelected;
 
     public TasksDailyVM() {
-        TaskList = new ObservableCollection<Task>();
         try {
-            TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1;
+            switch (ReferenceValues.ActiveBehaviorUser) {
+            case 1:
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User1Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1;
+                break;
+            case 2:
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User2Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2;
+                break;
+            case 3:
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User3Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3;
+                break;
+            case 4:
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User4Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4;
+                break;
+            case 5:
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User5Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5;
+                break;
+            }
+
+            TaskList ??= new ObservableCollection<Task>();
         } catch (Exception) {
             ReferenceValues.JsonTasksMaster.JsonTasksDaily = new JsonTasksDaily {
-                TaskListDailyUser1 = new ObservableCollection<Task>()
+                TaskListDailyUser1 = new ObservableCollection<Task>(),
+                TaskListDailyUser2 = new ObservableCollection<Task>(),
+                TaskListDailyUser3 = new ObservableCollection<Task>(),
+                TaskListDailyUser4 = new ObservableCollection<Task>(),
+                TaskListDailyUser5 = new ObservableCollection<Task>()
             };
         }
 
-        TaskHeaderText = ReferenceValues.ActiveBehaviorUser + " " + DateTime.Now.DayOfWeek + " Tasks";
+        EditVisibility = !ReferenceValues.JsonMasterSettings.IsNormalMode ? "VISIBLE" : "COLLAPSED";
+
+        ImageList = ReferenceValues.IconImageList;
+        ImageSelected = "alarms";
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -43,19 +73,18 @@ public class TasksDailyVM : BaseViewModel {
                     Date = DateTime.Now,
                     Level = "INFO",
                     Module = "TasksDailyVM",
-                    Description = "Adding daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageName
+                    Description = "Adding daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                 });
                 SaveDebugFile.Save();
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
-                    ImageName = ImageName
+                    ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png"
                 });
 
                 ReferenceValues.SoundToPlay = "newTask";
                 SoundDispatcher.PlaySound();
                 TaskName = "";
-                ImageName = "";
                 SaveJson();
             }
 
@@ -73,20 +102,17 @@ public class TasksDailyVM : BaseViewModel {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "TasksDailyVM",
-                                Description = "Updating daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageName
+                                Description = "Updating daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                             });
                             SaveDebugFile.Save();
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
-                                ImageName = ImageName
+                                ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png"
                             });
 
-                            ReferenceValues.SoundToPlay = "cash";
-                            SoundDispatcher.PlaySound();
                             TaskList.Remove(TaskSelected);
                             TaskName = "";
-                            ImageName = "";
                             SaveJson();
                         }
                     }
@@ -111,7 +137,7 @@ public class TasksDailyVM : BaseViewModel {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "TaskDailyVM",
-                            Description = "Deleting daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageName
+                            Description = "Deleting daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                         });
                         SaveDebugFile.Save();
 
@@ -133,14 +159,14 @@ public class TasksDailyVM : BaseViewModel {
 
             break;
         case "complete":
-            if (TaskSelected.TaskName != null) {
+            try {
                 if (!TaskSelected.IsCompleted) {
                     ReferenceValues.SoundToPlay = "achievement1";
                     SoundDispatcher.PlaySound();
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = ImageName,
+                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                         IsCompleted = true,
                         DateCompleted = DateTime.Now.ToString("HH:mm")
                     });
@@ -148,23 +174,27 @@ public class TasksDailyVM : BaseViewModel {
                     TaskList.Remove(TaskSelected);
                     SaveJson();
                 }
+            } catch (Exception) {
+                // ignored
             }
 
             break;
         case "reset":
-            if (TaskSelected.TaskName != null) {
+            try {
                 if (TaskSelected.IsCompleted) {
                     TaskSelected.IsCompleted = false;
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = ImageName,
+                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                         DateCompleted = ""
                     });
 
                     TaskList.Remove(TaskSelected);
                     SaveJson();
                 }
+            } catch (Exception) {
+                // ignored
             }
 
             break;
@@ -174,7 +204,23 @@ public class TasksDailyVM : BaseViewModel {
     private void SaveJson() {
         if (TaskList.Count > 0) {
             try {
-                ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1 = TaskList;
+                switch (ReferenceValues.ActiveBehaviorUser) {
+                case 1:
+                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1 = TaskList;
+                    break;
+                case 2:
+                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2 = TaskList;
+                    break;
+                case 3:
+                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3 = TaskList;
+                    break;
+                case 4:
+                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4 = TaskList;
+                    break;
+                case 5:
+                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5 = TaskList;
+                    break;
+                }
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -204,7 +250,7 @@ public class TasksDailyVM : BaseViewModel {
 
     private void PopulateDetailedView(Task value) {
         TaskName = value.TaskName;
-        ImageName = value.ImageName;
+        ImageSelected = value.ImageName.Substring(32, value.ImageName.Length - 36);
     }
 
     #region Fields
@@ -220,16 +266,8 @@ public class TasksDailyVM : BaseViewModel {
     public string TaskName {
         get => _taskName;
         set {
-            _taskName = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            _taskName = value;
             RaisePropertyChangedEvent("TaskName");
-        }
-    }
-
-    public string ImageName {
-        get => _imageName;
-        set {
-            _imageName = VerifyInput.VerifyTextAlphaNumericSpace(value);
-            RaisePropertyChangedEvent("ImageName");
         }
     }
 
@@ -247,6 +285,30 @@ public class TasksDailyVM : BaseViewModel {
             _taskSelected = value;
             PopulateDetailedView(value);
             RaisePropertyChangedEvent("TaskSelected");
+        }
+    }
+
+    public ObservableCollection<string> ImageList {
+        get => _imageList;
+        set {
+            _imageList = value;
+            RaisePropertyChangedEvent("ImageList");
+        }
+    }
+
+    public string ImageSelected {
+        get => _imageSelected;
+        set {
+            _imageSelected = value;
+            RaisePropertyChangedEvent("ImageSelected");
+        }
+    }
+
+    public string EditVisibility {
+        get => _editVisibility;
+        set {
+            _editVisibility = value;
+            RaisePropertyChangedEvent("EditVisibility");
         }
     }
 

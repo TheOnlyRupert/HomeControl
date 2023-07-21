@@ -45,4 +45,7 @@ public class JsonSettings {
     public string AlarmCode { get; set; }
     public string ComPort { get; set; }
     public bool IsImperialMode { get; set; }
+    public bool IsNormalMode { get; set; }
+    public bool IsEditTasksMode { get; set; }
+    public bool IsDebugMode { get; set; }
 }

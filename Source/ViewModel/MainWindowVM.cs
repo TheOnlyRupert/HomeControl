@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Net;
 using System.Text.Json;
@@ -26,6 +27,9 @@ public class MainWindowVM : BaseViewModel {
         internetMessage = false;
         OnlineColor = "Black";
 
+        /* Get Settings */
+        new SettingsFromJson();
+
         /* Get Debug */
         new DebugFromJson();
 
@@ -37,8 +41,41 @@ public class MainWindowVM : BaseViewModel {
         });
         SaveDebugFile.Save();
 
-        /* Get Settings */
-        new SettingsFromJson();
+        /* Icon Image List (Manual for now until I can figure out how to pull from Resource file without copying images */
+        ReferenceValues.IconImageList = new ObservableCollection<string> {
+            "alarms",
+            "behavior",
+            "calendar",
+            "chores",
+            "clock",
+            "coin_flip",
+            "contact",
+            "events",
+            "games",
+            "groceries",
+            "hvac",
+            "key_locked",
+            "key_unlocked",
+            "meal",
+            "money",
+            "notes",
+            "open_tickets",
+            "panic",
+            "pictionary",
+            "recipes",
+            "tamagotchi",
+            "temp_burning",
+            "temp_cold",
+            "temp_cool",
+            "temp_freezing",
+            "temp_hot",
+            "temp_warm",
+            "tic_tac_toe",
+            "todo",
+            "vacation",
+            "wifi",
+            "workout"
+        };
 
         if (string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.UserAgent)) {
             Settings settingsDialog = new();
@@ -69,8 +106,10 @@ public class MainWindowVM : BaseViewModel {
         activityTimer.OnActive += activityTimer_OnActive;
 
         void activityTimer_OnInactive(object sender, EventArgs e) {
-            simpleMessenger.PushMessage("ScreenSaverOn", null);
-            ReferenceValues.LockUI = true;
+            if (!ReferenceValues.JsonMasterSettings.IsDebugMode) {
+                simpleMessenger.PushMessage("ScreenSaverOn", null);
+                ReferenceValues.LockUI = true;
+            }
         }
 
         void activityTimer_OnActive(object sender, EventArgs e) {

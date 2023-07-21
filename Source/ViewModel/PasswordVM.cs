@@ -7,12 +7,10 @@ namespace HomeControl.Source.ViewModel;
 
 public class PasswordVM : BaseViewModel {
     private string _image;
-    private bool passwordAccepted;
 
     public PasswordVM() {
-        ReferenceValues.LockUI = true;
-        passwordAccepted = true;
-        Image = "./../../Resources/Images/icons/key_locked.png";
+        ReferenceValues.LockUI = !ReferenceValues.JsonMasterSettings.IsDebugMode;
+        Image = ReferenceValues.LockUI ? "./../../Resources/Images/icons/key_locked.png" : "./../../Resources/Images/icons/key_unlocked.png";
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;

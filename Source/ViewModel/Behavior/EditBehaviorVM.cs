@@ -408,6 +408,12 @@ public class EditBehaviorVM : BaseViewModel {
                 tasksDaily.Close();
 
                 break;
+            case "weekly":
+                TasksWeekly tasksWeekly = new();
+                tasksWeekly.ShowDialog();
+                tasksWeekly.Close();
+
+                break;
             }
 
             RefreshBehavior();

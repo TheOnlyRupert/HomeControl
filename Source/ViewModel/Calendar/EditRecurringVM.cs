@@ -211,7 +211,7 @@ public class EditRecurringVM : BaseViewModel {
     public string HolidayText {
         get => _holidayText;
         set {
-            _holidayText = VerifyInput.VerifyTextAlphaNumericSpace(value);
+            _holidayText = value;
             RaisePropertyChangedEvent("HolidayText");
         }
     }

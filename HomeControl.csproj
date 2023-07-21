@@ -137,6 +137,9 @@
         <Compile Include="Source\Modules\Behavior\TasksDaily.xaml.cs">
             <DependentUpon>TasksDaily.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Behavior\TasksWeekly.xaml.cs">
+            <DependentUpon>TasksWeekly.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Calendar\EditRecurring.xaml.cs">
             <DependentUpon>EditRecurring.xaml</DependentUpon>
         </Compile>
@@ -146,7 +149,6 @@
         <Compile Include="Source\Modules\DebugLog.xaml.cs">
             <DependentUpon>DebugLog.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Function.xaml.cs"/>
         <Compile Include="Source\Modules\Games\CoinFlip.xaml.cs">
             <DependentUpon>CoinFlip.xaml</DependentUpon>
         </Compile>
@@ -170,9 +172,6 @@
         </Compile>
         <Compile Include="Source\Modules\Password.xaml.cs">
             <DependentUpon>Password.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Recipes.xaml.cs">
-            <DependentUpon>Recipes.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Timer\Timer.xaml.cs">
             <DependentUpon>Timer.xaml</DependentUpon>
@@ -216,6 +215,7 @@
         <Compile Include="Source\Reference\VerifyInput.cs"/>
         <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksDailyVM.cs"/>
+        <Compile Include="Source\ViewModel\Behavior\TasksWeeklyVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
@@ -230,7 +230,6 @@
         <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>
         <Compile Include="Source\ViewModel\MusicPlayerVM.cs"/>
         <Compile Include="Source\ViewModel\PasswordVM.cs"/>
-        <Compile Include="Source\ViewModel\RecipesVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
         <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
@@ -262,10 +261,10 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Source\Modules\Behavior\TasksDaily.xaml"/>
+        <Page Include="Source\Modules\Behavior\TasksWeekly.xaml"/>
         <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
         <Page Include="Source\Modules\DebugLog.xaml"/>
-        <Page Include="Source\Modules\Function.xaml"/>
         <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
         <Page Include="Source\Modules\Games\Tamagotchi.xaml"/>
         <Page Include="Source\Modules\Games\TamagotchiWindowCloset.xaml"/>
@@ -274,7 +273,6 @@
         <Page Include="Source\Modules\Hvac\Hvac.xaml"/>
         <Page Include="Source\Modules\MusicPlayer.xaml"/>
         <Page Include="Source\Modules\Password.xaml"/>
-        <Page Include="Source\Modules\Recipes.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
         <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
         <Page Include="Source\Modules\Behavior\Behavior.xaml"/>
@@ -312,7 +310,9 @@
         <Resource Include="Resources\Images\icon.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icons\alarms.png"/>
+        <Resource Include="Resources\Images\icons\alarms.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
         <Resource Include="Resources\Images\icons\calendar.png"/>
         <Resource Include="Resources\Images\icons\chores.png"/>
         <Resource Include="Resources\Images\icons\coin_flip.png"/>

@@ -2,9 +2,9 @@
 
 namespace HomeControl.Source.Modules.Behavior;
 
-public partial class TasksDaily {
-    public TasksDaily() {
+public partial class TasksWeekly {
+    public TasksWeekly() {
         InitializeComponent();
-        DataContext = new TasksDailyVM();
+        DataContext = new TasksWeeklyVM();
     }
 }
