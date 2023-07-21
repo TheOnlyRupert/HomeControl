@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
@@ -12,7 +11,7 @@ using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Behavior;
 
-public class TasksWeeklyVM : BaseViewModel {
+public class TasksMonthlyVM : BaseViewModel {
     private ObservableCollection<string> _imageList, _roomList;
     private bool _isFundAmountReadOnly;
 
@@ -27,7 +26,7 @@ public class TasksWeeklyVM : BaseViewModel {
 
     private Task _taskSelected;
 
-    public TasksWeeklyVM() {
+    public TasksMonthlyVM() {
         TaskList = new ObservableCollection<Task>();
 
         /* Hardcoded for now... allow this to have custom names in the future */
@@ -69,44 +68,40 @@ public class TasksWeeklyVM : BaseViewModel {
         Room16TaskSelectedIndex = -1;
 
         try {
-            DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
-            System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
-            string currentWeek = "\"Week " + calendar.GetWeekOfYear(DateTime.Now, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek) + "\"";
-
             switch (ReferenceValues.ActiveBehaviorUser) {
             case 1:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User1Name + "'s " + currentWeek + " Tasks";
-                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser1.ToString();
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User1Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser1.ToString();
                 break;
             case 2:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User2Name + "'s " + currentWeek + " Tasks";
-                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser2.ToString();
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User2Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser2.ToString();
                 break;
             case 3:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User3Name + "'s " + currentWeek + " Tasks";
-                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser3.ToString();
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User3Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser3.ToString();
                 break;
             case 4:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User4Name + "'s " + currentWeek + " Tasks";
-                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser4.ToString();
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User4Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser4.ToString();
                 break;
             case 5:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User5Name + "'s " + currentWeek + " Tasks";
-                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser5.ToString();
+                TaskHeaderText = ReferenceValues.JsonMasterSettings.User5Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser5.ToString();
                 break;
             }
         } catch (Exception) {
-            ReferenceValues.JsonTasksMaster.JsonTasksWeekly = new JsonTasksWeekly {
-                TaskListWeeklyUser1 = new ObservableCollection<Task>(),
-                TaskListWeeklyUser2 = new ObservableCollection<Task>(),
-                TaskListWeeklyUser3 = new ObservableCollection<Task>(),
-                TaskListWeeklyUser4 = new ObservableCollection<Task>(),
-                TaskListWeeklyUser5 = new ObservableCollection<Task>()
+            ReferenceValues.JsonTasksMaster.JsonTasksMonthly = new JsonTasksMonthly {
+                TaskListMonthlyUser1 = new ObservableCollection<Task>(),
+                TaskListMonthlyUser2 = new ObservableCollection<Task>(),
+                TaskListMonthlyUser3 = new ObservableCollection<Task>(),
+                TaskListMonthlyUser4 = new ObservableCollection<Task>(),
+                TaskListMonthlyUser5 = new ObservableCollection<Task>()
             };
         }
 
@@ -150,8 +145,8 @@ public class TasksWeeklyVM : BaseViewModel {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "INFO",
-                    Module = "TasksWeeklyVM",
-                    Description = "Adding weekly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
+                    Module = "TasksMonthlyVM",
+                    Description = "Adding monthly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                 });
                 SaveDebugFile.Save();
 
@@ -182,8 +177,8 @@ public class TasksWeeklyVM : BaseViewModel {
                             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
-                                Module = "TasksWeeklyVM",
-                                Description = "Updating weekly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
+                                Module = "TasksMonthlyVM",
+                                Description = "Updating Monthly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                             });
                             SaveDebugFile.Save();
 
@@ -205,7 +200,7 @@ public class TasksWeeklyVM : BaseViewModel {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
-                    Module = "TaskWeeklyVM",
+                    Module = "TaskMonthlyVM",
                     Description = e.ToString()
                 });
                 SaveDebugFile.Save();
@@ -220,8 +215,8 @@ public class TasksWeeklyVM : BaseViewModel {
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
-                            Module = "TaskWeeklyVM",
-                            Description = "Deleting weekly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
+                            Module = "TaskMonthlyVM",
+                            Description = "Deleting monthly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                         });
                         SaveDebugFile.Save();
 
@@ -237,7 +232,7 @@ public class TasksWeeklyVM : BaseViewModel {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
-                    Module = "TaskWeeklyVM",
+                    Module = "TaskMonthlyVM",
                     Description = e.ToString()
                 });
                 SaveDebugFile.Save();
@@ -329,12 +324,12 @@ public class TasksWeeklyVM : BaseViewModel {
                 switch (ReferenceValues.ActiveBehaviorUser) {
                 case 1:
                     try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser1 = Convert.ToInt32(FundAmount);
+                        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser1 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
-                            Module = "TasksWeeklyVM",
+                            Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
                         SaveDebugFile.Save();
@@ -343,12 +338,12 @@ public class TasksWeeklyVM : BaseViewModel {
                     break;
                 case 2:
                     try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser2 = Convert.ToInt32(FundAmount);
+                        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser2 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
-                            Module = "TasksWeeklyVM",
+                            Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
                         SaveDebugFile.Save();
@@ -357,12 +352,12 @@ public class TasksWeeklyVM : BaseViewModel {
                     break;
                 case 3:
                     try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser3 = Convert.ToInt32(FundAmount);
+                        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser3 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
-                            Module = "TasksWeeklyVM",
+                            Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
                         SaveDebugFile.Save();
@@ -371,12 +366,12 @@ public class TasksWeeklyVM : BaseViewModel {
                     break;
                 case 4:
                     try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser4 = Convert.ToInt32(FundAmount);
+                        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser4 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
-                            Module = "TasksWeeklyVM",
+                            Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
                         SaveDebugFile.Save();
@@ -385,12 +380,12 @@ public class TasksWeeklyVM : BaseViewModel {
                     break;
                 case 5:
                     try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser5 = Convert.ToInt32(FundAmount);
+                        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser5 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
-                            Module = "TasksWeeklyVM",
+                            Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
                         SaveDebugFile.Save();
@@ -414,26 +409,26 @@ public class TasksWeeklyVM : BaseViewModel {
             try {
                 switch (ReferenceValues.ActiveBehaviorUser) {
                 case 1:
-                    ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1 = TaskList;
+                    ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1 = TaskList;
                     break;
                 case 2:
-                    ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2 = TaskList;
+                    ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2 = TaskList;
                     break;
                 case 3:
-                    ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3 = TaskList;
+                    ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3 = TaskList;
                     break;
                 case 4:
-                    ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4 = TaskList;
+                    ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4 = TaskList;
                     break;
                 case 5:
-                    ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5 = TaskList;
+                    ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5 = TaskList;
                     break;
                 }
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
-                    Module = "TaskWeeklyVM",
+                    Module = "TaskMonthlyVM",
                     Description = e.ToString()
                 });
                 SaveDebugFile.Save();
@@ -448,7 +443,7 @@ public class TasksWeeklyVM : BaseViewModel {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
-                    Module = "TaskWeeklyVM",
+                    Module = "TaskMonthlyVM",
                     Description = e.ToString()
                 });
                 SaveDebugFile.Save();
@@ -1344,7 +1339,6 @@ public class TasksWeeklyVM : BaseViewModel {
             RaisePropertyChangedEvent("Room16TaskSelectedIndex");
         }
     }
-
 
     public string FundAmount {
         get => _fundAmount;

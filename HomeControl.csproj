@@ -123,7 +123,7 @@
         <Compile Include="Source\IO\HvacFromJson.cs"/>
         <Compile Include="Source\IO\JsonBehavior.cs"/>
         <Compile Include="Source\IO\JsonCalendar.cs"/>
-        <Compile Include="Source\IO\JsonChores.cs"/>
+        <Compile Include="Source\IO\JsonTasks.cs"/>
         <Compile Include="Source\IO\JsonFinances.cs"/>
         <Compile Include="Source\IO\JsonGameStats.cs"/>
         <Compile Include="Source\IO\JsonHvac.cs"/>
@@ -136,6 +136,12 @@
         <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
         <Compile Include="Source\Modules\Behavior\TasksDaily.xaml.cs">
             <DependentUpon>TasksDaily.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Behavior\TasksMonthly.xaml.cs">
+            <DependentUpon>TasksMonthly.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Behavior\TasksQuarterly.xaml.cs">
+            <DependentUpon>TasksQuarterly.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Behavior\TasksWeekly.xaml.cs">
             <DependentUpon>TasksWeekly.xaml</DependentUpon>
@@ -215,6 +221,8 @@
         <Compile Include="Source\Reference\VerifyInput.cs"/>
         <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksDailyVM.cs"/>
+        <Compile Include="Source\ViewModel\Behavior\TasksMonthlyVM.cs"/>
+        <Compile Include="Source\ViewModel\Behavior\TasksQuarterlyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksWeeklyVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
@@ -261,6 +269,8 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="Source\Modules\Behavior\TasksDaily.xaml"/>
+        <Page Include="Source\Modules\Behavior\TasksMonthly.xaml"/>
+        <Page Include="Source\Modules\Behavior\TasksQuarterly.xaml"/>
         <Page Include="Source\Modules\Behavior\TasksWeekly.xaml"/>
         <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>

@@ -4,6 +4,11 @@ namespace HomeControl.Source.IO;
 
 public class JsonFinances {
     public ObservableCollection<FinanceBlock> financeList { get; set; }
+    public int User1Funds { get; set; }
+    public int User2Funds { get; set; }
+    public int User3Funds { get; set; }
+    public int User4Funds { get; set; }
+    public int User5Funds { get; set; }
 }
 
 public class FinanceBlock {

@@ -13,7 +13,8 @@ namespace HomeControl.Source.ViewModel.Behavior;
 
 public class TasksDailyVM : BaseViewModel {
     private ObservableCollection<string> _imageList;
-    private string _taskHeaderText, _taskName, _imageSelected, _editVisibility;
+    private bool _isFundAmountReadOnly;
+    private string _taskHeaderText, _taskName, _imageSelected, _editVisibility, _fundAmount;
     private ObservableCollection<Task> _taskList;
     private Task _taskSelected;
 
@@ -23,22 +24,27 @@ public class TasksDailyVM : BaseViewModel {
             case 1:
                 TaskHeaderText = ReferenceValues.JsonMasterSettings.User1Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser1.ToString();
                 break;
             case 2:
                 TaskHeaderText = ReferenceValues.JsonMasterSettings.User2Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser2.ToString();
                 break;
             case 3:
                 TaskHeaderText = ReferenceValues.JsonMasterSettings.User3Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser3.ToString();
                 break;
             case 4:
                 TaskHeaderText = ReferenceValues.JsonMasterSettings.User4Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser4.ToString();
                 break;
             case 5:
                 TaskHeaderText = ReferenceValues.JsonMasterSettings.User5Name + "'s " + DateTime.Now.DayOfWeek + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5;
+                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser5.ToString();
                 break;
             }
 
@@ -54,6 +60,7 @@ public class TasksDailyVM : BaseViewModel {
         }
 
         EditVisibility = !ReferenceValues.JsonMasterSettings.IsNormalMode ? "VISIBLE" : "COLLAPSED";
+        IsFundAmountReadOnly = !ReferenceValues.JsonMasterSettings.IsDebugMode;
 
         ImageList = ReferenceValues.IconImageList;
         ImageSelected = "alarms";
@@ -198,6 +205,88 @@ public class TasksDailyVM : BaseViewModel {
             }
 
             break;
+        case "saveFunds":
+            if (ReferenceValues.JsonMasterSettings.IsDebugMode) {
+                switch (ReferenceValues.ActiveBehaviorUser) {
+                case 1:
+                    try {
+                        ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser1 = Convert.ToInt32(FundAmount);
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "TasksDailyVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+
+                    break;
+                case 2:
+                    try {
+                        ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser2 = Convert.ToInt32(FundAmount);
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "TasksDailyVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+
+                    break;
+                case 3:
+                    try {
+                        ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser3 = Convert.ToInt32(FundAmount);
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "TasksDailyVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+
+                    break;
+                case 4:
+                    try {
+                        ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser4 = Convert.ToInt32(FundAmount);
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "TasksDailyVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+
+                    break;
+                case 5:
+                    try {
+                        ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser5 = Convert.ToInt32(FundAmount);
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "TasksDailyVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+
+                    break;
+                }
+
+                SaveJson();
+            } else {
+                ReferenceValues.SoundToPlay = "unable";
+                SoundDispatcher.PlaySound();
+            }
+
+            break;
         }
     }
 
@@ -309,6 +398,22 @@ public class TasksDailyVM : BaseViewModel {
         set {
             _editVisibility = value;
             RaisePropertyChangedEvent("EditVisibility");
+        }
+    }
+
+    public string FundAmount {
+        get => _fundAmount;
+        set {
+            _fundAmount = VerifyInput.VerifyTextNumeric(value);
+            RaisePropertyChangedEvent("FundAmount");
+        }
+    }
+
+    public bool IsFundAmountReadOnly {
+        get => _isFundAmountReadOnly;
+        set {
+            _isFundAmountReadOnly = value;
+            RaisePropertyChangedEvent("IsFundAmountReadOnly");
         }
     }
 

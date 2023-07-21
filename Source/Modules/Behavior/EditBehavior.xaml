@@ -361,18 +361,18 @@
 
                 <TextBlock Grid.Row="0" Text="Task Overview" Foreground="White" HorizontalAlignment="Center" FontSize="24"/>
 
-                <Grid Grid.Row="1" Margin="4">
+                <Grid Grid.Row="1" Margin="4 16">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" Foreground="White" FontSize="16" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedDay}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedDay}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
                     <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding TasksCompletedDayProgressColor}"
-                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1" Maximum="100" FontSize="24"/>
+                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
                 </Grid>
 
                 <Grid Grid.Row="2" Margin="4">
@@ -382,25 +382,27 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" Foreground="White" FontSize="16"/>
-                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedWeek}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" Foreground="White" FontSize="24"/>
+                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedWeek}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
                     <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding TasksCompletedWeekProgressColor}"
-                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1" FontSize="24"/>
+                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontSize="24"/>
                 </Grid>
 
-                <Grid Grid.Row="3" Margin="4">
+                <Grid Grid.Row="3" Margin="4 16">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="16" Foreground="White" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedMonth}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedMonth}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
                     <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding TasksCompletedMonthProgressColor}"
-                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1" FontSize="24"/>
+                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontSize="24"/>
                 </Grid>
 
                 <Grid Grid.Row="4" Margin="4">
@@ -410,14 +412,15 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="16" Foreground="White" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedQuarter}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedQuarterProgressValue}" IsIndeterminate="False"
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Text="{Binding TasksCompletedQuarter}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                    <ProgressBar Grid.Row="2" Value="{Binding TasksCompletedQuarterProgressValue}" IsIndeterminate="False" FontSize="24"
                                  Foreground="{Binding TasksCompletedQuarterProgressColor}" Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Text="{Binding TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontSize="24"/>
                 </Grid>
 
-                <Grid Grid.Row="5">
+                <Grid Grid.Row="5" Margin="0 64 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>

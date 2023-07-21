@@ -16,11 +16,13 @@ namespace HomeControl.Source.ViewModel.Behavior;
 public class EditBehaviorVM : BaseViewModel {
     private BitmapImage _imageUser;
 
-    private int _progressBarChildValue, stars, strikes;
+    private int _progressBarChildValue, stars, strikes, _tasksCompletedDayProgressValue, _tasksCompletedWeekProgressValue, _tasksCompletedMonthProgressValue,
+        _tasksCompletedQuarterProgressValue;
 
     private string _rewardButtonVisibility, _progressBarChildValueText, _childName, _cashAvailable, _cashAvailableColor, _currentMonthText, _currentWeekText, _currentDayText,
-        _currentQuarterText, _remainingDay, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _childStar1, _childStar2,
-        _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3;
+        _currentQuarterText, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3, _tasksCompletedDay, _tasksCompletedWeek,
+        _tasksCompletedMonth, _tasksCompletedQuarter, _tasksCompletedDayProgressColor, _tasksCompletedWeekProgressColor, _tasksCompletedMonthProgressColor,
+        _tasksCompletedQuarterProgressColor, _tasksCompletedDayProgressText, _tasksCompletedWeekProgressText, _tasksCompletedMonthProgressText, _tasksCompletedQuarterProgressText;
 
     public EditBehaviorVM() {
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
@@ -42,9 +44,6 @@ public class EditBehaviorVM : BaseViewModel {
             strikes = ReferenceValues.JsonBehaviorMaster.User1Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User1Progress;
             ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User1Progress + "/5";
-
-            /* WIP Tasks */
-
 
             try {
                 Uri uri1 = new(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
@@ -142,23 +141,291 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         }
 
-        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
-        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
-
         RefreshBehavior();
+        RefreshTasks();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
-    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "DateChanged") {
-            ReferenceValues.JsonBehaviorMaster.User1Strikes = 0;
-            ReferenceValues.JsonBehaviorMaster.User2Strikes = 0;
-            ReferenceValues.JsonBehaviorMaster.User3Strikes = 0;
-            ReferenceValues.JsonBehaviorMaster.User4Strikes = 0;
-            ReferenceValues.JsonBehaviorMaster.User5Strikes = 0;
-            strikes = 0;
-            RefreshBehavior();
+    private void RefreshTasks() {
+        int totalDay = 0, totalWeek = 0, totalMonth = 0, totalQuarter = 0;
+        int completedDay = 0, completedWeek = 0, completedMonth = 0, completedQuarter = 0;
+        int releaseAmountDaily = 0, releaseAmountWeekly = 0, releaseAmountMonthly = 0, releaseAmountQuarterly = 0;
+        double math;
+
+        switch (ReferenceValues.ActiveBehaviorUser) {
+        case 1:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser1);
+
+            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser1);
+
+            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser1);
+
+            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser1);
+
+            break;
+        case 2:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser2);
+
+            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser2);
+
+            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser2);
+
+            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser2);
+
+            break;
+        case 3:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser3);
+
+            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser3);
+
+            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser3);
+
+            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser3);
+
+            break;
+        case 4:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser4);
+
+            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser4);
+
+            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser4);
+
+            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser4);
+
+            break;
+        case 5:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser5);
+
+            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser5);
+
+            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser5);
+
+            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser5);
+
+            break;
+        }
+
+        try {
+            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay) * 100;
+            TasksCompletedDayProgressValue = (int)math;
+        } catch (DivideByZeroException) {
+            TasksCompletedDayProgressValue = 0;
+        }
+
+        try {
+            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek) * 100;
+            TasksCompletedWeekProgressValue = (int)math;
+        } catch (DivideByZeroException) {
+            TasksCompletedWeekProgressValue = 0;
+        }
+
+        try {
+            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth) * 100;
+            TasksCompletedMonthProgressValue = (int)math;
+        } catch (DivideByZeroException) {
+            TasksCompletedMonthProgressValue = 0;
+        }
+
+        try {
+            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter) * 100;
+            TasksCompletedQuarterProgressValue = (int)math;
+        } catch (DivideByZeroException) {
+            TasksCompletedQuarterProgressValue = 0;
+        }
+
+        TasksCompletedDayProgressColor = TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+        TasksCompletedWeekProgressColor = TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+        TasksCompletedMonthProgressColor = TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+        TasksCompletedQuarterProgressColor = TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+        /* Shows tasks completed and money estimated */
+        if (totalDay == 0) {
+            TasksCompletedDay = "None";
+        } else {
+            TasksCompletedDay = completedDay + "/" + totalDay + "  - $" + releaseAmountDaily;
+            TasksCompletedDayProgressText = TasksCompletedDayProgressValue + "%";
+        }
+
+        if (totalWeek == 0) {
+            TasksCompletedWeek = "None";
+        } else {
+            TasksCompletedWeek = completedWeek + "/" + totalWeek + "  - $" + releaseAmountWeekly;
+            TasksCompletedWeekProgressText = TasksCompletedWeekProgressValue + "%";
+        }
+
+        if (totalMonth == 0) {
+            TasksCompletedMonth = "None";
+        } else {
+            TasksCompletedMonth = completedMonth + "/" + totalMonth + "  - $" + releaseAmountMonthly;
+            TasksCompletedMonthProgressText = TasksCompletedMonthProgressValue + "%";
+        }
+
+        if (totalQuarter == 0) {
+            TasksCompletedQuarter = "None";
+        } else {
+            TasksCompletedQuarter = completedQuarter + "/" + totalQuarter + "  - $" + releaseAmountQuarterly;
+            TasksCompletedQuarterProgressText = TasksCompletedQuarterProgressValue + "%";
         }
     }
 
@@ -406,12 +673,28 @@ public class EditBehaviorVM : BaseViewModel {
                 TasksDaily tasksDaily = new();
                 tasksDaily.ShowDialog();
                 tasksDaily.Close();
+                RefreshTasks();
 
                 break;
             case "weekly":
                 TasksWeekly tasksWeekly = new();
                 tasksWeekly.ShowDialog();
                 tasksWeekly.Close();
+                RefreshTasks();
+
+                break;
+            case "monthly":
+                TasksMonthly tasksMonthly = new();
+                tasksMonthly.ShowDialog();
+                tasksMonthly.Close();
+                RefreshTasks();
+
+                break;
+            case "quarterly":
+                TasksQuarterly tasksQuarterly = new();
+                tasksQuarterly.ShowDialog();
+                tasksQuarterly.Close();
+                RefreshTasks();
 
                 break;
             }
@@ -452,46 +735,6 @@ public class EditBehaviorVM : BaseViewModel {
         set {
             _currentQuarterText = value;
             RaisePropertyChangedEvent("CurrentQuarterText");
-        }
-    }
-
-    public string RemainingDay {
-        get => _remainingDay;
-        set {
-            _remainingDay = value;
-            RaisePropertyChangedEvent("RemainingDay");
-        }
-    }
-
-    public string RemainingWeek {
-        get => _remainingWeek;
-        set {
-            _remainingWeek = value;
-            RaisePropertyChangedEvent("RemainingWeek");
-        }
-    }
-
-    public string RemainingMonth {
-        get => _remainingMonth;
-        set {
-            _remainingMonth = value;
-            RaisePropertyChangedEvent("RemainingMonth");
-        }
-    }
-
-    public string RemainingQuarter {
-        get => _remainingQuarter;
-        set {
-            _remainingQuarter = value;
-            RaisePropertyChangedEvent("RemainingQuarter");
-        }
-    }
-
-    public string RemainingYear {
-        get => _remainingYear;
-        set {
-            _remainingYear = value;
-            RaisePropertyChangedEvent("RemainingYear");
         }
     }
 
@@ -612,6 +855,134 @@ public class EditBehaviorVM : BaseViewModel {
         set {
             _childStrike3 = value;
             RaisePropertyChangedEvent("ChildStrike3");
+        }
+    }
+
+    public string TasksCompletedDay {
+        get => _tasksCompletedDay;
+        set {
+            _tasksCompletedDay = value;
+            RaisePropertyChangedEvent("TasksCompletedDay");
+        }
+    }
+
+    public string TasksCompletedWeek {
+        get => _tasksCompletedWeek;
+        set {
+            _tasksCompletedWeek = value;
+            RaisePropertyChangedEvent("TasksCompletedWeek");
+        }
+    }
+
+    public string TasksCompletedMonth {
+        get => _tasksCompletedMonth;
+        set {
+            _tasksCompletedMonth = value;
+            RaisePropertyChangedEvent("TasksCompletedMonth");
+        }
+    }
+
+    public string TasksCompletedQuarter {
+        get => _tasksCompletedQuarter;
+        set {
+            _tasksCompletedQuarter = value;
+            RaisePropertyChangedEvent("TasksCompletedQuarter");
+        }
+    }
+
+    public int TasksCompletedDayProgressValue {
+        get => _tasksCompletedDayProgressValue;
+        set {
+            _tasksCompletedDayProgressValue = value;
+            RaisePropertyChangedEvent("TasksCompletedDayProgressValue");
+        }
+    }
+
+    public int TasksCompletedWeekProgressValue {
+        get => _tasksCompletedWeekProgressValue;
+        set {
+            _tasksCompletedWeekProgressValue = value;
+            RaisePropertyChangedEvent("TasksCompletedWeekProgressValue");
+        }
+    }
+
+    public int TasksCompletedMonthProgressValue {
+        get => _tasksCompletedMonthProgressValue;
+        set {
+            _tasksCompletedMonthProgressValue = value;
+            RaisePropertyChangedEvent("TasksCompletedMonthProgressValue");
+        }
+    }
+
+    public int TasksCompletedQuarterProgressValue {
+        get => _tasksCompletedQuarterProgressValue;
+        set {
+            _tasksCompletedQuarterProgressValue = value;
+            RaisePropertyChangedEvent("TasksCompletedQuarterProgressValue");
+        }
+    }
+
+    public string TasksCompletedDayProgressColor {
+        get => _tasksCompletedDayProgressColor;
+        set {
+            _tasksCompletedDayProgressColor = value;
+            RaisePropertyChangedEvent("TasksCompletedDayProgressColor");
+        }
+    }
+
+    public string TasksCompletedWeekProgressColor {
+        get => _tasksCompletedWeekProgressColor;
+        set {
+            _tasksCompletedWeekProgressColor = value;
+            RaisePropertyChangedEvent("TasksCompletedWeekProgressColor");
+        }
+    }
+
+    public string TasksCompletedMonthProgressColor {
+        get => _tasksCompletedMonthProgressColor;
+        set {
+            _tasksCompletedMonthProgressColor = value;
+            RaisePropertyChangedEvent("TasksCompletedMonthProgressColor");
+        }
+    }
+
+    public string TasksCompletedQuarterProgressColor {
+        get => _tasksCompletedQuarterProgressColor;
+        set {
+            _tasksCompletedQuarterProgressColor = value;
+            RaisePropertyChangedEvent("TasksCompletedQuarterProgressColor");
+        }
+    }
+
+    public string TasksCompletedDayProgressText {
+        get => _tasksCompletedDayProgressText;
+        set {
+            _tasksCompletedDayProgressText = value;
+            RaisePropertyChangedEvent("TasksCompletedDayProgressText");
+        }
+    }
+
+    public string TasksCompletedWeekProgressText {
+        get => _tasksCompletedWeekProgressText;
+        set {
+            _tasksCompletedWeekProgressText = value;
+            RaisePropertyChangedEvent("TasksCompletedWeekProgressText");
+        }
+    }
+
+    public string TasksCompletedMonthProgressText {
+        get => _tasksCompletedMonthProgressText;
+        set {
+            _tasksCompletedMonthProgressText = value;
+            RaisePropertyChangedEvent("TasksCompletedMonthProgressText");
+        }
+    }
+
+    public string TasksCompletedQuarterProgressText {
+        get => _tasksCompletedQuarterProgressText;
+        set {
+            _tasksCompletedQuarterProgressText = value;
+            RaisePropertyChangedEvent("TasksCompletedQuarterProgressText");
         }
     }
 

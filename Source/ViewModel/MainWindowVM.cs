@@ -27,11 +27,11 @@ public class MainWindowVM : BaseViewModel {
         internetMessage = false;
         OnlineColor = "Black";
 
+        /* Get Debug (MAKE SURE THIS IS FIRST!) */
+        new DebugFromJson();
+
         /* Get Settings */
         new SettingsFromJson();
-
-        /* Get Debug */
-        new DebugFromJson();
 
         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
             Date = DateTime.Now,

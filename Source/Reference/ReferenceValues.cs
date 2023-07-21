@@ -11,13 +11,11 @@ public static class ReferenceValues {
     public const string VERSION = "1.0.0";
 
     public const bool EnableWeather = true;
-    public const bool EnableHvacSafetyTimer = false;
 
     public static readonly List<string> CategorySpendingList = new() {
         "Alcohol",
         "Animals/Pets",
         "Billing",
-        "Brittany Fund",
         "Carry Over",
         "Child Care",
         "Coffee",
@@ -43,7 +41,12 @@ public static class ReferenceValues {
         "Trash Bill",
         "Travel",
         "Vehicle Payment",
-        "Water Bill"
+        "Water Bill",
+        "User1 Fund",
+        "User2 Fund",
+        "User3 Fund",
+        "User4 Fund",
+        "User5 Fund"
     };
 
     public static readonly List<string> CategoryProfitList = new() {

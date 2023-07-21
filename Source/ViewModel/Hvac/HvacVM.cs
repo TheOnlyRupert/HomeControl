@@ -13,6 +13,8 @@ public class HvacVM : BaseViewModel {
         _tempInsideColor, _tempAdjustedColor, _fanStatusColor, _heatingCoolingStatusColor, _intHumidity;
 
     public HvacVM() {
+        ReferenceValues.JsonHvacSettings ??= new JsonHvac();
+
         if (ReferenceValues.JsonHvacSettings.TemperatureSet == 0) {
             ReferenceValues.JsonHvacSettings.TemperatureSet = 21;
         }

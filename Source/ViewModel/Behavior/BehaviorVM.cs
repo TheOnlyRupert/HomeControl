@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
+using System.Text.Json;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using HomeControl.Source.Helpers;
@@ -11,41 +14,61 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Behavior;
 
 public class BehaviorVM : BaseViewModel {
-    /* Integrating Tasks */
     private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5;
 
     private string _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1Star1, _user1Star2, _user1Star3, _user1Star4, _user1Star5, _user2Star1, _user2Star2,
-        _user2Star3, _user2Star4, _user2Star5, _user3Star1, _user3Star2, _user3Star3, _user3Star4, _user3Star5, _user4Star1, _user4Star2, _user4Star3, _user4Star4,
-        _user4Star5, _user5Star1, _user5Star2, _user5Star3, _user5Star4, _user5Star5, _user1Strike1, _user1Strike2, _user1Strike3, _user2Strike1, _user2Strike2,
-        _user2Strike3, _user3Strike1, _user3Strike2, _user3Strike3, _user4Strike1, _user4Strike2, _user4Strike3, _user5Strike1, _user5Strike2, _user5Strike3,
-        _user1TasksCompletedDayProgressColor, _user1TasksCompletedWeekProgressColor, _user1TasksCompletedMonthProgressColor, _user1TasksCompletedQuarterProgressColor,
-        _user2TasksCompletedDayProgressColor, _user2TasksCompletedWeekProgressColor, _user2TasksCompletedMonthProgressColor, _user2TasksCompletedQuarterProgressColor,
-        _user3TasksCompletedDayProgressColor, _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor, _user3TasksCompletedQuarterProgressColor,
-        _user4TasksCompletedDayProgressColor, _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor, _user4TasksCompletedQuarterProgressColor,
-        _user5TasksCompletedDayProgressColor, _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor, _user5TasksCompletedQuarterProgressColor,
-        _currentMonthText, _currentWeekText, _currentDayText, _user1CashAvailableColor, _user2CashAvailableColor, _user3CashAvailableColor, _user4CashAvailableColor,
-        _user5CashAvailableColor,
-        _currentQuarterText, _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText,
-        _user1TasksCompletedQuarterProgressText, _user1CashAvailable, _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText,
-        _user2TasksCompletedMonthProgressText, _user2TasksCompletedQuarterProgressText, _user2CashAvailable, _user3TasksCompletedWeekProgressText,
-        _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText, _user3CashAvailable,
-        _user4TasksCompletedWeekProgressText, _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText,
-        _user4CashAvailable, _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText,
-        _user5TasksCompletedQuarterProgressText, _user5CashAvailable, _remainingDay, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear;
+        _user2Star3, _user2Star4, _user2Star5, _user3Star1, _user3Star2, _user3Star3, _user3Star4, _user3Star5, _user4Star1, _user4Star2, _user4Star3, _user4Star4, _user4Star5,
+        _user5Star1, _user5Star2, _user5Star3, _user5Star4, _user5Star5, _user1Strike1, _user1Strike2, _user1Strike3, _user2Strike1, _user2Strike2, _user2Strike3, _user3Strike1,
+        _user3Strike2, _user3Strike3, _user4Strike1, _user4Strike2, _user4Strike3, _user5Strike1, _user5Strike2, _user5Strike3, _user1TasksCompletedDayProgressColor,
+        _user1TasksCompletedWeekProgressColor, _user1TasksCompletedMonthProgressColor, _user1TasksCompletedQuarterProgressColor, _user2TasksCompletedDayProgressColor,
+        _user2TasksCompletedWeekProgressColor, _user2TasksCompletedMonthProgressColor, _user2TasksCompletedQuarterProgressColor, _user3TasksCompletedDayProgressColor,
+        _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor, _user3TasksCompletedQuarterProgressColor, _user4TasksCompletedDayProgressColor,
+        _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor, _user4TasksCompletedQuarterProgressColor, _user5TasksCompletedDayProgressColor,
+        _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor, _user5TasksCompletedQuarterProgressColor, _currentMonthText, _currentWeekText,
+        _currentDayText, _user1CashAvailableColor, _user2CashAvailableColor, _user3CashAvailableColor, _user4CashAvailableColor, _user5CashAvailableColor, _currentQuarterText,
+        _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText, _user1TasksCompletedQuarterProgressText,
+        _user1CashAvailable, _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText,
+        _user2TasksCompletedQuarterProgressText, _user2CashAvailable, _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText,
+        _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText, _user3CashAvailable, _user4TasksCompletedWeekProgressText,
+        _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText, _user4CashAvailable,
+        _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText, _user5TasksCompletedQuarterProgressText,
+        _user5CashAvailable, _remainingDay, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear;
 
-    private int user1TasksCompletedDay, user1TasksCompletedWeek, user1TasksCompletedMonth, user1TasksCompletedQuarter, _user1TasksCompletedDayProgressValue,
-        _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue, user2TasksCompletedDay,
-        user2TasksCompletedWeek, user2TasksCompletedMonth, user2TasksCompletedQuarter, _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue,
-        _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue, user3TasksCompletedDay, user3TasksCompletedWeek, user3TasksCompletedMonth,
-        user3TasksCompletedQuarter, _user3TasksCompletedDayProgressValue, _user3TasksCompletedWeekProgressValue, _user3TasksCompletedMonthProgressValue,
-        _user3TasksCompletedQuarterProgressValue, user4TasksCompletedDay, user4TasksCompletedWeek, user4TasksCompletedMonth, user4TasksCompletedQuarter,
+    private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
+        _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
+        _user3TasksCompletedDayProgressValue, _user3TasksCompletedWeekProgressValue, _user3TasksCompletedMonthProgressValue, _user3TasksCompletedQuarterProgressValue,
         _user4TasksCompletedDayProgressValue, _user4TasksCompletedWeekProgressValue, _user4TasksCompletedMonthProgressValue, _user4TasksCompletedQuarterProgressValue,
-        user5TasksCompletedDay, user5TasksCompletedWeek, user5TasksCompletedMonth, user5TasksCompletedQuarter, _user5TasksCompletedDayProgressValue,
-        _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue;
+        _user5TasksCompletedDayProgressValue, _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue;
 
     public BehaviorVM() {
         new BehaviorFromJson();
         new TasksFromJson();
+
+        ReferenceValues.JsonTasksMaster ??= new JsonTasks();
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily ??= new JsonTasksDaily();
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly ??= new JsonTasksWeekly();
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly ??= new JsonTasksMonthly();
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly ??= new JsonTasksQuarterly();
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5 ??= new ObservableCollection<Task>();
 
         User1Name = ReferenceValues.JsonMasterSettings.User1Name;
         User2Name = ReferenceValues.JsonMasterSettings.User2Name;
@@ -97,118 +120,1366 @@ public class BehaviorVM : BaseViewModel {
         }
 
         RefreshBehavior();
-        RefreshTasks();
+        RefreshTasks(1);
+        RefreshTasks(2);
+        RefreshTasks(3);
+        RefreshTasks(4);
+        RefreshTasks(5);
         RefreshCountdown();
+        SaveJsons();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
-    private void RefreshTasks() {
-        User1CashAvailable = "$0";
-        User1CashAvailableColor = "White";
-        user1TasksCompletedDay = 0;
-        user1TasksCompletedWeek = 0;
-        user1TasksCompletedMonth = 0;
-        user1TasksCompletedQuarter = 0;
+    private void RefreshTasks(int UserID) {
+        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        culture.NumberFormat.CurrencyNegativePattern = 1;
+        System.Globalization.Calendar cal = DateTimeFormatInfo.CurrentInfo.Calendar;
+        DateTime d1 = DateTime.Today;
 
-        User2CashAvailable = "$0";
-        User2CashAvailableColor = "White";
-        user2TasksCompletedDay = 0;
-        user2TasksCompletedWeek = 0;
-        user2TasksCompletedMonth = 0;
-        user2TasksCompletedQuarter = 0;
+        try {
+            d1 = ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.AddDays(-1 * (int)cal.GetDayOfWeek(ReferenceValues.JsonTasksMaster.UpdatedDateTime));
+        } catch (Exception) {
+            // ignore?
+        }
 
-        User3CashAvailable = "$0";
-        User3CashAvailableColor = "White";
-        user3TasksCompletedDay = 0;
-        user3TasksCompletedWeek = 0;
-        user3TasksCompletedMonth = 0;
-        user3TasksCompletedQuarter = 0;
+        DateTime d2 = DateTime.Today.Date.AddDays(-1 * (int)cal.GetDayOfWeek(DateTime.Today));
 
-        User4CashAvailable = "$0";
-        User4CashAvailableColor = "White";
-        user4TasksCompletedDay = 0;
-        user4TasksCompletedWeek = 0;
-        user4TasksCompletedMonth = 0;
-        user4TasksCompletedQuarter = 0;
+        int totalDay = 0, totalWeek = 0, totalMonth = 0, totalQuarter = 0;
+        int completedDay = 0, completedWeek = 0, completedMonth = 0, completedQuarter = 0;
+        int releaseAmountDaily = 0, releaseAmountWeekly = 0, releaseAmountMonthly = 0, releaseAmountQuarterly = 0;
+        double math;
 
-        User5CashAvailable = "$0";
-        User5CashAvailableColor = "White";
-        user5TasksCompletedDay = 0;
-        user5TasksCompletedWeek = 0;
-        user5TasksCompletedMonth = 0;
-        user5TasksCompletedQuarter = 0;
+        switch (UserID) {
+        case 1:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
 
-        User1TasksCompletedWeekProgressValue = 0;
-        User1TasksCompletedWeekProgressText = User1TasksCompletedWeekProgressValue + "%";
-        User1TasksCompletedMonthProgressValue = 0;
-        User1TasksCompletedMonthProgressText = User1TasksCompletedMonthProgressValue + "%";
-        User1TasksCompletedDayProgressValue = 0;
-        User1TasksCompletedDayProgressText = User1TasksCompletedDayProgressValue + "%";
-        User1TasksCompletedQuarterProgressValue = 0;
-        User1TasksCompletedQuarterProgressText = User1TasksCompletedQuarterProgressValue + "%";
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
 
-        User2TasksCompletedWeekProgressValue = 0;
-        User2TasksCompletedWeekProgressText = User2TasksCompletedWeekProgressValue + "%";
-        User2TasksCompletedMonthProgressValue = 0;
-        User2TasksCompletedMonthProgressText = User2TasksCompletedMonthProgressValue + "%";
-        User2TasksCompletedDayProgressValue = 0;
-        User2TasksCompletedDayProgressText = User2TasksCompletedDayProgressValue + "%";
-        User2TasksCompletedQuarterProgressValue = 0;
-        User2TasksCompletedQuarterProgressText = User2TasksCompletedQuarterProgressValue + "%";
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
 
-        User3TasksCompletedWeekProgressValue = 0;
-        User3TasksCompletedWeekProgressText = User3TasksCompletedWeekProgressValue + "%";
-        User3TasksCompletedMonthProgressValue = 0;
-        User3TasksCompletedMonthProgressText = User3TasksCompletedMonthProgressValue + "%";
-        User3TasksCompletedDayProgressValue = 0;
-        User3TasksCompletedDayProgressText = User3TasksCompletedDayProgressValue + "%";
-        User3TasksCompletedQuarterProgressValue = 0;
-        User3TasksCompletedQuarterProgressText = User3TasksCompletedQuarterProgressValue + "%";
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
 
-        User4TasksCompletedWeekProgressValue = 0;
-        User4TasksCompletedWeekProgressText = User4TasksCompletedWeekProgressValue + "%";
-        User4TasksCompletedMonthProgressValue = 0;
-        User4TasksCompletedMonthProgressText = User4TasksCompletedMonthProgressValue + "%";
-        User4TasksCompletedDayProgressValue = 0;
-        User4TasksCompletedDayProgressText = User4TasksCompletedDayProgressValue + "%";
-        User4TasksCompletedQuarterProgressValue = 0;
-        User4TasksCompletedQuarterProgressText = User4TasksCompletedQuarterProgressValue + "%";
+            try {
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay) * 100;
+                User1TasksCompletedDayProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User1TasksCompletedDayProgressValue = 0;
+            }
 
-        User5TasksCompletedWeekProgressValue = 0;
-        User5TasksCompletedWeekProgressText = User5TasksCompletedWeekProgressValue + "%";
-        User5TasksCompletedMonthProgressValue = 0;
-        User5TasksCompletedMonthProgressText = User5TasksCompletedMonthProgressValue + "%";
-        User5TasksCompletedDayProgressValue = 0;
-        User5TasksCompletedDayProgressText = User5TasksCompletedDayProgressValue + "%";
-        User5TasksCompletedQuarterProgressValue = 0;
-        User5TasksCompletedQuarterProgressText = User5TasksCompletedQuarterProgressValue + "%";
+            try {
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek) * 100;
+                User1TasksCompletedWeekProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User1TasksCompletedWeekProgressValue = 0;
+            }
 
-        /* Check for all chores completed */
-        User1TasksCompletedDayProgressColor = User1TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User1TasksCompletedWeekProgressColor = User1TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User1TasksCompletedMonthProgressColor = User1TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User1TasksCompletedQuarterProgressColor = User1TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+            try {
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth) * 100;
+                User1TasksCompletedMonthProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User1TasksCompletedMonthProgressValue = 0;
+            }
 
-        User2TasksCompletedDayProgressColor = User2TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User2TasksCompletedWeekProgressColor = User2TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User2TasksCompletedMonthProgressColor = User2TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User2TasksCompletedQuarterProgressColor = User2TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+            try {
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter) * 100;
+                User1TasksCompletedQuarterProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User1TasksCompletedQuarterProgressValue = 0;
+            }
 
-        User3TasksCompletedDayProgressColor = User3TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User3TasksCompletedWeekProgressColor = User3TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User3TasksCompletedMonthProgressColor = User3TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User3TasksCompletedQuarterProgressColor = User3TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+            if (totalDay != 0) {
+                User1TasksCompletedDayProgressText = User1TasksCompletedDayProgressValue + "%";
 
-        User4TasksCompletedDayProgressColor = User4TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User4TasksCompletedWeekProgressColor = User4TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User4TasksCompletedMonthProgressColor = User4TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User4TasksCompletedQuarterProgressColor = User4TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser1);
 
-        User5TasksCompletedDayProgressColor = User5TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User5TasksCompletedWeekProgressColor = User5TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User5TasksCompletedMonthProgressColor = User5TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
-        User5TasksCompletedQuarterProgressColor = User5TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+                /* Release daily funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    if (releaseAmountDaily != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User1Name + "'s Daily Funds: $" + releaseAmountDaily
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User1Funds += releaseAmountDaily;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User1Name + "'s Daily Funds",
+                                Cost = releaseAmountDaily.ToString(),
+                                Category = "User1 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User1Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset daily */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User1TasksCompletedDayProgressText = "0%";
+                        User1TasksCompletedDayProgressValue = 0;
+                    }
+                }
+            } else {
+                User1TasksCompletedDayProgressText = "None";
+            }
+
+            if (totalWeek != 0) {
+                User1TasksCompletedWeekProgressText = User1TasksCompletedWeekProgressValue + "%";
+
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser1);
+
+                /* Release weekly funds */
+                if (d1 != d2) {
+                    if (releaseAmountWeekly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User1Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                        });
+                        SaveDebugFile.Save();
+
+                        ReferenceValues.JsonFinanceMasterList.User1Funds += releaseAmountWeekly;
+                        ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            AddSub = "SUB",
+                            Date = DateTime.Now.ToShortDateString(),
+                            Item = ReferenceValues.JsonMasterSettings.User1Name + "'s Weekly Funds",
+                            Cost = releaseAmountWeekly.ToString(),
+                            Category = "User1 Fund",
+                            Person = ReferenceValues.JsonMasterSettings.User1Name,
+                            Details = "(Automatic)"
+                        });
+
+                        /* Reset weekly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User1TasksCompletedWeekProgressText = "0%";
+                        User1TasksCompletedWeekProgressValue = 0;
+                    }
+                }
+            } else {
+                User1TasksCompletedWeekProgressText = "None";
+            }
+
+            if (totalMonth != 0) {
+                User1TasksCompletedMonthProgressText = User1TasksCompletedMonthProgressValue + "%";
+
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser1);
+
+                /* Release monthly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    if (releaseAmountMonthly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User1Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User1Funds += releaseAmountMonthly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User1Name + "'s Monthly Funds",
+                                Cost = releaseAmountMonthly.ToString(),
+                                Category = "User1 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User1Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset daily */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User1TasksCompletedMonthProgressText = "0%";
+                        User1TasksCompletedMonthProgressValue = 0;
+                    }
+                }
+            } else {
+                User1TasksCompletedMonthProgressText = "None";
+            }
+
+            if (totalQuarter != 0) {
+                User1TasksCompletedQuarterProgressText = User1TasksCompletedQuarterProgressValue + "%";
+
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser1);
+
+                /* Releasing quarterly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        if (releaseAmountQuarterly != 0) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "BehaviorVM",
+                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User1Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                            });
+                            SaveDebugFile.Save();
+
+                            try {
+                                ReferenceValues.JsonFinanceMasterList.User1Funds += releaseAmountQuarterly;
+                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                    AddSub = "SUB",
+                                    Date = DateTime.Now.ToShortDateString(),
+                                    Item = ReferenceValues.JsonMasterSettings.User1Name + "'s Quarterly Funds",
+                                    Cost = releaseAmountQuarterly.ToString(),
+                                    Category = "User1 Fund",
+                                    Person = ReferenceValues.JsonMasterSettings.User1Name,
+                                    Details = "(Automatic)"
+                                });
+                            } catch (Exception) {
+                                // ignore
+                            }
+
+                            /* Reset quarter */
+                            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1) {
+                                task.IsCompleted = false;
+                                task.DateCompleted = "";
+                            }
+
+                            User1TasksCompletedQuarterProgressText = "0%";
+                            User1TasksCompletedQuarterProgressValue = 0;
+                        }
+                    }
+                }
+            } else {
+                User1TasksCompletedQuarterProgressText = "None";
+            }
+
+            User1TasksCompletedDayProgressColor = User1TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User1TasksCompletedWeekProgressColor = User1TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User1TasksCompletedMonthProgressColor = User1TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User1TasksCompletedQuarterProgressColor = User1TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+            try {
+                User1CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User1Funds);
+                User1CashAvailableColor = User1CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } catch (Exception) {
+                User1CashAvailable = "Error";
+                User1CashAvailableColor = "White";
+            }
+
+            break;
+        case 2:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            try {
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay) * 100;
+                User2TasksCompletedDayProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User2TasksCompletedDayProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek) * 100;
+                User2TasksCompletedWeekProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User2TasksCompletedWeekProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth) * 100;
+                User2TasksCompletedMonthProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User2TasksCompletedMonthProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter) * 100;
+                User2TasksCompletedQuarterProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User2TasksCompletedQuarterProgressValue = 0;
+            }
+
+            if (totalDay != 0) {
+                User2TasksCompletedDayProgressText = User2TasksCompletedDayProgressValue + "%";
+
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser2);
+
+                /* Release daily funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    if (releaseAmountDaily != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User2Name + "'s Daily Funds: $" + releaseAmountDaily
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User2Funds += releaseAmountDaily;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User2Name + "'s Daily Funds",
+                                Cost = releaseAmountDaily.ToString(),
+                                Category = "User2 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User2Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset daily */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User2TasksCompletedDayProgressText = "0%";
+                        User2TasksCompletedDayProgressValue = 0;
+                    }
+                }
+            } else {
+                User2TasksCompletedDayProgressText = "None";
+            }
+
+            if (totalWeek != 0) {
+                User2TasksCompletedWeekProgressText = User2TasksCompletedWeekProgressValue + "%";
+
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser2);
+
+                /* Release weekly funds */
+                if (d1 != d2) {
+                    if (releaseAmountWeekly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User2Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                        });
+                        SaveDebugFile.Save();
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User2Funds += releaseAmountWeekly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User2Name + "'s Weekly Funds",
+                                Cost = releaseAmountWeekly.ToString(),
+                                Category = "User2 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User2Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset weekly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User2TasksCompletedWeekProgressText = "0%";
+                        User2TasksCompletedWeekProgressValue = 0;
+                    }
+                }
+            } else {
+                User2TasksCompletedWeekProgressText = "None";
+            }
+
+            if (totalMonth != 0) {
+                User2TasksCompletedMonthProgressText = User2TasksCompletedMonthProgressValue + "%";
+
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser2);
+
+                /* Release monthly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    if (releaseAmountMonthly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User2Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User2Funds += releaseAmountMonthly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User2Name + "'s Monthly Funds",
+                                Cost = releaseAmountMonthly.ToString(),
+                                Category = "User2 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User2Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset monthly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User2TasksCompletedMonthProgressText = "0%";
+                        User2TasksCompletedMonthProgressValue = 0;
+                    }
+                }
+            } else {
+                User2TasksCompletedMonthProgressText = "None";
+            }
+
+            if (totalQuarter != 0) {
+                User2TasksCompletedQuarterProgressText = User2TasksCompletedQuarterProgressValue + "%";
+
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser2);
+
+                /* Releasing quarterly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        if (releaseAmountQuarterly != 0) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "BehaviorVM",
+                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User2Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                            });
+                            SaveDebugFile.Save();
+                            try {
+                                ReferenceValues.JsonFinanceMasterList.User2Funds += releaseAmountQuarterly;
+                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                    AddSub = "SUB",
+                                    Date = DateTime.Now.ToShortDateString(),
+                                    Item = ReferenceValues.JsonMasterSettings.User2Name + "'s Quarterly Funds",
+                                    Cost = releaseAmountQuarterly.ToString(),
+                                    Category = "User2 Fund",
+                                    Person = ReferenceValues.JsonMasterSettings.User2Name,
+                                    Details = "(Automatic)"
+                                });
+                            } catch (Exception) {
+                                // ignore
+                            }
+
+                            /* Reset quarterly */
+                            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2) {
+                                task.IsCompleted = false;
+                                task.DateCompleted = "";
+                            }
+
+                            User2TasksCompletedQuarterProgressText = "0%";
+                            User2TasksCompletedQuarterProgressValue = 0;
+                        }
+                    }
+                }
+            } else {
+                User2TasksCompletedQuarterProgressText = "None";
+            }
+
+            User2TasksCompletedDayProgressColor = User2TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User2TasksCompletedWeekProgressColor = User2TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User2TasksCompletedMonthProgressColor = User2TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User2TasksCompletedQuarterProgressColor = User2TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+            try {
+                User2CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User2Funds);
+                User2CashAvailableColor = User2CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } catch (Exception) {
+                User2CashAvailable = "Error";
+                User2CashAvailableColor = "White";
+            }
+
+            break;
+        case 3:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            try {
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay) * 100;
+                User3TasksCompletedDayProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User3TasksCompletedDayProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek) * 100;
+                User3TasksCompletedWeekProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User3TasksCompletedWeekProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth) * 100;
+                User3TasksCompletedMonthProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User3TasksCompletedMonthProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter) * 100;
+                User3TasksCompletedQuarterProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User3TasksCompletedQuarterProgressValue = 0;
+            }
+
+            if (totalDay != 0) {
+                User3TasksCompletedDayProgressText = User3TasksCompletedDayProgressValue + "%";
+
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser3);
+
+                /* Release daily funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    if (releaseAmountDaily != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User3Name + "'s Daily Funds: $" + releaseAmountDaily
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User3Funds += releaseAmountDaily;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User3Name + "'s Daily Funds",
+                                Cost = releaseAmountDaily.ToString(),
+                                Category = "User3 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User3Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset daily */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User3TasksCompletedDayProgressText = "0%";
+                        User3TasksCompletedDayProgressValue = 0;
+                    }
+                }
+            } else {
+                User3TasksCompletedDayProgressText = "None";
+            }
+
+            if (totalWeek != 0) {
+                User3TasksCompletedWeekProgressText = User3TasksCompletedWeekProgressValue + "%";
+
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser3);
+
+                /* Release weekly funds */
+                if (d1 != d2) {
+                    if (releaseAmountWeekly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User3Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User3Funds += releaseAmountWeekly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User3Name + "'s Weekly Funds",
+                                Cost = releaseAmountWeekly.ToString(),
+                                Category = "User3 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User3Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset weekly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User3TasksCompletedWeekProgressText = "0%";
+                        User3TasksCompletedWeekProgressValue = 0;
+                    }
+                }
+            } else {
+                User3TasksCompletedWeekProgressText = "None";
+            }
+
+            if (totalMonth != 0) {
+                User3TasksCompletedMonthProgressText = User3TasksCompletedMonthProgressValue + "%";
+
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser3);
+
+                /* Release monthly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    if (releaseAmountMonthly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User3Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User3Funds += releaseAmountMonthly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User3Name + "'s Monthly Funds",
+                                Cost = releaseAmountMonthly.ToString(),
+                                Category = "User3 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User3Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset monthly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User3TasksCompletedMonthProgressText = "0%";
+                        User3TasksCompletedMonthProgressValue = 0;
+                    }
+                }
+            } else {
+                User3TasksCompletedMonthProgressText = "None";
+            }
+
+            if (totalQuarter != 0) {
+                User3TasksCompletedQuarterProgressText = User3TasksCompletedQuarterProgressValue + "%";
+
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser3);
+
+                /* Releasing quarterly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        if (releaseAmountQuarterly != 0) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "BehaviorVM",
+                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User3Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                            });
+                            SaveDebugFile.Save();
+
+                            try {
+                                ReferenceValues.JsonFinanceMasterList.User3Funds += releaseAmountQuarterly;
+                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                    AddSub = "SUB",
+                                    Date = DateTime.Now.ToShortDateString(),
+                                    Item = ReferenceValues.JsonMasterSettings.User3Name + "'s Quarterly Funds",
+                                    Cost = releaseAmountQuarterly.ToString(),
+                                    Category = "User3 Fund",
+                                    Person = ReferenceValues.JsonMasterSettings.User3Name,
+                                    Details = "(Automatic)"
+                                });
+                            } catch (Exception) {
+                                // ignore
+                            }
+
+                            /* Reset quarterly */
+                            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3) {
+                                task.IsCompleted = false;
+                                task.DateCompleted = "";
+                            }
+
+                            User3TasksCompletedQuarterProgressText = "0%";
+                            User3TasksCompletedQuarterProgressValue = 0;
+                        }
+                    }
+                }
+            } else {
+                User3TasksCompletedQuarterProgressText = "None";
+            }
+
+            User3TasksCompletedDayProgressColor = User3TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User3TasksCompletedWeekProgressColor = User3TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User3TasksCompletedMonthProgressColor = User3TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User3TasksCompletedQuarterProgressColor = User3TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+            try {
+                User3CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User3Funds);
+                User3CashAvailableColor = User3CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } catch (Exception) {
+                User3CashAvailable = "Error";
+                User3CashAvailableColor = "White";
+            }
+
+            break;
+        case 4:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            try {
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay) * 100;
+                User4TasksCompletedDayProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User4TasksCompletedDayProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek) * 100;
+                User4TasksCompletedWeekProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User4TasksCompletedWeekProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth) * 100;
+                User4TasksCompletedMonthProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User4TasksCompletedMonthProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter) * 100;
+                User4TasksCompletedQuarterProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User4TasksCompletedQuarterProgressValue = 0;
+            }
+
+            if (totalDay != 0) {
+                User4TasksCompletedDayProgressText = User4TasksCompletedDayProgressValue + "%";
+
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser4);
+
+                /* Release daily funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    if (releaseAmountDaily != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User4Name + "'s Daily Funds: $" + releaseAmountDaily
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User4Funds += releaseAmountDaily;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User4Name + "'s Daily Funds",
+                                Cost = releaseAmountDaily.ToString(),
+                                Category = "User4 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User4Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset daily */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User4TasksCompletedDayProgressText = "0%";
+                        User4TasksCompletedDayProgressValue = 0;
+                    }
+                }
+            } else {
+                User4TasksCompletedDayProgressText = "None";
+            }
+
+            if (totalWeek != 0) {
+                User4TasksCompletedWeekProgressText = User4TasksCompletedWeekProgressValue + "%";
+
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser4);
+
+                /* Release weekly funds */
+                if (d1 != d2) {
+                    if (releaseAmountWeekly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User4Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User4Funds += releaseAmountWeekly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User4Name + "'s Weekly Funds",
+                                Cost = releaseAmountWeekly.ToString(),
+                                Category = "User4 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User4Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset weekly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User4TasksCompletedWeekProgressText = "0%";
+                        User4TasksCompletedWeekProgressValue = 0;
+                    }
+                }
+            } else {
+                User4TasksCompletedWeekProgressText = "None";
+            }
+
+            if (totalMonth != 0) {
+                User4TasksCompletedMonthProgressText = User4TasksCompletedMonthProgressValue + "%";
+
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser4);
+
+                /* Release monthly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    if (releaseAmountMonthly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User4Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User4Funds += releaseAmountMonthly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User4Name + "'s Monthly Funds",
+                                Cost = releaseAmountMonthly.ToString(),
+                                Category = "User4 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User4Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset monthly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User4TasksCompletedMonthProgressText = "0%";
+                        User4TasksCompletedMonthProgressValue = 0;
+                    }
+                }
+            } else {
+                User4TasksCompletedMonthProgressText = "None";
+            }
+
+            if (totalQuarter != 0) {
+                User4TasksCompletedQuarterProgressText = User4TasksCompletedQuarterProgressValue + "%";
+
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser4);
+
+                /* Releasing quarterly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        if (releaseAmountQuarterly != 0) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "BehaviorVM",
+                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User4Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                            });
+                            SaveDebugFile.Save();
+
+                            try {
+                                ReferenceValues.JsonFinanceMasterList.User4Funds += releaseAmountQuarterly;
+                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                    AddSub = "SUB",
+                                    Date = DateTime.Now.ToShortDateString(),
+                                    Item = ReferenceValues.JsonMasterSettings.User4Name + "'s Quarterly Funds",
+                                    Cost = releaseAmountQuarterly.ToString(),
+                                    Category = "User4 Fund",
+                                    Person = ReferenceValues.JsonMasterSettings.User4Name,
+                                    Details = "(Automatic)"
+                                });
+                            } catch (Exception) {
+                                // ignore
+                            }
+
+                            /* Reset quarterly */
+                            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4) {
+                                task.IsCompleted = false;
+                                task.DateCompleted = "";
+                            }
+
+                            User4TasksCompletedQuarterProgressText = "0%";
+                            User4TasksCompletedQuarterProgressValue = 0;
+                        }
+                    }
+                }
+            } else {
+                User4TasksCompletedQuarterProgressText = "None";
+            }
+
+            User4TasksCompletedDayProgressColor = User4TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User4TasksCompletedWeekProgressColor = User4TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User4TasksCompletedMonthProgressColor = User4TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User4TasksCompletedQuarterProgressColor = User4TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+            try {
+                User4CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User4Funds);
+                User4CashAvailableColor = User4CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } catch (Exception) {
+                User4CashAvailable = "Error";
+                User4CashAvailableColor = "White";
+            }
+
+            break;
+        case 5:
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
+                totalDay++;
+                if (task.IsCompleted) {
+                    completedDay++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5) {
+                totalWeek++;
+                if (task.IsCompleted) {
+                    completedWeek++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5) {
+                totalMonth++;
+                if (task.IsCompleted) {
+                    completedMonth++;
+                }
+            }
+
+            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5) {
+                totalQuarter++;
+                if (task.IsCompleted) {
+                    completedQuarter++;
+                }
+            }
+
+            try {
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay) * 100;
+                User5TasksCompletedDayProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User5TasksCompletedDayProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek) * 100;
+                User5TasksCompletedWeekProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User5TasksCompletedWeekProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth) * 100;
+                User5TasksCompletedMonthProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User5TasksCompletedMonthProgressValue = 0;
+            }
+
+            try {
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter) * 100;
+                User5TasksCompletedQuarterProgressValue = (int)math;
+            } catch (DivideByZeroException) {
+                User5TasksCompletedQuarterProgressValue = 0;
+            }
+
+            if (totalDay != 0) {
+                User5TasksCompletedDayProgressText = User5TasksCompletedDayProgressValue + "%";
+
+                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
+                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser5);
+
+                /* Release daily funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    if (releaseAmountDaily != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User5Name + "'s Daily Funds: $" + releaseAmountDaily
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User5Funds += releaseAmountDaily;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User5Name + "'s Daily Funds",
+                                Cost = releaseAmountDaily.ToString(),
+                                Category = "User5 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User5Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset daily */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User5TasksCompletedDayProgressText = "0%";
+                        User5TasksCompletedDayProgressValue = 0;
+                    }
+                }
+            } else {
+                User5TasksCompletedDayProgressText = "None";
+            }
+
+            if (totalWeek != 0) {
+                User5TasksCompletedWeekProgressText = User5TasksCompletedWeekProgressValue + "%";
+
+                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
+                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser5);
+
+                /* Release weekly funds */
+                if (d1 != d2) {
+                    if (releaseAmountWeekly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User5Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User5Funds += releaseAmountWeekly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User5Name + "'s Weekly Funds",
+                                Cost = releaseAmountWeekly.ToString(),
+                                Category = "User5 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User5Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset weekly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User5TasksCompletedWeekProgressText = "0%";
+                        User5TasksCompletedWeekProgressValue = 0;
+                    }
+                }
+            } else {
+                User5TasksCompletedWeekProgressText = "None";
+            }
+
+            if (totalMonth != 0) {
+                User5TasksCompletedMonthProgressText = User5TasksCompletedMonthProgressValue + "%";
+
+                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
+                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser5);
+
+                /* Release monthly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    if (releaseAmountMonthly != 0) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "BehaviorVM",
+                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User5Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                        });
+                        SaveDebugFile.Save();
+
+                        try {
+                            ReferenceValues.JsonFinanceMasterList.User5Funds += releaseAmountMonthly;
+                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                AddSub = "SUB",
+                                Date = DateTime.Now.ToShortDateString(),
+                                Item = ReferenceValues.JsonMasterSettings.User5Name + "'s Monthly Funds",
+                                Cost = releaseAmountMonthly.ToString(),
+                                Category = "User5 Fund",
+                                Person = ReferenceValues.JsonMasterSettings.User5Name,
+                                Details = "(Automatic)"
+                            });
+                        } catch (Exception) {
+                            // ignore
+                        }
+
+                        /* Reset monthly */
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User5TasksCompletedMonthProgressText = "0%";
+                        User5TasksCompletedMonthProgressValue = 0;
+                    }
+                }
+            } else {
+                User5TasksCompletedMonthProgressText = "None";
+            }
+
+            if (totalQuarter != 0) {
+                User5TasksCompletedQuarterProgressText = User5TasksCompletedQuarterProgressValue + "%";
+
+                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
+                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser5);
+
+                /* Releasing quarterly funds */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        if (releaseAmountQuarterly != 0) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "BehaviorVM",
+                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User5Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                            });
+                            SaveDebugFile.Save();
+
+                            try {
+                                ReferenceValues.JsonFinanceMasterList.User5Funds += releaseAmountQuarterly;
+                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                    AddSub = "SUB",
+                                    Date = DateTime.Now.ToShortDateString(),
+                                    Item = ReferenceValues.JsonMasterSettings.User5Name + "'s Quarterly Funds",
+                                    Cost = releaseAmountQuarterly.ToString(),
+                                    Category = "User5 Fund",
+                                    Person = ReferenceValues.JsonMasterSettings.User5Name,
+                                    Details = "(Automatic)"
+                                });
+                            } catch (Exception) {
+                                // ignore
+                            }
+
+                            /* Reset quarterly */
+                            foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5) {
+                                task.IsCompleted = false;
+                                task.DateCompleted = "";
+                            }
+
+                            User5TasksCompletedQuarterProgressText = "0%";
+                            User5TasksCompletedQuarterProgressValue = 0;
+                        }
+                    }
+                }
+            } else {
+                User5TasksCompletedQuarterProgressText = "None";
+            }
+
+            User5TasksCompletedDayProgressColor = User5TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User5TasksCompletedWeekProgressColor = User5TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User5TasksCompletedMonthProgressColor = User5TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
+            User5TasksCompletedQuarterProgressColor = User5TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
+
+            try {
+                User5CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User5Funds);
+                User5CashAvailableColor = User5CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } catch (Exception) {
+                User5CashAvailable = "Error";
+                User5CashAvailableColor = "White";
+            }
+
+            break;
+        }
+    }
+
+    private void SaveJsons() {
+        ReferenceValues.JsonTasksMaster.UpdatedDateTime = DateTime.Today;
+
+        try {
+            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "behavior.json", jsonString);
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "BehaviorVM",
+                Description = e.ToString()
+            });
+            SaveDebugFile.Save();
+        }
+
+        try {
+            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "tasks.json", jsonString);
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "BehaviorVM",
+                Description = e.ToString()
+            });
+            SaveDebugFile.Save();
+        }
+
+        try {
+            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceMasterList);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "finances.json", jsonString);
+        } catch (Exception e) {
+            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "BehaviorVM",
+                Description = e.ToString()
+            });
+            SaveDebugFile.Save();
+        }
     }
 
     private void RefreshBehavior() {
@@ -480,7 +1751,12 @@ public class BehaviorVM : BaseViewModel {
             ReferenceValues.JsonBehaviorMaster.User5Strikes = 0;
             RefreshBehavior();
             RefreshCountdown();
-            RefreshTasks();
+            RefreshTasks(1);
+            RefreshTasks(2);
+            RefreshTasks(3);
+            RefreshTasks(4);
+            RefreshTasks(5);
+            SaveJsons();
         }
     }
 
@@ -492,30 +1768,35 @@ public class BehaviorVM : BaseViewModel {
                 EditBehavior editBehavior = new();
                 editBehavior.ShowDialog();
                 editBehavior.Close();
+                RefreshTasks(1);
                 break;
             case "user2":
                 ReferenceValues.ActiveBehaviorUser = 2;
                 EditBehavior editBehavior2 = new();
                 editBehavior2.ShowDialog();
                 editBehavior2.Close();
+                RefreshTasks(2);
                 break;
             case "user3":
                 ReferenceValues.ActiveBehaviorUser = 3;
                 EditBehavior editBehavior3 = new();
                 editBehavior3.ShowDialog();
                 editBehavior3.Close();
+                RefreshTasks(3);
                 break;
             case "user4":
                 ReferenceValues.ActiveBehaviorUser = 4;
                 EditBehavior editBehavior4 = new();
                 editBehavior4.ShowDialog();
                 editBehavior4.Close();
+                RefreshTasks(4);
                 break;
             case "user5":
                 ReferenceValues.ActiveBehaviorUser = 5;
                 EditBehavior editBehavior5 = new();
                 editBehavior5.ShowDialog();
                 editBehavior5.Close();
+                RefreshTasks(5);
                 break;
             }
 

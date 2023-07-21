@@ -18,27 +18,23 @@ public class EditFinancesVM : BaseViewModel {
     private ObservableCollection<string> _categoryList;
 
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor, _detailsText;
+        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor, _detailsText, selectedPerson, _categorySelected, _descriptionText;
 
     private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock1, _detailedFinanceBlock2;
     private ObservableCollection<FinanceBlock> _financeList;
     private FinanceBlock _financeSelected;
-    private string selectedPerson, _categorySelected, _descriptionText;
 
     private int totalBilling, totalGrocery, totalPetrol, totalRestaurantTakeout, totalShopping, totalHealth, totalTravel, totalCoffee, totalEntertainment, totalServices,
-        totalPersonalCare,
-        totalHomeImprovement, totalAlcohol, totalFirearms, totalStreamingService, totalBrittanyFund, totalInterest, totalCarryOver,
-        totalElectricBill, totalWaterBill,
+        totalPersonalCare, totalHomeImprovement, totalAlcohol, totalFirearms, totalStreamingService, totalInterest, totalCarryOver, totalElectricBill, totalWaterBill,
         totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance, totalChildSupport, totalGift,
-        totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses;
+        totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses, totalUser1, totalUser2, totalUser3, totalUser4, totalUser5;
 
-    private double totalPercentageBilling, totalPercentageBrittanyFund, totalPercentageCarryOver, totalPercentageChildCare,
-        totalPercentageCoffee, totalPercentageElectricBill, totalPercentageEntertainment, totalPercentageFirearms, totalPercentageGasBill, totalPercentageGrocery,
-        totalPercentageHealth, totalPercentageAlcohol,
-        totalPercentageHomeImprovement, totalPercentageInsurance, totalPercentageInterest, totalPercentageInternetBill, totalPercentageMortgageRent, totalPercentagePersonalCare,
-        totalPercentagePetrol, totalPercentagePhoneBill, totalPercentageRestaurantTakeout, totalPercentageServices, totalPercentageShopping, totalPercentageStreamingService,
-        totalPercentageTrashBill, totalPercentageTravel, totalPercentageVehiclePayment, totalPercentageWaterBill, totalPercentageChildSupport,
-        totalPercentageGift, totalPercentageGovernment, totalPercentagePaycheck, totalPercentageRefund;
+    private double totalPercentageBilling, totalPercentageCarryOver, totalPercentageChildCare, totalPercentageCoffee, totalPercentageElectricBill, totalPercentageEntertainment,
+        totalPercentageFirearms, totalPercentageGasBill, totalPercentageGrocery, totalPercentageHealth, totalPercentageAlcohol, totalPercentageHomeImprovement,
+        totalPercentageInsurance, totalPercentageInterest, totalPercentageInternetBill, totalPercentageMortgageRent, totalPercentagePersonalCare, totalPercentagePetrol,
+        totalPercentagePhoneBill, totalPercentageRestaurantTakeout, totalPercentageServices, totalPercentageShopping, totalPercentageStreamingService, totalPercentageTrashBill,
+        totalPercentageTravel, totalPercentageVehiclePayment, totalPercentageWaterBill, totalPercentageChildSupport, totalPercentageGift, totalPercentageGovernment,
+        totalPercentagePaycheck, totalPercentageRefund, totalPercentageUser1, totalPercentageUser2, totalPercentageUser3, totalPercentageUser4, totalPercentageUser5;
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
@@ -410,7 +406,6 @@ public class EditFinancesVM : BaseViewModel {
     private void RefreshDetailedView() {
         totalAlcohol = 0;
         totalBilling = 0;
-        totalBrittanyFund = 0;
         totalCarryOver = 0;
         totalChildCare = 0;
         totalCoffee = 0;
@@ -436,6 +431,12 @@ public class EditFinancesVM : BaseViewModel {
         totalTravel = 0;
         totalVehiclePayment = 0;
         totalWaterBill = 0;
+
+        totalUser1 = 0;
+        totalUser2 = 0;
+        totalUser3 = 0;
+        totalUser4 = 0;
+        totalUser5 = 0;
 
         totalChildSupport = 0;
         totalGift = 0;
@@ -647,20 +648,6 @@ public class EditFinancesVM : BaseViewModel {
             case "Streaming Service":
                 try {
                     totalStreamingService += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    SaveDebugFile.Save();
-                }
-
-                break;
-            case "Brittany Fund":
-                try {
-                    totalBrittanyFund += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -910,10 +897,80 @@ public class EditFinancesVM : BaseViewModel {
                 }
 
                 break;
+            case "User1 Fund":
+                try {
+                    totalUser1 += int.Parse(financeBlock.Cost);
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
+            case "User2 Fund":
+                try {
+                    totalUser2 += int.Parse(financeBlock.Cost);
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
+            case "User3 Fund":
+                try {
+                    totalUser3 += int.Parse(financeBlock.Cost);
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
+            case "User4 Fund":
+                try {
+                    totalUser4 += int.Parse(financeBlock.Cost);
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
+            case "User5 Fund":
+                try {
+                    totalUser5 += int.Parse(financeBlock.Cost);
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
             }
         }
 
-        totalAllExpenses = totalAlcohol + totalBilling + totalBrittanyFund + totalChildCare + totalCoffee + totalElectricBill + totalEntertainment + totalFirearms
+        totalAllExpenses = totalAlcohol + totalBilling + totalChildCare + totalCoffee + totalElectricBill + totalEntertainment + totalFirearms
                            + totalGasBill + totalGrocery + totalHealth + totalHomeImprovement + totalInsurance + totalInterest + totalInternetBill + totalMortgageRent +
                            totalPersonalCare
                            + totalPetrol + totalPhoneBill + totalRestaurantTakeout + totalServices + totalShopping + totalStreamingService + totalTrashBill +
@@ -923,7 +980,6 @@ public class EditFinancesVM : BaseViewModel {
         totalPercentageCarryOver = -1;
         totalPercentageAlcohol = Math.Round((double)(100 * totalAlcohol) / totalAllExpenses, 2);
         totalPercentageBilling = Math.Round((double)(100 * totalBilling) / totalAllExpenses, 2);
-        totalPercentageBrittanyFund = Math.Round((double)(100 * totalBrittanyFund) / totalAllExpenses, 2);
         totalPercentageChildCare = Math.Round((double)(100 * totalChildCare) / totalAllExpenses, 2);
         totalPercentageCoffee = Math.Round((double)(100 * totalCoffee) / totalAllExpenses, 2);
         totalPercentageElectricBill = Math.Round((double)(100 * totalElectricBill) / totalAllExpenses, 2);
@@ -948,6 +1004,12 @@ public class EditFinancesVM : BaseViewModel {
         totalPercentageTravel = Math.Round((double)(100 * totalTravel) / totalAllExpenses, 2);
         totalPercentageVehiclePayment = Math.Round((double)(100 * totalVehiclePayment) / totalAllExpenses, 2);
         totalPercentageWaterBill = Math.Round((double)(100 * totalWaterBill) / totalAllExpenses, 2);
+
+        totalPercentageUser1 = Math.Round((double)(100 * totalUser1) / totalAllExpenses, 2);
+        totalPercentageUser2 = Math.Round((double)(100 * totalUser2) / totalAllExpenses, 2);
+        totalPercentageUser3 = Math.Round((double)(100 * totalUser3) / totalAllExpenses, 2);
+        totalPercentageUser4 = Math.Round((double)(100 * totalUser4) / totalAllExpenses, 2);
+        totalPercentageUser5 = Math.Round((double)(100 * totalUser5) / totalAllExpenses, 2);
 
         totalAllProfit = totalChildSupport + totalGift + totalGovernment + totalPaycheck + totalRefund;
         totalPercentageChildSupport = Math.Round((double)(100 * totalChildSupport) / totalAllProfit, 2);
@@ -1044,12 +1106,6 @@ public class EditFinancesVM : BaseViewModel {
             Category = "Streaming Service",
             Percentage = totalPercentageStreamingService,
             Amount = totalStreamingService
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Brittany Fund",
-            Percentage = totalPercentageBrittanyFund,
-            Amount = totalBrittanyFund
         });
 
         DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
@@ -1152,6 +1208,36 @@ public class EditFinancesVM : BaseViewModel {
             Category = "Refund",
             Percentage = totalPercentageRefund,
             Amount = totalRefund
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "User1 Fund",
+            Percentage = totalPercentageUser1,
+            Amount = totalUser1
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "User2 Fund",
+            Percentage = totalPercentageUser2,
+            Amount = totalUser2
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "User3 Fund",
+            Percentage = totalPercentageUser3,
+            Amount = totalUser3
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "User4 Fund",
+            Percentage = totalPercentageUser4,
+            Amount = totalUser4
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "User5 Fund",
+            Percentage = totalPercentageUser5,
+            Amount = totalUser5
         });
 
         CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock1);
