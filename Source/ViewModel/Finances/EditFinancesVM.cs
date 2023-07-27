@@ -27,14 +27,15 @@ public class EditFinancesVM : BaseViewModel {
     private int totalBilling, totalGrocery, totalPetrol, totalRestaurantTakeout, totalShopping, totalHealth, totalTravel, totalCoffee, totalEntertainment, totalServices,
         totalPersonalCare, totalHomeImprovement, totalAlcohol, totalFirearms, totalStreamingService, totalInterest, totalCarryOver, totalElectricBill, totalWaterBill,
         totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance, totalChildSupport, totalGift,
-        totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses, totalUser1, totalUser2, totalUser3, totalUser4, totalUser5;
+        totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses, totalUser1, totalUser2, totalUser3, totalUser4, totalUser5, totalGovernmentSpent;
 
     private double totalPercentageBilling, totalPercentageCarryOver, totalPercentageChildCare, totalPercentageCoffee, totalPercentageElectricBill, totalPercentageEntertainment,
         totalPercentageFirearms, totalPercentageGasBill, totalPercentageGrocery, totalPercentageHealth, totalPercentageAlcohol, totalPercentageHomeImprovement,
         totalPercentageInsurance, totalPercentageInterest, totalPercentageInternetBill, totalPercentageMortgageRent, totalPercentagePersonalCare, totalPercentagePetrol,
         totalPercentagePhoneBill, totalPercentageRestaurantTakeout, totalPercentageServices, totalPercentageShopping, totalPercentageStreamingService, totalPercentageTrashBill,
         totalPercentageTravel, totalPercentageVehiclePayment, totalPercentageWaterBill, totalPercentageChildSupport, totalPercentageGift, totalPercentageGovernment,
-        totalPercentagePaycheck, totalPercentageRefund, totalPercentageUser1, totalPercentageUser2, totalPercentageUser3, totalPercentageUser4, totalPercentageUser5;
+        totalPercentagePaycheck, totalPercentageRefund, totalPercentageUser1, totalPercentageUser2, totalPercentageUser3, totalPercentageUser4, totalPercentageUser5,
+        totalPercentageGovernmentSpent;
 
     public EditFinancesVM() {
         fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
@@ -431,6 +432,7 @@ public class EditFinancesVM : BaseViewModel {
         totalTravel = 0;
         totalVehiclePayment = 0;
         totalWaterBill = 0;
+        totalGovernmentSpent = 0;
 
         totalUser1 = 0;
         totalUser2 = 0;
@@ -857,7 +859,11 @@ public class EditFinancesVM : BaseViewModel {
                 break;
             case "Government":
                 try {
-                    totalGovernment += int.Parse(financeBlock.Cost);
+                    if (financeBlock.AddSub == "ADD") {
+                        totalGovernment += int.Parse(financeBlock.Cost);
+                    } else {
+                        totalGovernmentSpent += int.Parse(financeBlock.Cost);
+                    }
                 } catch (Exception e) {
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -975,7 +981,7 @@ public class EditFinancesVM : BaseViewModel {
                            totalPersonalCare
                            + totalPetrol + totalPhoneBill + totalRestaurantTakeout + totalServices + totalShopping + totalStreamingService + totalTrashBill +
                            totalTravel
-                           + totalVehiclePayment + totalWaterBill;
+                           + totalVehiclePayment + totalWaterBill + totalGovernmentSpent;
 
         totalPercentageCarryOver = -1;
         totalPercentageAlcohol = Math.Round((double)(100 * totalAlcohol) / totalAllExpenses, 2);
@@ -1004,6 +1010,7 @@ public class EditFinancesVM : BaseViewModel {
         totalPercentageTravel = Math.Round((double)(100 * totalTravel) / totalAllExpenses, 2);
         totalPercentageVehiclePayment = Math.Round((double)(100 * totalVehiclePayment) / totalAllExpenses, 2);
         totalPercentageWaterBill = Math.Round((double)(100 * totalWaterBill) / totalAllExpenses, 2);
+        totalPercentageGovernmentSpent = Math.Round((double)(100 * totalGovernmentSpent) / totalAllExpenses, 2);
 
         totalPercentageUser1 = Math.Round((double)(100 * totalUser1) / totalAllExpenses, 2);
         totalPercentageUser2 = Math.Round((double)(100 * totalUser2) / totalAllExpenses, 2);
@@ -1238,6 +1245,12 @@ public class EditFinancesVM : BaseViewModel {
             Category = "User5 Fund",
             Percentage = totalPercentageUser5,
             Amount = totalUser5
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Government",
+            Percentage = totalPercentageGovernmentSpent,
+            Amount = totalGovernmentSpent
         });
 
         CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock1);

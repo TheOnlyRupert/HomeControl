@@ -71,10 +71,10 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" Source="{Binding ImageUser1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <!--Image Grid.Row="0" Source="../../../Resources/Images/behavior/crown.png" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16 -32 16 0"/-->
 
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -104,11 +104,10 @@
                         <Image Grid.Column="2" Source="{Binding User1Strike3}"/>
                     </Grid>
 
+                    <TextBlock Grid.Row="3" Text="{Binding User1CashAvailable}" FontSize="32" Foreground="{Binding User1CashAvailableColor}" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="4" Text="{Binding User1CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User1CashAvailable}" FontSize="32" Foreground="{Binding User1CashAvailableColor}" HorizontalAlignment="Center"
-                               Margin="0 4"/>
-
-                    <Grid Grid.Row="4" Margin="4">
+                    <Grid Grid.Row="5" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -121,7 +120,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="5" Margin="4">
+                    <Grid Grid.Row="6" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -133,7 +132,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User1TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="7" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -145,7 +144,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User1TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="8" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -185,6 +184,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" Source="{Binding ImageUser2}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -217,10 +217,10 @@
                         <Image Grid.Column="2" Source="{Binding User2Strike3}"/>
                     </Grid>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User2CashAvailable}" FontSize="32" Foreground="{Binding User2CashAvailableColor}" HorizontalAlignment="Center"
-                               Margin="0 4"/>
+                    <TextBlock Grid.Row="3" Text="{Binding User2CashAvailable}" FontSize="32" Foreground="{Binding User2CashAvailableColor}" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="4" Text="{Binding User2CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="4" Margin="4">
+                    <Grid Grid.Row="5" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -233,7 +233,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="5" Margin="4">
+                    <Grid Grid.Row="6" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -245,7 +245,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User2TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="7" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -258,7 +258,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="8" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -298,6 +298,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" Source="{Binding ImageUser3}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -330,10 +331,10 @@
                         <Image Grid.Column="2" Source="{Binding User3Strike3}"/>
                     </Grid>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User3CashAvailable}" FontSize="32" Foreground="{Binding User3CashAvailableColor}" HorizontalAlignment="Center"
-                               Margin="0 4"/>
+                    <TextBlock Grid.Row="3" Text="{Binding User3CashAvailable}" FontSize="32" Foreground="{Binding User3CashAvailableColor}" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="4" Text="{Binding User3CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="4" Margin="4">
+                    <Grid Grid.Row="5" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -346,7 +347,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="5" Margin="4">
+                    <Grid Grid.Row="6" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -358,7 +359,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User3TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="7" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -371,7 +372,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="8" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -411,6 +412,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" Source="{Binding ImageUser4}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -443,10 +445,10 @@
                         <Image Grid.Column="2" Source="{Binding User4Strike3}"/>
                     </Grid>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User4CashAvailable}" FontSize="32" Foreground="{Binding User4CashAvailableColor}" HorizontalAlignment="Center"
-                               Margin="0 4"/>
+                    <TextBlock Grid.Row="3" Text="{Binding User4CashAvailable}" FontSize="32" Foreground="{Binding User4CashAvailableColor}" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="4" Text="{Binding User4CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="4" Margin="4">
+                    <Grid Grid.Row="5" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -459,7 +461,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="5" Margin="4">
+                    <Grid Grid.Row="6" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -471,7 +473,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User4TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="7" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -484,7 +486,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="8" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -524,6 +526,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" Source="{Binding ImageUser5}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -556,10 +559,10 @@
                         <Image Grid.Column="2" Source="{Binding User5Strike3}"/>
                     </Grid>
 
-                    <TextBlock Grid.Row="3" Text="{Binding User5CashAvailable}" FontSize="32" Foreground="{Binding User5CashAvailableColor}" HorizontalAlignment="Center"
-                               Margin="0 4"/>
+                    <TextBlock Grid.Row="3" Text="{Binding User5CashAvailable}" FontSize="32" Foreground="{Binding User5CashAvailableColor}" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="4" Text="{Binding User5CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="4" Margin="4">
+                    <Grid Grid.Row="5" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -572,7 +575,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="5" Margin="4">
+                    <Grid Grid.Row="6" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -584,7 +587,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User5TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="7" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -597,7 +600,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="8" Margin="4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
