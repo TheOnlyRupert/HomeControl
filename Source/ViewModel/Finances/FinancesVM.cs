@@ -12,6 +12,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesVM : BaseViewModel {
+    private readonly CrossViewMessenger simpleMessenger;
     private string _cashIncomeText, _cashExpenseText, _cashAvailableText, _cashAvailableTextColor;
     private int expense, income, available;
 
@@ -27,7 +28,7 @@ public class FinancesVM : BaseViewModel {
         RefreshFinances();
         BackupFinances();
 
-        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
@@ -41,6 +42,8 @@ public class FinancesVM : BaseViewModel {
                 editFinances.ShowDialog();
                 editFinances.Close();
                 RefreshFinances();
+
+                simpleMessenger.PushMessage("RefreshFinances", null);
                 break;
             }
         } else {
@@ -84,7 +87,9 @@ public class FinancesVM : BaseViewModel {
             foreach (FinanceBlock t in ReferenceValues.JsonFinanceMasterList.financeList) {
                 if (t.AddSub == "ADD") {
                     try {
-                        income += int.Parse(t.Cost);
+                        if (t.Category is not ("User1 Fund" or "User2 Fund" or "User3 Fund" or "User4 Fund" or "User5 Fund")) {
+                            income += int.Parse(t.Cost);
+                        }
                     } catch (Exception e) {
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                             Date = DateTime.Now,

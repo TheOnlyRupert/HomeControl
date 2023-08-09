@@ -44,10 +44,11 @@ public class EditBehaviorVM : BaseViewModel {
             strikes = ReferenceValues.JsonBehaviorMaster.User1Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User1Progress;
             ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User1Progress + "/5";
+            Uri uri;
 
             try {
-                Uri uri1 = new(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
-                ImageUser = new BitmapImage(uri1);
+                uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+                ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -66,8 +67,8 @@ public class EditBehaviorVM : BaseViewModel {
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User2Progress;
             ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User2Progress + "/5";
             try {
-                Uri uri2 = new(ReferenceValues.FILE_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
-                ImageUser = new BitmapImage(uri2);
+                uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+                ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -86,8 +87,8 @@ public class EditBehaviorVM : BaseViewModel {
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User3Progress;
             ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User3Progress + "/5";
             try {
-                Uri uri3 = new(ReferenceValues.FILE_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
-                ImageUser = new BitmapImage(uri3);
+                uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+                ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -106,8 +107,8 @@ public class EditBehaviorVM : BaseViewModel {
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User4Progress;
             ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User4Progress + "/5";
             try {
-                Uri uri4 = new(ReferenceValues.FILE_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
-                ImageUser = new BitmapImage(uri4);
+                uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+                ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -126,8 +127,8 @@ public class EditBehaviorVM : BaseViewModel {
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User5Progress;
             ProgressBarChildValueText = ReferenceValues.JsonBehaviorMaster.User5Progress + "/5";
             try {
-                Uri uri5 = new(ReferenceValues.FILE_DIRECTORY + "icons/.png", UriKind.RelativeOrAbsolute);
-                ImageUser = new BitmapImage(uri5);
+                uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+                ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                     Date = DateTime.Now,

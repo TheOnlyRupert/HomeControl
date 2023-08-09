@@ -105,6 +105,50 @@
                                 <DataTrigger Binding="{Binding AddSub}" Value="ADD">
                                     <Setter Property="Foreground" Value="CornflowerBlue"/>
                                 </DataTrigger>
+                                
+                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
+                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                </DataTrigger>
+                                
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
+                                        <Condition Binding="{Binding Path=Category}" Value="User1 Fund"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="GreenYellow"/>
+                                </MultiDataTrigger>
+                                
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
+                                        <Condition Binding="{Binding Path=Category}" Value="User2 Fund"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="GreenYellow"/>
+                                </MultiDataTrigger>
+                                
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
+                                        <Condition Binding="{Binding Path=Category}" Value="User3 Fund"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="GreenYellow"/>
+                                </MultiDataTrigger>
+                                
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
+                                        <Condition Binding="{Binding Path=Category}" Value="User4 Fund"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="GreenYellow"/>
+                                </MultiDataTrigger>
+                                
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
+                                        <Condition Binding="{Binding Path=Category}" Value="User5 Fund"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="GreenYellow"/>
+                                </MultiDataTrigger>
 
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
@@ -431,13 +475,66 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="64"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="64"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Income Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
-
                 <control:CustomListView Grid.Row="1" x:Name="CustomListView3" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock2}" Foreground="CornflowerBlue"
                                         SelectedItem="{Binding DetailedFinanceSelected2}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
+                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
+                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Percentage}" Header="Percentage" Width="Auto" control:GridViewSort.PropertyName="Percentage"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="Auto" control:GridViewSort.PropertyName="Amount"/>
+                        </GridView>
+                    </ListView.View>
+                </control:CustomListView>
+
+                <TextBlock Grid.Row="2" Text="User Funds" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
+
+                <control:CustomListView Grid.Row="3" x:Name="CustomListView4" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock3}" Foreground="CornflowerBlue"
+                                        SelectedItem="{Binding DetailedFinanceSelected3}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
                                         IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">

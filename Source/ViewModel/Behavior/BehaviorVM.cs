@@ -228,7 +228,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User1Funds += releaseAmountDaily;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -274,7 +273,6 @@ public class BehaviorVM : BaseViewModel {
                         });
                         SaveDebugFile.Save();
 
-                        ReferenceValues.JsonFinanceMasterList.User1Funds += releaseAmountWeekly;
                         ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                             AddSub = "SUB",
                             Date = DateTime.Now.ToShortDateString(),
@@ -318,7 +316,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User1Funds += releaseAmountMonthly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -366,7 +363,6 @@ public class BehaviorVM : BaseViewModel {
                             SaveDebugFile.Save();
 
                             try {
-                                ReferenceValues.JsonFinanceMasterList.User1Funds += releaseAmountQuarterly;
                                 ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
@@ -431,13 +427,29 @@ public class BehaviorVM : BaseViewModel {
                 User1CashReleased = "";
             }
 
-            try {
-                User1CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User1Funds);
-                User1CashAvailableColor = User1CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } catch (Exception) {
-                User1CashAvailable = "Error";
-                User1CashAvailableColor = "White";
+            int funds = 0;
+            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                if (financeBlock.Category == "User1 Fund") {
+                    try {
+                        if (financeBlock.AddSub == "ADD") {
+                            funds -= int.Parse(financeBlock.Cost);
+                        } else {
+                            funds += int.Parse(financeBlock.Cost);
+                        }
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "BehaviorVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+                }
             }
+
+            User1CashAvailable = string.Format(culture, "{0:C}", funds);
+            User1CashAvailableColor = User1CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
 
             break;
         case 2:
@@ -516,7 +528,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User2Funds += releaseAmountDaily;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -562,7 +573,6 @@ public class BehaviorVM : BaseViewModel {
                         });
                         SaveDebugFile.Save();
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User2Funds += releaseAmountWeekly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -609,7 +619,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User2Funds += releaseAmountMonthly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -656,7 +665,6 @@ public class BehaviorVM : BaseViewModel {
                             });
                             SaveDebugFile.Save();
                             try {
-                                ReferenceValues.JsonFinanceMasterList.User2Funds += releaseAmountQuarterly;
                                 ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
@@ -721,13 +729,29 @@ public class BehaviorVM : BaseViewModel {
                 User2CashReleased = "";
             }
 
-            try {
-                User2CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User2Funds);
-                User2CashAvailableColor = User2CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } catch (Exception) {
-                User2CashAvailable = "Error";
-                User2CashAvailableColor = "White";
+            funds = 0;
+            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                if (financeBlock.Category == "User2 Fund") {
+                    try {
+                        if (financeBlock.AddSub == "ADD") {
+                            funds -= int.Parse(financeBlock.Cost);
+                        } else {
+                            funds += int.Parse(financeBlock.Cost);
+                        }
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "BehaviorVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+                }
             }
+
+            User2CashAvailable = string.Format(culture, "{0:C}", funds);
+            User2CashAvailableColor = User2CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
 
             break;
         case 3:
@@ -806,7 +830,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User3Funds += releaseAmountDaily;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -853,7 +876,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User3Funds += releaseAmountWeekly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -900,7 +922,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User3Funds += releaseAmountMonthly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -948,7 +969,6 @@ public class BehaviorVM : BaseViewModel {
                             SaveDebugFile.Save();
 
                             try {
-                                ReferenceValues.JsonFinanceMasterList.User3Funds += releaseAmountQuarterly;
                                 ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
@@ -1013,13 +1033,29 @@ public class BehaviorVM : BaseViewModel {
             User3TasksCompletedMonthProgressColor = User3TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User3TasksCompletedQuarterProgressColor = User3TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
 
-            try {
-                User3CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User3Funds);
-                User3CashAvailableColor = User3CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } catch (Exception) {
-                User3CashAvailable = "Error";
-                User3CashAvailableColor = "White";
+            funds = 0;
+            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                if (financeBlock.Category == "User3 Fund") {
+                    try {
+                        if (financeBlock.AddSub == "ADD") {
+                            funds -= int.Parse(financeBlock.Cost);
+                        } else {
+                            funds += int.Parse(financeBlock.Cost);
+                        }
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "BehaviorVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+                }
             }
+
+            User3CashAvailable = string.Format(culture, "{0:C}", funds);
+            User3CashAvailableColor = User3CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
 
             break;
         case 4:
@@ -1098,7 +1134,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User4Funds += releaseAmountDaily;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -1145,7 +1180,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User4Funds += releaseAmountWeekly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -1192,7 +1226,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User4Funds += releaseAmountMonthly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -1240,7 +1273,6 @@ public class BehaviorVM : BaseViewModel {
                             SaveDebugFile.Save();
 
                             try {
-                                ReferenceValues.JsonFinanceMasterList.User4Funds += releaseAmountQuarterly;
                                 ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
@@ -1305,13 +1337,29 @@ public class BehaviorVM : BaseViewModel {
                 User4CashReleased = "";
             }
 
-            try {
-                User4CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User4Funds);
-                User4CashAvailableColor = User4CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } catch (Exception) {
-                User4CashAvailable = "Error";
-                User4CashAvailableColor = "White";
+            funds = 0;
+            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                if (financeBlock.Category == "User4 Fund") {
+                    try {
+                        if (financeBlock.AddSub == "ADD") {
+                            funds -= int.Parse(financeBlock.Cost);
+                        } else {
+                            funds += int.Parse(financeBlock.Cost);
+                        }
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "BehaviorVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+                }
             }
+
+            User4CashAvailable = string.Format(culture, "{0:C}", funds);
+            User4CashAvailableColor = User4CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
 
             break;
         case 5:
@@ -1390,7 +1438,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User5Funds += releaseAmountDaily;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -1437,7 +1484,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User5Funds += releaseAmountWeekly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -1484,7 +1530,6 @@ public class BehaviorVM : BaseViewModel {
                         SaveDebugFile.Save();
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.User5Funds += releaseAmountMonthly;
                             ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
@@ -1532,7 +1577,6 @@ public class BehaviorVM : BaseViewModel {
                             SaveDebugFile.Save();
 
                             try {
-                                ReferenceValues.JsonFinanceMasterList.User5Funds += releaseAmountQuarterly;
                                 ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
@@ -1597,13 +1641,29 @@ public class BehaviorVM : BaseViewModel {
                 User5CashReleased = "";
             }
 
-            try {
-                User5CashAvailable = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMasterList.User5Funds);
-                User5CashAvailableColor = User5CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } catch (Exception) {
-                User5CashAvailable = "Error";
-                User5CashAvailableColor = "White";
+            funds = 0;
+            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                if (financeBlock.Category == "User5 Fund") {
+                    try {
+                        if (financeBlock.AddSub == "ADD") {
+                            funds -= int.Parse(financeBlock.Cost);
+                        } else {
+                            funds += int.Parse(financeBlock.Cost);
+                        }
+                    } catch (Exception e) {
+                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "BehaviorVM",
+                            Description = e.ToString()
+                        });
+                        SaveDebugFile.Save();
+                    }
+                }
             }
+
+            User5CashAvailable = string.Format(culture, "{0:C}", funds);
+            User5CashAvailableColor = User5CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
 
             break;
         }
@@ -1937,6 +1997,13 @@ public class BehaviorVM : BaseViewModel {
             break;
         case "HourChanged":
             RefreshCountdown();
+            break;
+        case "RefreshFinances":
+            RefreshTasks(1);
+            RefreshTasks(2);
+            RefreshTasks(3);
+            RefreshTasks(4);
+            RefreshTasks(5);
             break;
         }
     }
