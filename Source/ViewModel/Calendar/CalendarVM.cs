@@ -1359,6 +1359,9 @@ public class CalendarVM : BaseViewModel {
 
         /* Get Calendar Events */
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[0].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[0].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             if (ReferenceValues.JsonCalendarMasterEventList[0].eventsList != null) {
                 foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[0].eventsList) {
                     Button1EventList.Add(new CalendarEventsCustom {
@@ -1380,6 +1383,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[1].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[1].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[1].eventsList) {
                 Button2EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1399,6 +1405,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[2].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[2].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[2].eventsList) {
                 Button3EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1418,6 +1427,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[3].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[3].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[3].eventsList) {
                 Button4EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1437,6 +1449,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[4].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[4].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[4].eventsList) {
                 Button5EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1456,6 +1471,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[5].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[5].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[5].eventsList) {
                 Button6EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1475,6 +1493,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[6].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[6].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[6].eventsList) {
                 Button7EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1494,6 +1515,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[7].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[7].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[7].eventsList) {
                 Button8EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1513,6 +1537,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[8].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[8].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[8].eventsList) {
                 Button9EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1532,6 +1559,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[9].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[9].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[9].eventsList) {
                 Button10EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1551,6 +1581,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[10].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[10].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[10].eventsList) {
                 Button11EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1570,6 +1603,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[11].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[11].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[11].eventsList) {
                 Button12EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1589,6 +1625,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[12].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[12].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[12].eventsList) {
                 Button13EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1608,6 +1647,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[13].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[13].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[13].eventsList) {
                 Button14EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1627,6 +1669,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[14].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[14].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[14].eventsList) {
                 Button15EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1646,6 +1691,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[15].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[15].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[15].eventsList) {
                 Button16EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1665,6 +1713,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[16].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[16].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[16].eventsList) {
                 Button17EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1684,6 +1735,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[17].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[17].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[17].eventsList) {
                 Button18EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1703,6 +1757,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[18].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[18].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[18].eventsList) {
                 Button19EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1722,6 +1779,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[19].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[19].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[19].eventsList) {
                 Button20EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1741,6 +1801,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[20].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[20].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[20].eventsList) {
                 Button21EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1760,6 +1823,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[21].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[21].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[21].eventsList) {
                 Button22EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1779,6 +1845,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[22].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[22].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[22].eventsList) {
                 Button23EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1798,6 +1867,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[23].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[23].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[23].eventsList) {
                 Button24EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1817,6 +1889,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[24].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[24].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[24].eventsList) {
                 Button25EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1836,6 +1911,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[25].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[25].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[25].eventsList) {
                 Button26EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1855,6 +1933,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[26].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[26].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[26].eventsList) {
                 Button27EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1874,6 +1955,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[27].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[27].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[27].eventsList) {
                 Button28EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1893,6 +1977,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[28].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[28].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[28].eventsList) {
                 Button29EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1912,6 +1999,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[29].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[29].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[29].eventsList) {
                 Button30EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1931,6 +2021,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[30].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[30].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[30].eventsList) {
                 Button31EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1950,6 +2043,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[31].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[31].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[31].eventsList) {
                 Button32EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1969,6 +2065,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[32].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[32].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[32].eventsList) {
                 Button33EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -1988,6 +2087,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[33].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[33].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[33].eventsList) {
                 Button34EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -2007,6 +2109,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[34].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[34].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[34].eventsList) {
                 Button35EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -2026,6 +2131,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[35].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[35].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[35].eventsList) {
                 Button36EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -2045,6 +2153,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[36].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[36].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[36].eventsList) {
                 Button37EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -2064,6 +2175,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[37].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[37].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[37].eventsList) {
                 Button38EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -2083,6 +2197,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[38].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[38].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[38].eventsList) {
                 Button39EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -2102,6 +2219,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[39].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[39].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[39].eventsList) {
                 Button40EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -2121,6 +2241,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[40].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[40].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[40].eventsList) {
                 Button41EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,
@@ -2140,6 +2263,9 @@ public class CalendarVM : BaseViewModel {
         }
 
         try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[41].eventsList orderby s.startTime select s;
+            ReferenceValues.JsonCalendarMasterEventList[41].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
             foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[41].eventsList) {
                 Button42EventList.Add(new CalendarEventsCustom {
                     name = t.startTime + " - " + t.endTime + "  " + t.name,

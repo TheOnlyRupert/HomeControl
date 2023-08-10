@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
@@ -80,7 +81,8 @@ public class EditCalendarVM : BaseViewModel {
                         JsonCalendar currentJsonCalendar = JsonSerializer.Deserialize<JsonCalendar>(eventsListString, options);
 
                         if (currentJsonCalendar != null) {
-                            EventList = currentJsonCalendar.eventsList;
+                            IOrderedEnumerable<CalendarEvents> orderByResult = from s in currentJsonCalendar.eventsList orderby s.startTime select s;
+                            EventList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
                         }
                     } catch (Exception e) {
                         ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -350,6 +352,9 @@ public class EditCalendarVM : BaseViewModel {
     private void SaveJson() {
         if (EventList.Count > 0) {
             try {
+                IOrderedEnumerable<CalendarEvents> orderByResult = from s in EventList orderby s.startTime select s;
+                EventList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
                 _jsonCalendar.eventsList = EventList;
                 string jsonString = JsonSerializer.Serialize(_jsonCalendar);
                 GC.Collect();
