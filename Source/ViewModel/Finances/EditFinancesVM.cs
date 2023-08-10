@@ -22,13 +22,16 @@ public class EditFinancesVM : BaseViewModel {
         _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor, _detailsText, selectedPerson, _categorySelected, _descriptionText;
 
     private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock1, _detailedFinanceBlock2;
+
+    private ObservableCollection<DetailedFinanceBlockUser> _detailedFinanceBlockUser;
     private ObservableCollection<FinanceBlock> _financeList;
     private FinanceBlock _financeSelected;
 
     private int totalBilling, totalGrocery, totalPetrol, totalRestaurantTakeout, totalShopping, totalHealth, totalTravel, totalCoffee, totalEntertainment, totalServices,
         totalPersonalCare, totalHomeImprovement, totalAlcohol, totalFirearms, totalStreamingService, totalInterest, totalCarryOver, totalElectricBill, totalWaterBill,
         totalPhoneBill, totalGasBill, totalMortgageRent, totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance, totalChildSupport, totalGift,
-        totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses, totalUsers, totalGovernmentSpent;
+        totalGovernment, totalPaycheck, totalRefund, totalAllProfit, totalAllExpenses, totalUsers, totalGovernmentSpent, totalUser1Spent, totalUser2Spent, totalUser3Spent,
+        totalUser4Spent, totalUser5Spent, totalUser1Profit, totalUser2Profit, totalUser3Profit, totalUser4Profit, totalUser5Profit;
 
     private double totalPercentageBilling, totalPercentageCarryOver, totalPercentageChildCare, totalPercentageCoffee, totalPercentageElectricBill, totalPercentageEntertainment,
         totalPercentageFirearms, totalPercentageGasBill, totalPercentageGrocery, totalPercentageHealth, totalPercentageAlcohol, totalPercentageHomeImprovement,
@@ -73,6 +76,7 @@ public class EditFinancesVM : BaseViewModel {
 
         DetailedFinanceBlock1 = new ObservableCollection<DetailedFinanceBlock>();
         DetailedFinanceBlock2 = new ObservableCollection<DetailedFinanceBlock>();
+        DetailedFinanceBlockUser = new ObservableCollection<DetailedFinanceBlockUser>();
 
         RefreshDetailedView();
     }
@@ -438,6 +442,16 @@ public class EditFinancesVM : BaseViewModel {
         totalGovernmentSpent = 0;
 
         totalUsers = 0;
+        totalUser1Spent = 0;
+        totalUser1Profit = 0;
+        totalUser2Spent = 0;
+        totalUser2Profit = 0;
+        totalUser3Spent = 0;
+        totalUser3Profit = 0;
+        totalUser4Spent = 0;
+        totalUser4Profit = 0;
+        totalUser5Spent = 0;
+        totalUser5Profit = 0;
 
         totalChildSupport = 0;
         totalGift = 0;
@@ -447,6 +461,7 @@ public class EditFinancesVM : BaseViewModel {
 
         DetailedFinanceBlock1.Clear();
         DetailedFinanceBlock2.Clear();
+        DetailedFinanceBlockUser.Clear();
 
         foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
             switch (financeBlock.Category) {
@@ -903,13 +918,88 @@ public class EditFinancesVM : BaseViewModel {
 
                 break;
             case "User1 Fund":
+                try {
+                    if (financeBlock.AddSub == "SUB") {
+                        totalUsers += int.Parse(financeBlock.Cost);
+                        totalUser1Profit += int.Parse(financeBlock.Cost);
+                    } else {
+                        totalUser1Spent += int.Parse(financeBlock.Cost);
+                    }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
             case "User2 Fund":
+                try {
+                    if (financeBlock.AddSub == "SUB") {
+                        totalUsers += int.Parse(financeBlock.Cost);
+                        totalUser2Profit += int.Parse(financeBlock.Cost);
+                    } else {
+                        totalUser2Spent += int.Parse(financeBlock.Cost);
+                    }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
             case "User3 Fund":
+                try {
+                    if (financeBlock.AddSub == "SUB") {
+                        totalUsers += int.Parse(financeBlock.Cost);
+                        totalUser3Profit += int.Parse(financeBlock.Cost);
+                    } else {
+                        totalUser3Spent += int.Parse(financeBlock.Cost);
+                    }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
             case "User4 Fund":
+                try {
+                    if (financeBlock.AddSub == "SUB") {
+                        totalUsers += int.Parse(financeBlock.Cost);
+                        totalUser4Profit += int.Parse(financeBlock.Cost);
+                    } else {
+                        totalUser4Spent += int.Parse(financeBlock.Cost);
+                    }
+                } catch (Exception e) {
+                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "EditFinancesVM",
+                        Description = e.ToString()
+                    });
+                    SaveDebugFile.Save();
+                }
+
+                break;
             case "User5 Fund":
                 try {
                     if (financeBlock.AddSub == "SUB") {
                         totalUsers += int.Parse(financeBlock.Cost);
+                        totalUser5Profit += int.Parse(financeBlock.Cost);
+                    } else {
+                        totalUser5Spent += int.Parse(financeBlock.Cost);
                     }
                 } catch (Exception e) {
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
@@ -1130,6 +1220,19 @@ public class EditFinancesVM : BaseViewModel {
             Amount = totalInsurance
         });
 
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "User Funds",
+            Percentage = totalPercentageUsers,
+            Amount = totalUsers
+        });
+
+        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
+            Category = "Government",
+            Percentage = totalPercentageGovernmentSpent,
+            Amount = totalGovernmentSpent
+        });
+
+        /* Start of profit */
         DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
             Category = "Child Support",
             Percentage = totalPercentageChildSupport,
@@ -1160,16 +1263,45 @@ public class EditFinancesVM : BaseViewModel {
             Amount = totalRefund
         });
 
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "User Funds",
-            Percentage = totalPercentageUsers,
-            Amount = totalUsers
+        /* Start of users */
+        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
+            Id = 1,
+            Name = ReferenceValues.JsonMasterSettings.User1Name,
+            TotalSpent = totalUser1Spent,
+            TotalEarned = totalUser1Profit,
+            Available = totalUser1Profit - totalUser1Spent
         });
 
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Government",
-            Percentage = totalPercentageGovernmentSpent,
-            Amount = totalGovernmentSpent
+        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
+            Id = 2,
+            Name = ReferenceValues.JsonMasterSettings.User2Name,
+            TotalSpent = totalUser2Spent,
+            TotalEarned = totalUser2Profit,
+            Available = totalUser2Profit - totalUser2Spent
+        });
+
+        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
+            Id = 3,
+            Name = ReferenceValues.JsonMasterSettings.User3Name,
+            TotalSpent = totalUser3Spent,
+            TotalEarned = totalUser3Profit,
+            Available = totalUser3Profit - totalUser3Spent
+        });
+
+        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
+            Id = 4,
+            Name = ReferenceValues.JsonMasterSettings.User4Name,
+            TotalSpent = totalUser4Spent,
+            TotalEarned = totalUser4Profit,
+            Available = totalUser4Profit - totalUser4Spent
+        });
+
+        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
+            Id = 5,
+            Name = ReferenceValues.JsonMasterSettings.User5Name,
+            TotalSpent = totalUser5Spent,
+            TotalEarned = totalUser5Profit,
+            Available = totalUser5Profit - totalUser5Spent
         });
 
         CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock1);
@@ -1345,6 +1477,14 @@ public class EditFinancesVM : BaseViewModel {
         set {
             _detailedFinanceBlock2 = value;
             RaisePropertyChangedEvent("DetailedFinanceBlock2");
+        }
+    }
+
+    public ObservableCollection<DetailedFinanceBlockUser> DetailedFinanceBlockUser {
+        get => _detailedFinanceBlockUser;
+        set {
+            _detailedFinanceBlockUser = value;
+            RaisePropertyChangedEvent("DetailedFinanceBlockUser");
         }
     }
 

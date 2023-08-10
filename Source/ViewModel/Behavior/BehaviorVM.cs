@@ -428,24 +428,28 @@ public class BehaviorVM : BaseViewModel {
             }
 
             int funds = 0;
-            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
-                if (financeBlock.Category == "User1 Fund") {
-                    try {
-                        if (financeBlock.AddSub == "ADD") {
-                            funds -= int.Parse(financeBlock.Cost);
-                        } else {
-                            funds += int.Parse(financeBlock.Cost);
+            try {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                    if (financeBlock.Category == "User1 Fund") {
+                        try {
+                            if (financeBlock.AddSub == "ADD") {
+                                funds -= int.Parse(financeBlock.Cost);
+                            } else {
+                                funds += int.Parse(financeBlock.Cost);
+                            }
+                        } catch (Exception e) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "BehaviorVM",
+                                Description = e.ToString()
+                            });
+                            SaveDebugFile.Save();
                         }
-                    } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "BehaviorVM",
-                            Description = e.ToString()
-                        });
-                        SaveDebugFile.Save();
                     }
                 }
+            } catch (Exception) {
+                //blank
             }
 
             User1CashAvailable = string.Format(culture, "{0:C}", funds);
@@ -730,24 +734,28 @@ public class BehaviorVM : BaseViewModel {
             }
 
             funds = 0;
-            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
-                if (financeBlock.Category == "User2 Fund") {
-                    try {
-                        if (financeBlock.AddSub == "ADD") {
-                            funds -= int.Parse(financeBlock.Cost);
-                        } else {
-                            funds += int.Parse(financeBlock.Cost);
+            try {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                    if (financeBlock.Category == "User2 Fund") {
+                        try {
+                            if (financeBlock.AddSub == "ADD") {
+                                funds -= int.Parse(financeBlock.Cost);
+                            } else {
+                                funds += int.Parse(financeBlock.Cost);
+                            }
+                        } catch (Exception e) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "BehaviorVM",
+                                Description = e.ToString()
+                            });
+                            SaveDebugFile.Save();
                         }
-                    } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "BehaviorVM",
-                            Description = e.ToString()
-                        });
-                        SaveDebugFile.Save();
                     }
                 }
+            } catch (Exception) {
+                //blank
             }
 
             User2CashAvailable = string.Format(culture, "{0:C}", funds);
@@ -1034,24 +1042,28 @@ public class BehaviorVM : BaseViewModel {
             User3TasksCompletedQuarterProgressColor = User3TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
 
             funds = 0;
-            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
-                if (financeBlock.Category == "User3 Fund") {
-                    try {
-                        if (financeBlock.AddSub == "ADD") {
-                            funds -= int.Parse(financeBlock.Cost);
-                        } else {
-                            funds += int.Parse(financeBlock.Cost);
+            try {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                    if (financeBlock.Category == "User3 Fund") {
+                        try {
+                            if (financeBlock.AddSub == "ADD") {
+                                funds -= int.Parse(financeBlock.Cost);
+                            } else {
+                                funds += int.Parse(financeBlock.Cost);
+                            }
+                        } catch (Exception e) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "BehaviorVM",
+                                Description = e.ToString()
+                            });
+                            SaveDebugFile.Save();
                         }
-                    } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "BehaviorVM",
-                            Description = e.ToString()
-                        });
-                        SaveDebugFile.Save();
                     }
                 }
+            } catch (Exception) {
+                //blank
             }
 
             User3CashAvailable = string.Format(culture, "{0:C}", funds);
@@ -1338,24 +1350,28 @@ public class BehaviorVM : BaseViewModel {
             }
 
             funds = 0;
-            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
-                if (financeBlock.Category == "User4 Fund") {
-                    try {
-                        if (financeBlock.AddSub == "ADD") {
-                            funds -= int.Parse(financeBlock.Cost);
-                        } else {
-                            funds += int.Parse(financeBlock.Cost);
+            try {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                    if (financeBlock.Category == "User4 Fund") {
+                        try {
+                            if (financeBlock.AddSub == "ADD") {
+                                funds -= int.Parse(financeBlock.Cost);
+                            } else {
+                                funds += int.Parse(financeBlock.Cost);
+                            }
+                        } catch (Exception e) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "BehaviorVM",
+                                Description = e.ToString()
+                            });
+                            SaveDebugFile.Save();
                         }
-                    } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "BehaviorVM",
-                            Description = e.ToString()
-                        });
-                        SaveDebugFile.Save();
                     }
                 }
+            } catch (Exception) {
+                //blank
             }
 
             User4CashAvailable = string.Format(culture, "{0:C}", funds);
@@ -1642,24 +1658,28 @@ public class BehaviorVM : BaseViewModel {
             }
 
             funds = 0;
-            foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
-                if (financeBlock.Category == "User5 Fund") {
-                    try {
-                        if (financeBlock.AddSub == "ADD") {
-                            funds -= int.Parse(financeBlock.Cost);
-                        } else {
-                            funds += int.Parse(financeBlock.Cost);
+            try {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                    if (financeBlock.Category == "User5 Fund") {
+                        try {
+                            if (financeBlock.AddSub == "ADD") {
+                                funds -= int.Parse(financeBlock.Cost);
+                            } else {
+                                funds += int.Parse(financeBlock.Cost);
+                            }
+                        } catch (Exception e) {
+                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "BehaviorVM",
+                                Description = e.ToString()
+                            });
+                            SaveDebugFile.Save();
                         }
-                    } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "BehaviorVM",
-                            Description = e.ToString()
-                        });
-                        SaveDebugFile.Save();
                     }
                 }
+            } catch (Exception) {
+                //blank
             }
 
             User5CashAvailable = string.Format(culture, "{0:C}", funds);

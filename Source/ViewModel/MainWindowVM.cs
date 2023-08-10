@@ -88,12 +88,11 @@ public class MainWindowVM : BaseViewModel {
 
         /* HVAC Serial Port */
         new HvacFromJson();
-        if (string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.ComPort)) {
-            ReferenceValues.JsonMasterSettings.ComPort = "COM5";
-        }
 
-        ReferenceValues.SerialPortMaster = new SerialPort(ReferenceValues.JsonMasterSettings.ComPort, 9600);
-        HvacCrossPlay.EstablishConnection();
+        if (!string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.ComPort)) {
+            ReferenceValues.SerialPortMaster = new SerialPort(ReferenceValues.JsonMasterSettings.ComPort, 9600);
+            HvacCrossPlay.EstablishConnection();
+        }
 
         /* Global DispatcherTimer */
         DispatcherTimer dispatcherTimer = new();

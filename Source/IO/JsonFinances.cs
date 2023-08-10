@@ -21,3 +21,11 @@ public class DetailedFinanceBlock {
     public double Percentage { get; set; }
     public int Amount { get; set; }
 }
+
+public class DetailedFinanceBlockUser {
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int TotalSpent { get; set; }
+    public int TotalEarned { get; set; }
+    public int Available { get; set; }
+}

@@ -106,10 +106,6 @@
                                     <Setter Property="Foreground" Value="CornflowerBlue"/>
                                 </DataTrigger>
 
-                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
-                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
-                                </DataTrigger>
-
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
@@ -202,7 +198,7 @@
 
                 <TextBlock Grid.Row="0" Text="Add/Edit Finance" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
-                <Button Grid.Row="1" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="24" Margin="16"
+                <Button Grid.Row="1" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="48" Margin="16"
                         Background="{Binding SwitchModeButtonColor}" HorizontalContentAlignment="Center">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -419,44 +415,19 @@
 
                 <TextBlock Grid.Row="0" Text="Spending Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
-                <control:CustomListView Grid.Row="1" x:Name="CustomListView2" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White"
-                                        SelectedItem="{Binding DetailedFinanceSelected1}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
+                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White"
+                                        SelectedItem="{Binding DetailedFinanceSelected1}" Background="Transparent" BorderBrush="DarkSlateGray" Focusable="False"
                                         IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
-                            <Setter Property="BorderBrush" Value="White"/>
-                        </Style>
-
-                        <Style TargetType="ListViewItem">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
-                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
-                                </DataTrigger>
-
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsSelected" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Black"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
-                                        <Setter Property="Foreground" Value="White"/>
-                                    </MultiTrigger.Setters>
-                                </MultiTrigger>
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsMouseOver" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
-                                        <Setter Property="Foreground" Value="White"/>
-                                    </MultiTrigger.Setters>
-                                </MultiTrigger>
-                            </Style.Triggers>
                         </Style>
                     </ListView.Resources>
 
@@ -470,7 +441,6 @@
                 </control:CustomListView>
             </Grid>
 
-
             <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="64"/>
@@ -481,44 +451,18 @@
 
                 <TextBlock Grid.Row="0" Text="Income Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
-                <control:CustomListView Grid.Row="1" x:Name="CustomListView3" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock2}" Foreground="CornflowerBlue"
-                                        SelectedItem="{Binding DetailedFinanceSelected2}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock2}" Foreground="White" Background="Transparent"
+                                        BorderBrush="DarkSlateGray" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
-                            <Setter Property="BorderBrush" Value="White"/>
-                        </Style>
-
-                        <Style TargetType="ListViewItem">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
-                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
-                                </DataTrigger>
-
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsSelected" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Black"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
-                                        <Setter Property="Foreground" Value="White"/>
-                                    </MultiTrigger.Setters>
-                                </MultiTrigger>
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsMouseOver" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
-                                        <Setter Property="Foreground" Value="White"/>
-                                    </MultiTrigger.Setters>
-                                </MultiTrigger>
-                            </Style.Triggers>
                         </Style>
                     </ListView.Resources>
 
@@ -533,58 +477,33 @@
 
                 <TextBlock Grid.Row="2" Text="User Funds" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
-                <control:CustomListView Grid.Row="3" x:Name="CustomListView4" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock3}" Foreground="CornflowerBlue"
-                                        SelectedItem="{Binding DetailedFinanceSelected3}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                <control:CustomListView Grid.Row="3" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlockUser}" Foreground="White" Background="Transparent"
+                                        BorderBrush="DarkSlateGray" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
-                            <Setter Property="BorderBrush" Value="White"/>
-                        </Style>
-
-                        <Style TargetType="ListViewItem">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
-                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
-                                </DataTrigger>
-
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsSelected" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Black"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
-                                        <Setter Property="Foreground" Value="White"/>
-                                    </MultiTrigger.Setters>
-                                </MultiTrigger>
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsMouseOver" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
-                                        <Setter Property="Foreground" Value="White"/>
-                                    </MultiTrigger.Setters>
-                                </MultiTrigger>
-                            </Style.Triggers>
                         </Style>
                     </ListView.Resources>
 
                     <ListView.View>
                         <GridView AllowsColumnReorder="false">
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Percentage}" Header="Percentage" Width="Auto" control:GridViewSort.PropertyName="Percentage"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="Auto" control:GridViewSort.PropertyName="Amount"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="User" Width="Auto" control:GridViewSort.PropertyName="Id"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="Auto" control:GridViewSort.PropertyName="Name"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TotalEarned}" Header="Total Earned" Width="Auto" control:GridViewSort.PropertyName="TotalEarned"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TotalSpent}" Header="Total Spent" Width="Auto" control:GridViewSort.PropertyName="TotalSpent"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Available}" Header="Available" Width="Auto" control:GridViewSort.PropertyName="Available"/>
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
             </Grid>
         </Grid>
-
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
