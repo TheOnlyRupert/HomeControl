@@ -91,7 +91,7 @@
 
                 <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="1" ItemsSource="{Binding FinanceList}" Foreground="White"
                                         SelectedItem="{Binding FinanceSelected}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" BorderThickness="2">
+                                        IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -421,7 +421,7 @@
 
                 <control:CustomListView Grid.Row="1" x:Name="CustomListView2" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White"
                                         SelectedItem="{Binding DetailedFinanceSelected1}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                                        IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -483,7 +483,7 @@
 
                 <control:CustomListView Grid.Row="1" x:Name="CustomListView3" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock2}" Foreground="CornflowerBlue"
                                         SelectedItem="{Binding DetailedFinanceSelected2}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                                        IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -535,7 +535,7 @@
 
                 <control:CustomListView Grid.Row="3" x:Name="CustomListView4" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock3}" Foreground="CornflowerBlue"
                                         SelectedItem="{Binding DetailedFinanceSelected3}" SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        IsSynchronizedWithCurrentItem="True" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
+                                        IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Data;
@@ -374,6 +375,9 @@ public class EditFinancesVM : BaseViewModel {
 
     private void SaveJson() {
         if (FinanceList.Count > 0) {
+            IOrderedEnumerable<FinanceBlock> orderByResult = from s in FinanceList orderby s.Date select s;
+            FinanceList = new ObservableCollection<FinanceBlock>(orderByResult.ToList());
+
             try {
                 ReferenceValues.JsonFinanceMasterList.financeList = FinanceList;
             } catch (Exception e) {
