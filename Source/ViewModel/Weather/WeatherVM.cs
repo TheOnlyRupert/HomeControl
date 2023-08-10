@@ -12,8 +12,6 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Weather;
 
 public class WeatherVM : BaseViewModel {
-    private double _clockHourRotation, _clockMinRotation, _clockSecRotation;
-
     private int _currentWindDirectionRotation, _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
         _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
         _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10, _sevenDayForecastWindDirectionIcon11,
@@ -35,7 +33,7 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastDescription12, _sevenDayForecastWindSpeed12, _sevenDayForecastWeatherIcon12a, _sevenDayForecastWeatherIcon12b, _sevenDayForecastTemp12,
         _sevenDayForecastName12, _sevenDayForecastDescription13, _sevenDayForecastWindSpeed13, _sevenDayForecastWeatherIcon13a, _sevenDayForecastWeatherIcon13b,
         _sevenDayForecastTemp13, _sevenDayForecastName13, _sevenDayForecastDescription14, _sevenDayForecastWindSpeed14, _sevenDayForecastWeatherIcon14a,
-        _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _weatherOverlay, _thermometerDisplayIcon, _sevenDayForecastRainChance1,
+        _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1, _trashDayVisibility,
         _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6,
         _sevenDayForecastRainChance7, _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11,
         _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14;
@@ -84,6 +82,13 @@ public class WeatherVM : BaseViewModel {
 
     private void UpdateWeatherForecastPart1() {
         if (ReferenceValues.EnableWeather) {
+            /* Check for trash day and time is past noon */
+            if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonMasterSettings.TrashDay && DateTime.Now.Hour > 11) {
+                TrashDayVisibility = "VISIBLE";
+            } else {
+                TrashDayVisibility = "HIDDEN";
+            }
+
             bool errored = false;
             JsonSerializerOptions options = new() {
                 IncludeFields = true
@@ -1393,22 +1398,6 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string WeatherOverlay {
-        get => _weatherOverlay;
-        set {
-            _weatherOverlay = value;
-            RaisePropertyChangedEvent("WeatherOverlay");
-        }
-    }
-
-    public string ThermometerDisplayIcon {
-        get => _thermometerDisplayIcon;
-        set {
-            _thermometerDisplayIcon = value;
-            RaisePropertyChangedEvent("ThermometerDisplayIcon");
-        }
-    }
-
     public string SevenDayForecastRainChance1 {
         get => _sevenDayForecastRainChance1;
         set {
@@ -1633,27 +1622,11 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public double ClockHourRotation {
-        get => _clockHourRotation;
+    public string TrashDayVisibility {
+        get => _trashDayVisibility;
         set {
-            _clockHourRotation = value;
-            RaisePropertyChangedEvent("ClockHourRotation");
-        }
-    }
-
-    public double ClockMinRotation {
-        get => _clockMinRotation;
-        set {
-            _clockMinRotation = value;
-            RaisePropertyChangedEvent("ClockMinRotation");
-        }
-    }
-
-    public double ClockSecRotation {
-        get => _clockSecRotation;
-        set {
-            _clockSecRotation = value;
-            RaisePropertyChangedEvent("ClockSecRotation");
+            _trashDayVisibility = value;
+            RaisePropertyChangedEvent("TrashDayVisibility");
         }
     }
 

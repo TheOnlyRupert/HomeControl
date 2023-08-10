@@ -441,7 +441,17 @@
         <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-snow.svg"/>
         <Resource Include="Resources\Images\icons\hvac.png"/>
         <Resource Include="Resources\Images\behavior\crown.png"/>
+        <Resource Include="Resources\Images\icons\trash.gif"/>
         <Content Include="Resources\Sounds\buzzer.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\clock1.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\clock2.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\coo_coo.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <Content Include="Resources\Sounds\ding.wav">

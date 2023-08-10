@@ -48,4 +48,5 @@ public class JsonSettings {
     public bool IsNormalMode { get; set; }
     public bool IsEditTasksMode { get; set; }
     public bool IsDebugMode { get; set; }
+    public string TrashDay { get; set; }
 }

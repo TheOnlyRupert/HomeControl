@@ -105,11 +105,11 @@
                                 <DataTrigger Binding="{Binding AddSub}" Value="ADD">
                                     <Setter Property="Foreground" Value="CornflowerBlue"/>
                                 </DataTrigger>
-                                
+
                                 <DataTrigger Binding="{Binding AddSub}" Value="ADD">
                                     <Setter Property="Foreground" Value="CornflowerBlue"/>
                                 </DataTrigger>
-                                
+
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
@@ -117,7 +117,7 @@
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="Foreground" Value="GreenYellow"/>
                                 </MultiDataTrigger>
-                                
+
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
@@ -125,7 +125,7 @@
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="Foreground" Value="GreenYellow"/>
                                 </MultiDataTrigger>
-                                
+
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
@@ -133,7 +133,7 @@
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="Foreground" Value="GreenYellow"/>
                                 </MultiDataTrigger>
-                                
+
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
@@ -141,7 +141,7 @@
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="Foreground" Value="GreenYellow"/>
                                 </MultiDataTrigger>
-                                
+
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>

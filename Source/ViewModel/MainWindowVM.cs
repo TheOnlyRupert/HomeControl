@@ -5,6 +5,7 @@ using System.Net;
 using System.Text.Json;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.IO;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Reference;
@@ -135,6 +136,10 @@ public class MainWindowVM : BaseViewModel {
         if (!currentDate.Hour.Equals(DateTime.Now.Hour)) {
             simpleMessenger.PushMessage("HourChanged", null);
             changeDate = true;
+
+            Random random = new();
+            ReferenceValues.SoundToPlay = "clock" + random.Next(1, 3);
+            SoundDispatcher.PlaySound();
         }
 
         /* Date Changes */

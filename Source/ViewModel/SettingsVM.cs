@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
@@ -10,15 +11,20 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
+    private List<string> _trashDayList;
+
     private string _userAgentText, _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1NameLegal, _user2NameLegal, _user3NameLegal, _user4NameLegal, _user5NameLegal,
         _user1Phone1, _user1Phone2, _user2Phone1, _user2Phone2, _petNames, _neighbor1Location, _neighbor1Name, _neighbor1Phone1, _neighbor1Phone2, _neighbor2Location,
         _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
-        _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort;
+        _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected;
 
     private bool _valueImperialChecked, _valueMetricChecked, _isEditTasksMode, _isNormalMode, _isDebugMode;
 
     public SettingsVM() {
+        TrashDayList = new List<string>(new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "DISABLED" });
+        TrashDaySelected = "Wednesday";
+
         UserAgentText = ReferenceValues.JsonMasterSettings.UserAgent;
         User1Name = ReferenceValues.JsonMasterSettings.User1Name;
         User2Name = ReferenceValues.JsonMasterSettings.User2Name;
@@ -67,6 +73,7 @@ public class SettingsVM : BaseViewModel {
         IsNormalMode = ReferenceValues.JsonMasterSettings.IsNormalMode;
         IsEditTasksMode = ReferenceValues.JsonMasterSettings.IsEditTasksMode;
         IsDebugMode = ReferenceValues.JsonMasterSettings.IsDebugMode;
+        TrashDaySelected = ReferenceValues.JsonMasterSettings.TrashDay;
 
         if (!IsNormalMode && !IsEditTasksMode && !IsDebugMode) {
             IsNormalMode = true;
@@ -127,6 +134,7 @@ public class SettingsVM : BaseViewModel {
                 ReferenceValues.JsonMasterSettings.IsNormalMode = IsNormalMode;
                 ReferenceValues.JsonMasterSettings.IsEditTasksMode = IsEditTasksMode;
                 ReferenceValues.JsonMasterSettings.IsDebugMode = IsDebugMode;
+                ReferenceValues.JsonMasterSettings.TrashDay = TrashDaySelected;
 
                 try {
                     string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonMasterSettings);
@@ -534,6 +542,22 @@ public class SettingsVM : BaseViewModel {
         set {
             _isDebugMode = value;
             RaisePropertyChangedEvent("IsDebugMode");
+        }
+    }
+
+    public string TrashDaySelected {
+        get => _trashDaySelected;
+        set {
+            _trashDaySelected = value;
+            RaisePropertyChangedEvent("TrashDaySelected");
+        }
+    }
+
+    public List<string> TrashDayList {
+        get => _trashDayList;
+        set {
+            _trashDayList = value;
+            RaisePropertyChangedEvent("TrashDayList");
         }
     }
 

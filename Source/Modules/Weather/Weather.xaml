@@ -32,6 +32,9 @@
                         </StackPanel>
                     </StackPanel>
 
+                    <Image Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" Height="64" HorizontalAlignment="Right" Margin="0 0 8 0"
+                           gif:ImageBehavior.AnimatedSource="../../../Resources/Images/icons/trash.gif" Visibility="{Binding TrashDayVisibility}"/>
+
                     <Frame Grid.Row="2" Source="../MusicPlayer.xaml" Focusable="False"/>
                 </Grid>
 
