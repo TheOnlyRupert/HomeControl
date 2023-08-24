@@ -1,16 +1,15 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Timer;
 
 public class EditTimerVM : BaseViewModel {
-    private string _mainTimerOutput, _timerNumberText, _timerNumberColor;
+    private string _timer1Text, _timer1Color, _timer2Text, _timer2Color, _timer3Text, _timer3Color, _timer4Text, _timer4Color;
 
     public EditTimerVM() {
-        MainTimerOutput = $"{ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]:000}:{ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]:00}";
-        TimerNumberText = "Timer " + ReferenceValues.ActiveTimerEdit;
-        TimerNumberColor = ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] ? "Red" : "YellowGreen";
+        RefreshTimer();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -19,135 +18,385 @@ public class EditTimerVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "Refresh") {
-            if (ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                MainTimerOutput = $"{ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]:000}:{ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]:00}";
-                TimerNumberColor = ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] ? "Red" : "YellowGreen";
+        if (e.PropertyName == "RefreshTimer") {
+            if (ReferenceValues.JsonTimerSettings.IsTimer1Running || ReferenceValues.JsonTimerSettings.IsTimer2Running || ReferenceValues.JsonTimerSettings.IsTimer3Running ||
+                ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+                RefreshTimer();
             }
+        }
+    }
+
+    private void RefreshTimer() {
+        TimeSpan time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer1Seconds);
+        Timer1Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
+
+        if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+            Timer1Color = "White";
+        } else {
+            Timer1Color = ReferenceValues.JsonTimerSettings.Timer1Seconds < 0 ? "Red" : "Green";
+        }
+
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer2Seconds);
+        Timer2Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
+
+        if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+            Timer2Color = "White";
+        } else {
+            Timer2Color = ReferenceValues.JsonTimerSettings.Timer2Seconds < 0 ? "Red" : "Green";
+        }
+
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer3Seconds);
+        Timer3Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
+
+        if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+            Timer3Color = "White";
+        } else {
+            Timer3Color = ReferenceValues.JsonTimerSettings.Timer3Seconds < 0 ? "Red" : "Green";
+        }
+
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer4Seconds);
+        Timer4Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
+
+        if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+            Timer4Color = "White";
+        } else {
+            Timer4Color = ReferenceValues.JsonTimerSettings.Timer4Seconds < 0 ? "Red" : "Green";
         }
     }
 
     private void ButtonLogic(object param) {
         switch (param) {
-        case "timerSecAdd":
-            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]++;
-                ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
-                if (ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] > 59) {
-                    ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] = 0;
-                }
+        case "timer1Add1":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+                ReferenceValues.JsonTimerSettings.Timer1Seconds += 60;
+                RefreshTimer();
             }
 
             break;
-        case "timerMinAdd":
-            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]++;
-                ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+        case "timer1Add5":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+                ReferenceValues.JsonTimerSettings.Timer1Seconds += 300;
+                RefreshTimer();
             }
 
             break;
-        case "timerMinAdd15":
-            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] += 15;
-                ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+        case "timer1Add10":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+                ReferenceValues.JsonTimerSettings.Timer1Seconds += 600;
+                RefreshTimer();
             }
 
             break;
-        case "timerSecSub":
-            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]--;
-                if (ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] < 0) {
-                    ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] = 59;
+        case "timer1Sub1":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+                ReferenceValues.JsonTimerSettings.Timer1Seconds -= 60;
+                if (ReferenceValues.JsonTimerSettings.Timer1Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer1Seconds = 0;
                 }
 
-                ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+                RefreshTimer();
             }
 
             break;
-        case "timerMinSub":
-            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]--;
-                if (ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] < 0) {
-                    ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
+        case "timer1Sub5":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+                ReferenceValues.JsonTimerSettings.Timer1Seconds -= 300;
+                if (ReferenceValues.JsonTimerSettings.Timer1Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer1Seconds = 0;
                 }
 
-                ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+                RefreshTimer();
             }
 
             break;
-        case "timerMinSub15":
-            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] -= 15;
-                if (ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] < 0) {
-                    ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
+        case "timer1Sub10":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+                ReferenceValues.JsonTimerSettings.Timer1Seconds -= 600;
+                if (ReferenceValues.JsonTimerSettings.Timer1Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer1Seconds = 0;
                 }
 
-                ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
+                RefreshTimer();
             }
 
             break;
-        case "timerPlayPause":
-            if (ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit] = false;
-            } else {
-                ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit] = true;
-            }
-
-            ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
-            ReferenceValues.IsTimerAlarmActive = false;
-            //ReferenceValues.TimerSound.Stop();
-            TimerNumberColor = "YellowGreen";
+        case "timer1PlayPause":
+            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerSettings.IsTimer1Running = !ReferenceValues.JsonTimerSettings.IsTimer1Running;
 
             break;
-        case "timerStop":
-            if (ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit] = false;
-            }
-
-            ReferenceValues.SwitchTimerDirection[ReferenceValues.ActiveTimerEdit] = false;
-            ReferenceValues.IsTimerAlarmActive = false;
-            ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 0;
-            ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] = 0;
-            //ReferenceValues.TimerSound.Stop();
-            TimerNumberColor = "YellowGreen";
+        case "timer1Stop":
+            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerSettings.IsTimer1Running = false;
+            ReferenceValues.JsonTimerSettings.Timer1Seconds = 0;
+            RefreshTimer();
 
             break;
-        case "button1":
-            if (!ReferenceValues.IsTimerRunning[ReferenceValues.ActiveTimerEdit]) {
-                ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit] = 18;
-                ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit] = 0;
+        case "timer2Add1":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+                ReferenceValues.JsonTimerSettings.Timer2Seconds += 60;
+                RefreshTimer();
             }
+
+            break;
+        case "timer2Add5":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+                ReferenceValues.JsonTimerSettings.Timer2Seconds += 300;
+                RefreshTimer();
+            }
+
+            break;
+        case "timer2Add10":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+                ReferenceValues.JsonTimerSettings.Timer2Seconds += 600;
+                RefreshTimer();
+            }
+
+            break;
+        case "timer2Sub1":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+                ReferenceValues.JsonTimerSettings.Timer2Seconds -= 60;
+                if (ReferenceValues.JsonTimerSettings.Timer2Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer2Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer2Sub5":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+                ReferenceValues.JsonTimerSettings.Timer2Seconds -= 300;
+                if (ReferenceValues.JsonTimerSettings.Timer2Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer2Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer2Sub10":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+                ReferenceValues.JsonTimerSettings.Timer2Seconds -= 600;
+                if (ReferenceValues.JsonTimerSettings.Timer2Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer2Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer2PlayPause":
+            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerSettings.IsTimer2Running = !ReferenceValues.JsonTimerSettings.IsTimer2Running;
+
+            break;
+        case "timer2Stop":
+            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerSettings.IsTimer2Running = false;
+            ReferenceValues.JsonTimerSettings.Timer2Seconds = 0;
+            RefreshTimer();
+
+            break;
+        case "timer3Add1":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+                ReferenceValues.JsonTimerSettings.Timer3Seconds += 60;
+                RefreshTimer();
+            }
+
+            break;
+        case "timer3Add5":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+                ReferenceValues.JsonTimerSettings.Timer3Seconds += 300;
+                RefreshTimer();
+            }
+
+            break;
+        case "timer3Add10":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+                ReferenceValues.JsonTimerSettings.Timer3Seconds += 600;
+                RefreshTimer();
+            }
+
+            break;
+        case "timer3Sub1":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+                ReferenceValues.JsonTimerSettings.Timer3Seconds -= 60;
+                if (ReferenceValues.JsonTimerSettings.Timer3Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer3Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer3Sub5":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+                ReferenceValues.JsonTimerSettings.Timer3Seconds -= 300;
+                if (ReferenceValues.JsonTimerSettings.Timer3Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer3Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer3Sub10":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+                ReferenceValues.JsonTimerSettings.Timer3Seconds -= 600;
+                if (ReferenceValues.JsonTimerSettings.Timer3Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer3Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer3PlayPause":
+            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerSettings.IsTimer3Running = !ReferenceValues.JsonTimerSettings.IsTimer3Running;
+
+            break;
+        case "timer3Stop":
+            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerSettings.IsTimer3Running = false;
+            ReferenceValues.JsonTimerSettings.Timer3Seconds = 0;
+            RefreshTimer();
+
+            break;
+        case "timer4Add1":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+                ReferenceValues.JsonTimerSettings.Timer4Seconds += 60;
+                RefreshTimer();
+            }
+
+            break;
+        case "timer4Add5":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+                ReferenceValues.JsonTimerSettings.Timer4Seconds += 300;
+                RefreshTimer();
+            }
+
+            break;
+        case "timer4Add10":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+                ReferenceValues.JsonTimerSettings.Timer4Seconds += 600;
+                RefreshTimer();
+            }
+
+            break;
+        case "timer4Sub1":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+                ReferenceValues.JsonTimerSettings.Timer4Seconds -= 60;
+                if (ReferenceValues.JsonTimerSettings.Timer4Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer4Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer4Sub5":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+                ReferenceValues.JsonTimerSettings.Timer4Seconds -= 300;
+                if (ReferenceValues.JsonTimerSettings.Timer4Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer4Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer4Sub10":
+            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+                ReferenceValues.JsonTimerSettings.Timer4Seconds -= 600;
+                if (ReferenceValues.JsonTimerSettings.Timer4Seconds < 0) {
+                    ReferenceValues.JsonTimerSettings.Timer4Seconds = 0;
+                }
+
+                RefreshTimer();
+            }
+
+            break;
+        case "timer4PlayPause":
+            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerSettings.IsTimer4Running = !ReferenceValues.JsonTimerSettings.IsTimer4Running;
+
+            break;
+        case "timer4Stop":
+            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerSettings.IsTimer4Running = false;
+            ReferenceValues.JsonTimerSettings.Timer4Seconds = 0;
+            RefreshTimer();
 
             break;
         }
-
-        MainTimerOutput = $"{ReferenceValues.TimerMinutes[ReferenceValues.ActiveTimerEdit]:000}:{ReferenceValues.TimerSeconds[ReferenceValues.ActiveTimerEdit]:00}";
     }
 
 
     #region Fields
 
-    public string MainTimerOutput {
-        get => _mainTimerOutput;
+    public string Timer1Text {
+        get => _timer1Text;
         set {
-            _mainTimerOutput = value;
-            RaisePropertyChangedEvent("MainTimerOutput");
+            _timer1Text = value;
+            RaisePropertyChangedEvent("Timer1Text");
         }
     }
 
-    public string TimerNumberText {
-        get => _timerNumberText;
+    public string Timer1Color {
+        get => _timer1Color;
         set {
-            _timerNumberText = value;
-            RaisePropertyChangedEvent("TimerNumberText");
+            _timer1Color = value;
+            RaisePropertyChangedEvent("Timer1Color");
         }
     }
 
-    public string TimerNumberColor {
-        get => _timerNumberColor;
+    public string Timer2Text {
+        get => _timer2Text;
         set {
-            _timerNumberColor = value;
-            RaisePropertyChangedEvent("TimerNumberColor");
+            _timer2Text = value;
+            RaisePropertyChangedEvent("Timer2Text");
+        }
+    }
+
+    public string Timer2Color {
+        get => _timer2Color;
+        set {
+            _timer2Color = value;
+            RaisePropertyChangedEvent("Timer2Color");
+        }
+    }
+
+    public string Timer3Text {
+        get => _timer3Text;
+        set {
+            _timer3Text = value;
+            RaisePropertyChangedEvent("Timer3Text");
+        }
+    }
+
+    public string Timer3Color {
+        get => _timer3Color;
+        set {
+            _timer3Color = value;
+            RaisePropertyChangedEvent("Timer3Color");
+        }
+    }
+
+    public string Timer4Text {
+        get => _timer4Text;
+        set {
+            _timer4Text = value;
+            RaisePropertyChangedEvent("Timer4Text");
+        }
+    }
+
+    public string Timer4Color {
+        get => _timer4Color;
+        set {
+            _timer4Color = value;
+            RaisePropertyChangedEvent("Timer4Color");
         }
     }
 

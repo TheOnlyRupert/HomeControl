@@ -5,30 +5,32 @@ using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.IO;
 
-public class RecipeFromJson {
-    public RecipeFromJson() {
+public class TimerFromJson {
+    public TimerFromJson() {
+        ReferenceValues.JsonTimerSettings = new JsonTimer();
+
         JsonSerializerOptions options = new() {
             IncludeFields = true
         };
 
         try {
-            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "recipes.json");
-            string financeListString = null;
+            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "timer.json");
+            string timerJson = null;
             while (!streamReader.EndOfStream) {
-                financeListString = streamReader.ReadToEnd();
+                timerJson = streamReader.ReadToEnd();
             }
 
             streamReader.Close();
 
-            if (financeListString != null) {
+            if (timerJson != null) {
                 try {
-                    JsonRecipe jsonRecipe = JsonSerializer.Deserialize<JsonRecipe>(financeListString, options);
-                    ReferenceValues.JsonRecipesMaster = jsonRecipe;
+                    JsonTimer jsonTimerSettings = JsonSerializer.Deserialize<JsonTimer>(timerJson, options);
+                    ReferenceValues.JsonTimerSettings = jsonTimerSettings;
                 } catch (Exception e) {
                     ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "WARN",
-                        Module = "RecipeFromJson",
+                        Module = "TimerFromJson",
                         Description = e.ToString()
                     });
                     SaveDebugFile.Save();
@@ -38,7 +40,7 @@ public class RecipeFromJson {
             ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
-                Module = "RecipeFromJson",
+                Module = "TimerFromJson",
                 Description = e.ToString()
             });
             SaveDebugFile.Save();

@@ -63,7 +63,7 @@ public class TasksDailyVM : BaseViewModel {
         IsFundAmountReadOnly = !ReferenceValues.JsonMasterSettings.IsDebugMode;
 
         ImageList = ReferenceValues.IconImageList;
-        ImageSelected = "alarms";
+        ImageSelected = "bathtub";
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -86,7 +86,7 @@ public class TasksDailyVM : BaseViewModel {
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
-                    ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png"
+                    ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png"
                 });
 
                 ReferenceValues.SoundToPlay = "newTask";
@@ -115,7 +115,7 @@ public class TasksDailyVM : BaseViewModel {
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
-                                ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png"
+                                ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png"
                             });
 
                             TaskList.Remove(TaskSelected);
@@ -173,7 +173,7 @@ public class TasksDailyVM : BaseViewModel {
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
+                        ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
                         IsCompleted = true,
                         DateCompleted = DateTime.Now.ToString("HH:mm")
                     });
@@ -193,7 +193,7 @@ public class TasksDailyVM : BaseViewModel {
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
+                        ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
                         DateCompleted = ""
                     });
 
@@ -339,7 +339,7 @@ public class TasksDailyVM : BaseViewModel {
 
     private void PopulateDetailedView(Task value) {
         TaskName = value.TaskName;
-        ImageSelected = value.ImageName.Substring(32, value.ImageName.Length - 36);
+        ImageSelected = value.ImageName.Substring(33, value.ImageName.Length - 37);
     }
 
     #region Fields

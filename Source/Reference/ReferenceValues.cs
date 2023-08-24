@@ -80,12 +80,6 @@ public static class ReferenceValues {
     public static JsonFinances JsonFinanceMasterList { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
     public static DateTime TaskWeekStartDate { get; set; }
-    public static int[] TimerMinutes { get; set; }
-    public static int[] TimerSeconds { get; set; }
-    public static int ActiveTimerEdit { get; set; }
-    public static bool IsTimerAlarmActive { get; set; }
-    public static bool[] IsTimerRunning { get; set; }
-    public static bool[] SwitchTimerDirection { get; set; }
 
     public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonMasterSettings { get; set; }
@@ -104,8 +98,9 @@ public static class ReferenceValues {
 
     public static ObservableCollection<DebugTextBlock> DebugTextBlockOutput { get; set; }
 
-    public static JsonRecipe JsonRecipesMaster { get; set; }
     public static string SoundToPlay { get; set; }
     public static JsonTasks JsonTasksMaster { get; set; }
     public static ObservableCollection<string> IconImageList { get; set; }
+
+    public static JsonTimer JsonTimerSettings { get; set; }
 }

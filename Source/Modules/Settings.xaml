@@ -23,6 +23,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -263,6 +264,14 @@
             <RadioButton GroupName="debug" IsChecked="{Binding IsNormalMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Normal Mode</RadioButton>
             <RadioButton GroupName="debug" IsChecked="{Binding IsEditTasksMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Edit Tasks Mode</RadioButton>
             <RadioButton GroupName="debug" IsChecked="{Binding IsDebugMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Debug Mode</RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="19" Grid.ColumnSpan="4" Orientation="Horizontal">
+            <CheckBox Content="User1 Enabled" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User1Checked}"/>
+            <CheckBox Content="User2 Enabled" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User2Checked}"/>
+            <CheckBox Content="User3 Enabled" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User3Checked}"/>
+            <CheckBox Content="User4 Enabled" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User4Checked}"/>
+            <CheckBox Content="User5 Enabled" Foreground="White" FontSize="16" Margin="0 4 0 0" IsChecked="{Binding User5Checked}"/>
         </StackPanel>
 
         <Grid Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="4">

@@ -152,7 +152,7 @@ public class TasksMonthlyVM : BaseViewModel {
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
-                    ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
+                    ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
                     RoomNumber = RoomSelectedIndex
                 });
 
@@ -184,7 +184,7 @@ public class TasksMonthlyVM : BaseViewModel {
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
-                                ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
+                                ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
                                 RoomNumber = RoomSelectedIndex
                             });
 
@@ -247,7 +247,7 @@ public class TasksMonthlyVM : BaseViewModel {
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
+                        ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
                         IsCompleted = true,
                         RoomNumber = RoomSelectedIndex,
                         DateCompleted = DateTime.Now.ToString("MM/dd")
@@ -287,7 +287,7 @@ public class TasksMonthlyVM : BaseViewModel {
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
+                        ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
                         RoomNumber = RoomSelectedIndex,
                         DateCompleted = ""
                     });
@@ -453,7 +453,7 @@ public class TasksMonthlyVM : BaseViewModel {
 
     private void PopulateDetailedView(Task value) {
         TaskName = value.TaskName;
-        ImageSelected = value.ImageName.Substring(32, value.ImageName.Length - 36);
+        ImageSelected = value.ImageName.Substring(33, value.ImageName.Length - 37);
         RoomSelectedIndex = value.RoomNumber;
     }
 

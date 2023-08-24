@@ -19,7 +19,8 @@ public class SettingsVM : BaseViewModel {
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
         _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected;
 
-    private bool _valueImperialChecked, _valueMetricChecked, _isEditTasksMode, _isNormalMode, _isDebugMode;
+    private bool _valueImperialChecked, _valueMetricChecked, _isEditTasksMode, _isNormalMode, _isDebugMode, _user1Checked, _user2Checked, _user3Checked, _user4Checked,
+        _user5Checked;
 
     public SettingsVM() {
         TrashDayList = new List<string>(new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "DISABLED" });
@@ -74,6 +75,11 @@ public class SettingsVM : BaseViewModel {
         IsEditTasksMode = ReferenceValues.JsonMasterSettings.IsEditTasksMode;
         IsDebugMode = ReferenceValues.JsonMasterSettings.IsDebugMode;
         TrashDaySelected = ReferenceValues.JsonMasterSettings.TrashDay;
+        User1Checked = ReferenceValues.JsonMasterSettings.User1Checked;
+        User2Checked = ReferenceValues.JsonMasterSettings.User2Checked;
+        User3Checked = ReferenceValues.JsonMasterSettings.User3Checked;
+        User4Checked = ReferenceValues.JsonMasterSettings.User4Checked;
+        User5Checked = ReferenceValues.JsonMasterSettings.User5Checked;
 
         if (!IsNormalMode && !IsEditTasksMode && !IsDebugMode) {
             IsNormalMode = true;
@@ -135,6 +141,11 @@ public class SettingsVM : BaseViewModel {
                 ReferenceValues.JsonMasterSettings.IsEditTasksMode = IsEditTasksMode;
                 ReferenceValues.JsonMasterSettings.IsDebugMode = IsDebugMode;
                 ReferenceValues.JsonMasterSettings.TrashDay = TrashDaySelected;
+                ReferenceValues.JsonMasterSettings.User1Checked = User1Checked;
+                ReferenceValues.JsonMasterSettings.User2Checked = User2Checked;
+                ReferenceValues.JsonMasterSettings.User3Checked = User3Checked;
+                ReferenceValues.JsonMasterSettings.User4Checked = User4Checked;
+                ReferenceValues.JsonMasterSettings.User5Checked = User5Checked;
 
                 try {
                     string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonMasterSettings);
@@ -558,6 +569,46 @@ public class SettingsVM : BaseViewModel {
         set {
             _trashDayList = value;
             RaisePropertyChangedEvent("TrashDayList");
+        }
+    }
+
+    public bool User1Checked {
+        get => _user1Checked;
+        set {
+            _user1Checked = value;
+            RaisePropertyChangedEvent("User1Checked");
+        }
+    }
+
+    public bool User2Checked {
+        get => _user2Checked;
+        set {
+            _user2Checked = value;
+            RaisePropertyChangedEvent("User2Checked");
+        }
+    }
+
+    public bool User3Checked {
+        get => _user3Checked;
+        set {
+            _user3Checked = value;
+            RaisePropertyChangedEvent("User3Checked");
+        }
+    }
+
+    public bool User4Checked {
+        get => _user4Checked;
+        set {
+            _user4Checked = value;
+            RaisePropertyChangedEvent("User4Checked");
+        }
+    }
+
+    public bool User5Checked {
+        get => _user5Checked;
+        set {
+            _user5Checked = value;
+            RaisePropertyChangedEvent("User5Checked");
         }
     }
 

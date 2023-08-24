@@ -39,7 +39,8 @@ public class BehaviorVM : BaseViewModel {
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
         _user3TasksCompletedDayProgressValue, _user3TasksCompletedWeekProgressValue, _user3TasksCompletedMonthProgressValue, _user3TasksCompletedQuarterProgressValue,
         _user4TasksCompletedDayProgressValue, _user4TasksCompletedWeekProgressValue, _user4TasksCompletedMonthProgressValue, _user4TasksCompletedQuarterProgressValue,
-        _user5TasksCompletedDayProgressValue, _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue;
+        _user5TasksCompletedDayProgressValue, _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue,
+        _progressBarUser1, _progressBarUser2, _progressBarUser3, _progressBarUser4, _progressBarUser5;
 
     public BehaviorVM() {
         new BehaviorFromJson();
@@ -452,8 +453,14 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            User1CashAvailable = string.Format(culture, "{0:C}", funds);
-            User1CashAvailableColor = User1CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            if (ReferenceValues.JsonMasterSettings.User1Checked) {
+                User1CashAvailable = string.Format(culture, "{0:C}", funds);
+                User1CashAvailableColor = User1CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } else {
+                User1CashAvailable = "";
+            }
+
+            ProgressBarUser1 = ReferenceValues.JsonBehaviorMaster.User1Progress;
 
             break;
         case 2:
@@ -758,8 +765,14 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            User2CashAvailable = string.Format(culture, "{0:C}", funds);
-            User2CashAvailableColor = User2CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            if (ReferenceValues.JsonMasterSettings.User2Checked) {
+                User2CashAvailable = string.Format(culture, "{0:C}", funds);
+                User2CashAvailableColor = User2CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } else {
+                User2CashAvailable = "";
+            }
+
+            ProgressBarUser2 = ReferenceValues.JsonBehaviorMaster.User2Progress;
 
             break;
         case 3:
@@ -1066,8 +1079,14 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            User3CashAvailable = string.Format(culture, "{0:C}", funds);
-            User3CashAvailableColor = User3CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            if (ReferenceValues.JsonMasterSettings.User3Checked) {
+                User3CashAvailable = string.Format(culture, "{0:C}", funds);
+                User3CashAvailableColor = User3CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } else {
+                User3CashAvailable = "";
+            }
+
+            ProgressBarUser3 = ReferenceValues.JsonBehaviorMaster.User3Progress;
 
             break;
         case 4:
@@ -1374,8 +1393,14 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            User4CashAvailable = string.Format(culture, "{0:C}", funds);
-            User4CashAvailableColor = User4CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            if (ReferenceValues.JsonMasterSettings.User4Checked) {
+                User4CashAvailable = string.Format(culture, "{0:C}", funds);
+                User4CashAvailableColor = User4CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } else {
+                User4CashAvailable = "";
+            }
+
+            ProgressBarUser4 = ReferenceValues.JsonBehaviorMaster.User4Progress;
 
             break;
         case 5:
@@ -1682,8 +1707,14 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            User5CashAvailable = string.Format(culture, "{0:C}", funds);
-            User5CashAvailableColor = User5CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            if (ReferenceValues.JsonMasterSettings.User5Checked) {
+                User5CashAvailable = string.Format(culture, "{0:C}", funds);
+                User5CashAvailableColor = User5CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
+            } else {
+                User5CashAvailable = "";
+            }
+
+            ProgressBarUser5 = ReferenceValues.JsonBehaviorMaster.User5Progress;
 
             break;
         }
@@ -3278,6 +3309,46 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5CashReleased = value;
             RaisePropertyChangedEvent("User5CashReleased");
+        }
+    }
+
+    public int ProgressBarUser1 {
+        get => _progressBarUser1;
+        set {
+            _progressBarUser1 = value;
+            RaisePropertyChangedEvent("ProgressBarUser1");
+        }
+    }
+
+    public int ProgressBarUser2 {
+        get => _progressBarUser2;
+        set {
+            _progressBarUser2 = value;
+            RaisePropertyChangedEvent("ProgressBarUser2");
+        }
+    }
+
+    public int ProgressBarUser3 {
+        get => _progressBarUser3;
+        set {
+            _progressBarUser3 = value;
+            RaisePropertyChangedEvent("ProgressBarUser3");
+        }
+    }
+
+    public int ProgressBarUser4 {
+        get => _progressBarUser4;
+        set {
+            _progressBarUser4 = value;
+            RaisePropertyChangedEvent("ProgressBarUser4");
+        }
+    }
+
+    public int ProgressBarUser5 {
+        get => _progressBarUser5;
+        set {
+            _progressBarUser5 = value;
+            RaisePropertyChangedEvent("ProgressBarUser5");
         }
     }
 

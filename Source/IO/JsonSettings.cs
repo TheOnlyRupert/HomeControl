@@ -49,4 +49,9 @@ public class JsonSettings {
     public bool IsEditTasksMode { get; set; }
     public bool IsDebugMode { get; set; }
     public string TrashDay { get; set; }
+    public bool User1Checked { get; set; }
+    public bool User2Checked { get; set; }
+    public bool User3Checked { get; set; }
+    public bool User4Checked { get; set; }
+    public bool User5Checked { get; set; }
 }

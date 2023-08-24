@@ -1,7 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO.Ports;
+using System.Linq;
 using System.Net;
+using System.Reflection;
+using System.Resources;
 using System.Text.Json;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
@@ -42,41 +47,14 @@ public class MainWindowVM : BaseViewModel {
         });
         SaveDebugFile.Save();
 
-        /* Icon Image List (Manual for now until I can figure out how to pull from Resource file without copying images */
-        ReferenceValues.IconImageList = new ObservableCollection<string> {
-            "alarms",
-            "behavior",
-            "calendar",
-            "chores",
-            "clock",
-            "coin_flip",
-            "contact",
-            "events",
-            "games",
-            "groceries",
-            "hvac",
-            "key_locked",
-            "key_unlocked",
-            "meal",
-            "money",
-            "notes",
-            "open_tickets",
-            "panic",
-            "pictionary",
-            "recipes",
-            "tamagotchi",
-            "temp_burning",
-            "temp_cold",
-            "temp_cool",
-            "temp_freezing",
-            "temp_hot",
-            "temp_warm",
-            "tic_tac_toe",
-            "todo",
-            "vacation",
-            "wifi",
-            "workout"
-        };
+        ReferenceValues.IconImageList = new ObservableCollection<string>();
+        ResourceManager resourceManager = new("HomeControl.g", Assembly.GetExecutingAssembly());
+        ResourceSet resources = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+        foreach (string key in from object res in resources select ((DictionaryEntry)res).Key.ToString() into key where key.Contains("resources/images/chores/") select key) {
+            ReferenceValues.IconImageList.Add(key.Substring(24, key.Length - 28));
+        }
+
+        ReferenceValues.IconImageList = new ObservableCollection<string>(ReferenceValues.IconImageList.OrderBy(i => i));
 
         if (string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.UserAgent)) {
             Settings settingsDialog = new();
@@ -156,6 +134,48 @@ public class MainWindowVM : BaseViewModel {
         if (changeDate) {
             currentDate = DateTime.Now;
             changeDate = false;
+        }
+
+        if (ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+            ReferenceValues.JsonTimerSettings.Timer1Seconds--;
+
+            if (ReferenceValues.JsonTimerSettings.Timer1Seconds == 0) {
+                ReferenceValues.JsonTimerSettings.IsAlarmSounding = true;
+            }
+        }
+
+        if (ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+            ReferenceValues.JsonTimerSettings.Timer2Seconds--;
+
+            if (ReferenceValues.JsonTimerSettings.Timer2Seconds == 0) {
+                ReferenceValues.JsonTimerSettings.IsAlarmSounding = true;
+            }
+        }
+
+        if (ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+            ReferenceValues.JsonTimerSettings.Timer3Seconds--;
+
+            if (ReferenceValues.JsonTimerSettings.Timer3Seconds == 0) {
+                ReferenceValues.JsonTimerSettings.IsAlarmSounding = true;
+            }
+        }
+
+        if (ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+            ReferenceValues.JsonTimerSettings.Timer4Seconds--;
+
+            if (ReferenceValues.JsonTimerSettings.Timer4Seconds == 0) {
+                ReferenceValues.JsonTimerSettings.IsAlarmSounding = true;
+            }
+        }
+
+        if (ReferenceValues.JsonTimerSettings.IsTimer1Running || ReferenceValues.JsonTimerSettings.IsTimer2Running || ReferenceValues.JsonTimerSettings.IsTimer3Running ||
+            ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+            simpleMessenger.PushMessage("RefreshTimer", null);
+        }
+
+        if (ReferenceValues.JsonTimerSettings.IsAlarmSounding) {
+            ReferenceValues.SoundToPlay = "timerDone";
+            SoundDispatcher.PlaySound();
         }
 
         simpleMessenger.PushMessage("Refresh", null);

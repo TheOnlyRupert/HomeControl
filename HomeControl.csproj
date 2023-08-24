@@ -127,12 +127,12 @@
         <Compile Include="Source\IO\JsonFinances.cs"/>
         <Compile Include="Source\IO\JsonGameStats.cs"/>
         <Compile Include="Source\IO\JsonHvac.cs"/>
-        <Compile Include="Source\IO\JsonRecipe.cs"/>
         <Compile Include="Source\IO\JsonSettings.cs"/>
         <Compile Include="Source\IO\JsonTamagotchi.cs"/>
+        <Compile Include="Source\IO\JsonTimer.cs"/>
         <Compile Include="Source\IO\JsonWeatherForecast.cs"/>
-        <Compile Include="Source\IO\RecipeFromJson.cs"/>
         <Compile Include="Source\IO\SettingsFromJson.cs"/>
+        <Compile Include="Source\IO\TimerFromJson.cs"/>
         <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
         <Compile Include="Source\Modules\Behavior\TasksDaily.xaml.cs">
             <DependentUpon>TasksDaily.xaml</DependentUpon>
@@ -334,6 +334,39 @@
         <Resource Include="Resources\Images\icons\wifi.png"/>
     </ItemGroup>
     <ItemGroup>
+        <Resource Include="Resources\Images\chores\bathtub.png"/>
+        <Resource Include="Resources\Images\chores\bed.png"/>
+        <Resource Include="Resources\Images\chores\brushTeeth.png"/>
+        <Resource Include="Resources\Images\chores\chicken.png"/>
+        <Resource Include="Resources\Images\chores\chickenPen.png"/>
+        <Resource Include="Resources\Images\chores\couch.png"/>
+        <Resource Include="Resources\Images\chores\desk.png"/>
+        <Resource Include="Resources\Images\chores\dog.png"/>
+        <Resource Include="Resources\Images\chores\dryer.png"/>
+        <Resource Include="Resources\Images\chores\fan.png"/>
+        <Resource Include="Resources\Images\chores\food.png"/>
+        <Resource Include="Resources\Images\chores\fridge.png"/>
+        <Resource Include="Resources\Images\chores\laundry.png"/>
+        <Resource Include="Resources\Images\chores\laundry2.png"/>
+        <Resource Include="Resources\Images\chores\lips.png"/>
+        <Resource Include="Resources\Images\chores\makeBed.png"/>
+        <Resource Include="Resources\Images\chores\medication.png"/>
+        <Resource Include="Resources\Images\chores\mop.png"/>
+        <Resource Include="Resources\Images\chores\shelves.png"/>
+        <Resource Include="Resources\Images\chores\shower.png"/>
+        <Resource Include="Resources\Images\chores\sink.png"/>
+        <Resource Include="Resources\Images\chores\stainlessSteel.png"/>
+        <Resource Include="Resources\Images\chores\sweep.png"/>
+        <Resource Include="Resources\Images\chores\table.png"/>
+        <Resource Include="Resources\Images\chores\toilet.png"/>
+        <Resource Include="Resources\Images\chores\toys.png"/>
+        <Resource Include="Resources\Images\chores\tv.png"/>
+        <Resource Include="Resources\Images\chores\vacuum.png"/>
+        <Resource Include="Resources\Images\chores\vehicle1.png"/>
+        <Resource Include="Resources\Images\chores\workout.png"/>
+        <Content Include="Resources\Sounds\zoom.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Resource Include="Resources\Images\weather\clear-day.gif"/>
         <Resource Include="Resources\Images\weather\clear-night.gif"/>
         <Resource Include="Resources\Images\weather\cloudy.gif"/>
