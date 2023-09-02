@@ -1,7 +1,6 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.DebugLog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:control="clr-namespace:HomeControl.Source.Control"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:control="clr-namespace:HomeControl.Source.Control" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d" Height="600" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
     <Window.Resources>
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -70,8 +69,8 @@
             <RowDefinition Height="64"/>
         </Grid.RowDefinitions>
 
-        <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding DebugList}" Foreground="White" SelectionMode="Single"
-                                Background="Transparent" BorderBrush="DarkSlateGray" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" BorderThickness="2">
+        <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding DebugList}" Foreground="White" SelectionMode="Single" Background="Transparent"
+                                BorderBrush="DarkSlateGray" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" BorderThickness="2">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Background" Value="Transparent"/>

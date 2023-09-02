@@ -1,7 +1,6 @@
-﻿<Window x:Class="HomeControl.Source.Modules.Games.Tamagotchi" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
+﻿<Window x:Class="HomeControl.Source.Modules.Games.Tamagotchi" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -15,8 +14,7 @@
         </Grid.ColumnDefinitions>
 
         <Image Grid.Column="1" Grid.Row="0" Source="../../../Resources/Images/games/tamagotchi/house.png" Width="1080"/>
-        <Button Grid.Column="1" Grid.Row="0" Width="113" Height="93" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="875,200,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="bed">
+        <Button Grid.Column="1" Grid.Row="0" Width="113" Height="93" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="875,200,0,0" Command="{Binding ButtonCommand}" CommandParameter="bed">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -49,8 +47,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="0" Width="56" Height="97" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="932,402,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="tub">
+        <Button Grid.Column="1" Grid.Row="0" Width="56" Height="97" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="932,402,0,0" Command="{Binding ButtonCommand}" CommandParameter="tub">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -66,8 +63,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="0" Width="56" Height="49" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="877,450,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="toilet">
+        <Button Grid.Column="1" Grid.Row="0" Width="56" Height="49" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="877,450,0,0" Command="{Binding ButtonCommand}" CommandParameter="toilet">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -100,8 +96,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="0" Width="101" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="640,156,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="couch">
+        <Button Grid.Column="1" Grid.Row="0" Width="101" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="640,156,0,0" Command="{Binding ButtonCommand}" CommandParameter="couch">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -117,8 +112,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="0" Width="58" Height="114" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="741,156,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="couch">
+        <Button Grid.Column="1" Grid.Row="0" Width="58" Height="114" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="741,156,0,0" Command="{Binding ButtonCommand}" CommandParameter="couch">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -134,8 +128,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Width="85" Height="84" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="355,0,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="table">
+        <Button Grid.Column="1" Width="85" Height="84" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="355,0,0,0" Command="{Binding ButtonCommand}" CommandParameter="table">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -151,26 +144,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Width="30" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="325,0,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="chairW">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-
-        <Button Grid.Column="1" Grid.Row="0" Width="134" Height="62" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,10,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="pantry">
+        <Button Grid.Column="1" Width="30" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="325,0,0,0" Command="{Binding ButtonCommand}" CommandParameter="chairW">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -187,8 +161,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Column="1" Width="30" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="440,0,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="chairE">
+        <Button Grid.Column="1" Grid.Row="0" Width="134" Height="62" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,10,0,0" Command="{Binding ButtonCommand}" CommandParameter="pantry">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -204,8 +177,8 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="0" Width="40" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="379,190,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="chairN">
+
+        <Button Grid.Column="1" Width="30" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="440,0,0,0" Command="{Binding ButtonCommand}" CommandParameter="chairE">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -221,8 +194,23 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="0" Width="40" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="380,303,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="chairS">
+        <Button Grid.Column="1" Grid.Row="0" Width="40" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="379,190,0,0" Command="{Binding ButtonCommand}" CommandParameter="chairN">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="0" Width="40" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="380,303,0,0" Command="{Binding ButtonCommand}" CommandParameter="chairS">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -256,8 +244,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Column="1" Grid.Row="0" Width="42" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,460,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="washer">
+        <Button Grid.Column="1" Grid.Row="0" Width="42" Height="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,460,0,0" Command="{Binding ButtonCommand}" CommandParameter="washer">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -273,8 +260,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="0" Width="42" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,413,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="dryer">
+        <Button Grid.Column="1" Grid.Row="0" Width="42" Height="47" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,413,0,0" Command="{Binding ButtonCommand}" CommandParameter="dryer">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -291,8 +277,7 @@
             </Button.Style>
         </Button>
 
-        <Button Grid.Column="1" Grid.Row="0" Width="30" Height="37" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="429,404,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="stove">
+        <Button Grid.Column="1" Grid.Row="0" Width="30" Height="37" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="429,404,0,0" Command="{Binding ButtonCommand}" CommandParameter="stove">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -359,8 +344,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Grid.Column="1" Grid.Row="0" Width="49" Height="49" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="252,453,0,0" Command="{Binding ButtonCommand}"
-                CommandParameter="fridge">
+        <Button Grid.Column="1" Grid.Row="0" Width="49" Height="49" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="252,453,0,0" Command="{Binding ButtonCommand}" CommandParameter="fridge">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>

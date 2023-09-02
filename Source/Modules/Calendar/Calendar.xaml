@@ -1,6 +1,5 @@
-﻿<Page x:Class="HomeControl.Source.Modules.Calendar.Calendar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
+﻿<Page x:Class="HomeControl.Source.Modules.Calendar.Calendar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -102,8 +101,7 @@
 
                 <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DupeText}" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold" FontSize="18"/>
 
-                <Button Grid.Column="1" Content="&lt;" Command="{Binding ButtonCommand}" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Right"
-                        CommandParameter="subMonth">
+                <Button Grid.Column="1" Content="&lt;" Command="{Binding ButtonCommand}" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Right" CommandParameter="subMonth">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -123,8 +121,7 @@
 
                 <TextBlock Grid.Column="2" Text="{Binding CurrentMonthAndYear}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
 
-                <Button Grid.Column="3" Content="&gt;" Command="{Binding ButtonCommand}" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Left"
-                        CommandParameter="addMonth">
+                <Button Grid.Column="3" Content="&gt;" Command="{Binding ButtonCommand}" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Left" CommandParameter="addMonth">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -230,8 +227,8 @@
                             <TextBlock Grid.Column="1" Text="{Binding Button1HolidayText}" Foreground="YellowGreen" HorizontalAlignment="Right"/>
                         </Grid>
 
-                        <ListView ItemsSource="{Binding Button1EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button1EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -331,8 +328,8 @@
                             <TextBlock Grid.Column="1" Text="{Binding Button2HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
 
-                        <ListView ItemsSource="{Binding Button2EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button2EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -425,8 +422,8 @@
                             <TextBlock Grid.Column="1" Text="{Binding Button3HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
 
-                        <ListView ItemsSource="{Binding Button3EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button3EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -520,8 +517,8 @@
                             <TextBlock Grid.Column="1" Text="{Binding Button4HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
 
-                        <ListView ItemsSource="{Binding Button4EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button4EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -613,8 +610,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button5Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button5HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button5EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button5EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -706,8 +703,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button6Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button6HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button6EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button6EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -799,8 +796,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button7Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button7HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button7EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button7EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -892,8 +889,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button8Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button8HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button8EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button8EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -985,8 +982,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button9Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button9HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button9EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button9EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1078,8 +1075,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button10Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button10HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button10EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button10EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1171,8 +1168,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button11Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button11HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button11EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button11EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1264,8 +1261,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button12Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button12HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button12EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button12EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1357,8 +1354,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button13Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button13HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button13EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button13EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1450,8 +1447,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button14Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button14HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button14EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button14EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1543,8 +1540,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button15Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button15HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button15EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button15EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1636,8 +1633,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button16Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button16HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button16EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button16EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1729,8 +1726,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button17Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button17HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button17EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button17EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1822,8 +1819,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button18Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button18HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button18EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button18EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -1915,8 +1912,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button19Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button19HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button19EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button19EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2008,8 +2005,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button20Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button20HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button20EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button20EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2101,8 +2098,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button21Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button21HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button21EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button21EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2194,8 +2191,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button22Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button22HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button22EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button22EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2287,8 +2284,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button23Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button23HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button23EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button23EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2380,8 +2377,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button24Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button24HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button24EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button24EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2473,8 +2470,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button25Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button25HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button25EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button25EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2566,8 +2563,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button26Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button26HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button26EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button26EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2659,8 +2656,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button27Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button27HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button27EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button27EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2752,8 +2749,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button28Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button28HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button28EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button28EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2845,8 +2842,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button29Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button29HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button29EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button29EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -2938,8 +2935,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button30Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button30HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button30EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button30EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3031,8 +3028,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button31Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button31HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button31EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button31EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3124,8 +3121,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button32Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button32HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button32EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button32EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3217,8 +3214,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button33Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button33HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button33EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button33EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3310,8 +3307,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button34Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button34HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button34EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button34EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3403,8 +3400,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button35Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button35HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button35EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button35EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3496,8 +3493,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button36Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button36HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button36EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button36EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3589,8 +3586,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button37Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button37HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button37EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button37EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3682,8 +3679,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button38Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button38HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button38EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button38EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3775,8 +3772,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button39Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button39HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button39EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button39EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3868,8 +3865,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button40Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button40HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button40EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button40EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -3961,8 +3958,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button41Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button41HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button41EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button41EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -4054,8 +4051,8 @@
                             <TextBlock Grid.Column="0" Text="{Binding Button42Date}" FontWeight="Bold"/>
                             <TextBlock Grid.Column="1" Text="{Binding Button42HolidayText}" HorizontalAlignment="Right" Foreground="YellowGreen"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding Button42EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
-                                  Focusable="False" FontSize="8" DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button42EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
+                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>

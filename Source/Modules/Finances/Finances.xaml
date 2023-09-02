@@ -1,6 +1,5 @@
-﻿<Page x:Class="HomeControl.Source.Modules.Finances.Finances" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
+﻿<Page x:Class="HomeControl.Source.Modules.Finances.Finances" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
     <Border BorderBrush="DarkSlateGray" BorderThickness="1" Margin="4 4 0 4">
         <Grid Margin="4">
             <Grid.ColumnDefinitions>
@@ -25,8 +24,7 @@
                 <TextBlock Text="{Binding CashAvailableText}" FontSize="24" Foreground="{Binding CashAvailableTextColor}"/>
             </StackPanel>
 
-            <Button Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Width="100" Margin="0 0 0 8" Content="Details" Command="{Binding ButtonCommand}"
-                    CommandParameter="edit" FontSize="18">
+            <Button Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Width="100" Margin="0 0 0 8" Content="Details" Command="{Binding ButtonCommand}" CommandParameter="edit" FontSize="18">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>

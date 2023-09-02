@@ -1,7 +1,6 @@
-﻿<Window x:Class="HomeControl.Source.Modules.Calendar.EditCalendar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control" mc:Ignorable="d" Height="640" Width="1024"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
+﻿<Window x:Class="HomeControl.Source.Modules.Calendar.EditCalendar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control"
+        mc:Ignorable="d" Height="640" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
         FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
     <Window.Resources>
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
@@ -79,8 +78,8 @@
 
             <Grid Grid.Column="0" Margin="8">
                 <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding EventList}" Background="Transparent"
-                                        SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" IsSelected="{Binding IsSelected}" Foreground="White"
-                                        BorderThickness="2" BorderBrush="White" IsSynchronizedWithCurrentItem="False">
+                                        SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" IsSelected="{Binding IsSelected}" Foreground="White" BorderThickness="2"
+                                        BorderBrush="White" IsSynchronizedWithCurrentItem="False">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -146,8 +145,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="&lt;" Command="{Binding ButtonCommand}" CommandParameter="subDay" FontSize="16" HorizontalContentAlignment="Center"
-                            HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Grid.Column="0" Content="&lt;" Command="{Binding ButtonCommand}" CommandParameter="subDay" FontSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -167,8 +166,8 @@
 
                     <TextBlock Grid.Column="1" Text="{Binding EventDate}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                    <Button Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="16" HorizontalContentAlignment="Center"
-                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Button Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Left"
+                            VerticalAlignment="Center">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -222,8 +221,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="{Binding User1NameText}" Command="{Binding ButtonCommand}" FontSize="16" CommandParameter="user1"
-                            Background="{Binding User1BackgroundColor}">
+                    <Button Grid.Column="0" Content="{Binding User1NameText}" Command="{Binding ButtonCommand}" FontSize="16" CommandParameter="user1" Background="{Binding User1BackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -240,8 +238,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Grid.Column="1" Content="{Binding User2NameText}" Command="{Binding ButtonCommand}" CommandParameter="user2" FontSize="16"
-                            Background="{Binding User2BackgroundColor}">
+                    <Button Grid.Column="1" Content="{Binding User2NameText}" Command="{Binding ButtonCommand}" CommandParameter="user2" FontSize="16" Background="{Binding User2BackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -258,8 +255,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Grid.Column="2" Content="Parents" Command="{Binding ButtonCommand}" CommandParameter="parents" FontSize="16"
-                            Background="{Binding ParentsBackgroundColor}">
+                    <Button Grid.Column="2" Content="Parents" Command="{Binding ButtonCommand}" CommandParameter="parents" FontSize="16" Background="{Binding ParentsBackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -276,8 +272,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Grid.Column="3" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children" FontSize="16"
-                            Background="{Binding ChildrenBackgroundColor}">
+                    <Button Grid.Column="3" Content="Children" Command="{Binding ButtonCommand}" CommandParameter="children" FontSize="16" Background="{Binding ChildrenBackgroundColor}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
