@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Net;
 using System.Text.Json;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -54,14 +54,14 @@ public class WeatherHourlyVM : BaseViewModel {
             try {
                 using WebClient client2 = new();
                 Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
-                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
+                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
                 string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
-                JsonWeatherForecast forecast = JsonSerializer.Deserialize<JsonWeatherForecast>(weatherForecastHourly, options);
+                JsonWeather forecast = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
 
                 ForecastHourlyList.Clear();
 
                 if (forecast != null) {
-                    foreach (JsonWeatherForecast.Periods period in forecast.properties.periods) {
+                    foreach (JsonWeather.Periods period in forecast.properties.periods) {
                         ForecastHourlyList.Add(new WeatherHourlyBlock {
                             Time = period.startTime.ToString("MM/dd  ") + period.startTime.ToString("HH:mm"),
                             WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, "null"),
@@ -80,13 +80,13 @@ public class WeatherHourlyVM : BaseViewModel {
             } catch (WebException) {
                 // NORMAL
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "WeatherHourlyVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
         }
     }

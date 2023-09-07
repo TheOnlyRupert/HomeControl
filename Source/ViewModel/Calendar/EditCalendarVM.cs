@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -19,12 +18,10 @@ public class EditCalendarVM : BaseViewModel {
         _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText, _startTimeText, _endTimeText, _parentsBackgroundColor, _dupeButtonBackgroundColor, _dupeText;
 
     private ObservableCollection<CalendarEvents> _eventList;
-    private JsonCalendar _jsonCalendar;
-    private string fileName;
 
     public EditCalendarVM() {
-        User1NameText = ReferenceValues.JsonMasterSettings.User1Name;
-        User2NameText = ReferenceValues.JsonMasterSettings.User2Name;
+        User1NameText = ReferenceValues.JsonSettingsMaster.User1Name;
+        User2NameText = ReferenceValues.JsonSettingsMaster.User2Name;
         EventText = "";
 
         PopulateEvent();
@@ -34,126 +31,38 @@ public class EditCalendarVM : BaseViewModel {
 
     private void PopulateEvent() {
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
-        fileName = ReferenceValues.FILE_DIRECTORY + "events/" + ReferenceValues.CalendarEventDate.ToString("yyyy_MM_dd") + ".json";
         EventList = new ObservableCollection<CalendarEvents>();
-        _jsonCalendar = new JsonCalendar();
         selectedPerson = "Home";
         CalendarEventSelected = new CalendarEvents();
-        UserButtonLogic();
 
         if (ReferenceValues.IsCalendarDupeModeEnabled) {
-            DupeText = "Duplicate Mode Enabled\n" + ReferenceValues.DupeEvent.startTime + " - " + ReferenceValues.DupeEvent.endTime + "  " + ReferenceValues.DupeEvent.name;
+            DupeText = "Duplicate Mode Enabled\n" + ReferenceValues.DupeEvent.StartTime + " - " + ReferenceValues.DupeEvent.EndTime + "  " + ReferenceValues.DupeEvent.EventName;
             DupeButtonBackgroundColor = "Green";
-            EventText = ReferenceValues.DupeEvent.name;
-            LocationText = ReferenceValues.DupeEvent.location;
-            DescriptionText = ReferenceValues.DupeEvent.description;
-            StartTimeText = ReferenceValues.DupeEvent.startTime;
-            EndTimeText = ReferenceValues.DupeEvent.endTime;
-
-            if (ReferenceValues.DupeEvent.person == ReferenceValues.JsonMasterSettings.User1Name) {
-                selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
-            } else if (ReferenceValues.DupeEvent.person == ReferenceValues.JsonMasterSettings.User2Name) {
-                selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
-            } else if (string.IsNullOrEmpty(ReferenceValues.DupeEvent.person)) {
-                selectedPerson = "Home";
-            } else {
-                selectedPerson = ReferenceValues.DupeEvent.person;
-            }
+            EventText = ReferenceValues.DupeEvent.EventName;
+            LocationText = ReferenceValues.DupeEvent.Location;
+            DescriptionText = ReferenceValues.DupeEvent.Description;
+            StartTimeText = ReferenceValues.DupeEvent.StartTime;
+            EndTimeText = ReferenceValues.DupeEvent.EndTime;
         } else {
             DupeText = "";
             DupeButtonBackgroundColor = "Transparent";
         }
 
-        if (File.Exists(fileName)) {
-            JsonSerializerOptions options = new() {
-                IncludeFields = true
-            };
-
-            try {
-                StreamReader streamReader = new(fileName);
-                string eventsListString = null;
-                while (!streamReader.EndOfStream) {
-                    eventsListString = streamReader.ReadToEnd();
-                }
-
-                if (eventsListString != null) {
-                    try {
-                        JsonCalendar currentJsonCalendar = JsonSerializer.Deserialize<JsonCalendar>(eventsListString, options);
-
-                        if (currentJsonCalendar != null) {
-                            IOrderedEnumerable<CalendarEvents> orderByResult = from s in currentJsonCalendar.eventsList orderby s.startTime select s;
-                            EventList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-                        }
-                    } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "EditCalendarVM",
-                            Description = e.ToString()
-                        });
-                        SaveDebugFile.Save();
-                    }
-                }
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditCalendarVM",
-                    Description = e.ToString()
-                });
-                SaveDebugFile.Save();
+        /* Get Calendar Events */
+        foreach (CalendarEvents calendar in ReferenceValues.JsonCalendarMaster.eventsList) {
+            Console.WriteLine(ReferenceValues.CalendarEventDate.Date + " ... " + calendar.Date);
+            if (ReferenceValues.CalendarEventDate.Date == calendar.Date) {
+                EventList.Add(calendar);
             }
         }
     }
 
     private void PopulateDetailedView(CalendarEvents value) {
-        EventText = value.name;
-        LocationText = value.location;
-        DescriptionText = value.description;
-        StartTimeText = value.startTime;
-        EndTimeText = value.endTime;
-
-        if (value.person == ReferenceValues.JsonMasterSettings.User1Name) {
-            selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
-        } else if (value.person == ReferenceValues.JsonMasterSettings.User2Name) {
-            selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
-        } else if (string.IsNullOrEmpty(value.person)) {
-            selectedPerson = "Home";
-        } else {
-            selectedPerson = value.person;
-        }
-
-        UserButtonLogic();
-    }
-
-    private void UserButtonLogic() {
-        User1BackgroundColor = "Transparent";
-        User2BackgroundColor = "Transparent";
-        ParentsBackgroundColor = "Transparent";
-        ChildrenBackgroundColor = "Transparent";
-        HomeBackgroundColor = "Transparent";
-        OtherBackgroundColor = "Transparent";
-
-        if (selectedPerson == ReferenceValues.JsonMasterSettings.User1Name) {
-            User1BackgroundColor = "Green";
-        } else if (selectedPerson == ReferenceValues.JsonMasterSettings.User2Name) {
-            User2BackgroundColor = "Green";
-        } else {
-            switch (selectedPerson) {
-            case "Parents":
-                ParentsBackgroundColor = "Green";
-                break;
-            case "Children":
-                ChildrenBackgroundColor = "Green";
-                break;
-            case "Home":
-                HomeBackgroundColor = "Green";
-                break;
-            default:
-                OtherBackgroundColor = "Green";
-                break;
-            }
-        }
+        EventText = value.EventName;
+        LocationText = value.Location;
+        DescriptionText = value.Description;
+        StartTimeText = value.StartTime;
+        EndTimeText = value.EndTime;
     }
 
     private void ButtonLogic(object param) {
@@ -165,22 +74,22 @@ public class EditCalendarVM : BaseViewModel {
                 ReferenceValues.SoundToPlay = "missing_info";
                 SoundDispatcher.PlaySound();
             } else {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "INFO",
                     Module = "EditCalendarVM",
                     Description = "Adding calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText + ", " +
                                   LocationText + ", " + selectedPerson
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                 EventList.Add(new CalendarEvents {
-                    name = EventText,
-                    description = DescriptionText,
-                    location = LocationText,
-                    person = selectedPerson,
-                    startTime = StartTimeText,
-                    endTime = EndTimeText
+                    Date = DateTime.Today,
+                    EventName = EventText,
+                    Description = DescriptionText,
+                    Location = LocationText,
+                    StartTime = StartTimeText,
+                    EndTime = EndTimeText
                 });
 
                 ReferenceValues.SoundToPlay = "scribble1";
@@ -197,14 +106,14 @@ public class EditCalendarVM : BaseViewModel {
             break;
         case "update":
             try {
-                if (CalendarEventSelected.name != null) {
+                if (CalendarEventSelected.EventName != null) {
                     if (string.IsNullOrWhiteSpace(EventText)) {
                         ReferenceValues.SoundToPlay = "missing_info";
                         SoundDispatcher.PlaySound();
-                    } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.name)) {
+                    } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.EventName)) {
                         confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (confirmation == MessageBoxResult.Yes) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "EditCalendarVM",
@@ -212,15 +121,15 @@ public class EditCalendarVM : BaseViewModel {
                                               DescriptionText + ", " +
                                               LocationText + ", " + selectedPerson
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
-                                name = EventText,
-                                description = DescriptionText,
-                                location = LocationText,
-                                person = selectedPerson,
-                                startTime = StartTimeText,
-                                endTime = EndTimeText
+                                Date = DateTime.Today,
+                                EventName = EventText,
+                                Description = DescriptionText,
+                                Location = LocationText,
+                                StartTime = StartTimeText,
+                                EndTime = EndTimeText
                             });
                             EventList.Remove(CalendarEventSelected);
 
@@ -237,22 +146,22 @@ public class EditCalendarVM : BaseViewModel {
                     }
                 }
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
         case "delete":
             try {
-                if (CalendarEventSelected.name != null) {
+                if (CalendarEventSelected.EventName != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (confirmation == MessageBoxResult.Yes) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditCalendarVM",
@@ -260,7 +169,7 @@ public class EditCalendarVM : BaseViewModel {
                                           ", " +
                                           LocationText + ", " + selectedPerson
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         EventList.Remove(CalendarEventSelected);
                         ReferenceValues.SoundToPlay = "scribble3";
@@ -270,13 +179,13 @@ public class EditCalendarVM : BaseViewModel {
                     }
                 }
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
@@ -295,12 +204,11 @@ public class EditCalendarVM : BaseViewModel {
                     DupeButtonBackgroundColor = "Green";
 
                     ReferenceValues.DupeEvent = new CalendarEvents {
-                        name = EventText,
-                        description = DescriptionText,
-                        location = LocationText,
-                        person = selectedPerson,
-                        startTime = StartTimeText,
-                        endTime = EndTimeText
+                        EventName = EventText,
+                        Description = DescriptionText,
+                        Location = LocationText,
+                        StartTime = StartTimeText,
+                        EndTime = EndTimeText
                     };
 
                     DupeText = "Duplicate Mode Enabled\n" + StartTimeText + " - " + EndTimeText + "  " + EventText;
@@ -308,35 +216,29 @@ public class EditCalendarVM : BaseViewModel {
             }
 
             break;
-
         case "user1":
-            selectedPerson = ReferenceValues.JsonMasterSettings.User1Name;
-            UserButtonLogic();
-            break;
+            selectedPerson = ReferenceValues.JsonSettingsMaster.User1Name;
 
+            break;
         case "user2":
-            selectedPerson = ReferenceValues.JsonMasterSettings.User2Name;
-            UserButtonLogic();
-            break;
+            selectedPerson = ReferenceValues.JsonSettingsMaster.User2Name;
 
-        case "children":
+            break;
+        case "user3":
             selectedPerson = "Children";
-            UserButtonLogic();
-            break;
 
-        case "parents":
+            break;
+        case "user4":
             selectedPerson = "Parents";
-            UserButtonLogic();
-            break;
 
-        case "home":
+            break;
+        case "user5":
             selectedPerson = "Home";
-            UserButtonLogic();
-            break;
 
+            break;
         case "other":
             selectedPerson = "Other";
-            UserButtonLogic();
+
             break;
         case "addDay":
             ReferenceValues.CalendarEventDate = ReferenceValues.CalendarEventDate.AddDays(1);
@@ -350,39 +252,21 @@ public class EditCalendarVM : BaseViewModel {
     }
 
     private void SaveJson() {
-        if (EventList.Count > 0) {
-            try {
-                IOrderedEnumerable<CalendarEvents> orderByResult = from s in EventList orderby s.startTime select s;
-                EventList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+        try {
+            IOrderedEnumerable<CalendarEvents> orderByResult = from s in EventList orderby s.StartTime select s;
+            EventList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
 
-                _jsonCalendar.eventsList = EventList;
-                string jsonString = JsonSerializer.Serialize(_jsonCalendar);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.WriteAllText(fileName, jsonString);
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditCalendarVM",
-                    Description = e.ToString()
-                });
-                SaveDebugFile.Save();
-            }
-        } else {
-            try {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.Delete(fileName);
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditCalendarVM",
-                    Description = e.ToString()
-                });
-                SaveDebugFile.Save();
-            }
+            //TODO: ADD EVENTS TO MAIN LIST
+
+            //FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "EditCalendarVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 

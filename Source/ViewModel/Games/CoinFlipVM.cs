@@ -1,9 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -27,27 +26,24 @@ public class CoinFlipVM : BaseViewModel {
         try {
             GameStats = "Total Heads: " + ReferenceValues.JsonGameStatsMaster.CoinHead + "\nTotal Tails: " + ReferenceValues.JsonGameStatsMaster.CoinTails;
             try {
-                string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonGameStatsMaster);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "gameStats.json", jsonString);
+                FileHelpers.SaveFileText("gameStats", JsonSerializer.Serialize(ReferenceValues.JsonGameStatsMaster));
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "CoinFlipVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "CoinFlipVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 

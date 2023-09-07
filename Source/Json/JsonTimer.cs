@@ -1,4 +1,4 @@
-﻿namespace HomeControl.Source.IO;
+﻿namespace HomeControl.Source.Json;
 
 public class JsonTimer {
     public bool IsTimer1Running { get; set; }

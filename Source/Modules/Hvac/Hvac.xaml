@@ -47,7 +47,7 @@
 
             <TextBlock Grid.Column="1" Grid.Row="4" Text="Fan" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
             <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding FanStatus}" Foreground="{Binding FanStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
-            
+
             <TextBlock Grid.Column="2" Grid.Row="4" Text="Program" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
             <TextBlock Grid.Column="2" Grid.Row="5" Text="{Binding HeatingCoolingStatus}" Foreground="{Binding HeatingCoolingStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
         </Grid>

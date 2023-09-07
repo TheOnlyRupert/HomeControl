@@ -19,79 +19,79 @@ public class EditTimerVM : BaseViewModel {
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "RefreshTimer") {
-            if (ReferenceValues.JsonTimerSettings.IsTimer1Running || ReferenceValues.JsonTimerSettings.IsTimer2Running || ReferenceValues.JsonTimerSettings.IsTimer3Running ||
-                ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+            if (ReferenceValues.JsonTimerMaster.IsTimer1Running || ReferenceValues.JsonTimerMaster.IsTimer2Running || ReferenceValues.JsonTimerMaster.IsTimer3Running ||
+                ReferenceValues.JsonTimerMaster.IsTimer4Running) {
                 RefreshTimer();
             }
         }
     }
 
     private void RefreshTimer() {
-        TimeSpan time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer1Seconds);
+        TimeSpan time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerMaster.Timer1Seconds);
         Timer1Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
 
-        if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+        if (!ReferenceValues.JsonTimerMaster.IsTimer1Running) {
             Timer1Color = "White";
         } else {
-            Timer1Color = ReferenceValues.JsonTimerSettings.Timer1Seconds < 0 ? "Red" : "Green";
+            Timer1Color = ReferenceValues.JsonTimerMaster.Timer1Seconds < 0 ? "Red" : "Green";
         }
 
-        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer2Seconds);
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerMaster.Timer2Seconds);
         Timer2Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
 
-        if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+        if (!ReferenceValues.JsonTimerMaster.IsTimer2Running) {
             Timer2Color = "White";
         } else {
-            Timer2Color = ReferenceValues.JsonTimerSettings.Timer2Seconds < 0 ? "Red" : "Green";
+            Timer2Color = ReferenceValues.JsonTimerMaster.Timer2Seconds < 0 ? "Red" : "Green";
         }
 
-        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer3Seconds);
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerMaster.Timer3Seconds);
         Timer3Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
 
-        if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+        if (!ReferenceValues.JsonTimerMaster.IsTimer3Running) {
             Timer3Color = "White";
         } else {
-            Timer3Color = ReferenceValues.JsonTimerSettings.Timer3Seconds < 0 ? "Red" : "Green";
+            Timer3Color = ReferenceValues.JsonTimerMaster.Timer3Seconds < 0 ? "Red" : "Green";
         }
 
-        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer4Seconds);
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerMaster.Timer4Seconds);
         Timer4Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
 
-        if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+        if (!ReferenceValues.JsonTimerMaster.IsTimer4Running) {
             Timer4Color = "White";
         } else {
-            Timer4Color = ReferenceValues.JsonTimerSettings.Timer4Seconds < 0 ? "Red" : "Green";
+            Timer4Color = ReferenceValues.JsonTimerMaster.Timer4Seconds < 0 ? "Red" : "Green";
         }
     }
 
     private void ButtonLogic(object param) {
         switch (param) {
         case "timer1Add1":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
-                ReferenceValues.JsonTimerSettings.Timer1Seconds += 60;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer1Running) {
+                ReferenceValues.JsonTimerMaster.Timer1Seconds += 60;
                 RefreshTimer();
             }
 
             break;
         case "timer1Add5":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
-                ReferenceValues.JsonTimerSettings.Timer1Seconds += 300;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer1Running) {
+                ReferenceValues.JsonTimerMaster.Timer1Seconds += 300;
                 RefreshTimer();
             }
 
             break;
         case "timer1Add10":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
-                ReferenceValues.JsonTimerSettings.Timer1Seconds += 600;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer1Running) {
+                ReferenceValues.JsonTimerMaster.Timer1Seconds += 600;
                 RefreshTimer();
             }
 
             break;
         case "timer1Sub1":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
-                ReferenceValues.JsonTimerSettings.Timer1Seconds -= 60;
-                if (ReferenceValues.JsonTimerSettings.Timer1Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer1Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer1Running) {
+                ReferenceValues.JsonTimerMaster.Timer1Seconds -= 60;
+                if (ReferenceValues.JsonTimerMaster.Timer1Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer1Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -99,10 +99,10 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer1Sub5":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
-                ReferenceValues.JsonTimerSettings.Timer1Seconds -= 300;
-                if (ReferenceValues.JsonTimerSettings.Timer1Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer1Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer1Running) {
+                ReferenceValues.JsonTimerMaster.Timer1Seconds -= 300;
+                if (ReferenceValues.JsonTimerMaster.Timer1Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer1Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -110,10 +110,10 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer1Sub10":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
-                ReferenceValues.JsonTimerSettings.Timer1Seconds -= 600;
-                if (ReferenceValues.JsonTimerSettings.Timer1Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer1Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer1Running) {
+                ReferenceValues.JsonTimerMaster.Timer1Seconds -= 600;
+                if (ReferenceValues.JsonTimerMaster.Timer1Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer1Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -121,43 +121,43 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer1PlayPause":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
-            ReferenceValues.JsonTimerSettings.IsTimer1Running = !ReferenceValues.JsonTimerSettings.IsTimer1Running;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsTimer1Running = !ReferenceValues.JsonTimerMaster.IsTimer1Running;
 
             break;
         case "timer1Stop":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
-            ReferenceValues.JsonTimerSettings.IsTimer1Running = false;
-            ReferenceValues.JsonTimerSettings.Timer1Seconds = 0;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsTimer1Running = false;
+            ReferenceValues.JsonTimerMaster.Timer1Seconds = 0;
             RefreshTimer();
 
             break;
         case "timer2Add1":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
-                ReferenceValues.JsonTimerSettings.Timer2Seconds += 60;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer2Running) {
+                ReferenceValues.JsonTimerMaster.Timer2Seconds += 60;
                 RefreshTimer();
             }
 
             break;
         case "timer2Add5":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
-                ReferenceValues.JsonTimerSettings.Timer2Seconds += 300;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer2Running) {
+                ReferenceValues.JsonTimerMaster.Timer2Seconds += 300;
                 RefreshTimer();
             }
 
             break;
         case "timer2Add10":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
-                ReferenceValues.JsonTimerSettings.Timer2Seconds += 600;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer2Running) {
+                ReferenceValues.JsonTimerMaster.Timer2Seconds += 600;
                 RefreshTimer();
             }
 
             break;
         case "timer2Sub1":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
-                ReferenceValues.JsonTimerSettings.Timer2Seconds -= 60;
-                if (ReferenceValues.JsonTimerSettings.Timer2Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer2Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer2Running) {
+                ReferenceValues.JsonTimerMaster.Timer2Seconds -= 60;
+                if (ReferenceValues.JsonTimerMaster.Timer2Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer2Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -165,10 +165,10 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer2Sub5":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
-                ReferenceValues.JsonTimerSettings.Timer2Seconds -= 300;
-                if (ReferenceValues.JsonTimerSettings.Timer2Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer2Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer2Running) {
+                ReferenceValues.JsonTimerMaster.Timer2Seconds -= 300;
+                if (ReferenceValues.JsonTimerMaster.Timer2Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer2Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -176,10 +176,10 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer2Sub10":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
-                ReferenceValues.JsonTimerSettings.Timer2Seconds -= 600;
-                if (ReferenceValues.JsonTimerSettings.Timer2Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer2Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer2Running) {
+                ReferenceValues.JsonTimerMaster.Timer2Seconds -= 600;
+                if (ReferenceValues.JsonTimerMaster.Timer2Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer2Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -187,43 +187,43 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer2PlayPause":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
-            ReferenceValues.JsonTimerSettings.IsTimer2Running = !ReferenceValues.JsonTimerSettings.IsTimer2Running;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsTimer2Running = !ReferenceValues.JsonTimerMaster.IsTimer2Running;
 
             break;
         case "timer2Stop":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
-            ReferenceValues.JsonTimerSettings.IsTimer2Running = false;
-            ReferenceValues.JsonTimerSettings.Timer2Seconds = 0;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsTimer2Running = false;
+            ReferenceValues.JsonTimerMaster.Timer2Seconds = 0;
             RefreshTimer();
 
             break;
         case "timer3Add1":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
-                ReferenceValues.JsonTimerSettings.Timer3Seconds += 60;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer3Running) {
+                ReferenceValues.JsonTimerMaster.Timer3Seconds += 60;
                 RefreshTimer();
             }
 
             break;
         case "timer3Add5":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
-                ReferenceValues.JsonTimerSettings.Timer3Seconds += 300;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer3Running) {
+                ReferenceValues.JsonTimerMaster.Timer3Seconds += 300;
                 RefreshTimer();
             }
 
             break;
         case "timer3Add10":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
-                ReferenceValues.JsonTimerSettings.Timer3Seconds += 600;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer3Running) {
+                ReferenceValues.JsonTimerMaster.Timer3Seconds += 600;
                 RefreshTimer();
             }
 
             break;
         case "timer3Sub1":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
-                ReferenceValues.JsonTimerSettings.Timer3Seconds -= 60;
-                if (ReferenceValues.JsonTimerSettings.Timer3Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer3Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer3Running) {
+                ReferenceValues.JsonTimerMaster.Timer3Seconds -= 60;
+                if (ReferenceValues.JsonTimerMaster.Timer3Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer3Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -231,10 +231,10 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer3Sub5":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
-                ReferenceValues.JsonTimerSettings.Timer3Seconds -= 300;
-                if (ReferenceValues.JsonTimerSettings.Timer3Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer3Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer3Running) {
+                ReferenceValues.JsonTimerMaster.Timer3Seconds -= 300;
+                if (ReferenceValues.JsonTimerMaster.Timer3Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer3Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -242,10 +242,10 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer3Sub10":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
-                ReferenceValues.JsonTimerSettings.Timer3Seconds -= 600;
-                if (ReferenceValues.JsonTimerSettings.Timer3Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer3Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer3Running) {
+                ReferenceValues.JsonTimerMaster.Timer3Seconds -= 600;
+                if (ReferenceValues.JsonTimerMaster.Timer3Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer3Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -253,43 +253,43 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer3PlayPause":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
-            ReferenceValues.JsonTimerSettings.IsTimer3Running = !ReferenceValues.JsonTimerSettings.IsTimer3Running;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsTimer3Running = !ReferenceValues.JsonTimerMaster.IsTimer3Running;
 
             break;
         case "timer3Stop":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
-            ReferenceValues.JsonTimerSettings.IsTimer3Running = false;
-            ReferenceValues.JsonTimerSettings.Timer3Seconds = 0;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsTimer3Running = false;
+            ReferenceValues.JsonTimerMaster.Timer3Seconds = 0;
             RefreshTimer();
 
             break;
         case "timer4Add1":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
-                ReferenceValues.JsonTimerSettings.Timer4Seconds += 60;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer4Running) {
+                ReferenceValues.JsonTimerMaster.Timer4Seconds += 60;
                 RefreshTimer();
             }
 
             break;
         case "timer4Add5":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
-                ReferenceValues.JsonTimerSettings.Timer4Seconds += 300;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer4Running) {
+                ReferenceValues.JsonTimerMaster.Timer4Seconds += 300;
                 RefreshTimer();
             }
 
             break;
         case "timer4Add10":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
-                ReferenceValues.JsonTimerSettings.Timer4Seconds += 600;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer4Running) {
+                ReferenceValues.JsonTimerMaster.Timer4Seconds += 600;
                 RefreshTimer();
             }
 
             break;
         case "timer4Sub1":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
-                ReferenceValues.JsonTimerSettings.Timer4Seconds -= 60;
-                if (ReferenceValues.JsonTimerSettings.Timer4Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer4Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer4Running) {
+                ReferenceValues.JsonTimerMaster.Timer4Seconds -= 60;
+                if (ReferenceValues.JsonTimerMaster.Timer4Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer4Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -297,10 +297,10 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer4Sub5":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
-                ReferenceValues.JsonTimerSettings.Timer4Seconds -= 300;
-                if (ReferenceValues.JsonTimerSettings.Timer4Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer4Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer4Running) {
+                ReferenceValues.JsonTimerMaster.Timer4Seconds -= 300;
+                if (ReferenceValues.JsonTimerMaster.Timer4Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer4Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -308,10 +308,10 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer4Sub10":
-            if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
-                ReferenceValues.JsonTimerSettings.Timer4Seconds -= 600;
-                if (ReferenceValues.JsonTimerSettings.Timer4Seconds < 0) {
-                    ReferenceValues.JsonTimerSettings.Timer4Seconds = 0;
+            if (!ReferenceValues.JsonTimerMaster.IsTimer4Running) {
+                ReferenceValues.JsonTimerMaster.Timer4Seconds -= 600;
+                if (ReferenceValues.JsonTimerMaster.Timer4Seconds < 0) {
+                    ReferenceValues.JsonTimerMaster.Timer4Seconds = 0;
                 }
 
                 RefreshTimer();
@@ -319,14 +319,14 @@ public class EditTimerVM : BaseViewModel {
 
             break;
         case "timer4PlayPause":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
-            ReferenceValues.JsonTimerSettings.IsTimer4Running = !ReferenceValues.JsonTimerSettings.IsTimer4Running;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsTimer4Running = !ReferenceValues.JsonTimerMaster.IsTimer4Running;
 
             break;
         case "timer4Stop":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
-            ReferenceValues.JsonTimerSettings.IsTimer4Running = false;
-            ReferenceValues.JsonTimerSettings.Timer4Seconds = 0;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsTimer4Running = false;
+            ReferenceValues.JsonTimerMaster.Timer4Seconds = 0;
             RefreshTimer();
 
             break;

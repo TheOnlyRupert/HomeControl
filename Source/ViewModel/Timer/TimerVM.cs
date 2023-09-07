@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Timer;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -13,7 +13,7 @@ public class TimerVM : BaseViewModel {
     private string _timer1Text, _timer2Text, _timer3Text, _timer4Text, _timer1Color, _timer2Color, _timer3Color, _timer4Color;
 
     public TimerVM() {
-        ReferenceValues.JsonTimerSettings = new JsonTimer();
+        ReferenceValues.JsonTimerMaster = new JsonTimer();
 
         RefreshTimer();
 
@@ -30,35 +30,35 @@ public class TimerVM : BaseViewModel {
     }
 
     private void RefreshTimer() {
-        TimeSpan time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer1Seconds);
+        TimeSpan time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerMaster.Timer1Seconds);
         Timer1Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
-        Timer1Color = ReferenceValues.JsonTimerSettings.Timer1Seconds < 0 ? "Red" : "Green";
+        Timer1Color = ReferenceValues.JsonTimerMaster.Timer1Seconds < 0 ? "Red" : "Green";
 
-        if (!ReferenceValues.JsonTimerSettings.IsTimer1Running) {
+        if (!ReferenceValues.JsonTimerMaster.IsTimer1Running) {
             Timer1Color = "White";
         }
 
-        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer2Seconds);
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerMaster.Timer2Seconds);
         Timer2Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
-        Timer2Color = ReferenceValues.JsonTimerSettings.Timer2Seconds < 0 ? "Red" : "Green";
+        Timer2Color = ReferenceValues.JsonTimerMaster.Timer2Seconds < 0 ? "Red" : "Green";
 
-        if (!ReferenceValues.JsonTimerSettings.IsTimer2Running) {
+        if (!ReferenceValues.JsonTimerMaster.IsTimer2Running) {
             Timer2Color = "White";
         }
 
-        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer3Seconds);
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerMaster.Timer3Seconds);
         Timer3Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
-        Timer3Color = ReferenceValues.JsonTimerSettings.Timer3Seconds < 0 ? "Red" : "Green";
+        Timer3Color = ReferenceValues.JsonTimerMaster.Timer3Seconds < 0 ? "Red" : "Green";
 
-        if (!ReferenceValues.JsonTimerSettings.IsTimer3Running) {
+        if (!ReferenceValues.JsonTimerMaster.IsTimer3Running) {
             Timer3Color = "White";
         }
 
-        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerSettings.Timer4Seconds);
+        time = TimeSpan.FromSeconds(ReferenceValues.JsonTimerMaster.Timer4Seconds);
         Timer4Text = (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
-        Timer4Color = ReferenceValues.JsonTimerSettings.Timer4Seconds < 0 ? "Red" : "Green";
+        Timer4Color = ReferenceValues.JsonTimerMaster.Timer4Seconds < 0 ? "Red" : "Green";
 
-        if (!ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+        if (!ReferenceValues.JsonTimerMaster.IsTimer4Running) {
             Timer4Color = "White";
         }
     }
@@ -66,12 +66,12 @@ public class TimerVM : BaseViewModel {
     private void ButtonLogic(object param) {
         switch (param) {
         case "timer":
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
             EditTimer editTimer = new();
             editTimer.ShowDialog();
             editTimer.Close();
             simpleMessenger.PushMessage("RefreshTimer", null);
-            ReferenceValues.JsonTimerSettings.IsAlarmSounding = false;
+            ReferenceValues.JsonTimerMaster.IsAlarmSounding = false;
             break;
         }
     }

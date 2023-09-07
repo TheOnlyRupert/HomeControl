@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Calendar;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -14,6 +13,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Calendar;
 
 public class CalendarVM : BaseViewModel {
+    private int _button1BorderThickness;
+
     private string _button1Date, _button1HolidayText, _button2Date, _button2HolidayText, _button3Date, _button3HolidayText, _button4Date, _button4HolidayText, _button5Date,
         _button5HolidayText, _button6Date, _button6HolidayText, _button7Date, _button7HolidayText, _button8Date, _button8HolidayText, _button9Date, _button9HolidayText,
         _button10Date, _button10HolidayText, _button11Date, _button11HolidayText, _button12Date, _button12HolidayText, _button13Date, _button13HolidayText, _button14Date,
@@ -30,7 +31,7 @@ public class CalendarVM : BaseViewModel {
         _button22BackgroundColor, _button23BackgroundColor, _button24BackgroundColor, _button25BackgroundColor, _button26BackgroundColor, _button27BackgroundColor,
         _button28BackgroundColor, _button29BackgroundColor, _button30BackgroundColor, _button31BackgroundColor, _button32BackgroundColor, _button33BackgroundColor,
         _button34BackgroundColor, _button35BackgroundColor, _button36BackgroundColor, _button37BackgroundColor, _button38BackgroundColor, _button39BackgroundColor,
-        _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor;
+        _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor, _button1BorderColor;
 
     private ObservableCollection<CalendarEventsCustom> _button1EventList, _button2EventList, _button3EventList, _button4EventList, _button5EventList, _button6EventList,
         _button7EventList, _button8EventList, _button9EventList, _button10EventList, _button11EventList, _button12EventList, _button13EventList, _button14EventList,
@@ -42,6 +43,15 @@ public class CalendarVM : BaseViewModel {
     private DateTime currentDateTime, button1DateTime;
 
     public CalendarVM() {
+        try {
+            ReferenceValues.JsonCalendarMaster = JsonSerializer.Deserialize<JsonCalendar>(FileHelpers.LoadFileText("calendar"));
+        } catch (Exception) {
+            ReferenceValues.JsonCalendarMaster = new JsonCalendar {
+                eventsList = new ObservableCollection<CalendarEvents>(),
+                eventsListRecurring = new ObservableCollection<CalendarEventsRecurring>()
+            };
+        }
+
         Button1EventList = new ObservableCollection<CalendarEventsCustom>();
         Button2EventList = new ObservableCollection<CalendarEventsCustom>();
         Button3EventList = new ObservableCollection<CalendarEventsCustom>();
@@ -91,8 +101,6 @@ public class CalendarVM : BaseViewModel {
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
-
-        ReferenceValues.JsonCalendarMasterEventList = new JsonCalendar[42];
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -565,7 +573,6 @@ public class CalendarVM : BaseViewModel {
     }
 
     private void PopulateCalendar(DateTime dateTime) {
-        /* Clear Calender */
         Button1HolidayText = "";
         Button2HolidayText = "";
         Button3HolidayText = "";
@@ -650,6 +657,8 @@ public class CalendarVM : BaseViewModel {
         Button40BackgroundColor = "Transparent";
         Button41BackgroundColor = "Transparent";
         Button42BackgroundColor = "Transparent";
+        Button1BorderColor = "DarkSlateGray";
+        Button1BorderThickness = 1;
 
         Button1EventList.Clear();
         Button2EventList.Clear();
@@ -848,6 +857,10 @@ public class CalendarVM : BaseViewModel {
         foreach (HolidayBlock holiday in GetHolidays(dateTime.AddDays(7).Year)) {
             if (dateTime.Month == holiday.Date.Month && dateTime.Day == holiday.Date.Day) {
                 Button1HolidayText = holiday.Holiday;
+                if (Button1HolidayText.Length > 0) {
+                    Button1BorderColor = "Red";
+                    Button1BorderThickness = 2;
+                }
             }
 
             if (dateTime.AddDays(1).Month == holiday.Date.Month && dateTime.AddDays(1).Day == holiday.Date.Day) {
@@ -1015,1290 +1028,269 @@ public class CalendarVM : BaseViewModel {
             }
         }
 
-        /* Get Recurring Events */
-        new CalenderEventsFromJson(button1DateTime);
-        ReferenceValues.JsonCalendarRecurringMaster = new JsonCalendarRecurring {
-            eventsListRecurring = new ObservableCollection<CalendarEventsRecurring>()
-        };
-
-        if (File.Exists(ReferenceValues.FILE_DIRECTORY + "recurringDates.json")) {
-            JsonSerializerOptions options = new() {
-                IncludeFields = true
-            };
-
-            try {
-                StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + "recurringDates.json");
-                string eventsListString = null;
-                while (!streamReader.EndOfStream) {
-                    eventsListString = streamReader.ReadToEnd();
-                }
-
-                if (eventsListString != null) {
-                    try {
-                        JsonCalendarRecurring calendar = JsonSerializer.Deserialize<JsonCalendarRecurring>(eventsListString, options);
-
-                        if (calendar != null) {
-                            ReferenceValues.JsonCalendarRecurringMaster.eventsListRecurring = calendar.eventsListRecurring;
-                        }
-                    } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "CalendarVM",
-                            Description = e.ToString()
-                        });
-                        SaveDebugFile.Save();
-                    }
-                }
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "CalendarVM",
-                    Description = e.ToString()
-                });
-                SaveDebugFile.Save();
-            }
-        }
-
-        foreach (CalendarEventsRecurring calendar in ReferenceValues.JsonCalendarRecurringMaster.eventsListRecurring) {
-            if (dateTime.Month == calendar.date.Month && dateTime.Day == calendar.date.Day) {
+        foreach (CalendarEventsRecurring calendar in ReferenceValues.JsonCalendarMaster.eventsListRecurring) {
+            if (dateTime.Month == calendar.Date.Month && dateTime.Day == calendar.Date.Day) {
                 Button1EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(1).Month == calendar.date.Month && dateTime.AddDays(1).Day == calendar.date.Day) {
+            if (dateTime.AddDays(1).Month == calendar.Date.Month && dateTime.AddDays(1).Day == calendar.Date.Day) {
                 Button2EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(2).Month == calendar.date.Month && dateTime.AddDays(2).Day == calendar.date.Day) {
+            if (dateTime.AddDays(2).Month == calendar.Date.Month && dateTime.AddDays(2).Day == calendar.Date.Day) {
                 Button3EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(3).Month == calendar.date.Month && dateTime.AddDays(3).Day == calendar.date.Day) {
+            if (dateTime.AddDays(3).Month == calendar.Date.Month && dateTime.AddDays(3).Day == calendar.Date.Day) {
                 Button4EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(4).Month == calendar.date.Month && dateTime.AddDays(4).Day == calendar.date.Day) {
+            if (dateTime.AddDays(4).Month == calendar.Date.Month && dateTime.AddDays(4).Day == calendar.Date.Day) {
                 Button5EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(5).Month == calendar.date.Month && dateTime.AddDays(5).Day == calendar.date.Day) {
+            if (dateTime.AddDays(5).Month == calendar.Date.Month && dateTime.AddDays(5).Day == calendar.Date.Day) {
                 Button6EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(6).Month == calendar.date.Month && dateTime.AddDays(6).Day == calendar.date.Day) {
+            if (dateTime.AddDays(6).Month == calendar.Date.Month && dateTime.AddDays(6).Day == calendar.Date.Day) {
                 Button7EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(7).Month == calendar.date.Month && dateTime.AddDays(7).Day == calendar.date.Day) {
+            if (dateTime.AddDays(7).Month == calendar.Date.Month && dateTime.AddDays(7).Day == calendar.Date.Day) {
                 Button8EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(8).Month == calendar.date.Month && dateTime.AddDays(8).Day == calendar.date.Day) {
+            if (dateTime.AddDays(8).Month == calendar.Date.Month && dateTime.AddDays(8).Day == calendar.Date.Day) {
                 Button9EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(9).Month == calendar.date.Month && dateTime.AddDays(9).Day == calendar.date.Day) {
+            if (dateTime.AddDays(9).Month == calendar.Date.Month && dateTime.AddDays(9).Day == calendar.Date.Day) {
                 Button10EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(10).Month == calendar.date.Month && dateTime.AddDays(10).Day == calendar.date.Day) {
+            if (dateTime.AddDays(10).Month == calendar.Date.Month && dateTime.AddDays(10).Day == calendar.Date.Day) {
                 Button11EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(11).Month == calendar.date.Month && dateTime.AddDays(11).Day == calendar.date.Day) {
+            if (dateTime.AddDays(11).Month == calendar.Date.Month && dateTime.AddDays(11).Day == calendar.Date.Day) {
                 Button12EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(12).Month == calendar.date.Month && dateTime.AddDays(12).Day == calendar.date.Day) {
+            if (dateTime.AddDays(12).Month == calendar.Date.Month && dateTime.AddDays(12).Day == calendar.Date.Day) {
                 Button13EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(13).Month == calendar.date.Month && dateTime.AddDays(13).Day == calendar.date.Day) {
+            if (dateTime.AddDays(13).Month == calendar.Date.Month && dateTime.AddDays(13).Day == calendar.Date.Day) {
                 Button14EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(14).Month == calendar.date.Month && dateTime.AddDays(14).Day == calendar.date.Day) {
+            if (dateTime.AddDays(14).Month == calendar.Date.Month && dateTime.AddDays(14).Day == calendar.Date.Day) {
                 Button15EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(15).Month == calendar.date.Month && dateTime.AddDays(15).Day == calendar.date.Day) {
+            if (dateTime.AddDays(15).Month == calendar.Date.Month && dateTime.AddDays(15).Day == calendar.Date.Day) {
                 Button16EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(16).Month == calendar.date.Month && dateTime.AddDays(16).Day == calendar.date.Day) {
+            if (dateTime.AddDays(16).Month == calendar.Date.Month && dateTime.AddDays(16).Day == calendar.Date.Day) {
                 Button17EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(17).Month == calendar.date.Month && dateTime.AddDays(17).Day == calendar.date.Day) {
+            if (dateTime.AddDays(17).Month == calendar.Date.Month && dateTime.AddDays(17).Day == calendar.Date.Day) {
                 Button18EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(18).Month == calendar.date.Month && dateTime.AddDays(18).Day == calendar.date.Day) {
+            if (dateTime.AddDays(18).Month == calendar.Date.Month && dateTime.AddDays(18).Day == calendar.Date.Day) {
                 Button19EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(19).Month == calendar.date.Month && dateTime.AddDays(19).Day == calendar.date.Day) {
+            if (dateTime.AddDays(19).Month == calendar.Date.Month && dateTime.AddDays(19).Day == calendar.Date.Day) {
                 Button20EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(20).Month == calendar.date.Month && dateTime.AddDays(20).Day == calendar.date.Day) {
+            if (dateTime.AddDays(20).Month == calendar.Date.Month && dateTime.AddDays(20).Day == calendar.Date.Day) {
                 Button21EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(21).Month == calendar.date.Month && dateTime.AddDays(21).Day == calendar.date.Day) {
+            if (dateTime.AddDays(21).Month == calendar.Date.Month && dateTime.AddDays(21).Day == calendar.Date.Day) {
                 Button22EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(22).Month == calendar.date.Month && dateTime.AddDays(22).Day == calendar.date.Day) {
+            if (dateTime.AddDays(22).Month == calendar.Date.Month && dateTime.AddDays(22).Day == calendar.Date.Day) {
                 Button23EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(23).Month == calendar.date.Month && dateTime.AddDays(23).Day == calendar.date.Day) {
+            if (dateTime.AddDays(23).Month == calendar.Date.Month && dateTime.AddDays(23).Day == calendar.Date.Day) {
                 Button24EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(24).Month == calendar.date.Month && dateTime.AddDays(24).Day == calendar.date.Day) {
+            if (dateTime.AddDays(24).Month == calendar.Date.Month && dateTime.AddDays(24).Day == calendar.Date.Day) {
                 Button25EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(25).Month == calendar.date.Month && dateTime.AddDays(25).Day == calendar.date.Day) {
+            if (dateTime.AddDays(25).Month == calendar.Date.Month && dateTime.AddDays(25).Day == calendar.Date.Day) {
                 Button26EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(26).Month == calendar.date.Month && dateTime.AddDays(26).Day == calendar.date.Day) {
+            if (dateTime.AddDays(26).Month == calendar.Date.Month && dateTime.AddDays(26).Day == calendar.Date.Day) {
                 Button27EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(27).Month == calendar.date.Month && dateTime.AddDays(27).Day == calendar.date.Day) {
+            if (dateTime.AddDays(27).Month == calendar.Date.Month && dateTime.AddDays(27).Day == calendar.Date.Day) {
                 Button28EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(28).Month == calendar.date.Month && dateTime.AddDays(28).Day == calendar.date.Day) {
+            if (dateTime.AddDays(28).Month == calendar.Date.Month && dateTime.AddDays(28).Day == calendar.Date.Day) {
                 Button29EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(29).Month == calendar.date.Month && dateTime.AddDays(29).Day == calendar.date.Day) {
+            if (dateTime.AddDays(29).Month == calendar.Date.Month && dateTime.AddDays(29).Day == calendar.Date.Day) {
                 Button30EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(30).Month == calendar.date.Month && dateTime.AddDays(30).Day == calendar.date.Day) {
+            if (dateTime.AddDays(30).Month == calendar.Date.Month && dateTime.AddDays(30).Day == calendar.Date.Day) {
                 Button31EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(31).Month == calendar.date.Month && dateTime.AddDays(31).Day == calendar.date.Day) {
+            if (dateTime.AddDays(31).Month == calendar.Date.Month && dateTime.AddDays(31).Day == calendar.Date.Day) {
                 Button32EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(32).Month == calendar.date.Month && dateTime.AddDays(32).Day == calendar.date.Day) {
+            if (dateTime.AddDays(32).Month == calendar.Date.Month && dateTime.AddDays(32).Day == calendar.Date.Day) {
                 Button33EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(33).Month == calendar.date.Month && dateTime.AddDays(33).Day == calendar.date.Day) {
+            if (dateTime.AddDays(33).Month == calendar.Date.Month && dateTime.AddDays(33).Day == calendar.Date.Day) {
                 Button34EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(34).Month == calendar.date.Month && dateTime.AddDays(34).Day == calendar.date.Day) {
+            if (dateTime.AddDays(34).Month == calendar.Date.Month && dateTime.AddDays(34).Day == calendar.Date.Day) {
                 Button35EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(35).Month == calendar.date.Month && dateTime.AddDays(35).Day == calendar.date.Day) {
+            if (dateTime.AddDays(35).Month == calendar.Date.Month && dateTime.AddDays(35).Day == calendar.Date.Day) {
                 Button36EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(36).Month == calendar.date.Month && dateTime.AddDays(36).Day == calendar.date.Day) {
+            if (dateTime.AddDays(36).Month == calendar.Date.Month && dateTime.AddDays(36).Day == calendar.Date.Day) {
                 Button37EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(37).Month == calendar.date.Month && dateTime.AddDays(37).Day == calendar.date.Day) {
+            if (dateTime.AddDays(37).Month == calendar.Date.Month && dateTime.AddDays(37).Day == calendar.Date.Day) {
                 Button38EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(38).Month == calendar.date.Month && dateTime.AddDays(38).Day == calendar.date.Day) {
+            if (dateTime.AddDays(38).Month == calendar.Date.Month && dateTime.AddDays(38).Day == calendar.Date.Day) {
                 Button39EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(39).Month == calendar.date.Month && dateTime.AddDays(39).Day == calendar.date.Day) {
+            if (dateTime.AddDays(39).Month == calendar.Date.Month && dateTime.AddDays(39).Day == calendar.Date.Day) {
                 Button40EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(40).Month == calendar.date.Month && dateTime.AddDays(40).Day == calendar.date.Day) {
+            if (dateTime.AddDays(40).Month == calendar.Date.Month && dateTime.AddDays(40).Day == calendar.Date.Day) {
                 Button41EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
 
-            if (dateTime.AddDays(41).Month == calendar.date.Month && dateTime.AddDays(41).Day == calendar.date.Day) {
+            if (dateTime.AddDays(41).Month == calendar.Date.Month && dateTime.AddDays(41).Day == calendar.Date.Day) {
                 Button42EventList.Add(new CalendarEventsCustom {
-                    name = calendar.eventText,
-                    person = 0
+                    Description = calendar.EventText
                 });
             }
         }
 
         /* Get Calendar Events */
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[0].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[0].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            if (ReferenceValues.JsonCalendarMasterEventList[0].eventsList != null) {
-                foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[0].eventsList) {
-                    Button1EventList.Add(new CalendarEventsCustom {
-                        name = t.startTime + " - " + t.endTime + "  " + t.name,
-                        person = GetIdFromPerson(t.person)
-                    });
-                }
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[1].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[1].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[1].eventsList) {
-                Button2EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
+        foreach (CalendarEvents calendar in ReferenceValues.JsonCalendarMaster.eventsList) {
+            Console.WriteLine(dateTime.Date + " ... " + calendar.Date);
+            if (dateTime.Date == calendar.Date) {
+                Button1EventList.Add(new CalendarEventsCustom {
+                    Description = calendar.EventName
                 });
             }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
         }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[2].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[2].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[2].eventsList) {
-                Button3EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[3].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[3].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[3].eventsList) {
-                Button4EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[4].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[4].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[4].eventsList) {
-                Button5EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[5].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[5].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[5].eventsList) {
-                Button6EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[6].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[6].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[6].eventsList) {
-                Button7EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[7].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[7].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[7].eventsList) {
-                Button8EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[8].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[8].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[8].eventsList) {
-                Button9EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[9].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[9].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[9].eventsList) {
-                Button10EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[10].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[10].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[10].eventsList) {
-                Button11EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[11].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[11].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[11].eventsList) {
-                Button12EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[12].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[12].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[12].eventsList) {
-                Button13EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[13].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[13].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[13].eventsList) {
-                Button14EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[14].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[14].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[14].eventsList) {
-                Button15EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[15].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[15].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[15].eventsList) {
-                Button16EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[16].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[16].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[16].eventsList) {
-                Button17EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[17].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[17].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[17].eventsList) {
-                Button18EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[18].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[18].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[18].eventsList) {
-                Button19EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[19].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[19].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[19].eventsList) {
-                Button20EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[20].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[20].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[20].eventsList) {
-                Button21EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[21].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[21].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[21].eventsList) {
-                Button22EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[22].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[22].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[22].eventsList) {
-                Button23EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[23].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[23].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[23].eventsList) {
-                Button24EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[24].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[24].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[24].eventsList) {
-                Button25EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[25].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[25].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[25].eventsList) {
-                Button26EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[26].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[26].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[26].eventsList) {
-                Button27EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[27].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[27].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[27].eventsList) {
-                Button28EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[28].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[28].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[28].eventsList) {
-                Button29EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[29].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[29].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[29].eventsList) {
-                Button30EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[30].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[30].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[30].eventsList) {
-                Button31EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[31].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[31].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[31].eventsList) {
-                Button32EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[32].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[32].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[32].eventsList) {
-                Button33EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[33].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[33].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[33].eventsList) {
-                Button34EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[34].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[34].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[34].eventsList) {
-                Button35EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[35].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[35].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[35].eventsList) {
-                Button36EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[36].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[36].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[36].eventsList) {
-                Button37EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[37].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[37].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[37].eventsList) {
-                Button38EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[38].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[38].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[38].eventsList) {
-                Button39EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[39].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[39].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[39].eventsList) {
-                Button40EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[40].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[40].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[40].eventsList) {
-                Button41EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in ReferenceValues.JsonCalendarMasterEventList[41].eventsList orderby s.startTime select s;
-            ReferenceValues.JsonCalendarMasterEventList[41].eventsList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            foreach (CalendarEvents t in ReferenceValues.JsonCalendarMasterEventList[41].eventsList) {
-                Button42EventList.Add(new CalendarEventsCustom {
-                    name = t.startTime + " - " + t.endTime + "  " + t.name,
-                    person = GetIdFromPerson(t.person)
-                });
-            }
-        } catch (NullReferenceException) {
-            // NORMAL
-        } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "CalendarVM",
-                Description = e.ToString()
-            });
-            SaveDebugFile.Save();
-        }
-    }
-
-    private static int GetIdFromPerson(string tPerson) {
-        if (tPerson == ReferenceValues.JsonMasterSettings.User1Name) {
-            return 1;
-        }
-
-        if (tPerson == ReferenceValues.JsonMasterSettings.User2Name) {
-            return 2;
-        }
-
-        return tPerson switch {
-            "Children" => 3,
-            "Home" => 4,
-            _ => 5
-        };
     }
 
     private static List<HolidayBlock> GetHolidays(int year) {
@@ -3844,6 +2836,22 @@ public class CalendarVM : BaseViewModel {
         set {
             _button42EventList = value;
             RaisePropertyChangedEvent("Button42EventList");
+        }
+    }
+
+    public string Button1BorderColor {
+        get => _button1BorderColor;
+        set {
+            _button1BorderColor = value;
+            RaisePropertyChangedEvent("Button1BorderColor");
+        }
+    }
+
+    public int Button1BorderThickness {
+        get => _button1BorderThickness;
+        set {
+            _button1BorderThickness = value;
+            RaisePropertyChangedEvent("Button1BorderThickness");
         }
     }
 

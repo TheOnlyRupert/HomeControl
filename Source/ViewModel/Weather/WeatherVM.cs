@@ -3,7 +3,7 @@ using System.Net;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Weather;
 using HomeControl.Source.Reference;
@@ -38,7 +38,7 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastRainChance7, _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11,
         _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14;
 
-    private JsonWeatherForecast forecast, forecastHourly;
+    private JsonWeather forecast, _hourly;
     private bool updateForecast, messageSent, messageSentHourly;
 
     public WeatherVM() {
@@ -83,7 +83,7 @@ public class WeatherVM : BaseViewModel {
     private void UpdateWeatherForecastPart1() {
         if (ReferenceValues.EnableWeather) {
             /* Check for trash day and time is past noon */
-            if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonMasterSettings.TrashDay && DateTime.Now.Hour > 11) {
+            if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 11) {
                 TrashDayVisibility = "VISIBLE";
             } else {
                 TrashDayVisibility = "HIDDEN";
@@ -97,65 +97,65 @@ public class WeatherVM : BaseViewModel {
             try {
                 using WebClient client1 = new();
                 Uri weatherForecastURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast");
-                client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
+                client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
                 string weatherForecast = client1.DownloadString(weatherForecastURL);
-                forecast = JsonSerializer.Deserialize<JsonWeatherForecast>(weatherForecast, options);
+                forecast = JsonSerializer.Deserialize<JsonWeather>(weatherForecast, options);
                 updateForecast = false;
                 messageSent = false;
             } catch (WebException) {
                 if (!messageSent) {
                     errored = true;
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "WARN",
                         Module = "WeatherVM",
                         Description = "7-day weather forcast request failed... Possibly offline"
                     });
-                    SaveDebugFile.Save();
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                 }
 
                 messageSent = true;
             } catch (Exception e) {
                 errored = true;
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "WeatherVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             try {
                 using WebClient client2 = new();
                 Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
-                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
+                client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
                 string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
-                forecastHourly = JsonSerializer.Deserialize<JsonWeatherForecast>(weatherForecastHourly, options);
+                _hourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
                 updateForecast = false;
                 messageSentHourly = false;
             } catch (WebException) {
                 errored = true;
                 if (!messageSentHourly) {
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "WARN",
                         Module = "WeatherVM",
                         Description = "Hourly weather forcast request failed... Possibly offline"
                     });
-                    SaveDebugFile.Save();
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                 }
 
                 messageSentHourly = true;
             } catch (Exception e) {
                 errored = true;
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "WeatherVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             if (!errored) {
@@ -170,22 +170,22 @@ public class WeatherVM : BaseViewModel {
 
         //TODO: Add more places
         CurrentWeatherLocationText = "Ashland City, TN";
-        CurrentWeatherTempText = forecastHourly.properties.periods[0].temperature + "°";
-        CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(forecastHourly.properties.periods[0].windDirection);
-        CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
-        CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
-        CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime,
-            forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "null");
+        CurrentWeatherTempText = _hourly.properties.periods[0].temperature + "°";
+        CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(_hourly.properties.periods[0].windDirection);
+        CurrentWindSpeedText = _hourly.properties.periods[0].windSpeed;
+        CurrentWeatherDescription = _hourly.properties.periods[0].shortForecast;
+        CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(_hourly.properties.periods[0].shortForecast, _hourly.properties.periods[0].isDaytime,
+            _hourly.properties.periods[0].temperature, _hourly.properties.periods[0].windSpeed, "null");
 
         try {
             SevenDayForecastName1 = forecast.properties.periods[0].name;
             SevenDayForecastTemp1 = forecast.properties.periods[0].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[0].shortForecast);
-            SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime, forecastHourly.properties.periods[0]
+            SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime, _hourly.properties.periods[0]
                 .temperature, forecast.properties.periods[0].windSpeed, "null");
             SevenDayForecastWeatherIcon1b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime, forecastHourly.properties.periods[0]
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime, _hourly.properties.periods[0]
                     .temperature, forecast.properties.periods[0].windSpeed, weatherIcons[0])
                 : "null";
             SevenDayForecastRainChance1 = forecast.properties.periods[0].probabilityOfPrecipitation.value?.ToString();
@@ -200,13 +200,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed1 = forecast.properties.periods[0].windSpeed;
             SevenDayForecastDescription1 = forecast.properties.periods[0].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -232,13 +232,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed2 = forecast.properties.periods[1].windSpeed;
             SevenDayForecastDescription2 = forecast.properties.periods[1].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -264,13 +264,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed3 = forecast.properties.periods[2].windSpeed;
             SevenDayForecastDescription3 = forecast.properties.periods[2].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -296,13 +296,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed4 = forecast.properties.periods[3].windSpeed;
             SevenDayForecastDescription4 = forecast.properties.periods[3].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -328,13 +328,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed5 = forecast.properties.periods[4].windSpeed;
             SevenDayForecastDescription5 = forecast.properties.periods[4].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -360,13 +360,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed6 = forecast.properties.periods[5].windSpeed;
             SevenDayForecastDescription6 = forecast.properties.periods[5].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -392,13 +392,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed7 = forecast.properties.periods[6].windSpeed;
             SevenDayForecastDescription7 = forecast.properties.periods[6].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -424,13 +424,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed8 = forecast.properties.periods[7].windSpeed;
             SevenDayForecastDescription8 = forecast.properties.periods[7].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -456,13 +456,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed9 = forecast.properties.periods[8].windSpeed;
             SevenDayForecastDescription9 = forecast.properties.periods[8].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -488,13 +488,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed10 = forecast.properties.periods[9].windSpeed;
             SevenDayForecastDescription10 = forecast.properties.periods[9].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -520,13 +520,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed11 = forecast.properties.periods[10].windSpeed;
             SevenDayForecastDescription11 = forecast.properties.periods[10].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -552,13 +552,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed12 = forecast.properties.periods[11].windSpeed;
             SevenDayForecastDescription12 = forecast.properties.periods[11].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -584,13 +584,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed13 = forecast.properties.periods[12].windSpeed;
             SevenDayForecastDescription13 = forecast.properties.periods[12].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
@@ -616,13 +616,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed14 = forecast.properties.periods[13].windSpeed;
             SevenDayForecastDescription14 = forecast.properties.periods[13].shortForecast;
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "WeatherVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 

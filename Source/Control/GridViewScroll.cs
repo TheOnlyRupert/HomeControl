@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Text.Json;
 using System.Windows.Controls;
-using HomeControl.Source.IO;
+using HomeControl.Source.Helpers;
+using HomeControl.Source.Json;
 using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.Control;
@@ -19,13 +21,13 @@ public class CustomListView : ListView {
         } catch (NullReferenceException) {
             // NORMAL
         } catch (Exception e2) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "GridViewScroll",
                 Description = e2.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 }

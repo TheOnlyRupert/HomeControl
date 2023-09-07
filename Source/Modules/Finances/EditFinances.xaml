@@ -105,45 +105,9 @@
                                     <Setter Property="Foreground" Value="CornflowerBlue"/>
                                 </DataTrigger>
 
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
-                                        <Condition Binding="{Binding Path=Category}" Value="User1 Fund"/>
-                                    </MultiDataTrigger.Conditions>
+                                <DataTrigger Binding="{Binding AddSub}" Value="NA">
                                     <Setter Property="Foreground" Value="GreenYellow"/>
-                                </MultiDataTrigger>
-
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
-                                        <Condition Binding="{Binding Path=Category}" Value="User2 Fund"/>
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Foreground" Value="GreenYellow"/>
-                                </MultiDataTrigger>
-
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
-                                        <Condition Binding="{Binding Path=Category}" Value="User3 Fund"/>
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Foreground" Value="GreenYellow"/>
-                                </MultiDataTrigger>
-
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
-                                        <Condition Binding="{Binding Path=Category}" Value="User4 Fund"/>
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Foreground" Value="GreenYellow"/>
-                                </MultiDataTrigger>
-
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=AddSub}" Value="ADD"/>
-                                        <Condition Binding="{Binding Path=Category}" Value="User5 Fund"/>
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Foreground" Value="GreenYellow"/>
-                                </MultiDataTrigger>
+                                </DataTrigger>
 
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>

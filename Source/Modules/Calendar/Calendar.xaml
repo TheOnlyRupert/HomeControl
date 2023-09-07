@@ -79,9 +79,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Column="0" Source="../../../Resources/Images/icons/calendar.png" HorizontalAlignment="Left" Width="24" Height="24"/>
-
-                <Button Grid.Column="0" Content="Recurring Dates" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="recurring" Margin="28 0 0 0">
+                <Button Grid.Column="0" Content="Recurring Dates" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="recurring">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -198,8 +196,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Foreground="White" Command="{Binding ButtonCommand}"
-                        CommandParameter="button1" Focusable="False">
+                <Button Grid.Row="0" Grid.Column="0" Command="{Binding ButtonCommand}" CommandParameter="button1">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="{Binding Button1BackgroundColor}"/>
@@ -208,7 +205,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="{Binding Button1BorderColor}" BorderThickness="{Binding Button1BorderThickness}">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False"/>
                                         </Border>
                                     </ControlTemplate>
@@ -216,19 +213,18 @@
                             </Setter>
                         </Style>
                     </Button.Style>
-                    <DockPanel>
-                        <Grid DockPanel.Dock="Top">
+                    <DockPanel Focusable="False">
+                        <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button1Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button1HolidayText}" Foreground="YellowGreen" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button1HolidayText}" Foreground="Red" FontWeight="Bold" HorizontalAlignment="Right"/>
                         </Grid>
 
-                        <ListView ItemsSource="{Binding Button1EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
-                                  DockPanel.Dock="Bottom" Margin="-4 0 0 0">
+                        <ListView ItemsSource="{Binding Button1EventList}" Foreground="White" Background="Transparent" BorderThickness="0" Focusable="False" FontSize="8" Margin="-4 0 0 0">
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -236,32 +232,17 @@
 
                                 <Style TargetType="ListViewItem">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding person}" Value="1">
-                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
-                                            <Setter Property="Focusable" Value="False"/>
-                                        </DataTrigger>
-
-                                        <DataTrigger Binding="{Binding person}" Value="2">
-                                            <Setter Property="Foreground" Value="Pink"/>
-                                            <Setter Property="Focusable" Value="False"/>
-                                        </DataTrigger>
-
-                                        <DataTrigger Binding="{Binding person}" Value="3">
-                                            <Setter Property="Foreground" Value="Yellow"/>
-                                            <Setter Property="Focusable" Value="False"/>
-                                        </DataTrigger>
-
-                                        <DataTrigger Binding="{Binding person}" Value="4">
-                                            <Setter Property="Foreground" Value="Yellow"/>
-                                            <Setter Property="Focusable" Value="False"/>
-                                        </DataTrigger>
-
-                                        <DataTrigger Binding="{Binding person}" Value="5">
+                                        <DataTrigger Binding="{Binding Priority}" Value="1">
                                             <Setter Property="Foreground" Value="White"/>
                                             <Setter Property="Focusable" Value="False"/>
                                         </DataTrigger>
 
-                                        <DataTrigger Binding="{Binding person}" Value="6">
+                                        <DataTrigger Binding="{Binding Priority}" Value="2">
+                                            <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                            <Setter Property="Focusable" Value="False"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding Priority}" Value="3">
                                             <Setter Property="Foreground" Value="Green"/>
                                             <Setter Property="Focusable" Value="False"/>
                                         </DataTrigger>
@@ -273,6 +254,7 @@
                                             <MultiTrigger.Setters>
                                                 <Setter Property="Background" Value="Transparent"/>
                                                 <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Foreground" Value="White"/>
                                                 <Setter Property="Focusable" Value="False"/>
                                             </MultiTrigger.Setters>
                                         </MultiTrigger>
@@ -283,6 +265,7 @@
                                             <MultiTrigger.Setters>
                                                 <Setter Property="Background" Value="Transparent"/>
                                                 <Setter Property="BorderBrush" Value="Transparent"/>
+                                                <Setter Property="Foreground" Value="White"/>
                                                 <Setter Property="Focusable" Value="False"/>
                                             </MultiTrigger.Setters>
                                         </MultiTrigger>
@@ -292,8 +275,21 @@
 
                             <ListView.View>
                                 <GridView AllowsColumnReorder="false">
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="136"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=person}" Width="0"/>
+                                    <GridViewColumn Width="12">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Icon}" Margin="-8"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Width="128">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>

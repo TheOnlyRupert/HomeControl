@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 
 namespace HomeControl.Source.Reference;
 
@@ -55,7 +55,12 @@ public static class ReferenceValues {
         "Gift",
         "Government",
         "Paycheck",
-        "Refund",
+        "Investment",
+        "Selling Assets",
+        "Other"
+    };
+
+    public static readonly List<string> CategoryTaskList = new() {
         "User1 Fund",
         "User2 Fund",
         "User3 Fund",
@@ -63,11 +68,12 @@ public static class ReferenceValues {
         "User5 Fund"
     };
 
+
     public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 
     public static bool LockUI;
 
-    public static SerialPort SerialPortMaster { get; set; }
+    public static SerialPort SerialPort { get; set; }
 
     public static int InteriorTemp { get; set; }
     public static int InteriorHumidity { get; set; }
@@ -76,15 +82,15 @@ public static class ReferenceValues {
 
     public static DateTime CalendarEventDate { get; set; }
 
-    public static JsonCalendar[] JsonCalendarMasterEventList { get; set; }
-    public static JsonFinances JsonFinanceMasterList { get; set; }
+    public static JsonCalendar JsonCalendarMaster { get; set; }
+    public static JsonFinances JsonFinanceMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
     public static DateTime TaskWeekStartDate { get; set; }
 
     public static int ActiveBehaviorUser { get; set; }
-    public static JsonSettings JsonMasterSettings { get; set; }
+    public static JsonSettings JsonSettingsMaster { get; set; }
 
-    public static JsonHvac JsonHvacSettings { get; set; }
+    public static JsonHvac JsonHvacMaster { get; set; }
     public static bool IsHvacComEstablished { get; set; }
 
     public static bool IsCalendarDupeModeEnabled { get; set; }
@@ -94,13 +100,11 @@ public static class ReferenceValues {
 
     public static JsonGameStats JsonGameStatsMaster { get; set; }
 
-    public static JsonCalendarRecurring JsonCalendarRecurringMaster { get; set; }
-
-    public static ObservableCollection<DebugTextBlock> DebugTextBlockOutput { get; set; }
+    public static JsonDebug JsonDebugMaster { get; set; }
 
     public static string SoundToPlay { get; set; }
     public static JsonTasks JsonTasksMaster { get; set; }
     public static ObservableCollection<string> IconImageList { get; set; }
 
-    public static JsonTimer JsonTimerSettings { get; set; }
+    public static JsonTimer JsonTimerMaster { get; set; }
 }

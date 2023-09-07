@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace HomeControl.Source.IO;
+namespace HomeControl.Source.Json;
 
-public class JsonWeatherHourlyBlock {
+public class JsonWeatherHourly {
     public ObservableCollection<FinanceBlock> WeatherHourlyBlock { get; set; }
 }
 

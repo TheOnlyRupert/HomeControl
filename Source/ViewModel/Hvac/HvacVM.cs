@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Hvac;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -13,10 +14,14 @@ public class HvacVM : BaseViewModel {
         _tempInsideColor, _tempAdjustedColor, _fanStatusColor, _heatingCoolingStatusColor, _intHumidity;
 
     public HvacVM() {
-        ReferenceValues.JsonHvacSettings ??= new JsonHvac();
+        try {
+            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac"));
+        } catch (Exception) {
+            ReferenceValues.JsonHvacMaster = new JsonHvac();
+        }
 
-        if (ReferenceValues.JsonHvacSettings.TemperatureSet == 0) {
-            ReferenceValues.JsonHvacSettings.TemperatureSet = 21;
+        if (ReferenceValues.JsonHvacMaster.TemperatureSet == 0) {
+            ReferenceValues.JsonHvacMaster.TemperatureSet = 21;
         }
 
         TempInsideColor = "White";
@@ -50,11 +55,11 @@ public class HvacVM : BaseViewModel {
             return;
         }
 
-        if (ReferenceValues.JsonMasterSettings.IsImperialMode) {
-            double f = ReferenceValues.JsonHvacSettings.TemperatureSet * 1.8 + 32;
+        if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
+            double f = ReferenceValues.JsonHvacMaster.TemperatureSet * 1.8 + 32;
             TempAdjusted = (int)f + "°";
         } else {
-            TempAdjusted = ReferenceValues.JsonHvacSettings.TemperatureSet + "°";
+            TempAdjusted = ReferenceValues.JsonHvacMaster.TemperatureSet + "°";
         }
 
         TempAdjustedColor = "White";
@@ -63,7 +68,7 @@ public class HvacVM : BaseViewModel {
             TempInside = "??";
             TempInsideColor = "Red";
         } else {
-            if (ReferenceValues.JsonMasterSettings.IsImperialMode) {
+            if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
                 double f = ReferenceValues.InteriorTemp * 1.8 + 32;
                 TempInside = (int)f + "°";
             } else {
@@ -79,8 +84,8 @@ public class HvacVM : BaseViewModel {
             IntHumidity = "Humidity: " + ReferenceValues.InteriorHumidity + "%";
         }
 
-        if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {
-            if (ReferenceValues.JsonHvacSettings.IsStandby) {
+        if (ReferenceValues.JsonHvacMaster.IsProgramRunning) {
+            if (ReferenceValues.JsonHvacMaster.IsStandby) {
                 ProgramStatus = "Standby";
                 ProgramStatusColor = "Yellow";
             } else {
@@ -92,7 +97,7 @@ public class HvacVM : BaseViewModel {
             ProgramStatusColor = "White";
         }
 
-        if (ReferenceValues.JsonHvacSettings.IsFanAuto) {
+        if (ReferenceValues.JsonHvacMaster.IsFanAuto) {
             FanStatus = "Auto";
             FanStatusColor = "White";
         } else {
@@ -100,7 +105,7 @@ public class HvacVM : BaseViewModel {
             FanStatusColor = "Green";
         }
 
-        if (ReferenceValues.JsonHvacSettings.IsHeatingMode) {
+        if (ReferenceValues.JsonHvacMaster.IsHeatingMode) {
             HeatingCoolingStatus = "Heating";
             HeatingCoolingStatusColor = "White";
             HeatingCoolingText = "Heating To";
@@ -115,65 +120,65 @@ public class HvacVM : BaseViewModel {
         switch (param) {
         case "hvac":
             if (ReferenceValues.IsHvacComEstablished) {
-                bool isFanAuto = ReferenceValues.JsonHvacSettings.IsFanAuto;
-                bool isProgramRunning = ReferenceValues.JsonHvacSettings.IsProgramRunning;
-                bool isHeatingMode = ReferenceValues.JsonHvacSettings.IsHeatingMode;
-                int temp = ReferenceValues.JsonHvacSettings.TemperatureSet;
+                bool isFanAuto = ReferenceValues.JsonHvacMaster.IsFanAuto;
+                bool isProgramRunning = ReferenceValues.JsonHvacMaster.IsProgramRunning;
+                bool isHeatingMode = ReferenceValues.JsonHvacMaster.IsHeatingMode;
+                int temp = ReferenceValues.JsonHvacMaster.TemperatureSet;
 
                 EditHvac editHvac = new();
                 editHvac.ShowDialog();
                 editHvac.Close();
 
-                if (isFanAuto != ReferenceValues.JsonHvacSettings.IsFanAuto) {
-                    ReferenceValues.SerialPortMaster.Write(ReferenceValues.JsonHvacSettings.IsFanAuto ? "2" : "1");
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                if (isFanAuto != ReferenceValues.JsonHvacMaster.IsFanAuto) {
+                    ReferenceValues.SerialPort.Write(ReferenceValues.JsonHvacMaster.IsFanAuto ? "2" : "1");
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "INFO",
                         Module = "HvacVM",
-                        Description = "Changing HVAC Fan Mode: FanModeAuto " + ReferenceValues.JsonHvacSettings.IsFanAuto
+                        Description = "Changing HVAC Fan Mode: FanModeAuto " + ReferenceValues.JsonHvacMaster.IsFanAuto
                     });
-                    SaveDebugFile.Save();
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                 }
 
-                if (isProgramRunning != ReferenceValues.JsonHvacSettings.IsProgramRunning) {
-                    if (ReferenceValues.JsonHvacSettings.IsProgramRunning) {
-                        ReferenceValues.SerialPortMaster.Write(ReferenceValues.JsonHvacSettings.IsHeatingMode ? "4" : "3");
+                if (isProgramRunning != ReferenceValues.JsonHvacMaster.IsProgramRunning) {
+                    if (ReferenceValues.JsonHvacMaster.IsProgramRunning) {
+                        ReferenceValues.SerialPort.Write(ReferenceValues.JsonHvacMaster.IsHeatingMode ? "4" : "3");
                     } else {
-                        ReferenceValues.SerialPortMaster.Write("5");
+                        ReferenceValues.SerialPort.Write("5");
                     }
 
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "INFO",
                         Module = "HvacVM",
-                        Description = "Changing HVAC Program Mode: ProgramRunning " + ReferenceValues.JsonHvacSettings.IsProgramRunning
+                        Description = "Changing HVAC Program Mode: ProgramRunning " + ReferenceValues.JsonHvacMaster.IsProgramRunning
                     });
-                    SaveDebugFile.Save();
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                 }
 
-                if (isHeatingMode != ReferenceValues.JsonHvacSettings.IsHeatingMode) {
-                    ReferenceValues.SerialPortMaster.Write("6");
+                if (isHeatingMode != ReferenceValues.JsonHvacMaster.IsHeatingMode) {
+                    ReferenceValues.SerialPort.Write("6");
 
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "INFO",
                         Module = "HvacVM",
-                        Description = "Changing HVAC Heating/Cooling Mode: IsHeatingMode " + ReferenceValues.JsonHvacSettings.IsHeatingMode
+                        Description = "Changing HVAC Heating/Cooling Mode: IsHeatingMode " + ReferenceValues.JsonHvacMaster.IsHeatingMode
                     });
-                    SaveDebugFile.Save();
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                 }
 
-                if (temp != ReferenceValues.JsonHvacSettings.TemperatureSet) {
-                    char c = (char)(ReferenceValues.JsonHvacSettings.TemperatureSet + 50);
-                    ReferenceValues.SerialPortMaster.Write(c.ToString());
+                if (temp != ReferenceValues.JsonHvacMaster.TemperatureSet) {
+                    char c = (char)(ReferenceValues.JsonHvacMaster.TemperatureSet + 50);
+                    ReferenceValues.SerialPort.Write(c.ToString());
 
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "INFO",
                         Module = "HvacVM",
-                        Description = "Changing HVAC Temperature Set to: " + ReferenceValues.JsonHvacSettings.TemperatureSet + "°C"
+                        Description = "Changing HVAC Temperature Set to: " + ReferenceValues.JsonHvacMaster.TemperatureSet + "°C"
                     });
-                    SaveDebugFile.Save();
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                 }
 
                 GetButtonColors();

@@ -1,4 +1,4 @@
-﻿namespace HomeControl.Source.IO;
+﻿namespace HomeControl.Source.Json;
 
 public class JsonSettings {
     public string UserAgent { get; set; }

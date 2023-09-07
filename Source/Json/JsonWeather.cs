@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HomeControl.Source.IO;
+namespace HomeControl.Source.Json;
 
-public class JsonWeatherForecast {
+public class JsonWeather {
     public Properties properties { get; set; }
 
     public class Properties {

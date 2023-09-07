@@ -1,6 +1,10 @@
-﻿using System.Windows.Input;
-using HomeControl.Source.IO;
+﻿using System;
+using System.Text.Json;
+using System.Windows.Input;
+using HomeControl.Source.Helpers;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Games;
+using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 using Tamagotchi = HomeControl.Source.Modules.Games.Tamagotchi;
 
@@ -8,7 +12,13 @@ namespace HomeControl.Source.ViewModel.Games;
 
 public class GamesVM : BaseViewModel {
     public GamesVM() {
-        new GameStatsFromJson();
+        try {
+            ReferenceValues.JsonGameStatsMaster = JsonSerializer.Deserialize<JsonGameStats>(FileHelpers.LoadFileText("gameStats"));
+        } catch (Exception) {
+            ReferenceValues.JsonGameStatsMaster = new JsonGameStats();
+
+            FileHelpers.SaveFileText("gameStats", JsonSerializer.Serialize(ReferenceValues.JsonGameStatsMaster));
+        }
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);

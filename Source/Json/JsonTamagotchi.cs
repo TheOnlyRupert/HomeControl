@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-namespace HomeControl.Source.IO;
+namespace HomeControl.Source.Json;
 
 public class JsonTamagotchi {
     public ObservableCollection<Tamagotchi> tamagotchiList { get; set; }

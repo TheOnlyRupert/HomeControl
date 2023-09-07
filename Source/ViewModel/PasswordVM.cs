@@ -9,7 +9,7 @@ public class PasswordVM : BaseViewModel {
     private string _image;
 
     public PasswordVM() {
-        ReferenceValues.LockUI = !ReferenceValues.JsonMasterSettings.IsDebugMode;
+        ReferenceValues.LockUI = !ReferenceValues.JsonSettingsMaster.IsDebugMode;
         Image = ReferenceValues.LockUI ? "./../../Resources/Images/icons/key_locked.png" : "./../../Resources/Images/icons/key_unlocked.png";
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;

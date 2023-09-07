@@ -1,5 +1,5 @@
 ﻿using System;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.Helpers;
@@ -110,7 +110,7 @@ public static class WeatherHelpers {
                     return "../../../Resources/Images/weather/wind-snow.gif";
                 }
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "WeatherHelpers",

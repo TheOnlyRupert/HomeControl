@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -70,27 +69,27 @@ public class TasksMonthlyVM : BaseViewModel {
         try {
             switch (ReferenceValues.ActiveBehaviorUser) {
             case 1:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User1Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskHeaderText = ReferenceValues.JsonSettingsMaster.User1Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1;
                 FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser1.ToString();
                 break;
             case 2:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User2Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskHeaderText = ReferenceValues.JsonSettingsMaster.User2Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2;
                 FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser2.ToString();
                 break;
             case 3:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User3Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskHeaderText = ReferenceValues.JsonSettingsMaster.User3Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3;
                 FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser3.ToString();
                 break;
             case 4:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User4Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskHeaderText = ReferenceValues.JsonSettingsMaster.User4Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4;
                 FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser4.ToString();
                 break;
             case 5:
-                TaskHeaderText = ReferenceValues.JsonMasterSettings.User5Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
+                TaskHeaderText = ReferenceValues.JsonSettingsMaster.User5Name + "'s " + DateTime.Now.ToString("MMMM") + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5;
                 FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser5.ToString();
                 break;
@@ -123,8 +122,8 @@ public class TasksMonthlyVM : BaseViewModel {
         Room15TaskList ??= new ObservableCollection<Task>();
         Room16TaskList ??= new ObservableCollection<Task>();
 
-        EditVisibility = !ReferenceValues.JsonMasterSettings.IsNormalMode ? "VISIBLE" : "COLLAPSED";
-        IsFundAmountReadOnly = !ReferenceValues.JsonMasterSettings.IsDebugMode;
+        EditVisibility = !ReferenceValues.JsonSettingsMaster.IsNormalMode ? "VISIBLE" : "COLLAPSED";
+        IsFundAmountReadOnly = !ReferenceValues.JsonSettingsMaster.IsDebugMode;
 
         ImageList = ReferenceValues.IconImageList;
         ImageSelected = "alarms";
@@ -142,13 +141,13 @@ public class TasksMonthlyVM : BaseViewModel {
                 ReferenceValues.SoundToPlay = "missing_info";
                 SoundDispatcher.PlaySound();
             } else {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "INFO",
                     Module = "TasksMonthlyVM",
                     Description = "Adding monthly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
@@ -174,13 +173,13 @@ public class TasksMonthlyVM : BaseViewModel {
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update task?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "TasksMonthlyVM",
                                 Description = "Updating Monthly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
@@ -197,13 +196,13 @@ public class TasksMonthlyVM : BaseViewModel {
                     }
                 }
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "TaskMonthlyVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
@@ -212,13 +211,13 @@ public class TasksMonthlyVM : BaseViewModel {
                 if (TaskSelected.TaskName != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "TaskMonthlyVM",
                             Description = "Deleting monthly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         ReferenceValues.SoundToPlay = "newTask";
                         SoundDispatcher.PlaySound();
@@ -229,13 +228,13 @@ public class TasksMonthlyVM : BaseViewModel {
                     }
                 }
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "TaskMonthlyVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
@@ -320,19 +319,19 @@ public class TasksMonthlyVM : BaseViewModel {
 
             break;
         case "saveFunds":
-            if (ReferenceValues.JsonMasterSettings.IsDebugMode) {
+            if (ReferenceValues.JsonSettingsMaster.IsDebugMode) {
                 switch (ReferenceValues.ActiveBehaviorUser) {
                 case 1:
                     try {
                         ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser1 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
                             Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
 
                     break;
@@ -340,13 +339,13 @@ public class TasksMonthlyVM : BaseViewModel {
                     try {
                         ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser2 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
                             Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
 
                     break;
@@ -354,13 +353,13 @@ public class TasksMonthlyVM : BaseViewModel {
                     try {
                         ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser3 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
                             Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
 
                     break;
@@ -368,13 +367,13 @@ public class TasksMonthlyVM : BaseViewModel {
                     try {
                         ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser4 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
                             Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
 
                     break;
@@ -382,13 +381,13 @@ public class TasksMonthlyVM : BaseViewModel {
                     try {
                         ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser5 = Convert.ToInt32(FundAmount);
                     } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
                             Module = "TasksMonthlyVM",
                             Description = e.ToString()
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
 
                     break;
@@ -425,28 +424,25 @@ public class TasksMonthlyVM : BaseViewModel {
                     break;
                 }
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "TaskMonthlyVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             try {
-                string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "tasks.json", jsonString);
+                FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "TaskMonthlyVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
         }
     }

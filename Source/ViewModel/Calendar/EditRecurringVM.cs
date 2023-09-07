@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
@@ -18,50 +17,10 @@ public class EditRecurringVM : BaseViewModel {
     private ObservableCollection<CalendarEventsRecurring> _eventList;
 
     public EditRecurringVM() {
-        fileName = ReferenceValues.FILE_DIRECTORY + "recurringDates.json";
+        fileName = ReferenceValues.FILE_DIRECTORY + "events.json";
         EventList = new ObservableCollection<CalendarEventsRecurring>();
         DateText = DateTime.Now.ToShortDateString();
         HolidayText = "";
-
-        if (File.Exists(fileName)) {
-            JsonSerializerOptions options = new() {
-                IncludeFields = true
-            };
-
-            try {
-                StreamReader streamReader = new(fileName);
-                string eventsListString = null;
-                while (!streamReader.EndOfStream) {
-                    eventsListString = streamReader.ReadToEnd();
-                }
-
-                if (eventsListString != null) {
-                    try {
-                        JsonCalendarRecurring jsonCalendarRecurring = JsonSerializer.Deserialize<JsonCalendarRecurring>(eventsListString, options);
-
-                        if (jsonCalendarRecurring != null) {
-                            EventList = jsonCalendarRecurring.eventsListRecurring;
-                        }
-                    } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "EditRecurringVM",
-                            Description = e.ToString()
-                        });
-                        SaveDebugFile.Save();
-                    }
-                }
-            } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditRecurringVM",
-                    Description = e.ToString()
-                });
-                SaveDebugFile.Save();
-            }
-        }
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
@@ -75,17 +34,17 @@ public class EditRecurringVM : BaseViewModel {
                 ReferenceValues.SoundToPlay = "missing_info";
                 SoundDispatcher.PlaySound();
             } else {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "INFO",
                     Module = "EditRecurringVM",
                     Description = "Adding recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                 EventList.Add(new CalendarEventsRecurring {
-                    date = Convert.ToDateTime(DateText),
-                    eventText = HolidayText
+                    Date = Convert.ToDateTime(DateText),
+                    EventText = HolidayText
                 });
 
                 ReferenceValues.SoundToPlay = "birthday";
@@ -98,24 +57,24 @@ public class EditRecurringVM : BaseViewModel {
             break;
         case "update":
             try {
-                if (CalendarEventSelected.eventText != null) {
+                if (CalendarEventSelected.EventText != null) {
                     if (string.IsNullOrWhiteSpace(HolidayText)) {
                         ReferenceValues.SoundToPlay = "missing_info";
                         SoundDispatcher.PlaySound();
-                    } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.eventText)) {
+                    } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.EventText)) {
                         confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (confirmation == MessageBoxResult.Yes) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "EditRecurringVM",
                                 Description = "Updating recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEventsRecurring {
-                                date = Convert.ToDateTime(DateText),
-                                eventText = HolidayText
+                                Date = Convert.ToDateTime(DateText),
+                                EventText = HolidayText
                             });
                             EventList.Remove(CalendarEventSelected);
 
@@ -128,28 +87,28 @@ public class EditRecurringVM : BaseViewModel {
                     }
                 }
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditRecurringVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
         case "delete":
             try {
-                if (CalendarEventSelected.eventText != null) {
+                if (CalendarEventSelected.EventText != null) {
                     confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (confirmation == MessageBoxResult.Yes) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditRecurringVM",
                             Description = "Adding recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         EventList.Remove(CalendarEventSelected);
                         HolidayText = "";
@@ -158,13 +117,13 @@ public class EditRecurringVM : BaseViewModel {
                     }
                 }
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditRecurringVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
@@ -172,25 +131,22 @@ public class EditRecurringVM : BaseViewModel {
     }
 
     private void PopulateDetailedView(CalendarEventsRecurring value) {
-        DateText = value.date.ToShortDateString();
-        HolidayText = value.eventText;
+        DateText = value.Date.ToShortDateString();
+        HolidayText = value.EventText;
     }
 
     private void SaveJson() {
         try {
-            ReferenceValues.JsonCalendarRecurringMaster.eventsListRecurring = EventList;
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonCalendarRecurringMaster);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(fileName, jsonString);
+            ReferenceValues.JsonCalendarMaster.eventsListRecurring = EventList;
+            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "EditRecurringVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 

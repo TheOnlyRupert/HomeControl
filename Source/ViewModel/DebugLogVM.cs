@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -11,7 +11,7 @@ public class DebugLogVM : BaseViewModel {
     private ObservableCollection<DebugTextBlock> _debugList;
 
     public DebugLogVM() {
-        DebugList = ReferenceValues.DebugTextBlockOutput;
+        DebugList = ReferenceValues.JsonDebugMaster.DebugBlockList;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -17,6 +18,16 @@ public class FinancesVM : BaseViewModel {
     private int expense, income, available;
 
     public FinancesVM() {
+        try {
+            ReferenceValues.JsonFinanceMaster = JsonSerializer.Deserialize<JsonFinances>(FileHelpers.LoadFileText("finances"));
+        } catch (Exception) {
+            ReferenceValues.JsonFinanceMaster = new JsonFinances {
+                financeList = new ObservableCollection<FinanceBlock>()
+            };
+
+            FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster));
+        }
+
         CashIncomeText = "";
         CashExpenseText = "";
         CashAvailableText = "";
@@ -24,7 +35,6 @@ public class FinancesVM : BaseViewModel {
         income = 0;
         available = 0;
         CashAvailableTextColor = "CornflowerBlue";
-        new FinancesFromJson();
         RefreshFinances();
         BackupFinances();
 
@@ -68,47 +78,47 @@ public class FinancesVM : BaseViewModel {
 
         /* Calculate income, expense, and available cash */
         try {
-            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMasterList.financeList) {
+            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMaster.financeList) {
                 if (t.AddSub == "SUB") {
                     try {
                         expense += int.Parse(t.Cost);
                     } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
                             Module = "FinancesVM",
                             Description = e.ToString()
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
                 }
             }
 
-            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMasterList.financeList) {
+            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMaster.financeList) {
                 if (t.AddSub == "ADD") {
                     try {
                         if (t.Category is not ("User1 Fund" or "User2 Fund" or "User3 Fund" or "User4 Fund" or "User5 Fund")) {
                             income += int.Parse(t.Cost);
                         }
                     } catch (Exception e) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "WARN",
                             Module = "FinancesVM",
                             Description = e.ToString()
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
                 }
             }
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "FinancesVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         available = income - expense;
@@ -124,21 +134,17 @@ public class FinancesVM : BaseViewModel {
 
     private void BackupFinances() {
         Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "finances_backup/");
-        string fileName = ReferenceValues.FILE_DIRECTORY + "finances_backup/finances_" + DateTime.Now.ToString("yyyy_MM_dd") + ".json";
 
         try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceMasterList);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(fileName, jsonString);
+            FileHelpers.SaveFileText(ReferenceValues.FILE_DIRECTORY + "finances_backup/finances_" + DateTime.Now.ToString("yyyy_MM_dd"), JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster));
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "FinancesVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 

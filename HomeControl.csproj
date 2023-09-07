@@ -5,7 +5,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{A8AAB6E4-8B96-4171-A46A-2650B7118841}</ProjectGuid>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <RootNamespace>HomeControl</RootNamespace>
         <AssemblyName>HomeControl</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -109,31 +109,23 @@
         <Compile Include="Source\Control\GridViewSort.cs"/>
         <Compile Include="Source\Control\SnowEngine.cs"/>
         <Compile Include="Source\Control\SnowInfo.cs"/>
+        <Compile Include="Source\Helpers\FileHelpers.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
         <Compile Include="Source\Helpers\SerialPortExtensions.cs"/>
         <Compile Include="Source\Helpers\SoundDispatcher.cs"/>
         <Compile Include="Source\Helpers\WeatherHelpers.cs"/>
-        <Compile Include="Source\IO\BehaviorFromJson.cs"/>
-        <Compile Include="Source\IO\CalenderEventsFromJson.cs"/>
-        <Compile Include="Source\IO\ChoresFromJson.cs"/>
-        <Compile Include="Source\IO\DebugFromJson.cs"/>
-        <Compile Include="Source\IO\DebugTextBlock.cs"/>
-        <Compile Include="Source\IO\FinancesFromJson.cs"/>
-        <Compile Include="Source\IO\GameStatsFromJson.cs"/>
-        <Compile Include="Source\IO\HvacFromJson.cs"/>
-        <Compile Include="Source\IO\JsonBehavior.cs"/>
-        <Compile Include="Source\IO\JsonCalendar.cs"/>
-        <Compile Include="Source\IO\JsonTasks.cs"/>
-        <Compile Include="Source\IO\JsonFinances.cs"/>
-        <Compile Include="Source\IO\JsonGameStats.cs"/>
-        <Compile Include="Source\IO\JsonHvac.cs"/>
-        <Compile Include="Source\IO\JsonSettings.cs"/>
-        <Compile Include="Source\IO\JsonTamagotchi.cs"/>
-        <Compile Include="Source\IO\JsonTimer.cs"/>
-        <Compile Include="Source\IO\JsonWeatherForecast.cs"/>
-        <Compile Include="Source\IO\SettingsFromJson.cs"/>
-        <Compile Include="Source\IO\TimerFromJson.cs"/>
-        <Compile Include="Source\IO\WeatherHourlyBlock.cs"/>
+        <Compile Include="Source\Json\JsonDebug.cs"/>
+        <Compile Include="Source\Json\JsonBehavior.cs"/>
+        <Compile Include="Source\Json\JsonCalendar.cs"/>
+        <Compile Include="Source\Json\JsonTasks.cs"/>
+        <Compile Include="Source\Json\JsonFinances.cs"/>
+        <Compile Include="Source\Json\JsonGameStats.cs"/>
+        <Compile Include="Source\Json\JsonHvac.cs"/>
+        <Compile Include="Source\Json\JsonSettings.cs"/>
+        <Compile Include="Source\Json\JsonTamagotchi.cs"/>
+        <Compile Include="Source\Json\JsonTimer.cs"/>
+        <Compile Include="Source\Json\JsonWeather.cs"/>
+        <Compile Include="Source\Json\JsonWeatherHourly.cs"/>
         <Compile Include="Source\Modules\Behavior\TasksDaily.xaml.cs">
             <DependentUpon>TasksDaily.xaml</DependentUpon>
         </Compile>
@@ -227,12 +219,10 @@
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
-        <Compile Include="Source\ViewModel\FunctionVM.cs"/>
         <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowBedVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowClosetVM.cs"/>
-        <Compile Include="Source\ViewModel\GroceriesVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacCrossPlay.cs"/>
         <Compile Include="Source\ViewModel\Hvac\EditHvacVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>

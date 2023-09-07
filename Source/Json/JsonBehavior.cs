@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HomeControl.Source.IO;
+namespace HomeControl.Source.Json;
 
 public class JsonBehavior {
     public DateTime Date { get; set; }

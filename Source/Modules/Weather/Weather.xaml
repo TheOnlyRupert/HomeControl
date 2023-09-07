@@ -8,8 +8,6 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Column="0" Grid.Row="0" Source="../../../Resources/Images/icons/clock.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24"/>
-
             <Grid Grid.Row="0" Margin="0 0 0 4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*"/>

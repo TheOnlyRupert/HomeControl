@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -39,7 +38,7 @@ public class EditBehaviorVM : BaseViewModel {
 
         switch (ReferenceValues.ActiveBehaviorUser) {
         case 1:
-            ChildName = ReferenceValues.JsonMasterSettings.User1Name;
+            ChildName = ReferenceValues.JsonSettingsMaster.User1Name;
             stars = ReferenceValues.JsonBehaviorMaster.User1Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User1Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User1Progress;
@@ -50,18 +49,18 @@ public class EditBehaviorVM : BaseViewModel {
                 uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
         case 2:
-            ChildName = ReferenceValues.JsonMasterSettings.User2Name;
+            ChildName = ReferenceValues.JsonSettingsMaster.User2Name;
             stars = ReferenceValues.JsonBehaviorMaster.User2Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User2Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User2Progress;
@@ -70,18 +69,18 @@ public class EditBehaviorVM : BaseViewModel {
                 uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
         case 3:
-            ChildName = ReferenceValues.JsonMasterSettings.User3Name;
+            ChildName = ReferenceValues.JsonSettingsMaster.User3Name;
             stars = ReferenceValues.JsonBehaviorMaster.User3Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User3Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User3Progress;
@@ -90,18 +89,18 @@ public class EditBehaviorVM : BaseViewModel {
                 uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
         case 4:
-            ChildName = ReferenceValues.JsonMasterSettings.User4Name;
+            ChildName = ReferenceValues.JsonSettingsMaster.User4Name;
             stars = ReferenceValues.JsonBehaviorMaster.User4Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User4Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User4Progress;
@@ -110,18 +109,18 @@ public class EditBehaviorVM : BaseViewModel {
                 uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
         case 5:
-            ChildName = ReferenceValues.JsonMasterSettings.User5Name;
+            ChildName = ReferenceValues.JsonSettingsMaster.User5Name;
             stars = ReferenceValues.JsonBehaviorMaster.User5Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User5Strikes;
             ProgressBarChildValue = ReferenceValues.JsonBehaviorMaster.User5Progress;
@@ -130,13 +129,13 @@ public class EditBehaviorVM : BaseViewModel {
                 uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
                     Module = "EditBehaviorVM",
                     Description = e.ToString()
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;
@@ -516,18 +515,15 @@ public class EditBehaviorVM : BaseViewModel {
         }
 
         try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "behavior.json", jsonString);
+            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster));
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "EditBehaviorVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 
@@ -546,13 +542,13 @@ public class EditBehaviorVM : BaseViewModel {
                             ProgressBarChildValueText = "0/5";
                             ReferenceValues.SoundToPlay = "buzzer";
                             SoundDispatcher.PlaySound();
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "EditBehaviorVM",
                                 Description = "Adding strike to " + ChildName
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             if (strikes == 3) {
                                 stars--;
@@ -586,13 +582,13 @@ public class EditBehaviorVM : BaseViewModel {
 
                                 ReferenceValues.SoundToPlay = "yay";
                                 SoundDispatcher.PlaySound();
-                                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                     Date = DateTime.Now,
                                     Level = "INFO",
                                     Module = "EditBehaviorVM",
                                     Description = "Adding progress (which resulted in a star) to " + ChildName
                                 });
-                                SaveDebugFile.Save();
+                                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                             } else {
                                 ProgressBarChildValue = 5;
                                 ProgressBarChildValueText = "5/5";
@@ -600,13 +596,13 @@ public class EditBehaviorVM : BaseViewModel {
                         } else {
                             ReferenceValues.SoundToPlay = "ding";
                             SoundDispatcher.PlaySound();
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "EditBehaviorVM",
                                 Description = "Adding progress to " + ChildName
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                         }
                     } else {
                         ReferenceValues.SoundToPlay = "unable";
@@ -626,13 +622,13 @@ public class EditBehaviorVM : BaseViewModel {
                             ProgressBarChildValueText = "4/5";
                             ReferenceValues.SoundToPlay = "aww";
                             SoundDispatcher.PlaySound();
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "EditBehaviorVM",
                                 Description = "Removing progress (which resulted in a loss of a star) from " + ChildName
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                         } else {
                             ProgressBarChildValue = 0;
                             ProgressBarChildValueText = "0/5";
@@ -640,13 +636,13 @@ public class EditBehaviorVM : BaseViewModel {
                     } else {
                         ReferenceValues.SoundToPlay = "error";
                         SoundDispatcher.PlaySound();
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditBehaviorVM",
                             Description = "Removing progress from " + ChildName
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
                 } else {
                     ReferenceValues.SoundToPlay = "unable";
@@ -655,13 +651,13 @@ public class EditBehaviorVM : BaseViewModel {
 
                 break;
             case "reward":
-                ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "INFO",
                     Module = "EditBehaviorVM",
                     Description = ChildName + " claimed their reward!"
                 });
-                SaveDebugFile.Save();
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                 stars = 0;
                 ProgressBarChildValue = 0;
                 ProgressBarChildValueText = "0/5";

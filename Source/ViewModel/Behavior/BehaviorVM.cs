@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -43,8 +42,21 @@ public class BehaviorVM : BaseViewModel {
         _progressBarUser1, _progressBarUser2, _progressBarUser3, _progressBarUser4, _progressBarUser5;
 
     public BehaviorVM() {
-        new BehaviorFromJson();
-        new TasksFromJson();
+        try {
+            ReferenceValues.JsonBehaviorMaster = JsonSerializer.Deserialize<JsonBehavior>(FileHelpers.LoadFileText("behavior"));
+        } catch (Exception) {
+            ReferenceValues.JsonBehaviorMaster = new JsonBehavior();
+
+            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster));
+        }
+
+        try {
+            ReferenceValues.JsonTasksMaster = JsonSerializer.Deserialize<JsonTasks>(FileHelpers.LoadFileText("tasks"));
+        } catch (Exception) {
+            ReferenceValues.JsonTasksMaster = new JsonTasks();
+
+            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
+        }
 
         ReferenceValues.JsonTasksMaster ??= new JsonTasks();
         ReferenceValues.JsonTasksMaster.JsonTasksDaily ??= new JsonTasksDaily();
@@ -72,11 +84,11 @@ public class BehaviorVM : BaseViewModel {
         ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4 ??= new ObservableCollection<Task>();
         ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5 ??= new ObservableCollection<Task>();
 
-        User1Name = ReferenceValues.JsonMasterSettings.User1Name;
-        User2Name = ReferenceValues.JsonMasterSettings.User2Name;
-        User3Name = ReferenceValues.JsonMasterSettings.User3Name;
-        User4Name = ReferenceValues.JsonMasterSettings.User4Name;
-        User5Name = ReferenceValues.JsonMasterSettings.User5Name;
+        User1Name = ReferenceValues.JsonSettingsMaster.User1Name;
+        User2Name = ReferenceValues.JsonSettingsMaster.User2Name;
+        User3Name = ReferenceValues.JsonSettingsMaster.User3Name;
+        User4Name = ReferenceValues.JsonSettingsMaster.User4Name;
+        User5Name = ReferenceValues.JsonSettingsMaster.User5Name;
 
         try {
             Uri uri = new(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
@@ -90,13 +102,13 @@ public class BehaviorVM : BaseViewModel {
             uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageUser5 = new BitmapImage(uri);
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -112,13 +124,13 @@ public class BehaviorVM : BaseViewModel {
                 ReferenceValues.JsonBehaviorMaster.User5Strikes = 0;
             }
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         RefreshBehavior();
@@ -220,22 +232,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release daily funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
                     if (releaseAmountDaily != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User1Name + "'s Daily Funds: $" + releaseAmountDaily
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User1Name + "'s Daily Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User1 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User1Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User1Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -266,21 +278,21 @@ public class BehaviorVM : BaseViewModel {
                 /* Release weekly funds */
                 if (d1 != d2) {
                     if (releaseAmountWeekly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User1Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
-                        ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                        ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                             AddSub = "SUB",
                             Date = DateTime.Now.ToShortDateString(),
-                            Item = ReferenceValues.JsonMasterSettings.User1Name + "'s Weekly Funds",
+                            Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Weekly Funds",
                             Cost = releaseAmountWeekly.ToString(),
                             Category = "User1 Fund",
-                            Person = ReferenceValues.JsonMasterSettings.User1Name,
+                            Person = ReferenceValues.JsonSettingsMaster.User1Name,
                             Details = "(Automatic)"
                         });
                     }
@@ -308,22 +320,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release monthly funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
                     if (releaseAmountMonthly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User1Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User1Name + "'s Monthly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User1 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User1Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User1Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -355,22 +367,22 @@ public class BehaviorVM : BaseViewModel {
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
                     if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
                         if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User1Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             try {
-                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonMasterSettings.User1Name + "'s Quarterly Funds",
+                                    Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User1 Fund",
-                                    Person = ReferenceValues.JsonMasterSettings.User1Name,
+                                    Person = ReferenceValues.JsonSettingsMaster.User1Name,
                                     Details = "(Automatic)"
                                 });
                             } catch (Exception) {
@@ -430,7 +442,7 @@ public class BehaviorVM : BaseViewModel {
 
             int funds = 0;
             try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User1 Fund") {
                         try {
                             if (financeBlock.AddSub == "ADD") {
@@ -439,13 +451,13 @@ public class BehaviorVM : BaseViewModel {
                                 funds += int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "WARN",
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                         }
                     }
                 }
@@ -453,7 +465,7 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            if (ReferenceValues.JsonMasterSettings.User1Checked) {
+            if (ReferenceValues.JsonSettingsMaster.User1Checked) {
                 User1CashAvailable = string.Format(culture, "{0:C}", funds);
                 User1CashAvailableColor = User1CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
             } else {
@@ -530,22 +542,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release daily funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
                     if (releaseAmountDaily != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User2Name + "'s Daily Funds: $" + releaseAmountDaily
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User2Name + "'s Daily Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User2 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User2Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User2Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -576,21 +588,21 @@ public class BehaviorVM : BaseViewModel {
                 /* Release weekly funds */
                 if (d1 != d2) {
                     if (releaseAmountWeekly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User2Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User2Name + "'s Weekly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Weekly Funds",
                                 Cost = releaseAmountWeekly.ToString(),
                                 Category = "User2 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User2Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User2Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -621,22 +633,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release monthly funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
                     if (releaseAmountMonthly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User2Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User2Name + "'s Monthly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User2 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User2Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User2Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -668,21 +680,21 @@ public class BehaviorVM : BaseViewModel {
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
                     if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
                         if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User2Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                             try {
-                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonMasterSettings.User2Name + "'s Quarterly Funds",
+                                    Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User2 Fund",
-                                    Person = ReferenceValues.JsonMasterSettings.User2Name,
+                                    Person = ReferenceValues.JsonSettingsMaster.User2Name,
                                     Details = "(Automatic)"
                                 });
                             } catch (Exception) {
@@ -742,7 +754,7 @@ public class BehaviorVM : BaseViewModel {
 
             funds = 0;
             try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User2 Fund") {
                         try {
                             if (financeBlock.AddSub == "ADD") {
@@ -751,13 +763,13 @@ public class BehaviorVM : BaseViewModel {
                                 funds += int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "WARN",
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                         }
                     }
                 }
@@ -765,7 +777,7 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            if (ReferenceValues.JsonMasterSettings.User2Checked) {
+            if (ReferenceValues.JsonSettingsMaster.User2Checked) {
                 User2CashAvailable = string.Format(culture, "{0:C}", funds);
                 User2CashAvailableColor = User2CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
             } else {
@@ -842,22 +854,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release daily funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
                     if (releaseAmountDaily != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User3Name + "'s Daily Funds: $" + releaseAmountDaily
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User3Name + "'s Daily Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User3 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User3Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User3Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -888,22 +900,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release weekly funds */
                 if (d1 != d2) {
                     if (releaseAmountWeekly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User3Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User3Name + "'s Weekly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Weekly Funds",
                                 Cost = releaseAmountWeekly.ToString(),
                                 Category = "User3 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User3Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User3Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -934,22 +946,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release monthly funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
                     if (releaseAmountMonthly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User3Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User3Name + "'s Monthly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User3 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User3Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User3Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -981,22 +993,22 @@ public class BehaviorVM : BaseViewModel {
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
                     if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
                         if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User3Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             try {
-                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonMasterSettings.User3Name + "'s Quarterly Funds",
+                                    Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User3 Fund",
-                                    Person = ReferenceValues.JsonMasterSettings.User3Name,
+                                    Person = ReferenceValues.JsonSettingsMaster.User3Name,
                                     Details = "(Automatic)"
                                 });
                             } catch (Exception) {
@@ -1056,7 +1068,7 @@ public class BehaviorVM : BaseViewModel {
 
             funds = 0;
             try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User3 Fund") {
                         try {
                             if (financeBlock.AddSub == "ADD") {
@@ -1065,13 +1077,13 @@ public class BehaviorVM : BaseViewModel {
                                 funds += int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "WARN",
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                         }
                     }
                 }
@@ -1079,7 +1091,7 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            if (ReferenceValues.JsonMasterSettings.User3Checked) {
+            if (ReferenceValues.JsonSettingsMaster.User3Checked) {
                 User3CashAvailable = string.Format(culture, "{0:C}", funds);
                 User3CashAvailableColor = User3CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
             } else {
@@ -1156,22 +1168,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release daily funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
                     if (releaseAmountDaily != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User4Name + "'s Daily Funds: $" + releaseAmountDaily
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User4Name + "'s Daily Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User4 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User4Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User4Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -1202,22 +1214,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release weekly funds */
                 if (d1 != d2) {
                     if (releaseAmountWeekly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User4Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User4Name + "'s Weekly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Weekly Funds",
                                 Cost = releaseAmountWeekly.ToString(),
                                 Category = "User4 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User4Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User4Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -1248,22 +1260,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release monthly funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
                     if (releaseAmountMonthly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User4Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User4Name + "'s Monthly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User4 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User4Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User4Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -1295,22 +1307,22 @@ public class BehaviorVM : BaseViewModel {
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
                     if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
                         if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User4Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             try {
-                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonMasterSettings.User4Name + "'s Quarterly Funds",
+                                    Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User4 Fund",
-                                    Person = ReferenceValues.JsonMasterSettings.User4Name,
+                                    Person = ReferenceValues.JsonSettingsMaster.User4Name,
                                     Details = "(Automatic)"
                                 });
                             } catch (Exception) {
@@ -1370,7 +1382,7 @@ public class BehaviorVM : BaseViewModel {
 
             funds = 0;
             try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User4 Fund") {
                         try {
                             if (financeBlock.AddSub == "ADD") {
@@ -1379,13 +1391,13 @@ public class BehaviorVM : BaseViewModel {
                                 funds += int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "WARN",
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                         }
                     }
                 }
@@ -1393,7 +1405,7 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            if (ReferenceValues.JsonMasterSettings.User4Checked) {
+            if (ReferenceValues.JsonSettingsMaster.User4Checked) {
                 User4CashAvailable = string.Format(culture, "{0:C}", funds);
                 User4CashAvailableColor = User4CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
             } else {
@@ -1470,22 +1482,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release daily funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
                     if (releaseAmountDaily != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User5Name + "'s Daily Funds: $" + releaseAmountDaily
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User5Name + "'s Daily Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User5 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User5Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User5Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -1516,22 +1528,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release weekly funds */
                 if (d1 != d2) {
                     if (releaseAmountWeekly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User5Name + "'s Weekly Funds: $" + releaseAmountWeekly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User5Name + "'s Weekly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Weekly Funds",
                                 Cost = releaseAmountWeekly.ToString(),
                                 Category = "User5 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User5Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User5Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -1562,22 +1574,22 @@ public class BehaviorVM : BaseViewModel {
                 /* Release monthly funds */
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
                     if (releaseAmountMonthly != 0) {
-                        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonMasterSettings.User5Name + "'s Monthly Funds: $" + releaseAmountMonthly
+                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        SaveDebugFile.Save();
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         try {
-                            ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
                                 Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonMasterSettings.User5Name + "'s Monthly Funds",
+                                Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User5 Fund",
-                                Person = ReferenceValues.JsonMasterSettings.User5Name,
+                                Person = ReferenceValues.JsonSettingsMaster.User5Name,
                                 Details = "(Automatic)"
                             });
                         } catch (Exception) {
@@ -1609,22 +1621,22 @@ public class BehaviorVM : BaseViewModel {
                 if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
                     if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
                         if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonMasterSettings.User5Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
+                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             try {
-                                ReferenceValues.JsonFinanceMasterList.financeList.Add(new FinanceBlock {
+                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
                                     Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonMasterSettings.User5Name + "'s Quarterly Funds",
+                                    Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User5 Fund",
-                                    Person = ReferenceValues.JsonMasterSettings.User5Name,
+                                    Person = ReferenceValues.JsonSettingsMaster.User5Name,
                                     Details = "(Automatic)"
                                 });
                             } catch (Exception) {
@@ -1684,7 +1696,7 @@ public class BehaviorVM : BaseViewModel {
 
             funds = 0;
             try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMasterList.financeList) {
+                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User5 Fund") {
                         try {
                             if (financeBlock.AddSub == "ADD") {
@@ -1693,13 +1705,13 @@ public class BehaviorVM : BaseViewModel {
                                 funds += int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
-                            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                                 Date = DateTime.Now,
                                 Level = "WARN",
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            SaveDebugFile.Save();
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                         }
                     }
                 }
@@ -1707,7 +1719,7 @@ public class BehaviorVM : BaseViewModel {
                 //blank
             }
 
-            if (ReferenceValues.JsonMasterSettings.User5Checked) {
+            if (ReferenceValues.JsonSettingsMaster.User5Checked) {
                 User5CashAvailable = string.Format(culture, "{0:C}", funds);
                 User5CashAvailableColor = User5CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
             } else {
@@ -1724,48 +1736,39 @@ public class BehaviorVM : BaseViewModel {
         ReferenceValues.JsonTasksMaster.UpdatedDateTime = DateTime.Today;
 
         try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "behavior.json", jsonString);
+            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster));
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "tasks.json", jsonString);
+            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
 
         try {
-            string jsonString = JsonSerializer.Serialize(ReferenceValues.JsonFinanceMasterList);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.FILE_DIRECTORY + "finances.json", jsonString);
+            FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
         } catch (Exception e) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 

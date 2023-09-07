@@ -11,7 +11,7 @@ using System.Text.Json;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.IO;
+using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
@@ -34,18 +34,33 @@ public class MainWindowVM : BaseViewModel {
         OnlineColor = "Black";
 
         /* Get Debug (MAKE SURE THIS IS FIRST!) */
-        new DebugFromJson();
+        try {
+            ReferenceValues.JsonDebugMaster = JsonSerializer.Deserialize<JsonDebug>(FileHelpers.LoadFileText("debug"));
+        } catch (Exception) {
+            ReferenceValues.JsonDebugMaster = new JsonDebug {
+                DebugBlockList = new ObservableCollection<DebugTextBlock>()
+            };
+
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+        }
 
         /* Get Settings */
-        new SettingsFromJson();
+        try {
+            ReferenceValues.JsonSettingsMaster = JsonSerializer.Deserialize<JsonSettings>(FileHelpers.LoadFileText("settings"));
+        } catch (Exception) {
+            ReferenceValues.JsonSettingsMaster = new JsonSettings();
 
-        ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-            Date = DateTime.Now,
-            Level = "INFO",
-            Module = "MainWindowVM",
-            Description = ReferenceValues.COPYRIGHT + "  Version: " + ReferenceValues.VERSION
-        });
-        SaveDebugFile.Save();
+            FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster));
+        }
+
+        /* HVAC */
+        try {
+            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac"));
+        } catch (Exception) {
+            ReferenceValues.JsonHvacMaster = new JsonHvac();
+
+            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster));
+        }
 
         ReferenceValues.IconImageList = new ObservableCollection<string>();
         ResourceManager resourceManager = new("HomeControl.g", Assembly.GetExecutingAssembly());
@@ -56,7 +71,7 @@ public class MainWindowVM : BaseViewModel {
 
         ReferenceValues.IconImageList = new ObservableCollection<string>(ReferenceValues.IconImageList.OrderBy(i => i));
 
-        if (string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.UserAgent)) {
+        if (string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.UserAgent)) {
             Settings settingsDialog = new();
             settingsDialog.ShowDialog();
             settingsDialog.Close();
@@ -64,11 +79,8 @@ public class MainWindowVM : BaseViewModel {
 
         ApiStatus();
 
-        /* HVAC Serial Port */
-        new HvacFromJson();
-
-        if (!string.IsNullOrEmpty(ReferenceValues.JsonMasterSettings.ComPort)) {
-            ReferenceValues.SerialPortMaster = new SerialPort(ReferenceValues.JsonMasterSettings.ComPort, 9600);
+        if (!string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.ComPort)) {
+            ReferenceValues.SerialPort = new SerialPort(ReferenceValues.JsonSettingsMaster.ComPort, 9600);
             HvacCrossPlay.EstablishConnection();
         }
 
@@ -84,7 +96,7 @@ public class MainWindowVM : BaseViewModel {
         activityTimer.OnActive += activityTimer_OnActive;
 
         void activityTimer_OnInactive(object sender, EventArgs e) {
-            if (!ReferenceValues.JsonMasterSettings.IsDebugMode) {
+            if (!ReferenceValues.JsonSettingsMaster.IsDebugMode) {
                 simpleMessenger.PushMessage("ScreenSaverOn", null);
                 ReferenceValues.LockUI = true;
             }
@@ -136,44 +148,44 @@ public class MainWindowVM : BaseViewModel {
             changeDate = false;
         }
 
-        if (ReferenceValues.JsonTimerSettings.IsTimer1Running) {
-            ReferenceValues.JsonTimerSettings.Timer1Seconds--;
+        if (ReferenceValues.JsonTimerMaster.IsTimer1Running) {
+            ReferenceValues.JsonTimerMaster.Timer1Seconds--;
 
-            if (ReferenceValues.JsonTimerSettings.Timer1Seconds == 0) {
-                ReferenceValues.JsonTimerSettings.IsAlarmSounding = true;
+            if (ReferenceValues.JsonTimerMaster.Timer1Seconds == 0) {
+                ReferenceValues.JsonTimerMaster.IsAlarmSounding = true;
             }
         }
 
-        if (ReferenceValues.JsonTimerSettings.IsTimer2Running) {
-            ReferenceValues.JsonTimerSettings.Timer2Seconds--;
+        if (ReferenceValues.JsonTimerMaster.IsTimer2Running) {
+            ReferenceValues.JsonTimerMaster.Timer2Seconds--;
 
-            if (ReferenceValues.JsonTimerSettings.Timer2Seconds == 0) {
-                ReferenceValues.JsonTimerSettings.IsAlarmSounding = true;
+            if (ReferenceValues.JsonTimerMaster.Timer2Seconds == 0) {
+                ReferenceValues.JsonTimerMaster.IsAlarmSounding = true;
             }
         }
 
-        if (ReferenceValues.JsonTimerSettings.IsTimer3Running) {
-            ReferenceValues.JsonTimerSettings.Timer3Seconds--;
+        if (ReferenceValues.JsonTimerMaster.IsTimer3Running) {
+            ReferenceValues.JsonTimerMaster.Timer3Seconds--;
 
-            if (ReferenceValues.JsonTimerSettings.Timer3Seconds == 0) {
-                ReferenceValues.JsonTimerSettings.IsAlarmSounding = true;
+            if (ReferenceValues.JsonTimerMaster.Timer3Seconds == 0) {
+                ReferenceValues.JsonTimerMaster.IsAlarmSounding = true;
             }
         }
 
-        if (ReferenceValues.JsonTimerSettings.IsTimer4Running) {
-            ReferenceValues.JsonTimerSettings.Timer4Seconds--;
+        if (ReferenceValues.JsonTimerMaster.IsTimer4Running) {
+            ReferenceValues.JsonTimerMaster.Timer4Seconds--;
 
-            if (ReferenceValues.JsonTimerSettings.Timer4Seconds == 0) {
-                ReferenceValues.JsonTimerSettings.IsAlarmSounding = true;
+            if (ReferenceValues.JsonTimerMaster.Timer4Seconds == 0) {
+                ReferenceValues.JsonTimerMaster.IsAlarmSounding = true;
             }
         }
 
-        if (ReferenceValues.JsonTimerSettings.IsTimer1Running || ReferenceValues.JsonTimerSettings.IsTimer2Running || ReferenceValues.JsonTimerSettings.IsTimer3Running ||
-            ReferenceValues.JsonTimerSettings.IsTimer4Running) {
+        if (ReferenceValues.JsonTimerMaster.IsTimer1Running || ReferenceValues.JsonTimerMaster.IsTimer2Running || ReferenceValues.JsonTimerMaster.IsTimer3Running ||
+            ReferenceValues.JsonTimerMaster.IsTimer4Running) {
             simpleMessenger.PushMessage("RefreshTimer", null);
         }
 
-        if (ReferenceValues.JsonTimerSettings.IsAlarmSounding) {
+        if (ReferenceValues.JsonTimerMaster.IsAlarmSounding) {
             ReferenceValues.SoundToPlay = "timerDone";
             SoundDispatcher.PlaySound();
         }
@@ -189,19 +201,19 @@ public class MainWindowVM : BaseViewModel {
         try {
             using WebClient client1 = new();
             const string hostUrl = "https://api.weather.gov/";
-            client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonMasterSettings.UserAgent);
+            client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
             string apiStatusString = client1.DownloadString(hostUrl);
             ApiStatus apiStatus = JsonSerializer.Deserialize<ApiStatus>(apiStatusString, options);
 
             if (apiStatus is { status: "OK" }) {
                 if (internetMessage) {
-                    ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "INFO",
                         Module = "MainWindowVM",
                         Description = "Restored Internet Connection"
                     });
-                    SaveDebugFile.Save();
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                 }
 
                 internetMessage = false;
@@ -216,13 +228,13 @@ public class MainWindowVM : BaseViewModel {
 
     private void LostInternet() {
         if (!internetMessage) {
-            ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
                 Module = "MainWindowVM",
                 Description = "Lost Internet Connection"
             });
-            SaveDebugFile.Save();
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             internetMessage = true;
             OnlineColor = "Yellow";
         }

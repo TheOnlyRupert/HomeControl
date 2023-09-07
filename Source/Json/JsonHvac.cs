@@ -1,4 +1,4 @@
-﻿namespace HomeControl.Source.IO;
+﻿namespace HomeControl.Source.Json;
 
 public class JsonHvac {
     /* 0 = off, 1 = standby, 2 = running */

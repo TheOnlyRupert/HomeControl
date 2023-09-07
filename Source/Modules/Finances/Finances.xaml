@@ -9,8 +9,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" Source="../../../Resources/Images/icons/money.png" VerticalAlignment="Top" HorizontalAlignment="Left" Height="24"/>
-
             <StackPanel Grid.Column="0" HorizontalAlignment="Right">
                 <TextBlock Text="Income" FontSize="24" Foreground="White"/>
                 <TextBlock Text="{Binding CashIncomeText}" FontSize="24" Foreground="White"/>
@@ -24,7 +22,7 @@
                 <TextBlock Text="{Binding CashAvailableText}" FontSize="24" Foreground="{Binding CashAvailableTextColor}"/>
             </StackPanel>
 
-            <Button Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Width="100" Margin="0 0 0 8" Content="Details" Command="{Binding ButtonCommand}" CommandParameter="edit" FontSize="18">
+            <Button Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Content="Details" Command="{Binding ButtonCommand}" CommandParameter="edit" FontSize="24">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -32,8 +30,8 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="16 0">
+                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
