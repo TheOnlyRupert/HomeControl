@@ -90,76 +90,71 @@ public class SettingsVM : BaseViewModel {
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "save":
-            if (!string.IsNullOrEmpty(UserAgentText) || !string.IsNullOrEmpty(User1Name) || !string.IsNullOrEmpty(User2Name)) {
-                ReferenceValues.JsonSettingsMaster.UserAgent = UserAgentText;
-                ReferenceValues.JsonSettingsMaster.User1Name = User1Name;
-                ReferenceValues.JsonSettingsMaster.User2Name = User2Name;
-                ReferenceValues.JsonSettingsMaster.User3Name = User3Name;
-                ReferenceValues.JsonSettingsMaster.User4Name = User4Name;
-                ReferenceValues.JsonSettingsMaster.User5Name = User5Name;
-                ReferenceValues.JsonSettingsMaster.User1NameLegal = User1NameLegal;
-                ReferenceValues.JsonSettingsMaster.User2NameLegal = User2NameLegal;
-                ReferenceValues.JsonSettingsMaster.User3NameLegal = User3NameLegal;
-                ReferenceValues.JsonSettingsMaster.User4NameLegal = User4NameLegal;
-                ReferenceValues.JsonSettingsMaster.User5NameLegal = User5NameLegal;
-                ReferenceValues.JsonSettingsMaster.User1Phone1 = User1Phone1;
-                ReferenceValues.JsonSettingsMaster.User1Phone2 = User1Phone2;
-                ReferenceValues.JsonSettingsMaster.User2Phone1 = User2Phone1;
-                ReferenceValues.JsonSettingsMaster.User2Phone2 = User2Phone2;
-                ReferenceValues.JsonSettingsMaster.PetNames = PetNames;
-                ReferenceValues.JsonSettingsMaster.Neighbor1Location = Neighbor1Location;
-                ReferenceValues.JsonSettingsMaster.Neighbor1Name = Neighbor1Name;
-                ReferenceValues.JsonSettingsMaster.Neighbor1Phone1 = Neighbor1Phone1;
-                ReferenceValues.JsonSettingsMaster.Neighbor1Phone2 = Neighbor1Phone2;
-                ReferenceValues.JsonSettingsMaster.Neighbor2Location = Neighbor2Location;
-                ReferenceValues.JsonSettingsMaster.Neighbor2Name = Neighbor2Name;
-                ReferenceValues.JsonSettingsMaster.Neighbor2Phone1 = Neighbor2Phone1;
-                ReferenceValues.JsonSettingsMaster.Neighbor2Phone2 = Neighbor2Phone2;
-                ReferenceValues.JsonSettingsMaster.AddressLine1 = AddressLine1;
-                ReferenceValues.JsonSettingsMaster.AddressLine2 = AddressLine2;
-                ReferenceValues.JsonSettingsMaster.FireExtinguisherLocation = FireExtinguisherLocation;
-                ReferenceValues.JsonSettingsMaster.HospitalAddressLine1 = HospitalAddressLine1;
-                ReferenceValues.JsonSettingsMaster.HospitalAddressLine2 = HospitalAddressLine2;
-                ReferenceValues.JsonSettingsMaster.WifiGuestName = WifiGuestName;
-                ReferenceValues.JsonSettingsMaster.WifiGuestPassword = WifiGuestPassword;
-                ReferenceValues.JsonSettingsMaster.WifiPrivateName = WifiPrivateName;
-                ReferenceValues.JsonSettingsMaster.WifiPrivatePassword = WifiPrivatePassword;
-                ReferenceValues.JsonSettingsMaster.PoliceName = PoliceName;
-                ReferenceValues.JsonSettingsMaster.PolicePhone = PolicePhone;
-                ReferenceValues.JsonSettingsMaster.EmergencyContact1Name = EmergencyContact1Name;
-                ReferenceValues.JsonSettingsMaster.EmergencyContact1Phone1 = EmergencyContact1Phone1;
-                ReferenceValues.JsonSettingsMaster.EmergencyContact1Phone2 = EmergencyContact1Phone2;
-                ReferenceValues.JsonSettingsMaster.EmergencyContact2Name = EmergencyContact2Name;
-                ReferenceValues.JsonSettingsMaster.EmergencyContact2Phone1 = EmergencyContact2Phone1;
-                ReferenceValues.JsonSettingsMaster.EmergencyContact2Phone2 = EmergencyContact2Phone2;
-                ReferenceValues.JsonSettingsMaster.AlarmCode = AlarmCode;
-                ReferenceValues.JsonSettingsMaster.ComPort = ComPort;
-                ReferenceValues.JsonSettingsMaster.IsImperialMode = ValueImperialChecked;
-                ValueMetricChecked = !ValueImperialChecked;
-                ReferenceValues.JsonSettingsMaster.IsNormalMode = IsNormalMode;
-                ReferenceValues.JsonSettingsMaster.IsEditTasksMode = IsEditTasksMode;
-                ReferenceValues.JsonSettingsMaster.IsDebugMode = IsDebugMode;
-                ReferenceValues.JsonSettingsMaster.TrashDay = TrashDaySelected;
-                ReferenceValues.JsonSettingsMaster.User1Checked = User1Checked;
-                ReferenceValues.JsonSettingsMaster.User2Checked = User2Checked;
-                ReferenceValues.JsonSettingsMaster.User3Checked = User3Checked;
-                ReferenceValues.JsonSettingsMaster.User4Checked = User4Checked;
-                ReferenceValues.JsonSettingsMaster.User5Checked = User5Checked;
+            ReferenceValues.JsonSettingsMaster.UserAgent = UserAgentText;
+            ReferenceValues.JsonSettingsMaster.User1Name = User1Name;
+            ReferenceValues.JsonSettingsMaster.User2Name = User2Name;
+            ReferenceValues.JsonSettingsMaster.User3Name = User3Name;
+            ReferenceValues.JsonSettingsMaster.User4Name = User4Name;
+            ReferenceValues.JsonSettingsMaster.User5Name = User5Name;
+            ReferenceValues.JsonSettingsMaster.User1NameLegal = User1NameLegal;
+            ReferenceValues.JsonSettingsMaster.User2NameLegal = User2NameLegal;
+            ReferenceValues.JsonSettingsMaster.User3NameLegal = User3NameLegal;
+            ReferenceValues.JsonSettingsMaster.User4NameLegal = User4NameLegal;
+            ReferenceValues.JsonSettingsMaster.User5NameLegal = User5NameLegal;
+            ReferenceValues.JsonSettingsMaster.User1Phone1 = User1Phone1;
+            ReferenceValues.JsonSettingsMaster.User1Phone2 = User1Phone2;
+            ReferenceValues.JsonSettingsMaster.User2Phone1 = User2Phone1;
+            ReferenceValues.JsonSettingsMaster.User2Phone2 = User2Phone2;
+            ReferenceValues.JsonSettingsMaster.PetNames = PetNames;
+            ReferenceValues.JsonSettingsMaster.Neighbor1Location = Neighbor1Location;
+            ReferenceValues.JsonSettingsMaster.Neighbor1Name = Neighbor1Name;
+            ReferenceValues.JsonSettingsMaster.Neighbor1Phone1 = Neighbor1Phone1;
+            ReferenceValues.JsonSettingsMaster.Neighbor1Phone2 = Neighbor1Phone2;
+            ReferenceValues.JsonSettingsMaster.Neighbor2Location = Neighbor2Location;
+            ReferenceValues.JsonSettingsMaster.Neighbor2Name = Neighbor2Name;
+            ReferenceValues.JsonSettingsMaster.Neighbor2Phone1 = Neighbor2Phone1;
+            ReferenceValues.JsonSettingsMaster.Neighbor2Phone2 = Neighbor2Phone2;
+            ReferenceValues.JsonSettingsMaster.AddressLine1 = AddressLine1;
+            ReferenceValues.JsonSettingsMaster.AddressLine2 = AddressLine2;
+            ReferenceValues.JsonSettingsMaster.FireExtinguisherLocation = FireExtinguisherLocation;
+            ReferenceValues.JsonSettingsMaster.HospitalAddressLine1 = HospitalAddressLine1;
+            ReferenceValues.JsonSettingsMaster.HospitalAddressLine2 = HospitalAddressLine2;
+            ReferenceValues.JsonSettingsMaster.WifiGuestName = WifiGuestName;
+            ReferenceValues.JsonSettingsMaster.WifiGuestPassword = WifiGuestPassword;
+            ReferenceValues.JsonSettingsMaster.WifiPrivateName = WifiPrivateName;
+            ReferenceValues.JsonSettingsMaster.WifiPrivatePassword = WifiPrivatePassword;
+            ReferenceValues.JsonSettingsMaster.PoliceName = PoliceName;
+            ReferenceValues.JsonSettingsMaster.PolicePhone = PolicePhone;
+            ReferenceValues.JsonSettingsMaster.EmergencyContact1Name = EmergencyContact1Name;
+            ReferenceValues.JsonSettingsMaster.EmergencyContact1Phone1 = EmergencyContact1Phone1;
+            ReferenceValues.JsonSettingsMaster.EmergencyContact1Phone2 = EmergencyContact1Phone2;
+            ReferenceValues.JsonSettingsMaster.EmergencyContact2Name = EmergencyContact2Name;
+            ReferenceValues.JsonSettingsMaster.EmergencyContact2Phone1 = EmergencyContact2Phone1;
+            ReferenceValues.JsonSettingsMaster.EmergencyContact2Phone2 = EmergencyContact2Phone2;
+            ReferenceValues.JsonSettingsMaster.AlarmCode = AlarmCode;
+            ReferenceValues.JsonSettingsMaster.ComPort = ComPort;
+            ReferenceValues.JsonSettingsMaster.IsImperialMode = ValueImperialChecked;
+            ValueMetricChecked = !ValueImperialChecked;
+            ReferenceValues.JsonSettingsMaster.IsNormalMode = IsNormalMode;
+            ReferenceValues.JsonSettingsMaster.IsEditTasksMode = IsEditTasksMode;
+            ReferenceValues.JsonSettingsMaster.IsDebugMode = IsDebugMode;
+            ReferenceValues.JsonSettingsMaster.TrashDay = TrashDaySelected;
+            ReferenceValues.JsonSettingsMaster.User1Checked = User1Checked;
+            ReferenceValues.JsonSettingsMaster.User2Checked = User2Checked;
+            ReferenceValues.JsonSettingsMaster.User3Checked = User3Checked;
+            ReferenceValues.JsonSettingsMaster.User4Checked = User4Checked;
+            ReferenceValues.JsonSettingsMaster.User5Checked = User5Checked;
 
-                try {
-                    FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster));
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "SettingsVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-                }
-            } else {
-                ReferenceValues.SoundToPlay = "missing_info";
-                SoundDispatcher.PlaySound();
+            try {
+                FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster));
+            } catch (Exception e) {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "SettingsVM",
+                    Description = e.ToString()
+                });
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             }
 
             break;

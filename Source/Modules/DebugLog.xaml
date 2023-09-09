@@ -81,10 +81,6 @@
 
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding AddSub}" Value="ADD">
-                            <Setter Property="Foreground" Value="CornflowerBlue"/>
-                        </DataTrigger>
-
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
@@ -114,7 +110,13 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto" control:GridViewSort.PropertyName="Date"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Level}" Header="Level" Width="Auto" control:GridViewSort.PropertyName="Level"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Module}" Header="Module" Width="Auto" control:GridViewSort.PropertyName="Module"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Header="Description" Width="Auto" control:GridViewSort.PropertyName="Description"/>
+                    <GridViewColumn Header="Description" Width="512">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Description}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </control:CustomListView>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Reference;
@@ -14,15 +15,49 @@ namespace HomeControl.Source.ViewModel.Calendar;
 public class EditCalendarVM : BaseViewModel {
     private CalendarEvents _calendarEventSelected;
 
-    private string _eventDate, _eventText, _locationText, _descriptionText, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, selectedPerson, _user1NameText, _user2NameText, _startTimeText, _endTimeText, _parentsBackgroundColor, _dupeButtonBackgroundColor, _dupeText;
+    private string _eventDate, _eventText, _locationText, _descriptionText, _user1NameText, _user2NameText, _user3NameText, _user4NameText, _user5NameText, _startTimeText, _endTimeText,
+        _dupeButtonBackgroundColor, _dupeText, _priority0BorderColor, _priority1BorderColor, _priority2BorderColor, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor,
+        _user5BorderColor, _homeBorderColor;
 
     private ObservableCollection<CalendarEvents> _eventList;
 
+    private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5, _imageHome;
+
+    private int _priority0BorderThickness, _priority1BorderThickness, _priority2BorderThickness, _user1BorderThickness, _user2BorderThickness, _user3BorderThickness, _user4BorderThickness,
+        _user5BorderThickness, _homeBorderThickness, priority, user;
+
     public EditCalendarVM() {
-        User1NameText = ReferenceValues.JsonSettingsMaster.User1Name;
-        User2NameText = ReferenceValues.JsonSettingsMaster.User2Name;
         EventText = "";
+        EndTimeText = "";
+        StartTimeText = "";
+        DescriptionText = "";
+        LocationText = "";
+
+        PriorityLogic(1);
+        UserLogic(0);
+
+        try {
+            Uri uri = new(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+            ImageUser1 = new BitmapImage(uri);
+            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+            ImageUser2 = new BitmapImage(uri);
+            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+            ImageUser3 = new BitmapImage(uri);
+            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+            ImageUser4 = new BitmapImage(uri);
+            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+            ImageUser5 = new BitmapImage(uri);
+            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user0.png", UriKind.RelativeOrAbsolute);
+            ImageHome = new BitmapImage(uri);
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "EditCalendarVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+        }
 
         PopulateEvent();
     }
@@ -32,9 +67,14 @@ public class EditCalendarVM : BaseViewModel {
     private void PopulateEvent() {
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
         EventList = new ObservableCollection<CalendarEvents>();
-        selectedPerson = "Home";
         CalendarEventSelected = new CalendarEvents();
-
+        
+        foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
+            if (ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd") == dates.Date) {
+                EventList = dates.EventsList;
+            }
+        }
+        
         if (ReferenceValues.IsCalendarDupeModeEnabled) {
             DupeText = "Duplicate Mode Enabled\n" + ReferenceValues.DupeEvent.StartTime + " - " + ReferenceValues.DupeEvent.EndTime + "  " + ReferenceValues.DupeEvent.EventName;
             DupeButtonBackgroundColor = "Green";
@@ -43,17 +83,133 @@ public class EditCalendarVM : BaseViewModel {
             DescriptionText = ReferenceValues.DupeEvent.Description;
             StartTimeText = ReferenceValues.DupeEvent.StartTime;
             EndTimeText = ReferenceValues.DupeEvent.EndTime;
+            PriorityLogic(ReferenceValues.DupeEvent.Priority);
+            UserLogic(ReferenceValues.DupeEvent.UserId);
         } else {
             DupeText = "";
             DupeButtonBackgroundColor = "Transparent";
         }
+    }
 
-        /* Get Calendar Events */
-        foreach (CalendarEvents calendar in ReferenceValues.JsonCalendarMaster.eventsList) {
-            Console.WriteLine(ReferenceValues.CalendarEventDate.Date + " ... " + calendar.Date);
-            if (ReferenceValues.CalendarEventDate.Date == calendar.Date) {
-                EventList.Add(calendar);
-            }
+    private void PriorityLogic(int button) {
+        priority = button;
+
+        switch (button) {
+        case 0:
+            Priority0BorderColor = "Green";
+            Priority1BorderColor = "DarkSlateGray";
+            Priority2BorderColor = "DarkSlateGray";
+            Priority0BorderThickness = 4;
+            Priority1BorderThickness = 1;
+            Priority2BorderThickness = 1;
+            break;
+        case 1:
+            Priority0BorderColor = "DarkSlateGray";
+            Priority1BorderColor = "Green";
+            Priority2BorderColor = "DarkSlateGray";
+            Priority0BorderThickness = 1;
+            Priority1BorderThickness = 4;
+            Priority2BorderThickness = 1;
+            break;
+        case 2:
+            Priority0BorderColor = "DarkSlateGray";
+            Priority1BorderColor = "DarkSlateGray";
+            Priority2BorderColor = "Green";
+            Priority0BorderThickness = 1;
+            Priority1BorderThickness = 1;
+            Priority2BorderThickness = 4;
+            break;
+        }
+    }
+
+    private void UserLogic(int button) {
+        user = button;
+
+        switch (button) {
+        case 0:
+            HomeBorderColor = "Green";
+            User1BorderColor = "DarkSlateGray";
+            User2BorderColor = "DarkSlateGray";
+            User3BorderColor = "DarkSlateGray";
+            User4BorderColor = "DarkSlateGray";
+            User5BorderColor = "DarkSlateGray";
+            HomeBorderThickness = 4;
+            User1BorderThickness = 1;
+            User2BorderThickness = 1;
+            User3BorderThickness = 1;
+            User4BorderThickness = 1;
+            User5BorderThickness = 1;
+            break;
+        case 1:
+            HomeBorderColor = "DarkSlateGray";
+            User1BorderColor = "Green";
+            User2BorderColor = "DarkSlateGray";
+            User3BorderColor = "DarkSlateGray";
+            User4BorderColor = "DarkSlateGray";
+            User5BorderColor = "DarkSlateGray";
+            HomeBorderThickness = 1;
+            User1BorderThickness = 4;
+            User2BorderThickness = 1;
+            User3BorderThickness = 1;
+            User4BorderThickness = 1;
+            User5BorderThickness = 1;
+            break;
+        case 2:
+            HomeBorderColor = "DarkSlateGray";
+            User1BorderColor = "DarkSlateGray";
+            User2BorderColor = "Green";
+            User3BorderColor = "DarkSlateGray";
+            User4BorderColor = "DarkSlateGray";
+            User5BorderColor = "DarkSlateGray";
+            HomeBorderThickness = 1;
+            User1BorderThickness = 1;
+            User2BorderThickness = 4;
+            User3BorderThickness = 1;
+            User4BorderThickness = 1;
+            User5BorderThickness = 1;
+            break;
+        case 3:
+            HomeBorderColor = "DarkSlateGray";
+            User1BorderColor = "DarkSlateGray";
+            User2BorderColor = "DarkSlateGray";
+            User3BorderColor = "Green";
+            User4BorderColor = "DarkSlateGray";
+            User5BorderColor = "DarkSlateGray";
+            HomeBorderThickness = 1;
+            User1BorderThickness = 1;
+            User2BorderThickness = 1;
+            User3BorderThickness = 4;
+            User4BorderThickness = 1;
+            User5BorderThickness = 1;
+            break;
+        case 4:
+            HomeBorderColor = "DarkSlateGray";
+            User1BorderColor = "DarkSlateGray";
+            User2BorderColor = "DarkSlateGray";
+            User3BorderColor = "DarkSlateGray";
+            User4BorderColor = "Green";
+            User5BorderColor = "DarkSlateGray";
+            HomeBorderThickness = 1;
+            User1BorderThickness = 1;
+            User2BorderThickness = 1;
+            User3BorderThickness = 1;
+            User4BorderThickness = 4;
+            User5BorderThickness = 1;
+            break;
+        case 5:
+            HomeBorderColor = "DarkSlateGray";
+            User1BorderColor = "DarkSlateGray";
+            User2BorderColor = "DarkSlateGray";
+            User3BorderColor = "DarkSlateGray";
+            User4BorderColor = "DarkSlateGray";
+            User5BorderColor = "Green";
+            HomeBorderThickness = 1;
+            User1BorderThickness = 1;
+            User2BorderThickness = 1;
+            User3BorderThickness = 1;
+            User4BorderThickness = 1;
+            User5BorderThickness = 4;
+            break;
         }
     }
 
@@ -63,6 +219,9 @@ public class EditCalendarVM : BaseViewModel {
         DescriptionText = value.Description;
         StartTimeText = value.StartTime;
         EndTimeText = value.EndTime;
+
+        PriorityLogic(value.Priority);
+        UserLogic(value.UserId);
     }
 
     private void ButtonLogic(object param) {
@@ -79,18 +238,35 @@ public class EditCalendarVM : BaseViewModel {
                     Level = "INFO",
                     Module = "EditCalendarVM",
                     Description = "Adding calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText + ", " +
-                                  LocationText + ", " + selectedPerson
+                                  LocationText + ", "
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                 EventList.Add(new CalendarEvents {
-                    Date = DateTime.Today,
                     EventName = EventText,
                     Description = DescriptionText,
                     Location = LocationText,
                     StartTime = StartTimeText,
-                    EndTime = EndTimeText
+                    EndTime = EndTimeText,
+                    Priority = priority,
+                    UserId = user,
+                    Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + user + ".png"
                 });
+
+                bool createNew = true;
+                foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
+                    if (dates.Date == ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd")) {
+                        createNew = false;
+                        dates.EventsList = EventList;
+                    }
+                }
+
+                if (createNew) {
+                    ReferenceValues.JsonCalendarMaster.DatesList.Add(new CalendarDates {
+                        Date = ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd"),
+                        EventsList = EventList
+                    });
+                }
 
                 ReferenceValues.SoundToPlay = "scribble1";
                 SoundDispatcher.PlaySound();
@@ -119,19 +295,27 @@ public class EditCalendarVM : BaseViewModel {
                                 Module = "EditCalendarVM",
                                 Description = "Updating calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " +
                                               DescriptionText + ", " +
-                                              LocationText + ", " + selectedPerson
+                                              LocationText + ", "
                             });
                             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
-                                Date = DateTime.Today,
                                 EventName = EventText,
                                 Description = DescriptionText,
                                 Location = LocationText,
                                 StartTime = StartTimeText,
-                                EndTime = EndTimeText
+                                EndTime = EndTimeText,
+                                Priority = priority,
+                                UserId = user,
+                                Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + user + ".png"
                             });
                             EventList.Remove(CalendarEventSelected);
+
+                            foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
+                                if (dates.Date == ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd")) {
+                                    dates.EventsList = EventList;
+                                }
+                            }
 
                             ReferenceValues.SoundToPlay = "scribble2";
                             SoundDispatcher.PlaySound();
@@ -167,11 +351,18 @@ public class EditCalendarVM : BaseViewModel {
                             Module = "EditCalendarVM",
                             Description = "Removing calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText +
                                           ", " +
-                                          LocationText + ", " + selectedPerson
+                                          LocationText + ", "
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         EventList.Remove(CalendarEventSelected);
+
+                        foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
+                            if (dates.Date == ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd")) {
+                                dates.EventsList = EventList;
+                            }
+                        }
+
                         ReferenceValues.SoundToPlay = "scribble3";
                         SoundDispatcher.PlaySound();
 
@@ -208,7 +399,10 @@ public class EditCalendarVM : BaseViewModel {
                         Description = DescriptionText,
                         Location = LocationText,
                         StartTime = StartTimeText,
-                        EndTime = EndTimeText
+                        EndTime = EndTimeText,
+                        Priority = priority,
+                        UserId = user,
+                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + user + ".png"
                     };
 
                     DupeText = "Duplicate Mode Enabled\n" + StartTimeText + " - " + EndTimeText + "  " + EventText;
@@ -216,29 +410,32 @@ public class EditCalendarVM : BaseViewModel {
             }
 
             break;
+        case "priority1":
+            PriorityLogic(1);
+            break;
+        case "priority2":
+            PriorityLogic(2);
+            break;
+        case "priority3":
+            PriorityLogic(3);
+            break;
         case "user1":
-            selectedPerson = ReferenceValues.JsonSettingsMaster.User1Name;
-
+            UserLogic(1);
             break;
         case "user2":
-            selectedPerson = ReferenceValues.JsonSettingsMaster.User2Name;
-
+            UserLogic(2);
             break;
         case "user3":
-            selectedPerson = "Children";
-
+            UserLogic(3);
             break;
         case "user4":
-            selectedPerson = "Parents";
-
+            UserLogic(4);
             break;
         case "user5":
-            selectedPerson = "Home";
-
+            UserLogic(5);
             break;
-        case "other":
-            selectedPerson = "Other";
-
+        case "user0":
+            UserLogic(0);
             break;
         case "addDay":
             ReferenceValues.CalendarEventDate = ReferenceValues.CalendarEventDate.AddDays(1);
@@ -255,10 +452,7 @@ public class EditCalendarVM : BaseViewModel {
         try {
             IOrderedEnumerable<CalendarEvents> orderByResult = from s in EventList orderby s.StartTime select s;
             EventList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            //TODO: ADD EVENTS TO MAIN LIST
-
-            //FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
+            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -321,54 +515,6 @@ public class EditCalendarVM : BaseViewModel {
         }
     }
 
-    public string User1BackgroundColor {
-        get => _user1BackgroundColor;
-        set {
-            _user1BackgroundColor = value;
-            RaisePropertyChangedEvent("User1BackgroundColor");
-        }
-    }
-
-    public string User2BackgroundColor {
-        get => _user2BackgroundColor;
-        set {
-            _user2BackgroundColor = value;
-            RaisePropertyChangedEvent("User2BackgroundColor");
-        }
-    }
-
-    public string ParentsBackgroundColor {
-        get => _parentsBackgroundColor;
-        set {
-            _parentsBackgroundColor = value;
-            RaisePropertyChangedEvent("ParentsBackgroundColor");
-        }
-    }
-
-    public string ChildrenBackgroundColor {
-        get => _childrenBackgroundColor;
-        set {
-            _childrenBackgroundColor = value;
-            RaisePropertyChangedEvent("ChildrenBackgroundColor");
-        }
-    }
-
-    public string HomeBackgroundColor {
-        get => _homeBackgroundColor;
-        set {
-            _homeBackgroundColor = value;
-            RaisePropertyChangedEvent("HomeBackgroundColor");
-        }
-    }
-
-    public string OtherBackgroundColor {
-        get => _otherBackgroundColor;
-        set {
-            _otherBackgroundColor = value;
-            RaisePropertyChangedEvent("OtherBackgroundColor");
-        }
-    }
-
     public string User1NameText {
         get => _user1NameText;
         set {
@@ -382,6 +528,30 @@ public class EditCalendarVM : BaseViewModel {
         set {
             _user2NameText = value;
             RaisePropertyChangedEvent("User2NameText");
+        }
+    }
+
+    public string User3NameText {
+        get => _user3NameText;
+        set {
+            _user3NameText = value;
+            RaisePropertyChangedEvent("User3NameText");
+        }
+    }
+
+    public string User4NameText {
+        get => _user4NameText;
+        set {
+            _user4NameText = value;
+            RaisePropertyChangedEvent("User4NameText");
+        }
+    }
+
+    public string User5NameText {
+        get => _user5NameText;
+        set {
+            _user5NameText = value;
+            RaisePropertyChangedEvent("User5NameText");
         }
     }
 
@@ -414,6 +584,198 @@ public class EditCalendarVM : BaseViewModel {
         set {
             _dupeText = value;
             RaisePropertyChangedEvent("DupeText");
+        }
+    }
+
+    public string User1BorderColor {
+        get => _user1BorderColor;
+        set {
+            _user1BorderColor = value;
+            RaisePropertyChangedEvent("User1BorderColor");
+        }
+    }
+
+    public string User2BorderColor {
+        get => _user2BorderColor;
+        set {
+            _user2BorderColor = value;
+            RaisePropertyChangedEvent("User2BorderColor");
+        }
+    }
+
+    public string User3BorderColor {
+        get => _user3BorderColor;
+        set {
+            _user3BorderColor = value;
+            RaisePropertyChangedEvent("User3BorderColor");
+        }
+    }
+
+    public string User4BorderColor {
+        get => _user4BorderColor;
+        set {
+            _user4BorderColor = value;
+            RaisePropertyChangedEvent("User4BorderColor");
+        }
+    }
+
+    public string User5BorderColor {
+        get => _user5BorderColor;
+        set {
+            _user5BorderColor = value;
+            RaisePropertyChangedEvent("User5BorderColor");
+        }
+    }
+
+    public string HomeBorderColor {
+        get => _homeBorderColor;
+        set {
+            _homeBorderColor = value;
+            RaisePropertyChangedEvent("HomeBorderColor");
+        }
+    }
+    
+    public string Priority0BorderColor {
+        get => _priority0BorderColor;
+        set {
+            _priority0BorderColor = value;
+            RaisePropertyChangedEvent("Priority0BorderColor");
+        }
+    }
+
+    public string Priority1BorderColor {
+        get => _priority1BorderColor;
+        set {
+            _priority1BorderColor = value;
+            RaisePropertyChangedEvent("Priority1BorderColor");
+        }
+    }
+
+    public string Priority2BorderColor {
+        get => _priority2BorderColor;
+        set {
+            _priority2BorderColor = value;
+            RaisePropertyChangedEvent("Priority2BorderColor");
+        }
+    }
+
+    public int User1BorderThickness {
+        get => _user1BorderThickness;
+        set {
+            _user1BorderThickness = value;
+            RaisePropertyChangedEvent("User1BorderThickness");
+        }
+    }
+
+    public int User2BorderThickness {
+        get => _user2BorderThickness;
+        set {
+            _user2BorderThickness = value;
+            RaisePropertyChangedEvent("User2BorderThickness");
+        }
+    }
+
+    public int User3BorderThickness {
+        get => _user3BorderThickness;
+        set {
+            _user3BorderThickness = value;
+            RaisePropertyChangedEvent("User3BorderThickness");
+        }
+    }
+
+    public int User4BorderThickness {
+        get => _user4BorderThickness;
+        set {
+            _user4BorderThickness = value;
+            RaisePropertyChangedEvent("User4BorderThickness");
+        }
+    }
+
+    public int User5BorderThickness {
+        get => _user5BorderThickness;
+        set {
+            _user5BorderThickness = value;
+            RaisePropertyChangedEvent("User5BorderThickness");
+        }
+    }
+
+    public int HomeBorderThickness {
+        get => _homeBorderThickness;
+        set {
+            _homeBorderThickness = value;
+            RaisePropertyChangedEvent("HomeBorderThickness");
+        }
+    }
+    
+    public int Priority0BorderThickness {
+        get => _priority0BorderThickness;
+        set {
+            _priority0BorderThickness = value;
+            RaisePropertyChangedEvent("Priority0BorderThickness");
+        }
+    }
+
+    public int Priority1BorderThickness {
+        get => _priority1BorderThickness;
+        set {
+            _priority1BorderThickness = value;
+            RaisePropertyChangedEvent("Priority1BorderThickness");
+        }
+    }
+
+    public int Priority2BorderThickness {
+        get => _priority2BorderThickness;
+        set {
+            _priority2BorderThickness = value;
+            RaisePropertyChangedEvent("Priority2BorderThickness");
+        }
+    }
+
+    public BitmapImage ImageUser1 {
+        get => _imageUser1;
+        set {
+            _imageUser1 = value;
+            RaisePropertyChangedEvent("ImageUser1");
+        }
+    }
+
+    public BitmapImage ImageUser2 {
+        get => _imageUser2;
+        set {
+            _imageUser2 = value;
+            RaisePropertyChangedEvent("ImageUser2");
+        }
+    }
+
+    public BitmapImage ImageUser3 {
+        get => _imageUser3;
+        set {
+            _imageUser3 = value;
+            RaisePropertyChangedEvent("ImageUser3");
+        }
+    }
+
+    public BitmapImage ImageUser4 {
+        get => _imageUser4;
+        set {
+            _imageUser4 = value;
+            RaisePropertyChangedEvent("ImageUser4");
+        }
+    }
+
+    public BitmapImage ImageUser5 {
+        get => _imageUser5;
+        set {
+            _imageUser5 = value;
+            RaisePropertyChangedEvent("ImageUser5");
+        }
+    }
+
+    public BitmapImage ImageHome {
+        get => _imageHome;
+        set {
+            _imageHome = value;
+            RaisePropertyChangedEvent("ImageHome");
         }
     }
 

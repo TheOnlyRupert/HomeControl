@@ -117,8 +117,8 @@
                     </ListView.Resources>
                     <ListView.View>
                         <GridView AllowsColumnReorder="false">
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=date}" Header="Date" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=eventText}" Header="Recurring Date Text" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=EventText}" Header="Recurring Date Text" Width="Auto"/>
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>

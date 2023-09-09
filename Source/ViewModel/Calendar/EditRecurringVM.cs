@@ -11,14 +11,14 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Calendar;
 
 public class EditRecurringVM : BaseViewModel {
-    private readonly string fileName;
     private CalendarEventsRecurring _calendarEventSelected;
     private string _dateText, _holidayText;
     private ObservableCollection<CalendarEventsRecurring> _eventList;
 
     public EditRecurringVM() {
-        fileName = ReferenceValues.FILE_DIRECTORY + "events.json";
-        EventList = new ObservableCollection<CalendarEventsRecurring>();
+        EventList = ReferenceValues.JsonCalendarMaster.EventsListRecurring;
+        Console.WriteLine(EventList.Count + " .. " + ReferenceValues.JsonCalendarMaster.EventsListRecurring.Count);
+
         DateText = DateTime.Now.ToShortDateString();
         HolidayText = "";
     }
@@ -137,7 +137,7 @@ public class EditRecurringVM : BaseViewModel {
 
     private void SaveJson() {
         try {
-            ReferenceValues.JsonCalendarMaster.eventsListRecurring = EventList;
+            ReferenceValues.JsonCalendarMaster.EventsListRecurring = EventList;
             FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {

@@ -133,11 +133,12 @@ public class FinancesVM : BaseViewModel {
     }
 
     private void BackupFinances() {
-        Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "finances_backup/");
+        Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY + "backups/");
 
         try {
-            FileHelpers.SaveFileText(ReferenceValues.FILE_DIRECTORY + "finances_backup/finances_" + DateTime.Now.ToString("yyyy_MM_dd"), JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster));
+            FileHelpers.SaveFileText("backups/finance_backup_" + DateTime.Now.ToString("yyyy_MM_dd"), JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster));
         } catch (Exception e) {
+            Console.WriteLine(e);
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",

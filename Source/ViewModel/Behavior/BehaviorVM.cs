@@ -1760,7 +1760,7 @@ public class BehaviorVM : BaseViewModel {
         }
 
         try {
-            FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
+            FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster));
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,

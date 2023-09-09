@@ -528,119 +528,78 @@ public class EditBehaviorVM : BaseViewModel {
     }
 
     private void ButtonLogic(object param) {
-        if (!ReferenceValues.LockUI) {
-            switch (param) {
-            case "addStrike":
-                if (RewardButtonVisibility == "HIDDEN") {
-                    if (strikes < 3) {
-                        MessageBoxResult result = MessageBox.Show("Are you sure you want to add a strike?\nThis will reset all progress (but not stars)", "Confirmation",
-                            MessageBoxButton.YesNo,
-                            MessageBoxImage.Question);
-                        if (result == MessageBoxResult.Yes) {
-                            strikes++;
-                            ProgressBarChildValue = 0;
-                            ProgressBarChildValueText = "0/5";
-                            ReferenceValues.SoundToPlay = "buzzer";
-                            SoundDispatcher.PlaySound();
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "EditBehaviorVM",
-                                Description = "Adding strike to " + ChildName
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-
-                            if (strikes == 3) {
-                                stars--;
-                                if (stars < 0) {
-                                    stars = 0;
-                                }
-                            }
-                        }
-                    } else {
-                        ReferenceValues.SoundToPlay = "unable";
-                        SoundDispatcher.PlaySound();
-                    }
-                }
-
-                break;
-            case "add1":
-                if (RewardButtonVisibility == "HIDDEN") {
-                    if (strikes != 3) {
-                        ProgressBarChildValue++;
-                        ProgressBarChildValueText = ProgressBarChildValue + "/5";
-                        if (ProgressBarChildValue > 4) {
-                            if (stars < 5) {
-                                stars++;
-                                ProgressBarChildValue = 0;
-                                ProgressBarChildValueText = "0/5";
-
-                                if (stars == 5) {
-                                    ProgressBarChildValue = 5;
-                                    ProgressBarChildValueText = "5/5";
-                                }
-
-                                ReferenceValues.SoundToPlay = "yay";
-                                SoundDispatcher.PlaySound();
-                                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                    Date = DateTime.Now,
-                                    Level = "INFO",
-                                    Module = "EditBehaviorVM",
-                                    Description = "Adding progress (which resulted in a star) to " + ChildName
-                                });
-                                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-                            } else {
-                                ProgressBarChildValue = 5;
-                                ProgressBarChildValueText = "5/5";
-                            }
-                        } else {
-                            ReferenceValues.SoundToPlay = "ding";
-                            SoundDispatcher.PlaySound();
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "EditBehaviorVM",
-                                Description = "Adding progress to " + ChildName
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-                        }
-                    } else {
-                        ReferenceValues.SoundToPlay = "unable";
-                        SoundDispatcher.PlaySound();
-                    }
-                }
-
-                break;
-            case "remove1":
-                if (RewardButtonVisibility == "HIDDEN" && strikes != 3) {
-                    ProgressBarChildValue--;
-                    ProgressBarChildValueText = ProgressBarChildValue + "/5";
-                    if (ProgressBarChildValue < 0) {
-                        if (stars > 0) {
-                            stars--;
-                            ProgressBarChildValue = 4;
-                            ProgressBarChildValueText = "4/5";
-                            ReferenceValues.SoundToPlay = "aww";
-                            SoundDispatcher.PlaySound();
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "EditBehaviorVM",
-                                Description = "Removing progress (which resulted in a loss of a star) from " + ChildName
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-                        } else {
-                            ProgressBarChildValue = 0;
-                            ProgressBarChildValueText = "0/5";
-                        }
-                    } else {
-                        ReferenceValues.SoundToPlay = "error";
+        switch (param) {
+        case "addStrike":
+            if (RewardButtonVisibility == "HIDDEN") {
+                if (strikes < 3) {
+                    MessageBoxResult result = MessageBox.Show("Are you sure you want to add a strike?\nThis will reset all progress (but not stars)", "Confirmation",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes) {
+                        strikes++;
+                        ProgressBarChildValue = 0;
+                        ProgressBarChildValueText = "0/5";
+                        ReferenceValues.SoundToPlay = "buzzer";
                         SoundDispatcher.PlaySound();
                         ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditBehaviorVM",
-                            Description = "Removing progress from " + ChildName
+                            Description = "Adding strike to " + ChildName
+                        });
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+
+                        if (strikes == 3) {
+                            stars--;
+                            if (stars < 0) {
+                                stars = 0;
+                            }
+                        }
+                    }
+                } else {
+                    ReferenceValues.SoundToPlay = "unable";
+                    SoundDispatcher.PlaySound();
+                }
+            }
+
+            break;
+        case "add1":
+            if (RewardButtonVisibility == "HIDDEN") {
+                if (strikes != 3) {
+                    ProgressBarChildValue++;
+                    ProgressBarChildValueText = ProgressBarChildValue + "/5";
+                    if (ProgressBarChildValue > 4) {
+                        if (stars < 5) {
+                            stars++;
+                            ProgressBarChildValue = 0;
+                            ProgressBarChildValueText = "0/5";
+
+                            if (stars == 5) {
+                                ProgressBarChildValue = 5;
+                                ProgressBarChildValueText = "5/5";
+                            }
+
+                            ReferenceValues.SoundToPlay = "yay";
+                            SoundDispatcher.PlaySound();
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "INFO",
+                                Module = "EditBehaviorVM",
+                                Description = "Adding progress (which resulted in a star) to " + ChildName
+                            });
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        } else {
+                            ProgressBarChildValue = 5;
+                            ProgressBarChildValueText = "5/5";
+                        }
+                    } else {
+                        ReferenceValues.SoundToPlay = "ding";
+                        SoundDispatcher.PlaySound();
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "EditBehaviorVM",
+                            Description = "Adding progress to " + ChildName
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
                     }
@@ -648,56 +607,95 @@ public class EditBehaviorVM : BaseViewModel {
                     ReferenceValues.SoundToPlay = "unable";
                     SoundDispatcher.PlaySound();
                 }
-
-                break;
-            case "reward":
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "INFO",
-                    Module = "EditBehaviorVM",
-                    Description = ChildName + " claimed their reward!"
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-                stars = 0;
-                ProgressBarChildValue = 0;
-                ProgressBarChildValueText = "0/5";
-                RewardButtonVisibility = "HIDDEN";
-                ReferenceValues.SoundToPlay = "reward";
-                SoundDispatcher.PlaySound();
-
-                break;
-            case "daily":
-                TasksDaily tasksDaily = new();
-                tasksDaily.ShowDialog();
-                tasksDaily.Close();
-                RefreshTasks();
-
-                break;
-            case "weekly":
-                TasksWeekly tasksWeekly = new();
-                tasksWeekly.ShowDialog();
-                tasksWeekly.Close();
-                RefreshTasks();
-
-                break;
-            case "monthly":
-                TasksMonthly tasksMonthly = new();
-                tasksMonthly.ShowDialog();
-                tasksMonthly.Close();
-                RefreshTasks();
-
-                break;
-            case "quarterly":
-                TasksQuarterly tasksQuarterly = new();
-                tasksQuarterly.ShowDialog();
-                tasksQuarterly.Close();
-                RefreshTasks();
-
-                break;
             }
 
-            RefreshBehavior();
+            break;
+        case "remove1":
+            if (RewardButtonVisibility == "HIDDEN" && strikes != 3) {
+                ProgressBarChildValue--;
+                ProgressBarChildValueText = ProgressBarChildValue + "/5";
+                if (ProgressBarChildValue < 0) {
+                    if (stars > 0) {
+                        stars--;
+                        ProgressBarChildValue = 4;
+                        ProgressBarChildValueText = "4/5";
+                        ReferenceValues.SoundToPlay = "aww";
+                        SoundDispatcher.PlaySound();
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "EditBehaviorVM",
+                            Description = "Removing progress (which resulted in a loss of a star) from " + ChildName
+                        });
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    } else {
+                        ProgressBarChildValue = 0;
+                        ProgressBarChildValueText = "0/5";
+                    }
+                } else {
+                    ReferenceValues.SoundToPlay = "error";
+                    SoundDispatcher.PlaySound();
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "INFO",
+                        Module = "EditBehaviorVM",
+                        Description = "Removing progress from " + ChildName
+                    });
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                }
+            } else {
+                ReferenceValues.SoundToPlay = "unable";
+                SoundDispatcher.PlaySound();
+            }
+
+            break;
+        case "reward":
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "EditBehaviorVM",
+                Description = ChildName + " claimed their reward!"
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            stars = 0;
+            ProgressBarChildValue = 0;
+            ProgressBarChildValueText = "0/5";
+            RewardButtonVisibility = "HIDDEN";
+            ReferenceValues.SoundToPlay = "reward";
+            SoundDispatcher.PlaySound();
+
+            break;
+        case "daily":
+            TasksDaily tasksDaily = new();
+            tasksDaily.ShowDialog();
+            tasksDaily.Close();
+            RefreshTasks();
+
+            break;
+        case "weekly":
+            TasksWeekly tasksWeekly = new();
+            tasksWeekly.ShowDialog();
+            tasksWeekly.Close();
+            RefreshTasks();
+
+            break;
+        case "monthly":
+            TasksMonthly tasksMonthly = new();
+            tasksMonthly.ShowDialog();
+            tasksMonthly.Close();
+            RefreshTasks();
+
+            break;
+        case "quarterly":
+            TasksQuarterly tasksQuarterly = new();
+            tasksQuarterly.ShowDialog();
+            tasksQuarterly.Close();
+            RefreshTasks();
+
+            break;
         }
+
+        RefreshBehavior();
     }
 
     #region Fields
