@@ -34,4 +34,5 @@ public class CalendarEventsCustom {
 public class CalendarEventsRecurring {
     public DateTime Date { get; set; }
     public string EventText { get; set; }
+    public string Image { get; set; }
 }

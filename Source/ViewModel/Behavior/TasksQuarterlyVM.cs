@@ -158,7 +158,7 @@ public class TasksQuarterlyVM : BaseViewModel {
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
-                    ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
+                    ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                     RoomNumber = RoomSelectedIndex
                 });
 
@@ -190,7 +190,7 @@ public class TasksQuarterlyVM : BaseViewModel {
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
-                                ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
+                                ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                                 RoomNumber = RoomSelectedIndex
                             });
 
@@ -253,7 +253,7 @@ public class TasksQuarterlyVM : BaseViewModel {
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
+                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                         IsCompleted = true,
                         RoomNumber = RoomSelectedIndex,
                         DateCompleted = DateTime.Now.ToString("MM/dd")
@@ -293,7 +293,7 @@ public class TasksQuarterlyVM : BaseViewModel {
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
+                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                         RoomNumber = RoomSelectedIndex,
                         DateCompleted = ""
                     });
@@ -411,46 +411,44 @@ public class TasksQuarterlyVM : BaseViewModel {
     }
 
     private void SaveJson() {
-        if (TaskList.Count > 0) {
-            try {
-                switch (ReferenceValues.ActiveBehaviorUser) {
-                case 1:
-                    ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1 = TaskList;
-                    break;
-                case 2:
-                    ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2 = TaskList;
-                    break;
-                case 3:
-                    ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3 = TaskList;
-                    break;
-                case 4:
-                    ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4 = TaskList;
-                    break;
-                case 5:
-                    ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5 = TaskList;
-                    break;
-                }
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "TaskQuarterlyVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+        try {
+            switch (ReferenceValues.ActiveBehaviorUser) {
+            case 1:
+                ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1 = TaskList;
+                break;
+            case 2:
+                ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2 = TaskList;
+                break;
+            case 3:
+                ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3 = TaskList;
+                break;
+            case 4:
+                ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4 = TaskList;
+                break;
+            case 5:
+                ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5 = TaskList;
+                break;
             }
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "TaskQuarterlyVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+        }
 
-            try {
-                FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "TaskQuarterlyVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-            }
+        try {
+            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "TaskQuarterlyVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 

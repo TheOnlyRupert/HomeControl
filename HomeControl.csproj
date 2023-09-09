@@ -5,7 +5,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{A8AAB6E4-8B96-4171-A46A-2650B7118841}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <RootNamespace>HomeControl</RootNamespace>
         <AssemblyName>HomeControl</AssemblyName>
         <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -307,12 +307,7 @@
         <None Include="packages.config"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\icon.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\alarms.png">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Resource>
+        <Resource Include="Resources\Images\icons\alarms.png"/>
         <Resource Include="Resources\Images\icons\calendar.png"/>
         <Resource Include="Resources\Images\icons\chores.png"/>
         <Resource Include="Resources\Images\icons\coin_flip.png"/>
@@ -324,36 +319,36 @@
         <Resource Include="Resources\Images\icons\wifi.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\chores\bathtub.png"/>
-        <Resource Include="Resources\Images\chores\bed.png"/>
-        <Resource Include="Resources\Images\chores\brushTeeth.png"/>
-        <Resource Include="Resources\Images\chores\chicken.png"/>
-        <Resource Include="Resources\Images\chores\chickenPen.png"/>
-        <Resource Include="Resources\Images\chores\couch.png"/>
-        <Resource Include="Resources\Images\chores\desk.png"/>
-        <Resource Include="Resources\Images\chores\dog.png"/>
-        <Resource Include="Resources\Images\chores\dryer.png"/>
-        <Resource Include="Resources\Images\chores\fan.png"/>
-        <Resource Include="Resources\Images\chores\food.png"/>
-        <Resource Include="Resources\Images\chores\fridge.png"/>
-        <Resource Include="Resources\Images\chores\laundry.png"/>
-        <Resource Include="Resources\Images\chores\laundry2.png"/>
-        <Resource Include="Resources\Images\chores\lips.png"/>
-        <Resource Include="Resources\Images\chores\makeBed.png"/>
-        <Resource Include="Resources\Images\chores\medication.png"/>
-        <Resource Include="Resources\Images\chores\mop.png"/>
-        <Resource Include="Resources\Images\chores\shelves.png"/>
-        <Resource Include="Resources\Images\chores\shower.png"/>
-        <Resource Include="Resources\Images\chores\sink.png"/>
-        <Resource Include="Resources\Images\chores\stainlessSteel.png"/>
-        <Resource Include="Resources\Images\chores\sweep.png"/>
-        <Resource Include="Resources\Images\chores\table.png"/>
-        <Resource Include="Resources\Images\chores\toilet.png"/>
-        <Resource Include="Resources\Images\chores\toys.png"/>
-        <Resource Include="Resources\Images\chores\tv.png"/>
-        <Resource Include="Resources\Images\chores\vacuum.png"/>
-        <Resource Include="Resources\Images\chores\vehicle1.png"/>
-        <Resource Include="Resources\Images\chores\workout.png"/>
+        <Resource Include="Resources\Images\icons\bathtub.png"/>
+        <Resource Include="Resources\Images\icons\bed.png"/>
+        <Resource Include="Resources\Images\icons\birthday.png"/>
+        <Resource Include="Resources\Images\icons\brushTeeth.png"/>
+        <Resource Include="Resources\Images\icons\chicken.png"/>
+        <Resource Include="Resources\Images\icons\chickenPen.png"/>
+        <Resource Include="Resources\Images\icons\couch.png"/>
+        <Resource Include="Resources\Images\icons\desk.png"/>
+        <Resource Include="Resources\Images\icons\dog.png"/>
+        <Resource Include="Resources\Images\icons\dryer.png"/>
+        <Resource Include="Resources\Images\icons\fan.png"/>
+        <Resource Include="Resources\Images\icons\food.png"/>
+        <Resource Include="Resources\Images\icons\fridge.png"/>
+        <Resource Include="Resources\Images\icons\laundry.png"/>
+        <Resource Include="Resources\Images\icons\laundry2.png"/>
+        <Resource Include="Resources\Images\icons\lips.png"/>
+        <Resource Include="Resources\Images\icons\makeBed.png"/>
+        <Resource Include="Resources\Images\icons\medication.png"/>
+        <Resource Include="Resources\Images\icons\mop.png"/>
+        <Resource Include="Resources\Images\icons\shelves.png"/>
+        <Resource Include="Resources\Images\icons\shower.png"/>
+        <Resource Include="Resources\Images\icons\sink.png"/>
+        <Resource Include="Resources\Images\icons\stainlessSteel.png"/>
+        <Resource Include="Resources\Images\icons\sweep.png"/>
+        <Resource Include="Resources\Images\icons\table.png"/>
+        <Resource Include="Resources\Images\icons\toilet.png"/>
+        <Resource Include="Resources\Images\icons\toys.png"/>
+        <Resource Include="Resources\Images\icons\tv.png"/>
+        <Resource Include="Resources\Images\icons\vacuum.png"/>
+        <Resource Include="Resources\Images\icons\vehicle1.png"/>
         <Content Include="Resources\Sounds\zoom.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -617,22 +612,7 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\clock\clockface.png"/>
-    </ItemGroup>
-    <ItemGroup>
         <Resource Include="Resources\Images\icons\clock.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\clock\hand_hour.png"/>
-        <Resource Include="Resources\Images\clock\hand_min.png"/>
-        <Resource Include="Resources\Images\clock\hand_sec.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\groceries\aldi.png"/>
-        <Resource Include="Resources\Images\groceries\kroger.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\groceries\food_lion.png"/>
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\games\quarter_head.png"/>

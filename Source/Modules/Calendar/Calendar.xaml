@@ -278,7 +278,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -286,7 +286,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -375,7 +375,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -383,7 +383,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -417,7 +417,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button3Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button3HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button3HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
 
                         <ListView ItemsSource="{Binding Button3EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
@@ -473,7 +473,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -481,7 +481,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -515,7 +515,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button4Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button4HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button4HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
 
                         <ListView ItemsSource="{Binding Button4EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
@@ -570,7 +570,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -578,7 +578,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -612,7 +612,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button5Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button5HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button5HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button5EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -666,7 +666,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -674,7 +674,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -708,7 +708,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button6Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button6HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button6HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button6EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -762,7 +762,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -770,7 +770,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -804,7 +804,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button7Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button7HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button7HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button7EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -858,7 +858,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -866,7 +866,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -900,7 +900,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button8Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button8HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button8HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button8EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -954,7 +954,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -962,7 +962,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -996,7 +996,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button9Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button9HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button9HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button9EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1050,7 +1050,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1058,7 +1058,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1092,7 +1092,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button10Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button10HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button10HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button10EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1146,7 +1146,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1154,7 +1154,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1188,7 +1188,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button11Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button11HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button11HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button11EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1242,7 +1242,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1250,7 +1250,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1284,7 +1284,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button12Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button12HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button12HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button12EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1338,7 +1338,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1346,7 +1346,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1380,7 +1380,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button13Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button13HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button13HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button13EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1434,7 +1434,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1442,7 +1442,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1476,7 +1476,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button14Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button14HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button14HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button14EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1530,7 +1530,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1538,7 +1538,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1572,7 +1572,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button15Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button15HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button15HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button15EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1626,7 +1626,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1634,7 +1634,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1668,7 +1668,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button16Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button16HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button16HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button16EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1722,7 +1722,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1730,7 +1730,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1764,7 +1764,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button17Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button17HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button17HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button17EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1818,7 +1818,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1826,7 +1826,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1860,7 +1860,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button18Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button18HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button18HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button18EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -1914,7 +1914,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1922,7 +1922,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1956,7 +1956,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button19Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button19HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button19HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button19EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2010,7 +2010,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2018,7 +2018,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2052,7 +2052,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button20Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button20HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button20HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button20EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2106,7 +2106,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2114,7 +2114,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2148,7 +2148,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button21Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button21HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button21HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button21EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2202,7 +2202,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2210,7 +2210,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2244,7 +2244,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button22Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button22HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button22HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button22EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2298,7 +2298,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2306,7 +2306,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2340,7 +2340,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button23Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button23HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button23HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button23EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2394,7 +2394,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2402,7 +2402,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2436,7 +2436,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button24Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button24HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button24HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button24EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2490,7 +2490,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2498,7 +2498,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2532,7 +2532,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button25Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button25HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button25HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button25EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2586,7 +2586,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2594,7 +2594,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2628,7 +2628,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button26Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button26HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button26HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button26EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2682,7 +2682,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2690,7 +2690,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2724,7 +2724,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button27Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button27HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button27HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button27EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2778,7 +2778,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2786,7 +2786,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2820,7 +2820,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button28Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button28HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button28HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button28EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2874,7 +2874,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2882,7 +2882,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2916,7 +2916,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button29Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button29HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button29HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button29EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -2970,7 +2970,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2978,7 +2978,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3012,7 +3012,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button30Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button30HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button30HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button30EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3066,7 +3066,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3074,7 +3074,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3108,7 +3108,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button31Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button31HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button31HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button31EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3162,7 +3162,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3170,7 +3170,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3204,7 +3204,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button32Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button32HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button32HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button32EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3258,7 +3258,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3266,7 +3266,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3300,7 +3300,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button33Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button33HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button33HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button33EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3354,7 +3354,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3362,7 +3362,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3396,7 +3396,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button34Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button34HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button34HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button34EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3450,7 +3450,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3458,7 +3458,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3492,7 +3492,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button35Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button35HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button35HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button35EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3546,7 +3546,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3554,7 +3554,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3588,7 +3588,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button36Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button36HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button36HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button36EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3642,7 +3642,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3650,7 +3650,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3684,7 +3684,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button37Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button37HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button37HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button37EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3738,7 +3738,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3746,7 +3746,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3780,7 +3780,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button38Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button38HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button38HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button38EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3834,7 +3834,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3842,7 +3842,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3876,7 +3876,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button39Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button39HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button39HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button39EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -3930,7 +3930,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3938,7 +3938,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3972,7 +3972,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button40Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button40HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button40HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button40EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -4026,7 +4026,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -4034,7 +4034,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -4068,7 +4068,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button41Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button41HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button41HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button41EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -4122,7 +4122,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -4130,7 +4130,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -4164,7 +4164,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Button42Date}" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Button42HolidayText}" HorizontalAlignment="Right" Foreground="Red"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Button42HolidayText}" HorizontalAlignment="Right" Foreground="Red" FontWeight="Bold"/>
                         </Grid>
                         <ListView ItemsSource="{Binding Button42EventList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" FontSize="8"
                                   DockPanel.Dock="Bottom" Margin="-4 0 0 0">
@@ -4218,7 +4218,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4"/>
+                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -4226,7 +4226,7 @@
                                     <GridViewColumn Width="128">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Description}" FontSize="8"/>
+                                                <TextBlock Text="{Binding Description}" FontSize="8" Margin="-6 0 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

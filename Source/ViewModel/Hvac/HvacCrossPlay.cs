@@ -22,7 +22,7 @@ public static class HvacCrossPlay {
                 comPortMessage = false;
                 intMessageSent = false;
                 extMessageSent = false;
-                // ReferenceValues.SerialPort.Write("0");
+                ReferenceValues.SerialPort.Write("0");
             }
         } catch (Exception) {
             if (!comPortMessage) {

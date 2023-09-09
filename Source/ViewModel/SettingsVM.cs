@@ -19,7 +19,7 @@ public class SettingsVM : BaseViewModel {
         _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected;
 
     private bool _valueImperialChecked, _valueMetricChecked, _isEditTasksMode, _isNormalMode, _isDebugMode, _user1Checked, _user2Checked, _user3Checked, _user4Checked,
-        _user5Checked;
+        _user5Checked, _user1BehaviorChecked, _user2BehaviorChecked, _user3BehaviorChecked, _user4BehaviorChecked, _user5BehaviorChecked;
 
     public SettingsVM() {
         TrashDayList = new List<string>(new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "DISABLED" });
@@ -79,6 +79,11 @@ public class SettingsVM : BaseViewModel {
         User3Checked = ReferenceValues.JsonSettingsMaster.User3Checked;
         User4Checked = ReferenceValues.JsonSettingsMaster.User4Checked;
         User5Checked = ReferenceValues.JsonSettingsMaster.User5Checked;
+        User1BehaviorChecked = ReferenceValues.JsonSettingsMaster.User1BehaviorChecked;
+        User2BehaviorChecked = ReferenceValues.JsonSettingsMaster.User2BehaviorChecked;
+        User3BehaviorChecked = ReferenceValues.JsonSettingsMaster.User3BehaviorChecked;
+        User4BehaviorChecked = ReferenceValues.JsonSettingsMaster.User4BehaviorChecked;
+        User5BehaviorChecked = ReferenceValues.JsonSettingsMaster.User5BehaviorChecked;
 
         if (!IsNormalMode && !IsEditTasksMode && !IsDebugMode) {
             IsNormalMode = true;
@@ -144,6 +149,11 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.User3Checked = User3Checked;
             ReferenceValues.JsonSettingsMaster.User4Checked = User4Checked;
             ReferenceValues.JsonSettingsMaster.User5Checked = User5Checked;
+            ReferenceValues.JsonSettingsMaster.User1BehaviorChecked = User1BehaviorChecked;
+            ReferenceValues.JsonSettingsMaster.User2BehaviorChecked = User2BehaviorChecked;
+            ReferenceValues.JsonSettingsMaster.User3BehaviorChecked = User3BehaviorChecked;
+            ReferenceValues.JsonSettingsMaster.User4BehaviorChecked = User4BehaviorChecked;
+            ReferenceValues.JsonSettingsMaster.User5BehaviorChecked = User5BehaviorChecked;
 
             try {
                 FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster));
@@ -600,6 +610,46 @@ public class SettingsVM : BaseViewModel {
         set {
             _user5Checked = value;
             RaisePropertyChangedEvent("User5Checked");
+        }
+    }
+
+    public bool User1BehaviorChecked {
+        get => _user1BehaviorChecked;
+        set {
+            _user1BehaviorChecked = value;
+            RaisePropertyChangedEvent("User1BehaviorChecked");
+        }
+    }
+
+    public bool User2BehaviorChecked {
+        get => _user2BehaviorChecked;
+        set {
+            _user2BehaviorChecked = value;
+            RaisePropertyChangedEvent("User2BehaviorChecked");
+        }
+    }
+
+    public bool User3BehaviorChecked {
+        get => _user3BehaviorChecked;
+        set {
+            _user3BehaviorChecked = value;
+            RaisePropertyChangedEvent("User3BehaviorChecked");
+        }
+    }
+
+    public bool User4BehaviorChecked {
+        get => _user4BehaviorChecked;
+        set {
+            _user4BehaviorChecked = value;
+            RaisePropertyChangedEvent("User4BehaviorChecked");
+        }
+    }
+
+    public bool User5BehaviorChecked {
+        get => _user5BehaviorChecked;
+        set {
+            _user5BehaviorChecked = value;
+            RaisePropertyChangedEvent("User5BehaviorChecked");
         }
     }
 

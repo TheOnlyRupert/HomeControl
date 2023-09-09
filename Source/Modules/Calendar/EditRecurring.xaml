@@ -117,6 +117,14 @@
                     </ListView.Resources>
                     <ListView.View>
                         <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="48">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Image}" Width="48" Margin="-4"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=EventText}" Header="Recurring Date Text" Width="Auto"/>
                         </GridView>
@@ -127,6 +135,7 @@
             <Grid Grid.Column="1" Margin="8">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -143,6 +152,11 @@
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Recurring Date Text" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding HolidayText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="Image" FontSize="24" Foreground="White"/>
+                    <ComboBox ItemsSource="{Binding ImageList}" SelectedItem="{Binding ImageSelected}" FontSize="24"/>
                 </StackPanel>
             </Grid>
         </Grid>

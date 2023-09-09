@@ -85,7 +85,7 @@ public class TasksDailyVM : BaseViewModel {
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
-                    ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png"
+                    ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png"
                 });
 
                 ReferenceValues.SoundToPlay = "newTask";
@@ -114,7 +114,7 @@ public class TasksDailyVM : BaseViewModel {
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
-                                ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png"
+                                ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png"
                             });
 
                             TaskList.Remove(TaskSelected);
@@ -172,7 +172,7 @@ public class TasksDailyVM : BaseViewModel {
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
+                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                         IsCompleted = true,
                         DateCompleted = DateTime.Now.ToString("HH:mm")
                     });
@@ -192,7 +192,7 @@ public class TasksDailyVM : BaseViewModel {
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
-                        ImageName = "../../../Resources/Images/chores/" + ImageSelected + ".png",
+                        ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                         DateCompleted = ""
                     });
 
@@ -290,46 +290,44 @@ public class TasksDailyVM : BaseViewModel {
     }
 
     private void SaveJson() {
-        if (TaskList.Count > 0) {
-            try {
-                switch (ReferenceValues.ActiveBehaviorUser) {
-                case 1:
-                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1 = TaskList;
-                    break;
-                case 2:
-                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2 = TaskList;
-                    break;
-                case 3:
-                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3 = TaskList;
-                    break;
-                case 4:
-                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4 = TaskList;
-                    break;
-                case 5:
-                    ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5 = TaskList;
-                    break;
-                }
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "TaskDailyVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+        try {
+            switch (ReferenceValues.ActiveBehaviorUser) {
+            case 1:
+                ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1 = TaskList;
+                break;
+            case 2:
+                ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2 = TaskList;
+                break;
+            case 3:
+                ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3 = TaskList;
+                break;
+            case 4:
+                ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4 = TaskList;
+                break;
+            case 5:
+                ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5 = TaskList;
+                break;
             }
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "TaskDailyVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+        }
 
-            try {
-                FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "TaskDailyVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-            }
+        try {
+            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "TaskDailyVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
         }
     }
 

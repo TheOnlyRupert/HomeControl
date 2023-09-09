@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
@@ -14,11 +15,11 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class EditFinancesVM : BaseViewModel {
-    private readonly string fileName;
     private ObservableCollection<string> _categoryList;
 
     private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor, _detailsText, selectedPerson, _categorySelected, _descriptionText;
+        _otherBackgroundColor, _user1NameText, _user2NameText, AddOrSub, _costText, _parentsBackgroundColor, _detailsText, selectedPerson, _categorySelected, _descriptionText, _cashAvailableText,
+        _cashAvailableTextColor;
 
     private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock1, _detailedFinanceBlock2;
 
@@ -40,7 +41,6 @@ public class EditFinancesVM : BaseViewModel {
         totalPercentageSellingAssets, totalPercentageOther, totalPercentageUsers, totalPercentageGovernmentSpent;
 
     public EditFinancesVM() {
-        fileName = ReferenceValues.FILE_DIRECTORY + "finances.json";
         selectedPerson = "Home";
         User1NameText = ReferenceValues.JsonSettingsMaster.User1Name;
         User2NameText = ReferenceValues.JsonSettingsMaster.User2Name;
@@ -1377,9 +1377,82 @@ public class EditFinancesVM : BaseViewModel {
         CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock2);
         view2.SortDescriptions.Add(new SortDescription("Amount", ListSortDirection.Descending));
         view2.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
+
+        /* Available Cash */
+        int expense = 0;
+        int income = 0;
+        int available = 0;
+
+        /* Calculate income, expense, and available cash */
+        try {
+            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMaster.financeList) {
+                if (t.AddSub == "SUB") {
+                    try {
+                        expense += int.Parse(t.Cost);
+                    } catch (Exception e) {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "FinancesVM",
+                            Description = e.ToString()
+                        });
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    }
+                }
+            }
+
+            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMaster.financeList) {
+                if (t.AddSub == "ADD") {
+                    try {
+                        if (t.Category is not ("User1 Fund" or "User2 Fund" or "User3 Fund" or "User4 Fund" or "User5 Fund")) {
+                            income += int.Parse(t.Cost);
+                        }
+                    } catch (Exception e) {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "FinancesVM",
+                            Description = e.ToString()
+                        });
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "FinancesVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+        }
+
+
+        available = income - expense;
+        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        culture.NumberFormat.CurrencyNegativePattern = 1;
+        CashAvailableText = string.Format(culture, "{0:C}", available);
+        CashAvailableTextColor = CashAvailableText.StartsWith("-") ? "Red" : "CornflowerBlue";
     }
 
     #region Fields
+
+    public string CashAvailableText {
+        get => _cashAvailableText;
+        set {
+            _cashAvailableText = value;
+            RaisePropertyChangedEvent("CashAvailableText");
+        }
+    }
+
+    public string CashAvailableTextColor {
+        get => _cashAvailableTextColor;
+        set {
+            _cashAvailableTextColor = value;
+            RaisePropertyChangedEvent("CashAvailableTextColor");
+        }
+    }
 
     public string DescriptionText {
         get => _descriptionText;

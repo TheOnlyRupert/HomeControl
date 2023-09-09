@@ -15,24 +15,25 @@ namespace HomeControl.Source.ViewModel.Behavior;
 public class BehaviorVM : BaseViewModel {
     private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5;
 
-    private string _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1Star1, _user1Star2, _user1Star3, _user1Star4, _user1Star5, _user2Star1, _user2Star2,
-        _user2Star3, _user2Star4, _user2Star5, _user3Star1, _user3Star2, _user3Star3, _user3Star4, _user3Star5, _user4Star1, _user4Star2, _user4Star3, _user4Star4, _user4Star5,
-        _user5Star1, _user5Star2, _user5Star3, _user5Star4, _user5Star5, _user1Strike1, _user1Strike2, _user1Strike3, _user2Strike1, _user2Strike2, _user2Strike3, _user3Strike1,
-        _user3Strike2, _user3Strike3, _user4Strike1, _user4Strike2, _user4Strike3, _user5Strike1, _user5Strike2, _user5Strike3, _user1TasksCompletedDayProgressColor,
-        _user1TasksCompletedWeekProgressColor, _user1TasksCompletedMonthProgressColor, _user1TasksCompletedQuarterProgressColor, _user2TasksCompletedDayProgressColor,
-        _user2TasksCompletedWeekProgressColor, _user2TasksCompletedMonthProgressColor, _user2TasksCompletedQuarterProgressColor, _user3TasksCompletedDayProgressColor,
-        _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor, _user3TasksCompletedQuarterProgressColor, _user4TasksCompletedDayProgressColor,
-        _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor, _user4TasksCompletedQuarterProgressColor, _user5TasksCompletedDayProgressColor,
-        _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor, _user5TasksCompletedQuarterProgressColor, _currentMonthText, _currentWeekText,
-        _currentDayText, _user1CashAvailableColor, _user2CashAvailableColor, _user3CashAvailableColor, _user4CashAvailableColor, _user5CashAvailableColor, _currentQuarterText,
-        _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText, _user1TasksCompletedQuarterProgressText,
-        _user1CashAvailable, _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText,
-        _user2TasksCompletedQuarterProgressText, _user2CashAvailable, _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText,
-        _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText, _user3CashAvailable, _user4TasksCompletedWeekProgressText,
-        _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText, _user4CashAvailable,
-        _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText, _user5TasksCompletedQuarterProgressText,
-        _user5CashAvailable, _remainingDay, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _user1CashReleased, _user2CashReleased, _user3CashReleased,
-        _user4CashReleased, _user5CashReleased;
+    private string _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1Star1, _user1Star2, _user1Star3, _user1Star4, _user1Star5, _user2Star1, _user2Star2, _user2Star3, _user2Star4,
+        _user2Star5, _user3Star1, _user3Star2, _user3Star3, _user3Star4, _user3Star5, _user4Star1, _user4Star2, _user4Star3, _user4Star4, _user4Star5, _user5Star1, _user5Star2, _user5Star3,
+        _user5Star4, _user5Star5, _user1Strike1, _user1Strike2, _user1Strike3, _user2Strike1, _user2Strike2, _user2Strike3, _user3Strike1, _user3Strike2, _user3Strike3, _user4Strike1, _user4Strike2,
+        _user4Strike3, _user5Strike1, _user5Strike2, _user5Strike3, _user1TasksCompletedDayProgressColor, _user1TasksCompletedWeekProgressColor, _user1TasksCompletedMonthProgressColor,
+        _user1TasksCompletedQuarterProgressColor, _user2TasksCompletedDayProgressColor, _user2TasksCompletedWeekProgressColor, _user2TasksCompletedMonthProgressColor,
+        _user2TasksCompletedQuarterProgressColor, _user3TasksCompletedDayProgressColor, _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor,
+        _user3TasksCompletedQuarterProgressColor, _user4TasksCompletedDayProgressColor, _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor,
+        _user4TasksCompletedQuarterProgressColor, _user5TasksCompletedDayProgressColor, _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor,
+        _user5TasksCompletedQuarterProgressColor, _currentMonthText, _currentWeekText, _currentDayText, _user1CashAvailableColor, _user2CashAvailableColor, _user3CashAvailableColor,
+        _user4CashAvailableColor, _user5CashAvailableColor, _currentQuarterText, _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText,
+        _user1TasksCompletedQuarterProgressText, _user1CashAvailable, _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText,
+        _user2TasksCompletedQuarterProgressText, _user2CashAvailable, _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText,
+        _user3TasksCompletedQuarterProgressText, _user3CashAvailable, _user4TasksCompletedWeekProgressText, _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText,
+        _user4TasksCompletedQuarterProgressText, _user4CashAvailable, _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText,
+        _user5TasksCompletedQuarterProgressText, _user5CashAvailable, _remainingDay, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _user1CashReleased, _user2CashReleased,
+        _user3CashReleased, _user4CashReleased, _user5CashReleased, _user1DayVisibility, _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility, _user1WeekVisibility,
+        _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility, _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility,
+        _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility, _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility,
+        _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility, _user5BehaviorVisibility;
 
     private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
@@ -445,10 +446,10 @@ public class BehaviorVM : BaseViewModel {
                 foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User1 Fund") {
                         try {
-                            if (financeBlock.AddSub == "ADD") {
-                                funds -= int.Parse(financeBlock.Cost);
-                            } else {
+                            if (financeBlock.AddSub == "SUB") {
                                 funds += int.Parse(financeBlock.Cost);
+                            } else {
+                                funds -= int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
                             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -473,6 +474,13 @@ public class BehaviorVM : BaseViewModel {
             }
 
             ProgressBarUser1 = ReferenceValues.JsonBehaviorMaster.User1Progress;
+
+            User1DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User1WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User1MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User1QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
+
+            User1BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User1BehaviorChecked ? "VISIBLE" : "HIDDEN";
 
             break;
         case 2:
@@ -757,10 +765,10 @@ public class BehaviorVM : BaseViewModel {
                 foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User2 Fund") {
                         try {
-                            if (financeBlock.AddSub == "ADD") {
-                                funds -= int.Parse(financeBlock.Cost);
-                            } else {
+                            if (financeBlock.AddSub == "SUB") {
                                 funds += int.Parse(financeBlock.Cost);
+                            } else {
+                                funds -= int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
                             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -785,6 +793,13 @@ public class BehaviorVM : BaseViewModel {
             }
 
             ProgressBarUser2 = ReferenceValues.JsonBehaviorMaster.User2Progress;
+
+            User2DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User2WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User2MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User2QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
+
+            User2BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User2BehaviorChecked ? "VISIBLE" : "HIDDEN";
 
             break;
         case 3:
@@ -1071,10 +1086,10 @@ public class BehaviorVM : BaseViewModel {
                 foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User3 Fund") {
                         try {
-                            if (financeBlock.AddSub == "ADD") {
-                                funds -= int.Parse(financeBlock.Cost);
-                            } else {
+                            if (financeBlock.AddSub == "SUB") {
                                 funds += int.Parse(financeBlock.Cost);
+                            } else {
+                                funds -= int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
                             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -1099,6 +1114,13 @@ public class BehaviorVM : BaseViewModel {
             }
 
             ProgressBarUser3 = ReferenceValues.JsonBehaviorMaster.User3Progress;
+
+            User3DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User3WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User3MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User3QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
+
+            User3BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User3BehaviorChecked ? "VISIBLE" : "HIDDEN";
 
             break;
         case 4:
@@ -1385,10 +1407,10 @@ public class BehaviorVM : BaseViewModel {
                 foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User4 Fund") {
                         try {
-                            if (financeBlock.AddSub == "ADD") {
-                                funds -= int.Parse(financeBlock.Cost);
-                            } else {
+                            if (financeBlock.AddSub == "SUB") {
                                 funds += int.Parse(financeBlock.Cost);
+                            } else {
+                                funds -= int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
                             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -1413,6 +1435,13 @@ public class BehaviorVM : BaseViewModel {
             }
 
             ProgressBarUser4 = ReferenceValues.JsonBehaviorMaster.User4Progress;
+
+            User4DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User4WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User4MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User4QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
+
+            User4BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User4BehaviorChecked ? "VISIBLE" : "HIDDEN";
 
             break;
         case 5:
@@ -1699,10 +1728,10 @@ public class BehaviorVM : BaseViewModel {
                 foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
                     if (financeBlock.Category == "User5 Fund") {
                         try {
-                            if (financeBlock.AddSub == "ADD") {
-                                funds -= int.Parse(financeBlock.Cost);
-                            } else {
+                            if (financeBlock.AddSub == "SUB") {
                                 funds += int.Parse(financeBlock.Cost);
+                            } else {
+                                funds -= int.Parse(financeBlock.Cost);
                             }
                         } catch (Exception e) {
                             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -1727,6 +1756,13 @@ public class BehaviorVM : BaseViewModel {
             }
 
             ProgressBarUser5 = ReferenceValues.JsonBehaviorMaster.User5Progress;
+
+            User5DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User5WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User5MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
+            User5QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
+
+            User5BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User5BehaviorChecked ? "VISIBLE" : "HIDDEN";
 
             break;
         }
@@ -3352,6 +3388,206 @@ public class BehaviorVM : BaseViewModel {
         set {
             _progressBarUser5 = value;
             RaisePropertyChangedEvent("ProgressBarUser5");
+        }
+    }
+
+    public string User1DayVisibility {
+        get => _user1DayVisibility;
+        set {
+            _user1DayVisibility = value;
+            RaisePropertyChangedEvent("User1DayVisibility");
+        }
+    }
+
+    public string User2DayVisibility {
+        get => _user2DayVisibility;
+        set {
+            _user2DayVisibility = value;
+            RaisePropertyChangedEvent("User2DayVisibility");
+        }
+    }
+
+    public string User3DayVisibility {
+        get => _user3DayVisibility;
+        set {
+            _user3DayVisibility = value;
+            RaisePropertyChangedEvent("User3DayVisibility");
+        }
+    }
+
+    public string User4DayVisibility {
+        get => _user4DayVisibility;
+        set {
+            _user4DayVisibility = value;
+            RaisePropertyChangedEvent("User4DayVisibility");
+        }
+    }
+
+    public string User5DayVisibility {
+        get => _user5DayVisibility;
+        set {
+            _user5DayVisibility = value;
+            RaisePropertyChangedEvent("User5DayVisibility");
+        }
+    }
+
+    public string User1WeekVisibility {
+        get => _user1WeekVisibility;
+        set {
+            _user1WeekVisibility = value;
+            RaisePropertyChangedEvent("User1WeekVisibility");
+        }
+    }
+
+    public string User2WeekVisibility {
+        get => _user2WeekVisibility;
+        set {
+            _user2WeekVisibility = value;
+            RaisePropertyChangedEvent("User2WeekVisibility");
+        }
+    }
+
+    public string User3WeekVisibility {
+        get => _user3WeekVisibility;
+        set {
+            _user3WeekVisibility = value;
+            RaisePropertyChangedEvent("User3WeekVisibility");
+        }
+    }
+
+    public string User4WeekVisibility {
+        get => _user4WeekVisibility;
+        set {
+            _user4WeekVisibility = value;
+            RaisePropertyChangedEvent("User4WeekVisibility");
+        }
+    }
+
+    public string User5WeekVisibility {
+        get => _user5WeekVisibility;
+        set {
+            _user5WeekVisibility = value;
+            RaisePropertyChangedEvent("User5WeekVisibility");
+        }
+    }
+
+    public string User1MonthVisibility {
+        get => _user1MonthVisibility;
+        set {
+            _user1MonthVisibility = value;
+            RaisePropertyChangedEvent("User1MonthVisibility");
+        }
+    }
+
+    public string User2MonthVisibility {
+        get => _user2MonthVisibility;
+        set {
+            _user2MonthVisibility = value;
+            RaisePropertyChangedEvent("User2MonthVisibility");
+        }
+    }
+
+    public string User3MonthVisibility {
+        get => _user3MonthVisibility;
+        set {
+            _user3MonthVisibility = value;
+            RaisePropertyChangedEvent("User3MonthVisibility");
+        }
+    }
+
+    public string User4MonthVisibility {
+        get => _user4MonthVisibility;
+        set {
+            _user4MonthVisibility = value;
+            RaisePropertyChangedEvent("User4MonthVisibility");
+        }
+    }
+
+    public string User5MonthVisibility {
+        get => _user5MonthVisibility;
+        set {
+            _user5MonthVisibility = value;
+            RaisePropertyChangedEvent("User5MonthVisibility");
+        }
+    }
+
+    public string User1QuarterVisibility {
+        get => _user1QuarterVisibility;
+        set {
+            _user1QuarterVisibility = value;
+            RaisePropertyChangedEvent("User1QuarterVisibility");
+        }
+    }
+
+    public string User2QuarterVisibility {
+        get => _user2QuarterVisibility;
+        set {
+            _user2QuarterVisibility = value;
+            RaisePropertyChangedEvent("User2QuarterVisibility");
+        }
+    }
+
+    public string User3QuarterVisibility {
+        get => _user3QuarterVisibility;
+        set {
+            _user3QuarterVisibility = value;
+            RaisePropertyChangedEvent("User3QuarterVisibility");
+        }
+    }
+
+    public string User4QuarterVisibility {
+        get => _user4QuarterVisibility;
+        set {
+            _user4QuarterVisibility = value;
+            RaisePropertyChangedEvent("User4QuarterVisibility");
+        }
+    }
+
+    public string User5QuarterVisibility {
+        get => _user5QuarterVisibility;
+        set {
+            _user5QuarterVisibility = value;
+            RaisePropertyChangedEvent("User5QuarterVisibility");
+        }
+    }
+
+    public string User1BehaviorVisibility {
+        get => _user1BehaviorVisibility;
+        set {
+            _user1BehaviorVisibility = value;
+            RaisePropertyChangedEvent("User1BehaviorVisibility");
+        }
+    }
+
+    public string User2BehaviorVisibility {
+        get => _user2BehaviorVisibility;
+        set {
+            _user2BehaviorVisibility = value;
+            RaisePropertyChangedEvent("User2BehaviorVisibility");
+        }
+    }
+
+    public string User3BehaviorVisibility {
+        get => _user3BehaviorVisibility;
+        set {
+            _user3BehaviorVisibility = value;
+            RaisePropertyChangedEvent("User3BehaviorVisibility");
+        }
+    }
+
+    public string User4BehaviorVisibility {
+        get => _user4BehaviorVisibility;
+        set {
+            _user4BehaviorVisibility = value;
+            RaisePropertyChangedEvent("User4BehaviorVisibility");
+        }
+    }
+
+    public string User5BehaviorVisibility {
+        get => _user5BehaviorVisibility;
+        set {
+            _user5BehaviorVisibility = value;
+            RaisePropertyChangedEvent("User5BehaviorVisibility");
         }
     }
 

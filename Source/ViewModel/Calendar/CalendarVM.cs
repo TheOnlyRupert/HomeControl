@@ -1291,253 +1291,295 @@ public class CalendarVM : BaseViewModel {
         foreach (CalendarEventsRecurring calendar in ReferenceValues.JsonCalendarMaster.EventsListRecurring) {
             if (calendarStartingDate.Month == calendar.Date.Month && calendarStartingDate.Day == calendar.Date.Day) {
                 Button1EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(1).Month == calendar.Date.Month && calendarStartingDate.AddDays(1).Day == calendar.Date.Day) {
                 Button2EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(2).Month == calendar.Date.Month && calendarStartingDate.AddDays(2).Day == calendar.Date.Day) {
                 Button3EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(3).Month == calendar.Date.Month && calendarStartingDate.AddDays(3).Day == calendar.Date.Day) {
                 Button4EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(4).Month == calendar.Date.Month && calendarStartingDate.AddDays(4).Day == calendar.Date.Day) {
                 Button5EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(5).Month == calendar.Date.Month && calendarStartingDate.AddDays(5).Day == calendar.Date.Day) {
                 Button6EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(6).Month == calendar.Date.Month && calendarStartingDate.AddDays(6).Day == calendar.Date.Day) {
                 Button7EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(7).Month == calendar.Date.Month && calendarStartingDate.AddDays(7).Day == calendar.Date.Day) {
                 Button8EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(8).Month == calendar.Date.Month && calendarStartingDate.AddDays(8).Day == calendar.Date.Day) {
                 Button9EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(9).Month == calendar.Date.Month && calendarStartingDate.AddDays(9).Day == calendar.Date.Day) {
                 Button10EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(10).Month == calendar.Date.Month && calendarStartingDate.AddDays(10).Day == calendar.Date.Day) {
                 Button11EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(11).Month == calendar.Date.Month && calendarStartingDate.AddDays(11).Day == calendar.Date.Day) {
                 Button12EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(12).Month == calendar.Date.Month && calendarStartingDate.AddDays(12).Day == calendar.Date.Day) {
                 Button13EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(13).Month == calendar.Date.Month && calendarStartingDate.AddDays(13).Day == calendar.Date.Day) {
                 Button14EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(14).Month == calendar.Date.Month && calendarStartingDate.AddDays(14).Day == calendar.Date.Day) {
                 Button15EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(15).Month == calendar.Date.Month && calendarStartingDate.AddDays(15).Day == calendar.Date.Day) {
                 Button16EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(16).Month == calendar.Date.Month && calendarStartingDate.AddDays(16).Day == calendar.Date.Day) {
                 Button17EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(17).Month == calendar.Date.Month && calendarStartingDate.AddDays(17).Day == calendar.Date.Day) {
                 Button18EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(18).Month == calendar.Date.Month && calendarStartingDate.AddDays(18).Day == calendar.Date.Day) {
                 Button19EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(19).Month == calendar.Date.Month && calendarStartingDate.AddDays(19).Day == calendar.Date.Day) {
                 Button20EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(20).Month == calendar.Date.Month && calendarStartingDate.AddDays(20).Day == calendar.Date.Day) {
                 Button21EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(21).Month == calendar.Date.Month && calendarStartingDate.AddDays(21).Day == calendar.Date.Day) {
                 Button22EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(22).Month == calendar.Date.Month && calendarStartingDate.AddDays(22).Day == calendar.Date.Day) {
                 Button23EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(23).Month == calendar.Date.Month && calendarStartingDate.AddDays(23).Day == calendar.Date.Day) {
                 Button24EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(24).Month == calendar.Date.Month && calendarStartingDate.AddDays(24).Day == calendar.Date.Day) {
                 Button25EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(25).Month == calendar.Date.Month && calendarStartingDate.AddDays(25).Day == calendar.Date.Day) {
                 Button26EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(26).Month == calendar.Date.Month && calendarStartingDate.AddDays(26).Day == calendar.Date.Day) {
                 Button27EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(27).Month == calendar.Date.Month && calendarStartingDate.AddDays(27).Day == calendar.Date.Day) {
                 Button28EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(28).Month == calendar.Date.Month && calendarStartingDate.AddDays(28).Day == calendar.Date.Day) {
                 Button29EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(29).Month == calendar.Date.Month && calendarStartingDate.AddDays(29).Day == calendar.Date.Day) {
                 Button30EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(30).Month == calendar.Date.Month && calendarStartingDate.AddDays(30).Day == calendar.Date.Day) {
                 Button31EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(31).Month == calendar.Date.Month && calendarStartingDate.AddDays(31).Day == calendar.Date.Day) {
                 Button32EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(32).Month == calendar.Date.Month && calendarStartingDate.AddDays(32).Day == calendar.Date.Day) {
                 Button33EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(33).Month == calendar.Date.Month && calendarStartingDate.AddDays(33).Day == calendar.Date.Day) {
                 Button34EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(34).Month == calendar.Date.Month && calendarStartingDate.AddDays(34).Day == calendar.Date.Day) {
                 Button35EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(35).Month == calendar.Date.Month && calendarStartingDate.AddDays(35).Day == calendar.Date.Day) {
                 Button36EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(36).Month == calendar.Date.Month && calendarStartingDate.AddDays(36).Day == calendar.Date.Day) {
                 Button37EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(37).Month == calendar.Date.Month && calendarStartingDate.AddDays(37).Day == calendar.Date.Day) {
                 Button38EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(38).Month == calendar.Date.Month && calendarStartingDate.AddDays(38).Day == calendar.Date.Day) {
                 Button39EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(39).Month == calendar.Date.Month && calendarStartingDate.AddDays(39).Day == calendar.Date.Day) {
                 Button40EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(40).Month == calendar.Date.Month && calendarStartingDate.AddDays(40).Day == calendar.Date.Day) {
                 Button41EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
 
             if (calendarStartingDate.AddDays(41).Month == calendar.Date.Month && calendarStartingDate.AddDays(41).Day == calendar.Date.Day) {
                 Button42EventList.Add(new CalendarEventsCustom {
-                    Description = calendar.EventText
+                    Description = calendar.EventText,
+                    Image = calendar.Image
                 });
             }
         }
@@ -1983,14 +2025,14 @@ public class CalendarVM : BaseViewModel {
         DateTime mlkDay = new(year, 1, mlk);
         holidays.Add(new HolidayBlock {
             Date = mlkDay,
-            Holiday = "MLK Day"
+            Holiday = "MLK"
         });
 
         // Valentine's Day -- February 14th
         DateTime valentinesDay = new(year, 2, 14);
         holidays.Add(new HolidayBlock {
             Date = valentinesDay,
-            Holiday = "Valentine's Day"
+            Holiday = "Valentine's"
         });
 
         // Presidents Day -- 3rd Monday in February 
@@ -2000,7 +2042,7 @@ public class CalendarVM : BaseViewModel {
         DateTime presidentsDay = new(year, 2, presidents);
         holidays.Add(new HolidayBlock {
             Date = presidentsDay,
-            Holiday = "President's Day"
+            Holiday = "President's"
         });
 
         // Easter Sunday -- Complicated 
@@ -2029,7 +2071,7 @@ public class CalendarVM : BaseViewModel {
         DateTime mothersDay = new(year, 5, mothers);
         holidays.Add(new HolidayBlock {
             Date = mothersDay,
-            Holiday = "Mother's Day"
+            Holiday = "Mother's"
         });
 
         // Memorial Day -- Last monday in May 
@@ -2042,7 +2084,7 @@ public class CalendarVM : BaseViewModel {
 
         holidays.Add(new HolidayBlock {
             Date = memorialDay,
-            Holiday = "Memorial Day"
+            Holiday = "Memorial"
         });
 
         // Father's Day -- 3nd Sunday in June
@@ -2052,7 +2094,7 @@ public class CalendarVM : BaseViewModel {
         DateTime fathersDay = new(year, 6, fathers);
         holidays.Add(new HolidayBlock {
             Date = fathersDay,
-            Holiday = "Father's Day"
+            Holiday = "Father's"
         });
 
         // Juneteenth - June 19th
@@ -2067,7 +2109,7 @@ public class CalendarVM : BaseViewModel {
         DateTime independenceDay = new(year, 7, 4);
         holidays.Add(new HolidayBlock {
             Date = independenceDay,
-            Holiday = "Independence Day"
+            Holiday = "Independence"
         });
 
         // Labor Day -- 1st Monday in September 
@@ -2080,14 +2122,14 @@ public class CalendarVM : BaseViewModel {
 
         holidays.Add(new HolidayBlock {
             Date = laborDay,
-            Holiday = "Labor Day"
+            Holiday = "Labor"
         });
 
         // Veterans Day -- November 11th
         DateTime veteransDay = new(year, 11, 11);
         holidays.Add(new HolidayBlock {
             Date = veteransDay,
-            Holiday = "Veterans Day"
+            Holiday = "Veterans"
         });
 
         // Halloween -- October 31st
@@ -2123,7 +2165,7 @@ public class CalendarVM : BaseViewModel {
         // Christmas Day 
         holidays.Add(new HolidayBlock {
             Date = christmasEve.AddDays(1),
-            Holiday = "Christmas Day"
+            Holiday = "Christmas"
         });
 
         // Daylight Savings Start -- 2nd Sunday of March

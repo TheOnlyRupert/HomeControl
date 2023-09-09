@@ -65,8 +65,8 @@ public class MainWindowVM : BaseViewModel {
         ReferenceValues.IconImageList = new ObservableCollection<string>();
         ResourceManager resourceManager = new("HomeControl.g", Assembly.GetExecutingAssembly());
         ResourceSet resources = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-        foreach (string key in from object res in resources select ((DictionaryEntry)res).Key.ToString() into key where key.Contains("resources/images/chores/") select key) {
-            ReferenceValues.IconImageList.Add(key.Substring(24, key.Length - 28));
+        foreach (string key in from object res in resources select ((DictionaryEntry)res).Key.ToString() into key where key.Contains("resources/images/icons/") select key) {
+            ReferenceValues.IconImageList.Add(key.Substring(23, key.Length - 27));
         }
 
         ReferenceValues.IconImageList = new ObservableCollection<string>(ReferenceValues.IconImageList.OrderBy(i => i));
@@ -236,7 +236,7 @@ public class MainWindowVM : BaseViewModel {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
             internetMessage = true;
-            OnlineColor = "Yellow";
+            OnlineColor = "Red";
         }
     }
 

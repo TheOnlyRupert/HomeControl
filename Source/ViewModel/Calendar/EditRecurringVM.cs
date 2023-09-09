@@ -12,15 +12,17 @@ namespace HomeControl.Source.ViewModel.Calendar;
 
 public class EditRecurringVM : BaseViewModel {
     private CalendarEventsRecurring _calendarEventSelected;
-    private string _dateText, _holidayText;
+    private string _dateText, _holidayText, _imageSelected;
     private ObservableCollection<CalendarEventsRecurring> _eventList;
+    private ObservableCollection<string> _imageList;
 
     public EditRecurringVM() {
         EventList = ReferenceValues.JsonCalendarMaster.EventsListRecurring;
-        Console.WriteLine(EventList.Count + " .. " + ReferenceValues.JsonCalendarMaster.EventsListRecurring.Count);
-
         DateText = DateTime.Now.ToShortDateString();
         HolidayText = "";
+
+        ImageList = ReferenceValues.IconImageList;
+        ImageSelected = "bathtub";
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
@@ -44,7 +46,8 @@ public class EditRecurringVM : BaseViewModel {
 
                 EventList.Add(new CalendarEventsRecurring {
                     Date = Convert.ToDateTime(DateText),
-                    EventText = HolidayText
+                    EventText = HolidayText,
+                    Image = "../../../Resources/Images/icons/" + ImageSelected + ".png"
                 });
 
                 ReferenceValues.SoundToPlay = "birthday";
@@ -74,7 +77,8 @@ public class EditRecurringVM : BaseViewModel {
 
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEventsRecurring {
                                 Date = Convert.ToDateTime(DateText),
-                                EventText = HolidayText
+                                EventText = HolidayText,
+                                Image = "../../../Resources/Images/icons/" + ImageSelected + ".png"
                             });
                             EventList.Remove(CalendarEventSelected);
 
@@ -186,6 +190,22 @@ public class EditRecurringVM : BaseViewModel {
             _calendarEventSelected = value;
             PopulateDetailedView(value);
             RaisePropertyChangedEvent("EventSelected");
+        }
+    }
+
+    public ObservableCollection<string> ImageList {
+        get => _imageList;
+        set {
+            _imageList = value;
+            RaisePropertyChangedEvent("ImageList");
+        }
+    }
+
+    public string ImageSelected {
+        get => _imageSelected;
+        set {
+            _imageSelected = value;
+            RaisePropertyChangedEvent("ImageSelected");
         }
     }
 

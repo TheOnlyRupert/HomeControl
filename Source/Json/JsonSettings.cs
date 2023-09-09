@@ -54,4 +54,9 @@ public class JsonSettings {
     public bool User3Checked { get; set; }
     public bool User4Checked { get; set; }
     public bool User5Checked { get; set; }
+    public bool User1BehaviorChecked { get; set; }
+    public bool User2BehaviorChecked { get; set; }
+    public bool User3BehaviorChecked { get; set; }
+    public bool User4BehaviorChecked { get; set; }
+    public bool User5BehaviorChecked { get; set; }
 }

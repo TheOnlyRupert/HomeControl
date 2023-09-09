@@ -82,9 +82,9 @@
                     <Image Grid.Row="0" Source="{Binding ImageUser1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser1}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch"/>
+                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User1BehaviorVisibility}"/>
 
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2" Visibility="{Binding User1BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -100,7 +100,7 @@
                         <Image Grid.Column="4" Source="{Binding User1Star5}" Height="32"/>
                     </Grid>
 
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="3" Visibility="{Binding User1BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -115,7 +115,7 @@
                     <TextBlock Grid.Row="4" Text="{Binding User1CashAvailable}" FontSize="32" Foreground="{Binding User1CashAvailableColor}" HorizontalAlignment="Center"/>
                     <TextBlock Grid.Row="5" Text="{Binding User1CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User1DayVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -128,7 +128,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User1WeekVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -140,7 +140,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User1TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="8" Margin="4">
+                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User1MonthVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -152,7 +152,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User1TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="9" Margin="4">
+                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User1QuarterVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -199,9 +199,9 @@
                     <Image Grid.Row="0" Source="{Binding ImageUser2}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser2}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch"/>
+                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User2BehaviorVisibility}"/>
 
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2" Visibility="{Binding User2BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -217,7 +217,7 @@
                         <Image Grid.Column="4" Source="{Binding User2Star5}" Height="32"/>
                     </Grid>
 
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="3" Visibility="{Binding User2BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -232,7 +232,7 @@
                     <TextBlock Grid.Row="4" Text="{Binding User2CashAvailable}" FontSize="32" Foreground="{Binding User2CashAvailableColor}" HorizontalAlignment="Center"/>
                     <TextBlock Grid.Row="5" Text="{Binding User2CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User2DayVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -245,7 +245,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User2WeekVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -257,7 +257,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User2TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="8" Margin="4">
+                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User2MonthVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -270,7 +270,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="9" Margin="4">
+                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User2QuarterVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -317,9 +317,9 @@
                     <Image Grid.Row="0" Source="{Binding ImageUser3}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser3}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch"/>
+                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User3BehaviorVisibility}"/>
 
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2" Visibility="{Binding User3BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -335,7 +335,7 @@
                         <Image Grid.Column="4" Source="{Binding User3Star5}" Height="32"/>
                     </Grid>
 
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="3" Visibility="{Binding User3BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -350,7 +350,7 @@
                     <TextBlock Grid.Row="4" Text="{Binding User3CashAvailable}" FontSize="32" Foreground="{Binding User3CashAvailableColor}" HorizontalAlignment="Center"/>
                     <TextBlock Grid.Row="5" Text="{Binding User3CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User3DayVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -363,7 +363,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User3WeekVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -375,7 +375,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User3TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="8" Margin="4">
+                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User3MonthVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -388,7 +388,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="9" Margin="4">
+                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User3QuarterVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -435,9 +435,9 @@
                     <Image Grid.Row="0" Source="{Binding ImageUser4}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser4}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch"/>
+                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User4BehaviorVisibility}"/>
 
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2" Visibility="{Binding User4BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -453,7 +453,7 @@
                         <Image Grid.Column="4" Source="{Binding User4Star5}" Height="32"/>
                     </Grid>
 
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="3" Visibility="{Binding User4BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -468,7 +468,7 @@
                     <TextBlock Grid.Row="4" Text="{Binding User4CashAvailable}" FontSize="32" Foreground="{Binding User4CashAvailableColor}" HorizontalAlignment="Center"/>
                     <TextBlock Grid.Row="5" Text="{Binding User4CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User4DayVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -481,7 +481,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User4WeekVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -493,7 +493,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User4TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="8" Margin="4">
+                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User4MonthVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -506,7 +506,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="9" Margin="4">
+                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User4QuarterVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -553,9 +553,9 @@
                     <Image Grid.Row="0" Source="{Binding ImageUser5}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser5}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch"/>
+                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User5BehaviorVisibility}"/>
 
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2" Visibility="{Binding User5BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -571,7 +571,7 @@
                         <Image Grid.Column="4" Source="{Binding User5Star5}" Height="32"/>
                     </Grid>
 
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="3" Visibility="{Binding User5BehaviorVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -586,7 +586,7 @@
                     <TextBlock Grid.Row="4" Text="{Binding User5CashAvailable}" FontSize="32" Foreground="{Binding User5CashAvailableColor}" HorizontalAlignment="Center"/>
                     <TextBlock Grid.Row="5" Text="{Binding User5CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Grid Grid.Row="6" Margin="4">
+                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User5DayVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -599,7 +599,7 @@
                     </Grid>
 
 
-                    <Grid Grid.Row="7" Margin="4">
+                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User5WeekVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -611,7 +611,7 @@
                         <TextBlock Grid.Row="1" Text="{Binding User5TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
 
-                    <Grid Grid.Row="8" Margin="4">
+                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User5MonthVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -624,7 +624,7 @@
 
                     </Grid>
 
-                    <Grid Grid.Row="9" Margin="4">
+                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User5QuarterVisibility}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>

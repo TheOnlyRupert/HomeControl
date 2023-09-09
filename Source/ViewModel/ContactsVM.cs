@@ -4,39 +4,10 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class ContactsVM : BaseViewModel {
-    private string _user1Name, _user2Name,
-        _user1Phone1,
-        _user1Phone2,
-        _user2Phone1,
-        _user2Phone2,
-        _childrenNames,
-        _petNames,
-        _neighbor1Location,
-        _neighbor1Name,
-        _neighbor1Phone1,
-        _neighbor1Phone2,
-        _neighbor2Location,
-        _neighbor2Name,
-        _neighbor2Phone1,
-        _neighbor2Phone2,
-        _addressLine1,
-        _addressLine2,
-        _fireExtinguisherLocation,
-        _hospitalAddressLine1,
-        _hospitalAddressLine2,
-        _wifiGuestName,
-        _wifiGuestPassword,
-        _wifiPrivateName,
-        _wifiPrivatePassword,
-        _policeName,
-        _policePhone,
-        _emergencyContact1Name,
-        _emergencyContact1Phone1,
-        _emergencyContact1Phone2,
-        _emergencyContact2Name,
-        _emergencyContact2Phone1,
-        _emergencyContact2Phone2,
-        _alarmCode, _privateWifiVisibility;
+    private string _user1Name, _user2Name, _user1Phone1, _user1Phone2, _user2Phone1, _user2Phone2, _childrenNames, _petNames, _neighbor1Location, _neighbor1Name, _neighbor1Phone1, _neighbor1Phone2,
+        _neighbor2Location, _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
+        _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2, _emergencyContact2Name,
+        _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _privateWifiVisibility;
 
     public ContactsVM() {
         PrivateWifiVisibility = ReferenceValues.LockUI ? "HIDDEN" : "VISIBLE";

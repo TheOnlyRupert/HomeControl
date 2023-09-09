@@ -33,7 +33,7 @@ public class EditCalendarVM : BaseViewModel {
         DescriptionText = "";
         LocationText = "";
 
-        PriorityLogic(1);
+        PriorityLogic(0);
         UserLogic(0);
 
         try {
@@ -68,13 +68,13 @@ public class EditCalendarVM : BaseViewModel {
         EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
         EventList = new ObservableCollection<CalendarEvents>();
         CalendarEventSelected = new CalendarEvents();
-        
+
         foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
             if (ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd") == dates.Date) {
                 EventList = dates.EventsList;
             }
         }
-        
+
         if (ReferenceValues.IsCalendarDupeModeEnabled) {
             DupeText = "Duplicate Mode Enabled\n" + ReferenceValues.DupeEvent.StartTime + " - " + ReferenceValues.DupeEvent.EndTime + "  " + ReferenceValues.DupeEvent.EventName;
             DupeButtonBackgroundColor = "Green";
@@ -253,21 +253,6 @@ public class EditCalendarVM : BaseViewModel {
                     Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + user + ".png"
                 });
 
-                bool createNew = true;
-                foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
-                    if (dates.Date == ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd")) {
-                        createNew = false;
-                        dates.EventsList = EventList;
-                    }
-                }
-
-                if (createNew) {
-                    ReferenceValues.JsonCalendarMaster.DatesList.Add(new CalendarDates {
-                        Date = ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd"),
-                        EventsList = EventList
-                    });
-                }
-
                 ReferenceValues.SoundToPlay = "scribble1";
                 SoundDispatcher.PlaySound();
                 EventText = "";
@@ -311,12 +296,6 @@ public class EditCalendarVM : BaseViewModel {
                             });
                             EventList.Remove(CalendarEventSelected);
 
-                            foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
-                                if (dates.Date == ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd")) {
-                                    dates.EventsList = EventList;
-                                }
-                            }
-
                             ReferenceValues.SoundToPlay = "scribble2";
                             SoundDispatcher.PlaySound();
                             EventText = "";
@@ -356,12 +335,6 @@ public class EditCalendarVM : BaseViewModel {
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
 
                         EventList.Remove(CalendarEventSelected);
-
-                        foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
-                            if (dates.Date == ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd")) {
-                                dates.EventsList = EventList;
-                            }
-                        }
 
                         ReferenceValues.SoundToPlay = "scribble3";
                         SoundDispatcher.PlaySound();
@@ -410,14 +383,14 @@ public class EditCalendarVM : BaseViewModel {
             }
 
             break;
+        case "priority0":
+            PriorityLogic(0);
+            break;
         case "priority1":
             PriorityLogic(1);
             break;
         case "priority2":
             PriorityLogic(2);
-            break;
-        case "priority3":
-            PriorityLogic(3);
             break;
         case "user1":
             UserLogic(1);
@@ -452,6 +425,22 @@ public class EditCalendarVM : BaseViewModel {
         try {
             IOrderedEnumerable<CalendarEvents> orderByResult = from s in EventList orderby s.StartTime select s;
             EventList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
+
+            bool createNew = true;
+            foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
+                if (dates.Date == ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd")) {
+                    createNew = false;
+                    dates.EventsList = EventList;
+                }
+            }
+
+            if (createNew) {
+                ReferenceValues.JsonCalendarMaster.DatesList.Add(new CalendarDates {
+                    Date = ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd"),
+                    EventsList = EventList
+                });
+            }
+
             FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -634,7 +623,7 @@ public class EditCalendarVM : BaseViewModel {
             RaisePropertyChangedEvent("HomeBorderColor");
         }
     }
-    
+
     public string Priority0BorderColor {
         get => _priority0BorderColor;
         set {
@@ -706,7 +695,7 @@ public class EditCalendarVM : BaseViewModel {
             RaisePropertyChangedEvent("HomeBorderThickness");
         }
     }
-    
+
     public int Priority0BorderThickness {
         get => _priority0BorderThickness;
         set {

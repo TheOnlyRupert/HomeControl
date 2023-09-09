@@ -149,7 +149,8 @@
 
             <Grid Grid.Column="1" Margin="8">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -161,7 +162,9 @@
 
                 <TextBlock Grid.Row="0" Text="Add/Edit Finance" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
-                <Button Grid.Row="1" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="48" Margin="16"
+                <TextBlock Grid.Row="1" Text="{Binding CashAvailableText}" FontSize="32" Foreground="{Binding CashAvailableTextColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Button Grid.Row="2" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="48" Margin="16"
                         Background="{Binding SwitchModeButtonColor}" HorizontalContentAlignment="Center">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -180,22 +183,22 @@
                     </Button.Style>
                 </Button>
 
-                <StackPanel Grid.Row="2">
+                <StackPanel Grid.Row="3">
                     <TextBlock Text="Location/Business Name" FontSize="24" Foreground="White"/>
                     <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="3">
+                <StackPanel Grid.Row="4">
                     <TextBlock Text="Amount ($)" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="4">
+                <StackPanel Grid.Row="5">
                     <TextBlock Text="Category" FontSize="24" Foreground="White"/>
                     <ComboBox FontSize="24" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CategorySelected}"/>
                 </StackPanel>
 
-                <Grid Grid.Row="5">
+                <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -243,12 +246,12 @@
                     </Button>
                 </Grid>
 
-                <StackPanel Grid.Row="6">
+                <StackPanel Grid.Row="7">
                     <TextBlock Text="More Detailed Info  (optional)" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding DetailsText, UpdateSourceTrigger=PropertyChanged}" MaxLength="64" FontSize="24" Margin="0 0 0 8"/>
                 </StackPanel>
 
-                <Grid Grid.Row="7">
+                <Grid Grid.Row="8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
