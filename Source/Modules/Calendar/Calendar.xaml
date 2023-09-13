@@ -278,7 +278,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -375,7 +375,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -473,7 +473,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -570,7 +570,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -666,7 +666,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -762,7 +762,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -858,7 +858,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -954,7 +954,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1050,7 +1050,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1146,7 +1146,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1242,7 +1242,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1338,7 +1338,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1434,7 +1434,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1530,7 +1530,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1626,7 +1626,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1722,7 +1722,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1818,7 +1818,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -1914,7 +1914,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2010,7 +2010,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2106,7 +2106,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2202,7 +2202,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2298,7 +2298,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2394,7 +2394,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2490,7 +2490,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2586,7 +2586,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2682,7 +2682,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2778,7 +2778,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2874,7 +2874,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -2970,7 +2970,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3066,7 +3066,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3162,7 +3162,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3258,7 +3258,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3354,7 +3354,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3450,7 +3450,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3546,7 +3546,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3642,7 +3642,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3738,7 +3738,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3834,7 +3834,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -3930,7 +3930,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -4026,7 +4026,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -4122,7 +4122,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -4218,7 +4218,7 @@
                                     <GridViewColumn Width="24">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Image Source="{Binding Image}" Width="24" Margin="-4 -4 -4 0"/>
+                                                <Image Source="{Binding Image}" Height="24" Margin="-4 -4 -4 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

@@ -452,7 +452,7 @@ public class TasksWeeklyVM : BaseViewModel {
 
     private void PopulateDetailedView(Task value) {
         TaskName = value.TaskName;
-        ImageSelected = value.ImageName.Substring(33, value.ImageName.Length - 37);
+        ImageSelected = value.ImageName.Substring(32, value.ImageName.Length - 36);
         RoomSelectedIndex = value.RoomNumber;
     }
 

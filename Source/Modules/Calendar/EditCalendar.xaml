@@ -185,7 +185,7 @@
                         </Button.Style>
                     </Button>
 
-                    <TextBlock Grid.Column="1" Text="{Binding EventDate}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding EventDate}" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <Button Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Left"
                             VerticalAlignment="Center">

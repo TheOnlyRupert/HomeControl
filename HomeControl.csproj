@@ -312,7 +312,6 @@
         <Resource Include="Resources\Images\icons\chores.png"/>
         <Resource Include="Resources\Images\icons\coin_flip.png"/>
         <Resource Include="Resources\Images\icons\games.png"/>
-        <Resource Include="Resources\Images\icons\money.png"/>
         <Resource Include="Resources\Images\icons\panic.png"/>
         <Resource Include="Resources\Images\icons\tamagotchi.png"/>
         <Resource Include="Resources\Images\icons\tic_tac_toe.png"/>
@@ -333,12 +332,10 @@
         <Resource Include="Resources\Images\icons\food.png"/>
         <Resource Include="Resources\Images\icons\fridge.png"/>
         <Resource Include="Resources\Images\icons\laundry.png"/>
-        <Resource Include="Resources\Images\icons\laundry2.png"/>
         <Resource Include="Resources\Images\icons\lips.png"/>
         <Resource Include="Resources\Images\icons\makeBed.png"/>
         <Resource Include="Resources\Images\icons\medication.png"/>
         <Resource Include="Resources\Images\icons\mop.png"/>
-        <Resource Include="Resources\Images\icons\shelves.png"/>
         <Resource Include="Resources\Images\icons\shower.png"/>
         <Resource Include="Resources\Images\icons\sink.png"/>
         <Resource Include="Resources\Images\icons\stainlessSteel.png"/>
@@ -349,6 +346,10 @@
         <Resource Include="Resources\Images\icons\tv.png"/>
         <Resource Include="Resources\Images\icons\vacuum.png"/>
         <Resource Include="Resources\Images\icons\vehicle1.png"/>
+        <Resource Include="Resources\Images\icons\cabinet.png"/>
+        <Resource Include="Resources\Images\icons\can.png"/>
+        <Resource Include="Resources\Images\icons\shelf.png"/>
+        <Resource Include="Resources\Images\icons\sponge.png"/>
         <Content Include="Resources\Sounds\zoom.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
