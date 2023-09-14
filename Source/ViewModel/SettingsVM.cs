@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
+using System.Net;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
@@ -12,20 +14,24 @@ namespace HomeControl.Source.ViewModel;
 public class SettingsVM : BaseViewModel {
     private List<string> _trashDayList;
 
-    private string _userAgentText, _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1NameLegal, _user2NameLegal, _user3NameLegal, _user4NameLegal, _user5NameLegal,
+    private string _userAgent, _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1NameLegal, _user2NameLegal, _user3NameLegal, _user4NameLegal, _user5NameLegal,
         _user1Phone1, _user1Phone2, _user2Phone1, _user2Phone2, _petNames, _neighbor1Location, _neighbor1Name, _neighbor1Phone1, _neighbor1Phone2, _neighbor2Location,
         _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
-        _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected;
+        _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected, _weatherLocation, _gridId;
 
     private bool _valueImperialChecked, _valueMetricChecked, _isEditTasksMode, _isNormalMode, _isDebugMode, _user1Checked, _user2Checked, _user3Checked, _user4Checked,
         _user5Checked, _user1BehaviorChecked, _user2BehaviorChecked, _user3BehaviorChecked, _user4BehaviorChecked, _user5BehaviorChecked;
+
+    private double _weatherLat, _weatherLon;
+
+    private int gridX, gridY;
 
     public SettingsVM() {
         TrashDayList = new List<string>(new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "DISABLED" });
         TrashDaySelected = "Wednesday";
 
-        UserAgentText = ReferenceValues.JsonSettingsMaster.UserAgent;
+        UserAgent = ReferenceValues.JsonSettingsMaster.UserAgent;
         User1Name = ReferenceValues.JsonSettingsMaster.User1Name;
         User2Name = ReferenceValues.JsonSettingsMaster.User2Name;
         User3Name = ReferenceValues.JsonSettingsMaster.User3Name;
@@ -84,10 +90,12 @@ public class SettingsVM : BaseViewModel {
         User3BehaviorChecked = ReferenceValues.JsonSettingsMaster.User3BehaviorChecked;
         User4BehaviorChecked = ReferenceValues.JsonSettingsMaster.User4BehaviorChecked;
         User5BehaviorChecked = ReferenceValues.JsonSettingsMaster.User5BehaviorChecked;
-
-        if (!IsNormalMode && !IsEditTasksMode && !IsDebugMode) {
-            IsNormalMode = true;
-        }
+        WeatherLat = ReferenceValues.JsonSettingsMaster.WeatherLat;
+        WeatherLon = ReferenceValues.JsonSettingsMaster.WeatherLon;
+        GridX = ReferenceValues.JsonSettingsMaster.GridX;
+        GridY = ReferenceValues.JsonSettingsMaster.GridY;
+        GridId = ReferenceValues.JsonSettingsMaster.GridId;
+        WeatherLocation = ReferenceValues.JsonSettingsMaster.WeatherLocation;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -95,7 +103,7 @@ public class SettingsVM : BaseViewModel {
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "save":
-            ReferenceValues.JsonSettingsMaster.UserAgent = UserAgentText;
+            ReferenceValues.JsonSettingsMaster.UserAgent = UserAgent;
             ReferenceValues.JsonSettingsMaster.User1Name = User1Name;
             ReferenceValues.JsonSettingsMaster.User2Name = User2Name;
             ReferenceValues.JsonSettingsMaster.User3Name = User3Name;
@@ -154,6 +162,16 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.User3BehaviorChecked = User3BehaviorChecked;
             ReferenceValues.JsonSettingsMaster.User4BehaviorChecked = User4BehaviorChecked;
             ReferenceValues.JsonSettingsMaster.User5BehaviorChecked = User5BehaviorChecked;
+            ReferenceValues.JsonSettingsMaster.WeatherLat = WeatherLat;
+            ReferenceValues.JsonSettingsMaster.WeatherLon = WeatherLon;
+            ReferenceValues.JsonSettingsMaster.GridX = GridX;
+            ReferenceValues.JsonSettingsMaster.GridY = GridY;
+            ReferenceValues.JsonSettingsMaster.GridId = GridId;
+            ReferenceValues.JsonSettingsMaster.WeatherLocation = WeatherLocation;
+
+            if (!IsNormalMode && !IsEditTasksMode && !IsDebugMode) {
+                ReferenceValues.JsonSettingsMaster.IsNormalMode = true;
+            }
 
             try {
                 FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster));
@@ -168,16 +186,51 @@ public class SettingsVM : BaseViewModel {
             }
 
             break;
+        case "generate": {
+            JsonSerializerOptions options = new() {
+                IncludeFields = true
+            };
+
+            try {
+                using WebClient client1 = new();
+                Uri weatherLocationURL = new($"https://api.weather.gov/points/{WeatherLat},{WeatherLon}");
+                client1.Headers.Add("User-Agent", "Home Control, " + UserAgent);
+                string weatherLocation = client1.DownloadString(weatherLocationURL);
+                JsonWeatherLocation location = JsonSerializer.Deserialize<JsonWeatherLocation>(weatherLocation, options);
+
+                GridX = location.properties.gridX;
+                GridY = location.properties.gridY;
+                GridId = location.properties.gridId;
+                WeatherLocation = location.properties.relativeLocation.properties.city + ", " + location.properties.relativeLocation.properties.state;
+            } catch (Exception) {
+                ReferenceValues.SoundToPlay = "unable";
+                SoundDispatcher.PlaySound();
+            }
+
+            break;
+        }
+        case "location":
+            GeoCoordinateWatcher watcher = new();
+
+            watcher.PositionChanged += (s, e) => {
+                WeatherLat = e.Position.Location.Latitude;
+                WeatherLon = e.Position.Location.Longitude;
+            };
+
+            watcher.MovementThreshold = 100;
+            watcher.Start();
+
+            break;
         }
     }
 
     #region Fields
 
-    public string UserAgentText {
-        get => _userAgentText;
+    public string UserAgent {
+        get => _userAgent;
         set {
-            _userAgentText = value;
-            RaisePropertyChangedEvent("UserAgentText");
+            _userAgent = value;
+            RaisePropertyChangedEvent("UserAgent");
         }
     }
 
@@ -650,6 +703,54 @@ public class SettingsVM : BaseViewModel {
         set {
             _user5BehaviorChecked = value;
             RaisePropertyChangedEvent("User5BehaviorChecked");
+        }
+    }
+
+    public double WeatherLat {
+        get => _weatherLat;
+        set {
+            _weatherLat = value;
+            RaisePropertyChangedEvent("WeatherLat");
+        }
+    }
+
+    public double WeatherLon {
+        get => _weatherLon;
+        set {
+            _weatherLon = value;
+            RaisePropertyChangedEvent("WeatherLon");
+        }
+    }
+
+    public int GridX {
+        get => gridX;
+        set {
+            gridX = value;
+            RaisePropertyChangedEvent("GridX");
+        }
+    }
+
+    public int GridY {
+        get => gridY;
+        set {
+            gridY = value;
+            RaisePropertyChangedEvent("GridY");
+        }
+    }
+
+    public string GridId {
+        get => _gridId;
+        set {
+            _gridId = value;
+            RaisePropertyChangedEvent("GridId");
+        }
+    }
+
+    public string WeatherLocation {
+        get => _weatherLocation;
+        set {
+            _weatherLocation = value;
+            RaisePropertyChangedEvent("WeatherLocation");
         }
     }
 

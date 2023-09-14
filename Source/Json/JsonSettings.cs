@@ -59,4 +59,11 @@ public class JsonSettings {
     public bool User3BehaviorChecked { get; set; }
     public bool User4BehaviorChecked { get; set; }
     public bool User5BehaviorChecked { get; set; }
+
+    public double WeatherLat { get; set; }
+    public double WeatherLon { get; set; }
+    public int GridX { get; set; }
+    public int GridY { get; set; }
+    public string WeatherLocation { get; set; }
+    public string GridId { get; set; }
 }

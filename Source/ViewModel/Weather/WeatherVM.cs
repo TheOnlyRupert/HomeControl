@@ -46,6 +46,8 @@ public class WeatherVM : BaseViewModel {
         messageSent = false;
         messageSentHourly = false;
         _updateWeatherTimer = 0;
+
+        CurrentWeatherLocationText = ReferenceValues.JsonSettingsMaster.WeatherLocation;
         UpdateWeatherForecastPart1();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -89,6 +91,8 @@ public class WeatherVM : BaseViewModel {
                 TrashDayVisibility = "HIDDEN";
             }
 
+            CurrentWeatherLocationText = ReferenceValues.JsonSettingsMaster.WeatherLocation;
+
             bool errored = false;
             JsonSerializerOptions options = new() {
                 IncludeFields = true
@@ -96,7 +100,9 @@ public class WeatherVM : BaseViewModel {
 
             try {
                 using WebClient client1 = new();
-                Uri weatherForecastURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast");
+                Uri weatherForecastURL =
+                    new(
+                        $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast");
                 client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
                 string weatherForecast = client1.DownloadString(weatherForecastURL);
                 forecast = JsonSerializer.Deserialize<JsonWeather>(weatherForecast, options);
@@ -128,7 +134,9 @@ public class WeatherVM : BaseViewModel {
 
             try {
                 using WebClient client2 = new();
-                Uri weatherForecastHourlyURL = new("https://api.weather.gov/gridpoints/OHX/42,62/forecast/hourly");
+                Uri weatherForecastHourlyURL =
+                    new(
+                        $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
                 client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
                 string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
                 _hourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
@@ -168,8 +176,6 @@ public class WeatherVM : BaseViewModel {
     private void UpdateWeatherForecastPart2() {
         string[] weatherIcons;
 
-        //TODO: Add more places
-        CurrentWeatherLocationText = "Ashland City, TN";
         CurrentWeatherTempText = _hourly.properties.periods[0].temperature + "°";
         CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(_hourly.properties.periods[0].windDirection);
         CurrentWindSpeedText = _hourly.properties.periods[0].windSpeed;

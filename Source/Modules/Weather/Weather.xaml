@@ -52,10 +52,8 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Image Grid.Column="1" Grid.Row="0" Source="{Binding ThermometerDisplayIcon}" VerticalAlignment="Top" HorizontalAlignment="Right" Height="32"/>
-
                         <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding CurrentWeatherLocationText}" FontSize="24" HorizontalAlignment="Center" Foreground="White"
-                                   Margin="8 0 0 0"/>
+                                   Margin="8 0 0 0" TextWrapping="Wrap"/>
 
                         <Image Grid.Column="0" Grid.Row="1" gif:ImageBehavior.AnimatedSource="{Binding CurrentWeatherCloudIcon}" Margin="-32"/>
 
@@ -63,9 +61,8 @@
                         <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap"
                                    Foreground="White" VerticalAlignment="Bottom"/>
 
-                        <Button Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" MinWidth="256" MinHeight="64" HorizontalAlignment="Right" VerticalAlignment="Top"
-                                Command="{Binding 
-                        ButtonCommand}" CommandParameter="debug">
+                        <Button Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" MinWidth="256" MinHeight="64" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding ButtonCommand}"
+                                CommandParameter="debug">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="Transparent"/>

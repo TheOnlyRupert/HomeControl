@@ -29,12 +29,29 @@ public class EditBehaviorVM : BaseViewModel {
         CurrentDayText = DateTime.Now.ToString("dddd");
         CurrentMonthText = DateTime.Now.ToString("MMMM");
         CurrentWeekText = "Week " + calendar.GetWeekOfYear(DateTime.Now, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
-        CurrentQuarterText = DateTime.Now.Month switch {
-            > 0 and < 3 => "Quarter 1",
-            > 2 and < 6 => "Quarter 2",
-            > 5 and < 9 => "Quarter 3",
-            _ => "Quarter 4"
-        };
+
+        switch (DateTime.Now.Month) {
+        case 1:
+        case 2:
+        case 3:
+            CurrentQuarterText = "Quarter 1";
+            break;
+        case 4:
+        case 5:
+        case 6:
+            CurrentQuarterText = "Quarter 2";
+            break;
+        case 7:
+        case 8:
+        case 9:
+            CurrentQuarterText = "Quarter 3";
+            break;
+        case 10:
+        case 11:
+        case 12:
+            CurrentQuarterText = "Quarter 4";
+            break;
+        }
 
         switch (ReferenceValues.ActiveBehaviorUser) {
         case 1:

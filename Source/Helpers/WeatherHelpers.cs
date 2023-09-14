@@ -73,6 +73,7 @@ public static class WeatherHelpers {
         case "Chance Rain":
         case "Chance Rain Showers":
         case "Slight Chance Rain Showers":
+        case "Isolated Rain Showers":
             return "../../../Resources/Images/weather/rain.gif";
 
         case "Showers And Thunderstorms":
