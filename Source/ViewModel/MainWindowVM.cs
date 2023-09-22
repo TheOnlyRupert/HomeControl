@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Net;
@@ -13,7 +14,6 @@ using HomeControl.Source.Control;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
-using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Hvac;
 
@@ -32,6 +32,9 @@ public class MainWindowVM : BaseViewModel {
         currentDate = DateTime.Now;
         internetMessage = false;
         OnlineColor = "Black";
+
+        /* Create Directory */
+        Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY);
 
         /* Get Debug (MAKE SURE THIS IS FIRST!) */
         try {

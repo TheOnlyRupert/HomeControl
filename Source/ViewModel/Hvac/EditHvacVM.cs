@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Hvac;

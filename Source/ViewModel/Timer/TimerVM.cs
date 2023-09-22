@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Timer;
-using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Timer;

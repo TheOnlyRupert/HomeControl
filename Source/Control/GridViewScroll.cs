@@ -4,7 +4,6 @@ using System.Text.Json;
 using System.Windows.Controls;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
-using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.Control;
 

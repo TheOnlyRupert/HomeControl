@@ -114,6 +114,7 @@
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
         <Compile Include="Source\Helpers\SerialPortExtensions.cs"/>
         <Compile Include="Source\Helpers\SoundDispatcher.cs"/>
+        <Compile Include="Source\Helpers\VerifyInput.cs"/>
         <Compile Include="Source\Helpers\WeatherHelpers.cs"/>
         <Compile Include="Source\Json\JsonDebug.cs"/>
         <Compile Include="Source\Json\JsonBehavior.cs"/>
@@ -209,8 +210,7 @@
         <Compile Include="Source\Modules\Weather\WeatherHourly.xaml.cs">
             <DependentUpon>WeatherHourly.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Reference\ReferenceValues.cs"/>
-        <Compile Include="Source\Reference\VerifyInput.cs"/>
+        <Compile Include="Source\ReferenceValues.cs"/>
         <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksDailyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksMonthlyVM.cs"/>
@@ -352,6 +352,8 @@
         <Resource Include="Resources\Images\icons\sponge.png"/>
         <Resource Include="Resources\Images\icons\dishes.png"/>
         <Resource Include="Resources\Images\icons\freezer.png"/>
+        <Resource Include="Resources\Images\icons\microwave.png"/>
+        <Resource Include="Resources\Images\icons\washer.png"/>
         <Content Include="Resources\Sounds\zoom.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>

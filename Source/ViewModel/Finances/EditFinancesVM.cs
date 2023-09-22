@@ -9,7 +9,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
-using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Finances;

@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO.Ports;
 using HomeControl.Source.Json;
 
-namespace HomeControl.Source.Reference;
+namespace HomeControl.Source;
 
 public static class ReferenceValues {
     public const string COPYRIGHT = "Copyright © 2022-2023  Robert Higgins";
@@ -67,7 +67,6 @@ public static class ReferenceValues {
         "User4 Fund",
         "User5 Fund"
     };
-
 
     public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 

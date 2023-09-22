@@ -4,7 +4,6 @@ using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Games;
-using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 using Tamagotchi = HomeControl.Source.Modules.Games.Tamagotchi;
 

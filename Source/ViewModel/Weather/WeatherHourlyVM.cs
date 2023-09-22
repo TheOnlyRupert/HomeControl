@@ -4,7 +4,6 @@ using System.Net;
 using System.Text.Json;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
-using HomeControl.Source.Reference;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Weather;

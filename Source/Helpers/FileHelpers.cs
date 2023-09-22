@@ -2,7 +2,6 @@
 using System.IO;
 using System.Text.Json;
 using HomeControl.Source.Json;
-using HomeControl.Source.Reference;
 
 namespace HomeControl.Source.Helpers;
 
@@ -22,7 +21,7 @@ public static class FileHelpers {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",
-                Module = "BehaviorFromJson",
+                Module = "FileHelpers",
                 Description = e.ToString()
             });
             SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));

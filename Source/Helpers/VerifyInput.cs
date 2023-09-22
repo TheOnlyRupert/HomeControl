@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace HomeControl.Source.Reference;
+namespace HomeControl.Source.Helpers;
 
 public static class VerifyInput {
     public static string VerifyTextNumeric(string value) {
