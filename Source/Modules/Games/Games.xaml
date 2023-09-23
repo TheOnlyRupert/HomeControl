@@ -77,7 +77,7 @@
                 </StackPanel>
             </Button>
 
-            <Button Grid.Row="0" Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="" HorizontalContentAlignment="Stretch">
+            <Button Grid.Row="0" Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="nhie" HorizontalContentAlignment="Stretch">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -94,12 +94,12 @@
                     </Style>
                 </Button.Style>
                 <StackPanel>
-                    <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
-                    <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
+                    <Image Source="../../../Resources/Images/icons/nhie.png" Width="48" Height="48"/>
+                    <TextBlock Text="Never Have I Ever" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
 
-            <Button Grid.Row="0" Grid.Column="4" Command="{Binding ButtonCommand}" CommandParameter="" HorizontalContentAlignment="Stretch">
+            <Button Grid.Row="0" Grid.Column="4" Command="{Binding ButtonCommand}" CommandParameter="trafficLight" HorizontalContentAlignment="Stretch">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -116,8 +116,8 @@
                     </Style>
                 </Button.Style>
                 <StackPanel>
-                    <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
-                    <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
+                    <Image Source="../../../Resources/Images/icons/trafficLight.png" Width="48" Height="48"/>
+                    <TextBlock Text="Traffic Light" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
 

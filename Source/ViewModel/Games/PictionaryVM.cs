@@ -144,15 +144,19 @@ public class PictionaryVM : BaseViewModel {
                 Button1Text = "Play";
                 Button2Text = "Play";
             } else {
-                ReferenceValues.IsGameTimerRunning = false;
-                isGameActive = true;
-                MenuVisibility = "HIDDEN";
-                GameVisibility = "VISIBLE";
-                Button1Text = "Next Word";
-                Button2Text = "Main Menu";
+                if (WordsEasyColor == "Transparent" && WordsMediumColor == "Transparent" && WordsHardColor == "Transparent" && WordsAdultColor == "Transparent") {
+                    MessageBox.Show("At least one word level must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                } else {
+                    ReferenceValues.IsGameTimerRunning = false;
+                    isGameActive = true;
+                    MenuVisibility = "HIDDEN";
+                    GameVisibility = "VISIBLE";
+                    Button1Text = "Next Word";
+                    Button2Text = "Main Menu";
 
-                GeneratePlayableWords();
-                NextWord();
+                    GeneratePlayableWords();
+                    NextWord();
+                }
             }
 
             break;

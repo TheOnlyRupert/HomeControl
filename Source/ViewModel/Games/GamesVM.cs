@@ -39,6 +39,16 @@ public class GamesVM : BaseViewModel {
             tamagotchi.ShowDialog();
             tamagotchi.Close();
             break;
+        case "nhie":
+            Nhie nhie = new();
+            nhie.ShowDialog();
+            nhie.Close();
+            break;
+        case "trafficLight":
+            TrafficLight trafficLight = new();
+            trafficLight.ShowDialog();
+            trafficLight.Close();
+            break;
         }
     }
 }

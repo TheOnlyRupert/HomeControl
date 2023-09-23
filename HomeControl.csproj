@@ -151,6 +151,9 @@
         <Compile Include="Source\Modules\Games\CoinFlip.xaml.cs">
             <DependentUpon>CoinFlip.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Games\Nhie.xaml.cs">
+            <DependentUpon>Nhie.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Games\Tamagotchi.xaml.cs">
             <DependentUpon>Tamagotchi.xaml</DependentUpon>
         </Compile>
@@ -159,6 +162,9 @@
         </Compile>
         <Compile Include="Source\Modules\Games\TamagotchiWindowBed.xaml.cs">
             <DependentUpon>TamagotchiWindowBed.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Games\TrafficLight.xaml.cs">
+            <DependentUpon>TrafficLight.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Hvac\EditHvac.xaml.cs">
             <DependentUpon>EditHvac.xaml</DependentUpon>
@@ -220,9 +226,11 @@
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
         <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
+        <Compile Include="Source\ViewModel\Games\NhieVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowBedVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TamagotchiWindowClosetVM.cs"/>
+        <Compile Include="Source\ViewModel\Games\TrafficLightVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacCrossPlay.cs"/>
         <Compile Include="Source\ViewModel\Hvac\EditHvacVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>
@@ -266,9 +274,11 @@
         <Page Include="Source\Modules\Contacts.xaml"/>
         <Page Include="Source\Modules\DebugLog.xaml"/>
         <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
+        <Page Include="Source\Modules\Games\Nhie.xaml"/>
         <Page Include="Source\Modules\Games\Tamagotchi.xaml"/>
         <Page Include="Source\Modules\Games\TamagotchiWindowCloset.xaml"/>
         <Page Include="Source\Modules\Games\TamagotchiWindowBed.xaml"/>
+        <Page Include="Source\Modules\Games\TrafficLight.xaml"/>
         <Page Include="Source\Modules\Hvac\EditHvac.xaml"/>
         <Page Include="Source\Modules\Hvac\Hvac.xaml"/>
         <Page Include="Source\Modules\MusicPlayer.xaml"/>
@@ -312,9 +322,11 @@
         <Resource Include="Resources\Images\icons\chores.png"/>
         <Resource Include="Resources\Images\icons\coin_flip.png"/>
         <Resource Include="Resources\Images\icons\games.png"/>
+        <Resource Include="Resources\Images\icons\nhie.png"/>
         <Resource Include="Resources\Images\icons\panic.png"/>
         <Resource Include="Resources\Images\icons\tamagotchi.png"/>
         <Resource Include="Resources\Images\icons\tic_tac_toe.png"/>
+        <Resource Include="Resources\Images\icons\trafficLight.png"/>
         <Resource Include="Resources\Images\icons\wifi.png"/>
     </ItemGroup>
     <ItemGroup>
