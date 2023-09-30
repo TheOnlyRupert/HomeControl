@@ -99,7 +99,7 @@ public class EditFinancesVM : BaseViewModel {
                     Description = "Adding finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
                                   CategorySelected + ", " + selectedPerson + ", " + DetailsText
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                 FinanceList.Add(new FinanceBlock {
                     AddSub = AddOrSub,
@@ -140,7 +140,7 @@ public class EditFinancesVM : BaseViewModel {
                                 Description = "Updating finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText +
                                               ", " + CategorySelected + ", " + selectedPerson + ", " + DetailsText
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
                                 AddSub = AddOrSub,
@@ -170,7 +170,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -186,7 +186,7 @@ public class EditFinancesVM : BaseViewModel {
                             Description = "Removing finance: " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
                                           CategorySelected + ", " + selectedPerson + ", " + DetailsText
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         ReferenceValues.SoundToPlay = "cash";
                         SoundDispatcher.PlaySound();
@@ -202,7 +202,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -293,7 +293,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -307,7 +307,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -415,11 +415,11 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             try {
-                FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster));
+                FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster), true);
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -427,7 +427,7 @@ public class EditFinancesVM : BaseViewModel {
                     Module = "EditFinancesVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
         }
     }
@@ -498,7 +498,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -512,7 +512,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -526,7 +526,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -540,7 +540,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -554,7 +554,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -568,7 +568,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -582,7 +582,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -596,7 +596,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -610,7 +610,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -624,7 +624,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -638,7 +638,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -652,7 +652,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -666,7 +666,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -680,7 +680,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -694,7 +694,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -708,7 +708,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -722,7 +722,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -736,7 +736,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -750,7 +750,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -764,7 +764,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -778,7 +778,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -792,7 +792,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -806,7 +806,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -820,7 +820,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -834,7 +834,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -848,7 +848,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -862,7 +862,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -876,7 +876,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -890,7 +890,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -908,7 +908,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -922,7 +922,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -936,7 +936,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -950,7 +950,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -964,7 +964,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -983,7 +983,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -1002,7 +1002,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -1021,7 +1021,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -1040,7 +1040,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -1059,7 +1059,7 @@ public class EditFinancesVM : BaseViewModel {
                         Module = "EditFinancesVM",
                         Description = e.ToString()
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 break;
@@ -1395,7 +1395,7 @@ public class EditFinancesVM : BaseViewModel {
                             Module = "FinancesVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
                 }
             }
@@ -1413,7 +1413,7 @@ public class EditFinancesVM : BaseViewModel {
                             Module = "FinancesVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
                 }
             }
@@ -1424,7 +1424,7 @@ public class EditFinancesVM : BaseViewModel {
                 Module = "FinancesVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
 

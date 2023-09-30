@@ -41,7 +41,7 @@ public class EditRecurringVM : BaseViewModel {
                     Module = "EditRecurringVM",
                     Description = "Adding recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                 EventList.Add(new CalendarEventsRecurring {
                     Date = Convert.ToDateTime(DateText),
@@ -72,7 +72,7 @@ public class EditRecurringVM : BaseViewModel {
                                 Module = "EditRecurringVM",
                                 Description = "Updating recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEventsRecurring {
                                 Date = Convert.ToDateTime(DateText),
@@ -96,7 +96,7 @@ public class EditRecurringVM : BaseViewModel {
                     Module = "EditRecurringVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -111,7 +111,7 @@ public class EditRecurringVM : BaseViewModel {
                             Module = "EditRecurringVM",
                             Description = "Adding recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         EventList.Remove(CalendarEventSelected);
                         HolidayText = "";
@@ -126,7 +126,7 @@ public class EditRecurringVM : BaseViewModel {
                     Module = "EditRecurringVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -141,7 +141,7 @@ public class EditRecurringVM : BaseViewModel {
     private void SaveJson() {
         try {
             ReferenceValues.JsonCalendarMaster.EventsListRecurring = EventList;
-            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
+            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -149,7 +149,7 @@ public class EditRecurringVM : BaseViewModel {
                 Module = "EditRecurringVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 

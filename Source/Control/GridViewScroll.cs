@@ -26,7 +26,7 @@ public class CustomListView : ListView {
                 Module = "GridViewScroll",
                 Description = e2.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 }

@@ -33,36 +33,54 @@ public class MainWindowVM : BaseViewModel {
         internetMessage = false;
         OnlineColor = "Black";
 
-        /* Create Directory */
-        Directory.CreateDirectory(ReferenceValues.FILE_DIRECTORY);
+        /* Create Documents Directory */
+        Directory.CreateDirectory(ReferenceValues.DOCUMENTS_DIRECTORY);
+        
+        /* Create App Directory */
+        try {
+            ReferenceValues.AppDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location + "/");
+            ReferenceValues.AppDirectory = ReferenceValues.AppDirectory.Substring(0, ReferenceValues.AppDirectory.Length - 15);
+        } catch (Exception) {
+            ReferenceValues.AppDirectory = Environment.CurrentDirectory;
+        }
 
         /* Get Debug (MAKE SURE THIS IS FIRST!) */
         try {
-            ReferenceValues.JsonDebugMaster = JsonSerializer.Deserialize<JsonDebug>(FileHelpers.LoadFileText("debug"));
+            ReferenceValues.JsonDebugMaster = JsonSerializer.Deserialize<JsonDebug>(FileHelpers.LoadFileText("debug", true));
         } catch (Exception) {
             ReferenceValues.JsonDebugMaster = new JsonDebug {
                 DebugBlockList = new ObservableCollection<DebugTextBlock>()
             };
 
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         /* Get Settings */
         try {
-            ReferenceValues.JsonSettingsMaster = JsonSerializer.Deserialize<JsonSettings>(FileHelpers.LoadFileText("settings"));
+            ReferenceValues.JsonSettingsMaster = JsonSerializer.Deserialize<JsonSettings>(FileHelpers.LoadFileText("settings", true));
         } catch (Exception) {
             ReferenceValues.JsonSettingsMaster = new JsonSettings();
 
-            FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster));
+            FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster), true);
         }
+        
+        /* Set Version */
+        JsonVersion jsonVersion = new() {
+            versionMajor = ReferenceValues.VERSION_MAJOR,
+            versionMinor = ReferenceValues.VERSION_MINOR,
+            versionPatch = ReferenceValues.VERSION_PATCH,
+            versionBranch = ReferenceValues.VERSION_BRANCH
+        };
 
+        FileHelpers.SaveFileText("version", JsonSerializer.Serialize(jsonVersion), false);
+        
         /* HVAC */
         try {
-            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac"));
+            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac", true));
         } catch (Exception) {
             ReferenceValues.JsonHvacMaster = new JsonHvac();
 
-            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster));
+            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster), true);
         }
 
         ReferenceValues.IconImageList = new ObservableCollection<string>();
@@ -216,7 +234,7 @@ public class MainWindowVM : BaseViewModel {
                         Module = "MainWindowVM",
                         Description = "Restored Internet Connection"
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 internetMessage = false;
@@ -237,7 +255,7 @@ public class MainWindowVM : BaseViewModel {
                 Module = "MainWindowVM",
                 Description = "Lost Internet Connection"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             internetMessage = true;
             OnlineColor = "Red";
         }

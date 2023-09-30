@@ -43,19 +43,19 @@ public class BehaviorVM : BaseViewModel {
 
     public BehaviorVM() {
         try {
-            ReferenceValues.JsonBehaviorMaster = JsonSerializer.Deserialize<JsonBehavior>(FileHelpers.LoadFileText("behavior"));
+            ReferenceValues.JsonBehaviorMaster = JsonSerializer.Deserialize<JsonBehavior>(FileHelpers.LoadFileText("behavior", true));
         } catch (Exception) {
             ReferenceValues.JsonBehaviorMaster = new JsonBehavior();
 
-            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster));
+            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster), true);
         }
 
         try {
-            ReferenceValues.JsonTasksMaster = JsonSerializer.Deserialize<JsonTasks>(FileHelpers.LoadFileText("tasks"));
+            ReferenceValues.JsonTasksMaster = JsonSerializer.Deserialize<JsonTasks>(FileHelpers.LoadFileText("tasks", true));
         } catch (Exception) {
             ReferenceValues.JsonTasksMaster = new JsonTasks();
 
-            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
+            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster), true);
         }
 
         ReferenceValues.JsonTasksMaster ??= new JsonTasks();
@@ -91,15 +91,15 @@ public class BehaviorVM : BaseViewModel {
         User5Name = ReferenceValues.JsonSettingsMaster.User5Name;
 
         try {
-            Uri uri = new(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+            Uri uri = new(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
             ImageUser1 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
             ImageUser2 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
             ImageUser3 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
             ImageUser4 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageUser5 = new BitmapImage(uri);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -108,7 +108,7 @@ public class BehaviorVM : BaseViewModel {
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -130,7 +130,7 @@ public class BehaviorVM : BaseViewModel {
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         RefreshBehavior();
@@ -238,7 +238,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -284,7 +284,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                             AddSub = "SUB",
@@ -326,7 +326,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -373,7 +373,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             try {
                                 ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -457,7 +457,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
                     }
                 }
@@ -555,7 +555,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -601,7 +601,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                 AddSub = "SUB",
@@ -646,7 +646,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -693,7 +693,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                             try {
                                 ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
                                     AddSub = "SUB",
@@ -776,7 +776,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
                     }
                 }
@@ -874,7 +874,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -920,7 +920,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -966,7 +966,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1013,7 +1013,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             try {
                                 ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1097,7 +1097,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
                     }
                 }
@@ -1195,7 +1195,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1241,7 +1241,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1287,7 +1287,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1334,7 +1334,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             try {
                                 ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1418,7 +1418,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
                     }
                 }
@@ -1516,7 +1516,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Daily Funds: $" + releaseAmountDaily
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1562,7 +1562,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Weekly Funds: $" + releaseAmountWeekly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1608,7 +1608,7 @@ public class BehaviorVM : BaseViewModel {
                             Module = "BehaviorVM",
                             Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Monthly Funds: $" + releaseAmountMonthly
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         try {
                             ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1655,7 +1655,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             try {
                                 ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
@@ -1739,7 +1739,7 @@ public class BehaviorVM : BaseViewModel {
                                 Module = "BehaviorVM",
                                 Description = e.ToString()
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
                     }
                 }
@@ -1771,7 +1771,7 @@ public class BehaviorVM : BaseViewModel {
         ReferenceValues.JsonTasksMaster.UpdatedDateTime = DateTime.Today;
 
         try {
-            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster));
+            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -1779,11 +1779,11 @@ public class BehaviorVM : BaseViewModel {
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         try {
-            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
+            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -1791,11 +1791,11 @@ public class BehaviorVM : BaseViewModel {
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         try {
-            FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster));
+            FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -1803,7 +1803,7 @@ public class BehaviorVM : BaseViewModel {
                 Module = "BehaviorVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 

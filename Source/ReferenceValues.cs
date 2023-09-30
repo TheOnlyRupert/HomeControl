@@ -8,7 +8,10 @@ namespace HomeControl.Source;
 
 public static class ReferenceValues {
     public const string COPYRIGHT = "Copyright © 2022-2023  Robert Higgins";
-    public const string VERSION = "1.0.0";
+    public const int VERSION_MAJOR = 1;
+    public const int VERSION_MINOR = 1;
+    public const int VERSION_PATCH = 0;
+    public const string VERSION_BRANCH = "release";
 
     public const bool EnableWeather = true;
 
@@ -68,7 +71,7 @@ public static class ReferenceValues {
         "User5 Fund"
     };
 
-    public static readonly string FILE_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
+    public static readonly string DOCUMENTS_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 
     public static bool LockUI;
 
@@ -106,4 +109,6 @@ public static class ReferenceValues {
     public static ObservableCollection<string> IconImageList { get; set; }
 
     public static JsonTimer JsonTimerMaster { get; set; }
+    
+    public static string AppDirectory { get; set; }
 }

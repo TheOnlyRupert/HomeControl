@@ -80,7 +80,7 @@ public class TasksDailyVM : BaseViewModel {
                     Module = "TasksDailyVM",
                     Description = "Adding daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
@@ -109,7 +109,7 @@ public class TasksDailyVM : BaseViewModel {
                                 Module = "TasksDailyVM",
                                 Description = "Updating daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
@@ -129,7 +129,7 @@ public class TasksDailyVM : BaseViewModel {
                     Module = "TaskDailyVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -144,7 +144,7 @@ public class TasksDailyVM : BaseViewModel {
                             Module = "TaskDailyVM",
                             Description = "Deleting daily task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         ReferenceValues.SoundToPlay = "newTask";
                         SoundDispatcher.PlaySound();
@@ -159,7 +159,7 @@ public class TasksDailyVM : BaseViewModel {
                     Module = "TaskDailyVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -216,7 +216,7 @@ public class TasksDailyVM : BaseViewModel {
                             Module = "TasksDailyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -230,7 +230,7 @@ public class TasksDailyVM : BaseViewModel {
                             Module = "TasksDailyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -244,7 +244,7 @@ public class TasksDailyVM : BaseViewModel {
                             Module = "TasksDailyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -258,7 +258,7 @@ public class TasksDailyVM : BaseViewModel {
                             Module = "TasksDailyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -272,7 +272,7 @@ public class TasksDailyVM : BaseViewModel {
                             Module = "TasksDailyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -314,11 +314,11 @@ public class TasksDailyVM : BaseViewModel {
                 Module = "TaskDailyVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         try {
-            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
+            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -326,7 +326,7 @@ public class TasksDailyVM : BaseViewModel {
                 Module = "TaskDailyVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 

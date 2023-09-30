@@ -6,9 +6,11 @@ using HomeControl.Source.Json;
 namespace HomeControl.Source.Helpers;
 
 public static class FileHelpers {
-    public static string LoadFileText(string fileName) {
+    public static string LoadFileText(string fileName, bool isDocumentsFolder) {
         try {
-            StreamReader streamReader = new(ReferenceValues.FILE_DIRECTORY + fileName + ".json");
+            StreamReader streamReader = isDocumentsFolder ? new StreamReader(ReferenceValues.DOCUMENTS_DIRECTORY + fileName + ".json") :
+                new StreamReader(ReferenceValues.AppDirectory + fileName + ".json");
+
             string fileText = null;
             while (!streamReader.EndOfStream) {
                 fileText = streamReader.ReadToEnd();
@@ -24,15 +26,21 @@ public static class FileHelpers {
                 Module = "FileHelpers",
                 Description = e.ToString()
             });
-            SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
             return null;
         }
     }
 
-    public static void SaveFileText(string fileName, string fileText) {
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        File.WriteAllText(ReferenceValues.FILE_DIRECTORY + fileName + ".json", fileText);
+    public static void SaveFileText(string fileName, string fileText, bool isDocumentsFolder) {
+        if (isDocumentsFolder) {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(ReferenceValues.DOCUMENTS_DIRECTORY + fileName + ".json", fileText);
+        } else {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            File.WriteAllText(ReferenceValues.AppDirectory + fileName + ".json", fileText);
+        }
     }
 }

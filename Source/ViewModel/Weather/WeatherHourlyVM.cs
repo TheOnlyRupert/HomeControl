@@ -87,7 +87,7 @@ public class WeatherHourlyVM : BaseViewModel {
                     Module = "WeatherHourlyVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
         }
     }

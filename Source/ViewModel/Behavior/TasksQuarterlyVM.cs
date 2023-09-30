@@ -153,7 +153,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                     Module = "TasksQuarterlyVM",
                     Description = "Adding quarterly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
@@ -185,7 +185,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                                 Module = "TasksQuarterlyVM",
                                 Description = "Updating Quarterly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
@@ -208,7 +208,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                     Module = "TaskQuarterlyVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -223,7 +223,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                             Module = "TaskQuarterlyVM",
                             Description = "Deleting quarterly task to " + ReferenceValues.ActiveBehaviorUser + ": " + TaskName + ", " + ImageSelected
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         ReferenceValues.SoundToPlay = "newTask";
                         SoundDispatcher.PlaySound();
@@ -240,7 +240,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                     Module = "TaskQuarterlyVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -337,7 +337,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                             Module = "TasksQuarterlyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -351,7 +351,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                             Module = "TasksQuarterlyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -365,7 +365,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                             Module = "TasksQuarterlyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -379,7 +379,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                             Module = "TasksQuarterlyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -393,7 +393,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                             Module = "TasksQuarterlyVM",
                             Description = e.ToString()
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
 
                     break;
@@ -435,11 +435,11 @@ public class TasksQuarterlyVM : BaseViewModel {
                 Module = "TaskQuarterlyVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         try {
-            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster));
+            FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -447,7 +447,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                 Module = "TaskQuarterlyVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 

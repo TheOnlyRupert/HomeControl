@@ -12,11 +12,11 @@ namespace HomeControl.Source.ViewModel.Games;
 public class GamesVM : BaseViewModel {
     public GamesVM() {
         try {
-            ReferenceValues.JsonGameStatsMaster = JsonSerializer.Deserialize<JsonGameStats>(FileHelpers.LoadFileText("gameStats"));
+            ReferenceValues.JsonGameStatsMaster = JsonSerializer.Deserialize<JsonGameStats>(FileHelpers.LoadFileText("gameStats", true));
         } catch (Exception) {
             ReferenceValues.JsonGameStatsMaster = new JsonGameStats();
 
-            FileHelpers.SaveFileText("gameStats", JsonSerializer.Serialize(ReferenceValues.JsonGameStatsMaster));
+            FileHelpers.SaveFileText("gameStats", JsonSerializer.Serialize(ReferenceValues.JsonGameStatsMaster), true);
         }
     }
 

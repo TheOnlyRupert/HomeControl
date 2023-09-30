@@ -53,14 +53,14 @@ public class CalendarVM : BaseViewModel {
 
     public CalendarVM() {
         try {
-            ReferenceValues.JsonCalendarMaster = JsonSerializer.Deserialize<JsonCalendar>(FileHelpers.LoadFileText("calendar"));
+            ReferenceValues.JsonCalendarMaster = JsonSerializer.Deserialize<JsonCalendar>(FileHelpers.LoadFileText("calendar", true));
         } catch (Exception) {
             ReferenceValues.JsonCalendarMaster = new JsonCalendar {
                 DatesList = new ObservableCollection<CalendarDates>(),
                 EventsListRecurring = new ObservableCollection<CalendarEventsRecurring>()
             };
 
-            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
+            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster), true);
         }
 
         Button1EventList = new ObservableCollection<CalendarEventsCustom>();
@@ -1588,7 +1588,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button1EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1598,7 +1598,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(1).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button2EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1608,7 +1608,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(2).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button3EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1618,7 +1618,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(3).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button4EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1628,7 +1628,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(4).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button5EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1638,7 +1638,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(5).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button6EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1648,7 +1648,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(6).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button7EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1658,7 +1658,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(7).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button8EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1668,7 +1668,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(8).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button9EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1678,7 +1678,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(9).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button10EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1688,7 +1688,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(10).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button11EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1698,7 +1698,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(11).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button12EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1708,7 +1708,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(12).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button13EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1718,7 +1718,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(13).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button14EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1728,7 +1728,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(14).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button15EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1738,7 +1738,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(15).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button16EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1748,7 +1748,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(16).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button17EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1758,7 +1758,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(17).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button18EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1768,7 +1768,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(18).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button19EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1778,7 +1778,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(19).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button20EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1788,7 +1788,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(20).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button21EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1798,7 +1798,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(21).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button22EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1808,7 +1808,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(22).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button23EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1818,7 +1818,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(23).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button24EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1828,7 +1828,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(24).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button25EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1838,7 +1838,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(25).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button26EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1848,7 +1848,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(26).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button27EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1858,7 +1858,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(27).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button28EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1868,7 +1868,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(28).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button29EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1878,7 +1878,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(29).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button30EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1888,7 +1888,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(30).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button31EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1898,7 +1898,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(31).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button32EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1908,7 +1908,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(32).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button33EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1918,7 +1918,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(33).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button34EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1928,7 +1928,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(34).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button35EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1938,7 +1938,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(35).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button36EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1948,7 +1948,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(36).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button37EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1958,7 +1958,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(37).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button38EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1968,7 +1968,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(38).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button39EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1978,7 +1978,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(39).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button40EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1988,7 +1988,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(40).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button41EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });
@@ -1998,7 +1998,7 @@ public class CalendarVM : BaseViewModel {
             if (calendarStartingDate.AddDays(41).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
                     Button42EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + events.UserId + ".png",
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
                         Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                         Priority = events.Priority
                     });

@@ -14,7 +14,7 @@ public class HvacVM : BaseViewModel {
 
     public HvacVM() {
         try {
-            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac"));
+            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac", true));
         } catch (Exception) {
             ReferenceValues.JsonHvacMaster = new JsonHvac();
         }
@@ -136,7 +136,7 @@ public class HvacVM : BaseViewModel {
                         Module = "HvacVM",
                         Description = "Changing HVAC Fan Mode: FanModeAuto " + ReferenceValues.JsonHvacMaster.IsFanAuto
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 if (isProgramRunning != ReferenceValues.JsonHvacMaster.IsProgramRunning) {
@@ -152,7 +152,7 @@ public class HvacVM : BaseViewModel {
                         Module = "HvacVM",
                         Description = "Changing HVAC Program Mode: ProgramRunning " + ReferenceValues.JsonHvacMaster.IsProgramRunning
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 if (isHeatingMode != ReferenceValues.JsonHvacMaster.IsHeatingMode) {
@@ -164,7 +164,7 @@ public class HvacVM : BaseViewModel {
                         Module = "HvacVM",
                         Description = "Changing HVAC Heating/Cooling Mode: IsHeatingMode " + ReferenceValues.JsonHvacMaster.IsHeatingMode
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 if (temp != ReferenceValues.JsonHvacMaster.TemperatureSet) {
@@ -177,7 +177,7 @@ public class HvacVM : BaseViewModel {
                         Module = "HvacVM",
                         Description = "Changing HVAC Temperature Set to: " + ReferenceValues.JsonHvacMaster.TemperatureSet + "°C"
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 GetButtonColors();

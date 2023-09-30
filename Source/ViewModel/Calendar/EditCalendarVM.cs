@@ -36,17 +36,17 @@ public class EditCalendarVM : BaseViewModel {
         UserLogic(0);
 
         try {
-            Uri uri = new(ReferenceValues.FILE_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+            Uri uri = new(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
             ImageUser1 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
             ImageUser2 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
             ImageUser3 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
             ImageUser4 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageUser5 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.FILE_DIRECTORY + "icons/user0.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user0.png", UriKind.RelativeOrAbsolute);
             ImageHome = new BitmapImage(uri);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -55,7 +55,7 @@ public class EditCalendarVM : BaseViewModel {
                 Module = "EditCalendarVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         PopulateEvent();
@@ -239,7 +239,7 @@ public class EditCalendarVM : BaseViewModel {
                     Description = "Adding calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText + ", " +
                                   LocationText + ", "
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                 EventList.Add(new CalendarEvents {
                     EventName = EventText,
@@ -249,7 +249,7 @@ public class EditCalendarVM : BaseViewModel {
                     EndTime = EndTimeText,
                     Priority = priority,
                     UserId = user,
-                    Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + user + ".png"
+                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png"
                 });
 
                 ReferenceValues.SoundToPlay = "scribble1";
@@ -281,7 +281,7 @@ public class EditCalendarVM : BaseViewModel {
                                               DescriptionText + ", " +
                                               LocationText + ", "
                             });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
                                 EventName = EventText,
@@ -291,7 +291,7 @@ public class EditCalendarVM : BaseViewModel {
                                 EndTime = EndTimeText,
                                 Priority = priority,
                                 UserId = user,
-                                Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + user + ".png"
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png"
                             });
                             EventList.Remove(CalendarEventSelected);
 
@@ -314,7 +314,7 @@ public class EditCalendarVM : BaseViewModel {
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -331,7 +331,7 @@ public class EditCalendarVM : BaseViewModel {
                                           ", " +
                                           LocationText + ", "
                         });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                         EventList.Remove(CalendarEventSelected);
 
@@ -348,7 +348,7 @@ public class EditCalendarVM : BaseViewModel {
                     Module = "EditCalendarVM",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
 
             break;
@@ -374,7 +374,7 @@ public class EditCalendarVM : BaseViewModel {
                         EndTime = EndTimeText,
                         Priority = priority,
                         UserId = user,
-                        Image = ReferenceValues.FILE_DIRECTORY + "icons/user" + user + ".png"
+                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png"
                     };
 
                     DupeText = "Duplicate Mode Enabled\n" + StartTimeText + " - " + EndTimeText + "  " + EventText;
@@ -440,7 +440,7 @@ public class EditCalendarVM : BaseViewModel {
                 });
             }
 
-            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster));
+            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -448,7 +448,7 @@ public class EditCalendarVM : BaseViewModel {
                 Module = "EditCalendarVM",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 

@@ -31,7 +31,7 @@ public static class HvacCrossPlay {
                     Module = "HvacCrossPlay",
                     Description = "Unable to open port: " + ReferenceValues.JsonSettingsMaster.ComPort
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 comPortMessage = true;
             }
 
@@ -60,7 +60,7 @@ public static class HvacCrossPlay {
                     Module = "HvacCrossPlay",
                     Description = "Unable to receive serial data"
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                 ReferenceValues.IsHvacComEstablished = false;
                 simpleMessenger.PushMessage("HvacUpdated", null);
@@ -88,7 +88,7 @@ public static class HvacCrossPlay {
                         Module = "HvacCrossPlay",
                         Description = "Unable to get interior temp/humidity... Possibly offline?"
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 intMessageSent = true;
@@ -99,7 +99,7 @@ public static class HvacCrossPlay {
                     Module = "HvacCrossPlay",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
         } else if (data.Contains("<EXT:")) {
             try {
@@ -120,7 +120,7 @@ public static class HvacCrossPlay {
                         Module = "HvacCrossPlay",
                         Description = "Unable to get exterior temp/humidity... Possibly offline?"
                     });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 extMessageSent = true;
@@ -131,7 +131,7 @@ public static class HvacCrossPlay {
                     Module = "HvacCrossPlay",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
         } else if (data.Contains("<HVAC: Fan On>")) {
             ReferenceValues.JsonHvacMaster.IsFanAuto = false;
@@ -141,7 +141,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Changing Fan Mode to On"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: Fan Auto>")) {
             ReferenceValues.JsonHvacMaster.IsFanAuto = true;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -150,7 +150,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Changing Fan Mode to Auto"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: Cooling Mode>")) {
             ReferenceValues.JsonHvacMaster.IsHeatingMode = false;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -159,7 +159,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Changing to Cooling Mode"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: Heating Mode>")) {
             ReferenceValues.JsonHvacMaster.IsHeatingMode = true;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -168,7 +168,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Changing to Heating Mode"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: Program Off>")) {
             ReferenceValues.JsonHvacMaster.IsProgramRunning = false;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -177,7 +177,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Program Off"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: Heating Running>")) {
             ReferenceValues.JsonHvacMaster.IsStandby = false;
             ReferenceValues.JsonHvacMaster.IsProgramRunning = true;
@@ -187,7 +187,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Heating Running"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: Heating Standby>")) {
             ReferenceValues.JsonHvacMaster.IsStandby = true;
             ReferenceValues.JsonHvacMaster.IsProgramRunning = true;
@@ -197,7 +197,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Heating Standby"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: Cooling Running>")) {
             ReferenceValues.JsonHvacMaster.IsStandby = false;
             ReferenceValues.JsonHvacMaster.IsProgramRunning = true;
@@ -207,7 +207,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Cooling Running"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: Cooling Standby>")) {
             ReferenceValues.JsonHvacMaster.IsStandby = true;
             ReferenceValues.JsonHvacMaster.IsProgramRunning = true;
@@ -217,7 +217,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = "HVAC: Cooling Standby"
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: TEMP_SET_")) {
             try {
                 data = data.Substring(data.IndexOf('<'));
@@ -229,7 +229,7 @@ public static class HvacCrossPlay {
                     Module = "HvacCrossPlay",
                     Description = "HVAC: Changing Set Temperature to: " + ReferenceValues.JsonHvacMaster.TemperatureSet + "°C"
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -237,7 +237,7 @@ public static class HvacCrossPlay {
                     Module = "HvacCrossPlay",
                     Description = e.ToString()
                 });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
         }
 
@@ -246,7 +246,7 @@ public static class HvacCrossPlay {
 
     public static void SaveJson() {
         try {
-            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster));
+            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -254,7 +254,7 @@ public static class HvacCrossPlay {
                 Module = "HvacCrossPlay",
                 Description = e.ToString()
             });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 }
