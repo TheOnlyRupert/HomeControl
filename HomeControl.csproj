@@ -79,7 +79,7 @@
         <Compile Include="Source\Json\JsonSettings.cs"/>
         <Compile Include="Source\Json\JsonTamagotchi.cs"/>
         <Compile Include="Source\Json\JsonTimer.cs"/>
-        <Compile Include="Source\Json\JsonVersion.cs" />
+        <Compile Include="Source\Json\JsonVersion.cs"/>
         <Compile Include="Source\Json\JsonWeather.cs"/>
         <Compile Include="Source\Modules\Behavior\TasksDaily.xaml.cs">
             <DependentUpon>TasksDaily.xaml</DependentUpon>
@@ -283,7 +283,7 @@
         <Resource Include="Resources\Images\icons\wifi.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="version.json" />
+        <Content Include="version.json"/>
         <Resource Include="Resources\Images\icons\bathtub.png"/>
         <Resource Include="Resources\Images\icons\bed.png"/>
         <Resource Include="Resources\Images\icons\birthday.png"/>

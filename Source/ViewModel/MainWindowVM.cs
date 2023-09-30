@@ -35,7 +35,7 @@ public class MainWindowVM : BaseViewModel {
 
         /* Create Documents Directory */
         Directory.CreateDirectory(ReferenceValues.DOCUMENTS_DIRECTORY);
-        
+
         /* Create App Directory */
         try {
             ReferenceValues.AppDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location + "/");
@@ -63,7 +63,7 @@ public class MainWindowVM : BaseViewModel {
 
             FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster), true);
         }
-        
+
         /* Set Version */
         JsonVersion jsonVersion = new() {
             versionMajor = ReferenceValues.VERSION_MAJOR,
@@ -73,7 +73,7 @@ public class MainWindowVM : BaseViewModel {
         };
 
         FileHelpers.SaveFileText("version", JsonSerializer.Serialize(jsonVersion), false);
-        
+
         /* HVAC */
         try {
             ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac", true));

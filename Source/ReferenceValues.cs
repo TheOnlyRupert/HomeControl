@@ -109,6 +109,6 @@ public static class ReferenceValues {
     public static ObservableCollection<string> IconImageList { get; set; }
 
     public static JsonTimer JsonTimerMaster { get; set; }
-    
+
     public static string AppDirectory { get; set; }
 }

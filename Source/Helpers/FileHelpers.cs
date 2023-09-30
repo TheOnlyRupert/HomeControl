@@ -8,8 +8,9 @@ namespace HomeControl.Source.Helpers;
 public static class FileHelpers {
     public static string LoadFileText(string fileName, bool isDocumentsFolder) {
         try {
-            StreamReader streamReader = isDocumentsFolder ? new StreamReader(ReferenceValues.DOCUMENTS_DIRECTORY + fileName + ".json") :
-                new StreamReader(ReferenceValues.AppDirectory + fileName + ".json");
+            StreamReader streamReader = isDocumentsFolder
+                ? new StreamReader(ReferenceValues.DOCUMENTS_DIRECTORY + fileName + ".json")
+                : new StreamReader(ReferenceValues.AppDirectory + fileName + ".json");
 
             string fileText = null;
             while (!streamReader.EndOfStream) {
