@@ -110,10 +110,11 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto" control:GridViewSort.PropertyName="Date"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Level}" Header="Level" Width="Auto" control:GridViewSort.PropertyName="Level"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Module}" Header="Module" Width="Auto" control:GridViewSort.PropertyName="Module"/>
-                    <GridViewColumn Header="Description" Width="512">
+
+                    <GridViewColumn Width="580" Header="Description" control:GridViewSort.PropertyName="Description">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Description}"/>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

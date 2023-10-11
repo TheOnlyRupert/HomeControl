@@ -151,7 +151,7 @@
 
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Recurring Date Text" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding HolidayText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32"/>
+                    <TextBox Text="{Binding HolidayText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">

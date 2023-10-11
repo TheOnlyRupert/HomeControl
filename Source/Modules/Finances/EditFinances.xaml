@@ -185,17 +185,17 @@
 
                 <StackPanel Grid.Row="3">
                     <TextBlock Text="Location/Business Name" FontSize="24" Foreground="White"/>
-                    <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
+                    <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="4">
                     <TextBlock Text="Amount ($)" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24"/>
+                    <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="5">
                     <TextBlock Text="Category" FontSize="24" Foreground="White"/>
-                    <ComboBox FontSize="24" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CategorySelected}"/>
+                    <ComboBox FontSize="24" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CategorySelected}" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <Grid Grid.Row="6">
@@ -248,7 +248,7 @@
 
                 <StackPanel Grid.Row="7">
                     <TextBlock Text="More Detailed Info  (optional)" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding DetailsText, UpdateSourceTrigger=PropertyChanged}" MaxLength="64" FontSize="24" Margin="0 0 0 8"/>
+                    <TextBox Text="{Binding DetailsText, UpdateSourceTrigger=PropertyChanged}" MaxLength="64" FontSize="24" Margin="0 0 0 8" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <Grid Grid.Row="8">

@@ -209,27 +209,28 @@
 
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Event" FontSize="24" Foreground="White"/>
-                    <TextBox Name="MainFocusItem" Text="{Binding EventText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
+                    <TextBox Name="MainFocusItem" Text="{Binding EventText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Start Time" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding StartTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4"/>
+                    <TextBox Text="{Binding StartTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">
                     <TextBlock Text="End Time" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding EndTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4"/>
+                    <TextBox Text="{Binding EndTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="4">
                     <TextBlock Text="Location" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding LocationText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64"/>
+                    <TextBox Text="{Binding LocationText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="5">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"/>
+                    <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"
+                             control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <Grid Grid.Row="6" Margin="0 16">

@@ -61,6 +61,7 @@
         <Compile Include="Source\Control\DisableNavigation.cs"/>
         <Compile Include="Source\Control\GridViewScroll.cs"/>
         <Compile Include="Source\Control\GridViewSort.cs"/>
+        <Compile Include="Source\Control\SelectTextOnFocus.cs"/>
         <Compile Include="Source\Control\SnowEngine.cs"/>
         <Compile Include="Source\Control\SnowInfo.cs"/>
         <Compile Include="Source\Helpers\FileHelpers.cs"/>
