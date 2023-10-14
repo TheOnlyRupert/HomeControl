@@ -5,7 +5,6 @@ using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Games;
 using HomeControl.Source.ViewModel.Base;
-using Tamagotchi = HomeControl.Source.Modules.Games.Tamagotchi;
 
 namespace HomeControl.Source.ViewModel.Games;
 
@@ -35,7 +34,7 @@ public class GamesVM : BaseViewModel {
             coinFlip.Close();
             break;
         case "tamagotchi":
-            Tamagotchi tamagotchi = new();
+            Modules.Games.Tamagotchi.Tamagotchi tamagotchi = new();
             tamagotchi.ShowDialog();
             tamagotchi.Close();
             break;

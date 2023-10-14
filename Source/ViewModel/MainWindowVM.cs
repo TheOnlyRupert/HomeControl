@@ -15,7 +15,9 @@ using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.ViewModel.Base;
+using HomeControl.Source.ViewModel.Games.Tamagotchi;
 using HomeControl.Source.ViewModel.Hvac;
+using Task = System.Threading.Tasks.Task;
 
 namespace HomeControl.Source.ViewModel;
 
@@ -126,6 +128,9 @@ public class MainWindowVM : BaseViewModel {
         void activityTimer_OnActive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOff", null);
         }
+
+        /* Start Tamagotchi */
+        new TamagotchiVM();
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
@@ -214,16 +219,17 @@ public class MainWindowVM : BaseViewModel {
         simpleMessenger.PushMessage("Refresh", null);
     }
 
-    private void ApiStatus() {
+    private async Task ApiStatus() {
         JsonSerializerOptions options = new() {
             IncludeFields = true
         };
 
         try {
-            using WebClient client1 = new();
-            const string hostUrl = "https://api.weather.gov/";
-            client1.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
-            string apiStatusString = client1.DownloadString(hostUrl);
+            Uri api = new("https://api.weather.gov/");
+
+            using WebClient client = new();
+            client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
+            string apiStatusString = await client.DownloadStringTaskAsync(api);
             ApiStatus apiStatus = JsonSerializer.Deserialize<ApiStatus>(apiStatusString, options);
 
             if (apiStatus is { status: "OK" }) {

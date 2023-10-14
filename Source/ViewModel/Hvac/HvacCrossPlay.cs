@@ -21,6 +21,10 @@ public static class HvacCrossPlay {
                 comPortMessage = false;
                 intMessageSent = false;
                 extMessageSent = false;
+
+                ReferenceValues.SerialPort.ReadTimeout = 500;
+                ReferenceValues.SerialPort.WriteTimeout = 500;
+
                 ReferenceValues.SerialPort.Write("0");
             }
         } catch (Exception) {

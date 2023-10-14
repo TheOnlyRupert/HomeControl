@@ -111,4 +111,5 @@ public static class ReferenceValues {
     public static JsonTimer JsonTimerMaster { get; set; }
 
     public static string AppDirectory { get; set; }
+    public static Tamagotchi TamagotchiMaster { get; set; }
 }
