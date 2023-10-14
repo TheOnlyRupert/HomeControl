@@ -3,15 +3,12 @@
 public class Tamagotchi {
     public string Name { get; set; }
 
-    /* -1 dead, 0 egg, 1 baby, 2 child, 3 toddler, 4 teen, 5 adult, 6 elderly */
-    public int GrowthStage { get; set; }
-    public int DroppingAmount { get; set; }
     public bool IsMale { get; set; }
     public bool IsLightOn { get; set; }
     public bool IsSleeping { get; set; }
     public bool IsBusy { get; set; }
 
-    /* 0 is dead, above 80 is fully healthy */
+    public double Age { get; set; }
     public double Health { get; set; }
     public double Hunger { get; set; }
     public double Happiness { get; set; }
@@ -19,7 +16,7 @@ public class Tamagotchi {
     public double Anxiety { get; set; }
     public double Bladder { get; set; }
     public double Weight { get; set; }
-    public double Age { get; set; }
+    public double Cleanliness { get; set; }
 
     public int HealthMultiplier { get; set; }
     public int HungerMultiplier { get; set; }
@@ -28,6 +25,7 @@ public class Tamagotchi {
     public int AnxietyMultiplier { get; set; }
     public int BladderMultiplier { get; set; }
     public int WeightMultiplier { get; set; }
+    public int CleanlinessMultiplier { get; set; }
 
     public int HealthMultiplierDuration { get; set; }
     public int HungerMultiplierDuration { get; set; }
@@ -36,6 +34,7 @@ public class Tamagotchi {
     public int AnxietyMultiplierDuration { get; set; }
     public int BladderMultiplierDuration { get; set; }
     public int WeightMultiplierDuration { get; set; }
+    public int CleanlinessMultiplierDuration { get; set; }
 
     public bool ReverseHealth { get; set; }
     public bool ReverseHunger { get; set; }
@@ -44,6 +43,7 @@ public class Tamagotchi {
     public bool ReverseAnxiety { get; set; }
     public bool ReverseBladder { get; set; }
     public bool ReverseWeight { get; set; }
+    public bool ReverseCleanliness { get; set; }
 
     public int ReverseHealthDuration { get; set; }
     public int ReverseHungerDuration { get; set; }
@@ -52,4 +52,5 @@ public class Tamagotchi {
     public int ReverseAnxietyDuration { get; set; }
     public int ReverseBladderDuration { get; set; }
     public int ReverseWeightDuration { get; set; }
+    public int ReverseCleanlinessDuration { get; set; }
 }

@@ -128,9 +128,6 @@ public class MainWindowVM : BaseViewModel {
         void activityTimer_OnActive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOff", null);
         }
-
-        /* Start Tamagotchi */
-        new TamagotchiVM();
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
@@ -145,6 +142,9 @@ public class MainWindowVM : BaseViewModel {
             }
 
             changeDate = true;
+
+            /* Safe Tamagotchi File */
+            FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
         }
 
         /* Hour Changes */
@@ -215,6 +215,9 @@ public class MainWindowVM : BaseViewModel {
             ReferenceValues.SoundToPlay = "timerDone";
             SoundDispatcher.PlaySound();
         }
+
+        /* Tick Tamagotchi Every Second */
+        TamagotchiLogic.TickLogic();
 
         simpleMessenger.PushMessage("Refresh", null);
     }

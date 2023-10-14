@@ -7,7 +7,10 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Games.Tamagotchi;
 
 public class TamagotchiVM : BaseViewModel {
-    private string _nameText, _debugStats, _tamagotchi;
+    private double _debugAgeText, _debugHealthText, _debugHungerText, _debugHappinessText, _debugFatigueText, _debugAnxietyText, _debugBladderText, _debugWeightText, _debugCleanlinessText;
+
+    private string _nameText, _tamagotchi, _debugAgeOutput, _debugHealthOutput, _debugHungerOutput, _debugHappinessOutput, _debugFatigueOutput, _debugAnxietyOutput, _debugBladderOutput,
+        _debugWeightOutput, _debugCleanlinessOutput, _isMaleText, _isLightOnText, _isSleepingText, _isBusyText, _debugVisibility, _isBusyVisibility;
 
     public TamagotchiVM() {
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -23,11 +26,10 @@ public class TamagotchiVM : BaseViewModel {
                 Hunger = 100,
                 Happiness = 100,
                 Fatigue = 100,
-                DroppingAmount = 0,
                 Weight = 10,
                 Bladder = 100,
                 Anxiety = 100,
-                GrowthStage = 1,
+                Cleanliness = 100,
                 IsMale = true,
                 IsLightOn = true,
                 IsSleeping = false,
@@ -39,6 +41,7 @@ public class TamagotchiVM : BaseViewModel {
                 ReverseHealth = false,
                 ReverseHunger = false,
                 ReverseWeight = false,
+                ReverseCleanliness = false,
                 HealthMultiplier = 1,
                 HungerMultiplier = 1,
                 HappinessMultiplier = 1,
@@ -46,6 +49,7 @@ public class TamagotchiVM : BaseViewModel {
                 AnxietyMultiplier = 1,
                 BladderMultiplier = 1,
                 WeightMultiplier = 1,
+                CleanlinessMultiplier = 0,
                 ReverseFatigueDuration = 0,
                 ReverseAnxietyDuration = 0,
                 ReverseBladderDuration = 0,
@@ -53,21 +57,39 @@ public class TamagotchiVM : BaseViewModel {
                 ReverseHealthDuration = 0,
                 ReverseHungerDuration = 0,
                 ReverseWeightDuration = 0,
+                ReverseCleanlinessDuration = 0,
                 HealthMultiplierDuration = 0,
                 AnxietyMultiplierDuration = 0,
                 BladderMultiplierDuration = 0,
                 FatigueMultiplierDuration = 0,
                 HappinessMultiplierDuration = 0,
                 HungerMultiplierDuration = 0,
-                WeightMultiplierDuration = 0
+                WeightMultiplierDuration = 0,
+                CleanlinessMultiplierDuration = 0
             };
 
             FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
         }
 
-        NameText = ReferenceValues.TamagotchiMaster.Name;
+        if (ReferenceValues.JsonSettingsMaster.IsDebugMode) {
+            DebugVisibility = "VISIBLE";
 
-        RefreshDisplay();
+            DebugAgeText = 100;
+            DebugHealthText = 100;
+            DebugHungerText = 100;
+            DebugHappinessText = 100;
+            DebugFatigueText = 100;
+            DebugAnxietyText = 100;
+            DebugBladderText = 100;
+            DebugWeightText = 100;
+            DebugCleanlinessText = 100;
+        } else {
+            DebugVisibility = "HIDDEN";
+        }
+
+        IsBusyVisibility = "HIDDEN";
+
+        NameText = ReferenceValues.TamagotchiMaster.Name;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -75,205 +97,16 @@ public class TamagotchiVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
         case "Refresh": {
-            if (ReferenceValues.TamagotchiMaster.GrowthStage != -1) {
-                ReferenceValues.TamagotchiMaster.Age--;
-
-                /* Kill it */
-                if (ReferenceValues.TamagotchiMaster.Age <= 0) {
-                    ReferenceValues.TamagotchiMaster.GrowthStage = -1;
-                }
-                
-                /* Tick Heath */
-                if (!ReferenceValues.TamagotchiMaster.ReverseHealth) {
-                    ReferenceValues.TamagotchiMaster.Health -= 0.1 * ReferenceValues.TamagotchiMaster.HealthMultiplier;
-
-                    if (ReferenceValues.TamagotchiMaster.HealthMultiplierDuration <= 0) {
-                        ReferenceValues.TamagotchiMaster.HealthMultiplier = 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.HealthMultiplierDuration--;
-                    }
-
-                    if (ReferenceValues.TamagotchiMaster.Health <= 0) {
-                        ReferenceValues.TamagotchiMaster.GrowthStage = 0;
-
-                        try {
-                            FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
-                        } catch (Exception) {
-                            //ignore
-                        }
-                    }
-                } else {
-                    if (ReferenceValues.TamagotchiMaster.ReverseHealthDuration > 0) {
-                        ReferenceValues.TamagotchiMaster.ReverseHealthDuration--;
-                        ReferenceValues.TamagotchiMaster.Health += 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.ReverseHealth = false;
-                        ReferenceValues.TamagotchiMaster.IsBusy = false;
-                    }
-                }
-
-                /* Tick Happiness */
-                if (!ReferenceValues.TamagotchiMaster.ReverseHappiness) {
-                    ReferenceValues.TamagotchiMaster.Happiness -= 0.1 * ReferenceValues.TamagotchiMaster.HappinessMultiplier;
-
-                    if (ReferenceValues.TamagotchiMaster.HappinessMultiplierDuration <= 0) {
-                        ReferenceValues.TamagotchiMaster.HappinessMultiplier = 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.HappinessMultiplierDuration--;
-                    }
-
-                    if (ReferenceValues.TamagotchiMaster.Happiness <= 0) {
-                        ReferenceValues.TamagotchiMaster.Happiness = 0;
-                        ReferenceValues.TamagotchiMaster.AnxietyMultiplier = 5;
-                        ReferenceValues.TamagotchiMaster.AnxietyMultiplierDuration = 1;
-                    }
-                } else {
-                    if (ReferenceValues.TamagotchiMaster.ReverseHappinessDuration > 0) {
-                        ReferenceValues.TamagotchiMaster.ReverseHappinessDuration--;
-                        ReferenceValues.TamagotchiMaster.Happiness += 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.ReverseHappiness = false;
-                        ReferenceValues.TamagotchiMaster.IsBusy = false;
-                    }
-                }
-
-                /* Tick Hunger */
-                if (!ReferenceValues.TamagotchiMaster.ReverseHunger) {
-                    ReferenceValues.TamagotchiMaster.Hunger -= 0.1 * ReferenceValues.TamagotchiMaster.HungerMultiplier;
-
-                    if (ReferenceValues.TamagotchiMaster.HungerMultiplierDuration <= 0) {
-                        ReferenceValues.TamagotchiMaster.HungerMultiplier = 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.HungerMultiplierDuration--;
-                    }
-
-                    if (ReferenceValues.TamagotchiMaster.Hunger <= 0) {
-                        ReferenceValues.TamagotchiMaster.Hunger = 0;
-                        ReferenceValues.TamagotchiMaster.HealthMultiplier = 5;
-                        ReferenceValues.TamagotchiMaster.HealthMultiplierDuration = 1;
-                    }
-                } else {
-                    if (ReferenceValues.TamagotchiMaster.ReverseHungerDuration > 0) {
-                        ReferenceValues.TamagotchiMaster.ReverseHungerDuration--;
-                        ReferenceValues.TamagotchiMaster.Hunger += 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.ReverseHunger = false;
-                        ReferenceValues.TamagotchiMaster.IsBusy = false;
-                    }
-                }
-
-                /* Tick Fatigue */
-                if (!ReferenceValues.TamagotchiMaster.ReverseFatigue) {
-                    ReferenceValues.TamagotchiMaster.Fatigue -= 0.1 * ReferenceValues.TamagotchiMaster.FatigueMultiplier;
-
-                    if (ReferenceValues.TamagotchiMaster.FatigueMultiplierDuration <= 0) {
-                        ReferenceValues.TamagotchiMaster.FatigueMultiplier = 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.FatigueMultiplierDuration--;
-                    }
-
-                    if (ReferenceValues.TamagotchiMaster.Fatigue <= 0) {
-                        ReferenceValues.TamagotchiMaster.Fatigue = 0;
-                    }
-                } else {
-                    if (ReferenceValues.TamagotchiMaster.ReverseFatigueDuration > 0) {
-                        ReferenceValues.TamagotchiMaster.ReverseFatigueDuration--;
-                        ReferenceValues.TamagotchiMaster.Fatigue += 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.ReverseFatigue = false;
-                    }
-                }
-
-                /* Tick Bladder */
-                if (!ReferenceValues.TamagotchiMaster.ReverseBladder) {
-                    ReferenceValues.TamagotchiMaster.Bladder -= 0.1 * ReferenceValues.TamagotchiMaster.BladderMultiplier;
-
-                    if (ReferenceValues.TamagotchiMaster.BladderMultiplierDuration <= 0) {
-                        ReferenceValues.TamagotchiMaster.BladderMultiplier = 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.BladderMultiplierDuration--;
-                    }
-
-                    if (ReferenceValues.TamagotchiMaster.Bladder <= 0) {
-                        AddDropping();
-                        ReferenceValues.TamagotchiMaster.HealthMultiplier = 5;
-                        ReferenceValues.TamagotchiMaster.HealthMultiplierDuration = 5;
-                        ReferenceValues.TamagotchiMaster.Bladder = 100;
-                    }
-                } else {
-                    if (ReferenceValues.TamagotchiMaster.ReverseBladderDuration >= 0) {
-                        ReferenceValues.TamagotchiMaster.ReverseBladderDuration--;
-                        ReferenceValues.TamagotchiMaster.Bladder += 10;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.ReverseBladder = false;
-                        ReferenceValues.TamagotchiMaster.IsBusy = false;
-                    }
-                }
-
-                /* Tick Anxiety */
-                if (!ReferenceValues.TamagotchiMaster.ReverseAnxiety) {
-                    ReferenceValues.TamagotchiMaster.Anxiety -= 0.1 * ReferenceValues.TamagotchiMaster.AnxietyMultiplier;
-
-                    if (ReferenceValues.TamagotchiMaster.AnxietyMultiplierDuration <= 0) {
-                        ReferenceValues.TamagotchiMaster.AnxietyMultiplier = 1;
-                    } else {
-                        ReferenceValues.TamagotchiMaster.AnxietyMultiplierDuration--;
-                    }
-
-                    if (ReferenceValues.TamagotchiMaster.Anxiety <= 0) {
-                        ReferenceValues.TamagotchiMaster.Anxiety = 0;
-                        ReferenceValues.TamagotchiMaster.HappinessMultiplier = 5;
-                        ReferenceValues.TamagotchiMaster.HappinessMultiplierDuration = 1;
-                    }
-                } else {
-                    if (ReferenceValues.TamagotchiMaster.ReverseAnxietyDuration > 0) {
-                        ReferenceValues.TamagotchiMaster.ReverseAnxietyDuration--;
-                        ReferenceValues.TamagotchiMaster.Anxiety += 1 * ReferenceValues.TamagotchiMaster.AnxietyMultiplier;
-
-                        if (ReferenceValues.TamagotchiMaster.AnxietyMultiplierDuration <= 0) {
-                            ReferenceValues.TamagotchiMaster.AnxietyMultiplier = 1;
-                        } else {
-                            ReferenceValues.TamagotchiMaster.AnxietyMultiplierDuration--;
-                        }
-                    } else {
-                        ReferenceValues.TamagotchiMaster.ReverseAnxiety = false;
-                    }
-                }
-
-                /* Light Logic */
-                if (!ReferenceValues.TamagotchiMaster.IsSleeping) {
-                    if (!ReferenceValues.TamagotchiMaster.IsLightOn) {
-                        ReferenceValues.TamagotchiMaster.AnxietyMultiplier = 5;
-                        ReferenceValues.TamagotchiMaster.AnxietyMultiplierDuration = 1;
-                    }
-                } else {
-                    if (ReferenceValues.TamagotchiMaster.IsLightOn) {
-                        ReferenceValues.TamagotchiMaster.FatigueMultiplier = 1;
-                        ReferenceValues.TamagotchiMaster.FatigueMultiplierDuration = 1;
-                    }
-                }
-            }
-
             RefreshDisplay();
             break;
         }
-        case "MinChanged":
-            try {
-                FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
-            } catch (Exception) {
-                //ignore
-            }
-
-            break;
         }
     }
-
-    private void AddDropping() { }
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "food":
-            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.GrowthStage != 0) {
+            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
                 ReferenceValues.SoundToPlay = "eating";
                 SoundDispatcher.PlaySound();
 
@@ -284,13 +117,24 @@ public class TamagotchiVM : BaseViewModel {
 
             break;
         case "toilet":
-            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.GrowthStage != 0) {
+            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
                 ReferenceValues.SoundToPlay = "flush";
                 SoundDispatcher.PlaySound();
 
                 ReferenceValues.TamagotchiMaster.ReverseBladder = true;
                 ReferenceValues.TamagotchiMaster.IsBusy = true;
                 ReferenceValues.TamagotchiMaster.ReverseBladderDuration = 10;
+            }
+
+            break;
+        case "trash":
+            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
+                ReferenceValues.SoundToPlay = "trash";
+                SoundDispatcher.PlaySound();
+
+                ReferenceValues.TamagotchiMaster.ReverseCleanliness = true;
+                ReferenceValues.TamagotchiMaster.IsBusy = true;
+                ReferenceValues.TamagotchiMaster.ReverseCleanlinessDuration = 10;
             }
 
             break;
@@ -301,7 +145,7 @@ public class TamagotchiVM : BaseViewModel {
             ReferenceValues.TamagotchiMaster.IsLightOn = !ReferenceValues.TamagotchiMaster.IsLightOn;
             break;
         case "medicine":
-            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.GrowthStage != 0) {
+            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
                 ReferenceValues.SoundToPlay = "medicine";
                 SoundDispatcher.PlaySound();
 
@@ -312,7 +156,7 @@ public class TamagotchiVM : BaseViewModel {
 
             break;
         case "play":
-            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.GrowthStage != 0) {
+            if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
                 ReferenceValues.SoundToPlay = "fun";
                 SoundDispatcher.PlaySound();
 
@@ -321,6 +165,45 @@ public class TamagotchiVM : BaseViewModel {
                 ReferenceValues.TamagotchiMaster.ReverseHappinessDuration = 10;
             }
 
+            break;
+        case "debugAge":
+            ReferenceValues.TamagotchiMaster.Age = DebugAgeText;
+            break;
+        case "debugHealth":
+            ReferenceValues.TamagotchiMaster.Health = DebugHealthText;
+            break;
+        case "debugHunger":
+            ReferenceValues.TamagotchiMaster.Hunger = DebugHungerText;
+            break;
+        case "debugHappiness":
+            ReferenceValues.TamagotchiMaster.Happiness = DebugHappinessText;
+            break;
+        case "debugFatigue":
+            ReferenceValues.TamagotchiMaster.Fatigue = DebugFatigueText;
+            break;
+        case "debugAnxiety":
+            ReferenceValues.TamagotchiMaster.Anxiety = DebugAnxietyText;
+            break;
+        case "debugBladder":
+            ReferenceValues.TamagotchiMaster.Bladder = DebugBladderText;
+            break;
+        case "debugWeight":
+            ReferenceValues.TamagotchiMaster.Weight = DebugWeightText;
+            break;
+        case "debugCleanliness":
+            ReferenceValues.TamagotchiMaster.Cleanliness = DebugCleanlinessText;
+            break;
+        case "debugIsLightOn":
+            ReferenceValues.TamagotchiMaster.IsLightOn = !ReferenceValues.TamagotchiMaster.IsLightOn;
+            break;
+        case "debugIsMale":
+            ReferenceValues.TamagotchiMaster.IsMale = !ReferenceValues.TamagotchiMaster.IsMale;
+            break;
+        case "debugIsSleeping":
+            ReferenceValues.TamagotchiMaster.IsSleeping = !ReferenceValues.TamagotchiMaster.IsSleeping;
+            break;
+        case "debugIsBusy":
+            ReferenceValues.TamagotchiMaster.IsBusy = !ReferenceValues.TamagotchiMaster.IsBusy;
             break;
         }
 
@@ -333,26 +216,22 @@ public class TamagotchiVM : BaseViewModel {
     }
 
     private void RefreshDisplay() {
-        if (ReferenceValues.TamagotchiMaster.GrowthStage != 0) {
-            DebugStats = "Age: " + ReferenceValues.TamagotchiMaster.Age + "\nHealth: " + ReferenceValues.TamagotchiMaster.Health + "\nHappiness: " +
-                         ReferenceValues.TamagotchiMaster.Happiness + "\nHunger: " + ReferenceValues.TamagotchiMaster.Hunger + "\nFatigue: " + ReferenceValues.TamagotchiMaster.Fatigue +
-                         "\nBladder: " + ReferenceValues.TamagotchiMaster.Bladder + "\nAnxiety: " + ReferenceValues.TamagotchiMaster.Anxiety + "\nLights: " +
-                         ReferenceValues.TamagotchiMaster.IsLightOn;
-        } else {
-            DebugStats = "DEAD!";
-        }
+        DebugAgeOutput = "Age: " + ReferenceValues.TamagotchiMaster.Age;
+        DebugHealthOutput = "Health: " + ReferenceValues.TamagotchiMaster.Health;
+        DebugHungerOutput = "Hunger: " + ReferenceValues.TamagotchiMaster.Hunger;
+        DebugHappinessOutput = "Happiness: " + ReferenceValues.TamagotchiMaster.Happiness;
+        DebugFatigueOutput = "Fatigue: " + ReferenceValues.TamagotchiMaster.Fatigue;
+        DebugAnxietyOutput = "Anxiety: " + ReferenceValues.TamagotchiMaster.Anxiety;
+        DebugBladderOutput = "Bladder: " + ReferenceValues.TamagotchiMaster.Bladder;
+        DebugWeightOutput = "Weight: " + ReferenceValues.TamagotchiMaster.Weight;
+        DebugCleanlinessOutput = "Cleanliness: " + ReferenceValues.TamagotchiMaster.Cleanliness;
 
-        switch (ReferenceValues.TamagotchiMaster.GrowthStage) {
-        case -1:
-            Tamagotchi = "";
-            break;
-        case 0:
-            Tamagotchi = "../../Resources/Images/games/tamagotchi/egg1.png";
-            break;
-        case 1:
-            Tamagotchi = "../../Resources/Images/games/tamagotchi/egg2.png";
-            break;
-        }
+        IsLightOnText = "Light: " + ReferenceValues.TamagotchiMaster.IsLightOn;
+        IsMaleText = "Male: " + ReferenceValues.TamagotchiMaster.IsMale;
+        IsSleepingText = "Sleeping: " + ReferenceValues.TamagotchiMaster.IsSleeping;
+        IsBusyText = "Busy: " + ReferenceValues.TamagotchiMaster.IsBusy;
+
+        IsBusyVisibility = ReferenceValues.TamagotchiMaster.IsBusy ? "VISIBLE" : "HIDDEN";
     }
 
     #region Fields
@@ -365,19 +244,203 @@ public class TamagotchiVM : BaseViewModel {
         }
     }
 
-    public string DebugStats {
-        get => _debugStats;
-        set {
-            _debugStats = value;
-            RaisePropertyChangedEvent("DebugStats");
-        }
-    }
-
     public string Tamagotchi {
         get => _tamagotchi;
         set {
             _tamagotchi = value;
             RaisePropertyChangedEvent("Tamagotchi");
+        }
+    }
+
+    public string DebugAgeOutput {
+        get => _debugAgeOutput;
+        set {
+            _debugAgeOutput = value;
+            RaisePropertyChangedEvent("DebugAgeOutput");
+        }
+    }
+
+    public string DebugHealthOutput {
+        get => _debugHealthOutput;
+        set {
+            _debugHealthOutput = value;
+            RaisePropertyChangedEvent("DebugHealthOutput");
+        }
+    }
+
+    public string DebugHungerOutput {
+        get => _debugHungerOutput;
+        set {
+            _debugHungerOutput = value;
+            RaisePropertyChangedEvent("DebugHungerOutput");
+        }
+    }
+
+    public string DebugHappinessOutput {
+        get => _debugHappinessOutput;
+        set {
+            _debugHappinessOutput = value;
+            RaisePropertyChangedEvent("DebugHappinessOutput");
+        }
+    }
+
+    public string DebugFatigueOutput {
+        get => _debugFatigueOutput;
+        set {
+            _debugFatigueOutput = value;
+            RaisePropertyChangedEvent("DebugFatigueOutput");
+        }
+    }
+
+    public string DebugAnxietyOutput {
+        get => _debugAnxietyOutput;
+        set {
+            _debugAnxietyOutput = value;
+            RaisePropertyChangedEvent("DebugAnxietyOutput");
+        }
+    }
+
+    public string DebugBladderOutput {
+        get => _debugBladderOutput;
+        set {
+            _debugBladderOutput = value;
+            RaisePropertyChangedEvent("DebugBladderOutput");
+        }
+    }
+
+    public string DebugWeightOutput {
+        get => _debugWeightOutput;
+        set {
+            _debugWeightOutput = value;
+            RaisePropertyChangedEvent("DebugWeightOutput");
+        }
+    }
+
+    public string DebugCleanlinessOutput {
+        get => _debugCleanlinessOutput;
+        set {
+            _debugCleanlinessOutput = value;
+            RaisePropertyChangedEvent("DebugCleanlinessOutput");
+        }
+    }
+
+    public double DebugAgeText {
+        get => _debugAgeText;
+        set {
+            _debugAgeText = value;
+            RaisePropertyChangedEvent("DebugAgeText");
+        }
+    }
+
+    public double DebugHealthText {
+        get => _debugHealthText;
+        set {
+            _debugHealthText = value;
+            RaisePropertyChangedEvent("DebugHealthText");
+        }
+    }
+
+    public double DebugHungerText {
+        get => _debugHungerText;
+        set {
+            _debugHungerText = value;
+            RaisePropertyChangedEvent("DebugHungerText");
+        }
+    }
+
+    public double DebugHappinessText {
+        get => _debugHappinessText;
+        set {
+            _debugHappinessText = value;
+            RaisePropertyChangedEvent("DebugHappinessText");
+        }
+    }
+
+    public double DebugFatigueText {
+        get => _debugFatigueText;
+        set {
+            _debugFatigueText = value;
+            RaisePropertyChangedEvent("DebugFatigueText");
+        }
+    }
+
+    public double DebugAnxietyText {
+        get => _debugAnxietyText;
+        set {
+            _debugAnxietyText = value;
+            RaisePropertyChangedEvent("DebugAnxietyText");
+        }
+    }
+
+    public double DebugBladderText {
+        get => _debugBladderText;
+        set {
+            _debugBladderText = value;
+            RaisePropertyChangedEvent("DebugBladderText");
+        }
+    }
+
+    public double DebugWeightText {
+        get => _debugWeightText;
+        set {
+            _debugWeightText = value;
+            RaisePropertyChangedEvent("DebugWeightText");
+        }
+    }
+
+    public double DebugCleanlinessText {
+        get => _debugCleanlinessText;
+        set {
+            _debugCleanlinessText = value;
+            RaisePropertyChangedEvent("DebugCleanlinessText");
+        }
+    }
+
+    public string IsMaleText {
+        get => _isMaleText;
+        set {
+            _isMaleText = value;
+            RaisePropertyChangedEvent("IsMaleText");
+        }
+    }
+
+    public string IsLightOnText {
+        get => _isLightOnText;
+        set {
+            _isLightOnText = value;
+            RaisePropertyChangedEvent("IsLightOnText");
+        }
+    }
+
+    public string IsSleepingText {
+        get => _isSleepingText;
+        set {
+            _isSleepingText = value;
+            RaisePropertyChangedEvent("IsSleepingText");
+        }
+    }
+
+    public string IsBusyText {
+        get => _isBusyText;
+        set {
+            _isBusyText = value;
+            RaisePropertyChangedEvent("IsBusyText");
+        }
+    }
+
+    public string DebugVisibility {
+        get => _debugVisibility;
+        set {
+            _debugVisibility = value;
+            RaisePropertyChangedEvent("DebugVisibility");
+        }
+    }
+
+    public string IsBusyVisibility {
+        get => _isBusyVisibility;
+        set {
+            _isBusyVisibility = value;
+            RaisePropertyChangedEvent("IsBusyVisibility");
         }
     }
 

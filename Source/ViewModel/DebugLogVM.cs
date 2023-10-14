@@ -7,13 +7,27 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class DebugLogVM : BaseViewModel {
+    private string _copyrightText;
     private ObservableCollection<DebugTextBlock> _debugList;
 
     public DebugLogVM() {
         DebugList = ReferenceValues.JsonDebugMaster.DebugBlockList;
+
+        CopyrightText = ReferenceValues.COPYRIGHT + "  v" + ReferenceValues.VERSION_MAJOR + "." + ReferenceValues.VERSION_MINOR + "." + ReferenceValues.VERSION_PATCH + "-" +
+                        ReferenceValues.VERSION_BRANCH;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+
+    private void ButtonCommandLogic(object param) {
+        switch (param) {
+        case "settings":
+            Settings settings = new();
+            settings.ShowDialog();
+            settings.Close();
+            break;
+        }
+    }
 
     #region Fields
 
@@ -25,15 +39,13 @@ public class DebugLogVM : BaseViewModel {
         }
     }
 
-    #endregion
-
-    private void ButtonCommandLogic(object param) {
-        switch (param) {
-        case "settings":
-            Settings settings = new();
-            settings.ShowDialog();
-            settings.Close();
-            break;
+    public string CopyrightText {
+        get => _copyrightText;
+        set {
+            _copyrightText = value;
+            RaisePropertyChangedEvent("CopyrightText");
         }
     }
+
+    #endregion
 }

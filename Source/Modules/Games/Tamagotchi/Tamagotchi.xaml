@@ -15,21 +15,99 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Content="Food" Command="{Binding ButtonCommand}" CommandParameter="food"/>
             <Button Grid.Column="1" Content="Toilet" Command="{Binding ButtonCommand}" CommandParameter="toilet"/>
-            <Button Grid.Column="2" Content="Light" Command="{Binding ButtonCommand}" CommandParameter="light"/>
-            <Button Grid.Column="3" Content="Medicine" Command="{Binding ButtonCommand}" CommandParameter="medicine"/>
-            <Button Grid.Column="4" Content="Play" Command="{Binding ButtonCommand}" CommandParameter="play"/>
+            <Button Grid.Column="2" Content="Trash" Command="{Binding ButtonCommand}" CommandParameter="trash"/>
+            <Button Grid.Column="3" Content="Light" Command="{Binding ButtonCommand}" CommandParameter="light"/>
+            <Button Grid.Column="4" Content="Medicine" Command="{Binding ButtonCommand}" CommandParameter="medicine"/>
+            <Button Grid.Column="5" Content="Play" Command="{Binding ButtonCommand}" CommandParameter="play"/>
         </Grid>
 
         <Image Grid.Row="1" Source="../../../../Resources/Images/games/tamagotchi/egg1.png" HorizontalAlignment="Center"/>
 
+        <ProgressBar Grid.Row="1" Width="256" Height="32" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="White" Background="Transparent" Foreground="CornflowerBlue"
+                     IsIndeterminate="True" Margin="0 8" Visibility="{Binding IsBusyVisibility}"/>
+
         <TextBlock Grid.Row="2" Text="{Binding NameText}" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
 
         <Grid Grid.Row="1" Visibility="{Binding DebugVisibility}">
-            <TextBlock Text="{Binding DebugStats}" Foreground="White"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugAgeOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugAgeText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugAge"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugHealthOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugHealthText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugHealth"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugHungerOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugHungerText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugHunger"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugHappinessOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugHappinessText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugHappiness"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugFatigueOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugFatigueText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugFatigue"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="5" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugAnxietyOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugAnxietyText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugAnxiety"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="6" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugBladderOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugBladderText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugBladder"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="7" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugWeightOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugWeightText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugWeight"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="8" Orientation="Horizontal">
+                <TextBlock Text="{Binding DebugCleanlinessOutput}" Foreground="White" Width="192"/>
+                <TextBox Text="{Binding DebugCleanlinessText}" Width="64"/>
+                <Button Content="Set" Width="92" Command="{Binding ButtonCommand}" CommandParameter="debugCleanliness"/>
+            </StackPanel>
+
+            <Button Grid.Row="9" Content="{Binding IsMaleText}" Width="92" HorizontalAlignment="Left" Margin="256 0 0 0" Command="{Binding ButtonCommand}" CommandParameter="debugIsMale"/>
+            <Button Grid.Row="10" Content="{Binding IsLightOnText}" Width="92" HorizontalAlignment="Left" Margin="256 0 0 0" Command="{Binding ButtonCommand}" CommandParameter="debugIsLightOn"/>
+            <Button Grid.Row="11" Content="{Binding IsSleepingText}" Width="92" HorizontalAlignment="Left" Margin="256 0 0 0" Command="{Binding ButtonCommand}" CommandParameter="debugIsSleeping"/>
+            <Button Grid.Row="12" Content="{Binding IsBusyText}" Width="92" HorizontalAlignment="Left" Margin="256 0 0 0" Command="{Binding ButtonCommand}" CommandParameter="debugIsBusy"/>
         </Grid>
     </Grid>
 </Window>

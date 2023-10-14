@@ -9,7 +9,7 @@ namespace HomeControl.Source;
 public static class ReferenceValues {
     public const string COPYRIGHT = "Copyright © 2022-2023  Robert Higgins";
     public const int VERSION_MAJOR = 1;
-    public const int VERSION_MINOR = 2;
+    public const int VERSION_MINOR = 3;
     public const int VERSION_PATCH = 0;
     public const string VERSION_BRANCH = "release";
 
