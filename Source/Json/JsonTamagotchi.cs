@@ -8,6 +8,11 @@ public class Tamagotchi {
     public bool IsSleeping { get; set; }
     public bool IsBusy { get; set; }
 
+    /*
+     * 100 - 90 is an egg
+     * 89 - 80 is a baby
+     * 79 -
+     */
     public double Age { get; set; }
     public double Health { get; set; }
     public double Hunger { get; set; }
@@ -18,23 +23,20 @@ public class Tamagotchi {
     public double Weight { get; set; }
     public double Cleanliness { get; set; }
 
-    public int HealthMultiplier { get; set; }
-    public int HungerMultiplier { get; set; }
-    public int HappinessMultiplier { get; set; }
-    public int FatigueMultiplier { get; set; }
-    public int AnxietyMultiplier { get; set; }
-    public int BladderMultiplier { get; set; }
-    public int WeightMultiplier { get; set; }
-    public int CleanlinessMultiplier { get; set; }
-
-    public int HealthMultiplierDuration { get; set; }
-    public int HungerMultiplierDuration { get; set; }
-    public int HappinessMultiplierDuration { get; set; }
-    public int FatigueMultiplierDuration { get; set; }
-    public int AnxietyMultiplierDuration { get; set; }
-    public int BladderMultiplierDuration { get; set; }
-    public int WeightMultiplierDuration { get; set; }
-    public int CleanlinessMultiplierDuration { get; set; }
+    /*
+     * Health multipliers start at 1 and are worse for stats as the multiplier increase.
+     * Examples:
+     * If HealthMultiplier is 1 then 0.0001 of Age is lost every tick (standard).
+     * If HealthMultiplier is 2 then 0.0002 of Age is lost every tick (It will live for half has long).
+     */
+    public double HealthMultiplier { get; set; }
+    public double HungerMultiplier { get; set; }
+    public double HappinessMultiplier { get; set; }
+    public double FatigueMultiplier { get; set; }
+    public double AnxietyMultiplier { get; set; }
+    public double BladderMultiplier { get; set; }
+    public double WeightMultiplier { get; set; }
+    public double CleanlinessMultiplier { get; set; }
 
     public bool ReverseHealth { get; set; }
     public bool ReverseHunger { get; set; }

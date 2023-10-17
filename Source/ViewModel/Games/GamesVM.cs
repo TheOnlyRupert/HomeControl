@@ -37,6 +37,8 @@ public class GamesVM : BaseViewModel {
             Modules.Games.Tamagotchi.Tamagotchi tamagotchi = new();
             tamagotchi.ShowDialog();
             tamagotchi.Close();
+
+            FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
             break;
         case "nhie":
             Nhie nhie = new();

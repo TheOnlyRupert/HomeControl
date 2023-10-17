@@ -14,6 +14,11 @@ public class NotesVM : BaseViewModel {
             contacts.ShowDialog();
             contacts.Close();
             break;
+        case "security":
+            Security security = new();
+            security.ShowDialog();
+            security.Close();
+            break;
         }
     }
 }

@@ -33,7 +33,7 @@
                     <TextBlock Text="Contacts" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="0" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="">
+            <Button Grid.Row="0" Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="security">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -50,8 +50,8 @@
                     </Style>
                 </Button.Style>
                 <StackPanel>
-                    <Image Source="../../../Resources/Images/icons/" Width="48" Height="48"/>
-                    <TextBlock Text="" HorizontalAlignment="Center" Foreground="White"/>
+                    <Image Source="../../../Resources/Images/icons/security.png" Width="48" Height="48"/>
+                    <TextBlock Text="Security" HorizontalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
 

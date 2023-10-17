@@ -2,15 +2,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" Icon="{Binding IconImage}"
         WindowStartupLocation="CenterScreen" ResizeMode="CanResize" WindowState="Maximized" WindowStyle="None" FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
     <Border BorderBrush="{Binding OnlineColor}" BorderThickness="4">
-        <Grid Focusable="False">
-            <Canvas Name="canvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-
             <Grid Focusable="False" Background="Black">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
+                
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -64,7 +61,8 @@
 
                     <Frame Grid.Row="1" Source="Source/Modules/Behavior/Behavior.xaml" Focusable="False"/>
                 </Grid>
+                
+                <Canvas Grid.Column="0" Grid.ColumnSpan="2" Name="canvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Grid>
-        </Grid>
     </Border>
 </Window>

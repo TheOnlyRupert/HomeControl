@@ -57,15 +57,7 @@ public class TamagotchiVM : BaseViewModel {
                 ReverseHealthDuration = 0,
                 ReverseHungerDuration = 0,
                 ReverseWeightDuration = 0,
-                ReverseCleanlinessDuration = 0,
-                HealthMultiplierDuration = 0,
-                AnxietyMultiplierDuration = 0,
-                BladderMultiplierDuration = 0,
-                FatigueMultiplierDuration = 0,
-                HappinessMultiplierDuration = 0,
-                HungerMultiplierDuration = 0,
-                WeightMultiplierDuration = 0,
-                CleanlinessMultiplierDuration = 0
+                ReverseCleanlinessDuration = 0
             };
 
             FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
@@ -88,7 +80,6 @@ public class TamagotchiVM : BaseViewModel {
         }
 
         IsBusyVisibility = "HIDDEN";
-
         NameText = ReferenceValues.TamagotchiMaster.Name;
     }
 
@@ -96,10 +87,12 @@ public class TamagotchiVM : BaseViewModel {
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
-        case "Refresh": {
+        case "Refresh":
             RefreshDisplay();
             break;
-        }
+        case "MinChanged":
+            FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
+            break;
         }
     }
 

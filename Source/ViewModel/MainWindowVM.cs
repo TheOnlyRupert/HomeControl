@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Resources;
 using System.Text.Json;
 using System.Windows.Threading;
+using Windows.UI.Xaml.Controls;
 using HomeControl.Source.Control;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
@@ -17,6 +18,7 @@ using HomeControl.Source.Modules;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Games.Tamagotchi;
 using HomeControl.Source.ViewModel.Hvac;
+using Canvas = System.Windows.Controls.Canvas;
 using Task = System.Threading.Tasks.Task;
 
 namespace HomeControl.Source.ViewModel;
@@ -27,6 +29,7 @@ public class MainWindowVM : BaseViewModel {
     private string _onlineColor;
     private bool changeDate, internetMessage;
     private DateTime currentDate;
+    private Canvas _canvasItems;
 
     public MainWindowVM() {
         IconImage = "../../Resources/Images/icon.png";
@@ -122,11 +125,13 @@ public class MainWindowVM : BaseViewModel {
             if (!ReferenceValues.JsonSettingsMaster.IsDebugMode) {
                 simpleMessenger.PushMessage("ScreenSaverOn", null);
                 ReferenceValues.LockUI = true;
+                ReferenceValues.SnowEngineMaster.Start();
             }
         }
 
         void activityTimer_OnActive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOff", null);
+            ReferenceValues.SnowEngineMaster.Stop();
         }
     }
 
@@ -142,9 +147,6 @@ public class MainWindowVM : BaseViewModel {
             }
 
             changeDate = true;
-
-            /* Safe Tamagotchi File */
-            FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
         }
 
         /* Hour Changes */
@@ -285,6 +287,15 @@ public class MainWindowVM : BaseViewModel {
         set {
             _onlineColor = value;
             RaisePropertyChangedEvent("OnlineColor");
+        }
+    }
+
+
+    public Canvas CanvasItems {
+        get => _canvasItems;
+        set {
+            _canvasItems = value;
+            RaisePropertyChangedEvent("CanvasItems");
         }
     }
 

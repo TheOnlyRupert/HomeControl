@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
+using HomeControl.Source.Control;
 using HomeControl.Source.Json;
 
 namespace HomeControl.Source;
@@ -112,4 +113,6 @@ public static class ReferenceValues {
 
     public static string AppDirectory { get; set; }
     public static Tamagotchi TamagotchiMaster { get; set; }
+    
+    public static SnowEngine SnowEngineMaster;
 }

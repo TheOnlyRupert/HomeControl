@@ -13,7 +13,7 @@
         <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
         <WarningLevel>4</WarningLevel>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <LangVersion>latest</LangVersion>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,13 +36,15 @@
         <WarningLevel>4</WarningLevel>
         <Prefer32bit>false</Prefer32bit>
     </PropertyGroup>
+    <PropertyGroup>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+    </PropertyGroup>
     <ItemGroup>
         <Reference Include="mscorlib"/>
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
-        <Reference Include="System.Data"/>
         <Reference Include="System.Device"/>
-        <Reference Include="System.Net.Http"/>
+        <Reference Include="System.Net"/>
         <Reference Include="System.Numerics"/>
         <Reference Include="System.Xml"/>
         <Reference Include="System.Xaml">
@@ -58,12 +60,10 @@
             <SubType>Designer</SubType>
         </ApplicationDefinition>
         <Compile Include="Source\Control\AppActivityTimer.cs"/>
-        <Compile Include="Source\Control\DisableNavigation.cs"/>
         <Compile Include="Source\Control\GridViewScroll.cs"/>
         <Compile Include="Source\Control\GridViewSort.cs"/>
         <Compile Include="Source\Control\SelectTextOnFocus.cs"/>
         <Compile Include="Source\Control\SnowEngine.cs"/>
-        <Compile Include="Source\Control\SnowInfo.cs"/>
         <Compile Include="Source\Helpers\FileHelpers.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
         <Compile Include="Source\Helpers\SerialPortExtensions.cs"/>
@@ -97,6 +97,9 @@
         </Compile>
         <Compile Include="Source\Modules\Calendar\EditRecurring.xaml.cs">
             <DependentUpon>EditRecurring.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\Security.xaml.cs">
+            <DependentUpon>Security.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Contacts.xaml.cs">
             <DependentUpon>Contacts.xaml</DependentUpon>
@@ -173,6 +176,7 @@
         <Compile Include="Source\ViewModel\Behavior\TasksQuarterlyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksWeeklyVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
+        <Compile Include="Source\ViewModel\SecurityVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
         <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
@@ -220,6 +224,7 @@
         <Page Include="Source\Modules\Behavior\TasksQuarterly.xaml"/>
         <Page Include="Source\Modules\Behavior\TasksWeekly.xaml"/>
         <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
+        <Page Include="Source\Modules\Security.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
         <Page Include="Source\Modules\DebugLog.xaml"/>
         <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
@@ -635,6 +640,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Toolkit.Wpf.UI.XamlHost" Version="6.1.2" />
         <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0"/>
         <PackageReference Include="System.Buffers" Version="4.5.1"/>
         <PackageReference Include="System.Memory" Version="4.5.5"/>

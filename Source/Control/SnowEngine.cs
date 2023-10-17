@@ -10,45 +10,29 @@ using HomeControl.Source.Json;
 namespace HomeControl.Source.Control;
 
 public class SnowEngine {
-    //Canvas to draw flakes in
     private readonly Canvas canvas;
     private readonly List<string> flakeImages = new();
-
     private readonly List<SnowInfo> flakes = new();
-    private readonly int maxHorizontalSpeed = 3;
 
-    private readonly int maxStartingSpeed = 10;
-    private readonly int minHorizontalSpeed = 1;
-
-    private readonly int minRadius = 5;
-
-    private readonly int minStartingSpeed = 3;
-
-    //Maximum flakes. It's calculating at the beginning and after canvas resize and depends on SnowCoverage property
+    private const int maxHorizontalSpeed = 3;
+    private const int maxStartingSpeed = 10;
+    private const int minHorizontalSpeed = 1;
+    private const int minRadius = 30;
+    private const int maxRadius = 60;
+    private const int minStartingSpeed = 3;
+    private const double verticalSpeedRatio = 0.1;
+    private const double horizontalSpeedRatio = 0.08;
+    private readonly ushort snowCoverage;
+    private bool isWorking;
     private int maxFlakes;
 
     public SnowEngine(Canvas canvas, ushort snowCoverage, params string[] flakeImages) {
-        SnowCoverage = snowCoverage;
+        this.snowCoverage = snowCoverage;
         this.canvas = canvas;
         canvas.IsHitTestVisible = false;
         canvas.SizeChanged += canvas_SizeChanged;
         this.flakeImages.AddRange(flakeImages);
     }
-
-    public int MinRadius {
-        get => minRadius;
-        set => MaxRadius = value;
-    }
-
-    private int MaxRadius { get; set; } = 30;
-
-    private ushort SnowCoverage { get; }
-
-    private double VerticalSpeedRatio { get; } = 0.1;
-
-    private double HorizontalSpeedRatio { get; } = 0.08;
-
-    private bool IsWorking { get; set; }
 
     private void canvas_SizeChanged(object sender, SizeChangedEventArgs e) {
         RecalcMaxFlakes();
@@ -56,23 +40,23 @@ public class SnowEngine {
     }
 
     public void Start() {
-        IsWorking = true;
+        isWorking = true;
         RecalcMaxFlakes();
         SetFlakes(true);
         CompositionTarget.Rendering += CompositionTarget_Rendering;
     }
 
     public void Stop() {
-        IsWorking = false;
+        isWorking = false;
         CompositionTarget.Rendering -= CompositionTarget_Rendering;
         ClearSnow();
     }
 
     private void RecalcMaxFlakes() {
         //Approximate maximum flakes in canvas
-        double flakesInCanvas = canvas.ActualHeight * canvas.ActualWidth / (MaxRadius * MaxRadius);
+        double flakesInCanvas = canvas.ActualHeight * canvas.ActualWidth / (maxRadius * maxRadius);
 
-        maxFlakes = (int)(flakesInCanvas * SnowCoverage / 100);
+        maxFlakes = (int)(flakesInCanvas * snowCoverage / 100);
     }
 
     private static BitmapImage CreateImage(string path) {
@@ -112,7 +96,7 @@ public class SnowEngine {
                 Stretch = Stretch.Uniform
             };
 
-            SnowInfo info = new(flake, VerticalSpeedRatio * rand.Next(minStartingSpeed, maxStartingSpeed), rand.Next(minRadius, MaxRadius));
+            SnowInfo info = new(flake, verticalSpeedRatio * rand.Next(minStartingSpeed, maxStartingSpeed), rand.Next(minRadius, maxRadius));
 
 
             // Placing image  
@@ -139,7 +123,7 @@ public class SnowEngine {
     }
 
     private void CompositionTarget_Rendering(object sender, EventArgs e) {
-        if (!IsWorking) {
+        if (!isWorking) {
             return;
         }
 
@@ -156,7 +140,7 @@ public class SnowEngine {
             double top = Canvas.GetTop(info.Flake);
 
             //.5 is magic number. Don't use magic numbers! :)
-            flakes[i].VelocityX += .5 * HorizontalSpeedRatio;
+            flakes[i].VelocityX += .5 * horizontalSpeedRatio;
 
             Canvas.SetLeft(flakes[i].Flake, left + Math.Cos(flakes[i].VelocityX));
             Canvas.SetTop(info.Flake, top + 1 * info.VelocityY);
@@ -168,4 +152,21 @@ public class SnowEngine {
             }
         }
     }
+}
+
+internal class SnowInfo {
+    public SnowInfo(Image flake, double velocityY, int radius) {
+        VelocityY = velocityY;
+        Flake = flake;
+        flake.Width = radius;
+        Radius = radius;
+    }
+
+    public Image Flake { get; set; }
+
+    public double VelocityY { get; set; }
+
+    public double VelocityX { get; set; }
+
+    public int Radius { get; set; }
 }
