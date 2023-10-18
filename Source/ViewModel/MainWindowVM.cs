@@ -9,8 +9,8 @@ using System.Net;
 using System.Reflection;
 using System.Resources;
 using System.Text.Json;
+using System.Windows.Controls;
 using System.Windows.Threading;
-using Windows.UI.Xaml.Controls;
 using HomeControl.Source.Control;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
@@ -18,18 +18,18 @@ using HomeControl.Source.Modules;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Games.Tamagotchi;
 using HomeControl.Source.ViewModel.Hvac;
-using Canvas = System.Windows.Controls.Canvas;
 using Task = System.Threading.Tasks.Task;
 
 namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
     private readonly CrossViewMessenger simpleMessenger;
+    private Canvas _canvasItems;
     private string _iconImage;
     private string _onlineColor;
     private bool changeDate, internetMessage;
     private DateTime currentDate;
-    private Canvas _canvasItems;
+    private int trashInt;
 
     public MainWindowVM() {
         IconImage = "../../Resources/Images/icon.png";
@@ -43,8 +43,10 @@ public class MainWindowVM : BaseViewModel {
 
         /* Create App Directory */
         try {
-            ReferenceValues.AppDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location + "/");
-            ReferenceValues.AppDirectory = ReferenceValues.AppDirectory.Substring(0, ReferenceValues.AppDirectory.Length - 15);
+            ReferenceValues.AppDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location + "/");
+            if (ReferenceValues.AppDirectory != null) {
+                ReferenceValues.AppDirectory = ReferenceValues.AppDirectory.Substring(0, ReferenceValues.AppDirectory.Length - 15);
+            }
         } catch (Exception) {
             ReferenceValues.AppDirectory = Environment.CurrentDirectory;
         }
@@ -120,6 +122,7 @@ public class MainWindowVM : BaseViewModel {
         AppActivityTimer activityTimer = new(60000, 60000, false);
         activityTimer.OnInactive += activityTimer_OnInactive;
         activityTimer.OnActive += activityTimer_OnActive;
+        return;
 
         void activityTimer_OnInactive(object sender, EventArgs e) {
             if (!ReferenceValues.JsonSettingsMaster.IsDebugMode) {
@@ -157,6 +160,11 @@ public class MainWindowVM : BaseViewModel {
             Random random = new();
             ReferenceValues.SoundToPlay = "clock" + random.Next(1, 3);
             SoundDispatcher.PlaySound();
+
+            /* Trash Night Sound */
+            if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 11) {
+                trashInt = 10;
+            }
         }
 
         /* Date Changes */
@@ -220,6 +228,15 @@ public class MainWindowVM : BaseViewModel {
 
         /* Tick Tamagotchi Every Second */
         TamagotchiLogic.TickLogic();
+
+        /* Check Trash */
+        if (trashInt > 0) {
+            trashInt--;
+            if (trashInt == 0) {
+                ReferenceValues.SoundToPlay = "trash";
+                SoundDispatcher.PlaySound();
+            }
+        }
 
         simpleMessenger.PushMessage("Refresh", null);
     }

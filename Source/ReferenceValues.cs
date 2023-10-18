@@ -76,6 +76,8 @@ public static class ReferenceValues {
 
     public static bool LockUI;
 
+    public static SnowEngine SnowEngineMaster;
+
     public static SerialPort SerialPort { get; set; }
 
     public static int InteriorTemp { get; set; }
@@ -113,6 +115,4 @@ public static class ReferenceValues {
 
     public static string AppDirectory { get; set; }
     public static Tamagotchi TamagotchiMaster { get; set; }
-    
-    public static SnowEngine SnowEngineMaster;
 }

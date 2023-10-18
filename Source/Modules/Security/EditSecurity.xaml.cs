@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Linq;
-using System.Windows;
 using Windows.Devices.Enumeration;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using HomeControl.Source.ViewModel;
+using HomeControl.Source.ViewModel.Security;
+using Page = System.Windows.Controls.Page;
 using Panel = Windows.Devices.Enumeration.Panel;
-using RoutedEventArgs = Windows.UI.Xaml.RoutedEventArgs;
 
-namespace HomeControl.Source.Modules;
+namespace HomeControl.Source.Modules.Security;
 
-public partial class Security : Window {
+public partial class EditSecurity : Page {
     private readonly CaptureElement _captureElement;
     private readonly MediaCapture _mediaCapture = new();
     private StorageFolder _captureFolder;
     private bool _initialized;
     private bool _isRecording;
 
-    public Security() {
+    public EditSecurity() {
         InitializeComponent();
-        DataContext = new SecurityVM();
+        DataContext = new EditSecurityVM();
 
         _captureElement = new CaptureElement {
             Stretch = Stretch.Uniform

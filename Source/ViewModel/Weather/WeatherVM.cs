@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
-using HomeControl.Source.Modules;
+using HomeControl.Source.Modules.Debug;
 using HomeControl.Source.Modules.Weather;
 using HomeControl.Source.ViewModel.Base;
 using Task = System.Threading.Tasks.Task;
@@ -17,7 +17,7 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10, _sevenDayForecastWindDirectionIcon11,
         _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14;
 
-    private string _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText, _currentTimeSecondsText, _currentWeatherLocationText,
+    private string _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText, _currentTimeSecondsText,
         _currentWeatherTempText, _currentWeatherCloudIcon, _sevenDayForecastDescription1, _sevenDayForecastWindSpeed1, _sevenDayForecastWeatherIcon1a,
         _sevenDayForecastWeatherIcon1b, _sevenDayForecastTemp1, _sevenDayForecastName1, _sevenDayForecastDescription2, _sevenDayForecastWindSpeed2, _sevenDayForecastWeatherIcon2a,
         _sevenDayForecastWeatherIcon2b, _sevenDayForecastTemp2, _sevenDayForecastName2, _sevenDayForecastDescription3, _sevenDayForecastWindSpeed3, _sevenDayForecastWeatherIcon3a,
@@ -36,13 +36,12 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1, _trashDayVisibility,
         _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6,
         _sevenDayForecastRainChance7, _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11,
-        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14;
+        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14, _currentDateDayText;
 
     private JsonWeather forecast, forecastHourly;
 
     public WeatherVM() {
         UpdateWeatherForecast();
-        CheckTrashDay();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -53,29 +52,19 @@ public class WeatherVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
         case "Refresh":
-            CurrentDateText = DateTime.Now.ToLongDateString();
+            CurrentDateDayText = DateTime.Now.DayOfWeek.ToString();
+            CurrentDateText = DateTime.Now.ToString("MMMM dd yyyy");
             CurrentTimeText = DateTime.Now.ToString("HH:mm");
             CurrentTimeSecondsText = DateTime.Now.ToString("ss");
             break;
         case "MinChanged":
             UpdateWeatherForecast();
-            CheckTrashDay();
             break;
-        }
-    }
-
-    private void CheckTrashDay() {
-        if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 11) {
-            TrashDayVisibility = "VISIBLE";
-        } else {
-            TrashDayVisibility = "HIDDEN";
         }
     }
 
     private async Task UpdateWeatherForecast() {
         if (ReferenceValues.EnableWeather) {
-            CurrentWeatherLocationText = ReferenceValues.JsonSettingsMaster.WeatherLocation;
-
             JsonSerializerOptions options = new() {
                 IncludeFields = true
             };
@@ -596,6 +585,14 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
+    public string CurrentDateDayText {
+        get => _currentDateDayText;
+        set {
+            _currentDateDayText = value;
+            RaisePropertyChangedEvent("CurrentDateDayText");
+        }
+    }
+
     public string CurrentTimeText {
         get => _currentTimeText;
         set {
@@ -609,14 +606,6 @@ public class WeatherVM : BaseViewModel {
         set {
             _currentTimeSecondsText = value;
             RaisePropertyChangedEvent("CurrentTimeSecondsText");
-        }
-    }
-
-    public string CurrentWeatherLocationText {
-        get => _currentWeatherLocationText;
-        set {
-            _currentWeatherLocationText = value;
-            RaisePropertyChangedEvent("CurrentWeatherLocationText");
         }
     }
 
@@ -1553,14 +1542,6 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindDirectionIcon14 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindDirectionIcon14");
-        }
-    }
-
-    public string TrashDayVisibility {
-        get => _trashDayVisibility;
-        set {
-            _trashDayVisibility = value;
-            RaisePropertyChangedEvent("TrashDayVisibility");
         }
     }
 

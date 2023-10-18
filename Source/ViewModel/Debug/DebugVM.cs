@@ -1,18 +1,18 @@
 ﻿using System.Windows.Input;
-using HomeControl.Source.Modules;
+using HomeControl.Source.Modules.Debug;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel;
+namespace HomeControl.Source.ViewModel.Debug;
 
-public class NotesVM : BaseViewModel {
+public class DebugVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
-        case "contacts":
-            Contacts contacts = new();
-            contacts.ShowDialog();
-            contacts.Close();
+        case "debug":
+            DebugLog debugLog = new();
+            debugLog.ShowDialog();
+            debugLog.Close();
             break;
         }
     }

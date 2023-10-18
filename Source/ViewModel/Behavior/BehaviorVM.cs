@@ -32,7 +32,7 @@ public class BehaviorVM : BaseViewModel {
         _user3CashReleased, _user4CashReleased, _user5CashReleased, _user1DayVisibility, _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility, _user1WeekVisibility,
         _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility, _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility,
         _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility, _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility,
-        _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility, _user5BehaviorVisibility;
+        _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility, _user5BehaviorVisibility, _trashDayVisibility;
 
     private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
@@ -2148,6 +2148,13 @@ public class BehaviorVM : BaseViewModel {
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
         System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
 
+        /* Check Trash Day */
+        if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 11) {
+            TrashDayVisibility = "VISIBLE";
+        } else {
+            TrashDayVisibility = "HIDDEN";
+        }
+
         ReferenceValues.TaskWeekStartDate = DateTime.Now;
         while (ReferenceValues.TaskWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
             ReferenceValues.TaskWeekStartDate = ReferenceValues.TaskWeekStartDate.AddDays(-1);
@@ -3604,6 +3611,14 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5BehaviorVisibility = value;
             RaisePropertyChangedEvent("User5BehaviorVisibility");
+        }
+    }
+
+    public string TrashDayVisibility {
+        get => _trashDayVisibility;
+        set {
+            _trashDayVisibility = value;
+            RaisePropertyChangedEvent("TrashDayVisibility");
         }
     }
 

@@ -10,86 +10,49 @@
 
             <Grid Grid.Row="0" Margin="0 0 0 4">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Orientation="Vertical">
-                        <TextBlock Text="{Binding CurrentDateText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding CurrentTimeText}" FontSize="48" Foreground="White"/>
-                            <TextBlock Text="{Binding CurrentTimeSecondsText}" FontSize="24" Foreground="Gray" VerticalAlignment="Center" Margin="2"/>
-                        </StackPanel>
+                    <TextBlock Grid.Row="0" Text="{Binding CurrentDateDayText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
+                    <TextBlock Grid.Row="1" Text="{Binding CurrentDateText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding CurrentTimeText}" FontSize="48" Foreground="White"/>
+                        <TextBlock Text="{Binding CurrentTimeSecondsText}" FontSize="24" Foreground="Gray" VerticalAlignment="Center"/>
                     </StackPanel>
 
-                    <Image Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" Height="64" HorizontalAlignment="Right" Margin="0 0 8 0"
-                           gif:ImageBehavior.AnimatedSource="../../../Resources/Images/icons/trash.gif" Visibility="{Binding TrashDayVisibility}"/>
-
-                    <Frame Grid.Row="2" Source="../MusicPlayer.xaml" Focusable="False"/>
-                </Grid>
-
-                <Frame Grid.Column="2" Source="../Hvac/Hvac.xaml" Focusable="False"/>
-
-                <Grid Grid.Column="1">
-                    <Grid>
+                    <Grid Grid.Row="4" HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding CurrentWeatherTempText}" FontSize="48" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center"/>
 
-                        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding CurrentWeatherLocationText}" FontSize="24" HorizontalAlignment="Center" Foreground="White"
-                                   Margin="8 0 0 0" TextWrapping="Wrap"/>
+                        <Image Grid.Column="1" gif:ImageBehavior.AnimatedSource="{Binding CurrentWeatherCloudIcon}" Margin="-8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                        <Image Grid.Column="0" Grid.Row="1" gif:ImageBehavior.AnimatedSource="{Binding CurrentWeatherCloudIcon}" Margin="-32"/>
-
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding CurrentWeatherTempText}" FontSize="60" HorizontalAlignment="Left" Foreground="White" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding CurrentWeatherDescription}" HorizontalAlignment="Center" FontSize="16" TextWrapping="Wrap"
-                                   Foreground="White" VerticalAlignment="Bottom"/>
-
-                        <Button Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" MinWidth="256" MinHeight="64" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding ButtonCommand}"
-                                CommandParameter="debug">
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-
-                        <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Image HorizontalAlignment="Center" Stretch="Uniform" gif:ImageBehavior.AnimatedSource="../../../Resources/Images/weather/wind.gif" VerticalAlignment="Center"
-                                   RenderTransformOrigin="0.5, 0.5" Margin="0 0">
-                                <Image.RenderTransform>
-                                    <RotateTransform Angle="{Binding CurrentWindDirectionRotation}"/>
-                                </Image.RenderTransform>
-                            </Image>
-
-                            <TextBlock Text="{Binding CurrentWindSpeedText}" HorizontalAlignment="Left" FontSize="14" Foreground="CornflowerBlue" VerticalAlignment="Center"/>
-                        </StackPanel>
+                        <Image Grid.Column="2" HorizontalAlignment="Left" Stretch="Uniform" gif:ImageBehavior.AnimatedSource="../../../Resources/Images/weather/wind.gif" VerticalAlignment="Center"
+                               RenderTransformOrigin="0.5, 0.5">
+                            <Image.RenderTransform>
+                                <RotateTransform Angle="{Binding CurrentWindDirectionRotation}"/>
+                            </Image.RenderTransform>
+                        </Image>
+                        <TextBlock Grid.Column="2" Text="{Binding CurrentWindSpeedText}" HorizontalAlignment="Center" FontSize="14" Foreground="CornflowerBlue" VerticalAlignment="Center"/>
                     </Grid>
+
+                    <TextBlock Grid.Row="5" Text="{Binding CurrentWeatherDescription}" FontSize="16" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center"/>
                 </Grid>
             </Grid>
 

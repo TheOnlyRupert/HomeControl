@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using HomeControl.Source.ViewModel;
+using HomeControl.Source.ViewModel.Debug;
 
-namespace HomeControl.Source.Modules;
+namespace HomeControl.Source.Modules.Debug;
 
 public partial class DebugLog {
     public DebugLog() {

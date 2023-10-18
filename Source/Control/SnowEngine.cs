@@ -10,10 +10,6 @@ using HomeControl.Source.Json;
 namespace HomeControl.Source.Control;
 
 public class SnowEngine {
-    private readonly Canvas canvas;
-    private readonly List<string> flakeImages = new();
-    private readonly List<SnowInfo> flakes = new();
-
     private const int maxHorizontalSpeed = 3;
     private const int maxStartingSpeed = 10;
     private const int minHorizontalSpeed = 1;
@@ -22,6 +18,9 @@ public class SnowEngine {
     private const int minStartingSpeed = 3;
     private const double verticalSpeedRatio = 0.1;
     private const double horizontalSpeedRatio = 0.08;
+    private readonly Canvas canvas;
+    private readonly List<string> flakeImages = new();
+    private readonly List<SnowInfo> flakes = new();
     private readonly ushort snowCoverage;
     private bool isWorking;
     private int maxFlakes;

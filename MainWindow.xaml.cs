@@ -51,7 +51,7 @@ public partial class MainWindow {
                     "pack://application:,,,/Resources/Images/leaves/leaf3.png",
                     "pack://application:,,,/Resources/Images/leaves/leaf4.png",
                     "pack://application:,,,/Resources/Images/leaves/leaf5.png",
-                    "pack://application:,,,/Resources/Images/leaves/leaf6.png",
+                    "pack://application:,,,/Resources/Images/leaves/leaf6.png"
                 };
             }
 
