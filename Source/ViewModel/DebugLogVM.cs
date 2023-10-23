@@ -4,7 +4,7 @@ using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel.Debug;
+namespace HomeControl.Source.ViewModel;
 
 public class DebugLogVM : BaseViewModel {
     private string _copyrightText;

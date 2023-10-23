@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using HomeControl.Source.ViewModel.Debug;
+using HomeControl.Source.ViewModel;
 
 namespace HomeControl.Source.Modules.Debug;
 

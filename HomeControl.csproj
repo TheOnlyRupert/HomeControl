@@ -36,9 +36,6 @@
         <WarningLevel>4</WarningLevel>
         <Prefer32bit>false</Prefer32bit>
     </PropertyGroup>
-    <PropertyGroup>
-        <ApplicationManifest>app.manifest</ApplicationManifest>
-    </PropertyGroup>
     <ItemGroup>
         <Reference Include="mscorlib"/>
         <Reference Include="System"/>
@@ -95,17 +92,17 @@
         <Compile Include="Source\Modules\Behavior\TasksWeekly.xaml.cs">
             <DependentUpon>TasksWeekly.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\ButtonStackBottom.xaml.cs">
+            <DependentUpon>ButtonStackBottom.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Calendar\EditRecurring.xaml.cs">
             <DependentUpon>EditRecurring.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Debug\DebugLog.xaml.cs">
-            <DependentUpon>DebugLog.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Debug\Debug.xaml.cs">
-            <DependentUpon>Debug.xaml</DependentUpon>
-        </Compile>
         <Compile Include="Source\Modules\Contacts.xaml.cs">
             <DependentUpon>Contacts.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\DebugLog.xaml.cs">
+            <DependentUpon>DebugLog.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Games\CoinFlip.xaml.cs">
             <DependentUpon>CoinFlip.xaml</DependentUpon>
@@ -124,9 +121,6 @@
         </Compile>
         <Compile Include="Source\Modules\Hvac\Hvac.xaml.cs">
             <DependentUpon>Hvac.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Password.xaml.cs">
-            <DependentUpon>Password.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Security\EditSecurity.xaml.cs">
             <DependentUpon>EditSecurity.xaml</DependentUpon>
@@ -152,8 +146,8 @@
         <Compile Include="Source\Modules\Calendar\EditCalendar.xaml.cs">
             <DependentUpon>EditCalendar.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Notes.xaml.cs">
-            <DependentUpon>Notes.xaml</DependentUpon>
+        <Compile Include="Source\Modules\ButtonStackTop.xaml.cs">
+            <DependentUpon>ButtonStackTop.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Settings.xaml.cs">
             <DependentUpon>Settings.xaml</DependentUpon>
@@ -164,13 +158,9 @@
         <Compile Include="Source\Modules\Finances\EditFinances.xaml.cs">
             <DependentUpon>EditFinances.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Games\Games.xaml.cs"/>
         <Compile Include="Source\Modules\Games\Pictionary.xaml.cs"/>
-        <Compile Include="Source\Modules\Weather\Weather.xaml.cs">
+        <Compile Include="Source\Modules\Weather.xaml.cs">
             <DependentUpon>Weather.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Weather\WeatherHourly.xaml.cs">
-            <DependentUpon>WeatherHourly.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\ReferenceValues.cs"/>
         <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
@@ -178,9 +168,9 @@
         <Compile Include="Source\ViewModel\Behavior\TasksMonthlyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksQuarterlyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksWeeklyVM.cs"/>
+        <Compile Include="Source\ViewModel\ButtonStackBottomVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
-        <Compile Include="Source\ViewModel\Debug\DebugVM.cs"/>
-        <Compile Include="Source\ViewModel\Debug\DebugLogVM.cs"/>
+        <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
         <Compile Include="Source\ViewModel\Games\NhieVM.cs"/>
@@ -190,8 +180,6 @@
         <Compile Include="Source\ViewModel\Hvac\HvacCrossPlay.cs"/>
         <Compile Include="Source\ViewModel\Hvac\EditHvacVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>
-        <Compile Include="Source\ViewModel\MusicPlayerVM.cs"/>
-        <Compile Include="Source\ViewModel\PasswordVM.cs"/>
         <Compile Include="Source\ViewModel\Security\EditSecurityVM.cs"/>
         <Compile Include="Source\ViewModel\Security\SecurityVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
@@ -204,14 +192,12 @@
         <Compile Include="Source\ViewModel\Calendar\CalendarVM.cs"/>
         <Compile Include="Source\ViewModel\Finances\EditFinancesVM.cs"/>
         <Compile Include="Source\ViewModel\Finances\FinancesVM.cs"/>
-        <Compile Include="Source\ViewModel\Games\GamesVM.cs"/>
         <Compile Include="Source\ViewModel\Games\PictionaryVM.cs"/>
         <Compile Include="Source\ViewModel\Games\WordList.cs"/>
         <Compile Include="Source\ViewModel\MainWindowVM.cs"/>
-        <Compile Include="Source\ViewModel\NotesVM.cs"/>
+        <Compile Include="Source\ViewModel\ButtonStackTopVM.cs"/>
         <Compile Include="Source\ViewModel\SettingsVM.cs"/>
-        <Compile Include="Source\ViewModel\Weather\WeatherHourlyVM.cs"/>
-        <Compile Include="Source\ViewModel\Weather\WeatherVM.cs"/>
+        <Compile Include="Source\ViewModel\WeatherVM.cs"/>
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -228,17 +214,16 @@
         <Page Include="Source\Modules\Behavior\TasksMonthly.xaml"/>
         <Page Include="Source\Modules\Behavior\TasksQuarterly.xaml"/>
         <Page Include="Source\Modules\Behavior\TasksWeekly.xaml"/>
+        <Page Include="Source\Modules\ButtonStackBottom.xaml"/>
         <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
-        <Page Include="Source\Modules\Debug\DebugLog.xaml"/>
-        <Page Include="Source\Modules\Debug\Debug.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
+        <Page Include="Source\Modules\DebugLog.xaml"/>
         <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
         <Page Include="Source\Modules\Games\Nhie.xaml"/>
         <Page Include="Source\Modules\Games\Tamagotchi\Tamagotchi.xaml"/>
         <Page Include="Source\Modules\Games\TrafficLight.xaml"/>
         <Page Include="Source\Modules\Hvac\EditHvac.xaml"/>
         <Page Include="Source\Modules\Hvac\Hvac.xaml"/>
-        <Page Include="Source\Modules\Password.xaml"/>
         <Page Include="Source\Modules\Security\EditSecurity.xaml"/>
         <Page Include="Source\Modules\Security\Security.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
@@ -247,14 +232,12 @@
         <Page Include="Source\Modules\Behavior\EditBehavior.xaml"/>
         <Page Include="Source\Modules\Calendar\Calendar.xaml"/>
         <Page Include="Source\Modules\Calendar\EditCalendar.xaml"/>
-        <Page Include="Source\Modules\Notes.xaml"/>
+        <Page Include="Source\Modules\ButtonStackTop.xaml"/>
         <Page Include="Source\Modules\Settings.xaml"/>
         <Page Include="Source\Modules\Finances\Finances.xaml"/>
         <Page Include="Source\Modules\Finances\EditFinances.xaml"/>
-        <Page Include="Source\Modules\Games\Games.xaml"/>
         <Page Include="Source\Modules\Games\Pictionary.xaml"/>
-        <Page Include="Source\Modules\Weather\Weather.xaml"/>
-        <Page Include="Source\Modules\Weather\WeatherHourly.xaml"/>
+        <Page Include="Source\Modules\Weather.xaml"/>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
@@ -9,8 +10,13 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public class HvacVM : BaseViewModel {
-    private string _tempInside, _heatingCoolingText, _tempAdjusted, _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor,
-        _tempInsideColor, _tempAdjustedColor, _fanStatusColor, _heatingCoolingStatusColor, _intHumidity;
+    private int _currentWindDirectionRotation;
+
+    private string _tempInside, _heatingCoolingText, _tempAdjusted, _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _extHumidity, _tempInsideColor, _tempAdjustedColor,
+        _fanStatusColor, _heatingCoolingStatusColor, _intHumidity, _tempOutside, _tempOutsideColor, _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText,
+        _currentTimeSecondsText, _currentWeatherCloudIcon, _mainStatus, _mainStatusColor;
+
+    private JsonWeather forecastHourly;
 
     public HvacVM() {
         try {
@@ -19,38 +25,87 @@ public class HvacVM : BaseViewModel {
             ReferenceValues.JsonHvacMaster = new JsonHvac();
         }
 
-        if (ReferenceValues.JsonHvacMaster.TemperatureSet == 0) {
-            ReferenceValues.JsonHvacMaster.TemperatureSet = 21;
-        }
+        CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
+        CurrentTimeText = DateTime.Now.ToString("HH:mm");
 
-        TempInsideColor = "White";
+        UpdateWeatherForecast();
+        UpdateHvac();
 
-        GetButtonColors();
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
-    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "HvacUpdated") {
-            GetButtonColors();
+    private async void UpdateWeatherForecast() {
+        if (ReferenceValues.EnableWeather) {
+            JsonSerializerOptions options = new() {
+                IncludeFields = true
+            };
+
+            try {
+                Uri weatherForecastHourlyURL =
+                    new(
+                        $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
+
+                using WebClient client = new();
+                client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
+                string weatherForecastHourly = await client.DownloadStringTaskAsync(weatherForecastHourlyURL);
+                forecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
+
+                CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(forecastHourly.properties.periods[0].windDirection);
+                CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
+                CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
+                CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime,
+                    forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "null");
+            } catch (Exception e) {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "WARN",
+                    Module = "WeatherVM",
+                    Description = e.ToString()
+                });
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            }
         }
     }
 
-    private void GetButtonColors() {
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        switch (e.PropertyName) {
+        case "Refresh":
+            CurrentTimeSecondsText = DateTime.Now.ToString("ss");
+            break;
+        case "HvacUpdated":
+            UpdateHvac();
+            break;
+        case "MinChanged":
+            CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
+            CurrentTimeText = DateTime.Now.ToString("HH:mm");
+            UpdateWeatherForecast();
+            break;
+        }
+    }
+
+    private void UpdateHvac() {
         if (!ReferenceValues.IsHvacComEstablished) {
+            MainStatus = "HVAC Offline";
+            MainStatusColor = "Red";
             TempAdjusted = "N/A";
             TempAdjustedColor = "White";
+            TempOutside = "N/A";
+            TempOutsideColor = "White";
             TempInside = "N/A";
             TempInsideColor = "White";
             ProgramStatus = "Offline";
             ProgramStatusColor = "Red";
-            FanStatus = "";
+            FanStatus = "Off";
+            FanStatusColor = "Red";
             HeatingCoolingText = "Adjust To";
             HeatingCoolingStatus = "Offline";
             HeatingCoolingStatusColor = "Red";
-            IntHumidity = "Humidity: Offline";
+            IntHumidity = "Offline";
+            ExtHumidity = "Offline";
+
             return;
         }
 
@@ -62,6 +117,20 @@ public class HvacVM : BaseViewModel {
         }
 
         TempAdjustedColor = "White";
+
+        if (ReferenceValues.InteriorTemp == -99) {
+            TempOutside = "??";
+            TempOutsideColor = "Red";
+        } else {
+            if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
+                double f = ReferenceValues.ExteriorTemp * 1.8 + 32;
+                TempOutside = (int)f + "°";
+            } else {
+                TempOutside = ReferenceValues.ExteriorTemp + "°";
+            }
+
+            TempOutsideColor = "White";
+        }
 
         if (ReferenceValues.InteriorTemp == -99) {
             TempInside = "??";
@@ -78,9 +147,15 @@ public class HvacVM : BaseViewModel {
         }
 
         if (ReferenceValues.InteriorHumidity == -99) {
-            IntHumidity = "Humidity: ??";
+            IntHumidity = "??";
         } else {
-            IntHumidity = "Humidity: " + ReferenceValues.InteriorHumidity + "%";
+            IntHumidity = ReferenceValues.InteriorHumidity + "%";
+        }
+
+        if (ReferenceValues.ExteriorHumidity == -99) {
+            ExtHumidity = "??";
+        } else {
+            ExtHumidity = ReferenceValues.ExteriorHumidity + "%";
         }
 
         if (ReferenceValues.JsonHvacMaster.IsProgramRunning) {
@@ -180,7 +255,7 @@ public class HvacVM : BaseViewModel {
                     FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
-                GetButtonColors();
+                UpdateHvac();
             } else {
                 ReferenceValues.SoundToPlay = "offline";
                 SoundDispatcher.PlaySound();
@@ -205,6 +280,22 @@ public class HvacVM : BaseViewModel {
         set {
             _tempInsideColor = value;
             RaisePropertyChangedEvent("TempInsideColor");
+        }
+    }
+
+    public string TempOutside {
+        get => _tempOutside;
+        set {
+            _tempOutside = value;
+            RaisePropertyChangedEvent("TempOutside");
+        }
+    }
+
+    public string TempOutsideColor {
+        get => _tempOutsideColor;
+        set {
+            _tempOutsideColor = value;
+            RaisePropertyChangedEvent("TempOutsideColor");
         }
     }
 
@@ -285,6 +376,86 @@ public class HvacVM : BaseViewModel {
         set {
             _intHumidity = value;
             RaisePropertyChangedEvent("IntHumidity");
+        }
+    }
+
+    public string ExtHumidity {
+        get => _extHumidity;
+        set {
+            _extHumidity = value;
+            RaisePropertyChangedEvent("ExtHumidity");
+        }
+    }
+
+    public string CurrentDateText {
+        get => _currentDateText;
+        set {
+            _currentDateText = value;
+            RaisePropertyChangedEvent("CurrentDateText");
+        }
+    }
+
+    public string CurrentTimeText {
+        get => _currentTimeText;
+        set {
+            _currentTimeText = value;
+            RaisePropertyChangedEvent("CurrentTimeText");
+        }
+    }
+
+    public string CurrentTimeSecondsText {
+        get => _currentTimeSecondsText;
+        set {
+            _currentTimeSecondsText = value;
+            RaisePropertyChangedEvent("CurrentTimeSecondsText");
+        }
+    }
+
+    public string CurrentWeatherCloudIcon {
+        get => _currentWeatherCloudIcon;
+        set {
+            _currentWeatherCloudIcon = value;
+            RaisePropertyChangedEvent("CurrentWeatherCloudIcon");
+        }
+    }
+
+    public int CurrentWindDirectionRotation {
+        get => _currentWindDirectionRotation;
+        set {
+            _currentWindDirectionRotation = value;
+            RaisePropertyChangedEvent("CurrentWindDirectionRotation");
+        }
+    }
+
+    public string CurrentWindSpeedText {
+        get => _currentWindSpeedText;
+        set {
+            _currentWindSpeedText = value;
+            RaisePropertyChangedEvent("CurrentWindSpeedText");
+        }
+    }
+
+    public string CurrentWeatherDescription {
+        get => _currentWeatherDescription;
+        set {
+            _currentWeatherDescription = value;
+            RaisePropertyChangedEvent("CurrentWeatherDescription");
+        }
+    }
+
+    public string MainStatus {
+        get => _mainStatus;
+        set {
+            _mainStatus = value;
+            RaisePropertyChangedEvent("MainStatus");
+        }
+    }
+
+    public string MainStatusColor {
+        get => _mainStatusColor;
+        set {
+            _mainStatusColor = value;
+            RaisePropertyChangedEvent("MainStatusColor");
         }
     }
 

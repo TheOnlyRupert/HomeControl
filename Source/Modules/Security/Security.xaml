@@ -17,4 +17,4 @@
         <TextBlock Grid.Row="4" Text="Laundry Door:  Closed" Foreground="DarkSlateGray" FontSize="16"/>
         <TextBlock Grid.Row="5" Text="Garage Door:  Closed" Foreground="DarkSlateGray" FontSize="16"/>
     </Grid>
-</Page>z
+</Page>

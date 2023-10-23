@@ -1,11 +1,4 @@
-﻿<Page x:Class="HomeControl.Source.Modules.Security.EditSecurity" mc:Ignorable="d" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:xamlHost="clr-namespace:Microsoft.Toolkit.Wpf.UI.XamlHost;assembly=Microsoft.Toolkit.Wpf.UI.XamlHost">
-    <Grid Margin="0 8">
-        <xamlHost:WindowsXamlHost x:Name="XamlHost" Margin="0 0 0 40"/>
-
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-            <Button Content="Video" Margin="10" Click="Video_Click"/>
-        </StackPanel>
-    </Grid>
-</Page>
+﻿<Window x:Class="HomeControl.Source.Modules.Security.EditSecurity" mc:Ignorable="d" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <Grid/>
+</Window>

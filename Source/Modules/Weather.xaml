@@ -1,62 +1,8 @@
-﻿<Page x:Class="HomeControl.Source.Modules.Weather.Weather" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:gif="http://wpfanimatedgif.codeplex.com"
-      mc:Ignorable="d">
+﻿<Page x:Class="HomeControl.Source.Modules.Weather" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
     <Border BorderBrush="DarkSlateGray" BorderThickness="1" Margin="4">
-        <Grid Margin="4">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Margin="0 0 0 4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0" Text="{Binding CurrentDateDayText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
-                    <TextBlock Grid.Row="1" Text="{Binding CurrentDateText}" HorizontalAlignment="Center" FontSize="24" Foreground="White"/>
-
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="{Binding CurrentTimeText}" FontSize="48" Foreground="White"/>
-                        <TextBlock Text="{Binding CurrentTimeSecondsText}" FontSize="24" Foreground="Gray" VerticalAlignment="Center"/>
-                    </StackPanel>
-
-                    <Grid Grid.Row="4" HorizontalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Column="0" Text="{Binding CurrentWeatherTempText}" FontSize="48" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center"/>
-
-                        <Image Grid.Column="1" gif:ImageBehavior.AnimatedSource="{Binding CurrentWeatherCloudIcon}" Margin="-8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-                        <Image Grid.Column="2" HorizontalAlignment="Left" Stretch="Uniform" gif:ImageBehavior.AnimatedSource="../../../Resources/Images/weather/wind.gif" VerticalAlignment="Center"
-                               RenderTransformOrigin="0.5, 0.5">
-                            <Image.RenderTransform>
-                                <RotateTransform Angle="{Binding CurrentWindDirectionRotation}"/>
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock Grid.Column="2" Text="{Binding CurrentWindSpeedText}" HorizontalAlignment="Center" FontSize="14" Foreground="CornflowerBlue" VerticalAlignment="Center"/>
-                    </Grid>
-
-                    <TextBlock Grid.Row="5" Text="{Binding CurrentWeatherDescription}" FontSize="16" TextWrapping="Wrap" Foreground="White" HorizontalAlignment="Center"/>
-                </Grid>
-            </Grid>
-
-            <Grid Grid.Row="1">
+        <Grid>
+            <Grid Visibility="{Binding ForcastSevenDayVisibility}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -519,24 +465,139 @@
                         <TextBlock Grid.Row="3" Text="{Binding SevenDayForecastDescription14}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                     </Grid>
                 </Border>
+            </Grid>
 
-                <Button Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="2" Command="{Binding ButtonCommand}" CommandParameter="hourly">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
+            <Grid Visibility="{Binding ForcastHourlyVisibility}">
+                <ListView ItemsSource="{Binding ForecastHourlyList}" Foreground="White" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Focusable="False" Margin="8 8 8 0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Template">
                                 <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderThickness="0">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border BorderBrush="Transparent" BorderThickness="0" Background="{TemplateBinding Background}">
+                                            <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="Auto" Margin="0"
+                                                                  Content="{TemplateBinding Content}"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                         </Style>
-                    </Button.Style>
-                </Button>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Focusable" Value="False"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Focusable" Value="False"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Time}" FontSize="14"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Width="32">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding WeatherIcon}" Margin="-8"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Temp}" FontSize="14"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{Binding RainIcon}" Height="32" Margin="-8 -8 -8 -8"/>
+                                            <TextBlock Text="{Binding RainChance}" FontSize="14"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="../../../Resources/Images/weather/wind.gif" Height="32" RenderTransformOrigin="0.5, 0.5" Margin="-8 -8 0 -8">
+                                                <Image.RenderTransform>
+                                                    <RotateTransform Angle="{Binding WindDirectionIcon}"/>
+                                                </Image.RenderTransform>
+                                            </Image>
+                                            <TextBlock Text="{Binding WindSpeed}" FontSize="14"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Humidity}" FontSize="14"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
+
+            <Button Command="{Binding ButtonCommand}" CommandParameter="switch">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Border>
 </Page>

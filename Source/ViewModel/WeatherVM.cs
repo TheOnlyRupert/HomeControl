@@ -1,24 +1,18 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
-using HomeControl.Source.Modules.Debug;
-using HomeControl.Source.Modules.Weather;
 using HomeControl.Source.ViewModel.Base;
-using Task = System.Threading.Tasks.Task;
 
-namespace HomeControl.Source.ViewModel.Weather;
+namespace HomeControl.Source.ViewModel;
 
 public class WeatherVM : BaseViewModel {
-    private int _currentWindDirectionRotation, _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
-        _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
-        _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10, _sevenDayForecastWindDirectionIcon11,
-        _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14;
+    private ObservableCollection<WeatherHourlyBlock> _forecastHourlyList;
 
-    private string _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText, _currentTimeSecondsText,
-        _currentWeatherTempText, _currentWeatherCloudIcon, _sevenDayForecastDescription1, _sevenDayForecastWindSpeed1, _sevenDayForecastWeatherIcon1a,
+    private string _sevenDayForecastDescription1, _sevenDayForecastWindSpeed1, _sevenDayForecastWeatherIcon1a,
         _sevenDayForecastWeatherIcon1b, _sevenDayForecastTemp1, _sevenDayForecastName1, _sevenDayForecastDescription2, _sevenDayForecastWindSpeed2, _sevenDayForecastWeatherIcon2a,
         _sevenDayForecastWeatherIcon2b, _sevenDayForecastTemp2, _sevenDayForecastName2, _sevenDayForecastDescription3, _sevenDayForecastWindSpeed3, _sevenDayForecastWeatherIcon3a,
         _sevenDayForecastWeatherIcon3b, _sevenDayForecastTemp3, _sevenDayForecastName3, _sevenDayForecastDescription4, _sevenDayForecastWindSpeed4, _sevenDayForecastWeatherIcon4a,
@@ -33,14 +27,26 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastDescription12, _sevenDayForecastWindSpeed12, _sevenDayForecastWeatherIcon12a, _sevenDayForecastWeatherIcon12b, _sevenDayForecastTemp12,
         _sevenDayForecastName12, _sevenDayForecastDescription13, _sevenDayForecastWindSpeed13, _sevenDayForecastWeatherIcon13a, _sevenDayForecastWeatherIcon13b,
         _sevenDayForecastTemp13, _sevenDayForecastName13, _sevenDayForecastDescription14, _sevenDayForecastWindSpeed14, _sevenDayForecastWeatherIcon14a,
-        _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1, _trashDayVisibility,
+        _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1,
         _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6,
         _sevenDayForecastRainChance7, _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11,
-        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14, _currentDateDayText;
+        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14, _forcastSevenDayVisibility, _forcastHourlyVisibility;
 
-    private JsonWeather forecast, forecastHourly;
+    private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
+        _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
+        _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10, _sevenDayForecastWindDirectionIcon11,
+        _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14;
+
+    private JsonWeather forecast;
+
+    private bool isHourly;
 
     public WeatherVM() {
+        ForcastSevenDayVisibility = "HIDDEN";
+        ForcastHourlyVisibility = "HIDDEN";
+
+        isHourly = false;
+        ForecastHourlyList = new ObservableCollection<WeatherHourlyBlock>();
         UpdateWeatherForecast();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -51,33 +57,28 @@ public class WeatherVM : BaseViewModel {
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
-        case "Refresh":
-            CurrentDateDayText = DateTime.Now.DayOfWeek.ToString();
-            CurrentDateText = DateTime.Now.ToString("MMMM dd yyyy");
-            CurrentTimeText = DateTime.Now.ToString("HH:mm");
-            CurrentTimeSecondsText = DateTime.Now.ToString("ss");
-            break;
         case "MinChanged":
             UpdateWeatherForecast();
             break;
         }
     }
 
-    private async Task UpdateWeatherForecast() {
+    private async void UpdateWeatherForecast() {
         if (ReferenceValues.EnableWeather) {
-            JsonSerializerOptions options = new() {
-                IncludeFields = true
-            };
+            if (!isHourly) {
+                ForcastSevenDayVisibility = "VISIBLE";
+                ForcastHourlyVisibility = "HIDDEN";
 
-            try {
-                Uri weatherForecastURL =
-                    new(
-                        $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast");
-                Uri weatherForecastHourlyURL =
-                    new(
-                        $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
+                JsonSerializerOptions options = new() {
+                    IncludeFields = true
+                };
 
-                using (WebClient client = new()) {
+                try {
+                    Uri weatherForecastURL =
+                        new(
+                            $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast");
+
+                    using WebClient client = new();
                     client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
                     string weatherForecast = await client.DownloadStringTaskAsync(weatherForecastURL);
                     forecast = JsonSerializer.Deserialize<JsonWeather>(weatherForecast, options);
@@ -87,10 +88,10 @@ public class WeatherVM : BaseViewModel {
                         SevenDayForecastTemp1 = forecast.properties.periods[0].temperature + "°";
 
                         string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[0].shortForecast);
-                        SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime, forecastHourly.properties.periods[0].temperature,
+                        SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
                             forecast.properties.periods[0].windSpeed, "null");
                         SevenDayForecastWeatherIcon1b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime, forecastHourly.properties.periods[0].temperature,
+                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
                                 forecast.properties.periods[0].windSpeed, weatherIcons[0])
                             : "null";
                         SevenDayForecastRainChance1 = forecast.properties.periods[0].probabilityOfPrecipitation.value?.ToString();
@@ -529,22 +530,54 @@ public class WeatherVM : BaseViewModel {
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                     }
+                } catch (Exception) {
+                    //ignore
                 }
+            } else {
+                ForcastSevenDayVisibility = "HIDDEN";
+                ForcastHourlyVisibility = "VISIBLE";
 
-                using (WebClient client = new()) {
-                    client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
-                    string weatherForecastHourly = await client.DownloadStringTaskAsync(weatherForecastHourlyURL);
-                    forecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
+                JsonSerializerOptions options = new() {
+                    IncludeFields = true
+                };
 
-                    CurrentWeatherTempText = forecastHourly.properties.periods[0].temperature + "°";
-                    CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(forecastHourly.properties.periods[0].windDirection);
-                    CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
-                    CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
-                    CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime,
-                        forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "null");
+                try {
+                    using WebClient client2 = new();
+                    Uri weatherForecastHourlyURL =
+                        new(
+                            $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
+                    client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
+                    string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
+                    JsonWeather forecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
+
+                    ForecastHourlyList.Clear();
+
+                    if (forecastHourly != null) {
+                        foreach (JsonWeather.Periods period in forecastHourly.properties.periods) {
+                            ForecastHourlyList.Add(new WeatherHourlyBlock {
+                                Time = period.startTime.ToString("MM/dd  ") + period.startTime.ToString("HH:mm"),
+                                WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, "null"),
+                                Temp = period.temperature + "°",
+                                RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),
+                                RainChance = period.probabilityOfPrecipitation.value + "%",
+                                WindSpeed = period.windSpeed,
+                                WindDirectionIcon = WeatherHelpers.GetWindRotation(period.windDirection),
+                                Humidity = "Humidity: " + period.relativeHumidity.value + "%",
+                                ShortForecast = period.shortForecast
+                            });
+                        }
+                    }
+                } catch (WebException) {
+                    // NORMAL
+                } catch (Exception e) {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "WeatherHourlyVM",
+                        Description = e.ToString()
+                    });
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
-            } catch (Exception) {
-                //ignore
             }
         }
     }
@@ -555,99 +588,14 @@ public class WeatherVM : BaseViewModel {
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
-        case "hourly":
-            WeatherHourly weatherHourly = new();
-            weatherHourly.ShowDialog();
-            weatherHourly.Close();
-
-            break;
-        case "debug":
-            if (!ReferenceValues.LockUI) {
-                DebugLog debugLog = new();
-                debugLog.ShowDialog();
-                debugLog.Close();
-            } else {
-                ReferenceValues.SoundToPlay = "locked";
-                SoundDispatcher.PlaySound();
-            }
-
+        case "switch":
+            isHourly = !isHourly;
+            UpdateWeatherForecast();
             break;
         }
     }
 
     #region Fields
-
-    public string CurrentDateText {
-        get => _currentDateText;
-        set {
-            _currentDateText = value;
-            RaisePropertyChangedEvent("CurrentDateText");
-        }
-    }
-
-    public string CurrentDateDayText {
-        get => _currentDateDayText;
-        set {
-            _currentDateDayText = value;
-            RaisePropertyChangedEvent("CurrentDateDayText");
-        }
-    }
-
-    public string CurrentTimeText {
-        get => _currentTimeText;
-        set {
-            _currentTimeText = value;
-            RaisePropertyChangedEvent("CurrentTimeText");
-        }
-    }
-
-    public string CurrentTimeSecondsText {
-        get => _currentTimeSecondsText;
-        set {
-            _currentTimeSecondsText = value;
-            RaisePropertyChangedEvent("CurrentTimeSecondsText");
-        }
-    }
-
-    public string CurrentWeatherTempText {
-        get => _currentWeatherTempText;
-        set {
-            _currentWeatherTempText = value;
-            RaisePropertyChangedEvent("CurrentWeatherTempText");
-        }
-    }
-
-    public string CurrentWeatherCloudIcon {
-        get => _currentWeatherCloudIcon;
-        set {
-            _currentWeatherCloudIcon = value;
-            RaisePropertyChangedEvent("CurrentWeatherCloudIcon");
-        }
-    }
-
-    public int CurrentWindDirectionRotation {
-        get => _currentWindDirectionRotation;
-        set {
-            _currentWindDirectionRotation = value;
-            RaisePropertyChangedEvent("CurrentWindDirectionRotation");
-        }
-    }
-
-    public string CurrentWindSpeedText {
-        get => _currentWindSpeedText;
-        set {
-            _currentWindSpeedText = value;
-            RaisePropertyChangedEvent("CurrentWindSpeedText");
-        }
-    }
-
-    public string CurrentWeatherDescription {
-        get => _currentWeatherDescription;
-        set {
-            _currentWeatherDescription = value;
-            RaisePropertyChangedEvent("CurrentWeatherDescription");
-        }
-    }
 
     public string SevenDayForecastName1 {
         get => _sevenDayForecastName1;
@@ -1542,6 +1490,30 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindDirectionIcon14 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindDirectionIcon14");
+        }
+    }
+
+    public string ForcastSevenDayVisibility {
+        get => _forcastSevenDayVisibility;
+        set {
+            _forcastSevenDayVisibility = value;
+            RaisePropertyChangedEvent("ForcastSevenDayVisibility");
+        }
+    }
+
+    public string ForcastHourlyVisibility {
+        get => _forcastHourlyVisibility;
+        set {
+            _forcastHourlyVisibility = value;
+            RaisePropertyChangedEvent("ForcastHourlyVisibility");
+        }
+    }
+
+    public ObservableCollection<WeatherHourlyBlock> ForecastHourlyList {
+        get => _forecastHourlyList;
+        set {
+            _forecastHourlyList = value;
+            RaisePropertyChangedEvent("ForecastHourlyList");
         }
     }
 

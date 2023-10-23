@@ -2,9 +2,9 @@
 
 namespace HomeControl.Source.Modules;
 
-public partial class Notes {
-    public Notes() {
+public partial class ButtonStackTop {
+    public ButtonStackTop() {
         InitializeComponent();
-        DataContext = new NotesVM();
+        DataContext = new ButtonStackTopVM();
     }
 }

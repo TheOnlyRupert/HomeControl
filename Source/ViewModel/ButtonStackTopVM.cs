@@ -1,15 +1,16 @@
 ﻿using System.Windows.Input;
 using HomeControl.Source.Helpers;
+using HomeControl.Source.Modules.Debug;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel;
 
-public class PasswordVM : BaseViewModel {
-    private string _image;
+public class ButtonStackTopVM : BaseViewModel {
+    private string _lockedImage;
 
-    public PasswordVM() {
+    public ButtonStackTopVM() {
         ReferenceValues.LockUI = !ReferenceValues.JsonSettingsMaster.IsDebugMode;
-        Image = ReferenceValues.LockUI ? "./../../Resources/Images/icons/key_locked.png" : "./../../Resources/Images/icons/key_unlocked.png";
+        LockedImage = ReferenceValues.LockUI ? "./../../Resources/Images/icons/key_locked.png" : "./../../Resources/Images/icons/key_unlocked.png";
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -19,11 +20,11 @@ public class PasswordVM : BaseViewModel {
 
     #region Fields
 
-    public string Image {
-        get => _image;
+    public string LockedImage {
+        get => _lockedImage;
         set {
-            _image = value;
-            RaisePropertyChangedEvent("Image");
+            _lockedImage = value;
+            RaisePropertyChangedEvent("LockedImage");
         }
     }
 
@@ -31,7 +32,7 @@ public class PasswordVM : BaseViewModel {
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "ScreenSaverOn") {
-            Image = "./../../Resources/Images/icons/key_locked.png";
+            LockedImage = "./../../Resources/Images/icons/key_locked.png";
         }
     }
 
@@ -40,22 +41,25 @@ public class PasswordVM : BaseViewModel {
         case "lock":
             if (!ReferenceValues.LockUI) {
                 ReferenceValues.LockUI = true;
-                Image = "./../../Resources/Images/icons/key_locked.png";
+                LockedImage = "./../../Resources/Images/icons/key_locked.png";
             } else {
-                //ReferenceValues.DebugTextBlockOutput.Add(new DebugTextBlock {
-                //    Date = DateTime.Now,
-                //    Level = "INFO",
-                //    Module = "PasswordVM",
-                //    Description = "Unlocking UI with correct password"
-                //});
-                //SaveDebugFile.Save();
-
                 ReferenceValues.LockUI = false;
-                Image = "./../../Resources/Images/icons/key_unlocked.png";
+                LockedImage = "./../../Resources/Images/icons/key_unlocked.png";
             }
 
             ReferenceValues.SoundToPlay = "unlock";
             SoundDispatcher.PlaySound();
+
+            break;
+        case "debug":
+            if (!ReferenceValues.LockUI) {
+                DebugLog debugLog = new();
+                debugLog.ShowDialog();
+                debugLog.Close();
+            } else {
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
+            }
 
             break;
         }

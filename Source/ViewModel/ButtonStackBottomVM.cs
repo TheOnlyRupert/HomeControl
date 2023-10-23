@@ -3,13 +3,15 @@ using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
+using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Games;
 using HomeControl.Source.ViewModel.Base;
+using Tamagotchi = HomeControl.Source.Modules.Games.Tamagotchi.Tamagotchi;
 
-namespace HomeControl.Source.ViewModel.Games;
+namespace HomeControl.Source.ViewModel;
 
-public class GamesVM : BaseViewModel {
-    public GamesVM() {
+public class ButtonStackBottomVM : BaseViewModel {
+    public ButtonStackBottomVM() {
         try {
             ReferenceValues.JsonGameStatsMaster = JsonSerializer.Deserialize<JsonGameStats>(FileHelpers.LoadFileText("gameStats", true));
         } catch (Exception) {
@@ -23,6 +25,11 @@ public class GamesVM : BaseViewModel {
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
+        case "contacts":
+            Contacts contacts = new();
+            contacts.ShowDialog();
+            contacts.Close();
+            break;
         case "pictionary":
             Pictionary pictionary = new();
             pictionary.ShowDialog();
@@ -34,7 +41,7 @@ public class GamesVM : BaseViewModel {
             coinFlip.Close();
             break;
         case "tamagotchi":
-            Modules.Games.Tamagotchi.Tamagotchi tamagotchi = new();
+            Tamagotchi tamagotchi = new();
             tamagotchi.ShowDialog();
             tamagotchi.Close();
 
