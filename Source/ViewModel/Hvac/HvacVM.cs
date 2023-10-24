@@ -14,7 +14,7 @@ public class HvacVM : BaseViewModel {
 
     private string _tempInside, _heatingCoolingText, _tempAdjusted, _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _extHumidity, _tempInsideColor, _tempAdjustedColor,
         _fanStatusColor, _heatingCoolingStatusColor, _intHumidity, _tempOutside, _tempOutsideColor, _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText,
-        _currentTimeSecondsText, _currentWeatherCloudIcon, _mainStatus, _mainStatusColor;
+        _currentTimeSecondsText, _currentWeatherCloudIcon, _mainStatus, _mainStatusColor, _hvacStatusImage, _fanStatusImage;
 
     private JsonWeather forecastHourly;
 
@@ -28,7 +28,7 @@ public class HvacVM : BaseViewModel {
         CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
         CurrentTimeText = DateTime.Now.ToString("HH:mm");
 
-        UpdateWeatherForecast();
+        UpdateWeather();
         UpdateHvac();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
@@ -37,7 +37,7 @@ public class HvacVM : BaseViewModel {
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
-    private async void UpdateWeatherForecast() {
+    private async void UpdateWeather() {
         if (ReferenceValues.EnableWeather) {
             JsonSerializerOptions options = new() {
                 IncludeFields = true
@@ -81,7 +81,7 @@ public class HvacVM : BaseViewModel {
         case "MinChanged":
             CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
             CurrentTimeText = DateTime.Now.ToString("HH:mm");
-            UpdateWeatherForecast();
+            UpdateWeather();
             break;
         }
     }
@@ -118,7 +118,7 @@ public class HvacVM : BaseViewModel {
 
         TempAdjustedColor = "White";
 
-        if (ReferenceValues.InteriorTemp == -99) {
+        if (ReferenceValues.ExteriorTemp == -99) {
             TempOutside = "??";
             TempOutsideColor = "Red";
         } else {
@@ -158,6 +158,22 @@ public class HvacVM : BaseViewModel {
             ExtHumidity = ReferenceValues.ExteriorHumidity + "%";
         }
 
+        if (ReferenceValues.JsonHvacMaster.IsOverride) {
+            MainStatus = "HVAC State: Override Enabled";
+            MainStatusColor = "Yellow";
+        } else {
+            MainStatus = "HVAC State: Normal";
+            MainStatusColor = "Green";
+        }
+
+        if (ReferenceValues.JsonHvacMaster.IsFanAuto) {
+            FanStatus = "Auto";
+            FanStatusColor = "White";
+        } else {
+            FanStatus = "On";
+            FanStatusColor = "Green";
+        }
+
         if (ReferenceValues.JsonHvacMaster.IsProgramRunning) {
             if (ReferenceValues.JsonHvacMaster.IsStandby) {
                 ProgramStatus = "Standby";
@@ -171,22 +187,34 @@ public class HvacVM : BaseViewModel {
             ProgramStatusColor = "White";
         }
 
-        if (ReferenceValues.JsonHvacMaster.IsFanAuto) {
-            FanStatus = "Auto";
-            FanStatusColor = "White";
-        } else {
-            FanStatus = "On";
-            FanStatusColor = "Green";
-        }
-
         if (ReferenceValues.JsonHvacMaster.IsHeatingMode) {
             HeatingCoolingStatus = "Heating";
-            HeatingCoolingStatusColor = "White";
+            HeatingCoolingStatusColor = "Red";
             HeatingCoolingText = "Heating To";
         } else {
             HeatingCoolingStatus = "Cooling";
             HeatingCoolingStatusColor = "CornflowerBlue";
             HeatingCoolingText = "Cooling To";
+        }
+
+        /* Image logic */
+        if (ReferenceValues.JsonHvacMaster.IsProgramRunning) {
+            FanStatusImage = ReferenceValues.JsonHvacMaster.IsFanAuto ? "" : "../../../Resources/Images/hvac/fan.gif";
+
+            if (!ReferenceValues.JsonHvacMaster.IsStandby) {
+                if (ReferenceValues.JsonHvacMaster.IsHeatingMode) {
+                    HvacStatusImage = "../../../Resources/Images/hvac/heat.gif";
+                    FanStatusImage = "../../../Resources/Images/hvac/fan.gif";
+                } else {
+                    HvacStatusImage = "../../../Resources/Images/hvac/cooling.gif";
+                    FanStatusImage = "../../../Resources/Images/hvac/fan.gif";
+                }
+            } else {
+                HvacStatusImage = "";
+            }
+        } else {
+            FanStatusImage = "";
+            HvacStatusImage = "";
         }
     }
 
@@ -194,6 +222,7 @@ public class HvacVM : BaseViewModel {
         switch (param) {
         case "hvac":
             if (ReferenceValues.IsHvacComEstablished) {
+                bool isOverride = ReferenceValues.JsonHvacMaster.IsOverride;
                 bool isFanAuto = ReferenceValues.JsonHvacMaster.IsFanAuto;
                 bool isProgramRunning = ReferenceValues.JsonHvacMaster.IsProgramRunning;
                 bool isHeatingMode = ReferenceValues.JsonHvacMaster.IsHeatingMode;
@@ -238,6 +267,17 @@ public class HvacVM : BaseViewModel {
                         Level = "INFO",
                         Module = "HvacVM",
                         Description = "Changing HVAC Heating/Cooling Mode: IsHeatingMode " + ReferenceValues.JsonHvacMaster.IsHeatingMode
+                    });
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                }
+
+                if (isOverride != ReferenceValues.JsonHvacMaster.IsOverride) {
+                    ReferenceValues.SerialPort.Write("7");
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "INFO",
+                        Module = "HvacVM",
+                        Description = "Changing HVAC IsOverride: " + ReferenceValues.JsonHvacMaster.IsOverride
                     });
                     FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
@@ -456,6 +496,22 @@ public class HvacVM : BaseViewModel {
         set {
             _mainStatusColor = value;
             RaisePropertyChangedEvent("MainStatusColor");
+        }
+    }
+
+    public string HvacStatusImage {
+        get => _hvacStatusImage;
+        set {
+            _hvacStatusImage = value;
+            RaisePropertyChangedEvent("HvacStatusImage");
+        }
+    }
+
+    public string FanStatusImage {
+        get => _fanStatusImage;
+        set {
+            _fanStatusImage = value;
+            RaisePropertyChangedEvent("FanStatusImage");
         }
     }
 

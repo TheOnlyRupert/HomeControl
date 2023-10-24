@@ -12,7 +12,7 @@ public static class HvacCrossPlay {
     private static bool comPortMessage, intMessageSent, extMessageSent;
     private static readonly CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
 
-    /* 1 = fan on, 2 = fan off, 3 = cooling on, 4 = cooling off, 5 = heat on, 6 = heat off */
+    /* 1 = fan on, 2 = fan off, 3 = cooling on, 4 = cooling off, 5 = heat on, 6 = heat off, 7 = override on, 8 = override off */
     public static async void EstablishConnection() {
         try {
             if (!ReferenceValues.SerialPort.IsOpen) {
@@ -243,6 +243,24 @@ public static class HvacCrossPlay {
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
+        } else if (data.Contains("<HVAC: Override On>")) {
+            ReferenceValues.JsonHvacMaster.IsOverride = true;
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "HvacCrossPlay",
+                Description = "HVAC: Changing Override to On"
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+        } else if (data.Contains("<HVAC: Override Off>")) {
+            ReferenceValues.JsonHvacMaster.IsOverride = false;
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "HvacCrossPlay",
+                Description = "HVAC: Changing Override to Off"
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         simpleMessenger.PushMessage("HvacUpdated", null);

@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Text.Json;
-using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.ViewModel.Base;
@@ -30,569 +29,428 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1,
         _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6,
         _sevenDayForecastRainChance7, _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11,
-        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14, _forcastSevenDayVisibility, _forcastHourlyVisibility;
+        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14;
 
     private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
         _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
         _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10, _sevenDayForecastWindDirectionIcon11,
-        _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14;
+        _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14, _tempMin, _tempMax;
 
     private JsonWeather forecast;
 
-    private bool isHourly;
-
     public WeatherVM() {
-        ForcastSevenDayVisibility = "HIDDEN";
-        ForcastHourlyVisibility = "HIDDEN";
-
-        isHourly = false;
         ForecastHourlyList = new ObservableCollection<WeatherHourlyBlock>();
-        UpdateWeatherForecast();
+
+        if (ReferenceValues.EnableWeather) {
+            UpdateWeather();
+        }
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
-
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
         case "MinChanged":
-            UpdateWeatherForecast();
+            if (ReferenceValues.EnableWeather) {
+                UpdateWeather();
+            }
+
             break;
         }
     }
 
-    private async void UpdateWeatherForecast() {
-        if (ReferenceValues.EnableWeather) {
-            if (!isHourly) {
-                ForcastSevenDayVisibility = "VISIBLE";
-                ForcastHourlyVisibility = "HIDDEN";
+    private async void UpdateWeather() {
+        JsonSerializerOptions options = new() {
+            IncludeFields = true
+        };
 
-                JsonSerializerOptions options = new() {
-                    IncludeFields = true
-                };
+        try {
+            Uri weatherForecastURL =
+                new($"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast");
 
-                try {
-                    Uri weatherForecastURL =
-                        new(
-                            $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast");
+            using WebClient client = new();
+            client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
+            string weatherForecast = await client.DownloadStringTaskAsync(weatherForecastURL);
+            forecast = JsonSerializer.Deserialize<JsonWeather>(weatherForecast, options);
 
-                    using WebClient client = new();
-                    client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
-                    string weatherForecast = await client.DownloadStringTaskAsync(weatherForecastURL);
-                    forecast = JsonSerializer.Deserialize<JsonWeather>(weatherForecast, options);
+            SevenDayForecastName1 = forecast.properties.periods[0].name;
+            SevenDayForecastTemp1 = forecast.properties.periods[0].temperature + "°";
 
-                    try {
-                        SevenDayForecastName1 = forecast.properties.periods[0].name;
-                        SevenDayForecastTemp1 = forecast.properties.periods[0].temperature + "°";
+            string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[0].shortForecast);
+            SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
+                forecast.properties.periods[0].windSpeed, "null");
+            SevenDayForecastWeatherIcon1b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
+                    forecast.properties.periods[0].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance1 = forecast.properties.periods[0].probabilityOfPrecipitation.value?.ToString();
 
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[0].shortForecast);
-                        SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
-                            forecast.properties.periods[0].windSpeed, "null");
-                        SevenDayForecastWeatherIcon1b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
-                                forecast.properties.periods[0].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance1 = forecast.properties.periods[0].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance1)) {
-                            SevenDayForecastRainChance1 += "%";
-                        } else {
-                            SevenDayForecastRainChance1 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon1 = WeatherHelpers.GetWindRotation(forecast.properties.periods[0].windDirection);
-                        SevenDayForecastWindSpeed1 = forecast.properties.periods[0].windSpeed;
-                        SevenDayForecastDescription1 = forecast.properties.periods[0].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName2 = forecast.properties.periods[1].name;
-                        SevenDayForecastTemp2 = forecast.properties.periods[1].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[1].shortForecast);
-                        SevenDayForecastWeatherIcon2a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[1].isDaytime, forecast.properties.periods[1]
-                            .temperature, forecast.properties.periods[1].windSpeed, "null");
-                        SevenDayForecastWeatherIcon2b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[1].isDaytime, forecast.properties.periods[1].temperature,
-                                forecast.properties.periods[1].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance2 = forecast.properties.periods[1].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance2)) {
-                            SevenDayForecastRainChance2 += "%";
-                        } else {
-                            SevenDayForecastRainChance2 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon2 = WeatherHelpers.GetWindRotation(forecast.properties.periods[1].windDirection);
-                        SevenDayForecastWindSpeed2 = forecast.properties.periods[1].windSpeed;
-                        SevenDayForecastDescription2 = forecast.properties.periods[1].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName3 = forecast.properties.periods[2].name;
-                        SevenDayForecastTemp3 = forecast.properties.periods[2].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[2].shortForecast);
-                        SevenDayForecastWeatherIcon3a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[2].isDaytime, forecast.properties.periods[2]
-                            .temperature, forecast.properties.periods[2].windSpeed, "null");
-                        SevenDayForecastWeatherIcon3b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[2].isDaytime, forecast.properties.periods[2].temperature,
-                                forecast.properties.periods[2].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance3 = forecast.properties.periods[2].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance3)) {
-                            SevenDayForecastRainChance3 += "%";
-                        } else {
-                            SevenDayForecastRainChance3 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon3 = WeatherHelpers.GetWindRotation(forecast.properties.periods[2].windDirection);
-                        SevenDayForecastWindSpeed3 = forecast.properties.periods[2].windSpeed;
-                        SevenDayForecastDescription3 = forecast.properties.periods[2].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName4 = forecast.properties.periods[3].name;
-                        SevenDayForecastTemp4 = forecast.properties.periods[3].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[3].shortForecast);
-                        SevenDayForecastWeatherIcon4a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[3].isDaytime, forecast.properties.periods[3]
-                            .temperature, forecast.properties.periods[3].windSpeed, "null");
-                        SevenDayForecastWeatherIcon4b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[3].isDaytime, forecast
-                                .properties.periods[3].temperature, forecast.properties.periods[3].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance4 = forecast.properties.periods[3].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance4)) {
-                            SevenDayForecastRainChance4 += "%";
-                        } else {
-                            SevenDayForecastRainChance4 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon4 = WeatherHelpers.GetWindRotation(forecast.properties.periods[3].windDirection);
-                        SevenDayForecastWindSpeed4 = forecast.properties.periods[3].windSpeed;
-                        SevenDayForecastDescription4 = forecast.properties.periods[3].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName5 = forecast.properties.periods[4].name;
-                        SevenDayForecastTemp5 = forecast.properties.periods[4].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[4].shortForecast);
-                        SevenDayForecastWeatherIcon5a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[4].isDaytime, forecast.properties.periods[4]
-                            .temperature, forecast.properties.periods[4].windSpeed, "null");
-                        SevenDayForecastWeatherIcon5b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[4].isDaytime, forecast.properties.periods[4].temperature,
-                                forecast.properties.periods[4].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance5 = forecast.properties.periods[4].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance5)) {
-                            SevenDayForecastRainChance5 += "%";
-                        } else {
-                            SevenDayForecastRainChance5 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon5 = WeatherHelpers.GetWindRotation(forecast.properties.periods[4].windDirection);
-                        SevenDayForecastWindSpeed5 = forecast.properties.periods[4].windSpeed;
-                        SevenDayForecastDescription5 = forecast.properties.periods[4].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName6 = forecast.properties.periods[5].name;
-                        SevenDayForecastTemp6 = forecast.properties.periods[5].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[5].shortForecast);
-                        SevenDayForecastWeatherIcon6a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[5].isDaytime, forecast.properties.periods[5]
-                            .temperature, forecast.properties.periods[5].windSpeed, "null");
-                        SevenDayForecastWeatherIcon6b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[5].isDaytime, forecast.properties.periods[5].temperature,
-                                forecast.properties.periods[5].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance6 = forecast.properties.periods[5].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance6)) {
-                            SevenDayForecastRainChance6 += "%";
-                        } else {
-                            SevenDayForecastRainChance6 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon6 = WeatherHelpers.GetWindRotation(forecast.properties.periods[5].windDirection);
-                        SevenDayForecastWindSpeed6 = forecast.properties.periods[5].windSpeed;
-                        SevenDayForecastDescription6 = forecast.properties.periods[5].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName7 = forecast.properties.periods[6].name;
-                        SevenDayForecastTemp7 = forecast.properties.periods[6].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[6].shortForecast);
-                        SevenDayForecastWeatherIcon7a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[6].isDaytime, forecast.properties.periods[6]
-                            .temperature, forecast.properties.periods[6].windSpeed, "null");
-                        SevenDayForecastWeatherIcon7b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[6].isDaytime, forecast.properties.periods[6].temperature,
-                                forecast.properties.periods[6].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance7 = forecast.properties.periods[6].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance7)) {
-                            SevenDayForecastRainChance7 += "%";
-                        } else {
-                            SevenDayForecastRainChance7 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon7 = WeatherHelpers.GetWindRotation(forecast.properties.periods[6].windDirection);
-                        SevenDayForecastWindSpeed7 = forecast.properties.periods[6].windSpeed;
-                        SevenDayForecastDescription7 = forecast.properties.periods[6].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName8 = forecast.properties.periods[7].name;
-                        SevenDayForecastTemp8 = forecast.properties.periods[7].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[7].shortForecast);
-                        SevenDayForecastWeatherIcon8a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[7].isDaytime, forecast.properties.periods[7]
-                            .temperature, forecast.properties.periods[7].windSpeed, "null");
-                        SevenDayForecastWeatherIcon8b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[7].isDaytime, forecast.properties.periods[7].temperature,
-                                forecast.properties.periods[7].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance8 = forecast.properties.periods[7].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance8)) {
-                            SevenDayForecastRainChance8 += "%";
-                        } else {
-                            SevenDayForecastRainChance8 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon8 = WeatherHelpers.GetWindRotation(forecast.properties.periods[7].windDirection);
-                        SevenDayForecastWindSpeed8 = forecast.properties.periods[7].windSpeed;
-                        SevenDayForecastDescription8 = forecast.properties.periods[7].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName9 = forecast.properties.periods[8].name;
-                        SevenDayForecastTemp9 = forecast.properties.periods[8].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[8].shortForecast);
-                        SevenDayForecastWeatherIcon9a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[8].isDaytime, forecast.properties.periods[8]
-                            .temperature, forecast.properties.periods[8].windSpeed, "null");
-                        SevenDayForecastWeatherIcon9b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[8].isDaytime, forecast.properties.periods[8].temperature,
-                                forecast.properties.periods[8].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance9 = forecast.properties.periods[8].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance9)) {
-                            SevenDayForecastRainChance9 += "%";
-                        } else {
-                            SevenDayForecastRainChance9 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon9 = WeatherHelpers.GetWindRotation(forecast.properties.periods[8].windDirection);
-                        SevenDayForecastWindSpeed9 = forecast.properties.periods[8].windSpeed;
-                        SevenDayForecastDescription9 = forecast.properties.periods[8].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName10 = forecast.properties.periods[9].name;
-                        SevenDayForecastTemp10 = forecast.properties.periods[9].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[9].shortForecast);
-                        SevenDayForecastWeatherIcon10a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[9].isDaytime,
-                            forecast.properties.periods[9].temperature, forecast.properties.periods[9].windSpeed, "null");
-                        SevenDayForecastWeatherIcon10b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[9].isDaytime, forecast.properties.periods[9].temperature,
-                                forecast.properties.periods[9].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance10 = forecast.properties.periods[9].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance10)) {
-                            SevenDayForecastRainChance10 += "%";
-                        } else {
-                            SevenDayForecastRainChance10 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon10 = WeatherHelpers.GetWindRotation(forecast.properties.periods[9].windDirection);
-                        SevenDayForecastWindSpeed10 = forecast.properties.periods[9].windSpeed;
-                        SevenDayForecastDescription10 = forecast.properties.periods[9].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName11 = forecast.properties.periods[10].name;
-                        SevenDayForecastTemp11 = forecast.properties.periods[10].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[10].shortForecast);
-                        SevenDayForecastWeatherIcon11a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[10].isDaytime,
-                            forecast.properties.periods[10].temperature, forecast.properties.periods[10].windSpeed, "null");
-                        SevenDayForecastWeatherIcon11b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[10].isDaytime, forecast.properties.periods[10].temperature,
-                                forecast.properties.periods[10].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance11 = forecast.properties.periods[10].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance11)) {
-                            SevenDayForecastRainChance11 += "%";
-                        } else {
-                            SevenDayForecastRainChance11 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon11 = WeatherHelpers.GetWindRotation(forecast.properties.periods[10].windDirection);
-                        SevenDayForecastWindSpeed11 = forecast.properties.periods[10].windSpeed;
-                        SevenDayForecastDescription11 = forecast.properties.periods[10].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName12 = forecast.properties.periods[11].name;
-                        SevenDayForecastTemp12 = forecast.properties.periods[11].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[11].shortForecast);
-                        SevenDayForecastWeatherIcon12a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[11].isDaytime, forecast.properties.periods[11]
-                            .temperature, forecast.properties.periods[11].windSpeed, "null");
-                        SevenDayForecastWeatherIcon12b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[11].isDaytime, forecast.properties.periods[11].temperature,
-                                forecast.properties.periods[11].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance12 = forecast.properties.periods[11].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance12)) {
-                            SevenDayForecastRainChance12 += "%";
-                        } else {
-                            SevenDayForecastRainChance12 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon12 = WeatherHelpers.GetWindRotation(forecast.properties.periods[11].windDirection);
-                        SevenDayForecastWindSpeed12 = forecast.properties.periods[11].windSpeed;
-                        SevenDayForecastDescription12 = forecast.properties.periods[11].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName13 = forecast.properties.periods[12].name;
-                        SevenDayForecastTemp13 = forecast.properties.periods[12].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[12].shortForecast);
-                        SevenDayForecastWeatherIcon13a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[12].isDaytime,
-                            forecast.properties.periods[12].temperature, forecast.properties.periods[12].windSpeed, "null");
-                        SevenDayForecastWeatherIcon13b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[12].isDaytime, forecast.properties.periods[12].temperature,
-                                forecast.properties.periods[12].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance13 = forecast.properties.periods[12].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance13)) {
-                            SevenDayForecastRainChance13 += "%";
-                        } else {
-                            SevenDayForecastRainChance13 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon13 = WeatherHelpers.GetWindRotation(forecast.properties.periods[12].windDirection);
-                        SevenDayForecastWindSpeed13 = forecast.properties.periods[12].windSpeed;
-                        SevenDayForecastDescription13 = forecast.properties.periods[12].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    try {
-                        SevenDayForecastName14 = forecast.properties.periods[13].name;
-                        SevenDayForecastTemp14 = forecast.properties.periods[13].temperature + "°";
-
-                        string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[13].shortForecast);
-                        SevenDayForecastWeatherIcon14a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[13].isDaytime,
-                            forecast.properties.periods[13].temperature, forecast.properties.periods[13].windSpeed, "null");
-                        SevenDayForecastWeatherIcon14b = weatherIcons.Length > 1
-                            ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[13].isDaytime, forecast.properties.periods[13].temperature,
-                                forecast.properties.periods[13].windSpeed, weatherIcons[0])
-                            : "null";
-                        SevenDayForecastRainChance14 = forecast.properties.periods[13].probabilityOfPrecipitation.value?.ToString();
-
-                        if (!string.IsNullOrEmpty(SevenDayForecastRainChance14)) {
-                            SevenDayForecastRainChance14 += "%";
-                        } else {
-                            SevenDayForecastRainChance14 = "None";
-                        }
-
-                        SevenDayForecastWindDirectionIcon14 = WeatherHelpers.GetWindRotation(forecast.properties.periods[13].windDirection);
-                        SevenDayForecastWindSpeed14 = forecast.properties.periods[13].windSpeed;
-                        SevenDayForecastDescription14 = forecast.properties.periods[13].shortForecast;
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "WeatherVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-                } catch (Exception) {
-                    //ignore
-                }
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance1)) {
+                SevenDayForecastRainChance1 += "%";
             } else {
-                ForcastSevenDayVisibility = "HIDDEN";
-                ForcastHourlyVisibility = "VISIBLE";
-
-                JsonSerializerOptions options = new() {
-                    IncludeFields = true
-                };
-
-                try {
-                    using WebClient client2 = new();
-                    Uri weatherForecastHourlyURL =
-                        new(
-                            $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
-                    client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
-                    string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
-                    JsonWeather forecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
-
-                    ForecastHourlyList.Clear();
-
-                    if (forecastHourly != null) {
-                        foreach (JsonWeather.Periods period in forecastHourly.properties.periods) {
-                            ForecastHourlyList.Add(new WeatherHourlyBlock {
-                                Time = period.startTime.ToString("MM/dd  ") + period.startTime.ToString("HH:mm"),
-                                WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, "null"),
-                                Temp = period.temperature + "°",
-                                RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),
-                                RainChance = period.probabilityOfPrecipitation.value + "%",
-                                WindSpeed = period.windSpeed,
-                                WindDirectionIcon = WeatherHelpers.GetWindRotation(period.windDirection),
-                                Humidity = "Humidity: " + period.relativeHumidity.value + "%",
-                                ShortForecast = period.shortForecast
-                            });
-                        }
-                    }
-                } catch (WebException) {
-                    // NORMAL
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "WeatherHourlyVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
+                SevenDayForecastRainChance1 = "None";
             }
+
+            SevenDayForecastWindDirectionIcon1 = WeatherHelpers.GetWindRotation(forecast.properties.periods[0].windDirection);
+            SevenDayForecastWindSpeed1 = forecast.properties.periods[0].windSpeed;
+            SevenDayForecastDescription1 = forecast.properties.periods[0].shortForecast;
+
+            SevenDayForecastName2 = forecast.properties.periods[1].name;
+            SevenDayForecastTemp2 = forecast.properties.periods[1].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[1].shortForecast);
+            SevenDayForecastWeatherIcon2a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[1].isDaytime, forecast.properties.periods[1]
+                .temperature, forecast.properties.periods[1].windSpeed, "null");
+            SevenDayForecastWeatherIcon2b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[1].isDaytime, forecast.properties.periods[1].temperature,
+                    forecast.properties.periods[1].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance2 = forecast.properties.periods[1].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance2)) {
+                SevenDayForecastRainChance2 += "%";
+            } else {
+                SevenDayForecastRainChance2 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon2 = WeatherHelpers.GetWindRotation(forecast.properties.periods[1].windDirection);
+            SevenDayForecastWindSpeed2 = forecast.properties.periods[1].windSpeed;
+            SevenDayForecastDescription2 = forecast.properties.periods[1].shortForecast;
+
+            SevenDayForecastName3 = forecast.properties.periods[2].name;
+            SevenDayForecastTemp3 = forecast.properties.periods[2].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[2].shortForecast);
+            SevenDayForecastWeatherIcon3a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[2].isDaytime, forecast.properties.periods[2]
+                .temperature, forecast.properties.periods[2].windSpeed, "null");
+            SevenDayForecastWeatherIcon3b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[2].isDaytime, forecast.properties.periods[2].temperature,
+                    forecast.properties.periods[2].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance3 = forecast.properties.periods[2].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance3)) {
+                SevenDayForecastRainChance3 += "%";
+            } else {
+                SevenDayForecastRainChance3 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon3 = WeatherHelpers.GetWindRotation(forecast.properties.periods[2].windDirection);
+            SevenDayForecastWindSpeed3 = forecast.properties.periods[2].windSpeed;
+            SevenDayForecastDescription3 = forecast.properties.periods[2].shortForecast;
+
+            SevenDayForecastName4 = forecast.properties.periods[3].name;
+            SevenDayForecastTemp4 = forecast.properties.periods[3].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[3].shortForecast);
+            SevenDayForecastWeatherIcon4a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[3].isDaytime, forecast.properties.periods[3]
+                .temperature, forecast.properties.periods[3].windSpeed, "null");
+            SevenDayForecastWeatherIcon4b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[3].isDaytime, forecast
+                    .properties.periods[3].temperature, forecast.properties.periods[3].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance4 = forecast.properties.periods[3].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance4)) {
+                SevenDayForecastRainChance4 += "%";
+            } else {
+                SevenDayForecastRainChance4 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon4 = WeatherHelpers.GetWindRotation(forecast.properties.periods[3].windDirection);
+            SevenDayForecastWindSpeed4 = forecast.properties.periods[3].windSpeed;
+            SevenDayForecastDescription4 = forecast.properties.periods[3].shortForecast;
+
+            SevenDayForecastName5 = forecast.properties.periods[4].name;
+            SevenDayForecastTemp5 = forecast.properties.periods[4].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[4].shortForecast);
+            SevenDayForecastWeatherIcon5a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[4].isDaytime, forecast.properties.periods[4]
+                .temperature, forecast.properties.periods[4].windSpeed, "null");
+            SevenDayForecastWeatherIcon5b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[4].isDaytime, forecast.properties.periods[4].temperature,
+                    forecast.properties.periods[4].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance5 = forecast.properties.periods[4].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance5)) {
+                SevenDayForecastRainChance5 += "%";
+            } else {
+                SevenDayForecastRainChance5 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon5 = WeatherHelpers.GetWindRotation(forecast.properties.periods[4].windDirection);
+            SevenDayForecastWindSpeed5 = forecast.properties.periods[4].windSpeed;
+            SevenDayForecastDescription5 = forecast.properties.periods[4].shortForecast;
+
+            SevenDayForecastName6 = forecast.properties.periods[5].name;
+            SevenDayForecastTemp6 = forecast.properties.periods[5].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[5].shortForecast);
+            SevenDayForecastWeatherIcon6a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[5].isDaytime, forecast.properties.periods[5]
+                .temperature, forecast.properties.periods[5].windSpeed, "null");
+            SevenDayForecastWeatherIcon6b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[5].isDaytime, forecast.properties.periods[5].temperature,
+                    forecast.properties.periods[5].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance6 = forecast.properties.periods[5].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance6)) {
+                SevenDayForecastRainChance6 += "%";
+            } else {
+                SevenDayForecastRainChance6 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon6 = WeatherHelpers.GetWindRotation(forecast.properties.periods[5].windDirection);
+            SevenDayForecastWindSpeed6 = forecast.properties.periods[5].windSpeed;
+            SevenDayForecastDescription6 = forecast.properties.periods[5].shortForecast;
+
+            SevenDayForecastName7 = forecast.properties.periods[6].name;
+            SevenDayForecastTemp7 = forecast.properties.periods[6].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[6].shortForecast);
+            SevenDayForecastWeatherIcon7a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[6].isDaytime, forecast.properties.periods[6]
+                .temperature, forecast.properties.periods[6].windSpeed, "null");
+            SevenDayForecastWeatherIcon7b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[6].isDaytime, forecast.properties.periods[6].temperature,
+                    forecast.properties.periods[6].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance7 = forecast.properties.periods[6].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance7)) {
+                SevenDayForecastRainChance7 += "%";
+            } else {
+                SevenDayForecastRainChance7 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon7 = WeatherHelpers.GetWindRotation(forecast.properties.periods[6].windDirection);
+            SevenDayForecastWindSpeed7 = forecast.properties.periods[6].windSpeed;
+            SevenDayForecastDescription7 = forecast.properties.periods[6].shortForecast;
+
+            SevenDayForecastName8 = forecast.properties.periods[7].name;
+            SevenDayForecastTemp8 = forecast.properties.periods[7].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[7].shortForecast);
+            SevenDayForecastWeatherIcon8a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[7].isDaytime, forecast.properties.periods[7]
+                .temperature, forecast.properties.periods[7].windSpeed, "null");
+            SevenDayForecastWeatherIcon8b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[7].isDaytime, forecast.properties.periods[7].temperature,
+                    forecast.properties.periods[7].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance8 = forecast.properties.periods[7].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance8)) {
+                SevenDayForecastRainChance8 += "%";
+            } else {
+                SevenDayForecastRainChance8 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon8 = WeatherHelpers.GetWindRotation(forecast.properties.periods[7].windDirection);
+            SevenDayForecastWindSpeed8 = forecast.properties.periods[7].windSpeed;
+            SevenDayForecastDescription8 = forecast.properties.periods[7].shortForecast;
+
+            SevenDayForecastName9 = forecast.properties.periods[8].name;
+            SevenDayForecastTemp9 = forecast.properties.periods[8].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[8].shortForecast);
+            SevenDayForecastWeatherIcon9a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[8].isDaytime, forecast.properties.periods[8]
+                .temperature, forecast.properties.periods[8].windSpeed, "null");
+            SevenDayForecastWeatherIcon9b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[8].isDaytime, forecast.properties.periods[8].temperature,
+                    forecast.properties.periods[8].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance9 = forecast.properties.periods[8].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance9)) {
+                SevenDayForecastRainChance9 += "%";
+            } else {
+                SevenDayForecastRainChance9 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon9 = WeatherHelpers.GetWindRotation(forecast.properties.periods[8].windDirection);
+            SevenDayForecastWindSpeed9 = forecast.properties.periods[8].windSpeed;
+            SevenDayForecastDescription9 = forecast.properties.periods[8].shortForecast;
+
+            SevenDayForecastName10 = forecast.properties.periods[9].name;
+            SevenDayForecastTemp10 = forecast.properties.periods[9].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[9].shortForecast);
+            SevenDayForecastWeatherIcon10a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[9].isDaytime,
+                forecast.properties.periods[9].temperature, forecast.properties.periods[9].windSpeed, "null");
+            SevenDayForecastWeatherIcon10b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[9].isDaytime, forecast.properties.periods[9].temperature,
+                    forecast.properties.periods[9].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance10 = forecast.properties.periods[9].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance10)) {
+                SevenDayForecastRainChance10 += "%";
+            } else {
+                SevenDayForecastRainChance10 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon10 = WeatherHelpers.GetWindRotation(forecast.properties.periods[9].windDirection);
+            SevenDayForecastWindSpeed10 = forecast.properties.periods[9].windSpeed;
+            SevenDayForecastDescription10 = forecast.properties.periods[9].shortForecast;
+
+            SevenDayForecastName11 = forecast.properties.periods[10].name;
+            SevenDayForecastTemp11 = forecast.properties.periods[10].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[10].shortForecast);
+            SevenDayForecastWeatherIcon11a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[10].isDaytime,
+                forecast.properties.periods[10].temperature, forecast.properties.periods[10].windSpeed, "null");
+            SevenDayForecastWeatherIcon11b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[10].isDaytime, forecast.properties.periods[10].temperature,
+                    forecast.properties.periods[10].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance11 = forecast.properties.periods[10].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance11)) {
+                SevenDayForecastRainChance11 += "%";
+            } else {
+                SevenDayForecastRainChance11 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon11 = WeatherHelpers.GetWindRotation(forecast.properties.periods[10].windDirection);
+            SevenDayForecastWindSpeed11 = forecast.properties.periods[10].windSpeed;
+            SevenDayForecastDescription11 = forecast.properties.periods[10].shortForecast;
+
+            SevenDayForecastName12 = forecast.properties.periods[11].name;
+            SevenDayForecastTemp12 = forecast.properties.periods[11].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[11].shortForecast);
+            SevenDayForecastWeatherIcon12a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[11].isDaytime, forecast.properties.periods[11]
+                .temperature, forecast.properties.periods[11].windSpeed, "null");
+            SevenDayForecastWeatherIcon12b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[11].isDaytime, forecast.properties.periods[11].temperature,
+                    forecast.properties.periods[11].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance12 = forecast.properties.periods[11].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance12)) {
+                SevenDayForecastRainChance12 += "%";
+            } else {
+                SevenDayForecastRainChance12 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon12 = WeatherHelpers.GetWindRotation(forecast.properties.periods[11].windDirection);
+            SevenDayForecastWindSpeed12 = forecast.properties.periods[11].windSpeed;
+            SevenDayForecastDescription12 = forecast.properties.periods[11].shortForecast;
+
+            SevenDayForecastName13 = forecast.properties.periods[12].name;
+            SevenDayForecastTemp13 = forecast.properties.periods[12].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[12].shortForecast);
+            SevenDayForecastWeatherIcon13a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[12].isDaytime,
+                forecast.properties.periods[12].temperature, forecast.properties.periods[12].windSpeed, "null");
+            SevenDayForecastWeatherIcon13b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[12].isDaytime, forecast.properties.periods[12].temperature,
+                    forecast.properties.periods[12].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance13 = forecast.properties.periods[12].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance13)) {
+                SevenDayForecastRainChance13 += "%";
+            } else {
+                SevenDayForecastRainChance13 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon13 = WeatherHelpers.GetWindRotation(forecast.properties.periods[12].windDirection);
+            SevenDayForecastWindSpeed13 = forecast.properties.periods[12].windSpeed;
+            SevenDayForecastDescription13 = forecast.properties.periods[12].shortForecast;
+
+
+            SevenDayForecastName14 = forecast.properties.periods[13].name;
+            SevenDayForecastTemp14 = forecast.properties.periods[13].temperature + "°";
+
+            weatherIcons = RegexWeatherForecast(forecast.properties.periods[13].shortForecast);
+            SevenDayForecastWeatherIcon14a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[13].isDaytime,
+                forecast.properties.periods[13].temperature, forecast.properties.periods[13].windSpeed, "null");
+            SevenDayForecastWeatherIcon14b = weatherIcons.Length > 1
+                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[13].isDaytime, forecast.properties.periods[13].temperature,
+                    forecast.properties.periods[13].windSpeed, weatherIcons[0])
+                : "null";
+            SevenDayForecastRainChance14 = forecast.properties.periods[13].probabilityOfPrecipitation.value?.ToString();
+
+            if (!string.IsNullOrEmpty(SevenDayForecastRainChance14)) {
+                SevenDayForecastRainChance14 += "%";
+            } else {
+                SevenDayForecastRainChance14 = "None";
+            }
+
+            SevenDayForecastWindDirectionIcon14 = WeatherHelpers.GetWindRotation(forecast.properties.periods[13].windDirection);
+            SevenDayForecastWindSpeed14 = forecast.properties.periods[13].windSpeed;
+            SevenDayForecastDescription14 = forecast.properties.periods[13].shortForecast;
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+        }
+
+        try {
+            using WebClient client2 = new();
+            Uri weatherForecastHourlyURL =
+                new(
+                    $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
+            client2.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
+            string weatherForecastHourly = client2.DownloadString(weatherForecastHourlyURL);
+            JsonWeather forecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
+
+            ForecastHourlyList.Clear();
+
+            if (forecastHourly != null) {
+                TempMin = -200;
+                TempMax = 200;
+
+                int max = -200;
+                int min = 200;
+
+                foreach (JsonWeather.Periods period in forecastHourly.properties.periods) {
+                    ForecastHourlyList.Add(new WeatherHourlyBlock {
+                        Number = period.number,
+                        Time = period.startTime,
+                        WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, "null"),
+                        Temp = period.temperature,
+                        RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),
+                        RainChance = Convert.ToInt32(period.probabilityOfPrecipitation.value.ToString()),
+                        WindSpeed = period.windSpeed,
+                        WindDirectionIcon = WeatherHelpers.GetWindRotation(period.windDirection),
+                        Humidity = period.relativeHumidity.value,
+                        ShortForecast = period.shortForecast
+                    });
+
+                    if (period.temperature < min) {
+                        min = period.temperature;
+                    }
+
+                    if (period.temperature > max) {
+                        max = period.temperature;
+                    }
+                }
+
+                TempMin = min - 5;
+                TempMax = max + 5;
+            }
+        } catch (WebException) {
+            //normal
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherHourlyVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 
     private static string[] RegexWeatherForecast(string input) {
         return input.Split(new[] { " then " }, StringSplitOptions.None);
-    }
-
-    private void ButtonCommandLogic(object param) {
-        switch (param) {
-        case "switch":
-            isHourly = !isHourly;
-            UpdateWeatherForecast();
-            break;
-        }
     }
 
     #region Fields
@@ -1493,27 +1351,27 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string ForcastSevenDayVisibility {
-        get => _forcastSevenDayVisibility;
-        set {
-            _forcastSevenDayVisibility = value;
-            RaisePropertyChangedEvent("ForcastSevenDayVisibility");
-        }
-    }
-
-    public string ForcastHourlyVisibility {
-        get => _forcastHourlyVisibility;
-        set {
-            _forcastHourlyVisibility = value;
-            RaisePropertyChangedEvent("ForcastHourlyVisibility");
-        }
-    }
-
     public ObservableCollection<WeatherHourlyBlock> ForecastHourlyList {
         get => _forecastHourlyList;
         set {
             _forecastHourlyList = value;
             RaisePropertyChangedEvent("ForecastHourlyList");
+        }
+    }
+
+    public int TempMin {
+        get => _tempMin;
+        set {
+            _tempMin = value;
+            RaisePropertyChangedEvent("TempMin");
+        }
+    }
+
+    public int TempMax {
+        get => _tempMax;
+        set {
+            _tempMax = value;
+            RaisePropertyChangedEvent("TempMax");
         }
     }
 
