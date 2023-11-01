@@ -29,7 +29,7 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1,
         _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6,
         _sevenDayForecastRainChance7, _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11,
-        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14;
+        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14, _forecastHourlyVisibility;
 
     private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
         _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
@@ -44,6 +44,8 @@ public class WeatherVM : BaseViewModel {
         if (ReferenceValues.EnableWeather) {
             UpdateWeather();
         }
+
+        ForecastHourlyVisibility = "HIDDEN";
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -411,18 +413,26 @@ public class WeatherVM : BaseViewModel {
                 int min = 200;
 
                 foreach (JsonWeather.Periods period in forecastHourly.properties.periods) {
-                    ForecastHourlyList.Add(new WeatherHourlyBlock {
-                        Number = period.number,
-                        Time = period.startTime,
-                        WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, "null"),
-                        Temp = period.temperature,
-                        RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),
-                        RainChance = Convert.ToInt32(period.probabilityOfPrecipitation.value.ToString()),
-                        WindSpeed = period.windSpeed,
-                        WindDirectionIcon = WeatherHelpers.GetWindRotation(period.windDirection),
-                        Humidity = period.relativeHumidity.value,
-                        ShortForecast = period.shortForecast
-                    });
+                    if (period.startTime > DateTime.Now) {
+                        ForecastHourlyList.Add(new WeatherHourlyBlock {
+                            Number = period.number,
+                            Time = period.startTime,
+                            WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, "null"),
+                            Temp = period.temperature,
+                            RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),
+                            RainChance = Convert.ToInt32(period.probabilityOfPrecipitation.value.ToString()),
+                            WindSpeed = period.windSpeed,
+                            WindDirectionIcon = WeatherHelpers.GetWindRotation(period.windDirection),
+                            Humidity = period.relativeHumidity.value,
+                            ShortForecast = period.shortForecast
+                        });
+                    }
+
+                    if (ForecastHourlyList.Count == 0) {
+                        ForecastHourlyVisibility = "HIDDEN";
+                    } else {
+                        ForecastHourlyVisibility = "VISIBLE";
+                    }
 
                     if (period.temperature < min) {
                         min = period.temperature;
@@ -1372,6 +1382,14 @@ public class WeatherVM : BaseViewModel {
         set {
             _tempMax = value;
             RaisePropertyChangedEvent("TempMax");
+        }
+    }
+
+    public string ForecastHourlyVisibility {
+        get => _forecastHourlyVisibility;
+        set {
+            _forecastHourlyVisibility = value;
+            RaisePropertyChangedEvent("ForecastHourlyVisibility");
         }
     }
 

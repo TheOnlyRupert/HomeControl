@@ -1,647 +1,509 @@
 ﻿<Page x:Class="HomeControl.Source.Modules.Behavior.Behavior" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:gif="http://wpfanimatedgif.codeplex.com"
       mc:Ignorable="d">
-    <Border BorderBrush="DarkSlateGray" BorderThickness="1" Margin="4 0 4 4">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid HorizontalAlignment="Center" Grid.Row="0" Grid.RowSpan="2" Grid.Column="5" Margin="2 0 4 0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding User1Name}" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding User2Name}" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding User3Name}" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
-            <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding User4Name}" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
-            <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding User5Name}" HorizontalAlignment="Center" FontSize="14" Foreground="White"/>
+            <TextBlock Grid.Row="0" Text="Remaining Day" HorizontalAlignment="Center" Foreground="White"/>
+            <TextBlock Grid.Row="1" Text="{Binding RemainingDay}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="2" Text="Remaining Week" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
+            <TextBlock Grid.Row="3" Text="{Binding RemainingWeek}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="4" Text="Remaining Month" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
+            <TextBlock Grid.Row="5" Text="{Binding RemainingMonth}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="6" Text="Remaining Quarter" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
+            <TextBlock Grid.Row="7" Text="{Binding RemainingQuarter}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="8" Text="Remaining Year" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
+            <TextBlock Grid.Row="9" Text="{Binding RemainingYear}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
 
-            <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="5" HorizontalAlignment="Center">
+            <Image Grid.Row="10" VerticalAlignment="Center" Height="64" HorizontalAlignment="Center" Visibility="{Binding TrashDayVisibility}"
+                   gif:ImageBehavior.AnimatedSource="../../../Resources/Images/icons/trash.gif"/>
+        </Grid>
+
+        <Button Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user1" Margin="4 0 2 0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Remaining Day" HorizontalAlignment="Center" Foreground="White"/>
-                <TextBlock Grid.Row="1" Text="{Binding RemainingDay}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
-                <TextBlock Grid.Row="2" Text="Remaining Week" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
-                <TextBlock Grid.Row="3" Text="{Binding RemainingWeek}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
-                <TextBlock Grid.Row="4" Text="Remaining Month" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
-                <TextBlock Grid.Row="5" Text="{Binding RemainingMonth}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
-                <TextBlock Grid.Row="6" Text="Remaining Quarter" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
-                <TextBlock Grid.Row="7" Text="{Binding RemainingQuarter}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
-                <TextBlock Grid.Row="8" Text="Remaining Year" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
-                <TextBlock Grid.Row="9" Text="{Binding RemainingYear}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+                <Image Grid.Row="0" Source="{Binding ImageUser1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                <Image Grid.Row="10" VerticalAlignment="Center" Height="64" HorizontalAlignment="Center" Visibility="{Binding TrashDayVisibility}"
-                       gif:ImageBehavior.AnimatedSource="../../../Resources/Images/icons/trash.gif"/>
+                <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser1}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
+                             BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User1BehaviorVisibility}"/>
+
+                <Grid Grid.Row="2" Visibility="{Binding User1BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding User1Star1}" Height="32"/>
+                    <Image Grid.Column="1" Source="{Binding User1Star2}" Height="32"/>
+                    <Image Grid.Column="2" Source="{Binding User1Star3}" Height="32"/>
+                    <Image Grid.Column="3" Source="{Binding User1Star4}" Height="32"/>
+                    <Image Grid.Column="4" Source="{Binding User1Star5}" Height="32"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Visibility="{Binding User1BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding User1Strike1}"/>
+                    <Image Grid.Column="1" Source="{Binding User1Strike2}"/>
+                    <Image Grid.Column="2" Source="{Binding User1Strike3}"/>
+                </Grid>
+
+                <TextBlock Grid.Row="4" Text="{Binding User1CashAvailable}" FontSize="24" Foreground="{Binding User1CashAvailableColor}" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="5" Text="{Binding User1CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
+
+                <Grid Grid.Row="6" Margin="4" Visibility="{Binding User1DayVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User1TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User1TasksCompletedDayProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User1TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="7" Margin="4" Visibility="{Binding User1WeekVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User1TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User1TasksCompletedWeekProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User1TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="8" Margin="4" Visibility="{Binding User1MonthVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User1TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User1TasksCompletedMonthProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User1TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="9" Margin="4" Visibility="{Binding User1QuarterVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User1TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User1TasksCompletedQuarterProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User1TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
             </Grid>
+        </Button>
 
-            <Button Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user1">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="8"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="24"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+        <Button Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user2" Margin="2 0 2 0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Source="{Binding ImageUser1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image Grid.Row="0" Source="{Binding ImageUser2}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                    <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser1}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User1BehaviorVisibility}"/>
+                <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser2}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
+                             BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User2BehaviorVisibility}"/>
 
-                    <Grid Grid.Row="2" Visibility="{Binding User1BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <Grid Grid.Row="2" Visibility="{Binding User2BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="{Binding User1Star1}" Height="32"/>
-                        <Image Grid.Column="1" Source="{Binding User1Star2}" Height="32"/>
-                        <Image Grid.Column="2" Source="{Binding User1Star3}" Height="32"/>
-                        <Image Grid.Column="3" Source="{Binding User1Star4}" Height="32"/>
-                        <Image Grid.Column="4" Source="{Binding User1Star5}" Height="32"/>
-                    </Grid>
-
-                    <Grid Grid.Row="3" Visibility="{Binding User1BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User1Strike1}"/>
-                        <Image Grid.Column="1" Source="{Binding User1Strike2}"/>
-                        <Image Grid.Column="2" Source="{Binding User1Strike3}"/>
-                    </Grid>
-
-                    <TextBlock Grid.Row="4" Text="{Binding User1CashAvailable}" FontSize="24" Foreground="{Binding User1CashAvailableColor}" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="5" Text="{Binding User1CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
-
-                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User1DayVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User1TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User1TasksCompletedDayProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User1TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-
-                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User1WeekVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" FontSize="14"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User1TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User1TasksCompletedWeekProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User1TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User1MonthVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User1TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User1TasksCompletedMonthProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User1TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User1QuarterVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User1TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User1TasksCompletedQuarterProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User1TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
+                    <Image Grid.Column="0" Source="{Binding User2Star1}" Height="32"/>
+                    <Image Grid.Column="1" Source="{Binding User2Star2}" Height="32"/>
+                    <Image Grid.Column="2" Source="{Binding User2Star3}" Height="32"/>
+                    <Image Grid.Column="3" Source="{Binding User2Star4}" Height="32"/>
+                    <Image Grid.Column="4" Source="{Binding User2Star5}" Height="32"/>
                 </Grid>
-            </Button>
 
-            <Button Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user2">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="8"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="24"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <Grid Grid.Row="3" Visibility="{Binding User2BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <Image Grid.Row="0" Source="{Binding ImageUser2}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser2}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User2BehaviorVisibility}"/>
-
-                    <Grid Grid.Row="2" Visibility="{Binding User2BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User2Star1}" Height="32"/>
-                        <Image Grid.Column="1" Source="{Binding User2Star2}" Height="32"/>
-                        <Image Grid.Column="2" Source="{Binding User2Star3}" Height="32"/>
-                        <Image Grid.Column="3" Source="{Binding User2Star4}" Height="32"/>
-                        <Image Grid.Column="4" Source="{Binding User2Star5}" Height="32"/>
-                    </Grid>
-
-                    <Grid Grid.Row="3" Visibility="{Binding User2BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User2Strike1}"/>
-                        <Image Grid.Column="1" Source="{Binding User2Strike2}"/>
-                        <Image Grid.Column="2" Source="{Binding User2Strike3}"/>
-                    </Grid>
-
-                    <TextBlock Grid.Row="4" Text="{Binding User2CashAvailable}" FontSize="24" Foreground="{Binding User2CashAvailableColor}" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="5" Text="{Binding User2CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
-
-                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User2DayVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User2TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User2TasksCompletedDayProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User2TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-
-                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User2WeekVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" FontSize="14"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User2TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User2TasksCompletedWeekProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User2TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User2MonthVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User2TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User2TasksCompletedMonthProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User2TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    </Grid>
-
-                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User2QuarterVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User2TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User2TasksCompletedQuarterProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User2TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
+                    <Image Grid.Column="0" Source="{Binding User2Strike1}"/>
+                    <Image Grid.Column="1" Source="{Binding User2Strike2}"/>
+                    <Image Grid.Column="2" Source="{Binding User2Strike3}"/>
                 </Grid>
-            </Button>
 
-            <Button Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user3">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="8"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="24"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <TextBlock Grid.Row="4" Text="{Binding User2CashAvailable}" FontSize="24" Foreground="{Binding User2CashAvailableColor}" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="5" Text="{Binding User2CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
 
-                    <Image Grid.Row="0" Source="{Binding ImageUser3}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser3}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User3BehaviorVisibility}"/>
-
-                    <Grid Grid.Row="2" Visibility="{Binding User3BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User3Star1}" Height="32"/>
-                        <Image Grid.Column="1" Source="{Binding User3Star2}" Height="32"/>
-                        <Image Grid.Column="2" Source="{Binding User3Star3}" Height="32"/>
-                        <Image Grid.Column="3" Source="{Binding User3Star4}" Height="32"/>
-                        <Image Grid.Column="4" Source="{Binding User3Star5}" Height="32"/>
-                    </Grid>
-
-                    <Grid Grid.Row="3" Visibility="{Binding User3BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User3Strike1}"/>
-                        <Image Grid.Column="1" Source="{Binding User3Strike2}"/>
-                        <Image Grid.Column="2" Source="{Binding User3Strike3}"/>
-                    </Grid>
-
-                    <TextBlock Grid.Row="4" Text="{Binding User3CashAvailable}" FontSize="24" Foreground="{Binding User3CashAvailableColor}" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="5" Text="{Binding User3CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
-
-                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User3DayVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User3TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User3TasksCompletedDayProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User3TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-
-                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User3WeekVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" FontSize="14"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User3TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User3TasksCompletedWeekProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User3TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User3MonthVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User3TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User3TasksCompletedMonthProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User3TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    </Grid>
-
-                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User3QuarterVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User3TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User3TasksCompletedQuarterProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User3TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
+                <Grid Grid.Row="6" Margin="4" Visibility="{Binding User2DayVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User2TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User2TasksCompletedDayProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User2TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
-            </Button>
 
-            <Button Grid.Row="2" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user4">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="8"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="24"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Image Grid.Row="0" Source="{Binding ImageUser4}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser4}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User4BehaviorVisibility}"/>
-
-                    <Grid Grid.Row="2" Visibility="{Binding User4BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User4Star1}" Height="32"/>
-                        <Image Grid.Column="1" Source="{Binding User4Star2}" Height="32"/>
-                        <Image Grid.Column="2" Source="{Binding User4Star3}" Height="32"/>
-                        <Image Grid.Column="3" Source="{Binding User4Star4}" Height="32"/>
-                        <Image Grid.Column="4" Source="{Binding User4Star5}" Height="32"/>
-                    </Grid>
-
-                    <Grid Grid.Row="3" Visibility="{Binding User4BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User4Strike1}"/>
-                        <Image Grid.Column="1" Source="{Binding User4Strike2}"/>
-                        <Image Grid.Column="2" Source="{Binding User4Strike3}"/>
-                    </Grid>
-
-                    <TextBlock Grid.Row="4" Text="{Binding User4CashAvailable}" FontSize="24" Foreground="{Binding User4CashAvailableColor}" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="5" Text="{Binding User4CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
-
-                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User4DayVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User4TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User4TasksCompletedDayProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User4TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-
-                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User4WeekVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" FontSize="14"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User4TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User4TasksCompletedWeekProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User4TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User4MonthVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User4TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User4TasksCompletedMonthProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User4TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    </Grid>
-
-                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User4QuarterVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User4TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedQuarterProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User4TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
+                <Grid Grid.Row="7" Margin="4" Visibility="{Binding User2WeekVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User2TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User2TasksCompletedWeekProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User2TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
-            </Button>
 
-            <Button Grid.Row="2" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user5">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
-                                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="8"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="24"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Image Grid.Row="0" Source="{Binding ImageUser5}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser5}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
-                                 BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User5BehaviorVisibility}"/>
-
-                    <Grid Grid.Row="2" Visibility="{Binding User5BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User5Star1}" Height="32"/>
-                        <Image Grid.Column="1" Source="{Binding User5Star2}" Height="32"/>
-                        <Image Grid.Column="2" Source="{Binding User5Star3}" Height="32"/>
-                        <Image Grid.Column="3" Source="{Binding User5Star4}" Height="32"/>
-                        <Image Grid.Column="4" Source="{Binding User5Star5}" Height="32"/>
-                    </Grid>
-
-                    <Grid Grid.Row="3" Visibility="{Binding User5BehaviorVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="{Binding User5Strike1}"/>
-                        <Image Grid.Column="1" Source="{Binding User5Strike2}"/>
-                        <Image Grid.Column="2" Source="{Binding User5Strike3}"/>
-                    </Grid>
-
-                    <TextBlock Grid.Row="4" Text="{Binding User5CashAvailable}" FontSize="24" Foreground="{Binding User5CashAvailableColor}" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Row="5" Text="{Binding User5CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
-
-                    <Grid Grid.Row="6" Margin="4" Visibility="{Binding User5DayVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentDayText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User5TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedDayProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User5TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-
-                    <Grid Grid.Row="7" Margin="4" Visibility="{Binding User5WeekVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentWeekText}" HorizontalAlignment="Center" FontSize="14"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User5TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedWeekProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User5TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
-
-                    <Grid Grid.Row="8" Margin="4" Visibility="{Binding User5MonthVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentMonthText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User5TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedMonthProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User5TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                    </Grid>
-
-                    <Grid Grid.Row="9" Margin="4" Visibility="{Binding User5QuarterVisibility}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="{Binding CurrentQuarterText}" FontSize="14" HorizontalAlignment="Center"/>
-                        <ProgressBar Grid.Row="1" Value="{Binding User5TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedQuarterProgressColor}"
-                                     Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
-                        <TextBlock Grid.Row="1" Text="{Binding User5TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Grid>
+                <Grid Grid.Row="8" Margin="4" Visibility="{Binding User2MonthVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User2TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User2TasksCompletedMonthProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User2TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
-            </Button>
-        </Grid>
-    </Border>
+
+                <Grid Grid.Row="9" Margin="4" Visibility="{Binding User2QuarterVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User2TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User2TasksCompletedQuarterProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User2TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Button>
+
+        <Button Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user3" Margin="2 0 2 0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" Source="{Binding ImageUser3}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser3}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
+                             BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User3BehaviorVisibility}"/>
+
+                <Grid Grid.Row="2" Visibility="{Binding User3BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding User3Star1}" Height="32"/>
+                    <Image Grid.Column="1" Source="{Binding User3Star2}" Height="32"/>
+                    <Image Grid.Column="2" Source="{Binding User3Star3}" Height="32"/>
+                    <Image Grid.Column="3" Source="{Binding User3Star4}" Height="32"/>
+                    <Image Grid.Column="4" Source="{Binding User3Star5}" Height="32"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Visibility="{Binding User3BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding User3Strike1}"/>
+                    <Image Grid.Column="1" Source="{Binding User3Strike2}"/>
+                    <Image Grid.Column="2" Source="{Binding User3Strike3}"/>
+                </Grid>
+
+                <TextBlock Grid.Row="4" Text="{Binding User3CashAvailable}" FontSize="24" Foreground="{Binding User3CashAvailableColor}" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="5" Text="{Binding User3CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
+
+                <Grid Grid.Row="6" Margin="4" Visibility="{Binding User3DayVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User3TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User3TasksCompletedDayProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User3TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="7" Margin="4" Visibility="{Binding User3WeekVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User3TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User3TasksCompletedWeekProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User3TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="8" Margin="4" Visibility="{Binding User3MonthVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User3TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User3TasksCompletedMonthProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User3TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="9" Margin="4" Visibility="{Binding User3QuarterVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User3TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User3TasksCompletedQuarterProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User3TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Button>
+
+        <Button Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user4" Margin="2 0 2 0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" Source="{Binding ImageUser4}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser4}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
+                             BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User4BehaviorVisibility}"/>
+
+                <Grid Grid.Row="2" Visibility="{Binding User4BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding User4Star1}" Height="32"/>
+                    <Image Grid.Column="1" Source="{Binding User4Star2}" Height="32"/>
+                    <Image Grid.Column="2" Source="{Binding User4Star3}" Height="32"/>
+                    <Image Grid.Column="3" Source="{Binding User4Star4}" Height="32"/>
+                    <Image Grid.Column="4" Source="{Binding User4Star5}" Height="32"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Visibility="{Binding User4BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding User4Strike1}"/>
+                    <Image Grid.Column="1" Source="{Binding User4Strike2}"/>
+                    <Image Grid.Column="2" Source="{Binding User4Strike3}"/>
+                </Grid>
+
+                <TextBlock Grid.Row="4" Text="{Binding User4CashAvailable}" FontSize="24" Foreground="{Binding User4CashAvailableColor}" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="5" Text="{Binding User4CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
+
+                <Grid Grid.Row="6" Margin="4" Visibility="{Binding User4DayVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User4TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User4TasksCompletedDayProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User4TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="7" Margin="4" Visibility="{Binding User4WeekVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User4TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User4TasksCompletedWeekProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User4TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="8" Margin="4" Visibility="{Binding User4MonthVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User4TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User4TasksCompletedMonthProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User4TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="9" Margin="4" Visibility="{Binding User4QuarterVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User4TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedQuarterProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User4TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Button>
+
+        <Button Grid.Row="1" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user5" Margin="2 0 2 0">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" Source="{Binding ImageUser5}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <ProgressBar Grid.Row="1" HorizontalAlignment="Stretch" Value="{Binding ProgressBarUser5}" IsIndeterminate="False" Foreground="CornflowerBlue" Maximum="5" Background="Transparent"
+                             BorderThickness="1" BorderBrush="DarkSlateGray" HorizontalContentAlignment="Stretch" Visibility="{Binding User5BehaviorVisibility}"/>
+
+                <Grid Grid.Row="2" Visibility="{Binding User5BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding User5Star1}" Height="32"/>
+                    <Image Grid.Column="1" Source="{Binding User5Star2}" Height="32"/>
+                    <Image Grid.Column="2" Source="{Binding User5Star3}" Height="32"/>
+                    <Image Grid.Column="3" Source="{Binding User5Star4}" Height="32"/>
+                    <Image Grid.Column="4" Source="{Binding User5Star5}" Height="32"/>
+                </Grid>
+
+                <Grid Grid.Row="3" Visibility="{Binding User5BehaviorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding User5Strike1}"/>
+                    <Image Grid.Column="1" Source="{Binding User5Strike2}"/>
+                    <Image Grid.Column="2" Source="{Binding User5Strike3}"/>
+                </Grid>
+
+                <TextBlock Grid.Row="4" Text="{Binding User5CashAvailable}" FontSize="24" Foreground="{Binding User5CashAvailableColor}" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Row="5" Text="{Binding User5CashReleased}" FontSize="14" FontStyle="Italic" Foreground="Green" HorizontalAlignment="Center"/>
+
+                <Grid Grid.Row="6" Margin="4" Visibility="{Binding User5DayVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User5TasksCompletedDayProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedDayProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User5TasksCompletedDayProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="7" Margin="4" Visibility="{Binding User5WeekVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User5TasksCompletedWeekProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedWeekProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User5TasksCompletedWeekProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="8" Margin="4" Visibility="{Binding User5MonthVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User5TasksCompletedMonthProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedMonthProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User5TasksCompletedMonthProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Row="9" Margin="4" Visibility="{Binding User5QuarterVisibility}">
+                    <ProgressBar Grid.Row="0" Value="{Binding User5TasksCompletedQuarterProgressValue}" IsIndeterminate="False" Foreground="{Binding User5TasksCompletedQuarterProgressColor}"
+                                 Background="Transparent" BorderBrush="DarkSlateGray" BorderThickness="1"/>
+                    <TextBlock Grid.Row="0" Text="{Binding User5TasksCompletedQuarterProgressText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </Button>
+    </Grid>
 </Page>

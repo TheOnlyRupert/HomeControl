@@ -58,6 +58,20 @@ public class HvacVM : BaseViewModel {
                 CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
                 CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime,
                     forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "null");
+
+                if (ReferenceValues.ExteriorTemp != -99) {
+                    TempOutside = forecastHourly.properties.periods[0].temperature + "°";
+                    TempOutsideColor = "Yellow";
+                } else {
+                    if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
+                        double f = ReferenceValues.ExteriorTemp * 1.8 + 32;
+                        TempOutside = (int)f + "°";
+                    } else {
+                        TempOutside = ReferenceValues.ExteriorTemp + "°";
+                    }
+
+                    TempOutsideColor = "White";
+                }
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -92,8 +106,6 @@ public class HvacVM : BaseViewModel {
             MainStatusColor = "Red";
             TempAdjusted = "N/A";
             TempAdjustedColor = "White";
-            TempOutside = "N/A";
-            TempOutsideColor = "White";
             TempInside = "N/A";
             TempInsideColor = "White";
             ProgramStatus = "Offline";
@@ -117,20 +129,6 @@ public class HvacVM : BaseViewModel {
         }
 
         TempAdjustedColor = "White";
-
-        if (ReferenceValues.ExteriorTemp == -99) {
-            TempOutside = "??";
-            TempOutsideColor = "Red";
-        } else {
-            if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
-                double f = ReferenceValues.ExteriorTemp * 1.8 + 32;
-                TempOutside = (int)f + "°";
-            } else {
-                TempOutside = ReferenceValues.ExteriorTemp + "°";
-            }
-
-            TempOutsideColor = "White";
-        }
 
         if (ReferenceValues.InteriorTemp == -99) {
             TempInside = "??";
@@ -221,7 +219,10 @@ public class HvacVM : BaseViewModel {
     private void ButtonLogic(object param) {
         switch (param) {
         case "hvac":
-            if (ReferenceValues.IsHvacComEstablished) {
+            if (ReferenceValues.LockUI) {
+                ReferenceValues.SoundToPlay = "locked";
+                SoundDispatcher.PlaySound();
+            } else if (ReferenceValues.IsHvacComEstablished) {
                 bool isOverride = ReferenceValues.JsonHvacMaster.IsOverride;
                 bool isFanAuto = ReferenceValues.JsonHvacMaster.IsFanAuto;
                 bool isProgramRunning = ReferenceValues.JsonHvacMaster.IsProgramRunning;

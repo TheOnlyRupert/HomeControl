@@ -26,10 +26,10 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{Binding Timer1Text}" FontSize="18" Margin="0 2" Foreground="{Binding Timer1Color}"/>
-                <TextBlock Grid.Row="1" Text="{Binding Timer2Text}" FontSize="18" Margin="0 1" Foreground="{Binding Timer2Color}"/>
-                <TextBlock Grid.Row="2" Text="{Binding Timer3Text}" FontSize="18" Margin="0 1" Foreground="{Binding Timer3Color}"/>
-                <TextBlock Grid.Row="3" Text="{Binding Timer4Text}" FontSize="18" Margin="0 2" Foreground="{Binding Timer4Color}"/>
+                <TextBlock Grid.Row="0" Text="{Binding Timer1Text}" FontSize="18" Margin="0 2" Foreground="{Binding Timer1Color}" TextAlignment="Center"/>
+                <TextBlock Grid.Row="1" Text="{Binding Timer2Text}" FontSize="18" Margin="0 1" Foreground="{Binding Timer2Color}" TextAlignment="Center"/>
+                <TextBlock Grid.Row="2" Text="{Binding Timer3Text}" FontSize="18" Margin="0 1" Foreground="{Binding Timer3Color}" TextAlignment="Center"/>
+                <TextBlock Grid.Row="3" Text="{Binding Timer4Text}" FontSize="18" Margin="0 2" Foreground="{Binding Timer4Color}" TextAlignment="Center"/>
             </Grid>
         </Button>
     </Border>

@@ -14,25 +14,25 @@ namespace HomeControl.Source.ViewModel.Behavior;
 public class BehaviorVM : BaseViewModel {
     private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5;
 
-    private string _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1Star1, _user1Star2, _user1Star3, _user1Star4, _user1Star5, _user2Star1, _user2Star2, _user2Star3, _user2Star4,
-        _user2Star5, _user3Star1, _user3Star2, _user3Star3, _user3Star4, _user3Star5, _user4Star1, _user4Star2, _user4Star3, _user4Star4, _user4Star5, _user5Star1, _user5Star2, _user5Star3,
-        _user5Star4, _user5Star5, _user1Strike1, _user1Strike2, _user1Strike3, _user2Strike1, _user2Strike2, _user2Strike3, _user3Strike1, _user3Strike2, _user3Strike3, _user4Strike1, _user4Strike2,
-        _user4Strike3, _user5Strike1, _user5Strike2, _user5Strike3, _user1TasksCompletedDayProgressColor, _user1TasksCompletedWeekProgressColor, _user1TasksCompletedMonthProgressColor,
-        _user1TasksCompletedQuarterProgressColor, _user2TasksCompletedDayProgressColor, _user2TasksCompletedWeekProgressColor, _user2TasksCompletedMonthProgressColor,
-        _user2TasksCompletedQuarterProgressColor, _user3TasksCompletedDayProgressColor, _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor,
-        _user3TasksCompletedQuarterProgressColor, _user4TasksCompletedDayProgressColor, _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor,
-        _user4TasksCompletedQuarterProgressColor, _user5TasksCompletedDayProgressColor, _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor,
-        _user5TasksCompletedQuarterProgressColor, _currentMonthText, _currentWeekText, _currentDayText, _user1CashAvailableColor, _user2CashAvailableColor, _user3CashAvailableColor,
-        _user4CashAvailableColor, _user5CashAvailableColor, _currentQuarterText, _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText,
-        _user1TasksCompletedQuarterProgressText, _user1CashAvailable, _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText,
-        _user2TasksCompletedQuarterProgressText, _user2CashAvailable, _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText,
-        _user3TasksCompletedQuarterProgressText, _user3CashAvailable, _user4TasksCompletedWeekProgressText, _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText,
-        _user4TasksCompletedQuarterProgressText, _user4CashAvailable, _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText,
-        _user5TasksCompletedQuarterProgressText, _user5CashAvailable, _remainingDay, _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _user1CashReleased, _user2CashReleased,
-        _user3CashReleased, _user4CashReleased, _user5CashReleased, _user1DayVisibility, _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility, _user1WeekVisibility,
-        _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility, _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility,
-        _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility, _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility,
-        _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility, _user5BehaviorVisibility, _trashDayVisibility;
+    private string _user1Star1, _user1Star2, _user1Star3, _user1Star4, _user1Star5, _user2Star1, _user2Star2, _user2Star3, _user2Star4, _user2Star5, _user3Star1, _user3Star2, _user3Star3, _user3Star4,
+        _user3Star5, _user4Star1, _user4Star2, _user4Star3, _user4Star4, _user4Star5, _user5Star1, _user5Star2, _user5Star3, _user5Star4, _user5Star5, _user1Strike1, _user1Strike2, _user1Strike3,
+        _user2Strike1, _user2Strike2, _user2Strike3, _user3Strike1, _user3Strike2, _user3Strike3, _user4Strike1, _user4Strike2, _user4Strike3, _user5Strike1, _user5Strike2, _user5Strike3,
+        _user1TasksCompletedDayProgressColor, _user1TasksCompletedWeekProgressColor, _user1TasksCompletedMonthProgressColor, _user1TasksCompletedQuarterProgressColor,
+        _user2TasksCompletedDayProgressColor, _user2TasksCompletedWeekProgressColor, _user2TasksCompletedMonthProgressColor, _user2TasksCompletedQuarterProgressColor,
+        _user3TasksCompletedDayProgressColor, _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor, _user3TasksCompletedQuarterProgressColor,
+        _user4TasksCompletedDayProgressColor, _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor, _user4TasksCompletedQuarterProgressColor,
+        _user5TasksCompletedDayProgressColor, _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor, _user5TasksCompletedQuarterProgressColor, _currentMonthText,
+        _currentWeekText, _currentDayText, _user1CashAvailableColor, _user2CashAvailableColor, _user3CashAvailableColor, _user4CashAvailableColor, _user5CashAvailableColor, _currentQuarterText,
+        _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText, _user1TasksCompletedQuarterProgressText, _user1CashAvailable,
+        _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText, _user2TasksCompletedQuarterProgressText, _user2CashAvailable,
+        _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText, _user3CashAvailable,
+        _user4TasksCompletedWeekProgressText, _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText, _user4CashAvailable,
+        _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText, _user5TasksCompletedQuarterProgressText, _user5CashAvailable, _remainingDay,
+        _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _user1CashReleased, _user2CashReleased, _user3CashReleased, _user4CashReleased, _user5CashReleased, _user1DayVisibility,
+        _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility, _user1WeekVisibility, _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility,
+        _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility, _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility,
+        _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility, _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility,
+        _user5BehaviorVisibility, _trashDayVisibility;
 
     private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
@@ -83,12 +83,6 @@ public class BehaviorVM : BaseViewModel {
         ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3 ??= new ObservableCollection<Task>();
         ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4 ??= new ObservableCollection<Task>();
         ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5 ??= new ObservableCollection<Task>();
-
-        User1Name = ReferenceValues.JsonSettingsMaster.User1Name;
-        User2Name = ReferenceValues.JsonSettingsMaster.User2Name;
-        User3Name = ReferenceValues.JsonSettingsMaster.User3Name;
-        User4Name = ReferenceValues.JsonSettingsMaster.User4Name;
-        User5Name = ReferenceValues.JsonSettingsMaster.User5Name;
 
         try {
             Uri uri = new(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
@@ -2300,46 +2294,6 @@ public class BehaviorVM : BaseViewModel {
     }
 
     #region Fields
-
-    public string User1Name {
-        get => _user1Name;
-        set {
-            _user1Name = value;
-            RaisePropertyChangedEvent("User1Name");
-        }
-    }
-
-    public string User2Name {
-        get => _user2Name;
-        set {
-            _user2Name = value;
-            RaisePropertyChangedEvent("User2Name");
-        }
-    }
-
-    public string User3Name {
-        get => _user3Name;
-        set {
-            _user3Name = value;
-            RaisePropertyChangedEvent("User3Name");
-        }
-    }
-
-    public string User4Name {
-        get => _user4Name;
-        set {
-            _user4Name = value;
-            RaisePropertyChangedEvent("User4Name");
-        }
-    }
-
-    public string User5Name {
-        get => _user5Name;
-        set {
-            _user5Name = value;
-            RaisePropertyChangedEvent("User5Name");
-        }
-    }
 
     public string User1Star1 {
         get => _user1Star1;

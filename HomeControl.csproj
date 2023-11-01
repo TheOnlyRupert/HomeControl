@@ -270,7 +270,7 @@
         <Resource Include="Resources\Images\icons\wifi.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="version.json" />
+        <Content Include="version.json"/>
         <Resource Include="Resources\Images\games\tamagotchi\egg1.png"/>
         <Resource Include="Resources\Images\games\tamagotchi\egg2.png"/>
         <Resource Include="Resources\Images\hvac\cooling.gif"/>
