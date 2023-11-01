@@ -76,7 +76,7 @@ public class WeatherVM : BaseViewModel {
             string weatherForecast = await client.DownloadStringTaskAsync(weatherForecastURL);
             forecast = JsonSerializer.Deserialize<JsonWeather>(weatherForecast, options);
 
-            SevenDayForecastName1 = forecast.properties.periods[0].name;
+            SevenDayForecastName1 = forecast.properties.periods[0].name + "    " + forecast.properties.periods[0].startTime.ToString("MM/dd");
             SevenDayForecastTemp1 = forecast.properties.periods[0].temperature + "°";
 
             string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[0].shortForecast);
@@ -98,7 +98,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed1 = forecast.properties.periods[0].windSpeed;
             SevenDayForecastDescription1 = forecast.properties.periods[0].shortForecast;
 
-            SevenDayForecastName2 = forecast.properties.periods[1].name;
+            SevenDayForecastName2 = forecast.properties.periods[1].name + "    " + forecast.properties.periods[1].startTime.ToString("MM/dd");
             SevenDayForecastTemp2 = forecast.properties.periods[1].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[1].shortForecast);
@@ -120,7 +120,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed2 = forecast.properties.periods[1].windSpeed;
             SevenDayForecastDescription2 = forecast.properties.periods[1].shortForecast;
 
-            SevenDayForecastName3 = forecast.properties.periods[2].name;
+            SevenDayForecastName3 = forecast.properties.periods[2].name + "    " + forecast.properties.periods[2].startTime.ToString("MM/dd");
             SevenDayForecastTemp3 = forecast.properties.periods[2].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[2].shortForecast);
@@ -142,7 +142,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed3 = forecast.properties.periods[2].windSpeed;
             SevenDayForecastDescription3 = forecast.properties.periods[2].shortForecast;
 
-            SevenDayForecastName4 = forecast.properties.periods[3].name;
+            SevenDayForecastName4 = forecast.properties.periods[3].name + "    " + forecast.properties.periods[3].startTime.ToString("MM/dd");
             SevenDayForecastTemp4 = forecast.properties.periods[3].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[3].shortForecast);
@@ -164,7 +164,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed4 = forecast.properties.periods[3].windSpeed;
             SevenDayForecastDescription4 = forecast.properties.periods[3].shortForecast;
 
-            SevenDayForecastName5 = forecast.properties.periods[4].name;
+            SevenDayForecastName5 = forecast.properties.periods[4].name + "    " + forecast.properties.periods[4].startTime.ToString("MM/dd");
             SevenDayForecastTemp5 = forecast.properties.periods[4].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[4].shortForecast);
@@ -186,7 +186,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed5 = forecast.properties.periods[4].windSpeed;
             SevenDayForecastDescription5 = forecast.properties.periods[4].shortForecast;
 
-            SevenDayForecastName6 = forecast.properties.periods[5].name;
+            SevenDayForecastName6 = forecast.properties.periods[5].name + "    " + forecast.properties.periods[5].startTime.ToString("MM/dd");
             SevenDayForecastTemp6 = forecast.properties.periods[5].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[5].shortForecast);
@@ -208,7 +208,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed6 = forecast.properties.periods[5].windSpeed;
             SevenDayForecastDescription6 = forecast.properties.periods[5].shortForecast;
 
-            SevenDayForecastName7 = forecast.properties.periods[6].name;
+            SevenDayForecastName7 = forecast.properties.periods[6].name + "    " + forecast.properties.periods[6].startTime.ToString("MM/dd");
             SevenDayForecastTemp7 = forecast.properties.periods[6].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[6].shortForecast);
@@ -230,7 +230,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed7 = forecast.properties.periods[6].windSpeed;
             SevenDayForecastDescription7 = forecast.properties.periods[6].shortForecast;
 
-            SevenDayForecastName8 = forecast.properties.periods[7].name;
+            SevenDayForecastName8 = forecast.properties.periods[7].name + "    " + forecast.properties.periods[7].startTime.ToString("MM/dd");
             SevenDayForecastTemp8 = forecast.properties.periods[7].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[7].shortForecast);
@@ -252,7 +252,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed8 = forecast.properties.periods[7].windSpeed;
             SevenDayForecastDescription8 = forecast.properties.periods[7].shortForecast;
 
-            SevenDayForecastName9 = forecast.properties.periods[8].name;
+            SevenDayForecastName9 = forecast.properties.periods[8].name + "    " + forecast.properties.periods[8].startTime.ToString("MM/dd");
             SevenDayForecastTemp9 = forecast.properties.periods[8].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[8].shortForecast);
@@ -274,7 +274,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed9 = forecast.properties.periods[8].windSpeed;
             SevenDayForecastDescription9 = forecast.properties.periods[8].shortForecast;
 
-            SevenDayForecastName10 = forecast.properties.periods[9].name;
+            SevenDayForecastName10 = forecast.properties.periods[9].name + "    " + forecast.properties.periods[9].startTime.ToString("MM/dd");
             SevenDayForecastTemp10 = forecast.properties.periods[9].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[9].shortForecast);
@@ -296,7 +296,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed10 = forecast.properties.periods[9].windSpeed;
             SevenDayForecastDescription10 = forecast.properties.periods[9].shortForecast;
 
-            SevenDayForecastName11 = forecast.properties.periods[10].name;
+            SevenDayForecastName11 = forecast.properties.periods[10].name + "    " + forecast.properties.periods[10].startTime.ToString("MM/dd");
             SevenDayForecastTemp11 = forecast.properties.periods[10].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[10].shortForecast);
@@ -318,7 +318,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed11 = forecast.properties.periods[10].windSpeed;
             SevenDayForecastDescription11 = forecast.properties.periods[10].shortForecast;
 
-            SevenDayForecastName12 = forecast.properties.periods[11].name;
+            SevenDayForecastName12 = forecast.properties.periods[11].name + "    " + forecast.properties.periods[11].startTime.ToString("MM/dd");
             SevenDayForecastTemp12 = forecast.properties.periods[11].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[11].shortForecast);
@@ -340,7 +340,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed12 = forecast.properties.periods[11].windSpeed;
             SevenDayForecastDescription12 = forecast.properties.periods[11].shortForecast;
 
-            SevenDayForecastName13 = forecast.properties.periods[12].name;
+            SevenDayForecastName13 = forecast.properties.periods[12].name + "    " + forecast.properties.periods[12].startTime.ToString("MM/dd");
             SevenDayForecastTemp13 = forecast.properties.periods[12].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[12].shortForecast);
@@ -363,7 +363,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastDescription13 = forecast.properties.periods[12].shortForecast;
 
 
-            SevenDayForecastName14 = forecast.properties.periods[13].name;
+            SevenDayForecastName14 = forecast.properties.periods[13].name + "    " + forecast.properties.periods[13].startTime.ToString("MM/dd");
             SevenDayForecastTemp14 = forecast.properties.periods[13].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[13].shortForecast);
@@ -413,7 +413,7 @@ public class WeatherVM : BaseViewModel {
                 int min = 200;
 
                 foreach (JsonWeather.Periods period in forecastHourly.properties.periods) {
-                    if (period.startTime > DateTime.Now) {
+                    if (period.startTime >= DateTime.Now) {
                         ForecastHourlyList.Add(new WeatherHourlyBlock {
                             Number = period.number,
                             Time = period.startTime,

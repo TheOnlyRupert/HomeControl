@@ -270,6 +270,7 @@
         <Resource Include="Resources\Images\icons\wifi.png"/>
     </ItemGroup>
     <ItemGroup>
+        <Resource Include="Resources\Images\weather\wind.png" />
         <Content Include="version.json"/>
         <Resource Include="Resources\Images\games\tamagotchi\egg1.png"/>
         <Resource Include="Resources\Images\games\tamagotchi\egg2.png"/>
@@ -434,7 +435,6 @@
         <Resource Include="Resources\Images\weather\tornado.svg"/>
         <Resource Include="Resources\Images\weather\wind-snow.gif"/>
         <Resource Include="Resources\Images\weather\wind-snow.svg"/>
-        <Resource Include="Resources\Images\weather\wind.gif"/>
         <Resource Include="Resources\Images\weather\wind.svg"/>
         <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-rain.gif"/>
         <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-rain.svg"/>

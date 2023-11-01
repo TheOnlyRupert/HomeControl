@@ -107,6 +107,9 @@ public class MainWindowVM : BaseViewModel {
 
         ApiStatus();
 
+        ReferenceValues.ExteriorTemp = -99;
+        ReferenceValues.ExteriorHumidity = -99;
+
         if (!string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.ComPort)) {
             ReferenceValues.SerialPort = new SerialPort(ReferenceValues.JsonSettingsMaster.ComPort, 9600);
             HvacCrossPlay.EstablishConnection();

@@ -53,13 +53,19 @@ public class HvacVM : BaseViewModel {
                 string weatherForecastHourly = await client.DownloadStringTaskAsync(weatherForecastHourlyURL);
                 forecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
 
+                for (int i = 0; i < forecastHourly.properties.periods.Count; i++) {
+                    if (forecastHourly.properties.periods[i].startTime < DateTime.Now) {
+                        forecastHourly.properties.periods.RemoveAt(i);
+                    }
+                }
+
                 CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(forecastHourly.properties.periods[0].windDirection);
                 CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
                 CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
                 CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime,
                     forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "null");
 
-                if (ReferenceValues.ExteriorTemp != -99) {
+                if (ReferenceValues.ExteriorTemp == -99) {
                     TempOutside = forecastHourly.properties.periods[0].temperature + "°";
                     TempOutsideColor = "Yellow";
                 } else {
@@ -71,6 +77,12 @@ public class HvacVM : BaseViewModel {
                     }
 
                     TempOutsideColor = "White";
+                }
+                
+                if (ReferenceValues.ExteriorHumidity == -99) {
+                    ExtHumidity = forecastHourly.properties.periods[0].relativeHumidity.value + "%";
+                } else {
+                    ExtHumidity = ReferenceValues.ExteriorHumidity + "%";
                 }
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -116,7 +128,6 @@ public class HvacVM : BaseViewModel {
             HeatingCoolingStatus = "Offline";
             HeatingCoolingStatusColor = "Red";
             IntHumidity = "Offline";
-            ExtHumidity = "Offline";
 
             return;
         }
@@ -148,12 +159,6 @@ public class HvacVM : BaseViewModel {
             IntHumidity = "??";
         } else {
             IntHumidity = ReferenceValues.InteriorHumidity + "%";
-        }
-
-        if (ReferenceValues.ExteriorHumidity == -99) {
-            ExtHumidity = "??";
-        } else {
-            ExtHumidity = ReferenceValues.ExteriorHumidity + "%";
         }
 
         if (ReferenceValues.JsonHvacMaster.IsOverride) {
