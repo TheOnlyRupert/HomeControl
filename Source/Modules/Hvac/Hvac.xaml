@@ -91,7 +91,7 @@
 
                 <TextBlock Grid.Column="0" Grid.Row="5" Text="Status" HorizontalAlignment="Center" Foreground="White" FontSize="14" VerticalAlignment="Bottom"/>
                 <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ProgramStatus}" Foreground="{Binding ProgramStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
-                
+
                 <TextBlock Grid.Column="1" Grid.Row="5" Text="Fan" HorizontalAlignment="Center" Foreground="White" FontSize="14" VerticalAlignment="Bottom"/>
                 <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding FanStatus}" Foreground="{Binding FanStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
 

@@ -78,7 +78,7 @@ public class HvacVM : BaseViewModel {
 
                     TempOutsideColor = "White";
                 }
-                
+
                 if (ReferenceValues.ExteriorHumidity == -99) {
                     ExtHumidity = forecastHourly.properties.periods[0].relativeHumidity.value + "%";
                 } else {

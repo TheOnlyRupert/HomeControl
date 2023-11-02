@@ -131,13 +131,13 @@ public class MainWindowVM : BaseViewModel {
             if (!ReferenceValues.JsonSettingsMaster.IsDebugMode) {
                 simpleMessenger.PushMessage("ScreenSaverOn", null);
                 ReferenceValues.LockUI = true;
-                ReferenceValues.SnowEngineMaster.Start();
+                ReferenceValues.ScreensaverMaster.Start();
             }
         }
 
         void activityTimer_OnActive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOff", null);
-            ReferenceValues.SnowEngineMaster.Stop();
+            ReferenceValues.ScreensaverMaster.Stop();
         }
     }
 

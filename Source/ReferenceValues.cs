@@ -76,7 +76,7 @@ public static class ReferenceValues {
 
     public static bool LockUI;
 
-    public static SnowEngine SnowEngineMaster;
+    public static Screensaver ScreensaverMaster;
 
     public static SerialPort SerialPort { get; set; }
 

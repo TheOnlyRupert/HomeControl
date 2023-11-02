@@ -56,7 +56,16 @@
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Frame Grid.Column="0" Grid.Row="0" Source="Source/Modules/Security/Security.xaml" Focusable="False"/>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Frame Grid.Row="0" Source="Source/Modules/Christmas.xaml" Focusable="False"/>
+                        <Frame Grid.Row="1" Source="Source/Modules/Security/Security.xaml" Focusable="False"/>
+                    </Grid>
+
                     <Frame Grid.Column="1" Grid.Row="0" Source="Source/Modules/Hvac/Hvac.xaml" Focusable="False"/>
                 </Grid>
 
