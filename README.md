@@ -1,7 +1,6 @@
 # Home Control
 
-![1](https://github.com/TheOnlyRupert/HomeControl/assets/3703153/c84f22e3-9e61-43a6-ab69-b1f61466ede0)
-NOTE: This image is not scaled properly. Everything is scaled better on the 55" TV.
+![photo](https://github.com/TheOnlyRupert/HomeControl/assets/3703153/437c0f9a-67aa-4dc3-b6b0-fc3fbbecd172)
 
 #### The Purpose:
 In my house in the kitchen I have a 55" LED TV with an infrared touch bar to allow touch input.
@@ -12,15 +11,16 @@ I'm constantly adding more features and changing them for how our household oper
 1. Fully functional month to month Calendar.
 2. Fully functional Finance Tracker.
 3. Fully functional 7-day and 48 hour Weather Tracker.
-4. Fully functional Behavior Tracker for up to three (5) users.
+4. Fully functional Behavior Tracker for up to five (5) users.
 5. Keep track of daily, weekly, monthly, and quarterly Chores.
 6. Built-in Hvac Thermostat (Just needs Arduino Uno).
 7. Four (4) Countdown Timers.
+8. Games such as Pictionary and Never Have I Ever.
 
 #### In Progress:
-1. Games Module.
-2. Music Player Module.
-3. Password Locked UI.
+1. Music Player Module.
+2. Password Locked UI.
+3. Security Module
 
 #### TODO:
 1. ToDo Module.
