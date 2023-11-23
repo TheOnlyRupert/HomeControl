@@ -93,7 +93,7 @@ public static class WeatherHelpers {
         case "Patchy Frost":
         case "Areas Of Frost":
         case "Widespread Frost":
-            return "../../../Resources/Images/weather/frost.gif";
+            return "../../../Resources/Images/weather/mist.gif";
 
         case "Snow Showers":
         case "Chance Snow Showers":
@@ -138,7 +138,7 @@ public static class WeatherHelpers {
             return "../../../Resources/Images/weather/smoke.gif";
 
         default:
-            return "../../../Resources/Images/weather/na.gif";
+            return "";
         }
     }
 

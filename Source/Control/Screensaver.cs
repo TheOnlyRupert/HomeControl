@@ -89,60 +89,60 @@ public class Screensaver {
                  where DateTime.Now.Month == holiday.Date.Month && DateTime.Now.Day == holiday.Date.Day
                  select holiday.Holiday) {
             switch (text) {
-            case "New Year's":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly/new_year/new_year1.png"
-                };
+            //case "New Year's":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly/new_year/new_year1.png"
+            //    };
 
-                break;
-            case "Valentine's":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+            //    break;
+            //case "Valentine's":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly//.png"
+            //    };
 
-                break;
-            case "President's":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+            //    break;
+            //case "President's":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly//.png"
+            //    };
 
-                break;
-            case "Easter":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+            //    break;
+            //case "Easter":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly//.png"
+            //    };
 
-                break;
-            case "Mother's":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+            //    break;
+            //case "Mother's":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly//.png"
+            //    };
 
-                break;
-            case "Memorial":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+            //    break;
+            //case "Memorial":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly//.png"
+            //    };
 
-                break;
-            case "Father's":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+            //    break;
+            //case "Father's":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly//.png"
+            //    };
 
-                break;
-            case "Independence":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+            //    break;
+            //case "Independence":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly//.png"
+            //    };
 
-                break;
-            case "Labor":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+            //    break;
+            //case "Labor":
+            //    flakeImages = new List<string> {
+            //        "pack://application:,,,/Resources/Images/monthly//.png"
+            //    };
 
-                break;
+            //    break;
             case "Veterans":
                 flakeImages = new List<string> {
                     "pack://application:,,,/Resources/Images/monthly/gun/gun1.png",
@@ -158,17 +158,32 @@ public class Screensaver {
                     "pack://application:,,,/Resources/Images/monthly/gun/gun11.png"
                 };
 
-                break;
-            case "Halloween":
-                flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
-                };
+                //case "Halloween":
+                //    flakeImages = new List<string> {
+                //        "pack://application:,,,/Resources/Images/monthly/halloween/halloween1.png"
+                //    };
 
                 break;
             case "Thanksgiving":
-            case "Black Friday":
                 flakeImages = new List<string> {
-                    "pack://application:,,,/Resources/Images/monthly//.png"
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving1.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving2.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving3.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving4.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving5.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving6.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving7.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving8.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving9.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving10.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving11.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving12.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving13.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving14.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving15.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving16.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving17.png",
+                    "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving18.png"
                 };
 
                 break;
