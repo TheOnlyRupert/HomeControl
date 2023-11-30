@@ -26,14 +26,7 @@ public class CalendarVM : BaseViewModel {
         _button28Date, _button28HolidayText, _button29Date, _button29HolidayText, _button30Date, _button30HolidayText, _button31Date, _button31HolidayText, _button32Date,
         _button32HolidayText, _button33Date, _button33HolidayText, _button34Date, _button34HolidayText, _button35Date, _button35HolidayText, _button36Date, _button36HolidayText,
         _button37Date, _button37HolidayText, _button38Date, _button38HolidayText, _button39Date, _button39HolidayText, _button40Date, _button40HolidayText, _button41Date,
-        _button41HolidayText, _button42Date, _button42HolidayText, _currentMonthAndYear, _button1BackgroundColor, _button2BackgroundColor, _button3BackgroundColor,
-        _button4BackgroundColor, _button5BackgroundColor, _button6BackgroundColor, _button7BackgroundColor, _button8BackgroundColor, _button9BackgroundColor,
-        _button10BackgroundColor, _button11BackgroundColor, _button12BackgroundColor, _button13BackgroundColor, _button14BackgroundColor, _button15BackgroundColor,
-        _button16BackgroundColor, _button17BackgroundColor, _button18BackgroundColor, _button19BackgroundColor, _button20BackgroundColor, _button21BackgroundColor,
-        _button22BackgroundColor, _button23BackgroundColor, _button24BackgroundColor, _button25BackgroundColor, _button26BackgroundColor, _button27BackgroundColor,
-        _button28BackgroundColor, _button29BackgroundColor, _button30BackgroundColor, _button31BackgroundColor, _button32BackgroundColor, _button33BackgroundColor,
-        _button34BackgroundColor, _button35BackgroundColor, _button36BackgroundColor, _button37BackgroundColor, _button38BackgroundColor, _button39BackgroundColor,
-        _button40BackgroundColor, _button41BackgroundColor, _button42BackgroundColor, _button1BorderColor, _button2BorderColor, _button3BorderColor, _button4BorderColor, _button5BorderColor,
+        _button41HolidayText, _button42Date, _button42HolidayText, _currentMonthAndYear, _button1BorderColor, _button2BorderColor, _button3BorderColor, _button4BorderColor, _button5BorderColor,
         _button6BorderColor, _button7BorderColor, _button8BorderColor, _button9BorderColor, _button10BorderColor, _button11BorderColor, _button12BorderColor, _button13BorderColor,
         _button14BorderColor, _button15BorderColor, _button16BorderColor, _button17BorderColor, _button18BorderColor, _button19BorderColor, _button20BorderColor, _button21BorderColor,
         _button22BorderColor, _button23BorderColor, _button24BorderColor, _button25BorderColor, _button26BorderColor, _button27BorderColor, _button28BorderColor, _button29BorderColor,
@@ -624,48 +617,6 @@ public class CalendarVM : BaseViewModel {
         Button40HolidayText = "";
         Button41HolidayText = "";
         Button42HolidayText = "";
-        Button1BackgroundColor = "Transparent";
-        Button2BackgroundColor = "Transparent";
-        Button3BackgroundColor = "Transparent";
-        Button4BackgroundColor = "Transparent";
-        Button5BackgroundColor = "Transparent";
-        Button6BackgroundColor = "Transparent";
-        Button7BackgroundColor = "Transparent";
-        Button8BackgroundColor = "Transparent";
-        Button9BackgroundColor = "Transparent";
-        Button10BackgroundColor = "Transparent";
-        Button11BackgroundColor = "Transparent";
-        Button12BackgroundColor = "Transparent";
-        Button13BackgroundColor = "Transparent";
-        Button14BackgroundColor = "Transparent";
-        Button15BackgroundColor = "Transparent";
-        Button16BackgroundColor = "Transparent";
-        Button17BackgroundColor = "Transparent";
-        Button18BackgroundColor = "Transparent";
-        Button19BackgroundColor = "Transparent";
-        Button20BackgroundColor = "Transparent";
-        Button21BackgroundColor = "Transparent";
-        Button22BackgroundColor = "Transparent";
-        Button23BackgroundColor = "Transparent";
-        Button24BackgroundColor = "Transparent";
-        Button25BackgroundColor = "Transparent";
-        Button26BackgroundColor = "Transparent";
-        Button27BackgroundColor = "Transparent";
-        Button28BackgroundColor = "Transparent";
-        Button29BackgroundColor = "Transparent";
-        Button30BackgroundColor = "Transparent";
-        Button31BackgroundColor = "Transparent";
-        Button32BackgroundColor = "Transparent";
-        Button33BackgroundColor = "Transparent";
-        Button34BackgroundColor = "Transparent";
-        Button35BackgroundColor = "Transparent";
-        Button36BackgroundColor = "Transparent";
-        Button37BackgroundColor = "Transparent";
-        Button38BackgroundColor = "Transparent";
-        Button39BackgroundColor = "Transparent";
-        Button40BackgroundColor = "Transparent";
-        Button41BackgroundColor = "Transparent";
-        Button42BackgroundColor = "Transparent";
         Button1BorderColor = "DarkSlateGray";
         Button2BorderColor = "DarkSlateGray";
         Button3BorderColor = "DarkSlateGray";
@@ -750,7 +701,6 @@ public class CalendarVM : BaseViewModel {
         Button40BorderThickness = 1;
         Button41BorderThickness = 1;
         Button42BorderThickness = 1;
-
         Button1EventList.Clear();
         Button2EventList.Clear();
         Button3EventList.Clear();
@@ -860,89 +810,131 @@ public class CalendarVM : BaseViewModel {
 
         /* Set background color for today */
         if (calendarStartingDate.Equals(DateTime.Today)) {
-            Button1BackgroundColor = "DarkBlue";
+            Button1BorderColor = "Yellow";
+            Button1BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(1).Equals(DateTime.Today)) {
-            Button2BackgroundColor = "DarkBlue";
+            Button2BorderColor = "Yellow";
+            Button2BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(2).Equals(DateTime.Today)) {
-            Button3BackgroundColor = "DarkBlue";
+            Button3BorderColor = "Yellow";
+            Button3BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(3).Equals(DateTime.Today)) {
-            Button4BackgroundColor = "DarkBlue";
+            Button4BorderColor = "Yellow";
+            Button4BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(4).Equals(DateTime.Today)) {
-            Button5BackgroundColor = "DarkBlue";
+            Button5BorderColor = "Yellow";
+            Button5BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(5).Equals(DateTime.Today)) {
-            Button6BackgroundColor = "DarkBlue";
+            Button6BorderColor = "Yellow";
+            Button6BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(6).Equals(DateTime.Today)) {
-            Button7BackgroundColor = "DarkBlue";
+            Button7BorderColor = "Yellow";
+            Button7BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(7).Equals(DateTime.Today)) {
-            Button8BackgroundColor = "DarkBlue";
+            Button8BorderColor = "Yellow";
+            Button8BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(8).Equals(DateTime.Today)) {
-            Button9BackgroundColor = "DarkBlue";
+            Button9BorderColor = "Yellow";
+            Button9BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(9).Equals(DateTime.Today)) {
-            Button10BackgroundColor = "DarkBlue";
+            Button10BorderColor = "Yellow";
+            Button10BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(10).Equals(DateTime.Today)) {
-            Button11BackgroundColor = "DarkBlue";
+            Button11BorderColor = "Yellow";
+            Button11BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(11).Equals(DateTime.Today)) {
-            Button12BackgroundColor = "DarkBlue";
+            Button12BorderColor = "Yellow";
+            Button12BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(12).Equals(DateTime.Today)) {
-            Button13BackgroundColor = "DarkBlue";
+            Button13BorderColor = "Yellow";
+            Button13BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(13).Equals(DateTime.Today)) {
-            Button14BackgroundColor = "DarkBlue";
+            Button14BorderColor = "Yellow";
+            Button14BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(14).Equals(DateTime.Today)) {
-            Button15BackgroundColor = "DarkBlue";
+            Button15BorderColor = "Yellow";
+            Button15BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(15).Equals(DateTime.Today)) {
-            Button16BackgroundColor = "DarkBlue";
+            Button16BorderColor = "Yellow";
+            Button16BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(16).Equals(DateTime.Today)) {
-            Button17BackgroundColor = "DarkBlue";
+            Button17BorderColor = "Yellow";
+            Button17BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(17).Equals(DateTime.Today)) {
-            Button18BackgroundColor = "DarkBlue";
+            Button18BorderColor = "Yellow";
+            Button18BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(18).Equals(DateTime.Today)) {
-            Button19BackgroundColor = "DarkBlue";
+            Button19BorderColor = "Yellow";
+            Button19BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(19).Equals(DateTime.Today)) {
-            Button20BackgroundColor = "DarkBlue";
+            Button20BorderColor = "Yellow";
+            Button20BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(20).Equals(DateTime.Today)) {
-            Button21BackgroundColor = "DarkBlue";
+            Button21BorderColor = "Yellow";
+            Button21BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(21).Equals(DateTime.Today)) {
-            Button22BackgroundColor = "DarkBlue";
+            Button22BorderColor = "Yellow";
+            Button22BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(22).Equals(DateTime.Today)) {
-            Button23BackgroundColor = "DarkBlue";
+            Button23BorderColor = "Yellow";
+            Button23BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(23).Equals(DateTime.Today)) {
-            Button24BackgroundColor = "DarkBlue";
+            Button24BorderColor = "Yellow";
+            Button24BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(24).Equals(DateTime.Today)) {
-            Button25BackgroundColor = "DarkBlue";
+            Button25BorderColor = "Yellow";
+            Button25BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(25).Equals(DateTime.Today)) {
-            Button26BackgroundColor = "DarkBlue";
+            Button26BorderColor = "Yellow";
+            Button26BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(26).Equals(DateTime.Today)) {
-            Button27BackgroundColor = "DarkBlue";
+            Button27BorderColor = "Yellow";
+            Button27BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(27).Equals(DateTime.Today)) {
-            Button28BackgroundColor = "DarkBlue";
+            Button28BorderColor = "Yellow";
+            Button28BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(28).Equals(DateTime.Today)) {
-            Button29BackgroundColor = "DarkBlue";
+            Button29BorderColor = "Yellow";
+            Button29BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(29).Equals(DateTime.Today)) {
-            Button30BackgroundColor = "DarkBlue";
+            Button30BorderColor = "Yellow";
+            Button30BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(30).Equals(DateTime.Today)) {
-            Button31BackgroundColor = "DarkBlue";
+            Button31BorderColor = "Yellow";
+            Button31BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(31).Equals(DateTime.Today)) {
-            Button32BackgroundColor = "DarkBlue";
+            Button32BorderColor = "Yellow";
+            Button32BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(32).Equals(DateTime.Today)) {
-            Button33BackgroundColor = "DarkBlue";
+            Button33BorderColor = "Yellow";
+            Button33BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(33).Equals(DateTime.Today)) {
-            Button34BackgroundColor = "DarkBlue";
+            Button34BorderColor = "Yellow";
+            Button34BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(34).Equals(DateTime.Today)) {
-            Button35BackgroundColor = "DarkBlue";
+            Button35BorderColor = "Yellow";
+            Button35BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(35).Equals(DateTime.Today)) {
-            Button36BackgroundColor = "DarkBlue";
+            Button36BorderColor = "Yellow";
+            Button36BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(36).Equals(DateTime.Today)) {
-            Button37BackgroundColor = "DarkBlue";
+            Button37BorderColor = "Yellow";
+            Button37BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(37).Equals(DateTime.Today)) {
-            Button38BackgroundColor = "DarkBlue";
+            Button38BorderColor = "Yellow";
+            Button38BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(38).Equals(DateTime.Today)) {
-            Button39BackgroundColor = "DarkBlue";
+            Button39BorderColor = "Yellow";
+            Button39BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(39).Equals(DateTime.Today)) {
-            Button40BackgroundColor = "DarkBlue";
+            Button40BorderColor = "Yellow";
+            Button40BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(40).Equals(DateTime.Today)) {
-            Button41BackgroundColor = "DarkBlue";
+            Button41BorderColor = "Yellow";
+            Button41BorderThickness = 4;
         } else if (calendarStartingDate.AddDays(41).Equals(DateTime.Today)) {
-            Button42BackgroundColor = "DarkBlue";
+            Button42BorderColor = "Yellow";
+            Button42BorderThickness = 4;
         }
 
         /* Get Holidays (Hardcoded) */
@@ -2685,342 +2677,6 @@ public class CalendarVM : BaseViewModel {
         set {
             _button42HolidayText = value;
             RaisePropertyChangedEvent("Button42HolidayText");
-        }
-    }
-
-    public string Button1BackgroundColor {
-        get => _button1BackgroundColor;
-        set {
-            _button1BackgroundColor = value;
-            RaisePropertyChangedEvent("Button1BackgroundColor");
-        }
-    }
-
-    public string Button2BackgroundColor {
-        get => _button2BackgroundColor;
-        set {
-            _button2BackgroundColor = value;
-            RaisePropertyChangedEvent("Button2BackgroundColor");
-        }
-    }
-
-    public string Button3BackgroundColor {
-        get => _button3BackgroundColor;
-        set {
-            _button3BackgroundColor = value;
-            RaisePropertyChangedEvent("Button3BackgroundColor");
-        }
-    }
-
-    public string Button4BackgroundColor {
-        get => _button4BackgroundColor;
-        set {
-            _button4BackgroundColor = value;
-            RaisePropertyChangedEvent("Button4BackgroundColor");
-        }
-    }
-
-    public string Button5BackgroundColor {
-        get => _button5BackgroundColor;
-        set {
-            _button5BackgroundColor = value;
-            RaisePropertyChangedEvent("Button5BackgroundColor");
-        }
-    }
-
-    public string Button6BackgroundColor {
-        get => _button6BackgroundColor;
-        set {
-            _button6BackgroundColor = value;
-            RaisePropertyChangedEvent("Button6BackgroundColor");
-        }
-    }
-
-    public string Button7BackgroundColor {
-        get => _button7BackgroundColor;
-        set {
-            _button7BackgroundColor = value;
-            RaisePropertyChangedEvent("Button7BackgroundColor");
-        }
-    }
-
-    public string Button8BackgroundColor {
-        get => _button8BackgroundColor;
-        set {
-            _button8BackgroundColor = value;
-            RaisePropertyChangedEvent("Button8BackgroundColor");
-        }
-    }
-
-    public string Button9BackgroundColor {
-        get => _button9BackgroundColor;
-        set {
-            _button9BackgroundColor = value;
-            RaisePropertyChangedEvent("Button9BackgroundColor");
-        }
-    }
-
-    public string Button10BackgroundColor {
-        get => _button10BackgroundColor;
-        set {
-            _button10BackgroundColor = value;
-            RaisePropertyChangedEvent("Button10BackgroundColor");
-        }
-    }
-
-    public string Button11BackgroundColor {
-        get => _button11BackgroundColor;
-        set {
-            _button11BackgroundColor = value;
-            RaisePropertyChangedEvent("Button11BackgroundColor");
-        }
-    }
-
-    public string Button12BackgroundColor {
-        get => _button12BackgroundColor;
-        set {
-            _button12BackgroundColor = value;
-            RaisePropertyChangedEvent("Button12BackgroundColor");
-        }
-    }
-
-    public string Button13BackgroundColor {
-        get => _button13BackgroundColor;
-        set {
-            _button13BackgroundColor = value;
-            RaisePropertyChangedEvent("Button13BackgroundColor");
-        }
-    }
-
-    public string Button14BackgroundColor {
-        get => _button14BackgroundColor;
-        set {
-            _button14BackgroundColor = value;
-            RaisePropertyChangedEvent("Button14BackgroundColor");
-        }
-    }
-
-    public string Button15BackgroundColor {
-        get => _button15BackgroundColor;
-        set {
-            _button15BackgroundColor = value;
-            RaisePropertyChangedEvent("Button15BackgroundColor");
-        }
-    }
-
-    public string Button16BackgroundColor {
-        get => _button16BackgroundColor;
-        set {
-            _button16BackgroundColor = value;
-            RaisePropertyChangedEvent("Button16BackgroundColor");
-        }
-    }
-
-    public string Button17BackgroundColor {
-        get => _button17BackgroundColor;
-        set {
-            _button17BackgroundColor = value;
-            RaisePropertyChangedEvent("Button17BackgroundColor");
-        }
-    }
-
-    public string Button18BackgroundColor {
-        get => _button18BackgroundColor;
-        set {
-            _button18BackgroundColor = value;
-            RaisePropertyChangedEvent("Button18BackgroundColor");
-        }
-    }
-
-    public string Button19BackgroundColor {
-        get => _button19BackgroundColor;
-        set {
-            _button19BackgroundColor = value;
-            RaisePropertyChangedEvent("Button19BackgroundColor");
-        }
-    }
-
-    public string Button20BackgroundColor {
-        get => _button20BackgroundColor;
-        set {
-            _button20BackgroundColor = value;
-            RaisePropertyChangedEvent("Button20BackgroundColor");
-        }
-    }
-
-    public string Button21BackgroundColor {
-        get => _button21BackgroundColor;
-        set {
-            _button21BackgroundColor = value;
-            RaisePropertyChangedEvent("Button21BackgroundColor");
-        }
-    }
-
-    public string Button22BackgroundColor {
-        get => _button22BackgroundColor;
-        set {
-            _button22BackgroundColor = value;
-            RaisePropertyChangedEvent("Button22BackgroundColor");
-        }
-    }
-
-    public string Button23BackgroundColor {
-        get => _button23BackgroundColor;
-        set {
-            _button23BackgroundColor = value;
-            RaisePropertyChangedEvent("Button23BackgroundColor");
-        }
-    }
-
-    public string Button24BackgroundColor {
-        get => _button24BackgroundColor;
-        set {
-            _button24BackgroundColor = value;
-            RaisePropertyChangedEvent("Button24BackgroundColor");
-        }
-    }
-
-    public string Button25BackgroundColor {
-        get => _button25BackgroundColor;
-        set {
-            _button25BackgroundColor = value;
-            RaisePropertyChangedEvent("Button25BackgroundColor");
-        }
-    }
-
-    public string Button26BackgroundColor {
-        get => _button26BackgroundColor;
-        set {
-            _button26BackgroundColor = value;
-            RaisePropertyChangedEvent("Button26BackgroundColor");
-        }
-    }
-
-    public string Button27BackgroundColor {
-        get => _button27BackgroundColor;
-        set {
-            _button27BackgroundColor = value;
-            RaisePropertyChangedEvent("Button27BackgroundColor");
-        }
-    }
-
-    public string Button28BackgroundColor {
-        get => _button28BackgroundColor;
-        set {
-            _button28BackgroundColor = value;
-            RaisePropertyChangedEvent("Button28BackgroundColor");
-        }
-    }
-
-    public string Button29BackgroundColor {
-        get => _button29BackgroundColor;
-        set {
-            _button29BackgroundColor = value;
-            RaisePropertyChangedEvent("Button29BackgroundColor");
-        }
-    }
-
-    public string Button30BackgroundColor {
-        get => _button30BackgroundColor;
-        set {
-            _button30BackgroundColor = value;
-            RaisePropertyChangedEvent("Button30BackgroundColor");
-        }
-    }
-
-    public string Button31BackgroundColor {
-        get => _button31BackgroundColor;
-        set {
-            _button31BackgroundColor = value;
-            RaisePropertyChangedEvent("Button31BackgroundColor");
-        }
-    }
-
-    public string Button32BackgroundColor {
-        get => _button32BackgroundColor;
-        set {
-            _button32BackgroundColor = value;
-            RaisePropertyChangedEvent("Button32BackgroundColor");
-        }
-    }
-
-    public string Button33BackgroundColor {
-        get => _button33BackgroundColor;
-        set {
-            _button33BackgroundColor = value;
-            RaisePropertyChangedEvent("Button33BackgroundColor");
-        }
-    }
-
-    public string Button34BackgroundColor {
-        get => _button34BackgroundColor;
-        set {
-            _button34BackgroundColor = value;
-            RaisePropertyChangedEvent("Button34BackgroundColor");
-        }
-    }
-
-    public string Button35BackgroundColor {
-        get => _button35BackgroundColor;
-        set {
-            _button35BackgroundColor = value;
-            RaisePropertyChangedEvent("Button35BackgroundColor");
-        }
-    }
-
-    public string Button36BackgroundColor {
-        get => _button36BackgroundColor;
-        set {
-            _button36BackgroundColor = value;
-            RaisePropertyChangedEvent("Button36BackgroundColor");
-        }
-    }
-
-    public string Button37BackgroundColor {
-        get => _button37BackgroundColor;
-        set {
-            _button37BackgroundColor = value;
-            RaisePropertyChangedEvent("Button37BackgroundColor");
-        }
-    }
-
-    public string Button38BackgroundColor {
-        get => _button38BackgroundColor;
-        set {
-            _button38BackgroundColor = value;
-            RaisePropertyChangedEvent("Button38BackgroundColor");
-        }
-    }
-
-    public string Button39BackgroundColor {
-        get => _button39BackgroundColor;
-        set {
-            _button39BackgroundColor = value;
-            RaisePropertyChangedEvent("Button39BackgroundColor");
-        }
-    }
-
-    public string Button40BackgroundColor {
-        get => _button40BackgroundColor;
-        set {
-            _button40BackgroundColor = value;
-            RaisePropertyChangedEvent("Button40BackgroundColor");
-        }
-    }
-
-    public string Button41BackgroundColor {
-        get => _button41BackgroundColor;
-        set {
-            _button41BackgroundColor = value;
-            RaisePropertyChangedEvent("Button41BackgroundColor");
-        }
-    }
-
-    public string Button42BackgroundColor {
-        get => _button42BackgroundColor;
-        set {
-            _button42BackgroundColor = value;
-            RaisePropertyChangedEvent("Button42BackgroundColor");
         }
     }
 

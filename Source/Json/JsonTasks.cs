@@ -9,6 +9,11 @@ public class JsonTasks {
     public JsonTasksMonthly JsonTasksMonthly { get; set; }
     public JsonTasksQuarterly JsonTasksQuarterly { get; set; }
     public DateTime UpdatedDateTime { get; set; }
+    public bool User1Blink { get; set; }
+    public bool User2Blink { get; set; }
+    public bool User3Blink { get; set; }
+    public bool User4Blink { get; set; }
+    public bool User5Blink { get; set; }
 }
 
 public class JsonTasksDaily {
@@ -69,4 +74,5 @@ public class Task {
     public int RoomNumber { get; set; }
     public bool IsCompleted { get; set; }
     public string DateCompleted { get; set; }
+    public int RequiredTime { get; set; }
 }

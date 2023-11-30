@@ -152,6 +152,12 @@ public class MainWindowVM : BaseViewModel {
                 HvacCrossPlay.EstablishConnection();
             }
 
+            if (ReferenceValues.JsonTasksMaster.User1Blink || ReferenceValues.JsonTasksMaster.User2Blink || ReferenceValues.JsonTasksMaster.User3Blink || ReferenceValues.JsonTasksMaster.User4Blink
+                || ReferenceValues.JsonTasksMaster.User5Blink) {
+                ReferenceValues.SoundToPlay = "beep";
+                SoundDispatcher.PlaySound();
+            }
+
             changeDate = true;
         }
 

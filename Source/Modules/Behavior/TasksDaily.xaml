@@ -17,11 +17,13 @@
                 <TextBlock Text="Max Daily Fund Release:" FontSize="18" Foreground="White"/>
                 <TextBox Text="{Binding FundAmount, UpdateSourceTrigger=PropertyChanged}" FontSize="18" MaxLength="3" IsReadOnly="{Binding IsFundAmountReadOnly}"
                          control:SelectTextOnFocus.Active="True"/>
-                <Button Content="Save" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="saveFunds" Margin="0 4 0 32"/>
+                <Button Content="Save Fund Amount" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="saveFunds" Margin="0 4 0 32"/>
                 <TextBlock Text="Task Name:" FontSize="18" Foreground="White"/>
                 <TextBox Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged}" FontSize="18" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 <TextBlock Text="Image:" FontSize="18" Foreground="White" Margin="0 8 0 0"/>
                 <ComboBox ItemsSource="{Binding ImageList}" SelectedItem="{Binding ImageSelected}" FontSize="18"/>
+                <TextBlock Text="Required Time:" FontSize="18" Foreground="White" Margin="0 8 0 0"/>
+                <TextBox Text="{Binding RequiredTime, UpdateSourceTrigger=PropertyChanged}" FontSize="18" MaxLength="2" control:SelectTextOnFocus.Active="True"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">

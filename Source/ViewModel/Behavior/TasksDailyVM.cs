@@ -12,6 +12,7 @@ namespace HomeControl.Source.ViewModel.Behavior;
 public class TasksDailyVM : BaseViewModel {
     private ObservableCollection<string> _imageList;
     private bool _isFundAmountReadOnly;
+    private int _requiredTime;
     private string _taskHeaderText, _taskName, _imageSelected, _editVisibility, _fundAmount;
     private ObservableCollection<Task> _taskList;
     private Task _taskSelected;
@@ -62,6 +63,7 @@ public class TasksDailyVM : BaseViewModel {
 
         ImageList = ReferenceValues.IconImageList;
         ImageSelected = "bathtub";
+        RequiredTime = 24;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -84,12 +86,14 @@ public class TasksDailyVM : BaseViewModel {
 
                 TaskList.Add(new Task {
                     TaskName = TaskName,
-                    ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png"
+                    ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
+                    RequiredTime = RequiredTime
                 });
 
                 ReferenceValues.SoundToPlay = "newTask";
                 SoundDispatcher.PlaySound();
                 TaskName = "";
+                RequiredTime = 24;
                 SaveJson();
             }
 
@@ -113,11 +117,13 @@ public class TasksDailyVM : BaseViewModel {
 
                             TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                                 TaskName = TaskName,
-                                ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png"
+                                ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
+                                RequiredTime = RequiredTime
                             });
 
                             TaskList.Remove(TaskSelected);
                             TaskName = "";
+                            RequiredTime = 24;
                             SaveJson();
                         }
                     }
@@ -149,6 +155,7 @@ public class TasksDailyVM : BaseViewModel {
                         ReferenceValues.SoundToPlay = "newTask";
                         SoundDispatcher.PlaySound();
                         TaskList.Remove(TaskSelected);
+                        RequiredTime = 24;
                         SaveJson();
                     }
                 }
@@ -173,7 +180,8 @@ public class TasksDailyVM : BaseViewModel {
                         TaskName = TaskName,
                         ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
                         IsCompleted = true,
-                        DateCompleted = DateTime.Now.ToString("HH:mm")
+                        DateCompleted = DateTime.Now.ToString("HH:mm"),
+                        RequiredTime = RequiredTime
                     });
 
                     TaskList.Remove(TaskSelected);
@@ -192,7 +200,8 @@ public class TasksDailyVM : BaseViewModel {
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,
                         ImageName = "../../../Resources/Images/icons/" + ImageSelected + ".png",
-                        DateCompleted = ""
+                        DateCompleted = "",
+                        RequiredTime = RequiredTime
                     });
 
                     TaskList.Remove(TaskSelected);
@@ -333,6 +342,7 @@ public class TasksDailyVM : BaseViewModel {
     private void PopulateDetailedView(Task value) {
         TaskName = value.TaskName;
         ImageSelected = value.ImageName.Substring(32, value.ImageName.Length - 36);
+        RequiredTime = value.RequiredTime;
     }
 
     #region Fields
@@ -407,6 +417,14 @@ public class TasksDailyVM : BaseViewModel {
         set {
             _isFundAmountReadOnly = value;
             RaisePropertyChangedEvent("IsFundAmountReadOnly");
+        }
+    }
+
+    public int RequiredTime {
+        get => _requiredTime;
+        set {
+            _requiredTime = value;
+            RaisePropertyChangedEvent("RequiredTime");
         }
     }
 

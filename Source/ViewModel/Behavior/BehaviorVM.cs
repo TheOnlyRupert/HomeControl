@@ -32,7 +32,7 @@ public class BehaviorVM : BaseViewModel {
         _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility, _user1WeekVisibility, _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility,
         _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility, _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility,
         _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility, _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility,
-        _user5BehaviorVisibility, _trashDayVisibility;
+        _user5BehaviorVisibility, _trashDayVisibility, _user1BackgroundColor, _user2BackgroundColor, _user3BackgroundColor, _user4BackgroundColor, _user5BackgroundColor;
 
     private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
@@ -105,6 +105,17 @@ public class BehaviorVM : BaseViewModel {
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
+        User1BackgroundColor = "Transparent";
+        User2BackgroundColor = "Transparent";
+        User3BackgroundColor = "Transparent";
+        User4BackgroundColor = "Transparent";
+        User5BackgroundColor = "Transparent";
+        ReferenceValues.JsonTasksMaster.User1Blink = false;
+        ReferenceValues.JsonTasksMaster.User2Blink = false;
+        ReferenceValues.JsonTasksMaster.User3Blink = false;
+        ReferenceValues.JsonTasksMaster.User4Blink = false;
+        ReferenceValues.JsonTasksMaster.User5Blink = false;
+
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
 
@@ -134,6 +145,7 @@ public class BehaviorVM : BaseViewModel {
         RefreshTasks(4);
         RefreshTasks(5);
         RefreshCountdown();
+        RefreshBlinking();
         SaveJsons();
     }
 
@@ -2080,6 +2092,7 @@ public class BehaviorVM : BaseViewModel {
             break;
         case "HourChanged":
             RefreshCountdown();
+            RefreshBlinking();
             break;
         case "RefreshFinances":
             RefreshTasks(1);
@@ -2088,6 +2101,71 @@ public class BehaviorVM : BaseViewModel {
             RefreshTasks(4);
             RefreshTasks(5);
             break;
+        case "Refresh":
+            if (ReferenceValues.JsonTasksMaster.User1Blink) {
+                User1BackgroundColor = User1BackgroundColor == "Transparent" ? "Yellow" : "Transparent";
+            }
+
+            if (ReferenceValues.JsonTasksMaster.User2Blink) {
+                User2BackgroundColor = User2BackgroundColor == "Transparent" ? "Yellow" : "Transparent";
+            }
+
+            if (ReferenceValues.JsonTasksMaster.User3Blink) {
+                User3BackgroundColor = User3BackgroundColor == "Transparent" ? "Yellow" : "Transparent";
+            }
+
+            if (ReferenceValues.JsonTasksMaster.User4Blink) {
+                User4BackgroundColor = User4BackgroundColor == "Transparent" ? "Yellow" : "Transparent";
+            }
+
+            if (ReferenceValues.JsonTasksMaster.User5Blink) {
+                User5BackgroundColor = User5BackgroundColor == "Transparent" ? "Yellow" : "Transparent";
+            }
+
+            break;
+        }
+    }
+
+    private void RefreshBlinking() {
+        ReferenceValues.JsonTasksMaster.User1Blink = false;
+        ReferenceValues.JsonTasksMaster.User2Blink = false;
+        ReferenceValues.JsonTasksMaster.User3Blink = false;
+        ReferenceValues.JsonTasksMaster.User4Blink = false;
+        ReferenceValues.JsonTasksMaster.User5Blink = false;
+        User1BackgroundColor = "Transparent";
+        User2BackgroundColor = "Transparent";
+        User3BackgroundColor = "Transparent";
+        User4BackgroundColor = "Transparent";
+        User5BackgroundColor = "Transparent";
+
+        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
+            if (!task.IsCompleted && DateTime.Now.Hour >= task.RequiredTime) {
+                ReferenceValues.JsonTasksMaster.User1Blink = true;
+            }
+        }
+
+        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
+            if (!task.IsCompleted && DateTime.Now.Hour >= task.RequiredTime) {
+                ReferenceValues.JsonTasksMaster.User2Blink = true;
+            }
+        }
+
+        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
+            if (!task.IsCompleted && DateTime.Now.Hour >= task.RequiredTime) {
+                ReferenceValues.JsonTasksMaster.User3Blink = true;
+            }
+        }
+
+        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
+            if (!task.IsCompleted && DateTime.Now.Hour >= task.RequiredTime) {
+                ReferenceValues.JsonTasksMaster.User4Blink = true;
+            }
+        }
+
+        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
+            if (!task.IsCompleted && DateTime.Now.Hour >= task.RequiredTime) {
+                ReferenceValues.JsonTasksMaster.User5Blink = true;
+            }
         }
     }
 
@@ -2100,6 +2178,7 @@ public class BehaviorVM : BaseViewModel {
                 editBehavior.ShowDialog();
                 editBehavior.Close();
                 RefreshTasks(1);
+                RefreshBlinking();
                 break;
             case "user2":
                 ReferenceValues.ActiveBehaviorUser = 2;
@@ -2107,6 +2186,7 @@ public class BehaviorVM : BaseViewModel {
                 editBehavior2.ShowDialog();
                 editBehavior2.Close();
                 RefreshTasks(2);
+                RefreshBlinking();
                 break;
             case "user3":
                 ReferenceValues.ActiveBehaviorUser = 3;
@@ -2114,6 +2194,7 @@ public class BehaviorVM : BaseViewModel {
                 editBehavior3.ShowDialog();
                 editBehavior3.Close();
                 RefreshTasks(3);
+                RefreshBlinking();
                 break;
             case "user4":
                 ReferenceValues.ActiveBehaviorUser = 4;
@@ -2121,6 +2202,7 @@ public class BehaviorVM : BaseViewModel {
                 editBehavior4.ShowDialog();
                 editBehavior4.Close();
                 RefreshTasks(4);
+                RefreshBlinking();
                 break;
             case "user5":
                 ReferenceValues.ActiveBehaviorUser = 5;
@@ -2128,6 +2210,7 @@ public class BehaviorVM : BaseViewModel {
                 editBehavior5.ShowDialog();
                 editBehavior5.Close();
                 RefreshTasks(5);
+                RefreshBlinking();
                 break;
             }
 
@@ -3573,6 +3656,46 @@ public class BehaviorVM : BaseViewModel {
         set {
             _trashDayVisibility = value;
             RaisePropertyChangedEvent("TrashDayVisibility");
+        }
+    }
+
+    public string User1BackgroundColor {
+        get => _user1BackgroundColor;
+        set {
+            _user1BackgroundColor = value;
+            RaisePropertyChangedEvent("User1BackgroundColor");
+        }
+    }
+
+    public string User2BackgroundColor {
+        get => _user2BackgroundColor;
+        set {
+            _user2BackgroundColor = value;
+            RaisePropertyChangedEvent("User2BackgroundColor");
+        }
+    }
+
+    public string User3BackgroundColor {
+        get => _user3BackgroundColor;
+        set {
+            _user3BackgroundColor = value;
+            RaisePropertyChangedEvent("User3BackgroundColor");
+        }
+    }
+
+    public string User4BackgroundColor {
+        get => _user4BackgroundColor;
+        set {
+            _user4BackgroundColor = value;
+            RaisePropertyChangedEvent("User4BackgroundColor");
+        }
+    }
+
+    public string User5BackgroundColor {
+        get => _user5BackgroundColor;
+        set {
+            _user5BackgroundColor = value;
+            RaisePropertyChangedEvent("User5BackgroundColor");
         }
     }
 

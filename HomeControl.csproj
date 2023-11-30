@@ -340,6 +340,11 @@
         <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving7.png"/>
         <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving8.png"/>
         <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving9.png"/>
+        <Resource Include="Resources\Images\icons\cat.png" />
+        <Resource Include="Resources\Images\icons\cat2.png" />
+        <Content Include="Resources\Sounds\beep.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Content Include="version.json"/>
         <Resource Include="Resources\Images\games\tamagotchi\egg1.png"/>
         <Resource Include="Resources\Images\games\tamagotchi\egg2.png"/>

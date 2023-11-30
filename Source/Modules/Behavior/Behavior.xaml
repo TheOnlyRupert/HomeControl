@@ -46,7 +46,8 @@
                    gif:ImageBehavior.AnimatedSource="../../../Resources/Images/icons/trash.gif"/>
         </Grid>
 
-        <Button Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user1" Margin="4 0 2 0">
+        <Button Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user1" Margin="4 0 2 0"
+                Background="{Binding User1BackgroundColor}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -138,7 +139,8 @@
             </Grid>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user2" Margin="2 0 2 0">
+        <Button Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user2" Margin="2 0 2 0"
+                Background="{Binding User2BackgroundColor}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -230,7 +232,8 @@
             </Grid>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user3" Margin="2 0 2 0">
+        <Button Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user3" Margin="2 0 2 0"
+                Background="{Binding User3BackgroundColor}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -322,7 +325,8 @@
             </Grid>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user4" Margin="2 0 2 0">
+        <Button Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user4" Margin="2 0 2 0"
+                Background="{Binding User4BackgroundColor}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -414,7 +418,8 @@
             </Grid>
         </Button>
 
-        <Button Grid.Row="1" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user5" Margin="2 0 2 0">
+        <Button Grid.Row="1" Grid.Column="4" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ButtonCommand}" CommandParameter="user5" Margin="2 0 2 0"
+                Background="{Binding User5BackgroundColor}">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
