@@ -12,8 +12,9 @@ public class FinanceBlock {
     public string Item { get; set; }
     public string Cost { get; set; }
     public string Category { get; set; }
-    public string Person { get; set; }
     public string Details { get; set; }
+    public string Image { get; set; }
+    public int UserId { get; set; }
 }
 
 public class DetailedFinanceBlock {

@@ -44,10 +44,9 @@ public class JsonSettings {
     public string EmergencyContact2Phone2 { get; set; }
     public string AlarmCode { get; set; }
     public string ComPort { get; set; }
-    public bool IsImperialMode { get; set; }
-    public bool IsNormalMode { get; set; }
-    public bool IsEditTasksMode { get; set; }
-    public bool IsDebugMode { get; set; }
+    public bool useMetricUnits { get; set; }
+    public bool useEasterEggs { get; set; }
+    public bool DebugMode { get; set; }
     public string TrashDay { get; set; }
     public bool User1Checked { get; set; }
     public bool User2Checked { get; set; }

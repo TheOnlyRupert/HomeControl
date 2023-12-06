@@ -7,7 +7,7 @@ public class EditHvacVM : BaseViewModel {
     private string _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _fanStatusColor, _heatingCoolingStatusColor, _temperatureSet, _override, _overrideColor;
 
     public EditHvacVM() {
-        if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
+        if (!ReferenceValues.JsonSettingsMaster.useMetricUnits) {
             double f = ReferenceValues.JsonHvacMaster.TemperatureSet * 1.8 + 32;
             TemperatureSet = (int)f + "°";
         } else {
@@ -62,7 +62,7 @@ public class EditHvacVM : BaseViewModel {
 
         GetButtonColors();
 
-        if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
+        if (!ReferenceValues.JsonSettingsMaster.useMetricUnits) {
             double f = ReferenceValues.JsonHvacMaster.TemperatureSet * 1.8 + 32;
             TemperatureSet = (int)f + "°";
         } else {

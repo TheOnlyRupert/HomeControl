@@ -69,7 +69,7 @@ public class HvacVM : BaseViewModel {
                     TempOutside = forecastHourly.properties.periods[0].temperature + "°";
                     TempOutsideColor = "Yellow";
                 } else {
-                    if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
+                    if (!ReferenceValues.JsonSettingsMaster.useMetricUnits) {
                         double f = ReferenceValues.ExteriorTemp * 1.8 + 32;
                         TempOutside = (int)f + "°";
                     } else {
@@ -132,7 +132,7 @@ public class HvacVM : BaseViewModel {
             return;
         }
 
-        if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
+        if (!ReferenceValues.JsonSettingsMaster.useMetricUnits) {
             double f = ReferenceValues.JsonHvacMaster.TemperatureSet * 1.8 + 32;
             TempAdjusted = (int)f + "°";
         } else {
@@ -145,7 +145,7 @@ public class HvacVM : BaseViewModel {
             TempInside = "??";
             TempInsideColor = "Red";
         } else {
-            if (ReferenceValues.JsonSettingsMaster.IsImperialMode) {
+            if (!ReferenceValues.JsonSettingsMaster.useMetricUnits) {
                 double f = ReferenceValues.InteriorTemp * 1.8 + 32;
                 TempInside = (int)f + "°";
             } else {

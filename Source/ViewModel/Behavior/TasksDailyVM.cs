@@ -11,7 +11,6 @@ namespace HomeControl.Source.ViewModel.Behavior;
 
 public class TasksDailyVM : BaseViewModel {
     private ObservableCollection<string> _imageList;
-    private bool _isFundAmountReadOnly;
     private int _requiredTime;
     private string _taskHeaderText, _taskName, _imageSelected, _editVisibility, _fundAmount;
     private ObservableCollection<Task> _taskList;
@@ -58,9 +57,7 @@ public class TasksDailyVM : BaseViewModel {
             };
         }
 
-        EditVisibility = !ReferenceValues.JsonSettingsMaster.IsNormalMode ? "VISIBLE" : "COLLAPSED";
-        IsFundAmountReadOnly = !ReferenceValues.JsonSettingsMaster.IsDebugMode;
-
+        EditVisibility = ReferenceValues.JsonSettingsMaster.DebugMode ? "VISIBLE" : "COLLAPSED";
         ImageList = ReferenceValues.IconImageList;
         ImageSelected = "bathtub";
         RequiredTime = 24;
@@ -213,7 +210,7 @@ public class TasksDailyVM : BaseViewModel {
 
             break;
         case "saveFunds":
-            if (ReferenceValues.JsonSettingsMaster.IsDebugMode) {
+            if (ReferenceValues.JsonSettingsMaster.DebugMode) {
                 switch (ReferenceValues.ActiveBehaviorUser) {
                 case 1:
                     try {
@@ -409,14 +406,6 @@ public class TasksDailyVM : BaseViewModel {
         set {
             _fundAmount = VerifyInput.VerifyTextNumeric(value);
             RaisePropertyChangedEvent("FundAmount");
-        }
-    }
-
-    public bool IsFundAmountReadOnly {
-        get => _isFundAmountReadOnly;
-        set {
-            _isFundAmountReadOnly = value;
-            RaisePropertyChangedEvent("IsFundAmountReadOnly");
         }
     }
 

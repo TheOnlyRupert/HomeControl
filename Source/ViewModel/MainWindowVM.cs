@@ -128,7 +128,7 @@ public class MainWindowVM : BaseViewModel {
         return;
 
         void activityTimer_OnInactive(object sender, EventArgs e) {
-            if (!ReferenceValues.JsonSettingsMaster.IsDebugMode) {
+            if (!ReferenceValues.JsonSettingsMaster.DebugMode) {
                 simpleMessenger.PushMessage("ScreenSaverOn", null);
                 ReferenceValues.LockUI = true;
                 ReferenceValues.ScreensaverMaster.Start();
@@ -166,9 +166,14 @@ public class MainWindowVM : BaseViewModel {
             simpleMessenger.PushMessage("HourChanged", null);
             changeDate = true;
 
-            Random random = new();
-            ReferenceValues.SoundToPlay = "clock" + random.Next(1, 3);
-            SoundDispatcher.PlaySound();
+            if (DateTime.Now.Month == 12) {
+                ReferenceValues.SoundToPlay = "jingle_bells";
+                SoundDispatcher.PlaySound();
+            } else {
+                Random random = new();
+                ReferenceValues.SoundToPlay = "clock" + random.Next(1, 3);
+                SoundDispatcher.PlaySound();
+            }
 
             /* Trash Night Sound */
             if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 11) {

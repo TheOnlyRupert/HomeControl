@@ -253,8 +253,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User1 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User1Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
+                                UserId = 1
                             });
                         } catch (Exception) {
                             // ignore
@@ -298,8 +299,9 @@ public class BehaviorVM : BaseViewModel {
                             Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Weekly Funds",
                             Cost = releaseAmountWeekly.ToString(),
                             Category = "User1 Fund",
-                            Person = ReferenceValues.JsonSettingsMaster.User1Name,
-                            Details = "(Automatic)"
+                            Details = "(Automatic)",
+                            Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
+                            UserId = 1
                         });
                     }
 
@@ -341,8 +343,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User1 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User1Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
+                                UserId = 1
                             });
                         } catch (Exception) {
                             // ignore
@@ -388,8 +391,9 @@ public class BehaviorVM : BaseViewModel {
                                     Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User1 Fund",
-                                    Person = ReferenceValues.JsonSettingsMaster.User1Name,
-                                    Details = "(Automatic)"
+                                    Details = "(Automatic)",
+                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
+                                    UserId = 1
                                 });
                             } catch (Exception) {
                                 // ignore
@@ -570,8 +574,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User2 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User2Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
+                                UserId = 2
                             });
                         } catch (Exception) {
                             // ignore
@@ -615,8 +620,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Weekly Funds",
                                 Cost = releaseAmountWeekly.ToString(),
                                 Category = "User2 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User2Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
+                                UserId = 2
                             });
                         } catch (Exception) {
                             // ignore
@@ -661,8 +667,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User2 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User2Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
+                                UserId = 2
                             });
                         } catch (Exception) {
                             // ignore
@@ -707,8 +714,9 @@ public class BehaviorVM : BaseViewModel {
                                     Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User2 Fund",
-                                    Person = ReferenceValues.JsonSettingsMaster.User2Name,
-                                    Details = "(Automatic)"
+                                    Details = "(Automatic)",
+                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
+                                    UserId = 2
                                 });
                             } catch (Exception) {
                                 // ignore
@@ -889,8 +897,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User3 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User3Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
+                                UserId = 3
                             });
                         } catch (Exception) {
                             // ignore
@@ -935,8 +944,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Weekly Funds",
                                 Cost = releaseAmountWeekly.ToString(),
                                 Category = "User3 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User3Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
+                                UserId = 3
                             });
                         } catch (Exception) {
                             // ignore
@@ -981,8 +991,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User3 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User3Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
+                                UserId = 3
                             });
                         } catch (Exception) {
                             // ignore
@@ -1028,8 +1039,9 @@ public class BehaviorVM : BaseViewModel {
                                     Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User3 Fund",
-                                    Person = ReferenceValues.JsonSettingsMaster.User3Name,
-                                    Details = "(Automatic)"
+                                    Details = "(Automatic)",
+                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
+                                    UserId = 3
                                 });
                             } catch (Exception) {
                                 // ignore
@@ -1210,8 +1222,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User4 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User4Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
+                                UserId = 4
                             });
                         } catch (Exception) {
                             // ignore
@@ -1256,8 +1269,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Weekly Funds",
                                 Cost = releaseAmountWeekly.ToString(),
                                 Category = "User4 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User4Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
+                                UserId = 4
                             });
                         } catch (Exception) {
                             // ignore
@@ -1302,8 +1316,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User4 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User4Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
+                                UserId = 4
                             });
                         } catch (Exception) {
                             // ignore
@@ -1349,8 +1364,9 @@ public class BehaviorVM : BaseViewModel {
                                     Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User4 Fund",
-                                    Person = ReferenceValues.JsonSettingsMaster.User4Name,
-                                    Details = "(Automatic)"
+                                    Details = "(Automatic)",
+                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
+                                    UserId = 4
                                 });
                             } catch (Exception) {
                                 // ignore
@@ -1531,8 +1547,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Daily Funds",
                                 Cost = releaseAmountDaily.ToString(),
                                 Category = "User5 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User5Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
+                                UserId = 4
                             });
                         } catch (Exception) {
                             // ignore
@@ -1577,8 +1594,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Weekly Funds",
                                 Cost = releaseAmountWeekly.ToString(),
                                 Category = "User5 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User5Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
+                                UserId = 4
                             });
                         } catch (Exception) {
                             // ignore
@@ -1623,8 +1641,9 @@ public class BehaviorVM : BaseViewModel {
                                 Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Monthly Funds",
                                 Cost = releaseAmountMonthly.ToString(),
                                 Category = "User5 Fund",
-                                Person = ReferenceValues.JsonSettingsMaster.User5Name,
-                                Details = "(Automatic)"
+                                Details = "(Automatic)",
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
+                                UserId = 4
                             });
                         } catch (Exception) {
                             // ignore
@@ -1670,8 +1689,9 @@ public class BehaviorVM : BaseViewModel {
                                     Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Quarterly Funds",
                                     Cost = releaseAmountQuarterly.ToString(),
                                     Category = "User5 Fund",
-                                    Person = ReferenceValues.JsonSettingsMaster.User5Name,
-                                    Details = "(Automatic)"
+                                    Details = "(Automatic)",
+                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
+                                    UserId = 4
                                 });
                             } catch (Exception) {
                                 // ignore

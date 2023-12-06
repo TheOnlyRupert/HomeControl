@@ -11,6 +11,9 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
+    private bool _isDebugModeChecked, _isMetricUnitsChecked, _isEasterEggsChecked, _user1Checked, _user2Checked, _user3Checked, _user4Checked,
+        _user5Checked, _user1BehaviorChecked, _user2BehaviorChecked, _user3BehaviorChecked, _user4BehaviorChecked, _user5BehaviorChecked;
+
     private List<string> _trashDayList;
 
     private string _userAgent, _user1Name, _user2Name, _user3Name, _user4Name, _user5Name, _user1NameLegal, _user2NameLegal, _user3NameLegal, _user4NameLegal, _user5NameLegal,
@@ -18,9 +21,6 @@ public class SettingsVM : BaseViewModel {
         _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
         _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected, _weatherLocation, _gridId;
-
-    private bool _valueImperialChecked, _valueMetricChecked, _isEditTasksMode, _isNormalMode, _isDebugMode, _user1Checked, _user2Checked, _user3Checked, _user4Checked,
-        _user5Checked, _user1BehaviorChecked, _user2BehaviorChecked, _user3BehaviorChecked, _user4BehaviorChecked, _user5BehaviorChecked;
 
     private double _weatherLat, _weatherLon;
 
@@ -73,11 +73,9 @@ public class SettingsVM : BaseViewModel {
         EmergencyContact2Phone2 = ReferenceValues.JsonSettingsMaster.EmergencyContact2Phone2;
         AlarmCode = ReferenceValues.JsonSettingsMaster.AlarmCode;
         ComPort = ReferenceValues.JsonSettingsMaster.ComPort;
-        ValueImperialChecked = ReferenceValues.JsonSettingsMaster.IsImperialMode;
-        ValueMetricChecked = !ValueImperialChecked;
-        IsNormalMode = ReferenceValues.JsonSettingsMaster.IsNormalMode;
-        IsEditTasksMode = ReferenceValues.JsonSettingsMaster.IsEditTasksMode;
-        IsDebugMode = ReferenceValues.JsonSettingsMaster.IsDebugMode;
+        IsDebugModeChecked = ReferenceValues.JsonSettingsMaster.DebugMode;
+        IsMetricUnitsChecked = ReferenceValues.JsonSettingsMaster.useMetricUnits;
+        IsEasterEggsChecked = ReferenceValues.JsonSettingsMaster.useEasterEggs;
         TrashDaySelected = ReferenceValues.JsonSettingsMaster.TrashDay;
         User1Checked = ReferenceValues.JsonSettingsMaster.User1Checked;
         User2Checked = ReferenceValues.JsonSettingsMaster.User2Checked;
@@ -145,11 +143,9 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.EmergencyContact2Phone2 = EmergencyContact2Phone2;
             ReferenceValues.JsonSettingsMaster.AlarmCode = AlarmCode;
             ReferenceValues.JsonSettingsMaster.ComPort = ComPort;
-            ReferenceValues.JsonSettingsMaster.IsImperialMode = ValueImperialChecked;
-            ValueMetricChecked = !ValueImperialChecked;
-            ReferenceValues.JsonSettingsMaster.IsNormalMode = IsNormalMode;
-            ReferenceValues.JsonSettingsMaster.IsEditTasksMode = IsEditTasksMode;
-            ReferenceValues.JsonSettingsMaster.IsDebugMode = IsDebugMode;
+            ReferenceValues.JsonSettingsMaster.DebugMode = IsDebugModeChecked;
+            ReferenceValues.JsonSettingsMaster.useMetricUnits = IsMetricUnitsChecked;
+            ReferenceValues.JsonSettingsMaster.useEasterEggs = IsEasterEggsChecked;
             ReferenceValues.JsonSettingsMaster.TrashDay = TrashDaySelected;
             ReferenceValues.JsonSettingsMaster.User1Checked = User1Checked;
             ReferenceValues.JsonSettingsMaster.User2Checked = User2Checked;
@@ -167,10 +163,6 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.GridY = GridY;
             ReferenceValues.JsonSettingsMaster.GridId = GridId;
             ReferenceValues.JsonSettingsMaster.WeatherLocation = WeatherLocation;
-
-            if (!IsNormalMode && !IsEditTasksMode && !IsDebugMode) {
-                ReferenceValues.JsonSettingsMaster.IsNormalMode = true;
-            }
 
             try {
                 FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster), true);
@@ -569,43 +561,27 @@ public class SettingsVM : BaseViewModel {
         }
     }
 
-    public bool ValueImperialChecked {
-        get => _valueImperialChecked;
+    public bool IsDebugModeChecked {
+        get => _isDebugModeChecked;
         set {
-            _valueImperialChecked = value;
-            RaisePropertyChangedEvent("ValueImperialChecked");
+            _isDebugModeChecked = value;
+            RaisePropertyChangedEvent("IsDebugModeChecked");
         }
     }
 
-    public bool ValueMetricChecked {
-        get => _valueMetricChecked;
+    public bool IsMetricUnitsChecked {
+        get => _isMetricUnitsChecked;
         set {
-            _valueMetricChecked = value;
-            RaisePropertyChangedEvent("ValueMetricChecked");
+            _isMetricUnitsChecked = value;
+            RaisePropertyChangedEvent("IsMetricUnitsChecked");
         }
     }
 
-    public bool IsNormalMode {
-        get => _isNormalMode;
+    public bool IsEasterEggsChecked {
+        get => _isEasterEggsChecked;
         set {
-            _isNormalMode = value;
-            RaisePropertyChangedEvent("IsNormalMode");
-        }
-    }
-
-    public bool IsEditTasksMode {
-        get => _isEditTasksMode;
-        set {
-            _isEditTasksMode = value;
-            RaisePropertyChangedEvent("IsEditTasksMode");
-        }
-    }
-
-    public bool IsDebugMode {
-        get => _isDebugMode;
-        set {
-            _isDebugMode = value;
-            RaisePropertyChangedEvent("IsDebugMode");
+            _isEasterEggsChecked = value;
+            RaisePropertyChangedEvent("IsEasterEggsChecked");
         }
     }
 

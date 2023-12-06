@@ -63,7 +63,7 @@ public class TamagotchiVM : BaseViewModel {
             FileHelpers.SaveFileText("tamagotchi", JsonSerializer.Serialize(ReferenceValues.TamagotchiMaster), true);
         }
 
-        if (ReferenceValues.JsonSettingsMaster.IsDebugMode) {
+        if (ReferenceValues.JsonSettingsMaster.DebugMode) {
             DebugVisibility = "VISIBLE";
 
             DebugAgeText = 100;

@@ -9,7 +9,7 @@ public class ButtonStackTopVM : BaseViewModel {
     private string _lockedImage;
 
     public ButtonStackTopVM() {
-        ReferenceValues.LockUI = !ReferenceValues.JsonSettingsMaster.IsDebugMode;
+        ReferenceValues.LockUI = !ReferenceValues.JsonSettingsMaster.DebugMode;
         LockedImage = ReferenceValues.LockUI ? "./../../Resources/Images/icons/key_locked.png" : "./../../Resources/Images/icons/key_unlocked.png";
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;

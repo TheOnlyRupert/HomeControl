@@ -340,10 +340,15 @@
         <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving7.png"/>
         <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving8.png"/>
         <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving9.png"/>
-        <Resource Include="Resources\Images\icons\cat.png" />
-        <Resource Include="Resources\Images\icons\cat2.png" />
+        <Resource Include="Resources\Images\icons\cat.png"/>
+        <Resource Include="Resources\Images\icons\cat2.png"/>
+        <Resource Include="Resources\Images\icons\elf.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas.gif"/>
         <Content Include="Resources\Sounds\beep.wav">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Resources\Sounds\jingle_bells.wav">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <Content Include="version.json"/>
         <Resource Include="Resources\Images\games\tamagotchi\egg1.png"/>

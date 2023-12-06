@@ -29,7 +29,7 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1,
         _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6,
         _sevenDayForecastRainChance7, _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11,
-        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14, _forecastHourlyVisibility;
+        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14, _forecastHourlyVisibility, _easterEggVisibility;
 
     private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
         _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
@@ -43,6 +43,13 @@ public class WeatherVM : BaseViewModel {
 
         if (ReferenceValues.EnableWeather) {
             UpdateWeather();
+        }
+
+        /* Show Elf on Dec 23rd */
+        if (ReferenceValues.JsonSettingsMaster.useEasterEggs && DateTime.Now.Month == 12 && DateTime.Now.Day == 23) {
+            EasterEggVisibility = "VISIBLE";
+        } else {
+            EasterEggVisibility = "HIDDEN";
         }
 
         ForecastHourlyVisibility = "HIDDEN";
@@ -1390,6 +1397,14 @@ public class WeatherVM : BaseViewModel {
         set {
             _forecastHourlyVisibility = value;
             RaisePropertyChangedEvent("ForecastHourlyVisibility");
+        }
+    }
+
+    public string EasterEggVisibility {
+        get => _easterEggVisibility;
+        set {
+            _easterEggVisibility = value;
+            RaisePropertyChangedEvent("EasterEggVisibility");
         }
     }
 

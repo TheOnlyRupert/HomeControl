@@ -70,6 +70,32 @@ public class EditCalendarVM : BaseViewModel {
 
         foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
             if (ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd") == dates.Date) {
+                /* DEBUG - Cross-platform safe. This fixes the issue with missing icons when transferring files */
+                if (ReferenceValues.JsonSettingsMaster.DebugMode) {
+                    foreach (CalendarEvents events in dates.EventsList) {
+                        switch (events.UserId) {
+                        case 0:
+                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user0.png";
+                            break;
+                        case 1:
+                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png";
+                            break;
+                        case 2:
+                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png";
+                            break;
+                        case 3:
+                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png";
+                            break;
+                        case 4:
+                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png";
+                            break;
+                        case 5:
+                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png";
+                            break;
+                        }
+                    }
+                }
+
                 EventList = dates.EventsList;
             }
         }
@@ -236,7 +262,7 @@ public class EditCalendarVM : BaseViewModel {
                     Date = DateTime.Now,
                     Level = "INFO",
                     Module = "EditCalendarVM",
-                    Description = "Adding calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText + ", " +
+                    Description = "Adding calendar event: User" + user + ", " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText + ", " +
                                   LocationText + ", "
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
@@ -277,7 +303,7 @@ public class EditCalendarVM : BaseViewModel {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "EditCalendarVM",
-                                Description = "Updating calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " +
+                                Description = "Updating calendar event: User" + user + ", " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " +
                                               DescriptionText + ", " +
                                               LocationText + ", "
                             });
@@ -327,7 +353,7 @@ public class EditCalendarVM : BaseViewModel {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditCalendarVM",
-                            Description = "Removing calendar event: " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText +
+                            Description = "Removing calendar event: User" + user + ", " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText +
                                           ", " +
                                           LocationText + ", "
                         });

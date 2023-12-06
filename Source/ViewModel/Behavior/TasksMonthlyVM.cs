@@ -11,7 +11,6 @@ namespace HomeControl.Source.ViewModel.Behavior;
 
 public class TasksMonthlyVM : BaseViewModel {
     private ObservableCollection<string> _imageList, _roomList;
-    private bool _isFundAmountReadOnly;
 
     private int _room1TaskSelectedIndex, _room2TaskSelectedIndex, _room3TaskSelectedIndex, _room4TaskSelectedIndex, _room5TaskSelectedIndex, _room6TaskSelectedIndex,
         _room7TaskSelectedIndex, _room8TaskSelectedIndex, _room9TaskSelectedIndex, _room10TaskSelectedIndex, _room11TaskSelectedIndex, _room12TaskSelectedIndex,
@@ -121,9 +120,7 @@ public class TasksMonthlyVM : BaseViewModel {
         Room15TaskList ??= new ObservableCollection<Task>();
         Room16TaskList ??= new ObservableCollection<Task>();
 
-        EditVisibility = !ReferenceValues.JsonSettingsMaster.IsNormalMode ? "VISIBLE" : "COLLAPSED";
-        IsFundAmountReadOnly = !ReferenceValues.JsonSettingsMaster.IsDebugMode;
-
+        EditVisibility = ReferenceValues.JsonSettingsMaster.DebugMode ? "VISIBLE" : "COLLAPSED";
         ImageList = ReferenceValues.IconImageList;
         ImageSelected = "alarms";
 
@@ -318,7 +315,7 @@ public class TasksMonthlyVM : BaseViewModel {
 
             break;
         case "saveFunds":
-            if (ReferenceValues.JsonSettingsMaster.IsDebugMode) {
+            if (ReferenceValues.JsonSettingsMaster.DebugMode) {
                 switch (ReferenceValues.ActiveBehaviorUser) {
                 case 1:
                     try {
@@ -1338,14 +1335,6 @@ public class TasksMonthlyVM : BaseViewModel {
         set {
             _fundAmount = VerifyInput.VerifyTextNumeric(value);
             RaisePropertyChangedEvent("FundAmount");
-        }
-    }
-
-    public bool IsFundAmountReadOnly {
-        get => _isFundAmountReadOnly;
-        set {
-            _isFundAmountReadOnly = value;
-            RaisePropertyChangedEvent("IsFundAmountReadOnly");
         }
     }
 

@@ -8,7 +8,7 @@
 
         <Image Grid.Row="0" Grid.RowSpan="2" Source="../../Resources/Images/monthly/christmas/christmas.png" Opacity="0.8"/>
 
-        <TextBlock Grid.Row="0" Text="CHRISTMAS COUNTDOWN" HorizontalAlignment="Center" Foreground="Red" FontSize="24" FontFamily="Harrington">
+        <TextBlock Grid.Row="0" Text="CHRISTMAS COUNTDOWN" HorizontalAlignment="Center" Foreground="Red" FontSize="24" FontFamily="Ravie" TextWrapping="Wrap">
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="4" RenderingBias="Performance"/>
             </TextBlock.Effect>

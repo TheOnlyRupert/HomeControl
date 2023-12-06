@@ -39,11 +39,11 @@
 
         <StackPanel Grid.Column="0" Grid.Row="0">
             <TextBlock Text="User 1 Legal Name" Foreground="White"/>
-            <TextBox Text="{Binding User1NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            <TextBox Name="MainFocusItem" Text="{Binding User1NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBlock Text="*User 1 Nickname" Foreground="White"/>
+            <TextBlock Text="User 1 Nickname" Foreground="White"/>
             <TextBox Text="{Binding User1Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
         </StackPanel>
 
@@ -63,7 +63,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBlock Text="*User 2 Nickname" Foreground="White"/>
+            <TextBlock Text="User 2 Nickname" Foreground="White"/>
             <TextBox Text="{Binding User2Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
         </StackPanel>
 
@@ -253,19 +253,14 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="15" Grid.RowSpan="2">
-            <RadioButton GroupName="debug" IsChecked="{Binding IsNormalMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Normal Mode</RadioButton>
-            <RadioButton GroupName="debug" IsChecked="{Binding IsEditTasksMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Edit Tasks Mode</RadioButton>
-            <RadioButton GroupName="debug" IsChecked="{Binding IsDebugMode}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Debug Mode</RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="15" Grid.RowSpan="2">
-            <RadioButton GroupName="metric" IsChecked="{Binding ValueImperialChecked}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Imperial</RadioButton>
-            <RadioButton GroupName="metric" IsChecked="{Binding ValueMetricChecked}" VerticalContentAlignment="Center" FontSize="16" Foreground="White">Metric</RadioButton>
+            <CheckBox Content="Debug Mode" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsDebugModeChecked}"/>
+            <CheckBox Content="Use Metric Units" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsMetricUnitsChecked}"/>
+            <CheckBox Content="Use Easter Eggs" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsEasterEggsChecked}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2">
             <TextBlock Text="National Weather Forcast User Agent (Email)" Foreground="White"/>
-            <TextBox Name="MainFocusItem" Text="{Binding UserAgent, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            <TextBox Text="{Binding UserAgent, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
         </StackPanel>
 
         <Button Grid.Column="0" Grid.Row="18" Content="Current Location" Command="{Binding ButtonCommand}" CommandParameter="location" Margin="0 0 4 0">
