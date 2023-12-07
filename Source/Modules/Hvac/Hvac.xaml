@@ -65,7 +65,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -76,27 +75,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="{Binding MainStatus}" HorizontalAlignment="Center" Foreground="{Binding MainStatusColor}" FontSize="20"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding TempOutside}" HorizontalAlignment="Center" Foreground="{Binding TempOutsideColor}" FontSize="48"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Outside" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding ExtHumidity}" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontSize="18"/>
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding TempOutside}" HorizontalAlignment="Center" Foreground="{Binding TempOutsideColor}" FontSize="48"/>
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Outside" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding ExtHumidity}" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontSize="18"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding TempInside}" HorizontalAlignment="Center" Foreground="{Binding TempInsideColor}" FontSize="48"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="Inside" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding IntHumidity}" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontSize="18"/>
 
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding TempInside}" HorizontalAlignment="Center" Foreground="{Binding TempInsideColor}" FontSize="48"/>
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="Inside" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding IntHumidity}" HorizontalAlignment="Center" Foreground="CornflowerBlue" FontSize="18"/>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding TempAdjusted}" HorizontalAlignment="Center" Foreground="{Binding TempAdjustedColor}" FontSize="48"/>
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding HeatingCoolingText}" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
 
-                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding TempAdjusted}" HorizontalAlignment="Center" Foreground="{Binding TempAdjustedColor}" FontSize="48"/>
-                <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding HeatingCoolingText}" HorizontalAlignment="Center" Foreground="White" FontSize="14"/>
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Status" HorizontalAlignment="Center" Foreground="White" FontSize="14" VerticalAlignment="Bottom"/>
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding ProgramStatus}" Foreground="{Binding ProgramStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
 
-                <TextBlock Grid.Column="0" Grid.Row="5" Text="Status" HorizontalAlignment="Center" Foreground="White" FontSize="14" VerticalAlignment="Bottom"/>
-                <TextBlock Grid.Column="0" Grid.Row="6" Text="{Binding ProgramStatus}" Foreground="{Binding ProgramStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="Fan" HorizontalAlignment="Center" Foreground="White" FontSize="14" VerticalAlignment="Bottom"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding FanStatus}" Foreground="{Binding FanStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
 
-                <TextBlock Grid.Column="1" Grid.Row="5" Text="Fan" HorizontalAlignment="Center" Foreground="White" FontSize="14" VerticalAlignment="Bottom"/>
-                <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding FanStatus}" Foreground="{Binding FanStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
-
-                <TextBlock Grid.Column="2" Grid.Row="5" Text="Program" HorizontalAlignment="Center" Foreground="White" FontSize="14" VerticalAlignment="Bottom"/>
-                <TextBlock Grid.Column="2" Grid.Row="6" Text="{Binding HeatingCoolingStatus}" Foreground="{Binding HeatingCoolingStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
+                <TextBlock Grid.Column="2" Grid.Row="4" Text="Program" HorizontalAlignment="Center" Foreground="White" FontSize="14" VerticalAlignment="Bottom"/>
+                <TextBlock Grid.Column="2" Grid.Row="5" Text="{Binding HeatingCoolingStatus}" Foreground="{Binding HeatingCoolingStatusColor}" HorizontalAlignment="Center" FontSize="18"/>
             </Grid>
         </Grid>
     </Button>

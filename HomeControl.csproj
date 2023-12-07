@@ -75,7 +75,6 @@
         <Compile Include="Source\Json\JsonTasks.cs"/>
         <Compile Include="Source\Json\JsonFinances.cs"/>
         <Compile Include="Source\Json\JsonGameStats.cs"/>
-        <Compile Include="Source\Json\JsonHvac.cs"/>
         <Compile Include="Source\Json\JsonSettings.cs"/>
         <Compile Include="Source\Json\JsonTamagotchi.cs"/>
         <Compile Include="Source\Json\JsonTimer.cs"/>

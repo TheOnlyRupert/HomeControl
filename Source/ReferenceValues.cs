@@ -80,11 +80,6 @@ public static class ReferenceValues {
 
     public static SerialPort SerialPort { get; set; }
 
-    public static int InteriorTemp { get; set; }
-    public static int InteriorHumidity { get; set; }
-    public static int ExteriorTemp { get; set; }
-    public static int ExteriorHumidity { get; set; }
-
     public static DateTime CalendarEventDate { get; set; }
 
     public static JsonCalendar JsonCalendarMaster { get; set; }
@@ -95,7 +90,24 @@ public static class ReferenceValues {
     public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonSettingsMaster { get; set; }
 
-    public static JsonHvac JsonHvacMaster { get; set; }
+    public static int InteriorTemp { get; set; }
+    public static int InteriorHumidity { get; set; }
+    public static int ExteriorTemp { get; set; }
+    public static int ExteriorHumidity { get; set; }
+
+    public static bool IsProgramRunning { get; set; }
+
+    /* Is program waiting for new temp */
+    public static bool IsStandby { get; set; }
+
+    /* On or auto... No other option */
+    public static bool IsFanAuto { get; set; }
+
+    /* Is heating or cooling */
+    public static bool IsHeatingMode { get; set; }
+
+    /* Ranges from ?°C - ?°C */
+    public static int TemperatureSet { get; set; }
     public static bool IsHvacComEstablished { get; set; }
 
     public static bool IsCalendarDupeModeEnabled { get; set; }

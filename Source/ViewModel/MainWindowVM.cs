@@ -81,15 +81,6 @@ public class MainWindowVM : BaseViewModel {
 
         FileHelpers.SaveFileText("version", JsonSerializer.Serialize(jsonVersion), false);
 
-        /* HVAC */
-        try {
-            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac", true));
-        } catch (Exception) {
-            ReferenceValues.JsonHvacMaster = new JsonHvac();
-
-            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster), true);
-        }
-
         ReferenceValues.IconImageList = new ObservableCollection<string>();
         ResourceManager resourceManager = new("HomeControl.g", Assembly.GetExecutingAssembly());
         ResourceSet resources = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);

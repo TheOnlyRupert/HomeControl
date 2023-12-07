@@ -13,8 +13,9 @@ bool isProgramRunning;
 bool isStandby;
 bool isHeatingMode;
 bool isOverride;
-unsigned long previousMillis;
-unsigned long coolDown;
+unsigned long previousMillisTemp;
+unsigned long previousMillisHVAC;
+unsigned long previousMillisCooldown;
 
 /* PINS   === 4 -> Fan, 5 -> Cooling, 6 -> Heating, 8 -> Interior Temp Input */
 /* RELAYS === Relay 4 -> Fan, Relay 3 -> Cooling, Relay 2 -> Heating */
@@ -24,7 +25,6 @@ void setup() {
   isFanAuto = true;
   isHeatingMode = false;
   isProgramRunning = false;
-  isOverride = false;
   isStandby = true;
   tempSet = 22;  //70F
   Serial.begin(9600);
@@ -36,13 +36,27 @@ void setup() {
   pinMode(6, OUTPUT);
 }
 
+/* Current Commands:
+ * <HVACFanAuto> or <HVACFanOn>
+ * <HVACCoolingMode> or <HVACHeatingMode>
+ * <HVACProgramOn> or <HVACProgramOff>
+ * <HVACStandby> or <HVACRunning>
+ * <HVAC: TEMP_SET_X> (where X is A-P)
+ */
 void loop() {
-  unsigned long currentMillis = millis();
+  unsigned long currentMillisTemp = millis();
+  unsigned long currentMillisHVAC = millis();
+  unsigned long currentMillisCooldown = millis();
 
-  if (currentMillis - previousMillis >= 10000) {
-    previousMillis = currentMillis;
-
+  /* Get interior temp every 1 minute */
+  if (currentMillisTemp - previousMillisTemp >= 60000) {
+    previousMillisTemp = currentMillisTemp;
     GetTemps();
+  }
+
+  /* Check HVAC state every 10 minutes */
+  if (currentMillisHVAC - previousMillisHVAC >= 600000) {
+    previousMillisHVAC = currentMillisHVAC;
     UpdateHvacState();
   }
 
@@ -53,39 +67,27 @@ void loop() {
       /* Force Refresh */
       case '0':
         if (isFanAuto) {
-          Serial.print("<HVAC: Fan Auto>");
+          Serial.print("<HVACFanAuto>");
         } else {
-          Serial.print("<HVAC: Fan On>");
-        }
-
-        if (isOverride) {
-          Serial.print("<HVAC: Override On>");
-        } else {
-          Serial.print("<HVAC: Override Off>");
+          Serial.print("<HVACFanOn>");
         }
 
         if (isHeatingMode) {
-          Serial.print("<HVAC: Heating Mode>");
-          if (isProgramRunning) {
-            if (isStandby) {
-              Serial.print("<HVAC: Heating Standby>");
-            } else {
-              Serial.print("<HVAC: Heating Running>");
-            }
-          } else {
-            Serial.print("<HVAC: Program Off>");
-          }
+          Serial.print("<HVACHeatingMode>");
         } else {
-          Serial.print("<HVAC: Cooling Mode>");
-          if (isProgramRunning) {
-            if (isStandby) {
-              Serial.print("<HVAC: Cooling Standby>");
-            } else {
-              Serial.print("<HVAC: Cooling Running>");
-            }
-          } else {
-            Serial.print("<HVAC: Program Off>");
-          }
+          Serial.print("<HVACCoolingMode>");
+        }
+          
+        if (isProgramRunning) {
+          Serial.print("<HVACProgramOn>");
+        } else {
+          Serial.print("<HVACProgramOff>");
+        }
+
+        if (isStandby) {
+          Serial.print("<HVACStandby>");
+        } else {
+          Serial.print("<HVACRunning>");
         }
 
         Serial.print("<HVAC: TEMP_SET_");
@@ -96,71 +98,59 @@ void loop() {
       /* Fan Mode: On */
       case '1':
         isFanAuto = false;
-
-        Serial.print("<HVAC: Fan On>");
+        Serial.print("<HVACFanOn>");
         digitalWrite(4, HIGH);
 
         break;
       /* Fan Mode: Auto */
       case '2':
         isFanAuto = true;
-
-        Serial.print("<HVAC: Fan Auto>");
+        Serial.print("<HVACFanAuto>");
+        
+        /* Keep safety checks in place */
         if (!isProgramRunning) {
           digitalWrite(6, LOW);
-          delay(2000);
           digitalWrite(5, LOW);
-          delay(2000);
           digitalWrite(4, LOW);
         }
 
         break;
-      /* Cooling On */
+      /* Program On */
       case '3':
-        if (isHeatingMode) {
-          digitalWrite(6, LOW);
-          delay(2000);
-        }
-
-        isHeatingMode = false;
         isProgramRunning = true;
         isStandby = true;
-
-        Serial.print("<HVAC: Cooling Mode>");
+        Serial.print("<HVACProgramOn>");
+        Serial.print("<HVACStandby>");
 
         break;
-      /* Heating On */
+      /* Program Off */
       case '4':
-        if (!isHeatingMode) {
-          digitalWrite(5, LOW);
-          delay(2000);
-        }
-
-        isHeatingMode = true;
-        isProgramRunning = true;
-        isStandby = true;
-
-        Serial.print("<HVAC: Heating Mode>");
-
-        break;
-      case '5':
-        /* Stop Hvac */
         isProgramRunning = false;
-
+        isStandby = true;
         Serial.print("<HVAC: Program Off>");
         digitalWrite(6, LOW);
-        delay(2000);
         digitalWrite(5, LOW);
+        
         if (isFanAuto) {
-          delay(2000);
           digitalWrite(4, LOW);
         }
+
         break;
+      /* Heating Mode */
+      case '5':
+        isHeatingMode = true;
+        isStandby = true;
+        Serial.print("<HVAC: Heating Mode>");
+        Serial.print("<HVACStandby>");
+
+        break;
+      /* Cooling Mode */
       case '6':
-        isHeatingMode = !isHeatingMode;
-        break;
-      case '7':
-        isOverride = !isOverride;
+        isHeatingMode = false;
+        isStandby = true;
+        Serial.print("<HVAC: Cooling Mode>");
+        Serial.print("<HVACStandby>");
+
         break;
       case 'A':
       case 'B':
@@ -212,82 +202,49 @@ void GetTemps() {
 void UpdateHvacState() {
   if (isProgramRunning) {
     if (isHeatingMode) {
-      if (isOverride) {
-        isStandby = false;
-
-        digitalWrite(4, HIGH);
-        delay(2000);
-        digitalWrite(5, LOW);
-        delay(2000);
-        digitalWrite(6, HIGH);
+      if (isStandby) {
+         if (tempSet - tempInt > 2) {
+          isStandby = false;
+          Serial.print("<HVACRunning>");
+          
+          digitalWrite(4, HIGH);
+          digitalWrite(5, LOW);
+          digitalWrite(6, HIGH);
+        }
       } else {
-        if (isStandby) {
+        if (tempSet >= tempInt) {
+          isStandby = true;
+          Serial.print("<HVACStandby>");
+
+          digitalWrite(5, LOW);
+          digitalWrite(6, LOW);
+
           if (isFanAuto) {
             digitalWrite(4, LOW);
-          }
-
-          if (tempSet - tempInt > 2) {
-            isStandby = false;
-            Serial.print("<HVAC: Heating Running>");
-
-            digitalWrite(4, HIGH);
-            delay(2000);
-            digitalWrite(5, LOW);
-            delay(2000);
-            digitalWrite(6, HIGH);
-          }
-        } else {
-          if (tempSet - tempInt <= 0) {
-            isStandby = true;
-            Serial.print("<HVAC: Heating Standby>");
-
-            digitalWrite(5, LOW);
-            delay(2000);
-            digitalWrite(6, LOW);
-            if (isFanAuto) {
-              delay(2000);
-              digitalWrite(4, LOW);
-            }
           }
         }
       }
-    } else {
-      if (isOverride) {
-        isStandby = false;
 
-        digitalWrite(4, HIGH);
-        delay(2000);
-        digitalWrite(6, LOW);
-        delay(2000);
-        digitalWrite(5, HIGH);
+    } else {
+      if (isStandby) {
+         if (tempSet - tempInt < 2) {
+          isStandby = false;
+          Serial.print("<HVACRunning>");
+          
+          digitalWrite(4, HIGH);
+          digitalWrite(6, LOW);
+          digitalWrite(5, HIGH);
+        }
       } else {
-        if (isStandby) {
+        if (tempSet >= tempInt) {
+          isStandby = true;
+          Serial.print("<HVACStandby/>");
+
+          digitalWrite(6, LOW);
+          digitalWrite(5, LOW);
+
           if (isFanAuto) {
             digitalWrite(4, LOW);
-          }
-
-          if (tempInt - tempSet > 2) {
-            isStandby = false;
-            Serial.print("<HVAC: Cooling Running>");
-
-            digitalWrite(4, HIGH);
-            delay(2000);
-            digitalWrite(6, LOW);
-            delay(2000);
-            digitalWrite(5, HIGH);
-          }
-        } else {
-          if (tempInt - tempSet <= 0) {
-            isStandby = true;
-            Serial.print("<HVAC: Cooling Standby>");
-
-            digitalWrite(6, LOW);
-            delay(2000);
-            digitalWrite(5, LOW);
-            if (isFanAuto) {
-              delay(2000);
-              digitalWrite(4, LOW);
-            }
           }
         }
       }

@@ -12,7 +12,10 @@ public static class HvacCrossPlay {
     private static bool comPortMessage, intMessageSent, extMessageSent;
     private static readonly CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
 
-    /* 1 = fan on, 2 = fan off, 3 = cooling on, 4 = cooling off, 5 = heat on, 6 = heat off, 7 = override on, 8 = override off */
+    /* 0 -> Force Refresh,
+     * 1 -> Fan On, 2 -> Fan Auto,
+     * 3 -> Program On, 4 -> Program Off,
+     * 5 -> Heating Mode, 6 -> Cooling Mode */
     public static async void EstablishConnection() {
         try {
             if (!ReferenceValues.SerialPort.IsOpen) {
@@ -24,6 +27,7 @@ public static class HvacCrossPlay {
 
                 ReferenceValues.SerialPort.ReadTimeout = 500;
                 ReferenceValues.SerialPort.WriteTimeout = 500;
+                /* Pull current state from Arduino */
                 ReferenceValues.SerialPort.Write("0");
             }
         } catch (Exception) {
@@ -136,8 +140,8 @@ public static class HvacCrossPlay {
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
-        } else if (data.Contains("<HVAC: Fan On>")) {
-            ReferenceValues.JsonHvacMaster.IsFanAuto = false;
+        } else if (data.Contains("<HVACFanOn>")) {
+            ReferenceValues.IsFanAuto = false;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -145,8 +149,8 @@ public static class HvacCrossPlay {
                 Description = "HVAC: Changing Fan Mode to On"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Fan Auto>")) {
-            ReferenceValues.JsonHvacMaster.IsFanAuto = true;
+        } else if (data.Contains("<HVACFanAuto>")) {
+            ReferenceValues.IsFanAuto = true;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -154,8 +158,8 @@ public static class HvacCrossPlay {
                 Description = "HVAC: Changing Fan Mode to Auto"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Cooling Mode>")) {
-            ReferenceValues.JsonHvacMaster.IsHeatingMode = false;
+        } else if (data.Contains("<HVACCoolingMode>")) {
+            ReferenceValues.IsHeatingMode = false;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -163,8 +167,8 @@ public static class HvacCrossPlay {
                 Description = "HVAC: Changing to Cooling Mode"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Heating Mode>")) {
-            ReferenceValues.JsonHvacMaster.IsHeatingMode = true;
+        } else if (data.Contains("<HVACHeatingMode>")) {
+            ReferenceValues.IsHeatingMode = true;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -172,8 +176,8 @@ public static class HvacCrossPlay {
                 Description = "HVAC: Changing to Heating Mode"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Program Off>")) {
-            ReferenceValues.JsonHvacMaster.IsProgramRunning = false;
+        } else if (data.Contains("<HVACProgramOff>")) {
+            ReferenceValues.IsProgramRunning = false;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -181,56 +185,43 @@ public static class HvacCrossPlay {
                 Description = "HVAC: Program Off"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Heating Running>")) {
-            ReferenceValues.JsonHvacMaster.IsStandby = false;
-            ReferenceValues.JsonHvacMaster.IsProgramRunning = true;
+        } else if (data.Contains("<HVACProgramOn>")) {
+            ReferenceValues.IsProgramRunning = true;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
                 Module = "HvacCrossPlay",
-                Description = "HVAC: Heating Running"
+                Description = "HVAC: Program On"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Heating Standby>")) {
-            ReferenceValues.JsonHvacMaster.IsStandby = true;
-            ReferenceValues.JsonHvacMaster.IsProgramRunning = true;
+        } else if (data.Contains("<HVACRunning>")) {
+            ReferenceValues.IsStandby = false;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
                 Module = "HvacCrossPlay",
-                Description = "HVAC: Heating Standby"
+                Description = "HVAC: Running"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Cooling Running>")) {
-            ReferenceValues.JsonHvacMaster.IsStandby = false;
-            ReferenceValues.JsonHvacMaster.IsProgramRunning = true;
+        } else if (data.Contains("<HVACStandby>")) {
+            ReferenceValues.IsStandby = true;
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
                 Module = "HvacCrossPlay",
-                Description = "HVAC: Cooling Running"
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Cooling Standby>")) {
-            ReferenceValues.JsonHvacMaster.IsStandby = true;
-            ReferenceValues.JsonHvacMaster.IsProgramRunning = true;
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "HvacCrossPlay",
-                Description = "HVAC: Cooling Standby"
+                Description = "HVAC: Standby"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HVAC: TEMP_SET_")) {
             try {
                 data = data.Substring(data.IndexOf('<'));
                 data = data.Substring(16, data.Length - 17);
-                ReferenceValues.JsonHvacMaster.TemperatureSet = int.Parse(data);
+                ReferenceValues.TemperatureSet = int.Parse(data);
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "INFO",
                     Module = "HvacCrossPlay",
-                    Description = "HVAC: Changing Set Temperature to: " + ReferenceValues.JsonHvacMaster.TemperatureSet + "°C"
+                    Description = "HVAC: Changing Set Temperature to: " + ReferenceValues.TemperatureSet + "°C"
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             } catch (Exception e) {
@@ -242,40 +233,8 @@ public static class HvacCrossPlay {
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
-        } else if (data.Contains("<HVAC: Override On>")) {
-            ReferenceValues.JsonHvacMaster.IsOverride = true;
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "HvacCrossPlay",
-                Description = "HVAC: Changing Override to On"
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: Override Off>")) {
-            ReferenceValues.JsonHvacMaster.IsOverride = false;
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "HvacCrossPlay",
-                Description = "HVAC: Changing Override to Off"
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         simpleMessenger.PushMessage("HvacUpdated", null);
-    }
-
-    public static void SaveJson() {
-        try {
-            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster), true);
-        } catch (Exception e) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "HvacCrossPlay",
-                Description = e.ToString()
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        }
     }
 }
