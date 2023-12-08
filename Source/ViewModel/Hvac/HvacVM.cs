@@ -21,6 +21,7 @@ public class HvacVM : BaseViewModel {
     public HvacVM() {
         CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
         CurrentTimeText = DateTime.Now.ToString("HH:mm");
+        ReferenceValues.TemperatureSet = 22;
 
         UpdateWeather();
         UpdateHvac();
@@ -59,25 +60,16 @@ public class HvacVM : BaseViewModel {
                 CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime,
                     forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "null");
 
-                if (ReferenceValues.ExteriorTemp == -99) {
+                if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
+                    double c = (forecastHourly.properties.periods[0].temperature - 32) * 0.556;
+                    TempOutside = (int)c + "°";
+                } else {
                     TempOutside = forecastHourly.properties.periods[0].temperature + "°";
-                    TempOutsideColor = "Yellow";
-                } else {
-                    if (!ReferenceValues.JsonSettingsMaster.useMetricUnits) {
-                        double f = ReferenceValues.ExteriorTemp * 1.8 + 32;
-                        TempOutside = (int)f + "°";
-                    } else {
-                        TempOutside = ReferenceValues.ExteriorTemp + "°";
-                    }
-
-                    TempOutsideColor = "White";
                 }
 
-                if (ReferenceValues.ExteriorHumidity == -99) {
-                    ExtHumidity = forecastHourly.properties.periods[0].relativeHumidity.value + "%";
-                } else {
-                    ExtHumidity = ReferenceValues.ExteriorHumidity + "%";
-                }
+                TempOutsideColor = "Yellow";
+
+                ExtHumidity = forecastHourly.properties.periods[0].relativeHumidity.value + "%";
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -124,14 +116,26 @@ public class HvacVM : BaseViewModel {
             return;
         }
 
-        TempAdjusted = ReferenceValues.TemperatureSet + "°";
+        if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
+            TempAdjusted = ReferenceValues.TemperatureSet + "°";
+        } else {
+            double f = ReferenceValues.TemperatureSet * 1.8 + 32;
+            TempAdjusted = (int)f + "°";
+        }
+
         TempAdjustedColor = "White";
 
         if (ReferenceValues.InteriorTemp == -99) {
             TempInside = "??";
             TempInsideColor = "Red";
         } else {
-            TempInside = ReferenceValues.InteriorTemp + "°";
+            if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
+                TempInside = ReferenceValues.InteriorTemp + "°";
+            } else {
+                double f = ReferenceValues.InteriorTemp * 1.8 + 32;
+                TempInside = (int)f + "°";
+            }
+
             TempInsideColor = "White";
         }
 

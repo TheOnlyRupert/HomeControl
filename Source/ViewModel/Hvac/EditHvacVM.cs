@@ -7,11 +7,16 @@ public class EditHvacVM : BaseViewModel {
     private string _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _fanStatusColor, _heatingCoolingStatusColor, _temperatureSet;
 
     public EditHvacVM() {
-        TemperatureSet = ReferenceValues.TemperatureSet + "°";
+        TemperatureDisplay();
         GetButtonColors();
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+
+    private void TemperatureDisplay() {
+        double f = ReferenceValues.TemperatureSet * 1.8 + 32;
+        TemperatureSet = ReferenceValues.TemperatureSet + "°C  or  " + (int)f + "°F";
+    }
 
     private void ButtonLogic(object param) {
         switch (param) {
@@ -38,6 +43,7 @@ public class EditHvacVM : BaseViewModel {
                 ReferenceValues.TemperatureSet--;
             }
 
+            TemperatureDisplay();
 
             break;
         case "addTemp":
@@ -45,10 +51,11 @@ public class EditHvacVM : BaseViewModel {
                 ReferenceValues.TemperatureSet++;
             }
 
+            TemperatureDisplay();
+
             break;
         }
 
-        TemperatureSet = ReferenceValues.TemperatureSet + "°";
         GetButtonColors();
     }
 

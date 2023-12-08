@@ -9,7 +9,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public static class HvacCrossPlay {
-    private static bool comPortMessage, intMessageSent, extMessageSent;
+    private static bool comPortMessage, intMessageSent;
     private static readonly CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
 
     /* 0 -> Force Refresh,
@@ -23,7 +23,6 @@ public static class HvacCrossPlay {
                 ReferenceValues.IsHvacComEstablished = true;
                 comPortMessage = false;
                 intMessageSent = false;
-                extMessageSent = false;
 
                 ReferenceValues.SerialPort.ReadTimeout = 500;
                 ReferenceValues.SerialPort.WriteTimeout = 500;
@@ -76,10 +75,10 @@ public static class HvacCrossPlay {
     }
 
     private static void ProcessData(string data) {
-        if (data.Contains("<INT:")) {
+        if (data.Contains("<INT,")) {
             try {
                 data = data.Substring(data.IndexOf('<'));
-                data = data.Substring(6, data.Length - 7);
+                data = data.Substring(5, data.Length - 6);
                 string[] parts = data.Split(',');
 
                 ReferenceValues.InteriorTemp = (int)float.Parse(parts[0].Trim());
@@ -99,38 +98,6 @@ public static class HvacCrossPlay {
                 }
 
                 intMessageSent = true;
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "HvacCrossPlay",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-            }
-        } else if (data.Contains("<EXT:")) {
-            try {
-                data = data.Substring(data.IndexOf('<'));
-                data = data.Substring(6, data.Length - 7);
-                string[] parts = data.Split(',');
-
-                ReferenceValues.ExteriorTemp = (int)float.Parse(parts[0].Trim());
-                ReferenceValues.ExteriorHumidity = (int)float.Parse(parts[1].Trim());
-                extMessageSent = false;
-            } catch (FormatException) {
-                ReferenceValues.ExteriorTemp = -99;
-                ReferenceValues.ExteriorHumidity = -99;
-                if (!extMessageSent) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "HvacCrossPlay",
-                        Description = "Unable to get exterior temp/humidity... Possibly offline?"
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                extMessageSent = true;
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -212,10 +179,10 @@ public static class HvacCrossPlay {
                 Description = "HVAC: Standby"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        } else if (data.Contains("<HVAC: TEMP_SET_")) {
+        } else if (data.Contains("<TEMP_SET_")) {
             try {
                 data = data.Substring(data.IndexOf('<'));
-                data = data.Substring(16, data.Length - 17);
+                data = data.Substring(10, data.Length - 14);
                 ReferenceValues.TemperatureSet = int.Parse(data);
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,

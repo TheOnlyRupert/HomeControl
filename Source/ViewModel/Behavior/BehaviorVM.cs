@@ -1549,7 +1549,7 @@ public class BehaviorVM : BaseViewModel {
                                 Category = "User5 Fund",
                                 Details = "(Automatic)",
                                 Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                                UserId = 4
+                                UserId = 5
                             });
                         } catch (Exception) {
                             // ignore
@@ -1596,7 +1596,7 @@ public class BehaviorVM : BaseViewModel {
                                 Category = "User5 Fund",
                                 Details = "(Automatic)",
                                 Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                                UserId = 4
+                                UserId = 5
                             });
                         } catch (Exception) {
                             // ignore
@@ -1643,7 +1643,7 @@ public class BehaviorVM : BaseViewModel {
                                 Category = "User5 Fund",
                                 Details = "(Automatic)",
                                 Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                                UserId = 4
+                                UserId = 5
                             });
                         } catch (Exception) {
                             // ignore
@@ -1691,7 +1691,7 @@ public class BehaviorVM : BaseViewModel {
                                     Category = "User5 Fund",
                                     Details = "(Automatic)",
                                     Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                                    UserId = 4
+                                    UserId = 5
                                 });
                             } catch (Exception) {
                                 // ignore

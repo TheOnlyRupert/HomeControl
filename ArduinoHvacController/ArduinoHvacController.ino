@@ -4,15 +4,12 @@ DHT dhtInt(8, DHT22);
 DHT dhtExt(9, DHT22);
 
 float humInt;
-float humExt;
 float tempInt;
-float tempExt;
-int tempSet;
+float tempSet;
 bool isFanAuto;
 bool isProgramRunning;
 bool isStandby;
 bool isHeatingMode;
-bool isOverride;
 unsigned long previousMillisTemp;
 unsigned long previousMillisHVAC;
 unsigned long previousMillisCooldown;
@@ -20,16 +17,16 @@ unsigned long previousMillisCooldown;
 /* PINS   === 4 -> Fan, 5 -> Cooling, 6 -> Heating, 8 -> Interior Temp Input */
 /* RELAYS === Relay 4 -> Fan, Relay 3 -> Cooling, Relay 2 -> Heating */
 void setup() {
-  previousMillis = 60000;
-  coolDown = 0;
+  previousMillisTemp = 60000;
+  previousMillisHVAC = 600000;
+  previousMillisCooldown = 60000;
   isFanAuto = true;
-  isHeatingMode = false;
+  isHeatingMode = true;
   isProgramRunning = false;
   isStandby = true;
   tempSet = 22;  //70F
   Serial.begin(9600);
   dhtInt.begin();
-  dhtExt.begin();
 
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
@@ -41,7 +38,7 @@ void setup() {
  * <HVACCoolingMode> or <HVACHeatingMode>
  * <HVACProgramOn> or <HVACProgramOff>
  * <HVACStandby> or <HVACRunning>
- * <HVAC: TEMP_SET_X> (where X is A-P)
+ * <TEMP_SET_X> (where X is A-P)
  */
 void loop() {
   unsigned long currentMillisTemp = millis();
@@ -62,7 +59,6 @@ void loop() {
 
   while (Serial.available() > 0) {
     char readWpf = Serial.read();
-
     switch (readWpf) {
       /* Force Refresh */
       case '0':
@@ -90,7 +86,7 @@ void loop() {
           Serial.print("<HVACRunning>");
         }
 
-        Serial.print("<HVAC: TEMP_SET_");
+        Serial.print("<TEMP_SET_");
         Serial.print(tempSet);
         Serial.print(">");
         break;
@@ -127,7 +123,7 @@ void loop() {
       case '4':
         isProgramRunning = false;
         isStandby = true;
-        Serial.print("<HVAC: Program Off>");
+        Serial.print("<HVACProgramOff>");
         digitalWrite(6, LOW);
         digitalWrite(5, LOW);
         
@@ -140,7 +136,7 @@ void loop() {
       case '5':
         isHeatingMode = true;
         isStandby = true;
-        Serial.print("<HVAC: Heating Mode>");
+        Serial.print("<HVACHeatingMode>");
         Serial.print("<HVACStandby>");
 
         break;
@@ -148,7 +144,7 @@ void loop() {
       case '6':
         isHeatingMode = false;
         isStandby = true;
-        Serial.print("<HVAC: Cooling Mode>");
+        Serial.print("<HVACCoolingMode>");
         Serial.print("<HVACStandby>");
 
         break;
@@ -169,11 +165,13 @@ void loop() {
       case 'O':
       case 'P':
         tempSet = readWpf - 50;
-        Serial.print("<HVAC: TEMP_SET_");
+        Serial.print("<TEMP_SET_");
         Serial.print(readWpf - 50);
         Serial.print(">");
 
         break;
+      default:
+      return;
     }
 
     UpdateHvacState();
@@ -181,25 +179,23 @@ void loop() {
 }
 
 void GetTemps() {
-  humInt = dhtInt.readHumidity();
   tempInt = dhtInt.readTemperature();
-  humExt = dhtExt.readHumidity();
-  tempExt = dhtExt.readTemperature();
+  humInt = dhtInt.readHumidity();
 
-  Serial.print("<INT: ");
+  Serial.print("<INT,");
   Serial.print(tempInt);
   Serial.print(",");
   Serial.print(humInt);
   Serial.print(">");
-
-  Serial.print("<EXT: ");
-  Serial.print(tempExt);
-  Serial.print(",");
-  Serial.print(humExt);
-  Serial.print(">");
 }
 
 void UpdateHvacState() {
+  Serial.print("<DEBUG,TempSet_");
+  Serial.print(tempSet);
+  Serial.print(",TempInt_");
+  Serial.print(tempInt);
+  Serial.print(">");
+
   if (isProgramRunning) {
     if (isHeatingMode) {
       if (isStandby) {
@@ -238,7 +234,7 @@ void UpdateHvacState() {
       } else {
         if (tempSet >= tempInt) {
           isStandby = true;
-          Serial.print("<HVACStandby/>");
+          Serial.print("<HVACStandby>");
 
           digitalWrite(6, LOW);
           digitalWrite(5, LOW);

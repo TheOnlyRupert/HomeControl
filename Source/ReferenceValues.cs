@@ -92,8 +92,6 @@ public static class ReferenceValues {
 
     public static int InteriorTemp { get; set; }
     public static int InteriorHumidity { get; set; }
-    public static int ExteriorTemp { get; set; }
-    public static int ExteriorHumidity { get; set; }
 
     public static bool IsProgramRunning { get; set; }
 
@@ -106,7 +104,7 @@ public static class ReferenceValues {
     /* Is heating or cooling */
     public static bool IsHeatingMode { get; set; }
 
-    /* Ranges from ?°C - ?°C */
+    /* Ranges from 15°C / 59°F to 30°C / 86°F */
     public static int TemperatureSet { get; set; }
     public static bool IsHvacComEstablished { get; set; }
 
