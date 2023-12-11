@@ -392,9 +392,8 @@
 
                 <TextBlock Grid.Row="0" Text="Spending Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
-                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White" SelectedItem="{Binding DetailedFinanceSelected1}"
-                                        Background="Transparent" BorderBrush="DarkSlateGray" Focusable="False" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True"
-                                        Margin="8 0 8 8" BorderThickness="2">
+                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                                        Focusable="False" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 8 8" BorderThickness="2">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
                             <Setter Property="Focusable" Value="False"/>

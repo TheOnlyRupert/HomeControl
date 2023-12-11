@@ -80,8 +80,7 @@
 
             <Grid Grid.Column="0" Margin="8">
                 <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding EventList}" Background="Transparent"
-                                        SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" IsSelected="{Binding IsSelected}" Foreground="White" BorderThickness="2"
-                                        BorderBrush="DarkSlateGray">
+                                        SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" Foreground="White" BorderThickness="2" BorderBrush="DarkSlateGray">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>

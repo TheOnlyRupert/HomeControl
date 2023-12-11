@@ -78,8 +78,8 @@
 
             <Grid Grid.Column="0" Margin="8">
                 <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding EventList}" Background="Transparent"
-                                        SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" IsSelected="{Binding IsSelected}" Foreground="White" BorderThickness="2"
-                                        BorderBrush="White" IsSynchronizedWithCurrentItem="False">
+                                        SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" Foreground="White" BorderThickness="2" BorderBrush="White"
+                                        IsSynchronizedWithCurrentItem="False">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent"/>
@@ -148,6 +148,7 @@
 
             <Grid Grid.Column="1" Margin="8">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -160,6 +161,16 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{Binding WeatherImage}"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="4*"/>
@@ -207,33 +218,33 @@
                     </Button>
                 </Grid>
 
-                <StackPanel Grid.Row="1">
+                <StackPanel Grid.Row="2">
                     <TextBlock Text="Event" FontSize="24" Foreground="White"/>
                     <TextBox Name="MainFocusItem" Text="{Binding EventText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="2">
+                <StackPanel Grid.Row="3">
                     <TextBlock Text="Start Time" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding StartTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="3">
+                <StackPanel Grid.Row="4">
                     <TextBlock Text="End Time" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding EndTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="4">
+                <StackPanel Grid.Row="5">
                     <TextBlock Text="Location" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding LocationText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="5">
+                <StackPanel Grid.Row="6">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"
                              control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <Grid Grid.Row="6" Margin="0 16">
+                <Grid Grid.Row="7" Margin="0 16">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -325,7 +336,7 @@
                     </Button>
                 </Grid>
 
-                <Grid Grid.Row="7" Margin="0 0 0 16">
+                <Grid Grid.Row="8" Margin="0 0 0 16">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -450,7 +461,7 @@
                     </Button>
                 </Grid>
 
-                <TextBlock Grid.Row="8" Foreground="White" FontSize="18" Text="{Binding DupeText}"/>
+                <TextBlock Grid.Row="9" Foreground="White" FontSize="18" Text="{Binding DupeText}"/>
             </Grid>
         </Grid>
 

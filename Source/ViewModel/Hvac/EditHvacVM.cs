@@ -4,7 +4,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public class EditHvacVM : BaseViewModel {
-    private string _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _fanStatusColor, _heatingCoolingStatusColor, _temperatureSet;
+    private string _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _fanStatusColor, _heatingCoolingStatusColor, _temperatureSet, _temperatureInside;
 
     public EditHvacVM() {
         TemperatureDisplay();
@@ -16,26 +16,23 @@ public class EditHvacVM : BaseViewModel {
     private void TemperatureDisplay() {
         double f = ReferenceValues.TemperatureSet * 1.8 + 32;
         TemperatureSet = ReferenceValues.TemperatureSet + "°C  or  " + (int)f + "°F";
+
+        f = ReferenceValues.TemperatureInside * 1.8 + 32;
+        TemperatureInside = ReferenceValues.TemperatureInside + "°C  or  " + (int)f + "°F";
     }
 
     private void ButtonLogic(object param) {
         switch (param) {
         case "programStatus":
-            if (ReferenceValues.IsHvacComEstablished) {
-                ReferenceValues.IsProgramRunning = !ReferenceValues.IsProgramRunning;
-            }
+            ReferenceValues.IsProgramRunning = !ReferenceValues.IsProgramRunning;
 
             break;
         case "fanStatus":
-            if (ReferenceValues.IsHvacComEstablished) {
-                ReferenceValues.IsFanAuto = !ReferenceValues.IsFanAuto;
-            }
+            ReferenceValues.IsFanAuto = !ReferenceValues.IsFanAuto;
 
             break;
         case "heatingCoolingStatus":
-            if (ReferenceValues.IsHvacComEstablished) {
-                ReferenceValues.IsHeatingMode = !ReferenceValues.IsHeatingMode;
-            }
+            ReferenceValues.IsHeatingMode = !ReferenceValues.IsHeatingMode;
 
             break;
         case "subTemp":
@@ -61,26 +58,26 @@ public class EditHvacVM : BaseViewModel {
 
     private void GetButtonColors() {
         if (ReferenceValues.IsProgramRunning) {
-            ProgramStatus = "System: On";
+            ProgramStatus = "Program:  ON";
             ProgramStatusColor = "Green";
         } else {
-            ProgramStatus = "System: Off";
+            ProgramStatus = "Program:  OFF";
             ProgramStatusColor = "Transparent";
         }
 
         if (ReferenceValues.IsFanAuto) {
-            FanStatus = "Fan Mode: Auto";
+            FanStatus = "Fan Mode:  AUTO";
             FanStatusColor = "Transparent";
         } else {
-            FanStatus = "Fan Mode: On";
+            FanStatus = "Fan Mode:  ON";
             FanStatusColor = "Green";
         }
 
         if (ReferenceValues.IsHeatingMode) {
-            HeatingCoolingStatus = "Temperature Status: Heating";
+            HeatingCoolingStatus = "Mode:  HEATING";
             HeatingCoolingStatusColor = "Red";
         } else {
-            HeatingCoolingStatus = "Temperature Status: Cooling";
+            HeatingCoolingStatus = "Mode:  COOLING";
             HeatingCoolingStatusColor = "CornflowerBlue";
         }
     }
@@ -140,6 +137,14 @@ public class EditHvacVM : BaseViewModel {
         set {
             _temperatureSet = value;
             RaisePropertyChangedEvent("TemperatureSet");
+        }
+    }
+
+    public string TemperatureInside {
+        get => _temperatureInside;
+        set {
+            _temperatureInside = value;
+            RaisePropertyChangedEvent("TemperatureInside");
         }
     }
 

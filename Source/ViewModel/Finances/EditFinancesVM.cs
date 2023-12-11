@@ -66,8 +66,7 @@ public class EditFinancesVM : BaseViewModel {
                     2 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
                     3 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
                     4 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
-                    5 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                    _ => "null"
+                    5 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png"
                 };
             }
         }

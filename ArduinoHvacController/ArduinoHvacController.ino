@@ -7,12 +7,11 @@ float humInt;
 float tempInt;
 float tempSet;
 bool isFanAuto;
-bool isProgramRunning;
-bool isStandby;
-bool isHeatingMode;
 unsigned long previousMillisTemp;
 unsigned long previousMillisHVAC;
 unsigned long previousMillisCooldown;
+
+enum { HvacCoolingOff, HvacCoolingRunning, HvacCoolingStandby, HvacCoolingPurging, HvacHeatingOff, HvacHeatingRunning, HvacHeatingStandby, HvacHeatingPurging } HvacState = HvacCoolingOff;
 
 /* PINS   === 4 -> Fan, 5 -> Cooling, 6 -> Heating, 8 -> Interior Temp Input */
 /* RELAYS === Relay 4 -> Fan, Relay 3 -> Cooling, Relay 2 -> Heating */
@@ -21,9 +20,6 @@ void setup() {
   previousMillisHVAC = 600000;
   previousMillisCooldown = 60000;
   isFanAuto = true;
-  isHeatingMode = true;
-  isProgramRunning = false;
-  isStandby = true;
   tempSet = 22;  //70F
   Serial.begin(9600);
   dhtInt.begin();
@@ -63,28 +59,14 @@ void loop() {
       /* Force Refresh */
       case '0':
         if (isFanAuto) {
-          Serial.print("<HVACFanAuto>");
+          Serial.print("<HvacFanAuto>");
         } else {
-          Serial.print("<HVACFanOn>");
+          Serial.print("<HvacFanOn>");
         }
 
-        if (isHeatingMode) {
-          Serial.print("<HVACHeatingMode>");
-        } else {
-          Serial.print("<HVACCoolingMode>");
-        }
-          
-        if (isProgramRunning) {
-          Serial.print("<HVACProgramOn>");
-        } else {
-          Serial.print("<HVACProgramOff>");
-        }
-
-        if (isStandby) {
-          Serial.print("<HVACStandby>");
-        } else {
-          Serial.print("<HVACRunning>");
-        }
+        Serial.print("<");
+        Serial.print(HvacState);
+        Serial.print(">");
 
         Serial.print("<TEMP_SET_");
         Serial.print(tempSet);
@@ -116,7 +98,6 @@ void loop() {
         isProgramRunning = true;
         isStandby = true;
         Serial.print("<HVACProgramOn>");
-        Serial.print("<HVACStandby>");
 
         break;
       /* Program Off */
@@ -196,7 +177,7 @@ void UpdateHvacState() {
   Serial.print(tempInt);
   Serial.print(">");
 
-  if (isProgramRunning) {
+  /*if (isProgramRunning) {
     if (isHeatingMode) {
       if (isStandby) {
          if (tempSet - tempInt > 2) {

@@ -343,6 +343,7 @@
         <Resource Include="Resources\Images\icons\cat2.png"/>
         <Resource Include="Resources\Images\icons\elf.png"/>
         <Resource Include="Resources\Images\monthly\christmas\christmas.gif"/>
+        <Resource Include="Resources\Images\behavior\strike_black.png"/>
         <Content Include="Resources\Sounds\beep.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>

@@ -8,6 +8,17 @@ using HomeControl.Source.Json;
 namespace HomeControl.Source;
 
 public static class ReferenceValues {
+    #region Enums
+
+    public enum HvacModes {
+        Off,
+        Running,
+        Standby,
+        Purging
+    }
+
+    #endregion
+
     public const string COPYRIGHT = "Copyright © 2022-2023  Robert Higgins";
     public const int VERSION_MAJOR = 1;
     public const int VERSION_MINOR = 5;
@@ -90,23 +101,20 @@ public static class ReferenceValues {
     public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonSettingsMaster { get; set; }
 
-    public static int InteriorTemp { get; set; }
+    public static int TemperatureInside { get; set; }
     public static int InteriorHumidity { get; set; }
 
-    public static bool IsProgramRunning { get; set; }
-
-    /* Is program waiting for new temp */
-    public static bool IsStandby { get; set; }
-
-    /* On or auto... No other option */
-    public static bool IsFanAuto { get; set; }
-
-    /* Is heating or cooling */
-    public static bool IsHeatingMode { get; set; }
+    public static HvacModes HvacMode { get; set; }
 
     /* Ranges from 15°C / 59°F to 30°C / 86°F */
     public static int TemperatureSet { get; set; }
+
+    /* On or auto... No other option */
+    public static bool IsFanAuto { get; set; }
+    public static bool IsHeatingMode { get; set; }
+    public static bool IsProgramRunning { get; set; }
     public static bool IsHvacComEstablished { get; set; }
+    public static int HvacStateRunTime { get; set; }
 
     public static bool IsCalendarDupeModeEnabled { get; set; }
     public static CalendarEvents DupeEvent { get; set; }

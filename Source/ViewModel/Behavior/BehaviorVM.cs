@@ -1861,21 +1861,21 @@ public class BehaviorVM : BaseViewModel {
         User5Star4 = "../../../Resources/Images/behavior/star_black.png";
         User5Star5 = "../../../Resources/Images/behavior/star_black.png";
 
-        User1Strike1 = "";
-        User1Strike2 = "";
-        User1Strike3 = "";
-        User2Strike1 = "";
-        User2Strike2 = "";
-        User2Strike3 = "";
-        User3Strike1 = "";
-        User3Strike2 = "";
-        User3Strike3 = "";
-        User4Strike1 = "";
-        User4Strike2 = "";
-        User4Strike3 = "";
-        User5Strike1 = "";
-        User5Strike2 = "";
-        User5Strike3 = "";
+        User1Strike1 = "../../../Resources/Images/behavior/strike_black.png";
+        User1Strike2 = "../../../Resources/Images/behavior/strike_black.png";
+        User1Strike3 = "../../../Resources/Images/behavior/strike_black.png";
+        User2Strike1 = "../../../Resources/Images/behavior/strike_black.png";
+        User2Strike2 = "../../../Resources/Images/behavior/strike_black.png";
+        User2Strike3 = "../../../Resources/Images/behavior/strike_black.png";
+        User3Strike1 = "../../../Resources/Images/behavior/strike_black.png";
+        User3Strike2 = "../../../Resources/Images/behavior/strike_black.png";
+        User3Strike3 = "../../../Resources/Images/behavior/strike_black.png";
+        User4Strike1 = "../../../Resources/Images/behavior/strike_black.png";
+        User4Strike2 = "../../../Resources/Images/behavior/strike_black.png";
+        User4Strike3 = "../../../Resources/Images/behavior/strike_black.png";
+        User5Strike1 = "../../../Resources/Images/behavior/strike_black.png";
+        User5Strike2 = "../../../Resources/Images/behavior/strike_black.png";
+        User5Strike3 = "../../../Resources/Images/behavior/strike_black.png";
 
         switch (ReferenceValues.JsonBehaviorMaster.User1Stars) {
         case 1:

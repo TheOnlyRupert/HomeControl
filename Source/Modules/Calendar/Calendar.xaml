@@ -96,7 +96,7 @@
                 </Button.Style>
             </Button>
 
-            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DupeText}" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold" FontSize="18"/>
+            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold" FontSize="18"/>
 
             <Button Grid.Column="1" Content="&lt;" Command="{Binding ButtonCommand}" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Right" CommandParameter="subMonth">
                 <Button.Style>
@@ -197,7 +197,7 @@
 
             <Grid Grid.Row="0" Grid.Column="0">
                 <Border BorderBrush="{Binding Button1BorderColor}" BorderThickness="{Binding Button1BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button1BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -299,7 +299,7 @@
 
             <Grid Grid.Row="0" Grid.Column="1">
                 <Border BorderBrush="{Binding Button2BorderColor}" BorderThickness="{Binding Button2BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button2BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -399,7 +399,7 @@
 
             <Grid Grid.Row="0" Grid.Column="2">
                 <Border BorderBrush="{Binding Button3BorderColor}" BorderThickness="{Binding Button3BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button3BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -499,7 +499,7 @@
 
             <Grid Grid.Row="0" Grid.Column="3">
                 <Border BorderBrush="{Binding Button4BorderColor}" BorderThickness="{Binding Button4BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button4BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -599,7 +599,7 @@
 
             <Grid Grid.Row="0" Grid.Column="4">
                 <Border BorderBrush="{Binding Button5BorderColor}" BorderThickness="{Binding Button5BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button5BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -699,7 +699,7 @@
 
             <Grid Grid.Row="0" Grid.Column="5">
                 <Border BorderBrush="{Binding Button6BorderColor}" BorderThickness="{Binding Button6BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button6BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -799,7 +799,7 @@
 
             <Grid Grid.Row="0" Grid.Column="6">
                 <Border BorderBrush="{Binding Button7BorderColor}" BorderThickness="{Binding Button7BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button7BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -899,7 +899,7 @@
 
             <Grid Grid.Row="1" Grid.Column="0">
                 <Border BorderBrush="{Binding Button8BorderColor}" BorderThickness="{Binding Button8BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button8BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -999,7 +999,7 @@
 
             <Grid Grid.Row="1" Grid.Column="1">
                 <Border BorderBrush="{Binding Button9BorderColor}" BorderThickness="{Binding Button9BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button9BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1099,7 +1099,7 @@
 
             <Grid Grid.Row="1" Grid.Column="2">
                 <Border BorderBrush="{Binding Button10BorderColor}" BorderThickness="{Binding Button10BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button10BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1199,7 +1199,7 @@
 
             <Grid Grid.Row="1" Grid.Column="3">
                 <Border BorderBrush="{Binding Button11BorderColor}" BorderThickness="{Binding Button11BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button11BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1299,7 +1299,7 @@
 
             <Grid Grid.Row="1" Grid.Column="4">
                 <Border BorderBrush="{Binding Button12BorderColor}" BorderThickness="{Binding Button12BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button12BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1399,7 +1399,7 @@
 
             <Grid Grid.Row="1" Grid.Column="5">
                 <Border BorderBrush="{Binding Button13BorderColor}" BorderThickness="{Binding Button13BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button13BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1499,7 +1499,7 @@
 
             <Grid Grid.Row="1" Grid.Column="6">
                 <Border BorderBrush="{Binding Button14BorderColor}" BorderThickness="{Binding Button14BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button14BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1599,7 +1599,7 @@
 
             <Grid Grid.Row="2" Grid.Column="0">
                 <Border BorderBrush="{Binding Button15BorderColor}" BorderThickness="{Binding Button15BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button15BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1699,7 +1699,7 @@
 
             <Grid Grid.Row="2" Grid.Column="1">
                 <Border BorderBrush="{Binding Button16BorderColor}" BorderThickness="{Binding Button16BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button16BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1799,7 +1799,7 @@
 
             <Grid Grid.Row="2" Grid.Column="2">
                 <Border BorderBrush="{Binding Button17BorderColor}" BorderThickness="{Binding Button17BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button17BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1899,7 +1899,7 @@
 
             <Grid Grid.Row="2" Grid.Column="3">
                 <Border BorderBrush="{Binding Button18BorderColor}" BorderThickness="{Binding Button18BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button18BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1999,7 +1999,7 @@
 
             <Grid Grid.Row="2" Grid.Column="4">
                 <Border BorderBrush="{Binding Button19BorderColor}" BorderThickness="{Binding Button19BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button19BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2099,7 +2099,7 @@
 
             <Grid Grid.Row="2" Grid.Column="5">
                 <Border BorderBrush="{Binding Button20BorderColor}" BorderThickness="{Binding Button20BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button20BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2199,7 +2199,7 @@
 
             <Grid Grid.Row="2" Grid.Column="6">
                 <Border BorderBrush="{Binding Button21BorderColor}" BorderThickness="{Binding Button21BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button21BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2299,7 +2299,7 @@
 
             <Grid Grid.Row="3" Grid.Column="0">
                 <Border BorderBrush="{Binding Button22BorderColor}" BorderThickness="{Binding Button22BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button22BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2399,7 +2399,7 @@
 
             <Grid Grid.Row="3" Grid.Column="1">
                 <Border BorderBrush="{Binding Button23BorderColor}" BorderThickness="{Binding Button23BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button23BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2499,7 +2499,7 @@
 
             <Grid Grid.Row="3" Grid.Column="2">
                 <Border BorderBrush="{Binding Button24BorderColor}" BorderThickness="{Binding Button24BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button24BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2599,7 +2599,7 @@
 
             <Grid Grid.Row="3" Grid.Column="3">
                 <Border BorderBrush="{Binding Button25BorderColor}" BorderThickness="{Binding Button25BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button25BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2699,7 +2699,7 @@
 
             <Grid Grid.Row="3" Grid.Column="4">
                 <Border BorderBrush="{Binding Button26BorderColor}" BorderThickness="{Binding Button26BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button26BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2799,7 +2799,7 @@
 
             <Grid Grid.Row="3" Grid.Column="5">
                 <Border BorderBrush="{Binding Button27BorderColor}" BorderThickness="{Binding Button27BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button27BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2899,7 +2899,7 @@
 
             <Grid Grid.Row="3" Grid.Column="6">
                 <Border BorderBrush="{Binding Button28BorderColor}" BorderThickness="{Binding Button28BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button28BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -2999,7 +2999,7 @@
 
             <Grid Grid.Row="4" Grid.Column="0">
                 <Border BorderBrush="{Binding Button29BorderColor}" BorderThickness="{Binding Button29BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button29BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3099,7 +3099,7 @@
 
             <Grid Grid.Row="4" Grid.Column="1">
                 <Border BorderBrush="{Binding Button30BorderColor}" BorderThickness="{Binding Button30BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button30BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3199,7 +3199,7 @@
 
             <Grid Grid.Row="4" Grid.Column="2">
                 <Border BorderBrush="{Binding Button31BorderColor}" BorderThickness="{Binding Button31BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button31BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3299,7 +3299,7 @@
 
             <Grid Grid.Row="4" Grid.Column="3">
                 <Border BorderBrush="{Binding Button32BorderColor}" BorderThickness="{Binding Button32BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button32BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3399,7 +3399,7 @@
 
             <Grid Grid.Row="4" Grid.Column="4">
                 <Border BorderBrush="{Binding Button33BorderColor}" BorderThickness="{Binding Button33BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button33BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3499,7 +3499,7 @@
 
             <Grid Grid.Row="4" Grid.Column="5">
                 <Border BorderBrush="{Binding Button34BorderColor}" BorderThickness="{Binding Button34BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button34BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3599,7 +3599,7 @@
 
             <Grid Grid.Row="4" Grid.Column="6">
                 <Border BorderBrush="{Binding Button35BorderColor}" BorderThickness="{Binding Button35BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button35BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3699,7 +3699,7 @@
 
             <Grid Grid.Row="5" Grid.Column="0">
                 <Border BorderBrush="{Binding Button36BorderColor}" BorderThickness="{Binding Button36BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button36BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3799,7 +3799,7 @@
 
             <Grid Grid.Row="5" Grid.Column="1">
                 <Border BorderBrush="{Binding Button37BorderColor}" BorderThickness="{Binding Button37BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button37BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3899,7 +3899,7 @@
 
             <Grid Grid.Row="5" Grid.Column="2">
                 <Border BorderBrush="{Binding Button38BorderColor}" BorderThickness="{Binding Button38BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button38BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -3999,7 +3999,7 @@
 
             <Grid Grid.Row="5" Grid.Column="3">
                 <Border BorderBrush="{Binding Button39BorderColor}" BorderThickness="{Binding Button39BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button39BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -4099,7 +4099,7 @@
 
             <Grid Grid.Row="5" Grid.Column="4">
                 <Border BorderBrush="{Binding Button40BorderColor}" BorderThickness="{Binding Button40BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button40BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -4199,7 +4199,7 @@
 
             <Grid Grid.Row="5" Grid.Column="5">
                 <Border BorderBrush="{Binding Button41BorderColor}" BorderThickness="{Binding Button41BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button41BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -4299,7 +4299,7 @@
 
             <Grid Grid.Row="5" Grid.Column="6">
                 <Border BorderBrush="{Binding Button42BorderColor}" BorderThickness="{Binding Button42BorderThickness}">
-                    <DockPanel Focusable="False" Background="{Binding Button42BackgroundColor}">
+                    <DockPanel Focusable="False">
                         <Grid DockPanel.Dock="Top" Focusable="False" Margin="2 2 2 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

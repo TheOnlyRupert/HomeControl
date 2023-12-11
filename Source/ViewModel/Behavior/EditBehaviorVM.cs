@@ -452,9 +452,9 @@ public class EditBehaviorVM : BaseViewModel {
         ChildStar3 = "../../../Resources/Images/behavior/star_black.png";
         ChildStar4 = "../../../Resources/Images/behavior/star_black.png";
         ChildStar5 = "../../../Resources/Images/behavior/star_black.png";
-        ChildStrike1 = "";
-        ChildStrike2 = "";
-        ChildStrike3 = "";
+        ChildStrike1 = "../../../Resources/Images/behavior/strike_black.png";
+        ChildStrike2 = "../../../Resources/Images/behavior/strike_black.png";
+        ChildStrike3 = "../../../Resources/Images/behavior/strike_black.png";
 
         switch (stars) {
         case 1:

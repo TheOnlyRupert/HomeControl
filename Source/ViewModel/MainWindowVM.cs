@@ -32,7 +32,7 @@ public class MainWindowVM : BaseViewModel {
     private int trashInt;
 
     public MainWindowVM() {
-        IconImage = "../../Resources/Images/icon.png";
+        IconImage = "../../Resources/Images/icons/behavior.png";
         simpleMessenger = CrossViewMessenger.Instance;
         currentDate = DateTime.Now;
         internetMessage = false;
@@ -230,6 +230,7 @@ public class MainWindowVM : BaseViewModel {
 
         /* Tick Tamagotchi Every Second */
         TamagotchiLogic.TickLogic();
+        ReferenceValues.HvacStateRunTime++;
 
         /* Check Trash */
         if (trashInt > 0) {

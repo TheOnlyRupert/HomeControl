@@ -14,7 +14,7 @@ public class HvacVM : BaseViewModel {
 
     private string _tempInside, _heatingCoolingText, _tempAdjusted, _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _extHumidity, _tempInsideColor, _tempAdjustedColor,
         _fanStatusColor, _heatingCoolingStatusColor, _intHumidity, _tempOutside, _tempOutsideColor, _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText,
-        _currentTimeSecondsText, _currentWeatherCloudIcon, _hvacStatusImage, _fanStatusImage;
+        _currentTimeSecondsText, _currentWeatherCloudIcon, _runTime, _currentRainChanceText;
 
     private JsonWeather forecastHourly;
 
@@ -56,9 +56,10 @@ public class HvacVM : BaseViewModel {
 
                 CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(forecastHourly.properties.periods[0].windDirection);
                 CurrentWindSpeedText = forecastHourly.properties.periods[0].windSpeed;
+                CurrentRainChanceText = forecastHourly.properties.periods[0].probabilityOfPrecipitation.value + "%";
                 CurrentWeatherDescription = forecastHourly.properties.periods[0].shortForecast;
                 CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(forecastHourly.properties.periods[0].shortForecast, forecastHourly.properties.periods[0].isDaytime,
-                    forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "null");
+                    forecastHourly.properties.periods[0].temperature, forecastHourly.properties.periods[0].windSpeed, "");
 
                 if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
                     double c = (forecastHourly.properties.periods[0].temperature - 32) * 0.556;
@@ -86,6 +87,9 @@ public class HvacVM : BaseViewModel {
         switch (e.PropertyName) {
         case "Refresh":
             CurrentTimeSecondsText = DateTime.Now.ToString("ss");
+            TimeSpan time = TimeSpan.FromSeconds(ReferenceValues.HvacStateRunTime);
+            RunTime = ReferenceValues.HvacMode + ": " + time.ToString(@"hh\:mm\:ss");
+
             break;
         case "HvacUpdated":
             UpdateHvac();
@@ -125,14 +129,14 @@ public class HvacVM : BaseViewModel {
 
         TempAdjustedColor = "White";
 
-        if (ReferenceValues.InteriorTemp == -99) {
+        if (ReferenceValues.TemperatureInside == -99) {
             TempInside = "??";
             TempInsideColor = "Red";
         } else {
             if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
-                TempInside = ReferenceValues.InteriorTemp + "°";
+                TempInside = ReferenceValues.TemperatureInside + "°";
             } else {
-                double f = ReferenceValues.InteriorTemp * 1.8 + 32;
+                double f = ReferenceValues.TemperatureInside * 1.8 + 32;
                 TempInside = (int)f + "°";
             }
 
@@ -153,47 +157,44 @@ public class HvacVM : BaseViewModel {
             FanStatusColor = "Green";
         }
 
-        if (ReferenceValues.IsProgramRunning) {
-            if (ReferenceValues.IsStandby) {
-                ProgramStatus = "Standby";
-                ProgramStatusColor = "Yellow";
-            } else {
-                ProgramStatus = "Running";
-                ProgramStatusColor = "Green";
-            }
-        } else {
-            ProgramStatus = "Off";
-            ProgramStatusColor = "White";
-        }
-
         if (ReferenceValues.IsHeatingMode) {
-            HeatingCoolingStatus = "Heating";
-            HeatingCoolingStatusColor = "Red";
-            HeatingCoolingText = "Heating To";
-        } else {
-            HeatingCoolingStatus = "Cooling";
-            HeatingCoolingStatusColor = "CornflowerBlue";
-            HeatingCoolingText = "Cooling To";
-        }
-
-        /* Image logic */
-        if (ReferenceValues.IsProgramRunning) {
-            FanStatusImage = ReferenceValues.IsFanAuto ? "" : "../../../Resources/Images/hvac/fan.gif";
-
-            if (!ReferenceValues.IsStandby) {
-                if (ReferenceValues.IsHeatingMode) {
-                    HvacStatusImage = "../../../Resources/Images/hvac/heat.gif";
-                    FanStatusImage = "../../../Resources/Images/hvac/fan.gif";
-                } else {
-                    HvacStatusImage = "../../../Resources/Images/hvac/cooling.gif";
-                    FanStatusImage = "../../../Resources/Images/hvac/fan.gif";
-                }
-            } else {
-                HvacStatusImage = "";
+            switch (ReferenceValues.HvacMode) {
+            case ReferenceValues.HvacModes.Off:
+                ProgramStatus = "Heating Off";
+                ProgramStatusColor = "White";
+                break;
+            case ReferenceValues.HvacModes.Running:
+                ProgramStatus = "Heating Running";
+                ProgramStatusColor = "Green";
+                break;
+            case ReferenceValues.HvacModes.Standby:
+                ProgramStatus = "Heating Standby";
+                ProgramStatusColor = "Yellow";
+                break;
+            case ReferenceValues.HvacModes.Purging:
+                ProgramStatus = "Heating Purging";
+                ProgramStatusColor = "Yellow";
+                break;
             }
         } else {
-            FanStatusImage = "";
-            HvacStatusImage = "";
+            switch (ReferenceValues.HvacMode) {
+            case ReferenceValues.HvacModes.Off:
+                ProgramStatus = "Cooling Off";
+                ProgramStatusColor = "White";
+                break;
+            case ReferenceValues.HvacModes.Running:
+                ProgramStatus = "Cooling Running";
+                ProgramStatusColor = "Green";
+                break;
+            case ReferenceValues.HvacModes.Standby:
+                ProgramStatus = "Cooling Standby";
+                ProgramStatusColor = "Yellow";
+                break;
+            case ReferenceValues.HvacModes.Purging:
+                ProgramStatus = "Cooling Purging";
+                ProgramStatusColor = "Yellow";
+                break;
+            }
         }
     }
 
@@ -203,18 +204,18 @@ public class HvacVM : BaseViewModel {
             if (ReferenceValues.LockUI) {
                 ReferenceValues.SoundToPlay = "locked";
                 SoundDispatcher.PlaySound();
-            } else if (ReferenceValues.IsHvacComEstablished) {
+            } else if (ReferenceValues.IsHvacComEstablished || ReferenceValues.JsonSettingsMaster.DebugMode) {
                 /* Save current state before editing. Only update if state changes */
-                bool isFanAuto = ReferenceValues.IsFanAuto;
-                bool isProgramRunning = ReferenceValues.IsProgramRunning;
-                bool isHeatingMode = ReferenceValues.IsHeatingMode;
-                int temp = ReferenceValues.TemperatureSet;
+                bool IsProgramRunningOld = ReferenceValues.IsProgramRunning;
+                bool isHeatingModeOld = ReferenceValues.IsHeatingMode;
+                bool isFanAutoOld = ReferenceValues.IsFanAuto;
+                int tempOld = ReferenceValues.TemperatureSet;
 
                 EditHvac editHvac = new();
                 editHvac.ShowDialog();
                 editHvac.Close();
 
-                if (isFanAuto != ReferenceValues.IsFanAuto) {
+                if (isFanAutoOld != ReferenceValues.IsFanAuto) {
                     if (ReferenceValues.IsFanAuto) {
                         /* 2 -> Fan On */
                         ReferenceValues.SerialPort.Write("2");
@@ -222,63 +223,35 @@ public class HvacVM : BaseViewModel {
                         /* 1 -> Fan Auto */
                         ReferenceValues.SerialPort.Write("1");
                     }
-
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "INFO",
-                        Module = "HvacVM",
-                        Description = "HVAC Changing FanModeAuto to " + ReferenceValues.IsFanAuto
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
-                if (isProgramRunning != ReferenceValues.IsProgramRunning) {
+                if (IsProgramRunningOld != ReferenceValues.IsProgramRunning) {
                     if (ReferenceValues.IsProgramRunning) {
                         /* 3 -> Program On */
                         ReferenceValues.SerialPort.Write("3");
+                        ReferenceValues.HvacMode = ReferenceValues.HvacModes.Standby;
                     } else {
                         /* 4 -> Program Off */
                         ReferenceValues.SerialPort.Write("4");
+                        ReferenceValues.HvacMode = ReferenceValues.HvacModes.Off;
                     }
-
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "INFO",
-                        Module = "HvacVM",
-                        Description = "HVAC Changing ProgramRunning to " + ReferenceValues.IsProgramRunning
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
-                if (isHeatingMode != ReferenceValues.IsHeatingMode) {
+                if (isHeatingModeOld != ReferenceValues.IsHeatingMode) {
                     if (ReferenceValues.IsHeatingMode) {
-                        /* 5 -> Heating Mode */
+                        /* 3 -> Heating Mode */
                         ReferenceValues.SerialPort.Write("5");
+                        ReferenceValues.HvacMode = ReferenceValues.HvacModes.Standby;
                     } else {
-                        /* 6 -> Cooling Mode */
+                        /* 4 -> Cooling Mode */
                         ReferenceValues.SerialPort.Write("6");
+                        ReferenceValues.HvacMode = ReferenceValues.HvacModes.Standby;
                     }
-
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "INFO",
-                        Module = "HvacVM",
-                        Description = "HVAC Changing IsHeatingMode to " + ReferenceValues.IsHeatingMode
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
-                if (temp != ReferenceValues.TemperatureSet) {
+                if (tempOld != ReferenceValues.TemperatureSet) {
                     char c = (char)(ReferenceValues.TemperatureSet + 50);
                     ReferenceValues.SerialPort.Write(c.ToString());
-
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "INFO",
-                        Module = "HvacVM",
-                        Description = "HVAC Changing TemperatureSet to: " + ReferenceValues.TemperatureSet + "°C"
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
                 UpdateHvac();
@@ -469,19 +442,19 @@ public class HvacVM : BaseViewModel {
         }
     }
 
-    public string HvacStatusImage {
-        get => _hvacStatusImage;
+    public string RunTime {
+        get => _runTime;
         set {
-            _hvacStatusImage = value;
-            RaisePropertyChangedEvent("HvacStatusImage");
+            _runTime = value;
+            RaisePropertyChangedEvent("RunTime");
         }
     }
 
-    public string FanStatusImage {
-        get => _fanStatusImage;
+    public string CurrentRainChanceText {
+        get => _currentRainChanceText;
         set {
-            _fanStatusImage = value;
-            RaisePropertyChangedEvent("FanStatusImage");
+            _currentRainChanceText = value;
+            RaisePropertyChangedEvent("CurrentRainChanceText");
         }
     }
 

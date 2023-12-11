@@ -88,11 +88,12 @@ public class WeatherVM : BaseViewModel {
 
             string[] weatherIcons = RegexWeatherForecast(forecast.properties.periods[0].shortForecast);
             SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
-                forecast.properties.periods[0].windSpeed, "null");
-            SevenDayForecastWeatherIcon1b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
-                    forecast.properties.periods[0].windSpeed, weatherIcons[0])
-                : "null";
+                forecast.properties.periods[0].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon1b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[0].isDaytime, forecast.properties.periods[0].temperature,
+                    forecast.properties.periods[0].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance1 = forecast.properties.periods[0].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance1)) {
@@ -110,11 +111,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[1].shortForecast);
             SevenDayForecastWeatherIcon2a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[1].isDaytime, forecast.properties.periods[1]
-                .temperature, forecast.properties.periods[1].windSpeed, "null");
-            SevenDayForecastWeatherIcon2b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[1].isDaytime, forecast.properties.periods[1].temperature,
-                    forecast.properties.periods[1].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[1].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon2b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[1].isDaytime, forecast.properties.periods[1].temperature,
+                    forecast.properties.periods[1].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance2 = forecast.properties.periods[1].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance2)) {
@@ -132,11 +134,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[2].shortForecast);
             SevenDayForecastWeatherIcon3a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[2].isDaytime, forecast.properties.periods[2]
-                .temperature, forecast.properties.periods[2].windSpeed, "null");
-            SevenDayForecastWeatherIcon3b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[2].isDaytime, forecast.properties.periods[2].temperature,
-                    forecast.properties.periods[2].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[2].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon3b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[2].isDaytime, forecast.properties.periods[2].temperature,
+                    forecast.properties.periods[2].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance3 = forecast.properties.periods[2].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance3)) {
@@ -154,11 +157,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[3].shortForecast);
             SevenDayForecastWeatherIcon4a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[3].isDaytime, forecast.properties.periods[3]
-                .temperature, forecast.properties.periods[3].windSpeed, "null");
-            SevenDayForecastWeatherIcon4b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[3].isDaytime, forecast
-                    .properties.periods[3].temperature, forecast.properties.periods[3].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[3].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon4b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[3].isDaytime, forecast
+                    .properties.periods[3].temperature, forecast.properties.periods[3].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance4 = forecast.properties.periods[3].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance4)) {
@@ -176,11 +180,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[4].shortForecast);
             SevenDayForecastWeatherIcon5a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[4].isDaytime, forecast.properties.periods[4]
-                .temperature, forecast.properties.periods[4].windSpeed, "null");
-            SevenDayForecastWeatherIcon5b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[4].isDaytime, forecast.properties.periods[4].temperature,
-                    forecast.properties.periods[4].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[4].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon5b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[4].isDaytime, forecast.properties.periods[4].temperature,
+                    forecast.properties.periods[4].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance5 = forecast.properties.periods[4].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance5)) {
@@ -198,11 +203,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[5].shortForecast);
             SevenDayForecastWeatherIcon6a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[5].isDaytime, forecast.properties.periods[5]
-                .temperature, forecast.properties.periods[5].windSpeed, "null");
-            SevenDayForecastWeatherIcon6b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[5].isDaytime, forecast.properties.periods[5].temperature,
-                    forecast.properties.periods[5].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[5].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon6b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[5].isDaytime, forecast.properties.periods[5].temperature,
+                    forecast.properties.periods[5].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance6 = forecast.properties.periods[5].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance6)) {
@@ -220,11 +226,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[6].shortForecast);
             SevenDayForecastWeatherIcon7a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[6].isDaytime, forecast.properties.periods[6]
-                .temperature, forecast.properties.periods[6].windSpeed, "null");
-            SevenDayForecastWeatherIcon7b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[6].isDaytime, forecast.properties.periods[6].temperature,
-                    forecast.properties.periods[6].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[6].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon7b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[6].isDaytime, forecast.properties.periods[6].temperature,
+                    forecast.properties.periods[6].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance7 = forecast.properties.periods[6].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance7)) {
@@ -242,11 +249,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[7].shortForecast);
             SevenDayForecastWeatherIcon8a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[7].isDaytime, forecast.properties.periods[7]
-                .temperature, forecast.properties.periods[7].windSpeed, "null");
-            SevenDayForecastWeatherIcon8b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[7].isDaytime, forecast.properties.periods[7].temperature,
-                    forecast.properties.periods[7].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[7].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon8b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[7].isDaytime, forecast.properties.periods[7].temperature,
+                    forecast.properties.periods[7].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance8 = forecast.properties.periods[7].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance8)) {
@@ -264,11 +272,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[8].shortForecast);
             SevenDayForecastWeatherIcon9a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[8].isDaytime, forecast.properties.periods[8]
-                .temperature, forecast.properties.periods[8].windSpeed, "null");
-            SevenDayForecastWeatherIcon9b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[8].isDaytime, forecast.properties.periods[8].temperature,
-                    forecast.properties.periods[8].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[8].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon9b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[8].isDaytime, forecast.properties.periods[8].temperature,
+                    forecast.properties.periods[8].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance9 = forecast.properties.periods[8].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance9)) {
@@ -286,11 +295,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[9].shortForecast);
             SevenDayForecastWeatherIcon10a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[9].isDaytime,
-                forecast.properties.periods[9].temperature, forecast.properties.periods[9].windSpeed, "null");
-            SevenDayForecastWeatherIcon10b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[9].isDaytime, forecast.properties.periods[9].temperature,
-                    forecast.properties.periods[9].windSpeed, weatherIcons[0])
-                : "null";
+                forecast.properties.periods[9].temperature, forecast.properties.periods[9].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon10b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[9].isDaytime, forecast.properties.periods[9].temperature,
+                    forecast.properties.periods[9].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance10 = forecast.properties.periods[9].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance10)) {
@@ -308,11 +318,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[10].shortForecast);
             SevenDayForecastWeatherIcon11a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[10].isDaytime,
-                forecast.properties.periods[10].temperature, forecast.properties.periods[10].windSpeed, "null");
-            SevenDayForecastWeatherIcon11b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[10].isDaytime, forecast.properties.periods[10].temperature,
-                    forecast.properties.periods[10].windSpeed, weatherIcons[0])
-                : "null";
+                forecast.properties.periods[10].temperature, forecast.properties.periods[10].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon11b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[10].isDaytime, forecast.properties.periods[10].temperature,
+                    forecast.properties.periods[10].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance11 = forecast.properties.periods[10].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance11)) {
@@ -330,11 +341,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[11].shortForecast);
             SevenDayForecastWeatherIcon12a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[11].isDaytime, forecast.properties.periods[11]
-                .temperature, forecast.properties.periods[11].windSpeed, "null");
-            SevenDayForecastWeatherIcon12b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[11].isDaytime, forecast.properties.periods[11].temperature,
-                    forecast.properties.periods[11].windSpeed, weatherIcons[0])
-                : "null";
+                .temperature, forecast.properties.periods[11].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon12b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[11].isDaytime, forecast.properties.periods[11].temperature,
+                    forecast.properties.periods[11].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance12 = forecast.properties.periods[11].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance12)) {
@@ -352,11 +364,12 @@ public class WeatherVM : BaseViewModel {
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[12].shortForecast);
             SevenDayForecastWeatherIcon13a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[12].isDaytime,
-                forecast.properties.periods[12].temperature, forecast.properties.periods[12].windSpeed, "null");
-            SevenDayForecastWeatherIcon13b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[12].isDaytime, forecast.properties.periods[12].temperature,
-                    forecast.properties.periods[12].windSpeed, weatherIcons[0])
-                : "null";
+                forecast.properties.periods[12].temperature, forecast.properties.periods[12].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon13b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[12].isDaytime, forecast.properties.periods[12].temperature,
+                    forecast.properties.periods[12].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance13 = forecast.properties.periods[12].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance13)) {
@@ -369,17 +382,17 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastWindSpeed13 = forecast.properties.periods[12].windSpeed;
             SevenDayForecastDescription13 = forecast.properties.periods[12].shortForecast;
 
-
             SevenDayForecastName14 = forecast.properties.periods[13].name + "    " + forecast.properties.periods[13].startTime.ToString("MM/dd");
             SevenDayForecastTemp14 = forecast.properties.periods[13].temperature + "°";
 
             weatherIcons = RegexWeatherForecast(forecast.properties.periods[13].shortForecast);
             SevenDayForecastWeatherIcon14a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], forecast.properties.periods[13].isDaytime,
-                forecast.properties.periods[13].temperature, forecast.properties.periods[13].windSpeed, "null");
-            SevenDayForecastWeatherIcon14b = weatherIcons.Length > 1
-                ? WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[13].isDaytime, forecast.properties.periods[13].temperature,
-                    forecast.properties.periods[13].windSpeed, weatherIcons[0])
-                : "null";
+                forecast.properties.periods[13].temperature, forecast.properties.periods[13].windSpeed, "");
+            if (weatherIcons.Length > 1) {
+                SevenDayForecastWeatherIcon14b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], forecast.properties.periods[13].isDaytime, forecast.properties.periods[13].temperature,
+                    forecast.properties.periods[13].windSpeed, weatherIcons[0]);
+            }
+
             SevenDayForecastRainChance14 = forecast.properties.periods[13].probabilityOfPrecipitation.value?.ToString();
 
             if (!string.IsNullOrEmpty(SevenDayForecastRainChance14)) {
@@ -424,7 +437,7 @@ public class WeatherVM : BaseViewModel {
                         ForecastHourlyList.Add(new WeatherHourlyBlock {
                             Number = period.number,
                             Time = period.startTime,
-                            WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, "null"),
+                            WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, ""),
                             Temp = period.temperature,
                             RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),
                             RainChance = Convert.ToInt32(period.probabilityOfPrecipitation.value.ToString()),
