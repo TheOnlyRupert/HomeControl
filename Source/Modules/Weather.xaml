@@ -497,7 +497,7 @@
 
                 <chartingToolkit:LineSeries ItemsSource="{Binding ForecastHourlyList}" IndependentValueBinding="{Binding Time}" DependentValueBinding="{Binding RainChance}" Foreground="White">
                     <chartingToolkit:LineSeries.DependentRangeAxis>
-                        <chartingToolkit:LinearAxis Orientation="Y" Title="Rain Chance %" Foreground="White" Minimum="0" Maximum="101"/>
+                        <chartingToolkit:LinearAxis Orientation="Y" Title="Rain %" Foreground="White" Minimum="0" Maximum="101"/>
                     </chartingToolkit:LineSeries.DependentRangeAxis>
 
                     <chartingToolkit:LineSeries.DataPointStyle>

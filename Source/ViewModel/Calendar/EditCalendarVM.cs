@@ -15,8 +15,8 @@ public class EditCalendarVM : BaseViewModel {
     private CalendarEvents _calendarEventSelected;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1NameText, _user2NameText, _user3NameText, _user4NameText, _user5NameText, _startTimeText, _endTimeText,
-        _dupeButtonBackgroundColor, _dupeText, _priority0BorderColor, _priority1BorderColor, _priority2BorderColor, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor,
-        _user5BorderColor, _homeBorderColor;
+        _dupeButtonBackgroundColor, _priority0BorderColor, _priority1BorderColor, _priority2BorderColor, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor,
+        _user5BorderColor, _homeBorderColor, _weatherCloudIcon, _detailedWeather, _temperatureHighLow, _eventDateWeekday;
 
     private ObservableCollection<CalendarEvents> _eventList;
 
@@ -64,7 +64,8 @@ public class EditCalendarVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
     private void PopulateEvent() {
-        EventDate = ReferenceValues.CalendarEventDate.ToLongDateString();
+        EventDateWeekday = ReferenceValues.CalendarEventDate.ToString("dddd");
+        EventDate = ReferenceValues.CalendarEventDate.ToString("MMMM d yyyy");
         EventList = new ObservableCollection<CalendarEvents>();
         CalendarEventSelected = new CalendarEvents();
 
@@ -97,11 +98,27 @@ public class EditCalendarVM : BaseViewModel {
                 }
 
                 EventList = dates.EventsList;
+
+                /* Populate Weather */
+                WeatherCloudIcon = null;
+                TemperatureHighLow = "";
+                DetailedWeather = "";
+
+                try {
+                    foreach (JsonWeather.Periods periods in ReferenceValues.ForecastSevenDay.properties.periods) {
+                        if (periods.startTime.Date == ReferenceValues.CalendarEventDate.Date && periods.isDaytime) {
+                            WeatherCloudIcon = WeatherHelpers.GetWeatherIcon(periods.shortForecast, periods.isDaytime, periods.temperature, periods.windSpeed, "");
+                            TemperatureHighLow = periods.temperature + "°";
+                            DetailedWeather = periods.detailedForecast;
+                        }
+                    }
+                } catch (Exception) {
+                    //ignore
+                }
             }
         }
 
         if (ReferenceValues.IsCalendarDupeModeEnabled) {
-            DupeText = "Duplicate Mode Enabled\n" + ReferenceValues.DupeEvent.StartTime + " - " + ReferenceValues.DupeEvent.EndTime + "  " + ReferenceValues.DupeEvent.EventName;
             DupeButtonBackgroundColor = "Green";
             EventText = ReferenceValues.DupeEvent.EventName;
             LocationText = ReferenceValues.DupeEvent.Location;
@@ -111,7 +128,6 @@ public class EditCalendarVM : BaseViewModel {
             PriorityLogic(ReferenceValues.DupeEvent.Priority);
             UserLogic(ReferenceValues.DupeEvent.UserId);
         } else {
-            DupeText = "";
             DupeButtonBackgroundColor = "Transparent";
         }
     }
@@ -383,7 +399,11 @@ public class EditCalendarVM : BaseViewModel {
             if (ReferenceValues.IsCalendarDupeModeEnabled) {
                 ReferenceValues.IsCalendarDupeModeEnabled = false;
                 DupeButtonBackgroundColor = "Transparent";
-                DupeText = "";
+                EventText = "";
+                LocationText = "";
+                DescriptionText = "";
+                StartTimeText = "";
+                EndTimeText = "";
             } else {
                 if (string.IsNullOrWhiteSpace(EventText)) {
                     ReferenceValues.SoundToPlay = "missing_info";
@@ -402,8 +422,6 @@ public class EditCalendarVM : BaseViewModel {
                         UserId = user,
                         Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png"
                     };
-
-                    DupeText = "Duplicate Mode Enabled\n" + StartTimeText + " - " + EndTimeText + "  " + EventText;
                 }
             }
 
@@ -485,6 +503,14 @@ public class EditCalendarVM : BaseViewModel {
         set {
             _eventDate = value;
             RaisePropertyChangedEvent("EventDate");
+        }
+    }
+
+    public string EventDateWeekday {
+        get => _eventDateWeekday;
+        set {
+            _eventDateWeekday = value;
+            RaisePropertyChangedEvent("EventDateWeekday");
         }
     }
 
@@ -590,14 +616,6 @@ public class EditCalendarVM : BaseViewModel {
         set {
             _dupeButtonBackgroundColor = value;
             RaisePropertyChangedEvent("DupeButtonBackgroundColor");
-        }
-    }
-
-    public string DupeText {
-        get => _dupeText;
-        set {
-            _dupeText = value;
-            RaisePropertyChangedEvent("DupeText");
         }
     }
 
@@ -790,6 +808,30 @@ public class EditCalendarVM : BaseViewModel {
         set {
             _imageHome = value;
             RaisePropertyChangedEvent("ImageHome");
+        }
+    }
+
+    public string WeatherCloudIcon {
+        get => _weatherCloudIcon;
+        set {
+            _weatherCloudIcon = value;
+            RaisePropertyChangedEvent("WeatherCloudIcon");
+        }
+    }
+
+    public string TemperatureHighLow {
+        get => _temperatureHighLow;
+        set {
+            _temperatureHighLow = value;
+            RaisePropertyChangedEvent("TemperatureHighLow");
+        }
+    }
+
+    public string DetailedWeather {
+        get => _detailedWeather;
+        set {
+            _detailedWeather = value;
+            RaisePropertyChangedEvent("DetailedWeather");
         }
     }
 

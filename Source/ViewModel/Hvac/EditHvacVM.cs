@@ -17,8 +17,12 @@ public class EditHvacVM : BaseViewModel {
         double f = ReferenceValues.TemperatureSet * 1.8 + 32;
         TemperatureSet = ReferenceValues.TemperatureSet + "°C  or  " + (int)f + "°F";
 
-        f = ReferenceValues.TemperatureInside * 1.8 + 32;
-        TemperatureInside = ReferenceValues.TemperatureInside + "°C  or  " + (int)f + "°F";
+        if (ReferenceValues.TemperatureInside == -99) {
+            TemperatureInside = "Unknown";
+        } else {
+            f = ReferenceValues.TemperatureInside * 1.8 + 32;
+            TemperatureInside = ReferenceValues.TemperatureInside + "°C  or  " + (int)f + "°F";
+        }
     }
 
     private void ButtonLogic(object param) {

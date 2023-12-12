@@ -32,7 +32,8 @@ public class BehaviorVM : BaseViewModel {
         _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility, _user1WeekVisibility, _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility,
         _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility, _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility,
         _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility, _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility,
-        _user5BehaviorVisibility, _trashDayVisibility, _user1BackgroundColor, _user2BackgroundColor, _user3BackgroundColor, _user4BackgroundColor, _user5BackgroundColor;
+        _user5BehaviorVisibility, _trashDayVisibility, _user1BackgroundColor, _user2BackgroundColor, _user3BackgroundColor, _user4BackgroundColor, _user5BackgroundColor, _remainingDayColor,
+        _remainingWeekColor, _remainingMonthColor, _remainingQuarterColor, _remainingYearColor;
 
     private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
@@ -40,6 +41,8 @@ public class BehaviorVM : BaseViewModel {
         _user4TasksCompletedDayProgressValue, _user4TasksCompletedWeekProgressValue, _user4TasksCompletedMonthProgressValue, _user4TasksCompletedQuarterProgressValue,
         _user5TasksCompletedDayProgressValue, _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue,
         _progressBarUser1, _progressBarUser2, _progressBarUser3, _progressBarUser4, _progressBarUser5;
+
+    private bool blinkDay, blinkWeek, blinkMonth, blinkQuarter, blinkYear;
 
     public BehaviorVM() {
         try {
@@ -2142,6 +2145,26 @@ public class BehaviorVM : BaseViewModel {
                 User5BackgroundColor = User5BackgroundColor == "Transparent" ? "Yellow" : "Transparent";
             }
 
+            if (blinkDay) {
+                RemainingDayColor = RemainingDayColor != "Yellow" ? "Yellow" : "Red";
+            }
+
+            if (blinkWeek) {
+                RemainingWeekColor = RemainingWeekColor != "Yellow" ? "Yellow" : "Red";
+            }
+
+            if (blinkMonth) {
+                RemainingMonthColor = RemainingMonthColor != "Yellow" ? "Yellow" : "Red";
+            }
+
+            if (blinkQuarter) {
+                RemainingQuarterColor = RemainingQuarterColor != "Yellow" ? "Yellow" : "Red";
+            }
+
+            if (blinkYear) {
+                RemainingYearColor = RemainingYearColor != "Yellow" ? "Yellow" : "Red";
+            }
+
             break;
         }
     }
@@ -2242,6 +2265,12 @@ public class BehaviorVM : BaseViewModel {
     }
 
     private void RefreshCountdown() {
+        blinkDay = false;
+        blinkWeek = false;
+        blinkMonth = false;
+        blinkQuarter = false;
+        blinkYear = false;
+
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
         System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
 
@@ -2289,8 +2318,14 @@ public class BehaviorVM : BaseViewModel {
         RemainingDay = (TimeSpan.FromHours(24) - dateNext.TimeOfDay).Hours + " Hours";
 
         if (RemainingDay == "1 Hours") {
+            blinkDay = true;
             RemainingDay = "1 Hour";
+        } else if (RemainingDay == "0 Hours") {
+            blinkDay = true;
+            RemainingDay = "< 1 Hour";
         }
+
+        RemainingDayColor = "White";
 
         /* Week */
         dateNext = DateTime.Now;
@@ -2305,13 +2340,19 @@ public class BehaviorVM : BaseViewModel {
         RemainingWeek = (dateNext.Date - DateTime.Now.Date).Days + " Days";
 
         if (RemainingWeek == "1 Days") {
+            blinkWeek = true;
+
             TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
             RemainingWeek = timeSpan.Hours + " Hours";
         }
 
         if (RemainingWeek == "1 Hours") {
             RemainingWeek = "1 Hour";
+        } else if (RemainingWeek == "0 Hours") {
+            RemainingWeek = "< 1 Hour";
         }
+
+        RemainingWeekColor = "White";
 
         /* Month */
         dateNext = DateTime.Now;
@@ -2322,13 +2363,19 @@ public class BehaviorVM : BaseViewModel {
         RemainingMonth = (dateNext.Date - DateTime.Now.Date).Days + " Days";
 
         if (RemainingMonth == "1 Days") {
+            blinkMonth = true;
+
             TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
             RemainingMonth = timeSpan.Hours + " Hours";
         }
 
         if (RemainingMonth == "1 Hours") {
             RemainingMonth = "1 Hour";
+        } else if (RemainingMonth == "0 Hours") {
+            RemainingMonth = "< 1 Hour";
         }
+
+        RemainingMonthColor = "White";
 
         /* Quarter */
         dateNext = DateTime.Now;
@@ -2370,13 +2417,19 @@ public class BehaviorVM : BaseViewModel {
         RemainingQuarter = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
 
         if (RemainingQuarter == "1 Days") {
+            blinkQuarter = true;
+
             TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
             RemainingQuarter = timeSpan.Hours + " Hours";
         }
 
         if (RemainingQuarter == "1 Hours") {
             RemainingQuarter = "1 Hour";
+        } else if (RemainingQuarter == "0 Hours") {
+            RemainingQuarter = "< 1 Hour";
         }
+
+        RemainingQuarterColor = "White";
 
         /* Year */
         dateNext = DateTime.Now;
@@ -2387,13 +2440,19 @@ public class BehaviorVM : BaseViewModel {
         RemainingYear = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
 
         if (RemainingYear == "1 Days") {
+            blinkYear = true;
+
             TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
             RemainingYear = timeSpan.Hours + " Hours";
         }
 
         if (RemainingYear == "1 Hours") {
             RemainingYear = "1 Hour";
+        } else if (RemainingYear == "0 Hours") {
+            RemainingYear = "< 1 Hour";
         }
+
+        RemainingYearColor = "White";
     }
 
     #region Fields
@@ -3716,6 +3775,46 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5BackgroundColor = value;
             RaisePropertyChangedEvent("User5BackgroundColor");
+        }
+    }
+
+    public string RemainingDayColor {
+        get => _remainingDayColor;
+        set {
+            _remainingDayColor = value;
+            RaisePropertyChangedEvent("RemainingDayColor");
+        }
+    }
+
+    public string RemainingWeekColor {
+        get => _remainingWeekColor;
+        set {
+            _remainingWeekColor = value;
+            RaisePropertyChangedEvent("RemainingWeekColor");
+        }
+    }
+
+    public string RemainingMonthColor {
+        get => _remainingMonthColor;
+        set {
+            _remainingMonthColor = value;
+            RaisePropertyChangedEvent("RemainingMonthColor");
+        }
+    }
+
+    public string RemainingQuarterColor {
+        get => _remainingQuarterColor;
+        set {
+            _remainingQuarterColor = value;
+            RaisePropertyChangedEvent("RemainingQuarterColor");
+        }
+    }
+
+    public string RemainingYearColor {
+        get => _remainingYearColor;
+        set {
+            _remainingYearColor = value;
+            RaisePropertyChangedEvent("RemainingYearColor");
         }
     }
 

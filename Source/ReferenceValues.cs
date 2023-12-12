@@ -102,7 +102,7 @@ public static class ReferenceValues {
     public static JsonSettings JsonSettingsMaster { get; set; }
 
     public static int TemperatureInside { get; set; }
-    public static int InteriorHumidity { get; set; }
+    public static int HumidityInside { get; set; }
 
     public static HvacModes HvacMode { get; set; }
 
@@ -133,4 +133,7 @@ public static class ReferenceValues {
 
     public static string AppDirectory { get; set; }
     public static Tamagotchi TamagotchiMaster { get; set; }
+
+    public static JsonWeather ForecastSevenDay { get; set; }
+    public static JsonWeather ForecastHourly { get; set; }
 }

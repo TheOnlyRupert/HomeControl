@@ -19,6 +19,7 @@ public class JsonWeather {
         public string windSpeed { get; set; }
         public string windDirection { get; set; }
         public string shortForecast { get; set; }
+        public string detailedForecast { get; set; }
         public RelativeHumidity relativeHumidity { get; set; }
         public ProbabilityOfPrecipitation probabilityOfPrecipitation { get; set; }
     }

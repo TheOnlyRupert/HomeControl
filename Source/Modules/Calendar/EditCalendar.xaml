@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Calendar.EditCalendar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control"
-        mc:Ignorable="d" Height="640" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
-        FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
+        xmlns:gif="http://wpfanimatedgif.codeplex.com" mc:Ignorable="d" Height="800" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None"
+        BorderBrush="CornflowerBlue" BorderThickness="4" FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
     <Window.Resources>
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -148,7 +148,6 @@
 
             <Grid Grid.Column="1" Margin="8">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -157,28 +156,23 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height=".75*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image Grid.Column="0" Source="{Binding WeatherImage}"/>
-                </Grid>
-
-                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="&lt;" Command="{Binding ButtonCommand}" CommandParameter="subDay" FontSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Right"
-                            VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Content="&lt;" Command="{Binding ButtonCommand}" CommandParameter="subDay" FontSize="16" HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Right" VerticalAlignment="Center">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -196,10 +190,11 @@
                         </Button.Style>
                     </Button>
 
-                    <TextBlock Grid.Column="1" Text="{Binding EventDate}" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding EventDateWeekday}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding EventDate}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                    <Button Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Left"
-                            VerticalAlignment="Center">
+                    <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="16" HorizontalContentAlignment="Center"
+                            HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -218,33 +213,33 @@
                     </Button>
                 </Grid>
 
-                <StackPanel Grid.Row="2">
+                <StackPanel Grid.Row="1">
                     <TextBlock Text="Event" FontSize="24" Foreground="White"/>
                     <TextBox Name="MainFocusItem" Text="{Binding EventText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="3">
+                <StackPanel Grid.Row="2">
                     <TextBlock Text="Start Time" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding StartTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="4">
+                <StackPanel Grid.Row="3">
                     <TextBlock Text="End Time" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding EndTimeText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="4" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="5">
+                <StackPanel Grid.Row="4">
                     <TextBlock Text="Location" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding LocationText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="6">
+                <StackPanel Grid.Row="5">
                     <TextBlock Text="Description" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" TextWrapping="Wrap" MaxLines="6" MaxLength="256"
                              control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <Grid Grid.Row="7" Margin="0 16">
+                <Grid Grid.Row="6" Margin="0 16">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -336,7 +331,7 @@
                     </Button>
                 </Grid>
 
-                <Grid Grid.Row="8" Margin="0 0 0 16">
+                <Grid Grid.Row="7" Margin="0 0 0 16">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -461,7 +456,22 @@
                     </Button>
                 </Grid>
 
-                <TextBlock Grid.Row="9" Foreground="White" FontSize="18" Text="{Binding DupeText}"/>
+                <Grid Grid.Row="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Grid.Column="0" gif:ImageBehavior.AnimatedSource="{Binding WeatherCloudIcon}" Margin="-8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TemperatureHighLow}" FontSize="24" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DetailedWeather}" FontSize="18" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                </Grid>
             </Grid>
         </Grid>
 

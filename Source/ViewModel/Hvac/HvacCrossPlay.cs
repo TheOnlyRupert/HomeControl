@@ -17,6 +17,8 @@ public static class HvacCrossPlay {
      * 3 -> Program On, 4 -> Program Off,
      * 5 -> Heating Mode, 6 -> Cooling Mode */
     public static async void EstablishConnection() {
+        ReferenceValues.TemperatureInside = -99;
+
         try {
             if (!ReferenceValues.SerialPort.IsOpen) {
                 ReferenceValues.SerialPort.Open();
@@ -82,11 +84,11 @@ public static class HvacCrossPlay {
                 string[] parts = data.Split(',');
 
                 ReferenceValues.TemperatureInside = (int)float.Parse(parts[0].Trim());
-                ReferenceValues.InteriorHumidity = (int)float.Parse(parts[1].Trim());
+                ReferenceValues.HumidityInside = (int)float.Parse(parts[1].Trim());
                 intMessageSent = false;
             } catch (FormatException) {
                 ReferenceValues.TemperatureInside = -99;
-                ReferenceValues.InteriorHumidity = -99;
+                ReferenceValues.HumidityInside = -99;
                 if (!intMessageSent) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,

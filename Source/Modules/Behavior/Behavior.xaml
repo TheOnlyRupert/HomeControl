@@ -32,15 +32,15 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Text="Remaining Day" HorizontalAlignment="Center" Foreground="White"/>
-            <TextBlock Grid.Row="1" Text="{Binding RemainingDay}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="1" Text="{Binding RemainingDay}" HorizontalAlignment="Center" FontSize="18" Foreground="{Binding RemainingDayColor}"/>
             <TextBlock Grid.Row="2" Text="Remaining Week" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
-            <TextBlock Grid.Row="3" Text="{Binding RemainingWeek}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="3" Text="{Binding RemainingWeek}" HorizontalAlignment="Center" FontSize="18" Foreground="{Binding RemainingWeekColor}"/>
             <TextBlock Grid.Row="4" Text="Remaining Month" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
-            <TextBlock Grid.Row="5" Text="{Binding RemainingMonth}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="5" Text="{Binding RemainingMonth}" HorizontalAlignment="Center" FontSize="18" Foreground="{Binding RemainingMonthColor}"/>
             <TextBlock Grid.Row="6" Text="Remaining Quarter" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
-            <TextBlock Grid.Row="7" Text="{Binding RemainingQuarter}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="7" Text="{Binding RemainingQuarter}" HorizontalAlignment="Center" FontSize="18" Foreground="{Binding RemainingQuarterColor}"/>
             <TextBlock Grid.Row="8" Text="Remaining Year" HorizontalAlignment="Center" Foreground="White" Margin="0 16 0 0"/>
-            <TextBlock Grid.Row="9" Text="{Binding RemainingYear}" HorizontalAlignment="Center" FontSize="18" Foreground="White"/>
+            <TextBlock Grid.Row="9" Text="{Binding RemainingYear}" HorizontalAlignment="Center" FontSize="18" Foreground="{Binding RemainingYearColor}"/>
 
             <Image Grid.Row="10" VerticalAlignment="Center" Height="64" HorizontalAlignment="Center" Visibility="{Binding TrashDayVisibility}"
                    gif:ImageBehavior.AnimatedSource="../../../Resources/Images/icons/trash.gif"/>
