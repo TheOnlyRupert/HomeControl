@@ -710,5 +710,8 @@
         <PackageReference Include="TagLibSharp" Version="2.3.0"/>
         <PackageReference Include="WpfAnimatedGif" Version="2.0.2"/>
     </ItemGroup>
+    <ItemGroup>
+        <ClCompile Include="ArduinoHvacController\ArduinoHvacController.ino"/>
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>

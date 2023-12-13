@@ -101,13 +101,13 @@ public static class ReferenceValues {
     public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonSettingsMaster { get; set; }
 
-    public static int TemperatureInside { get; set; }
+    public static double TemperatureInside { get; set; }
     public static int HumidityInside { get; set; }
 
     public static HvacModes HvacMode { get; set; }
 
     /* Ranges from 15°C / 59°F to 30°C / 86°F */
-    public static int TemperatureSet { get; set; }
+    public static double TemperatureSet { get; set; }
 
     /* On or auto... No other option */
     public static bool IsFanAuto { get; set; }

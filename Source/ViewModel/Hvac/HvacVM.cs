@@ -92,11 +92,13 @@ public class HvacVM : BaseViewModel {
             break;
         case "HvacUpdated":
             UpdateHvac();
+
             break;
         case "MinChanged":
             CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
             CurrentTimeText = DateTime.Now.ToString("HH:mm");
             UpdateWeather();
+
             break;
         }
     }
@@ -128,7 +130,7 @@ public class HvacVM : BaseViewModel {
 
         TemperatureAdjustedColor = "White";
 
-        if (ReferenceValues.TemperatureInside == -99) {
+        if (Math.Abs(ReferenceValues.TemperatureInside - -99) < 1) {
             TemperatureInside = "??";
             TemperatureInsideColor = "Red";
         } else {
@@ -159,44 +161,80 @@ public class HvacVM : BaseViewModel {
         if (ReferenceValues.IsHeatingMode) {
             switch (ReferenceValues.HvacMode) {
             case ReferenceValues.HvacModes.Off:
-                ProgramStatus = "Heating Off";
+                ProgramStatus = "Off";
                 ProgramStatusColor = "White";
+                HeatingCoolingStatus = "Heating";
+                HeatingCoolingStatusColor = "Red";
+                HeatingCoolingText = "Heating To";
+
                 break;
             case ReferenceValues.HvacModes.Running:
-                ProgramStatus = "Heating Running";
+                ProgramStatus = "Running";
                 ProgramStatusColor = "Green";
+                HeatingCoolingStatus = "Heating";
+                HeatingCoolingStatusColor = "Red";
+                HeatingCoolingText = "Heating To";
+
                 break;
             case ReferenceValues.HvacModes.Standby:
-                ProgramStatus = "Heating Standby";
+                ProgramStatus = "Standby";
                 ProgramStatusColor = "Yellow";
+                HeatingCoolingStatus = "Heating";
+                HeatingCoolingStatusColor = "Red";
+                HeatingCoolingText = "Heating To";
+
                 break;
             case ReferenceValues.HvacModes.Purging:
-                ProgramStatus = "Heating Purging";
+                ProgramStatus = "Purging";
                 ProgramStatusColor = "Yellow";
+                HeatingCoolingStatus = "Heating";
+                HeatingCoolingStatusColor = "Red";
+                HeatingCoolingText = "Heating To";
+
                 break;
             }
         } else {
             switch (ReferenceValues.HvacMode) {
             case ReferenceValues.HvacModes.Off:
-                ProgramStatus = "Cooling Off";
+                ProgramStatus = "Off";
                 ProgramStatusColor = "White";
+                HeatingCoolingStatus = "Cooling";
+                HeatingCoolingStatusColor = "CornflowerBlue";
+                HeatingCoolingText = "Cooling To";
+
                 break;
             case ReferenceValues.HvacModes.Running:
-                ProgramStatus = "Cooling Running";
+                ProgramStatus = "Running";
                 ProgramStatusColor = "Green";
+                HeatingCoolingStatus = "Cooling";
+                HeatingCoolingStatusColor = "CornflowerBlue";
+                HeatingCoolingText = "Cooling To";
+
                 break;
             case ReferenceValues.HvacModes.Standby:
-                ProgramStatus = "Cooling Standby";
+                ProgramStatus = "Standby";
                 ProgramStatusColor = "Yellow";
+                HeatingCoolingStatus = "Cooling";
+                HeatingCoolingStatusColor = "CornflowerBlue";
+                HeatingCoolingText = "Cooling To";
+
                 break;
             case ReferenceValues.HvacModes.Purging:
-                ProgramStatus = "Cooling Purging";
+                ProgramStatus = "Purging";
                 ProgramStatusColor = "Yellow";
+                HeatingCoolingStatus = "Cooling";
+                HeatingCoolingStatusColor = "CornflowerBlue";
+                HeatingCoolingText = "Cooling To";
+
                 break;
             }
         }
     }
 
+    /* 0 -> Force Refresh,
+     * 1 -> Fan On, 2 -> Fan Auto,
+     * 3 -> Program On, 4 -> Program Off,
+     * 5 -> Heating Mode, 6 -> Cooling Mode */
     private void ButtonLogic(object param) {
         switch (param) {
         case "hvac":
@@ -208,7 +246,7 @@ public class HvacVM : BaseViewModel {
                 bool IsProgramRunningOld = ReferenceValues.IsProgramRunning;
                 bool isHeatingModeOld = ReferenceValues.IsHeatingMode;
                 bool isFanAutoOld = ReferenceValues.IsFanAuto;
-                int tempOld = ReferenceValues.TemperatureSet;
+                double tempOld = ReferenceValues.TemperatureSet;
 
                 EditHvac editHvac = new();
                 editHvac.ShowDialog();
@@ -292,8 +330,6 @@ public class HvacVM : BaseViewModel {
                             });
                             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
-
-                        ReferenceValues.HvacMode = ReferenceValues.HvacModes.Standby;
                     } else {
                         /* 4 -> Cooling Mode */
                         try {
@@ -307,12 +343,10 @@ public class HvacVM : BaseViewModel {
                             });
                             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
-
-                        ReferenceValues.HvacMode = ReferenceValues.HvacModes.Standby;
                     }
                 }
 
-                if (tempOld != ReferenceValues.TemperatureSet) {
+                if (Math.Abs(tempOld - ReferenceValues.TemperatureSet) > 0.2) {
                     try {
                         char c = (char)(ReferenceValues.TemperatureSet + 50);
                         ReferenceValues.SerialPort.Write(c.ToString());

@@ -43,8 +43,8 @@ public class WeatherVM : BaseViewModel {
             UpdateWeather();
         }
 
-        /* Show Elf on Dec 23rd */
-        if (ReferenceValues.JsonSettingsMaster.useEasterEggs && DateTime.Now.Month == 12 && DateTime.Now.Day == 23) {
+        /* Show Elf on Dec 24rd (Christmas Eve) */
+        if (ReferenceValues.JsonSettingsMaster.useEasterEggs && DateTime.Now.Month == 12 && DateTime.Now.Day == 24) {
             EasterEggVisibility = "VISIBLE";
         } else {
             EasterEggVisibility = "HIDDEN";
