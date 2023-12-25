@@ -276,16 +276,16 @@
     </ItemGroup>
     <ItemGroup>
         <Resource Include="Resources\Images\weather\wind.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas1.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas10.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas2.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas3.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas4.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas5.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas6.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas7.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas8.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\chirstmas9.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas1.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas10.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas2.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas3.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas4.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas5.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas6.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas7.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas8.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas9.png"/>
         <Resource Include="Resources\Images\monthly\leaves\leaf1.png"/>
         <Resource Include="Resources\Images\monthly\leaves\leaf2.png"/>
         <Resource Include="Resources\Images\monthly\leaves\leaf3.png"/>
@@ -342,7 +342,6 @@
         <Resource Include="Resources\Images\icons\cat.png"/>
         <Resource Include="Resources\Images\icons\cat2.png"/>
         <Resource Include="Resources\Images\icons\elf.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas.gif"/>
         <Resource Include="Resources\Images\behavior\strike_black.png"/>
         <Content Include="Resources\Sounds\beep.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
