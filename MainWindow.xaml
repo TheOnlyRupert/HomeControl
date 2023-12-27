@@ -62,7 +62,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Frame Grid.Row="0" Source="Source/Modules/Christmas.xaml" Focusable="False"/>
+                        <Frame Grid.Row="0" Source="Source/Modules/Christmas.xaml" Focusable="False" Visibility="{Binding ChristmasVisibility}"/>
                         <Frame Grid.Row="1" Source="Source/Modules/Security/Security.xaml" Focusable="False"/>
                     </Grid>
 

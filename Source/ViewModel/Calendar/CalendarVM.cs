@@ -808,135 +808,6 @@ public class CalendarVM : BaseViewModel {
         /* Sep 09 2023 - I was right! I'm smart as fuck! */
         button1DateTime = calendarStartingDate;
 
-        /* Set background color for today */
-        if (calendarStartingDate.Equals(DateTime.Today)) {
-            Button1BorderColor = "Yellow";
-            Button1BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(1).Equals(DateTime.Today)) {
-            Button2BorderColor = "Yellow";
-            Button2BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(2).Equals(DateTime.Today)) {
-            Button3BorderColor = "Yellow";
-            Button3BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(3).Equals(DateTime.Today)) {
-            Button4BorderColor = "Yellow";
-            Button4BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(4).Equals(DateTime.Today)) {
-            Button5BorderColor = "Yellow";
-            Button5BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(5).Equals(DateTime.Today)) {
-            Button6BorderColor = "Yellow";
-            Button6BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(6).Equals(DateTime.Today)) {
-            Button7BorderColor = "Yellow";
-            Button7BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(7).Equals(DateTime.Today)) {
-            Button8BorderColor = "Yellow";
-            Button8BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(8).Equals(DateTime.Today)) {
-            Button9BorderColor = "Yellow";
-            Button9BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(9).Equals(DateTime.Today)) {
-            Button10BorderColor = "Yellow";
-            Button10BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(10).Equals(DateTime.Today)) {
-            Button11BorderColor = "Yellow";
-            Button11BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(11).Equals(DateTime.Today)) {
-            Button12BorderColor = "Yellow";
-            Button12BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(12).Equals(DateTime.Today)) {
-            Button13BorderColor = "Yellow";
-            Button13BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(13).Equals(DateTime.Today)) {
-            Button14BorderColor = "Yellow";
-            Button14BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(14).Equals(DateTime.Today)) {
-            Button15BorderColor = "Yellow";
-            Button15BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(15).Equals(DateTime.Today)) {
-            Button16BorderColor = "Yellow";
-            Button16BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(16).Equals(DateTime.Today)) {
-            Button17BorderColor = "Yellow";
-            Button17BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(17).Equals(DateTime.Today)) {
-            Button18BorderColor = "Yellow";
-            Button18BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(18).Equals(DateTime.Today)) {
-            Button19BorderColor = "Yellow";
-            Button19BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(19).Equals(DateTime.Today)) {
-            Button20BorderColor = "Yellow";
-            Button20BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(20).Equals(DateTime.Today)) {
-            Button21BorderColor = "Yellow";
-            Button21BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(21).Equals(DateTime.Today)) {
-            Button22BorderColor = "Yellow";
-            Button22BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(22).Equals(DateTime.Today)) {
-            Button23BorderColor = "Yellow";
-            Button23BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(23).Equals(DateTime.Today)) {
-            Button24BorderColor = "Yellow";
-            Button24BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(24).Equals(DateTime.Today)) {
-            Button25BorderColor = "Yellow";
-            Button25BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(25).Equals(DateTime.Today)) {
-            Button26BorderColor = "Yellow";
-            Button26BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(26).Equals(DateTime.Today)) {
-            Button27BorderColor = "Yellow";
-            Button27BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(27).Equals(DateTime.Today)) {
-            Button28BorderColor = "Yellow";
-            Button28BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(28).Equals(DateTime.Today)) {
-            Button29BorderColor = "Yellow";
-            Button29BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(29).Equals(DateTime.Today)) {
-            Button30BorderColor = "Yellow";
-            Button30BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(30).Equals(DateTime.Today)) {
-            Button31BorderColor = "Yellow";
-            Button31BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(31).Equals(DateTime.Today)) {
-            Button32BorderColor = "Yellow";
-            Button32BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(32).Equals(DateTime.Today)) {
-            Button33BorderColor = "Yellow";
-            Button33BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(33).Equals(DateTime.Today)) {
-            Button34BorderColor = "Yellow";
-            Button34BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(34).Equals(DateTime.Today)) {
-            Button35BorderColor = "Yellow";
-            Button35BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(35).Equals(DateTime.Today)) {
-            Button36BorderColor = "Yellow";
-            Button36BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(36).Equals(DateTime.Today)) {
-            Button37BorderColor = "Yellow";
-            Button37BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(37).Equals(DateTime.Today)) {
-            Button38BorderColor = "Yellow";
-            Button38BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(38).Equals(DateTime.Today)) {
-            Button39BorderColor = "Yellow";
-            Button39BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(39).Equals(DateTime.Today)) {
-            Button40BorderColor = "Yellow";
-            Button40BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(40).Equals(DateTime.Today)) {
-            Button41BorderColor = "Yellow";
-            Button41BorderThickness = 4;
-        } else if (calendarStartingDate.AddDays(41).Equals(DateTime.Today)) {
-            Button42BorderColor = "Yellow";
-            Button42BorderThickness = 4;
-        }
-
         /* Get Holidays (Hardcoded) */
         foreach (Holidays.HolidayBlock holiday in Holidays.GetHolidays(calendarStartingDate.AddDays(7).Year)) {
             if (calendarStartingDate.Month == holiday.Date.Month && calendarStartingDate.Day == holiday.Date.Day) {
@@ -1274,6 +1145,135 @@ public class CalendarVM : BaseViewModel {
                     Button42BorderThickness = 2;
                 }
             }
+        }
+
+        /* Set background color for today */
+        if (calendarStartingDate.Equals(DateTime.Today)) {
+            Button1BorderColor = "Yellow";
+            Button1BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(1).Equals(DateTime.Today)) {
+            Button2BorderColor = "Yellow";
+            Button2BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(2).Equals(DateTime.Today)) {
+            Button3BorderColor = "Yellow";
+            Button3BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(3).Equals(DateTime.Today)) {
+            Button4BorderColor = "Yellow";
+            Button4BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(4).Equals(DateTime.Today)) {
+            Button5BorderColor = "Yellow";
+            Button5BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(5).Equals(DateTime.Today)) {
+            Button6BorderColor = "Yellow";
+            Button6BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(6).Equals(DateTime.Today)) {
+            Button7BorderColor = "Yellow";
+            Button7BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(7).Equals(DateTime.Today)) {
+            Button8BorderColor = "Yellow";
+            Button8BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(8).Equals(DateTime.Today)) {
+            Button9BorderColor = "Yellow";
+            Button9BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(9).Equals(DateTime.Today)) {
+            Button10BorderColor = "Yellow";
+            Button10BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(10).Equals(DateTime.Today)) {
+            Button11BorderColor = "Yellow";
+            Button11BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(11).Equals(DateTime.Today)) {
+            Button12BorderColor = "Yellow";
+            Button12BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(12).Equals(DateTime.Today)) {
+            Button13BorderColor = "Yellow";
+            Button13BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(13).Equals(DateTime.Today)) {
+            Button14BorderColor = "Yellow";
+            Button14BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(14).Equals(DateTime.Today)) {
+            Button15BorderColor = "Yellow";
+            Button15BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(15).Equals(DateTime.Today)) {
+            Button16BorderColor = "Yellow";
+            Button16BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(16).Equals(DateTime.Today)) {
+            Button17BorderColor = "Yellow";
+            Button17BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(17).Equals(DateTime.Today)) {
+            Button18BorderColor = "Yellow";
+            Button18BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(18).Equals(DateTime.Today)) {
+            Button19BorderColor = "Yellow";
+            Button19BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(19).Equals(DateTime.Today)) {
+            Button20BorderColor = "Yellow";
+            Button20BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(20).Equals(DateTime.Today)) {
+            Button21BorderColor = "Yellow";
+            Button21BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(21).Equals(DateTime.Today)) {
+            Button22BorderColor = "Yellow";
+            Button22BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(22).Equals(DateTime.Today)) {
+            Button23BorderColor = "Yellow";
+            Button23BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(23).Equals(DateTime.Today)) {
+            Button24BorderColor = "Yellow";
+            Button24BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(24).Equals(DateTime.Today)) {
+            Button25BorderColor = "Yellow";
+            Button25BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(25).Equals(DateTime.Today)) {
+            Button26BorderColor = "Yellow";
+            Button26BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(26).Equals(DateTime.Today)) {
+            Button27BorderColor = "Yellow";
+            Button27BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(27).Equals(DateTime.Today)) {
+            Button28BorderColor = "Yellow";
+            Button28BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(28).Equals(DateTime.Today)) {
+            Button29BorderColor = "Yellow";
+            Button29BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(29).Equals(DateTime.Today)) {
+            Button30BorderColor = "Yellow";
+            Button30BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(30).Equals(DateTime.Today)) {
+            Button31BorderColor = "Yellow";
+            Button31BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(31).Equals(DateTime.Today)) {
+            Button32BorderColor = "Yellow";
+            Button32BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(32).Equals(DateTime.Today)) {
+            Button33BorderColor = "Yellow";
+            Button33BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(33).Equals(DateTime.Today)) {
+            Button34BorderColor = "Yellow";
+            Button34BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(34).Equals(DateTime.Today)) {
+            Button35BorderColor = "Yellow";
+            Button35BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(35).Equals(DateTime.Today)) {
+            Button36BorderColor = "Yellow";
+            Button36BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(36).Equals(DateTime.Today)) {
+            Button37BorderColor = "Yellow";
+            Button37BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(37).Equals(DateTime.Today)) {
+            Button38BorderColor = "Yellow";
+            Button38BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(38).Equals(DateTime.Today)) {
+            Button39BorderColor = "Yellow";
+            Button39BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(39).Equals(DateTime.Today)) {
+            Button40BorderColor = "Yellow";
+            Button40BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(40).Equals(DateTime.Today)) {
+            Button41BorderColor = "Yellow";
+            Button41BorderThickness = 4;
+        } else if (calendarStartingDate.AddDays(41).Equals(DateTime.Today)) {
+            Button42BorderColor = "Yellow";
+            Button42BorderThickness = 4;
         }
 
         /* Recurring Events */

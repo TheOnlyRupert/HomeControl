@@ -78,7 +78,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Recurring Dates" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="recurring">
+            <Button Grid.Column="0" Content="⚙" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="recurring" HorizontalAlignment="Left">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -86,7 +86,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="12 4">
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
@@ -116,43 +116,45 @@
                 </Button.Style>
             </Button>
 
-            <TextBlock Grid.Column="2" Text="{Binding CurrentMonthAndYear}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+            <TextBlock Grid.Column="2" Text="{Binding CurrentMonthAndYear}" Foreground="White" FontSize="24" HorizontalAlignment="Center"/>
 
-            <Button Grid.Column="3" Content="&gt;" Command="{Binding ButtonCommand}" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Left" CommandParameter="addMonth">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="16 4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
+            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                <Button Content="&gt;" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="addMonth">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="16 4">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
-            <Button Grid.Column="4" Content="Today" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="today">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
+                <Button Content="📅" Command="{Binding ButtonCommand}" FontSize="18" CommandParameter="today" Margin="16 0 0 0">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="12 4">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">

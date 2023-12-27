@@ -9,7 +9,6 @@ using System.Net;
 using System.Reflection;
 using System.Resources;
 using System.Text.Json;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
 using HomeControl.Source.Helpers;
@@ -24,9 +23,7 @@ namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
     private readonly CrossViewMessenger simpleMessenger;
-    private Canvas _canvasItems;
-    private string _iconImage;
-    private string _onlineColor;
+    private string _iconImage, _onlineColor, _christmasVisibility;
     private bool changeDate, internetMessage;
     private DateTime currentDate;
     private int trashInt;
@@ -103,6 +100,8 @@ public class MainWindowVM : BaseViewModel {
             HvacCrossPlay.EstablishConnection();
         }
 
+        UpdateChristmasVisibility();
+
         /* Global DispatcherTimer */
         DispatcherTimer dispatcherTimer = new();
         dispatcherTimer.Tick += dispatcherTimer_Tick;
@@ -173,6 +172,7 @@ public class MainWindowVM : BaseViewModel {
         if (!currentDate.Day.Equals(DateTime.Now.Day)) {
             simpleMessenger.PushMessage("DateChanged", null);
             changeDate = true;
+            UpdateChristmasVisibility();
         }
 
         /* Month Changes */
@@ -244,6 +244,14 @@ public class MainWindowVM : BaseViewModel {
         simpleMessenger.PushMessage("Refresh", null);
     }
 
+    private void UpdateChristmasVisibility() {
+        if (DateTime.Now.Month == 12 && DateTime.Now.Day < 26) {
+            ChristmasVisibility = "VISIBLE";
+        } else {
+            ChristmasVisibility = "COLLAPSED";
+        }
+    }
+
     private async Task ApiStatus() {
         JsonSerializerOptions options = new() {
             IncludeFields = true
@@ -310,12 +318,11 @@ public class MainWindowVM : BaseViewModel {
         }
     }
 
-
-    public Canvas CanvasItems {
-        get => _canvasItems;
+    public string ChristmasVisibility {
+        get => _christmasVisibility;
         set {
-            _canvasItems = value;
-            RaisePropertyChangedEvent("CanvasItems");
+            _christmasVisibility = value;
+            RaisePropertyChangedEvent("ChristmasVisibility");
         }
     }
 
