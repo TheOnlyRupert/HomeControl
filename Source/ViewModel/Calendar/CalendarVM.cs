@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
@@ -31,7 +32,7 @@ public class CalendarVM : BaseViewModel {
         _button14BorderColor, _button15BorderColor, _button16BorderColor, _button17BorderColor, _button18BorderColor, _button19BorderColor, _button20BorderColor, _button21BorderColor,
         _button22BorderColor, _button23BorderColor, _button24BorderColor, _button25BorderColor, _button26BorderColor, _button27BorderColor, _button28BorderColor, _button29BorderColor,
         _button30BorderColor, _button31BorderColor, _button32BorderColor, _button33BorderColor, _button34BorderColor, _button35BorderColor, _button36BorderColor, _button37BorderColor,
-        _button38BorderColor, _button39BorderColor, _button40BorderColor, _button41BorderColor, _button42BorderColor;
+        _button38BorderColor, _button39BorderColor, _button40BorderColor, _button41BorderColor, _button42BorderColor, _filterBackgroundColor;
 
     private ObservableCollection<CalendarEventsCustom> _button1EventList, _button2EventList, _button3EventList, _button4EventList, _button5EventList, _button6EventList,
         _button7EventList, _button8EventList, _button9EventList, _button10EventList, _button11EventList, _button12EventList, _button13EventList, _button14EventList,
@@ -53,6 +54,9 @@ public class CalendarVM : BaseViewModel {
 
             FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster), true);
         }
+
+        ReferenceValues.CalendarFilterList = new[] { true, true, true, true, true, true };
+        FilterBackgroundColor = "Transparent";
 
         Button1EventList = new ObservableCollection<CalendarEventsCustom>();
         Button2EventList = new ObservableCollection<CalendarEventsCustom>();
@@ -108,10 +112,35 @@ public class CalendarVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "DateChanged") {
+        switch (e.PropertyName) {
+        case "DateChanged":
             calendarDate = DateTime.Now;
             CurrentMonthAndYear = calendarDate.ToString("MMMM, yyyy");
             PopulateCalendar(DateTime.Now);
+            BackupEvents();
+
+            break;
+        case "ScreenSaverOn":
+            ReferenceValues.CalendarFilterList = new[] { true, true, true, true, true, true };
+            PopulateCalendar(calendarDate);
+
+            break;
+        }
+    }
+
+    private static void BackupEvents() {
+        Directory.CreateDirectory(ReferenceValues.DOCUMENTS_DIRECTORY + "backups/");
+
+        try {
+            FileHelpers.SaveFileText("backups/calendar_backup_" + DateTime.Now.ToString("yyyy_MM_dd"), JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster), true);
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "FinancesVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 
@@ -131,6 +160,13 @@ public class CalendarVM : BaseViewModel {
             calendarDate = DateTime.Now;
             CurrentMonthAndYear = calendarDate.ToString("MMMM, yyyy");
             PopulateCalendar(calendarDate);
+            break;
+        case "filter":
+            EditFilter editFilter = new();
+            editFilter.ShowDialog();
+            editFilter.Close();
+            PopulateCalendar(calendarDate);
+
             break;
         case "recurring":
             if (!ReferenceValues.LockUI) {
@@ -1577,422 +1613,597 @@ public class CalendarVM : BaseViewModel {
         foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
             if (calendarStartingDate.ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button1EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button1EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(1).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button2EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button2EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(2).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button3EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button3EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(3).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button4EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button4EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(4).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button5EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button5EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(5).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button6EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button6EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(6).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button7EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button7EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(7).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button8EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button8EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(8).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button9EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button9EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(9).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button10EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button10EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(10).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button11EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button11EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(11).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button12EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button12EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(12).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button13EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button13EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(13).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button14EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button14EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(14).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button15EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button15EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(15).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button16EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button16EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(16).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button17EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button17EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(17).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button18EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button18EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(18).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button19EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button19EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(19).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button20EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button20EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(20).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button21EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button21EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(21).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button22EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button22EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(22).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button23EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button23EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(23).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button24EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button24EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(24).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button25EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button25EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(25).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button26EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button26EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(26).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button27EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button27EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(27).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button28EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button28EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(28).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button29EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button29EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(29).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button30EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button30EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(30).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button31EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button31EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(31).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button32EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button32EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(32).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button33EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button33EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(33).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button34EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button34EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(34).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button35EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button35EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(35).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button36EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button36EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(36).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button37EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button37EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(37).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button38EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button38EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(38).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button39EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button39EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(39).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button40EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button40EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(40).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button41EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button41EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
             }
 
             if (calendarStartingDate.AddDays(41).ToString("yyyy-MM-dd") == dates.Date) {
                 foreach (CalendarEvents events in dates.EventsList) {
-                    Button42EventList.Add(new CalendarEventsCustom {
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
-                        Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
-                        Priority = events.Priority
-                    });
+                    for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
+                        if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
+                            Button42EventList.Add(new CalendarEventsCustom {
+                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
+                                Priority = events.Priority
+                            });
+                        }
+                    }
                 }
+            }
+        }
+
+        FilterBackgroundColor = "Transparent";
+        foreach (bool VARIABLE in ReferenceValues.CalendarFilterList) {
+            if (!VARIABLE) {
+                FilterBackgroundColor = "Yellow";
             }
         }
     }
@@ -3685,6 +3896,14 @@ public class CalendarVM : BaseViewModel {
         set {
             _button42BorderThickness = value;
             RaisePropertyChangedEvent("Button42BorderThickness");
+        }
+    }
+
+    public string FilterBackgroundColor {
+        get => _filterBackgroundColor;
+        set {
+            _filterBackgroundColor = value;
+            RaisePropertyChangedEvent("FilterBackgroundColor");
         }
     }
 

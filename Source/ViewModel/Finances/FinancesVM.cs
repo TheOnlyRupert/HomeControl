@@ -62,12 +62,13 @@ public class FinancesVM : BaseViewModel {
     }
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "RefreshFinances") {
+        switch (e.PropertyName) {
+        case "RefreshFinances":
             RefreshFinances();
-        }
-
-        if (e.PropertyName == "DateChanged") {
+            break;
+        case "DateChanged":
             BackupFinances();
+            break;
         }
     }
 
@@ -131,13 +132,12 @@ public class FinancesVM : BaseViewModel {
         CashAvailableTextColor = CashAvailableText.StartsWith("-") ? "Red" : "CornflowerBlue";
     }
 
-    private void BackupFinances() {
+    private static void BackupFinances() {
         Directory.CreateDirectory(ReferenceValues.DOCUMENTS_DIRECTORY + "backups/");
 
         try {
             FileHelpers.SaveFileText("backups/finance_backup_" + DateTime.Now.ToString("yyyy_MM_dd"), JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster), true);
         } catch (Exception e) {
-            Console.WriteLine(e);
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "WARN",

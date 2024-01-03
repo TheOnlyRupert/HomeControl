@@ -95,6 +95,9 @@
         <Compile Include="Source\Modules\ButtonStackBottom.xaml.cs">
             <DependentUpon>ButtonStackBottom.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Calendar\EditFilter.xaml.cs">
+            <DependentUpon>EditFilter.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Calendar\EditRecurring.xaml.cs">
             <DependentUpon>EditRecurring.xaml</DependentUpon>
         </Compile>
@@ -172,6 +175,7 @@
         <Compile Include="Source\ViewModel\Behavior\TasksQuarterlyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksWeeklyVM.cs"/>
         <Compile Include="Source\ViewModel\ButtonStackBottomVM.cs"/>
+        <Compile Include="Source\ViewModel\Calendar\EditFilterVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
         <Compile Include="Source\ViewModel\ChristmasVM.cs"/>
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
@@ -219,6 +223,7 @@
         <Page Include="Source\Modules\Behavior\TasksQuarterly.xaml"/>
         <Page Include="Source\Modules\Behavior\TasksWeekly.xaml"/>
         <Page Include="Source\Modules\ButtonStackBottom.xaml"/>
+        <Page Include="Source\Modules\Calendar\EditFilter.xaml"/>
         <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
         <Page Include="Source\Modules\Christmas.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>

@@ -84,14 +84,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName1 = ReferenceValues.ForecastSevenDay.properties.periods[0].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[0].startTime.ToString("MM/dd");
             SevenDayForecastTemp1 = ReferenceValues.ForecastSevenDay.properties.periods[0].temperature + "°";
 
-            string[] weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[0].shortForecast);
+            string[] weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[0].shortForecast);
             SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[0].isDaytime,
                 ReferenceValues.ForecastSevenDay.properties.periods[0].temperature,
-                ReferenceValues.ForecastSevenDay.properties.periods[0].windSpeed, "");
+                ReferenceValues.ForecastSevenDay.properties.periods[0].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon1b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[0].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[0].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[0].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[0].windSpeed);
             }
 
             SevenDayForecastRainChance1 = ReferenceValues.ForecastSevenDay.properties.periods[0].probabilityOfPrecipitation.value?.ToString();
@@ -109,14 +109,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName2 = ReferenceValues.ForecastSevenDay.properties.periods[1].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[1].startTime.ToString("MM/dd");
             SevenDayForecastTemp2 = ReferenceValues.ForecastSevenDay.properties.periods[1].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[1].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[1].shortForecast);
             SevenDayForecastWeatherIcon2a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[1].isDaytime, ReferenceValues.ForecastSevenDay.properties
                 .periods[1]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[1].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[1].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon2b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[1].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[1].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[1].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[1].windSpeed);
             }
 
             SevenDayForecastRainChance2 = ReferenceValues.ForecastSevenDay.properties.periods[1].probabilityOfPrecipitation.value?.ToString();
@@ -134,14 +134,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName3 = ReferenceValues.ForecastSevenDay.properties.periods[2].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[2].startTime.ToString("MM/dd");
             SevenDayForecastTemp3 = ReferenceValues.ForecastSevenDay.properties.periods[2].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[2].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[2].shortForecast);
             SevenDayForecastWeatherIcon3a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[2].isDaytime, ReferenceValues.ForecastSevenDay.properties
                 .periods[2]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[2].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[2].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon3b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[2].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[2].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[2].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[2].windSpeed);
             }
 
             SevenDayForecastRainChance3 = ReferenceValues.ForecastSevenDay.properties.periods[2].probabilityOfPrecipitation.value?.ToString();
@@ -159,13 +159,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName4 = ReferenceValues.ForecastSevenDay.properties.periods[3].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[3].startTime.ToString("MM/dd");
             SevenDayForecastTemp4 = ReferenceValues.ForecastSevenDay.properties.periods[3].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[3].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[3].shortForecast);
             SevenDayForecastWeatherIcon4a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[3].isDaytime, ReferenceValues.ForecastSevenDay.properties
                 .periods[3]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[3].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[3].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon4b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[3].isDaytime,
-                    ReferenceValues.ForecastSevenDay.properties.periods[3].temperature, ReferenceValues.ForecastSevenDay.properties.periods[3].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[3].temperature, ReferenceValues.ForecastSevenDay.properties.periods[3].windSpeed);
             }
 
             SevenDayForecastRainChance4 = ReferenceValues.ForecastSevenDay.properties.periods[3].probabilityOfPrecipitation.value?.ToString();
@@ -183,14 +183,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName5 = ReferenceValues.ForecastSevenDay.properties.periods[4].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[4].startTime.ToString("MM/dd");
             SevenDayForecastTemp5 = ReferenceValues.ForecastSevenDay.properties.periods[4].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[4].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[4].shortForecast);
             SevenDayForecastWeatherIcon5a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[4].isDaytime, ReferenceValues.ForecastSevenDay.properties
                 .periods[4]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[4].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[4].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon5b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[4].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[4].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[4].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[4].windSpeed);
             }
 
             SevenDayForecastRainChance5 = ReferenceValues.ForecastSevenDay.properties.periods[4].probabilityOfPrecipitation.value?.ToString();
@@ -208,14 +208,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName6 = ReferenceValues.ForecastSevenDay.properties.periods[5].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[5].startTime.ToString("MM/dd");
             SevenDayForecastTemp6 = ReferenceValues.ForecastSevenDay.properties.periods[5].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[5].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[5].shortForecast);
             SevenDayForecastWeatherIcon6a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[5].isDaytime, ReferenceValues.ForecastSevenDay.properties
                 .periods[5]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[5].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[5].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon6b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[5].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[5].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[5].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[5].windSpeed);
             }
 
             SevenDayForecastRainChance6 = ReferenceValues.ForecastSevenDay.properties.periods[5].probabilityOfPrecipitation.value?.ToString();
@@ -233,14 +233,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName7 = ReferenceValues.ForecastSevenDay.properties.periods[6].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[6].startTime.ToString("MM/dd");
             SevenDayForecastTemp7 = ReferenceValues.ForecastSevenDay.properties.periods[6].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[6].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[6].shortForecast);
             SevenDayForecastWeatherIcon7a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[6].isDaytime, ReferenceValues.ForecastSevenDay.properties
                 .periods[6]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[6].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[6].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon7b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[6].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[6].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[6].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[6].windSpeed);
             }
 
             SevenDayForecastRainChance7 = ReferenceValues.ForecastSevenDay.properties.periods[6].probabilityOfPrecipitation.value?.ToString();
@@ -258,14 +258,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName8 = ReferenceValues.ForecastSevenDay.properties.periods[7].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[7].startTime.ToString("MM/dd");
             SevenDayForecastTemp8 = ReferenceValues.ForecastSevenDay.properties.periods[7].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[7].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[7].shortForecast);
             SevenDayForecastWeatherIcon8a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[7].isDaytime, ReferenceValues.ForecastSevenDay.properties
                 .periods[7]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[7].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[7].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon8b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[7].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[7].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[7].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[7].windSpeed);
             }
 
             SevenDayForecastRainChance8 = ReferenceValues.ForecastSevenDay.properties.periods[7].probabilityOfPrecipitation.value?.ToString();
@@ -283,14 +283,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName9 = ReferenceValues.ForecastSevenDay.properties.periods[8].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[8].startTime.ToString("MM/dd");
             SevenDayForecastTemp9 = ReferenceValues.ForecastSevenDay.properties.periods[8].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[8].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[8].shortForecast);
             SevenDayForecastWeatherIcon9a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[8].isDaytime, ReferenceValues.ForecastSevenDay.properties
                 .periods[8]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[8].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[8].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon9b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[8].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[8].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[8].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[8].windSpeed);
             }
 
             SevenDayForecastRainChance9 = ReferenceValues.ForecastSevenDay.properties.periods[8].probabilityOfPrecipitation.value?.ToString();
@@ -308,13 +308,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName10 = ReferenceValues.ForecastSevenDay.properties.periods[9].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[9].startTime.ToString("MM/dd");
             SevenDayForecastTemp10 = ReferenceValues.ForecastSevenDay.properties.periods[9].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[9].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[9].shortForecast);
             SevenDayForecastWeatherIcon10a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[9].isDaytime,
-                ReferenceValues.ForecastSevenDay.properties.periods[9].temperature, ReferenceValues.ForecastSevenDay.properties.periods[9].windSpeed, "");
+                ReferenceValues.ForecastSevenDay.properties.periods[9].temperature, ReferenceValues.ForecastSevenDay.properties.periods[9].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon10b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[9].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[9].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[9].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[9].windSpeed);
             }
 
             SevenDayForecastRainChance10 = ReferenceValues.ForecastSevenDay.properties.periods[9].probabilityOfPrecipitation.value?.ToString();
@@ -332,13 +332,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName11 = ReferenceValues.ForecastSevenDay.properties.periods[10].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[10].startTime.ToString("MM/dd");
             SevenDayForecastTemp11 = ReferenceValues.ForecastSevenDay.properties.periods[10].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[10].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[10].shortForecast);
             SevenDayForecastWeatherIcon11a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[10].isDaytime,
-                ReferenceValues.ForecastSevenDay.properties.periods[10].temperature, ReferenceValues.ForecastSevenDay.properties.periods[10].windSpeed, "");
+                ReferenceValues.ForecastSevenDay.properties.periods[10].temperature, ReferenceValues.ForecastSevenDay.properties.periods[10].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon11b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[10].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[10].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[10].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[10].windSpeed);
             }
 
             SevenDayForecastRainChance11 = ReferenceValues.ForecastSevenDay.properties.periods[10].probabilityOfPrecipitation.value?.ToString();
@@ -356,14 +356,14 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName12 = ReferenceValues.ForecastSevenDay.properties.periods[11].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[11].startTime.ToString("MM/dd");
             SevenDayForecastTemp12 = ReferenceValues.ForecastSevenDay.properties.periods[11].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[11].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[11].shortForecast);
             SevenDayForecastWeatherIcon12a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[11].isDaytime, ReferenceValues.ForecastSevenDay
                 .properties.periods[11]
-                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[11].windSpeed, "");
+                .temperature, ReferenceValues.ForecastSevenDay.properties.periods[11].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon12b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[11].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[11].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[11].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[11].windSpeed);
             }
 
             SevenDayForecastRainChance12 = ReferenceValues.ForecastSevenDay.properties.periods[11].probabilityOfPrecipitation.value?.ToString();
@@ -381,13 +381,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName13 = ReferenceValues.ForecastSevenDay.properties.periods[12].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[12].startTime.ToString("MM/dd");
             SevenDayForecastTemp13 = ReferenceValues.ForecastSevenDay.properties.periods[12].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[12].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[12].shortForecast);
             SevenDayForecastWeatherIcon13a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[12].isDaytime,
-                ReferenceValues.ForecastSevenDay.properties.periods[12].temperature, ReferenceValues.ForecastSevenDay.properties.periods[12].windSpeed, "");
+                ReferenceValues.ForecastSevenDay.properties.periods[12].temperature, ReferenceValues.ForecastSevenDay.properties.periods[12].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon13b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[12].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[12].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[12].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[12].windSpeed);
             }
 
             SevenDayForecastRainChance13 = ReferenceValues.ForecastSevenDay.properties.periods[12].probabilityOfPrecipitation.value?.ToString();
@@ -405,13 +405,13 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName14 = ReferenceValues.ForecastSevenDay.properties.periods[13].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[13].startTime.ToString("MM/dd");
             SevenDayForecastTemp14 = ReferenceValues.ForecastSevenDay.properties.periods[13].temperature + "°";
 
-            weatherIcons = RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[13].shortForecast);
+            weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[13].shortForecast);
             SevenDayForecastWeatherIcon14a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[13].isDaytime,
-                ReferenceValues.ForecastSevenDay.properties.periods[13].temperature, ReferenceValues.ForecastSevenDay.properties.periods[13].windSpeed, "");
+                ReferenceValues.ForecastSevenDay.properties.periods[13].temperature, ReferenceValues.ForecastSevenDay.properties.periods[13].windSpeed);
             if (weatherIcons.Length > 1) {
                 SevenDayForecastWeatherIcon14b = WeatherHelpers.GetWeatherIcon(weatherIcons[1], ReferenceValues.ForecastSevenDay.properties.periods[13].isDaytime,
                     ReferenceValues.ForecastSevenDay.properties.periods[13].temperature,
-                    ReferenceValues.ForecastSevenDay.properties.periods[13].windSpeed, weatherIcons[0]);
+                    ReferenceValues.ForecastSevenDay.properties.periods[13].windSpeed);
             }
 
             SevenDayForecastRainChance14 = ReferenceValues.ForecastSevenDay.properties.periods[13].probabilityOfPrecipitation.value?.ToString();
@@ -458,7 +458,7 @@ public class WeatherVM : BaseViewModel {
                         ForecastHourlyList.Add(new WeatherHourlyBlock {
                             Number = period.number,
                             Time = period.startTime,
-                            WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed, ""),
+                            WeatherIcon = WeatherHelpers.GetWeatherIcon(period.shortForecast, period.isDaytime, period.temperature, period.windSpeed),
                             Temp = period.temperature,
                             RainIcon = WeatherHelpers.GetRainIcon(period.shortForecast),
                             RainChance = Convert.ToInt32(period.probabilityOfPrecipitation.value.ToString()),
@@ -469,11 +469,7 @@ public class WeatherVM : BaseViewModel {
                         });
                     }
 
-                    if (ForecastHourlyList.Count == 0) {
-                        ForecastHourlyVisibility = "HIDDEN";
-                    } else {
-                        ForecastHourlyVisibility = "VISIBLE";
-                    }
+                    ForecastHourlyVisibility = ForecastHourlyList.Count == 0 ? "HIDDEN" : "VISIBLE";
 
                     if (period.temperature < min) {
                         min = period.temperature;
@@ -498,10 +494,6 @@ public class WeatherVM : BaseViewModel {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
-    }
-
-    private static string[] RegexWeatherForecast(string input) {
-        return input.Split(new[] { " then " }, StringSplitOptions.None);
     }
 
     #region Fields

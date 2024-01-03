@@ -16,7 +16,7 @@ public class EditCalendarVM : BaseViewModel {
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1NameText, _user2NameText, _user3NameText, _user4NameText, _user5NameText, _startTimeText, _endTimeText,
         _dupeButtonBackgroundColor, _priority0BorderColor, _priority1BorderColor, _priority2BorderColor, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor,
-        _user5BorderColor, _homeBorderColor, _weatherCloudIcon, _detailedWeather, _temperatureHighLow, _eventDateWeekday;
+        _user5BorderColor, _homeBorderColor, _forecastWeatherIcon1, _forecastWeatherIcon2, _detailedWeather, _temperatureHighLow, _eventDateWeekday;
 
     private ObservableCollection<CalendarEvents> _eventList;
 
@@ -98,24 +98,30 @@ public class EditCalendarVM : BaseViewModel {
                 }
 
                 EventList = dates.EventsList;
+            }
+        }
 
-                /* Populate Weather */
-                WeatherCloudIcon = null;
-                TemperatureHighLow = "";
-                DetailedWeather = "";
+        /* Populate Weather */
+        ForecastWeatherIcon1 = null;
+        ForecastWeatherIcon2 = null;
+        TemperatureHighLow = "";
+        DetailedWeather = "";
 
-                try {
-                    foreach (JsonWeather.Periods periods in ReferenceValues.ForecastSevenDay.properties.periods) {
-                        if (periods.startTime.Date == ReferenceValues.CalendarEventDate.Date && periods.isDaytime) {
-                            WeatherCloudIcon = WeatherHelpers.GetWeatherIcon(periods.shortForecast, periods.isDaytime, periods.temperature, periods.windSpeed, "");
-                            TemperatureHighLow = periods.temperature + "°";
-                            DetailedWeather = periods.detailedForecast;
-                        }
+        try {
+            foreach (JsonWeather.Periods periods in ReferenceValues.ForecastSevenDay.properties.periods) {
+                if (periods.startTime.Date == ReferenceValues.CalendarEventDate.Date && periods.isDaytime) {
+                    string[] weatherIcons = WeatherHelpers.RegexWeatherForecast(periods.shortForecast);
+                    ForecastWeatherIcon1 = WeatherHelpers.GetWeatherIcon(weatherIcons[0], periods.isDaytime, periods.temperature, periods.windSpeed);
+                    if (weatherIcons.Length > 1) {
+                        ForecastWeatherIcon2 = WeatherHelpers.GetWeatherIcon(weatherIcons[1], periods.isDaytime, periods.temperature, periods.windSpeed);
                     }
-                } catch (Exception) {
-                    //ignore
+
+                    TemperatureHighLow = periods.temperature + "°";
+                    DetailedWeather = periods.detailedForecast;
                 }
             }
+        } catch (Exception) {
+            //ignore
         }
 
         if (ReferenceValues.IsCalendarDupeModeEnabled) {
@@ -811,11 +817,19 @@ public class EditCalendarVM : BaseViewModel {
         }
     }
 
-    public string WeatherCloudIcon {
-        get => _weatherCloudIcon;
+    public string ForecastWeatherIcon1 {
+        get => _forecastWeatherIcon1;
         set {
-            _weatherCloudIcon = value;
-            RaisePropertyChangedEvent("WeatherCloudIcon");
+            _forecastWeatherIcon1 = value;
+            RaisePropertyChangedEvent("ForecastWeatherIcon1");
+        }
+    }
+
+    public string ForecastWeatherIcon2 {
+        get => _forecastWeatherIcon2;
+        set {
+            _forecastWeatherIcon2 = value;
+            RaisePropertyChangedEvent("ForecastWeatherIcon2");
         }
     }
 

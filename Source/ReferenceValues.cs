@@ -137,4 +137,6 @@ public static class ReferenceValues {
     public static JsonWeather ForecastSevenDay { get; set; }
     public static JsonWeather ForecastHourly { get; set; }
     public static string AdjustedTrashDay { get; set; }
+
+    public static bool[] CalendarFilterList { get; set; }
 }

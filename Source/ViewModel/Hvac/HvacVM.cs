@@ -58,7 +58,7 @@ public class HvacVM : BaseViewModel {
                 CurrentWeatherDescription = ReferenceValues.ForecastHourly.properties.periods[0].shortForecast;
                 CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(ReferenceValues.ForecastHourly.properties.periods[0].shortForecast,
                     ReferenceValues.ForecastHourly.properties.periods[0].isDaytime,
-                    ReferenceValues.ForecastHourly.properties.periods[0].temperature, ReferenceValues.ForecastHourly.properties.periods[0].windSpeed, "");
+                    ReferenceValues.ForecastHourly.properties.periods[0].temperature, ReferenceValues.ForecastHourly.properties.periods[0].windSpeed);
 
                 if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
                     double c = (ReferenceValues.ForecastHourly.properties.periods[0].temperature - 32) * 0.556;

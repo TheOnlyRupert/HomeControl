@@ -4,26 +4,7 @@ using HomeControl.Source.Json;
 namespace HomeControl.Source.Helpers;
 
 public static class WeatherHelpers {
-    public static string GetWeatherIcon(string weather, bool isDayTime, int temp, string windSpeed, string firstText) {
-        switch (firstText) {
-        case "Showers And Thunderstorms":
-        case "Showers And Thunderstorms Likely":
-        case "Rain Likely":
-        case "Rain":
-        case "Rain Showers":
-            switch (weather) {
-            case "Sunny":
-            case "Mostly Sunny":
-                return "../../../Resources/Images/weather/rainbow-clear.gif";
-
-            case "Partly Cloudy":
-            case "Partly Sunny":
-                return "../../../Resources/Images/weather/rainbow.gif";
-            }
-
-            break;
-        }
-
+    public static string GetWeatherIcon(string weather, bool isDayTime, int temp, string windSpeed) {
         switch (weather) {
         case "Sunny":
         case "Mostly Sunny":
@@ -143,42 +124,25 @@ public static class WeatherHelpers {
     }
 
     public static int GetWindRotation(string direction) {
-        switch (direction) {
-        case "N":
-            return 0;
-        case "S":
-            return 180;
-        case "E":
-            return 90;
-        case "W":
-            return 270;
-        case "NE":
-            return 45;
-        case "SE":
-            return 135;
-        case "SW":
-            return 225;
-        case "NW":
-            return 315;
-        case "SSE":
-            return 158;
-        case "SSW":
-            return 202;
-        case "ENE":
-            return 68;
-        case "ESE":
-            return 112;
-        case "NNW":
-            return 338;
-        case "NNE":
-            return 22;
-        case "WSW":
-            return 248;
-        case "WNW":
-            return 292;
-        default:
-            return 0;
-        }
+        return direction switch {
+            "N" => 0,
+            "S" => 180,
+            "E" => 90,
+            "W" => 270,
+            "NE" => 45,
+            "SE" => 135,
+            "SW" => 225,
+            "NW" => 315,
+            "SSE" => 158,
+            "SSW" => 202,
+            "ENE" => 68,
+            "ESE" => 112,
+            "NNW" => 338,
+            "NNE" => 22,
+            "WSW" => 248,
+            "WNW" => 292,
+            _ => 0
+        };
     }
 
     public static string GetRainIcon(string input) {
@@ -195,5 +159,9 @@ public static class WeatherHelpers {
         default:
             return "../../../Resources/Images/weather/raindrop.gif";
         }
+    }
+
+    public static string[] RegexWeatherForecast(string input) {
+        return input.Split(new[] { " then " }, StringSplitOptions.None);
     }
 }

@@ -467,9 +467,13 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Grid.Column="0" gif:ImageBehavior.AnimatedSource="{Binding WeatherCloudIcon}" Margin="-8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <Image gif:ImageBehavior.AnimatedSource="{Binding ForecastWeatherIcon1}" Margin="-8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Image gif:ImageBehavior.AnimatedSource="{Binding ForecastWeatherIcon2}" Margin="-8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding TemperatureHighLow}" FontSize="24" Foreground="White" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DetailedWeather}" FontSize="18" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap"
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DetailedWeather}" FontSize="16" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap"
                                TextAlignment="Center"/>
                 </Grid>
             </Grid>
