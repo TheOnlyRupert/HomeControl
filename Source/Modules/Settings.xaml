@@ -258,6 +258,10 @@
             <CheckBox Content="Use Easter Eggs" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsEasterEggsChecked}"/>
         </StackPanel>
 
+        <StackPanel Grid.Column="2" Grid.Row="15" Grid.RowSpan="2">
+            <CheckBox Content="Trash Day Holidays" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding UseTrashDayHolidays}"/>
+        </StackPanel>
+
         <StackPanel Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2">
             <TextBlock Text="National Weather Forcast User Agent (Email)" Foreground="White"/>
             <TextBox Text="{Binding UserAgent, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>

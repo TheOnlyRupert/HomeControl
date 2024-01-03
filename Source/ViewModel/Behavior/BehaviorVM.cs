@@ -149,6 +149,7 @@ public class BehaviorVM : BaseViewModel {
         RefreshTasks(5);
         RefreshCountdown();
         RefreshBlinking();
+        TrashDayLogic();
         SaveJsons();
     }
 
@@ -2111,11 +2112,13 @@ public class BehaviorVM : BaseViewModel {
             RefreshTasks(3);
             RefreshTasks(4);
             RefreshTasks(5);
+            TrashDayLogic();
             SaveJsons();
             break;
         case "HourChanged":
             RefreshCountdown();
             RefreshBlinking();
+            TrashDayLogic();
             break;
         case "RefreshFinances":
             RefreshTasks(1);
@@ -2273,13 +2276,6 @@ public class BehaviorVM : BaseViewModel {
 
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
         System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
-
-        /* Check Trash Day */
-        if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 11) {
-            TrashDayVisibility = "VISIBLE";
-        } else {
-            TrashDayVisibility = "HIDDEN";
-        }
 
         ReferenceValues.TaskWeekStartDate = DateTime.Now;
         while (ReferenceValues.TaskWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
@@ -2453,6 +2449,55 @@ public class BehaviorVM : BaseViewModel {
         }
 
         RemainingYearColor = "White";
+    }
+
+    private void TrashDayLogic() {
+        if (ReferenceValues.JsonSettingsMaster.UseTrashDayHolidays) {
+            if (ReferenceValues.JsonSettingsMaster.TrashDay == "DISABLED") {
+                return;
+            }
+
+            bool breakout = false;
+            DateTime date = DateTime.Now;
+            DayOfWeek trashDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), ReferenceValues.JsonSettingsMaster.TrashDay);
+
+            if (date.DayOfWeek > trashDay) {
+                return;
+            }
+
+            while (date.DayOfWeek <= trashDay) {
+                foreach (Holidays.HolidayBlock holiday in Holidays.GetHolidays(date.Year)) {
+                    if (!breakout) {
+                        if (holiday.Holiday == "New Year's" || holiday.Holiday == "Memorial" || holiday.Holiday == "Independence" || holiday.Holiday == "Labor" || holiday.Holiday == "Thanksgiving" ||
+                            holiday.Holiday == "Christmas") {
+                            if (date.Month == holiday.Date.Month && date.Day == holiday.Date.Day) {
+                                /* Add one day to trash day */
+                                trashDay++;
+                                ReferenceValues.AdjustedTrashDay = trashDay.ToString();
+                                breakout = true;
+
+                                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                                    Date = DateTime.Now,
+                                    Level = "INFO",
+                                    Module = "BehaviorVM",
+                                    Description = "Adjusting trash day to " + trashDay + " because of " + holiday.Holiday
+                                });
+                                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                            }
+                        }
+                    }
+                }
+
+                /* Subtract a day */
+                date = date.AddDays(-1);
+            }
+        }
+
+        if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.AdjustedTrashDay && DateTime.Now.Hour > 11) {
+            TrashDayVisibility = "VISIBLE";
+        } else {
+            TrashDayVisibility = "HIDDEN";
+        }
     }
 
     #region Fields

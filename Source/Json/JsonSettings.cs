@@ -48,6 +48,7 @@ public class JsonSettings {
     public bool useEasterEggs { get; set; }
     public bool DebugMode { get; set; }
     public string TrashDay { get; set; }
+    public bool UseTrashDayHolidays { get; set; }
     public bool User1Checked { get; set; }
     public bool User2Checked { get; set; }
     public bool User3Checked { get; set; }

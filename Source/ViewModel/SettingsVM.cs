@@ -12,7 +12,7 @@ namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
     private bool _isDebugModeChecked, _isMetricUnitsChecked, _isEasterEggsChecked, _user1Checked, _user2Checked, _user3Checked, _user4Checked,
-        _user5Checked, _user1BehaviorChecked, _user2BehaviorChecked, _user3BehaviorChecked, _user4BehaviorChecked, _user5BehaviorChecked;
+        _user5Checked, _user1BehaviorChecked, _user2BehaviorChecked, _user3BehaviorChecked, _user4BehaviorChecked, _user5BehaviorChecked, _useTrashDayHolidays;
 
     private List<string> _trashDayList;
 
@@ -77,6 +77,7 @@ public class SettingsVM : BaseViewModel {
         IsMetricUnitsChecked = ReferenceValues.JsonSettingsMaster.useMetricUnits;
         IsEasterEggsChecked = ReferenceValues.JsonSettingsMaster.useEasterEggs;
         TrashDaySelected = ReferenceValues.JsonSettingsMaster.TrashDay;
+        UseTrashDayHolidays = ReferenceValues.JsonSettingsMaster.UseTrashDayHolidays;
         User1Checked = ReferenceValues.JsonSettingsMaster.User1Checked;
         User2Checked = ReferenceValues.JsonSettingsMaster.User2Checked;
         User3Checked = ReferenceValues.JsonSettingsMaster.User3Checked;
@@ -147,6 +148,7 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.useMetricUnits = IsMetricUnitsChecked;
             ReferenceValues.JsonSettingsMaster.useEasterEggs = IsEasterEggsChecked;
             ReferenceValues.JsonSettingsMaster.TrashDay = TrashDaySelected;
+            ReferenceValues.JsonSettingsMaster.UseTrashDayHolidays = UseTrashDayHolidays;
             ReferenceValues.JsonSettingsMaster.User1Checked = User1Checked;
             ReferenceValues.JsonSettingsMaster.User2Checked = User2Checked;
             ReferenceValues.JsonSettingsMaster.User3Checked = User3Checked;
@@ -203,7 +205,7 @@ public class SettingsVM : BaseViewModel {
         case "location":
             GeoCoordinateWatcher watcher = new();
 
-            watcher.PositionChanged += (s, e) => {
+            watcher.PositionChanged += (_, e) => {
                 WeatherLat = e.Position.Location.Latitude;
                 WeatherLon = e.Position.Location.Longitude;
             };
@@ -590,6 +592,14 @@ public class SettingsVM : BaseViewModel {
         set {
             _trashDaySelected = value;
             RaisePropertyChangedEvent("TrashDaySelected");
+        }
+    }
+
+    public bool UseTrashDayHolidays {
+        get => _useTrashDayHolidays;
+        set {
+            _useTrashDayHolidays = value;
+            RaisePropertyChangedEvent("UseTrashDayHolidays");
         }
     }
 
