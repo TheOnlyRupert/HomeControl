@@ -2465,6 +2465,8 @@ public class BehaviorVM : BaseViewModel {
                 return;
             }
 
+            ReferenceValues.AdjustedTrashDay = ReferenceValues.JsonSettingsMaster.TrashDay;
+            
             while (date.DayOfWeek <= trashDay) {
                 foreach (Holidays.HolidayBlock holiday in Holidays.GetHolidays(date.Year)) {
                     if (!breakout) {
