@@ -2462,11 +2462,12 @@ public class BehaviorVM : BaseViewModel {
             DayOfWeek trashDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), ReferenceValues.JsonSettingsMaster.TrashDay);
 
             if (date.DayOfWeek > trashDay) {
+                TrashDayVisibility = "HIDDEN";
                 return;
             }
 
             ReferenceValues.AdjustedTrashDay = ReferenceValues.JsonSettingsMaster.TrashDay;
-            
+
             while (date.DayOfWeek <= trashDay) {
                 foreach (Holidays.HolidayBlock holiday in Holidays.GetHolidays(date.Year)) {
                     if (!breakout) {

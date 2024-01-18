@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Hvac;
@@ -17,7 +18,7 @@ public class EditHvacVM : BaseViewModel {
         double f = ReferenceValues.TemperatureSet * 1.8 + 32;
         TemperatureSet = ReferenceValues.TemperatureSet + "°C  or  " + (int)f + "°F";
 
-        if (ReferenceValues.TemperatureInside == -99) {
+        if (Math.Abs(ReferenceValues.TemperatureInside - -99) < 1) {
             TemperatureInside = "Unknown";
         } else {
             f = ReferenceValues.TemperatureInside * 1.8 + 32;

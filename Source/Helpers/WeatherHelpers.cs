@@ -82,6 +82,7 @@ public static class WeatherHelpers {
         case "Isolated Snow Showers":
         case "Scattered Snow Showers":
         case "Light Snow":
+        case "Light Snow Likely":
         case "Chance Light Snow":
         case "Slight Chance Snow Showers":
         case "Slight Chance Light Snow":
@@ -103,8 +104,10 @@ public static class WeatherHelpers {
 
         case "Slight Chance Rain And Snow Showers":
         case "Slight Chance Rain And Snow":
+        case "Chance Rain And Snow":
         case "Chance Rain And Snow Showers":
         case "Chance Freezing Rain":
+        case "Freezing Rain Likely":
         case "Rain And Snow Showers":
         case "Rain And Snow Showers Likely":
             return "../../../Resources/Images/weather/sleet.gif";
