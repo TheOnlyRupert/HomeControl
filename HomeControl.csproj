@@ -80,6 +80,7 @@
         <Compile Include="Source\Json\JsonTimer.cs"/>
         <Compile Include="Source\Json\JsonVersion.cs"/>
         <Compile Include="Source\Json\JsonWeather.cs"/>
+        <Compile Include="Source\Json\JsonWorkout.cs"/>
         <Compile Include="Source\Modules\Behavior\TasksDaily.xaml.cs">
             <DependentUpon>TasksDaily.xaml</DependentUpon>
         </Compile>
@@ -168,6 +169,9 @@
         <Compile Include="Source\Modules\Weather.xaml.cs">
             <DependentUpon>Weather.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Workout\Workout.xaml.cs">
+            <DependentUpon>Workout.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\ReferenceValues.cs"/>
         <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksDailyVM.cs"/>
@@ -206,6 +210,7 @@
         <Compile Include="Source\ViewModel\ButtonStackTopVM.cs"/>
         <Compile Include="Source\ViewModel\SettingsVM.cs"/>
         <Compile Include="Source\ViewModel\WeatherVM.cs"/>
+        <Compile Include="Source\ViewModel\Workout\WorkoutVM.cs"/>
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -248,6 +253,7 @@
         <Page Include="Source\Modules\Finances\EditFinances.xaml"/>
         <Page Include="Source\Modules\Games\Pictionary.xaml"/>
         <Page Include="Source\Modules\Weather.xaml"/>
+        <Page Include="Source\Modules\Workout\Workout.xaml"/>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">

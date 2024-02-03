@@ -67,7 +67,7 @@ void loop()
         {
         case hvac_cooling_purging:
             hvac_state = hvac_cooling_standby;
-            Serial.print("<HvacState_6>");
+            Serial.print("<HvacState_2>");
             digitalWrite(6, LOW);
             digitalWrite(5, LOW);
 
@@ -79,7 +79,7 @@ void loop()
             break;
         case hvac_heating_purging:
             hvac_state = hvac_heating_standby;
-            Serial.print("<HvacState_2>");
+            Serial.print("<HvacState_6>");
             digitalWrite(6, LOW);
             digitalWrite(5, LOW);
 
