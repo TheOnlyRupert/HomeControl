@@ -68,6 +68,7 @@
         <Compile Include="Source\Helpers\SoundDispatcher.cs"/>
         <Compile Include="Source\Helpers\VerifyInput.cs"/>
         <Compile Include="Source\Helpers\WeatherHelpers.cs"/>
+        <Compile Include="Source\Json\JsonBloodPressure.cs"/>
         <Compile Include="Source\Json\JsonDebug.cs"/>
         <Compile Include="Source\Json\JsonBehavior.cs"/>
         <Compile Include="Source\Json\JsonCalendar.cs"/>
@@ -110,6 +111,9 @@
         </Compile>
         <Compile Include="Source\Modules\DebugLog.xaml.cs">
             <DependentUpon>DebugLog.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Source\Modules\BloodPressure.xaml.cs">
+            <DependentUpon>BloodPressure.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Games\CoinFlip.xaml.cs">
             <DependentUpon>CoinFlip.xaml</DependentUpon>
@@ -178,12 +182,14 @@
         <Compile Include="Source\ViewModel\Behavior\TasksMonthlyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksQuarterlyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksWeeklyVM.cs"/>
+        <Compile Include="Source\ViewModel\BloodPressureVM.cs"/>
         <Compile Include="Source\ViewModel\ButtonStackBottomVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditFilterVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
         <Compile Include="Source\ViewModel\ChristmasVM.cs"/>
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
+        <Compile Include="Source\ViewModel\EditRecurringVM.cs"/>
         <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
         <Compile Include="Source\ViewModel\Games\NhieVM.cs"/>
         <Compile Include="Source\ViewModel\Games\Tamagotchi\TamagotchiLogic.cs"/>
@@ -233,6 +239,7 @@
         <Page Include="Source\Modules\Christmas.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
         <Page Include="Source\Modules\DebugLog.xaml"/>
+        <Page Include="Source\Modules\BloodPressure.xaml"/>
         <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
         <Page Include="Source\Modules\Games\Nhie.xaml"/>
         <Page Include="Source\Modules\Games\Tamagotchi\Tamagotchi.xaml"/>

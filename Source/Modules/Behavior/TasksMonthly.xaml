@@ -41,7 +41,7 @@
             <TextBlock Grid.Row="0" Text="{Binding TaskHeaderText}" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Complete Task" Command="{Binding ButtonCommand}" CommandParameter="complete" FontSize="16">
+                <Button Content="Complete Task" Command="{Binding ButtonCommand}" CommandParameter="complete" FontSize="16" MinWidth="128">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>
@@ -58,7 +58,7 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                <Button Content="Reset Task" Command="{Binding ButtonCommand}" CommandParameter="reset" FontSize="16">
+                <Button Content="Reset Task" Command="{Binding ButtonCommand}" CommandParameter="reset" FontSize="16" MinWidth="128" Margin="8 0 0 0">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Background" Value="Transparent"/>

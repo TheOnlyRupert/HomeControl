@@ -376,8 +376,7 @@ public class EditCalendarVM : BaseViewModel {
                             Level = "INFO",
                             Module = "EditCalendarVM",
                             Description = "Removing calendar event: User" + user + ", " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText +
-                                          ", " +
-                                          LocationText + ", "
+                                          ", " + LocationText + ", "
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 

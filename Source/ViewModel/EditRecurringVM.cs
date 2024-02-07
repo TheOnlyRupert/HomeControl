@@ -7,7 +7,7 @@ using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.ViewModel.Base;
 
-namespace HomeControl.Source.ViewModel.Calendar;
+namespace HomeControl.Source.ViewModel;
 
 public class EditRecurringVM : BaseViewModel {
     private CalendarEventsRecurring _calendarEventSelected;
@@ -109,7 +109,7 @@ public class EditRecurringVM : BaseViewModel {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditRecurringVM",
-                            Description = "Deleting recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
+                            Description = "Adding recurring calendar event: " + Convert.ToDateTime(DateText).ToString("MM-dd") + ", " + HolidayText
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 

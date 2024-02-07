@@ -8,6 +8,7 @@ using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.ViewModel.Base;
+using BloodPressure = HomeControl.Source.Modules.BloodPressure;
 
 namespace HomeControl.Source.ViewModel.Behavior;
 
@@ -707,6 +708,12 @@ public class EditBehaviorVM : BaseViewModel {
             tasksQuarterly.ShowDialog();
             tasksQuarterly.Close();
             RefreshTasks();
+
+            break;
+        case "bloodPressure":
+            BloodPressure bloodPressure = new();
+            bloodPressure.ShowDialog();
+            bloodPressure.Close();
 
             break;
         }

@@ -72,81 +72,11 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Margin="8">
-                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding EventList}" Background="Transparent"
-                                        SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" Foreground="White" BorderThickness="2" BorderBrush="White"
-                                        IsSynchronizedWithCurrentItem="False">
-                    <ListView.Resources>
-                        <Style TargetType="GridViewColumnHeader">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
-                            <Setter Property="BorderBrush" Value="White"/>
-                        </Style>
-
-                        <Style TargetType="ListViewItem">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Priority}" Value="0">
-                                    <Setter Property="Foreground" Value="White"/>
-                                </DataTrigger>
-
-                                <DataTrigger Binding="{Binding Priority}" Value="1">
-                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
-                                </DataTrigger>
-
-                                <DataTrigger Binding="{Binding Priority}" Value="2">
-                                    <Setter Property="Foreground" Value="Green"/>
-                                </DataTrigger>
-
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsSelected" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Black"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
-                                        <Setter Property="Foreground" Value="White"/>
-                                    </MultiTrigger.Setters>
-                                </MultiTrigger>
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsMouseOver" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
-                                        <Setter Property="Foreground" Value="White"/>
-                                    </MultiTrigger.Setters>
-                                </MultiTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.Resources>
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="false">
-                            <GridViewColumn Width="48">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Image Source="{Binding Image}" Width="48" Margin="-4"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Priority}" Header="Priority" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=StartTime}" Header="Start" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=EndTime}" Header="End" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=EventName}" Header="Event Name" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Location}" Header="Location" Width="Auto"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Header="Description" Width="Auto"/>
-                        </GridView>
-                    </ListView.View>
-                </control:CustomListView>
-            </Grid>
-
-            <Grid Grid.Column="1" Margin="8">
+            <Grid Grid.Column="0" Margin="8 8 8 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -476,6 +406,76 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DetailedWeather}" FontSize="16" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap"
                                TextAlignment="Center"/>
                 </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="0 8 8 0">
+                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding EventList}" Background="Transparent"
+                                        SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" Foreground="White" BorderThickness="2" BorderBrush="DarkSlateGray"
+                                        IsSynchronizedWithCurrentItem="False">
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                        </Style>
+
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Priority}" Value="0">
+                                    <Setter Property="Foreground" Value="White"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Priority}" Value="1">
+                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Priority}" Value="2">
+                                    <Setter Property="Foreground" Value="Green"/>
+                                </DataTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </MultiTrigger.Setters>
+                                </MultiTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="false">
+                            <GridViewColumn Width="48">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Image}" Width="48" Margin="-4"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Priority}" Header="Priority" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=StartTime}" Header="Start" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=EndTime}" Header="End" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=EventName}" Header="Event Name" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Location}" Header="Location" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Description}" Header="Description" Width="Auto"/>
+                        </GridView>
+                    </ListView.View>
+                </control:CustomListView>
             </Grid>
         </Grid>
 

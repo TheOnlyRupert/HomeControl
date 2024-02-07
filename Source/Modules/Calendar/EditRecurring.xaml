@@ -74,12 +74,40 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Margin="8">
-                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding EventList}" Background="Transparent"
+            <Grid Grid.Column="0" Margin="8 8 8 2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Recurring Dates" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Date (Ignores Year and Time)" FontSize="24" Foreground="White"/>
+                    <Viewbox Height="48" Margin="0 8" HorizontalAlignment="Left">
+                        <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
+                    </Viewbox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock Text="Recurring Date Text" FontSize="24" Foreground="White"/>
+                    <TextBox Text="{Binding PressureText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32" control:SelectTextOnFocus.Active="True"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="Image" FontSize="24" Foreground="White"/>
+                    <ComboBox ItemsSource="{Binding ImageList}" SelectedItem="{Binding ImageSelected}" FontSize="24"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="0 8 8 0">
+                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding PressureList}" Background="Transparent"
                                         SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" Foreground="White" BorderThickness="2" BorderBrush="DarkSlateGray">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -130,35 +158,8 @@
                     </ListView.View>
                 </control:CustomListView>
             </Grid>
-
-            <Grid Grid.Column="1" Margin="8">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Text="Recurring Dates" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
-
-                <StackPanel Grid.Row="1">
-                    <TextBlock Text="Date (Ignores Year and Time)" FontSize="24" Foreground="White"/>
-                    <Viewbox Height="48" Margin="0 8" HorizontalAlignment="Left">
-                        <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
-                    </Viewbox>
-                </StackPanel>
-
-                <StackPanel Grid.Row="2">
-                    <TextBlock Text="Recurring Date Text" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding HolidayText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32" control:SelectTextOnFocus.Active="True"/>
-                </StackPanel>
-
-                <StackPanel Grid.Row="3">
-                    <TextBlock Text="Image" FontSize="24" Foreground="White"/>
-                    <ComboBox ItemsSource="{Binding ImageList}" SelectedItem="{Binding ImageSelected}" FontSize="24"/>
-                </StackPanel>
-            </Grid>
         </Grid>
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
