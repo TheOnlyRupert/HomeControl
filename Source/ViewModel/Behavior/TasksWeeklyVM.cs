@@ -210,7 +210,7 @@ public class TasksWeeklyVM : BaseViewModel {
         case "delete":
             try {
                 if (TaskSelected.TaskName != null) {
-                    confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
+                    confirmation = MessageBox.Show("Are you sure you want to delete task?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
                         ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,

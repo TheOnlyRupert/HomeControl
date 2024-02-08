@@ -112,7 +112,6 @@ public class TasksMonthlyVM : BaseViewModel {
         Room8TaskList ??= new ObservableCollection<Task>();
         Room9TaskList ??= new ObservableCollection<Task>();
         Room10TaskList ??= new ObservableCollection<Task>();
-        Room1TaskList ??= new ObservableCollection<Task>();
         Room11TaskList ??= new ObservableCollection<Task>();
         Room12TaskList ??= new ObservableCollection<Task>();
         Room13TaskList ??= new ObservableCollection<Task>();
@@ -205,7 +204,7 @@ public class TasksMonthlyVM : BaseViewModel {
         case "delete":
             try {
                 if (TaskSelected.TaskName != null) {
-                    confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
+                    confirmation = MessageBox.Show("Are you sure you want to delete task?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
                         ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,

@@ -34,7 +34,7 @@
             <Image Source="../../../Resources/Images/icons/contact.png" Width="48" Height="48"/>
         </Button>
 
-        <Button Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="workout" Margin="2 0">
+        <Button Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="exercise" Margin="2 0">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>

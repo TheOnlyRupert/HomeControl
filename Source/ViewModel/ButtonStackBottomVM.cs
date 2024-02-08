@@ -30,10 +30,10 @@ public class ButtonStackBottomVM : BaseViewModel {
             contacts.ShowDialog();
             contacts.Close();
             break;
-        case "workout":
-            Modules.Workout.Workout workout = new();
-            workout.ShowDialog();
-            workout.Close();
+        case "exercise":
+            Modules.Exercise.Exercise exercise = new();
+            exercise.ShowDialog();
+            exercise.Close();
             break;
         case "pictionary":
             Pictionary pictionary = new();
