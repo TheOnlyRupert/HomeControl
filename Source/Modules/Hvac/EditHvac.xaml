@@ -15,6 +15,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0" Content="{Binding ProgramStatus}" FontSize="24" Command="{Binding ButtonCommand}" CommandParameter="programStatus">
@@ -71,7 +72,25 @@
                 </Button.Style>
             </Button>
 
-            <Grid Grid.Row="3">
+            <Button Grid.Row="3" Content="{Binding UseSchedule}" FontSize="24" Command="{Binding ButtonCommand}" CommandParameter="useSchedule">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{Binding UseScheduleColor}"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -117,8 +136,8 @@
                 </Button>
             </Grid>
 
-            <TextBlock Grid.Row="4" Text="Temperature Inside" HorizontalAlignment="Center" Foreground="Yellow" FontSize="24" Margin="0 32 0 0"/>
-            <TextBlock Grid.Row="5" Text="{Binding TemperatureInside}" HorizontalAlignment="Center" Foreground="Yellow" FontSize="32"/>
+            <TextBlock Grid.Row="5" Text="Temperature Inside" HorizontalAlignment="Center" Foreground="Yellow" FontSize="24" Margin="0 32 0 0"/>
+            <TextBlock Grid.Row="6" Text="{Binding TemperatureInside}" HorizontalAlignment="Center" Foreground="Yellow" FontSize="32"/>
         </Grid>
 
         <Button Grid.Row="1" Content="Exit" FontSize="24" IsCancel="True" Margin="8" MinWidth="128" HorizontalAlignment="Right">

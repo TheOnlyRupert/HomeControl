@@ -128,10 +128,10 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_0>")) {
-            ReferenceValues.HvacMode = ReferenceValues.HvacModes.Off;
+            ReferenceValues.HvacState = ReferenceValues.HvacStates.Off;
             ReferenceValues.IsProgramRunning = false;
             ReferenceValues.IsHeatingMode = false;
-            ReferenceValues.HvacStateRunTime = 0;
+            ReferenceValues.HvacStateTime = 0;
 
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -141,10 +141,10 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_1>")) {
-            ReferenceValues.HvacMode = ReferenceValues.HvacModes.Running;
+            ReferenceValues.HvacState = ReferenceValues.HvacStates.Running;
             ReferenceValues.IsHeatingMode = false;
             ReferenceValues.IsProgramRunning = true;
-            ReferenceValues.HvacStateRunTime = 0;
+            ReferenceValues.HvacStateTime = 0;
 
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -154,10 +154,10 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_2>")) {
-            ReferenceValues.HvacMode = ReferenceValues.HvacModes.Standby;
+            ReferenceValues.HvacState = ReferenceValues.HvacStates.Standby;
             ReferenceValues.IsHeatingMode = false;
             ReferenceValues.IsProgramRunning = true;
-            ReferenceValues.HvacStateRunTime = 0;
+            ReferenceValues.HvacStateTime = 0;
 
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -167,10 +167,10 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_3>")) {
-            ReferenceValues.HvacMode = ReferenceValues.HvacModes.Purging;
+            ReferenceValues.HvacState = ReferenceValues.HvacStates.Purging;
             ReferenceValues.IsHeatingMode = false;
             ReferenceValues.IsProgramRunning = true;
-            ReferenceValues.HvacStateRunTime = 0;
+            ReferenceValues.HvacStateTime = 0;
 
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -180,10 +180,10 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_4>")) {
-            ReferenceValues.HvacMode = ReferenceValues.HvacModes.Off;
+            ReferenceValues.HvacState = ReferenceValues.HvacStates.Off;
             ReferenceValues.IsHeatingMode = true;
             ReferenceValues.IsProgramRunning = false;
-            ReferenceValues.HvacStateRunTime = 0;
+            ReferenceValues.HvacStateTime = 0;
 
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -193,10 +193,10 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_5>")) {
-            ReferenceValues.HvacMode = ReferenceValues.HvacModes.Running;
+            ReferenceValues.HvacState = ReferenceValues.HvacStates.Running;
             ReferenceValues.IsHeatingMode = true;
             ReferenceValues.IsProgramRunning = true;
-            ReferenceValues.HvacStateRunTime = 0;
+            ReferenceValues.HvacStateTime = 0;
 
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -206,10 +206,10 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_6>")) {
-            ReferenceValues.HvacMode = ReferenceValues.HvacModes.Standby;
+            ReferenceValues.HvacState = ReferenceValues.HvacStates.Standby;
             ReferenceValues.IsHeatingMode = true;
             ReferenceValues.IsProgramRunning = true;
-            ReferenceValues.HvacStateRunTime = 0;
+            ReferenceValues.HvacStateTime = 0;
 
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -219,10 +219,10 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_7>")) {
-            ReferenceValues.HvacMode = ReferenceValues.HvacModes.Purging;
+            ReferenceValues.HvacState = ReferenceValues.HvacStates.Purging;
             ReferenceValues.IsHeatingMode = true;
             ReferenceValues.IsProgramRunning = true;
-            ReferenceValues.HvacStateRunTime = 0;
+            ReferenceValues.HvacStateTime = 0;
 
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,

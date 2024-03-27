@@ -5,7 +5,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public class EditHvacVM : BaseViewModel {
-    private string _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _fanStatusColor, _heatingCoolingStatusColor, _temperatureSet, _temperatureInside;
+    private string _programStatus, _fanStatus, _heatingCoolingStatus, _useSchedule, _programStatusColor, _fanStatusColor, _heatingCoolingStatusColor, _useScheduleColor, _temperatureSet,
+        _temperatureInside;
 
     public EditHvacVM() {
         TemperatureDisplay();
@@ -38,6 +39,10 @@ public class EditHvacVM : BaseViewModel {
             break;
         case "heatingCoolingStatus":
             ReferenceValues.IsHeatingMode = !ReferenceValues.IsHeatingMode;
+
+            break;
+        case "useSchedule":
+            ReferenceValues.UseSchedule = !ReferenceValues.UseSchedule;
 
             break;
         case "subTemp":
@@ -85,6 +90,14 @@ public class EditHvacVM : BaseViewModel {
             HeatingCoolingStatus = "Mode:  COOLING";
             HeatingCoolingStatusColor = "CornflowerBlue";
         }
+
+        if (ReferenceValues.UseSchedule) {
+            UseSchedule = "Schedule:  TRUE";
+            UseScheduleColor = "CornflowerBlue";
+        } else {
+            UseSchedule = "Schedule:  FALSE";
+            UseScheduleColor = "Transparent";
+        }
     }
 
     #region Fields
@@ -110,6 +123,22 @@ public class EditHvacVM : BaseViewModel {
         set {
             _fanStatus = value;
             RaisePropertyChangedEvent("FanStatus");
+        }
+    }
+
+    public string UseSchedule {
+        get => _useSchedule;
+        set {
+            _useSchedule = value;
+            RaisePropertyChangedEvent("UseSchedule");
+        }
+    }
+
+    public string UseScheduleColor {
+        get => _useScheduleColor;
+        set {
+            _useScheduleColor = value;
+            RaisePropertyChangedEvent("UseScheduleColor");
         }
     }
 

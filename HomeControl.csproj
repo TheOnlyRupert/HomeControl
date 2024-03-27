@@ -72,6 +72,7 @@
         <Compile Include="Source\Json\JsonDebug.cs"/>
         <Compile Include="Source\Json\JsonBehavior.cs"/>
         <Compile Include="Source\Json\JsonCalendar.cs"/>
+        <Compile Include="Source\Json\JsonHvac.cs"/>
         <Compile Include="Source\Json\JsonNames.cs"/>
         <Compile Include="Source\Json\JsonTasks.cs"/>
         <Compile Include="Source\Json\JsonFinances.cs"/>

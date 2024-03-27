@@ -33,7 +33,7 @@ public class BehaviorVM : BaseViewModel {
         _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility, _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility,
         _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility, _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility,
         _user5BehaviorVisibility, _trashDayVisibility, _user1BackgroundColor, _user2BackgroundColor, _user3BackgroundColor, _user4BackgroundColor, _user5BackgroundColor, _remainingDayColor,
-        _remainingWeekColor, _remainingMonthColor, _remainingQuarterColor, _remainingYearColor;
+        _remainingWeekColor, _remainingMonthColor, _remainingQuarterColor, _remainingYearColor, _user1Visibility, _user2Visibility, _user3Visibility, _user4Visibility, _user5Visibility;
 
     private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
@@ -2220,41 +2220,51 @@ public class BehaviorVM : BaseViewModel {
             switch (param) {
             case "user1":
                 ReferenceValues.ActiveBehaviorUser = 1;
+                User1Visibility = "HIDDEN";
                 EditBehavior editBehavior = new();
                 editBehavior.ShowDialog();
                 editBehavior.Close();
+                User1Visibility = "VISIBLE";
                 RefreshTasks(1);
                 RefreshBlinking();
                 break;
             case "user2":
                 ReferenceValues.ActiveBehaviorUser = 2;
+                User2Visibility = "HIDDEN";
                 EditBehavior editBehavior2 = new();
                 editBehavior2.ShowDialog();
                 editBehavior2.Close();
+                User2Visibility = "VISIBLE";
                 RefreshTasks(2);
                 RefreshBlinking();
                 break;
             case "user3":
                 ReferenceValues.ActiveBehaviorUser = 3;
+                User3Visibility = "HIDDEN";
                 EditBehavior editBehavior3 = new();
                 editBehavior3.ShowDialog();
                 editBehavior3.Close();
+                User3Visibility = "VISIBLE";
                 RefreshTasks(3);
                 RefreshBlinking();
                 break;
             case "user4":
                 ReferenceValues.ActiveBehaviorUser = 4;
+                User4Visibility = "HIDDEN";
                 EditBehavior editBehavior4 = new();
                 editBehavior4.ShowDialog();
                 editBehavior4.Close();
+                User4Visibility = "VISIBLE";
                 RefreshTasks(4);
                 RefreshBlinking();
                 break;
             case "user5":
                 ReferenceValues.ActiveBehaviorUser = 5;
+                User5Visibility = "HIDDEN";
                 EditBehavior editBehavior5 = new();
                 editBehavior5.ShowDialog();
                 editBehavior5.Close();
+                User5Visibility = "VISIBLE";
                 RefreshTasks(5);
                 RefreshBlinking();
                 break;
@@ -3863,6 +3873,46 @@ public class BehaviorVM : BaseViewModel {
         set {
             _remainingYearColor = value;
             RaisePropertyChangedEvent("RemainingYearColor");
+        }
+    }
+
+    public string User1Visibility {
+        get => _user1Visibility;
+        set {
+            _user1Visibility = value;
+            RaisePropertyChangedEvent("User1Visibility");
+        }
+    }
+
+    public string User2Visibility {
+        get => _user2Visibility;
+        set {
+            _user2Visibility = value;
+            RaisePropertyChangedEvent("User2Visibility");
+        }
+    }
+
+    public string User3Visibility {
+        get => _user3Visibility;
+        set {
+            _user3Visibility = value;
+            RaisePropertyChangedEvent("User3Visibility");
+        }
+    }
+
+    public string User4Visibility {
+        get => _user4Visibility;
+        set {
+            _user4Visibility = value;
+            RaisePropertyChangedEvent("User4Visibility");
+        }
+    }
+
+    public string User5Visibility {
+        get => _user5Visibility;
+        set {
+            _user5Visibility = value;
+            RaisePropertyChangedEvent("User5Visibility");
         }
     }
 

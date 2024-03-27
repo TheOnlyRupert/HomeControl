@@ -230,7 +230,7 @@ public class MainWindowVM : BaseViewModel {
 
         /* Tick Tamagotchi Every Second */
         TamagotchiLogic.TickLogic();
-        ReferenceValues.HvacStateRunTime++;
+        ReferenceValues.HvacStateTime++;
 
         /* Check Trash */
         if (trashInt > 0) {

@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
+using System.Text.Json;
 using System.Windows;
 using HomeControl.Source;
 using HomeControl.Source.Control;
+using HomeControl.Source.Helpers;
 using HomeControl.Source.ViewModel;
 
 namespace HomeControl;
@@ -19,6 +21,11 @@ public partial class MainWindow {
             MessageBoxImage.Warning, MessageBoxResult.No);
         if (messageBoxResult == MessageBoxResult.No) {
             e.Cancel = true;
+        } else {
+            ReferenceValues.JsonHvacMaster.HvacState = ReferenceValues.HvacState;
+            ReferenceValues.JsonHvacMaster.HvacStateTime = ReferenceValues.HvacStateTime;
+
+            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster), true);
         }
     }
 }

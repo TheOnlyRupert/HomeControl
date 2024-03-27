@@ -10,7 +10,7 @@ namespace HomeControl.Source;
 public static class ReferenceValues {
     #region Enums
 
-    public enum HvacModes {
+    public enum HvacStates {
         Off,
         Running,
         Standby,
@@ -96,6 +96,8 @@ public static class ReferenceValues {
     public static JsonCalendar JsonCalendarMaster { get; set; }
     public static JsonFinances JsonFinanceMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
+    public static JsonHvac JsonHvacMaster { get; set; }
+
     public static DateTime TaskWeekStartDate { get; set; }
 
     public static int ActiveBehaviorUser { get; set; }
@@ -104,7 +106,7 @@ public static class ReferenceValues {
     public static double TemperatureInside { get; set; }
     public static int HumidityInside { get; set; }
 
-    public static HvacModes HvacMode { get; set; }
+    public static HvacStates HvacState { get; set; }
 
     /* Ranges from 15°C / 59°F to 30°C / 86°F */
     public static double TemperatureSet { get; set; }
@@ -112,9 +114,10 @@ public static class ReferenceValues {
     /* On or auto... No other option */
     public static bool IsFanAuto { get; set; }
     public static bool IsHeatingMode { get; set; }
+    public static bool UseSchedule { get; set; }
     public static bool IsProgramRunning { get; set; }
     public static bool IsHvacComEstablished { get; set; }
-    public static int HvacStateRunTime { get; set; }
+    public static int HvacStateTime { get; set; }
 
     public static bool IsCalendarDupeModeEnabled { get; set; }
     public static CalendarEvents DupeEvent { get; set; }
