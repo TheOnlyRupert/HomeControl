@@ -89,7 +89,7 @@
                 <TextBlock Grid.Row="0" Text="Recurring Dates" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
 
                 <StackPanel Grid.Row="1">
-                    <TextBlock Text="Date (Ignores Year and Time)" FontSize="24" Foreground="White"/>
+                    <TextBlock Text="Date (Ignores Year)" FontSize="24" Foreground="White"/>
                     <Viewbox Height="48" Margin="0 8" HorizontalAlignment="Left">
                         <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
                     </Viewbox>
@@ -97,7 +97,7 @@
 
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Recurring Date Text" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding PressureText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32" control:SelectTextOnFocus.Active="True"/>
+                    <TextBox Text="{Binding HolidayText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="32" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3">
@@ -107,7 +107,7 @@
             </Grid>
 
             <Grid Grid.Column="1" Margin="0 8 8 0">
-                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding PressureList}" Background="Transparent"
+                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="0" ItemsSource="{Binding EventList}" Background="Transparent"
                                         SelectedItem="{Binding CalendarEventSelected}" SelectionMode="Single" Foreground="White" BorderThickness="2" BorderBrush="DarkSlateGray">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -124,8 +124,8 @@
                                         <Condition Property="IsSelected" Value="True"/>
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Black"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -135,7 +135,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -152,7 +152,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date, StringFormat=MMM dd}" Header="Date" Width="Auto"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=EventText}" Header="Recurring Date Text" Width="Auto"/>
                         </GridView>
                     </ListView.View>

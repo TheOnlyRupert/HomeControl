@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using HomeControl.Source.Modules.Hvac;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Hvac;
@@ -43,6 +44,12 @@ public class EditHvacVM : BaseViewModel {
             break;
         case "useSchedule":
             ReferenceValues.UseSchedule = !ReferenceValues.UseSchedule;
+
+            break;
+        case "schedule":
+            EditHvacSchedule editHvacSchedule = new();
+            editHvacSchedule.ShowDialog();
+            editHvacSchedule.Close();
 
             break;
         case "subTemp":
@@ -92,10 +99,10 @@ public class EditHvacVM : BaseViewModel {
         }
 
         if (ReferenceValues.UseSchedule) {
-            UseSchedule = "Schedule:  TRUE";
-            UseScheduleColor = "CornflowerBlue";
+            UseSchedule = "Follow Schedule:  YES";
+            UseScheduleColor = "Green";
         } else {
-            UseSchedule = "Schedule:  FALSE";
+            UseSchedule = "Follow Schedule:  OFF";
             UseScheduleColor = "Transparent";
         }
     }

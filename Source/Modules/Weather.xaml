@@ -34,6 +34,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="{Binding SevenDayForecastName1}" Foreground="White" HorizontalAlignment="Center"/>
+
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -527,6 +528,9 @@
                     <chartingToolkit:DateTimeAxis Orientation="X" Foreground="White" ShowGridLines="True">
                         <chartingToolkit:DateTimeAxis.AxisLabelStyle>
                             <Style TargetType="chartingToolkit:DateTimeAxisLabel">
+                                <Setter Property="DaysIntervalStringFormat" Value="{}{0:dd-MMM HH}"/>
+                                <Setter Property="HoursIntervalStringFormat" Value="{}{0:dd-MMM HH}"/>
+
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="chartingToolkit:DateTimeAxisLabel">

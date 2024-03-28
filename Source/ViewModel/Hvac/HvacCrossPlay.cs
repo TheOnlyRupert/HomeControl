@@ -13,6 +13,14 @@ public static class HvacCrossPlay {
     private static readonly CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
 
     public static async void EstablishConnection() {
+        try {
+            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac", true));
+        } catch (Exception) {
+            ReferenceValues.JsonHvacMaster = new JsonHvac();
+
+            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster), true);
+        }
+
         ReferenceValues.TemperatureInside = -99;
 
         try {
@@ -69,6 +77,10 @@ public static class HvacCrossPlay {
                 ReferenceValues.IsHvacComEstablished = false;
                 simpleMessenger.PushMessage("HvacUpdated", null);
             }
+        }
+
+        if (ReferenceValues.HvacState == ReferenceValues.JsonHvacMaster.HvacState) {
+            ReferenceValues.HvacStateTime = ReferenceValues.JsonHvacMaster.HvacStateTime;
         }
     }
 

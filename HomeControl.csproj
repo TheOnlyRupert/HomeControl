@@ -131,6 +131,9 @@
         <Compile Include="Source\Modules\Hvac\EditHvac.xaml.cs">
             <DependentUpon>EditHvac.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Source\Modules\Hvac\EditHvacSchedule.xaml.cs">
+            <DependentUpon>EditHvacSchedule.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Source\Modules\Hvac\Hvac.xaml.cs">
             <DependentUpon>Hvac.xaml</DependentUpon>
         </Compile>
@@ -199,6 +202,7 @@
         <Compile Include="Source\ViewModel\Games\Tamagotchi\TamagotchiLogic.cs"/>
         <Compile Include="Source\ViewModel\Games\Tamagotchi\TamagotchiVM.cs"/>
         <Compile Include="Source\ViewModel\Games\TrafficLightVM.cs"/>
+        <Compile Include="Source\ViewModel\Hvac\EditHvacScheduleVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacCrossPlay.cs"/>
         <Compile Include="Source\ViewModel\Hvac\EditHvacVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>
@@ -250,6 +254,7 @@
         <Page Include="Source\Modules\Games\Tamagotchi\Tamagotchi.xaml"/>
         <Page Include="Source\Modules\Games\TrafficLight.xaml"/>
         <Page Include="Source\Modules\Hvac\EditHvac.xaml"/>
+        <Page Include="Source\Modules\Hvac\EditHvacSchedule.xaml"/>
         <Page Include="Source\Modules\Hvac\Hvac.xaml"/>
         <Page Include="Source\Modules\Security\EditSecurity.xaml"/>
         <Page Include="Source\Modules\Security\Security.xaml"/>

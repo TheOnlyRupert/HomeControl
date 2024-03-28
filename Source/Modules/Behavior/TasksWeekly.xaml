@@ -115,6 +115,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -126,7 +129,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -180,6 +183,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -191,7 +197,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -244,6 +250,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -255,7 +264,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -308,6 +317,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -319,7 +331,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -372,6 +384,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -383,7 +398,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -436,6 +451,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -447,7 +465,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -500,6 +518,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -511,7 +532,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -564,6 +585,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -575,7 +599,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -628,6 +652,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -639,7 +666,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -692,6 +719,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -703,7 +733,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -756,6 +786,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -767,7 +800,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -820,6 +853,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -831,7 +867,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -884,6 +920,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -895,7 +934,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -948,6 +987,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -959,7 +1001,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -1012,6 +1054,9 @@
                         </Style>
 
                         <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="true">
                                     <Setter Property="Background" Value="Green"/>
@@ -1023,7 +1068,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
@@ -1087,7 +1132,7 @@
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Yellow"/>
                                         <Setter Property="Foreground" Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>

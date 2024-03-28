@@ -24,18 +24,6 @@ public class HvacVM : BaseViewModel {
         UpdateWeather();
         UpdateHvac();
 
-        try {
-            ReferenceValues.JsonHvacMaster = JsonSerializer.Deserialize<JsonHvac>(FileHelpers.LoadFileText("hvac", true));
-        } catch (Exception) {
-            ReferenceValues.JsonHvacMaster = new JsonHvac();
-
-            FileHelpers.SaveFileText("hvac", JsonSerializer.Serialize(ReferenceValues.JsonHvacMaster), true);
-        }
-
-        if (ReferenceValues.HvacState == ReferenceValues.JsonHvacMaster.HvacState) {
-            ReferenceValues.HvacStateTime = ReferenceValues.JsonHvacMaster.HvacStateTime;
-        }
-
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
@@ -110,6 +98,19 @@ public class HvacVM : BaseViewModel {
             CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
             CurrentTimeText = DateTime.Now.ToString("HH:mm");
             UpdateWeather();
+
+            break;
+        case "HourChanged":
+            //Check Schedule Logic
+            if (ReferenceValues.UseSchedule) {
+                foreach (HvacEvent hvacEvent in ReferenceValues.JsonHvacMaster.HvacEvents) {
+                    if (hvacEvent.EventTime.Hour == DateTime.Now.Hour) {
+                        ReferenceValues.TemperatureSet = hvacEvent.EventTemp;
+                    }
+                }
+
+                UpdateWeather();
+            }
 
             break;
         }
