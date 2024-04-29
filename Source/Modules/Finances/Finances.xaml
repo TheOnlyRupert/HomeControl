@@ -8,8 +8,8 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="16 0">
-                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                            <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
+                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
@@ -23,18 +23,66 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                <TextBlock Text="Income" FontSize="24" Foreground="White" TextAlignment="Center"/>
-                <TextBlock Text="{Binding CashIncomeText}" FontSize="24" Foreground="White" TextAlignment="Center"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                <TextBlock Text="Expenses" FontSize="24" Foreground="White" TextAlignment="Center"/>
-                <TextBlock Text="{Binding CashExpenseText}" FontSize="24" Foreground="White" TextAlignment="Center"/>
-            </StackPanel>
-            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                <TextBlock Text="Available" FontSize="24" Foreground="White" TextAlignment="Center"/>
-                <TextBlock Text="{Binding CashAvailableText}" FontSize="24" Foreground="{Binding CashAvailableTextColor}" TextAlignment="Center"/>
-            </StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ProgressBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Value="{Binding ProgressTotal}" IsIndeterminate="False" Foreground="White" Background="Transparent"
+                         BorderBrush="DarkSlateGray" BorderThickness="1"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ProgressTotalText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Total Remaining" Foreground="White" HorizontalAlignment="Center"/>
+
+            <ProgressBar Grid.Row="2" Grid.Column="0" Value="{Binding ProgressBlock1}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding ProgressBlockText1}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding TextBlock1}" Foreground="White"/>
+
+            <ProgressBar Grid.Row="2" Grid.Column="1" Value="{Binding ProgressBlock2}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ProgressBlockText2}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding TextBlock2}" Foreground="White"/>
+
+            <ProgressBar Grid.Row="2" Grid.Column="2" Value="{Binding ProgressBlock3}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding ProgressBlockText3}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding TextBlock3}" Foreground="White"/>
+
+            <ProgressBar Grid.Row="4" Grid.Column="0" Value="{Binding ProgressBlock4}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding ProgressBlockText4}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding TextBlock4}" Foreground="White"/>
+
+            <ProgressBar Grid.Row="4" Grid.Column="1" Value="{Binding ProgressBlock5}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding ProgressBlockText5}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding TextBlock5}" Foreground="White"/>
+
+            <ProgressBar Grid.Row="4" Grid.Column="2" Value="{Binding ProgressBlock6}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding ProgressBlockText6}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding TextBlock6}" Foreground="White"/>
+
+            <ProgressBar Grid.Row="6" Grid.Column="0" Value="{Binding ProgressBlock7}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding ProgressBlockText7}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="{Binding TextBlock7}" Foreground="White"/>
+
+            <ProgressBar Grid.Row="6" Grid.Column="1" Value="{Binding ProgressBlock8}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding ProgressBlockText8}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding TextBlock8}" Foreground="White"/>
+
+            <ProgressBar Grid.Row="6" Grid.Column="2" Value="{Binding ProgressBlock9}" IsIndeterminate="False" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                         BorderThickness="1"/>
+            <TextBlock Grid.Row="6" Grid.Column="2" Text="{Binding ProgressBlockText9}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="7" Grid.Column="2" Text="{Binding TextBlock9}" Foreground="White"/>
         </Grid>
     </Button>
 </Page>

@@ -20,7 +20,8 @@ public class SettingsVM : BaseViewModel {
         _user1Phone1, _user1Phone2, _user2Phone1, _user2Phone2, _petNames, _neighbor1Location, _neighbor1Name, _neighbor1Phone1, _neighbor1Phone2, _neighbor2Location,
         _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
-        _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected, _weatherLocation, _gridId;
+        _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected, _weatherLocation, _gridId, _financeBlock1, _financeBlock2, _financeBlock3,
+        _financeBlock4, _financeBlock5, _financeBlock6, _financeBlock7, _financeBlock8;
 
     private double _weatherLat, _weatherLon;
 
@@ -94,6 +95,14 @@ public class SettingsVM : BaseViewModel {
         GridY = ReferenceValues.JsonSettingsMaster.GridY;
         GridId = ReferenceValues.JsonSettingsMaster.GridId;
         WeatherLocation = ReferenceValues.JsonSettingsMaster.WeatherLocation;
+        FinanceBlock1 = ReferenceValues.JsonSettingsMaster.FinanceBlock1;
+        FinanceBlock2 = ReferenceValues.JsonSettingsMaster.FinanceBlock2;
+        FinanceBlock3 = ReferenceValues.JsonSettingsMaster.FinanceBlock3;
+        FinanceBlock4 = ReferenceValues.JsonSettingsMaster.FinanceBlock4;
+        FinanceBlock5 = ReferenceValues.JsonSettingsMaster.FinanceBlock5;
+        FinanceBlock6 = ReferenceValues.JsonSettingsMaster.FinanceBlock6;
+        FinanceBlock7 = ReferenceValues.JsonSettingsMaster.FinanceBlock7;
+        FinanceBlock8 = ReferenceValues.JsonSettingsMaster.FinanceBlock8;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -165,6 +174,14 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.GridY = GridY;
             ReferenceValues.JsonSettingsMaster.GridId = GridId;
             ReferenceValues.JsonSettingsMaster.WeatherLocation = WeatherLocation;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock1 = FinanceBlock1;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock2 = FinanceBlock2;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock3 = FinanceBlock3;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock4 = FinanceBlock4;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock5 = FinanceBlock5;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock6 = FinanceBlock6;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock7 = FinanceBlock7;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock8 = FinanceBlock8;
 
             try {
                 FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster), true);
@@ -736,6 +753,70 @@ public class SettingsVM : BaseViewModel {
         set {
             _weatherLocation = value;
             RaisePropertyChangedEvent("WeatherLocation");
+        }
+    }
+
+    public string FinanceBlock1 {
+        get => _financeBlock1;
+        set {
+            _financeBlock1 = value;
+            RaisePropertyChangedEvent("FinanceBlock1");
+        }
+    }
+
+    public string FinanceBlock2 {
+        get => _financeBlock2;
+        set {
+            _financeBlock2 = value;
+            RaisePropertyChangedEvent("FinanceBlock2");
+        }
+    }
+
+    public string FinanceBlock3 {
+        get => _financeBlock3;
+        set {
+            _financeBlock3 = value;
+            RaisePropertyChangedEvent("FinanceBlock3");
+        }
+    }
+
+    public string FinanceBlock4 {
+        get => _financeBlock4;
+        set {
+            _financeBlock4 = value;
+            RaisePropertyChangedEvent("FinanceBlock4");
+        }
+    }
+
+    public string FinanceBlock5 {
+        get => _financeBlock5;
+        set {
+            _financeBlock5 = value;
+            RaisePropertyChangedEvent("FinanceBlock5");
+        }
+    }
+
+    public string FinanceBlock6 {
+        get => _financeBlock6;
+        set {
+            _financeBlock6 = value;
+            RaisePropertyChangedEvent("FinanceBlock6");
+        }
+    }
+
+    public string FinanceBlock7 {
+        get => _financeBlock7;
+        set {
+            _financeBlock7 = value;
+            RaisePropertyChangedEvent("FinanceBlock7");
+        }
+    }
+
+    public string FinanceBlock8 {
+        get => _financeBlock8;
+        set {
+            _financeBlock8 = value;
+            RaisePropertyChangedEvent("FinanceBlock8");
         }
     }
 

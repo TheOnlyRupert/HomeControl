@@ -18,7 +18,7 @@ public class EditBehaviorVM : BaseViewModel {
     private int _progressBarChildValue, stars, strikes, _tasksCompletedDayProgressValue, _tasksCompletedWeekProgressValue, _tasksCompletedMonthProgressValue,
         _tasksCompletedQuarterProgressValue;
 
-    private string _rewardButtonVisibility, _progressBarChildValueText, _childName, _cashAvailable, _cashAvailableColor, _currentMonthText, _currentWeekText, _currentDayText,
+    private string _rewardButtonVisibility, _progressBarChildValueText, _childName, _currentMonthText, _currentWeekText, _currentDayText,
         _currentQuarterText, _childStar1, _childStar2, _childStar3, _childStar4, _childStar5, _childStrike1, _childStrike2, _childStrike3, _tasksCompletedDay, _tasksCompletedWeek,
         _tasksCompletedMonth, _tasksCompletedQuarter, _tasksCompletedDayProgressColor, _tasksCompletedWeekProgressColor, _tasksCompletedMonthProgressColor,
         _tasksCompletedQuarterProgressColor, _tasksCompletedDayProgressText, _tasksCompletedWeekProgressText, _tasksCompletedMonthProgressText, _tasksCompletedQuarterProgressText;
@@ -167,7 +167,6 @@ public class EditBehaviorVM : BaseViewModel {
     private void RefreshTasks() {
         int totalDay = 0, totalWeek = 0, totalMonth = 0, totalQuarter = 0;
         int completedDay = 0, completedWeek = 0, completedMonth = 0, completedQuarter = 0;
-        int releaseAmountDaily = 0, releaseAmountWeekly = 0, releaseAmountMonthly = 0, releaseAmountQuarterly = 0;
         double math;
 
         switch (ReferenceValues.ActiveBehaviorUser) {
@@ -200,18 +199,6 @@ public class EditBehaviorVM : BaseViewModel {
                 }
             }
 
-            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser1);
-
-            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser1);
-
-            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser1);
-
-            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser1);
-
             break;
         case 2:
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
@@ -241,18 +228,6 @@ public class EditBehaviorVM : BaseViewModel {
                     completedQuarter++;
                 }
             }
-
-            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser2);
-
-            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser2);
-
-            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser2);
-
-            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser2);
 
             break;
         case 3:
@@ -284,18 +259,6 @@ public class EditBehaviorVM : BaseViewModel {
                 }
             }
 
-            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser3);
-
-            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser3);
-
-            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser3);
-
-            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser3);
-
             break;
         case 4:
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
@@ -326,18 +289,6 @@ public class EditBehaviorVM : BaseViewModel {
                 }
             }
 
-            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser4);
-
-            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser4);
-
-            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser4);
-
-            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser4);
-
             break;
         case 5:
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
@@ -367,18 +318,6 @@ public class EditBehaviorVM : BaseViewModel {
                     completedQuarter++;
                 }
             }
-
-            math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-            releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser5);
-
-            math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-            releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser5);
-
-            math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-            releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser5);
-
-            math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-            releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser5);
 
             break;
         }
@@ -420,28 +359,28 @@ public class EditBehaviorVM : BaseViewModel {
         if (totalDay == 0) {
             TasksCompletedDay = "None";
         } else {
-            TasksCompletedDay = completedDay + "/" + totalDay + "  - $" + releaseAmountDaily;
+            TasksCompletedDay = completedDay + "/" + totalDay;
             TasksCompletedDayProgressText = TasksCompletedDayProgressValue + "%";
         }
 
         if (totalWeek == 0) {
             TasksCompletedWeek = "None";
         } else {
-            TasksCompletedWeek = completedWeek + "/" + totalWeek + "  - $" + releaseAmountWeekly;
+            TasksCompletedWeek = completedWeek + "/" + totalWeek;
             TasksCompletedWeekProgressText = TasksCompletedWeekProgressValue + "%";
         }
 
         if (totalMonth == 0) {
             TasksCompletedMonth = "None";
         } else {
-            TasksCompletedMonth = completedMonth + "/" + totalMonth + "  - $" + releaseAmountMonthly;
+            TasksCompletedMonth = completedMonth + "/" + totalMonth;
             TasksCompletedMonthProgressText = TasksCompletedMonthProgressValue + "%";
         }
 
         if (totalQuarter == 0) {
             TasksCompletedQuarter = "None";
         } else {
-            TasksCompletedQuarter = completedQuarter + "/" + totalQuarter + "  - $" + releaseAmountQuarterly;
+            TasksCompletedQuarter = completedQuarter + "/" + totalQuarter;
             TasksCompletedQuarterProgressText = TasksCompletedQuarterProgressValue + "%";
         }
     }
@@ -793,22 +732,6 @@ public class EditBehaviorVM : BaseViewModel {
         set {
             _imageUser = value;
             RaisePropertyChangedEvent("ImageUser");
-        }
-    }
-
-    public string CashAvailable {
-        get => _cashAvailable;
-        set {
-            _cashAvailable = value;
-            RaisePropertyChangedEvent("CashAvailable");
-        }
-    }
-
-    public string CashAvailableColor {
-        get => _cashAvailableColor;
-        set {
-            _cashAvailableColor = value;
-            RaisePropertyChangedEvent("CashAvailableColor");
         }
     }
 

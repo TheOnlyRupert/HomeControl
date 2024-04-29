@@ -77,61 +77,39 @@
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" Margin="8 0 8 0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="64"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Add/Edit Finance" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="1" Text="{Binding CashAvailableText}" FontSize="32" Foreground="{Binding CashAvailableTextColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                <Button Grid.Row="2" Content="{Binding SwitchModeButtonText}" Command="{Binding ButtonCommand}" CommandParameter="switchMode" FontSize="48" Margin="16"
-                        Background="{Binding SwitchModeButtonColor}" HorizontalContentAlignment="Center">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
-
-                <StackPanel Grid.Row="3">
+                <StackPanel Grid.Row="2">
                     <TextBlock Text="Location/Business Name" FontSize="24" Foreground="White"/>
                     <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="4">
+                <StackPanel Grid.Row="3">
                     <TextBlock Text="Amount ($)" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="5">
+                <StackPanel Grid.Row="4">
                     <TextBlock Text="Category" FontSize="24" Foreground="White"/>
                     <ComboBox FontSize="24" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CategorySelected}" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <Grid Grid.Row="6">
+                <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -179,12 +157,12 @@
                     </Button>
                 </Grid>
 
-                <StackPanel Grid.Row="7">
+                <StackPanel Grid.Row="6">
                     <TextBlock Text="More Detailed Info  (optional)" FontSize="24" Foreground="White"/>
                     <TextBox Text="{Binding DetailsText, UpdateSourceTrigger=PropertyChanged}" MaxLength="64" FontSize="24" Margin="0 0 0 8" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <Grid Grid.Row="8">
+                <Grid Grid.Row="7">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -392,7 +370,7 @@
 
                 <TextBlock Grid.Row="0" Text="Spending Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock1}" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock}" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
                                         Focusable="False" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 4 0" BorderThickness="2">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
@@ -412,69 +390,6 @@
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Percentage}" Header="Percentage" Width="Auto" control:GridViewSort.PropertyName="Percentage"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="Auto" control:GridViewSort.PropertyName="Amount"/>
-                        </GridView>
-                    </ListView.View>
-                </control:CustomListView>
-            </Grid>
-
-            <Grid Grid.Column="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="64"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="64"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Text="Income Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock2}" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="4 0 8 0" BorderThickness="2">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="Focusable" Value="False"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-
-                    <ListView.Resources>
-                        <Style TargetType="GridViewColumnHeader">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Style>
-                    </ListView.Resources>
-
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="false">
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Percentage}" Header="Percentage" Width="Auto" control:GridViewSort.PropertyName="Percentage"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="Auto" control:GridViewSort.PropertyName="Amount"/>
-                        </GridView>
-                    </ListView.View>
-                </control:CustomListView>
-
-                <TextBlock Grid.Row="2" Text="User Funds" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                <control:CustomListView Grid.Row="3" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlockUser}" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="4 0 8 0" BorderThickness="2">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="Focusable" Value="False"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-
-                    <ListView.Resources>
-                        <Style TargetType="GridViewColumnHeader">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Style>
-                    </ListView.Resources>
-
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="false">
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="User" Width="Auto" control:GridViewSort.PropertyName="Id"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="Auto" control:GridViewSort.PropertyName="Name"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=TotalEarned}" Header="Total Earned" Width="Auto" control:GridViewSort.PropertyName="TotalEarned"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=TotalSpent}" Header="Total Spent" Width="Auto" control:GridViewSort.PropertyName="TotalSpent"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Available}" Header="Available" Width="Auto" control:GridViewSort.PropertyName="Available"/>
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>

@@ -7,11 +7,11 @@ public class JsonFinances {
 }
 
 public class FinanceBlock {
-    public string AddSub { get; set; }
     public string Date { get; set; }
     public string Item { get; set; }
     public string Cost { get; set; }
     public string Category { get; set; }
+    public int CategoryID { get; set; }
     public string Details { get; set; }
     public string Image { get; set; }
     public int UserId { get; set; }
@@ -21,12 +21,4 @@ public class DetailedFinanceBlock {
     public string Category { get; set; }
     public double Percentage { get; set; }
     public int Amount { get; set; }
-}
-
-public class DetailedFinanceBlockUser {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public int TotalSpent { get; set; }
-    public int TotalEarned { get; set; }
-    public int Available { get; set; }
 }

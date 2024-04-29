@@ -14,9 +14,6 @@
 
         <Grid Grid.Row="0" Grid.Column="0" Visibility="{Binding EditVisibility}">
             <StackPanel>
-                <TextBlock Text="Max Monthly Fund Release:" FontSize="18" Foreground="White"/>
-                <TextBox Text="{Binding FundAmount, UpdateSourceTrigger=PropertyChanged}" FontSize="18" MaxLength="3" control:SelectTextOnFocus.Active="True"/>
-                <Button Content="Save Fund Amount" FontSize="18" Command="{Binding ButtonCommand}" CommandParameter="saveFunds" Margin="0 4 0 32"/>
                 <TextBlock Text="Task Name:" FontSize="18" Foreground="White"/>
                 <TextBox Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged}" FontSize="18" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
                 <TextBlock Text="Image:" FontSize="18" Foreground="White" Margin="0 8 0 0"/>

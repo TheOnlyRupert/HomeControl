@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
@@ -17,31 +16,21 @@ namespace HomeControl.Source.ViewModel.Finances;
 public class EditFinancesVM : BaseViewModel {
     private ObservableCollection<string> _categoryList;
 
-    private string _dateText, _switchModeButtonText, _switchModeButtonColor, _user1BackgroundColor, _user2BackgroundColor, _childrenBackgroundColor, _homeBackgroundColor,
-        _otherBackgroundColor, AddOrSub, _costText, _parentsBackgroundColor, _detailsText, _categorySelected, _descriptionText, _cashAvailableText,
-        _cashAvailableTextColor, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor, _user5BorderColor, _homeBorderColor;
+    private string _dateText, _costText, _detailsText, _categorySelected, _descriptionText, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor, _user5BorderColor,
+        _homeBorderColor;
 
-    private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock1, _detailedFinanceBlock2;
-    private ObservableCollection<DetailedFinanceBlockUser> _detailedFinanceBlockUser;
+    private ObservableCollection<DetailedFinanceBlock> _detailedFinanceBlock;
     private ObservableCollection<FinanceBlock> _financeList;
 
     private FinanceBlock _financeSelected;
 
     private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5, _imageHome;
 
-    private int totalBilling, totalGrocery, totalPetrol, totalRestaurantTakeout, totalShopping, totalHealth, totalTravel, totalCoffee, totalEntertainment, totalServices, totalPersonalCare,
-        totalHomeImprovement, totalAlcohol, totalFirearms, totalStreamingService, totalInterest, totalCarryOver, totalElectricBill, totalWaterBill, totalPhoneBill, totalGasBill, totalMortgageRent,
-        totalChildCare, totalVehiclePayment, totalInternetBill, totalTrashBill, totalInsurance, totalChildSupport, totalGift, totalGovernment, totalPaycheck, totalInvestment, totalSellingAssets,
-        totalOther, totalAllProfit, totalAllExpenses, totalUsers, totalGovernmentSpent, totalUser1Spent, totalUser2Spent, totalUser3Spent, totalUser4Spent, totalUser5Spent, totalUser1Profit,
-        totalUser2Profit, totalUser3Profit, totalUser4Profit, totalUser5Profit, _user1BorderThickness, _user2BorderThickness, _user3BorderThickness, _user4BorderThickness, _user5BorderThickness,
-        _homeBorderThickness, user;
+    private int totalCategory1, totalCategory2, totalCategory3, totalCategory4, totalCategory5, totalCategory6, totalCategory7, totalCategory8, totalAllExpenses, _user1BorderThickness,
+        _user2BorderThickness, _user3BorderThickness, _user4BorderThickness, _user5BorderThickness, _homeBorderThickness, user;
 
-    private double totalPercentageBilling, totalPercentageCarryOver, totalPercentageChildCare, totalPercentageCoffee, totalPercentageElectricBill, totalPercentageEntertainment,
-        totalPercentageFirearms, totalPercentageGasBill, totalPercentageGrocery, totalPercentageHealth, totalPercentageAlcohol, totalPercentageHomeImprovement, totalPercentageInsurance,
-        totalPercentageInterest, totalPercentageInternetBill, totalPercentageMortgageRent, totalPercentagePersonalCare, totalPercentagePetrol, totalPercentagePhoneBill,
-        totalPercentageRestaurantTakeout, totalPercentageServices, totalPercentageShopping, totalPercentageStreamingService, totalPercentageTrashBill, totalPercentageTravel,
-        totalPercentageVehiclePayment, totalPercentageWaterBill, totalPercentageChildSupport, totalPercentageGift, totalPercentageGovernment, totalPercentagePaycheck, totalPercentageInvestment,
-        totalPercentageSellingAssets, totalPercentageOther, totalPercentageUsers, totalPercentageGovernmentSpent;
+    private double totalPercentageCategory1, totalPercentageCategory2, totalPercentageCategory3, totalPercentageCategory4, totalPercentageCategory5, totalPercentageCategory6,
+        totalPercentageCategory7, totalPercentageCategory8;
 
     public EditFinancesVM() {
         DescriptionText = "";
@@ -97,9 +86,6 @@ public class EditFinancesVM : BaseViewModel {
         }
 
         DateText = DateTime.Now.ToShortDateString();
-        SwitchModeButtonText = "EXPENSE";
-        SwitchModeButtonColor = "Red";
-        AddOrSub = "SUB";
 
         /* Populate drop down box with spending categories and set default */
         CategoryList = new ObservableCollection<string>();
@@ -107,14 +93,12 @@ public class EditFinancesVM : BaseViewModel {
             CategoryList.Add(VARIABLE);
         }
 
+        CategorySelected = CategoryList[0];
+
         CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
         view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
-        CategorySelected = "Billing";
-
-        DetailedFinanceBlock1 = new ObservableCollection<DetailedFinanceBlock>();
-        DetailedFinanceBlock2 = new ObservableCollection<DetailedFinanceBlock>();
-        DetailedFinanceBlockUser = new ObservableCollection<DetailedFinanceBlockUser>();
+        DetailedFinanceBlock = new ObservableCollection<DetailedFinanceBlock>();
 
         RefreshDetailedView();
     }
@@ -227,13 +211,12 @@ public class EditFinancesVM : BaseViewModel {
                     Date = DateTime.Now,
                     Level = "INFO",
                     Module = "EditFinancesVM",
-                    Description = "Adding finance: User" + user + ", " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
+                    Description = "Adding finance: User" + user + ", " + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
                                   CategorySelected + ", " + DetailsText
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                 FinanceList.Add(new FinanceBlock {
-                    AddSub = AddOrSub,
                     Date = DateTime.Parse(DateText).ToShortDateString(),
                     Item = DescriptionText,
                     Cost = CostText,
@@ -269,13 +252,12 @@ public class EditFinancesVM : BaseViewModel {
                                 Date = DateTime.Now,
                                 Level = "INFO",
                                 Module = "EditFinancesVM",
-                                Description = "Updating finance: User" + user + ", " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText +
+                                Description = "Updating finance: User" + user + ", " + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText +
                                               ", " + CategorySelected + ", " + DetailsText
                             });
                             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                             FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
-                                AddSub = AddOrSub,
                                 Date = DateTime.Parse(DateText).ToShortDateString(),
                                 Item = DescriptionText,
                                 Cost = CostText,
@@ -316,7 +298,7 @@ public class EditFinancesVM : BaseViewModel {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditFinancesVM",
-                            Description = "Removing finance: User" + user + ", " + AddOrSub + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
+                            Description = "Removing finance: User" + user + ", " + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
                                           CategorySelected + ", " + DetailsText
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
@@ -358,52 +340,6 @@ public class EditFinancesVM : BaseViewModel {
         case "user0":
             UserLogic(0);
             break;
-        case "switchMode":
-            if (AddOrSub == "SUB") {
-                SwitchModeButtonText = "TASK FUND";
-                SwitchModeButtonColor = "Green";
-                AddOrSub = "NA";
-
-                CategoryList.Clear();
-                foreach (string VARIABLE in ReferenceValues.CategoryTaskList) {
-                    CategoryList.Add(VARIABLE);
-                }
-
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
-                view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-
-                CategorySelected = "User1 Fund";
-            } else if (AddOrSub == "NA") {
-                SwitchModeButtonText = "INCOME";
-                SwitchModeButtonColor = "Blue";
-                AddOrSub = "ADD";
-
-                CategoryList.Clear();
-                foreach (string VARIABLE in ReferenceValues.CategoryProfitList) {
-                    CategoryList.Add(VARIABLE);
-                }
-
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
-                view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-
-                CategorySelected = "Paycheck";
-            } else {
-                SwitchModeButtonText = "EXPENSE";
-                SwitchModeButtonColor = "Red";
-                AddOrSub = "SUB";
-
-                CategoryList.Clear();
-                foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
-                    CategoryList.Add(VARIABLE);
-                }
-
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
-                view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-
-                CategorySelected = "Billing";
-            }
-
-            break;
         case "subDay":
             try {
                 DateText = Convert.ToDateTime(DateText).AddDays(-1).ToShortDateString();
@@ -441,46 +377,6 @@ public class EditFinancesVM : BaseViewModel {
         CostText = value.Cost;
         DetailsText = value.Details;
         UserLogic(value.UserId);
-
-        if (value.AddSub == "SUB") {
-            SwitchModeButtonText = "EXPENSE";
-            SwitchModeButtonColor = "Red";
-            AddOrSub = "SUB";
-
-            CategoryList.Clear();
-            foreach (string VARIABLE in ReferenceValues.CategorySpendingList) {
-                CategoryList.Add(VARIABLE);
-            }
-
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
-            view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-        } else if (value.AddSub == "NA") {
-            SwitchModeButtonText = "TASK FUND";
-            SwitchModeButtonColor = "Green";
-            AddOrSub = "NA";
-
-            CategoryList.Clear();
-            foreach (string VARIABLE in ReferenceValues.CategoryTaskList) {
-                CategoryList.Add(VARIABLE);
-            }
-
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
-            view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-        } else {
-            SwitchModeButtonText = "INCOME";
-            SwitchModeButtonColor = "Blue";
-            AddOrSub = "ADD";
-
-            CategoryList.Clear();
-            foreach (string VARIABLE in ReferenceValues.CategoryProfitList) {
-                CategoryList.Add(VARIABLE);
-            }
-
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CategoryList);
-            view.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-        }
-
-        CategorySelected = value.Category;
     }
 
     private void SaveJson() {
@@ -515,64 +411,22 @@ public class EditFinancesVM : BaseViewModel {
     }
 
     private void RefreshDetailedView() {
-        totalAlcohol = 0;
-        totalBilling = 0;
-        totalCarryOver = 0;
-        totalChildCare = 0;
-        totalCoffee = 0;
-        totalElectricBill = 0;
-        totalEntertainment = 0;
-        totalFirearms = 0;
-        totalGasBill = 0;
-        totalGrocery = 0;
-        totalHealth = 0;
-        totalHomeImprovement = 0;
-        totalInsurance = 0;
-        totalInterest = 0;
-        totalInternetBill = 0;
-        totalMortgageRent = 0;
-        totalPersonalCare = 0;
-        totalPetrol = 0;
-        totalPhoneBill = 0;
-        totalRestaurantTakeout = 0;
-        totalServices = 0;
-        totalShopping = 0;
-        totalStreamingService = 0;
-        totalTrashBill = 0;
-        totalTravel = 0;
-        totalVehiclePayment = 0;
-        totalWaterBill = 0;
-        totalGovernmentSpent = 0;
+        totalCategory1 = 0;
+        totalCategory2 = 0;
+        totalCategory3 = 0;
+        totalCategory4 = 0;
+        totalCategory5 = 0;
+        totalCategory6 = 0;
+        totalCategory7 = 0;
+        totalCategory8 = 0;
 
-        totalUsers = 0;
-        totalUser1Spent = 0;
-        totalUser1Profit = 0;
-        totalUser2Spent = 0;
-        totalUser2Profit = 0;
-        totalUser3Spent = 0;
-        totalUser3Profit = 0;
-        totalUser4Spent = 0;
-        totalUser4Profit = 0;
-        totalUser5Spent = 0;
-        totalUser5Profit = 0;
-
-        totalChildSupport = 0;
-        totalGift = 0;
-        totalGovernment = 0;
-        totalPaycheck = 0;
-        totalInvestment = 0;
-        totalSellingAssets = 0;
-        totalOther = 0;
-
-        DetailedFinanceBlock1.Clear();
-        DetailedFinanceBlock2.Clear();
-        DetailedFinanceBlockUser.Clear();
+        DetailedFinanceBlock.Clear();
 
         foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
-            switch (financeBlock.Category) {
-            case "Billing":
+            switch (financeBlock.CategoryID) {
+            case 1:
                 try {
-                    totalBilling += int.Parse(financeBlock.Cost);
+                    totalCategory1 += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -584,9 +438,9 @@ public class EditFinancesVM : BaseViewModel {
                 }
 
                 break;
-            case "Grocery":
+            case 2:
                 try {
-                    totalGrocery += int.Parse(financeBlock.Cost);
+                    totalCategory2 += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -598,9 +452,9 @@ public class EditFinancesVM : BaseViewModel {
                 }
 
                 break;
-            case "Petrol":
+            case 3:
                 try {
-                    totalPetrol += int.Parse(financeBlock.Cost);
+                    totalCategory3 += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -612,9 +466,9 @@ public class EditFinancesVM : BaseViewModel {
                 }
 
                 break;
-            case "Restaurant/Takeout":
+            case 4:
                 try {
-                    totalRestaurantTakeout += int.Parse(financeBlock.Cost);
+                    totalCategory4 += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -626,9 +480,9 @@ public class EditFinancesVM : BaseViewModel {
                 }
 
                 break;
-            case "Shopping":
+            case 5:
                 try {
-                    totalShopping += int.Parse(financeBlock.Cost);
+                    totalCategory5 += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -640,9 +494,9 @@ public class EditFinancesVM : BaseViewModel {
                 }
 
                 break;
-            case "Health":
+            case 6:
                 try {
-                    totalHealth += int.Parse(financeBlock.Cost);
+                    totalCategory6 += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -654,9 +508,9 @@ public class EditFinancesVM : BaseViewModel {
                 }
 
                 break;
-            case "Travel":
+            case 7:
                 try {
-                    totalTravel += int.Parse(financeBlock.Cost);
+                    totalCategory7 += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -668,472 +522,9 @@ public class EditFinancesVM : BaseViewModel {
                 }
 
                 break;
-            case "Coffee":
+            case 8:
                 try {
-                    totalCoffee += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Entertainment":
-                try {
-                    totalEntertainment += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Services":
-                try {
-                    totalServices += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Personal Care":
-                try {
-                    totalPersonalCare += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Home Improvement":
-                try {
-                    totalHomeImprovement += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Alcohol":
-                try {
-                    totalAlcohol += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Firearms":
-                try {
-                    totalFirearms += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Streaming Service":
-                try {
-                    totalStreamingService += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Interest":
-                try {
-                    totalInterest += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Carry Over":
-                try {
-                    totalCarryOver += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Electric Bill":
-                try {
-                    totalElectricBill += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Water Bill":
-                try {
-                    totalWaterBill += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Phone Bill":
-                try {
-                    totalPhoneBill += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Gas Bill":
-                try {
-                    totalGasBill += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Mortgage/Rent":
-                try {
-                    totalMortgageRent += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Child Care":
-                try {
-                    totalChildCare += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Vehicle Payment":
-                try {
-                    totalVehiclePayment += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Internet Bill":
-                try {
-                    totalInternetBill += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Trash Bill":
-                try {
-                    totalTrashBill += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Insurance":
-                try {
-                    totalInsurance += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Child Support":
-                try {
-                    totalChildSupport += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Gift":
-                try {
-                    totalGift += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Government":
-                try {
-                    if (financeBlock.AddSub == "ADD") {
-                        totalGovernment += int.Parse(financeBlock.Cost);
-                    } else {
-                        totalGovernmentSpent += int.Parse(financeBlock.Cost);
-                    }
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Paycheck":
-                try {
-                    totalPaycheck += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Investment":
-                try {
-                    totalInvestment += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Selling Assets":
-                try {
-                    totalSellingAssets += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "Other":
-                try {
-                    totalOther += int.Parse(financeBlock.Cost);
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "User1 Fund":
-                try {
-                    if (financeBlock.AddSub == "SUB") {
-                        totalUsers += int.Parse(financeBlock.Cost);
-                        totalUser1Profit += int.Parse(financeBlock.Cost);
-                    } else {
-                        totalUser1Spent += int.Parse(financeBlock.Cost);
-                    }
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "User2 Fund":
-                try {
-                    if (financeBlock.AddSub == "SUB") {
-                        totalUsers += int.Parse(financeBlock.Cost);
-                        totalUser2Profit += int.Parse(financeBlock.Cost);
-                    } else {
-                        totalUser2Spent += int.Parse(financeBlock.Cost);
-                    }
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "User3 Fund":
-                try {
-                    if (financeBlock.AddSub == "SUB") {
-                        totalUsers += int.Parse(financeBlock.Cost);
-                        totalUser3Profit += int.Parse(financeBlock.Cost);
-                    } else {
-                        totalUser3Spent += int.Parse(financeBlock.Cost);
-                    }
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "User4 Fund":
-                try {
-                    if (financeBlock.AddSub == "SUB") {
-                        totalUsers += int.Parse(financeBlock.Cost);
-                        totalUser4Profit += int.Parse(financeBlock.Cost);
-                    } else {
-                        totalUser4Spent += int.Parse(financeBlock.Cost);
-                    }
-                } catch (Exception e) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "WARN",
-                        Module = "EditFinancesVM",
-                        Description = e.ToString()
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
-                break;
-            case "User5 Fund":
-                try {
-                    if (financeBlock.AddSub == "SUB") {
-                        totalUsers += int.Parse(financeBlock.Cost);
-                        totalUser5Profit += int.Parse(financeBlock.Cost);
-                    } else {
-                        totalUser5Spent += int.Parse(financeBlock.Cost);
-                    }
+                    totalCategory8 += int.Parse(financeBlock.Cost);
                 } catch (Exception e) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
@@ -1148,354 +539,78 @@ public class EditFinancesVM : BaseViewModel {
             }
         }
 
-        totalAllExpenses = totalAlcohol + totalBilling + totalChildCare + totalCoffee + totalElectricBill + totalEntertainment + totalFirearms + totalGasBill + totalGrocery +
-                           totalHealth + totalHomeImprovement + totalInsurance + totalInterest + totalInternetBill + totalMortgageRent + totalPersonalCare + totalPetrol +
-                           totalPhoneBill + totalRestaurantTakeout + totalServices + totalShopping + totalStreamingService + totalTrashBill + totalTravel + totalVehiclePayment +
-                           totalWaterBill + totalGovernmentSpent;
+        totalAllExpenses = totalCategory1 + totalCategory2 + totalCategory3 + totalCategory4 + totalCategory5 + totalCategory6 + totalCategory7 + totalCategory8;
 
-        totalPercentageCarryOver = -1;
-        totalPercentageAlcohol = Math.Round((double)(100 * totalAlcohol) / totalAllExpenses, 2);
-        totalPercentageBilling = Math.Round((double)(100 * totalBilling) / totalAllExpenses, 2);
-        totalPercentageChildCare = Math.Round((double)(100 * totalChildCare) / totalAllExpenses, 2);
-        totalPercentageCoffee = Math.Round((double)(100 * totalCoffee) / totalAllExpenses, 2);
-        totalPercentageElectricBill = Math.Round((double)(100 * totalElectricBill) / totalAllExpenses, 2);
-        totalPercentageEntertainment = Math.Round((double)(100 * totalEntertainment) / totalAllExpenses, 2);
-        totalPercentageFirearms = Math.Round((double)(100 * totalFirearms) / totalAllExpenses, 2);
-        totalPercentageGasBill = Math.Round((double)(100 * totalGasBill) / totalAllExpenses, 2);
-        totalPercentageGrocery = Math.Round((double)(100 * totalGrocery) / totalAllExpenses, 2);
-        totalPercentageHealth = Math.Round((double)(100 * totalHealth) / totalAllExpenses, 2);
-        totalPercentageHomeImprovement = Math.Round((double)(100 * totalHomeImprovement) / totalAllExpenses, 2);
-        totalPercentageInsurance = Math.Round((double)(100 * totalInsurance) / totalAllExpenses, 2);
-        totalPercentageInterest = Math.Round((double)(100 * totalInterest) / totalAllExpenses, 2);
-        totalPercentageInternetBill = Math.Round((double)(100 * totalInternetBill) / totalAllExpenses, 2);
-        totalPercentageMortgageRent = Math.Round((double)(100 * totalMortgageRent) / totalAllExpenses, 2);
-        totalPercentagePersonalCare = Math.Round((double)(100 * totalPersonalCare) / totalAllExpenses, 2);
-        totalPercentagePetrol = Math.Round((double)(100 * totalPetrol) / totalAllExpenses, 2);
-        totalPercentagePhoneBill = Math.Round((double)(100 * totalPhoneBill) / totalAllExpenses, 2);
-        totalPercentageRestaurantTakeout = Math.Round((double)(100 * totalRestaurantTakeout) / totalAllExpenses, 2);
-        totalPercentageServices = Math.Round((double)(100 * totalServices) / totalAllExpenses, 2);
-        totalPercentageShopping = Math.Round((double)(100 * totalShopping) / totalAllExpenses, 2);
-        totalPercentageStreamingService = Math.Round((double)(100 * totalStreamingService) / totalAllExpenses, 2);
-        totalPercentageTrashBill = Math.Round((double)(100 * totalTrashBill) / totalAllExpenses, 2);
-        totalPercentageTravel = Math.Round((double)(100 * totalTravel) / totalAllExpenses, 2);
-        totalPercentageVehiclePayment = Math.Round((double)(100 * totalVehiclePayment) / totalAllExpenses, 2);
-        totalPercentageWaterBill = Math.Round((double)(100 * totalWaterBill) / totalAllExpenses, 2);
-        totalPercentageGovernmentSpent = Math.Round((double)(100 * totalGovernmentSpent) / totalAllExpenses, 2);
+        totalPercentageCategory1 = Math.Round((double)(100 * totalCategory1) / totalAllExpenses, 2);
+        totalPercentageCategory2 = Math.Round((double)(100 * totalCategory2) / totalAllExpenses, 2);
+        totalPercentageCategory3 = Math.Round((double)(100 * totalCategory3) / totalAllExpenses, 2);
+        totalPercentageCategory4 = Math.Round((double)(100 * totalCategory4) / totalAllExpenses, 2);
+        totalPercentageCategory5 = Math.Round((double)(100 * totalCategory5) / totalAllExpenses, 2);
+        totalPercentageCategory6 = Math.Round((double)(100 * totalCategory6) / totalAllExpenses, 2);
+        totalPercentageCategory7 = Math.Round((double)(100 * totalCategory7) / totalAllExpenses, 2);
+        totalPercentageCategory8 = Math.Round((double)(100 * totalCategory8) / totalAllExpenses, 2);
 
-        totalPercentageUsers = Math.Round((double)(100 * totalUsers) / totalAllExpenses, 2);
-
-        totalAllProfit = totalChildSupport + totalGift + totalGovernment + totalPaycheck + totalInvestment;
-        totalPercentageChildSupport = Math.Round((double)(100 * totalChildSupport) / totalAllProfit, 2);
-        totalPercentageGift = Math.Round((double)(100 * totalGift) / totalAllProfit, 2);
-        totalPercentageGovernment = Math.Round((double)(100 * totalGovernment) / totalAllProfit, 2);
-        totalPercentagePaycheck = Math.Round((double)(100 * totalPaycheck) / totalAllProfit, 2);
-        totalPercentageInvestment = Math.Round((double)(100 * totalInvestment) / totalAllProfit, 2);
-        totalPercentageSellingAssets = Math.Round((double)(100 * totalSellingAssets) / totalAllProfit, 2);
-        totalPercentageOther = Math.Round((double)(100 * totalOther) / totalAllProfit, 2);
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Billing",
-            Percentage = totalPercentageBilling,
-            Amount = totalBilling
+        DetailedFinanceBlock.Add(new DetailedFinanceBlock {
+            Category = ReferenceValues.JsonSettingsMaster.FinanceBlock1,
+            Percentage = totalPercentageCategory1,
+            Amount = totalCategory1
+        });
+        DetailedFinanceBlock.Add(new DetailedFinanceBlock {
+            Category = ReferenceValues.JsonSettingsMaster.FinanceBlock2,
+            Percentage = totalPercentageCategory2,
+            Amount = totalCategory2
+        });
+        DetailedFinanceBlock.Add(new DetailedFinanceBlock {
+            Category = ReferenceValues.JsonSettingsMaster.FinanceBlock3,
+            Percentage = totalPercentageCategory3,
+            Amount = totalCategory3
+        });
+        DetailedFinanceBlock.Add(new DetailedFinanceBlock {
+            Category = ReferenceValues.JsonSettingsMaster.FinanceBlock4,
+            Percentage = totalPercentageCategory4,
+            Amount = totalCategory4
+        });
+        DetailedFinanceBlock.Add(new DetailedFinanceBlock {
+            Category = ReferenceValues.JsonSettingsMaster.FinanceBlock5,
+            Percentage = totalPercentageCategory5,
+            Amount = totalCategory5
+        });
+        DetailedFinanceBlock.Add(new DetailedFinanceBlock {
+            Category = ReferenceValues.JsonSettingsMaster.FinanceBlock6,
+            Percentage = totalPercentageCategory6,
+            Amount = totalCategory6
+        });
+        DetailedFinanceBlock.Add(new DetailedFinanceBlock {
+            Category = ReferenceValues.JsonSettingsMaster.FinanceBlock7,
+            Percentage = totalPercentageCategory7,
+            Amount = totalCategory7
+        });
+        DetailedFinanceBlock.Add(new DetailedFinanceBlock {
+            Category = ReferenceValues.JsonSettingsMaster.FinanceBlock8,
+            Percentage = totalPercentageCategory8,
+            Amount = totalCategory8
         });
 
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Grocery",
-            Percentage = totalPercentageGrocery,
-            Amount = totalGrocery
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Petrol",
-            Percentage = totalPercentagePetrol,
-            Amount = totalPetrol
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Restaurant/Takeout",
-            Percentage = totalPercentageRestaurantTakeout,
-            Amount = totalRestaurantTakeout
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Shopping",
-            Percentage = totalPercentageShopping,
-            Amount = totalShopping
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Health",
-            Percentage = totalPercentageHealth,
-            Amount = totalHealth
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Travel",
-            Percentage = totalPercentageTravel,
-            Amount = totalTravel
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Coffee",
-            Percentage = totalPercentageCoffee,
-            Amount = totalCoffee
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Entertainment",
-            Percentage = totalPercentageEntertainment,
-            Amount = totalEntertainment
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Services",
-            Percentage = totalPercentageServices,
-            Amount = totalServices
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Personal Care",
-            Percentage = totalPercentagePersonalCare,
-            Amount = totalPersonalCare
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Home Improvement",
-            Percentage = totalPercentageHomeImprovement,
-            Amount = totalHomeImprovement
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Alcohol",
-            Percentage = totalPercentageAlcohol,
-            Amount = totalAlcohol
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Firearms",
-            Percentage = totalPercentageFirearms,
-            Amount = totalFirearms
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Streaming Service",
-            Percentage = totalPercentageStreamingService,
-            Amount = totalStreamingService
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Interest",
-            Percentage = totalPercentageInterest,
-            Amount = totalInterest
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Carry Over",
-            Percentage = totalPercentageCarryOver,
-            Amount = totalCarryOver
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Electric Bill",
-            Percentage = totalPercentageElectricBill,
-            Amount = totalElectricBill
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Water Bill",
-            Percentage = totalPercentageWaterBill,
-            Amount = totalWaterBill
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Phone Bill",
-            Percentage = totalPercentagePhoneBill,
-            Amount = totalPhoneBill
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Gas Bill",
-            Percentage = totalPercentageGasBill,
-            Amount = totalGasBill
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Mortgage/Rent",
-            Percentage = totalPercentageMortgageRent,
-            Amount = totalMortgageRent
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Child Care",
-            Percentage = totalPercentageChildCare,
-            Amount = totalChildCare
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Vehicle Payment",
-            Percentage = totalPercentageVehiclePayment,
-            Amount = totalVehiclePayment
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Internet Bill",
-            Percentage = totalPercentageInternetBill,
-            Amount = totalInternetBill
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Trash Bill",
-            Percentage = totalPercentageTrashBill,
-            Amount = totalTrashBill
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Insurance",
-            Percentage = totalPercentageInsurance,
-            Amount = totalInsurance
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "User Funds",
-            Percentage = totalPercentageUsers,
-            Amount = totalUsers
-        });
-
-        DetailedFinanceBlock1.Add(new DetailedFinanceBlock {
-            Category = "Government",
-            Percentage = totalPercentageGovernmentSpent,
-            Amount = totalGovernmentSpent
-        });
-
-        /* Start of profit */
-        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
-            Category = "Child Support",
-            Percentage = totalPercentageChildSupport,
-            Amount = totalChildSupport
-        });
-
-        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
-            Category = "Gift",
-            Percentage = totalPercentageGift,
-            Amount = totalGift
-        });
-
-        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
-            Category = "Government",
-            Percentage = totalPercentageGovernment,
-            Amount = totalGovernment
-        });
-
-        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
-            Category = "Paycheck",
-            Percentage = totalPercentagePaycheck,
-            Amount = totalPaycheck
-        });
-
-        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
-            Category = "Investment",
-            Percentage = totalPercentageInvestment,
-            Amount = totalInvestment
-        });
-
-        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
-            Category = "Selling Assets",
-            Percentage = totalPercentageSellingAssets,
-            Amount = totalSellingAssets
-        });
-
-        DetailedFinanceBlock2.Add(new DetailedFinanceBlock {
-            Category = "Other",
-            Percentage = totalPercentageOther,
-            Amount = totalOther
-        });
-
-        /* Start of users */
-        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
-            Id = 1,
-            Name = ReferenceValues.JsonSettingsMaster.User1Name,
-            TotalSpent = totalUser1Spent,
-            TotalEarned = totalUser1Profit,
-            Available = totalUser1Profit - totalUser1Spent
-        });
-
-        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
-            Id = 2,
-            Name = ReferenceValues.JsonSettingsMaster.User2Name,
-            TotalSpent = totalUser2Spent,
-            TotalEarned = totalUser2Profit,
-            Available = totalUser2Profit - totalUser2Spent
-        });
-
-        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
-            Id = 3,
-            Name = ReferenceValues.JsonSettingsMaster.User3Name,
-            TotalSpent = totalUser3Spent,
-            TotalEarned = totalUser3Profit,
-            Available = totalUser3Profit - totalUser3Spent
-        });
-
-        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
-            Id = 4,
-            Name = ReferenceValues.JsonSettingsMaster.User4Name,
-            TotalSpent = totalUser4Spent,
-            TotalEarned = totalUser4Profit,
-            Available = totalUser4Profit - totalUser4Spent
-        });
-
-        DetailedFinanceBlockUser.Add(new DetailedFinanceBlockUser {
-            Id = 5,
-            Name = ReferenceValues.JsonSettingsMaster.User5Name,
-            TotalSpent = totalUser5Spent,
-            TotalEarned = totalUser5Profit,
-            Available = totalUser5Profit - totalUser5Spent
-        });
-
-        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock1);
+        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock);
         view.SortDescriptions.Add(new SortDescription("Amount", ListSortDirection.Descending));
         view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
 
-        CollectionView view2 = (CollectionView)CollectionViewSource.GetDefaultView(DetailedFinanceBlock2);
-        view2.SortDescriptions.Add(new SortDescription("Amount", ListSortDirection.Descending));
-        view2.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
-
         /* Available Cash */
         int expense = 0;
-        int income = 0;
 
         /* Calculate income, expense, and available cash */
         try {
             foreach (FinanceBlock t in ReferenceValues.JsonFinanceMaster.financeList) {
-                if (t.AddSub == "SUB") {
-                    try {
-                        expense += int.Parse(t.Cost);
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "FinancesVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-                }
-            }
-
-            foreach (FinanceBlock t in ReferenceValues.JsonFinanceMaster.financeList) {
-                if (t.AddSub == "ADD") {
-                    try {
-                        if (t.Category is not ("User1 Fund" or "User2 Fund" or "User3 Fund" or "User4 Fund" or "User5 Fund")) {
-                            income += int.Parse(t.Cost);
-                        }
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "FinancesVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
+                try {
+                    expense += int.Parse(t.Cost);
+                } catch (Exception e) {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "WARN",
+                        Module = "FinancesVM",
+                        Description = e.ToString()
+                    });
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
             }
         } catch (Exception e) {
@@ -1507,32 +622,9 @@ public class EditFinancesVM : BaseViewModel {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
-
-
-        int available = income - expense;
-        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-        culture.NumberFormat.CurrencyNegativePattern = 1;
-        CashAvailableText = string.Format(culture, "{0:C}", available);
-        CashAvailableTextColor = CashAvailableText.StartsWith("-") ? "Red" : "CornflowerBlue";
     }
 
     #region Fields
-
-    public string CashAvailableText {
-        get => _cashAvailableText;
-        set {
-            _cashAvailableText = value;
-            RaisePropertyChangedEvent("CashAvailableText");
-        }
-    }
-
-    public string CashAvailableTextColor {
-        get => _cashAvailableTextColor;
-        set {
-            _cashAvailableTextColor = value;
-            RaisePropertyChangedEvent("CashAvailableTextColor");
-        }
-    }
 
     public string DescriptionText {
         get => _descriptionText;
@@ -1570,14 +662,6 @@ public class EditFinancesVM : BaseViewModel {
         }
     }
 
-    public string SwitchModeButtonText {
-        get => _switchModeButtonText;
-        set {
-            _switchModeButtonText = value;
-            RaisePropertyChangedEvent("SwitchModeButtonText");
-        }
-    }
-
     public ObservableCollection<string> CategoryList {
         get => _categoryList;
         set {
@@ -1611,83 +695,11 @@ public class EditFinancesVM : BaseViewModel {
         }
     }
 
-    public string SwitchModeButtonColor {
-        get => _switchModeButtonColor;
+    public ObservableCollection<DetailedFinanceBlock> DetailedFinanceBlock {
+        get => _detailedFinanceBlock;
         set {
-            _switchModeButtonColor = value;
-            RaisePropertyChangedEvent("SwitchModeButtonColor");
-        }
-    }
-
-    public string User1BackgroundColor {
-        get => _user1BackgroundColor;
-        set {
-            _user1BackgroundColor = value;
-            RaisePropertyChangedEvent("User1BackgroundColor");
-        }
-    }
-
-    public string User2BackgroundColor {
-        get => _user2BackgroundColor;
-        set {
-            _user2BackgroundColor = value;
-            RaisePropertyChangedEvent("User2BackgroundColor");
-        }
-    }
-
-    public string ParentsBackgroundColor {
-        get => _parentsBackgroundColor;
-        set {
-            _parentsBackgroundColor = value;
-            RaisePropertyChangedEvent("ParentsBackgroundColor");
-        }
-    }
-
-    public string ChildrenBackgroundColor {
-        get => _childrenBackgroundColor;
-        set {
-            _childrenBackgroundColor = value;
-            RaisePropertyChangedEvent("ChildrenBackgroundColor");
-        }
-    }
-
-    public string HomeBackgroundColor {
-        get => _homeBackgroundColor;
-        set {
-            _homeBackgroundColor = value;
-            RaisePropertyChangedEvent("HomeBackgroundColor");
-        }
-    }
-
-    public string OtherBackgroundColor {
-        get => _otherBackgroundColor;
-        set {
-            _otherBackgroundColor = value;
-            RaisePropertyChangedEvent("OtherBackgroundColor");
-        }
-    }
-
-    public ObservableCollection<DetailedFinanceBlock> DetailedFinanceBlock1 {
-        get => _detailedFinanceBlock1;
-        set {
-            _detailedFinanceBlock1 = value;
-            RaisePropertyChangedEvent("DetailedFinanceBlock1");
-        }
-    }
-
-    public ObservableCollection<DetailedFinanceBlock> DetailedFinanceBlock2 {
-        get => _detailedFinanceBlock2;
-        set {
-            _detailedFinanceBlock2 = value;
-            RaisePropertyChangedEvent("DetailedFinanceBlock2");
-        }
-    }
-
-    public ObservableCollection<DetailedFinanceBlockUser> DetailedFinanceBlockUser {
-        get => _detailedFinanceBlockUser;
-        set {
-            _detailedFinanceBlockUser = value;
-            RaisePropertyChangedEvent("DetailedFinanceBlockUser");
+            _detailedFinanceBlock = value;
+            RaisePropertyChangedEvent("DetailedFinanceBlock");
         }
     }
 

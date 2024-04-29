@@ -31,7 +31,6 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Frame Grid.Column="0" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
                         <Frame Grid.Column="1" Source="Source/Modules/ButtonStackTop.xaml" Focusable="False"/>
                     </Grid>
 
@@ -63,7 +62,7 @@
                         </Grid.RowDefinitions>
 
                         <Frame Grid.Row="0" Source="Source/Modules/Christmas.xaml" Focusable="False" Visibility="{Binding ChristmasVisibility}"/>
-                        <Frame Grid.Row="1" Source="Source/Modules/Security/Security.xaml" Focusable="False"/>
+                        <Frame Grid.Row="1" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
                     </Grid>
 
                     <Frame Grid.Column="1" Grid.Row="0" Source="Source/Modules/Hvac/Hvac.xaml" Focusable="False"/>

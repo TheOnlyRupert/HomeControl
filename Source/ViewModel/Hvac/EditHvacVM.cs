@@ -33,6 +33,10 @@ public class EditHvacVM : BaseViewModel {
         case "programStatus":
             ReferenceValues.IsProgramRunning = !ReferenceValues.IsProgramRunning;
 
+            if (!ReferenceValues.IsProgramRunning) {
+                ReferenceValues.UseSchedule = false;
+            }
+
             break;
         case "fanStatus":
             ReferenceValues.IsFanAuto = !ReferenceValues.IsFanAuto;
@@ -43,7 +47,11 @@ public class EditHvacVM : BaseViewModel {
 
             break;
         case "useSchedule":
-            ReferenceValues.UseSchedule = !ReferenceValues.UseSchedule;
+            if (ReferenceValues.IsProgramRunning) {
+                ReferenceValues.UseSchedule = !ReferenceValues.UseSchedule;
+            } else {
+                ReferenceValues.UseSchedule = false;
+            }
 
             break;
         case "schedule":

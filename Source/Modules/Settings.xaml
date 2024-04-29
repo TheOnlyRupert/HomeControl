@@ -1,9 +1,11 @@
 ﻿<Window x:Class="HomeControl.Source.Modules.Settings" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control"
-        mc:Ignorable="d" Height="800" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
+        mc:Ignorable="d" Height="1000" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
         FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
     <Grid Margin="8 4">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -318,22 +320,62 @@
             <TextBox Text="{Binding GridX, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="19">
+        <StackPanel Grid.Column="0" Grid.Row="20">
+            <TextBlock Text="Finance Block 1" Foreground="White"/>
+            <TextBox Text="{Binding FinanceBlock1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="20">
+            <TextBlock Text="Finance Block 2" Foreground="White"/>
+            <TextBox Text="{Binding FinanceBlock2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="20">
+            <TextBlock Text="Finance Block 3" Foreground="White"/>
+            <TextBox Text="{Binding FinanceBlock3, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="21">
+            <TextBlock Text="Finance Block 4" Foreground="White"/>
+            <TextBox Text="{Binding FinanceBlock4, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="21">
+            <TextBlock Text="Finance Block 5" Foreground="White"/>
+            <TextBox Text="{Binding FinanceBlock5, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="21">
+            <TextBlock Text="Finance Block 6" Foreground="White"/>
+            <TextBox Text="{Binding FinanceBlock6, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="21">
+            <TextBlock Text="Finance Block 7" Foreground="White"/>
+            <TextBox Text="{Binding FinanceBlock7, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="21">
+            <TextBlock Text="Finance Block 8" Foreground="White"/>
+            <TextBox Text="{Binding FinanceBlock8, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="22">
             <TextBlock Text="GridY (automatic/override)" Foreground="White"/>
             <TextBox Text="{Binding GridY, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="19">
+        <StackPanel Grid.Column="2" Grid.Row="22">
             <TextBlock Text="GridID (automatic/override)" Foreground="White"/>
             <TextBox Text="{Binding GridId, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="3" Grid.Row="19">
+        <StackPanel Grid.Column="3" Grid.Row="22">
             <TextBlock Text="Location (automatic/override)" Foreground="White"/>
             <TextBox Text="{Binding WeatherLocation, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="4" Orientation="Horizontal">
+        <StackPanel Grid.Column="0" Grid.Row="23" Grid.ColumnSpan="4" Orientation="Horizontal">
             <CheckBox Content="User1 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User1Checked}"/>
             <CheckBox Content="User2 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User2Checked}"/>
             <CheckBox Content="User3 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User3Checked}"/>
@@ -341,7 +383,7 @@
             <CheckBox Content="User5 Funds" Foreground="White" FontSize="16" Margin="0 4 0 0" IsChecked="{Binding User5Checked}"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="0" Grid.Row="21" Grid.ColumnSpan="4" Orientation="Horizontal">
+        <StackPanel Grid.Column="0" Grid.Row="24" Grid.ColumnSpan="4" Orientation="Horizontal">
             <CheckBox Content="User1 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User1BehaviorChecked}"/>
             <CheckBox Content="User2 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User2BehaviorChecked}"/>
             <CheckBox Content="User3 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User3BehaviorChecked}"/>
@@ -349,7 +391,7 @@
             <CheckBox Content="User5 Behavior" Foreground="White" FontSize="16" Margin="0 4 0 0" IsChecked="{Binding User5BehaviorChecked}"/>
         </StackPanel>
 
-        <Grid Grid.Column="0" Grid.Row="22" Grid.ColumnSpan="4">
+        <Grid Grid.Column="0" Grid.Row="25" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

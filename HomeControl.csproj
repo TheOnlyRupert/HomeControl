@@ -137,12 +137,6 @@
         <Compile Include="Source\Modules\Hvac\Hvac.xaml.cs">
             <DependentUpon>Hvac.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\Security\EditSecurity.xaml.cs">
-            <DependentUpon>EditSecurity.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Security\Security.xaml.cs">
-            <DependentUpon>Security.xaml</DependentUpon>
-        </Compile>
         <Compile Include="Source\Modules\Timer\Timer.xaml.cs">
             <DependentUpon>Timer.xaml</DependentUpon>
         </Compile>
@@ -206,8 +200,6 @@
         <Compile Include="Source\ViewModel\Hvac\HvacCrossPlay.cs"/>
         <Compile Include="Source\ViewModel\Hvac\EditHvacVM.cs"/>
         <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>
-        <Compile Include="Source\ViewModel\Security\EditSecurityVM.cs"/>
-        <Compile Include="Source\ViewModel\Security\SecurityVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
         <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
         <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
@@ -256,8 +248,6 @@
         <Page Include="Source\Modules\Hvac\EditHvac.xaml"/>
         <Page Include="Source\Modules\Hvac\EditHvacSchedule.xaml"/>
         <Page Include="Source\Modules\Hvac\Hvac.xaml"/>
-        <Page Include="Source\Modules\Security\EditSecurity.xaml"/>
-        <Page Include="Source\Modules\Security\Security.xaml"/>
         <Page Include="Source\Modules\Timer\Timer.xaml"/>
         <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
         <Page Include="Source\Modules\Behavior\Behavior.xaml"/>

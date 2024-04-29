@@ -22,13 +22,13 @@ public class BehaviorVM : BaseViewModel {
         _user3TasksCompletedDayProgressColor, _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor, _user3TasksCompletedQuarterProgressColor,
         _user4TasksCompletedDayProgressColor, _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor, _user4TasksCompletedQuarterProgressColor,
         _user5TasksCompletedDayProgressColor, _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor, _user5TasksCompletedQuarterProgressColor, _currentMonthText,
-        _currentWeekText, _currentDayText, _user1CashAvailableColor, _user2CashAvailableColor, _user3CashAvailableColor, _user4CashAvailableColor, _user5CashAvailableColor, _currentQuarterText,
-        _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText, _user1TasksCompletedQuarterProgressText, _user1CashAvailable,
-        _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText, _user2TasksCompletedQuarterProgressText, _user2CashAvailable,
-        _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText, _user3CashAvailable,
-        _user4TasksCompletedWeekProgressText, _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText, _user4CashAvailable,
-        _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText, _user5TasksCompletedQuarterProgressText, _user5CashAvailable, _remainingDay,
-        _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _user1CashReleased, _user2CashReleased, _user3CashReleased, _user4CashReleased, _user5CashReleased, _user1DayVisibility,
+        _currentWeekText, _currentDayText, _currentQuarterText,
+        _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText, _user1TasksCompletedQuarterProgressText,
+        _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText, _user2TasksCompletedQuarterProgressText,
+        _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText,
+        _user4TasksCompletedWeekProgressText, _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText,
+        _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText, _user5TasksCompletedQuarterProgressText, _remainingDay,
+        _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _user1DayVisibility,
         _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility, _user1WeekVisibility, _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility,
         _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility, _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility,
         _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility, _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility,
@@ -156,27 +156,11 @@ public class BehaviorVM : BaseViewModel {
     public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
 
     private void RefreshTasks(int UserID) {
-        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-        culture.NumberFormat.CurrencyNegativePattern = 1;
-        System.Globalization.Calendar cal = DateTimeFormatInfo.CurrentInfo.Calendar;
-        DateTime d1 = DateTime.Today;
-
-        try {
-            d1 = ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.AddDays(-1 * (int)cal.GetDayOfWeek(ReferenceValues.JsonTasksMaster.UpdatedDateTime));
-        } catch (Exception) {
-            // ignore?
-        }
-
-        DateTime d2 = DateTime.Today.Date.AddDays(-1 * (int)cal.GetDayOfWeek(DateTime.Today));
-
-        int totalDay = 0, totalWeek = 0, totalMonth = 0, totalQuarter = 0;
-        int completedDay = 0, completedWeek = 0, completedMonth = 0, completedQuarter = 0;
-        int releaseAmountDaily = 0, releaseAmountWeekly = 0, releaseAmountMonthly = 0, releaseAmountQuarterly = 0;
+        int totalDay = 0, totalWeek = 0, totalMonth = 0, totalQuarter = 0, completedDay = 0, completedWeek = 0, completedMonth = 0, completedQuarter = 0;
         double math;
 
         switch (UserID) {
         case 1:
-            User1CashReleased = "";
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
                 totalDay++;
                 if (task.IsCompleted) {
@@ -235,186 +219,24 @@ public class BehaviorVM : BaseViewModel {
 
             if (totalDay != 0) {
                 User1TasksCompletedDayProgressText = User1TasksCompletedDayProgressValue + "%";
-
-                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser1);
-
-                /* Release daily funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
-                    if (releaseAmountDaily != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Daily Funds: $" + releaseAmountDaily
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Daily Funds",
-                                Cost = releaseAmountDaily.ToString(),
-                                Category = "User1 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
-                                UserId = 1
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset daily */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountDaily = 0;
-                    User1TasksCompletedDayProgressText = "0%";
-                    User1TasksCompletedDayProgressValue = 0;
-                }
             } else {
                 User1TasksCompletedDayProgressText = "None";
             }
 
             if (totalWeek != 0) {
                 User1TasksCompletedWeekProgressText = User1TasksCompletedWeekProgressValue + "%";
-
-                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser1);
-
-                /* Release weekly funds */
-                if (d1 != d2) {
-                    if (releaseAmountWeekly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Weekly Funds: $" + releaseAmountWeekly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                            AddSub = "SUB",
-                            Date = DateTime.Now.ToShortDateString(),
-                            Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Weekly Funds",
-                            Cost = releaseAmountWeekly.ToString(),
-                            Category = "User1 Fund",
-                            Details = "(Automatic)",
-                            Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
-                            UserId = 1
-                        });
-                    }
-
-                    /* Reset weekly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountWeekly = 0;
-                    User1TasksCompletedWeekProgressText = "0%";
-                    User1TasksCompletedWeekProgressValue = 0;
-                }
             } else {
                 User1TasksCompletedWeekProgressText = "None";
             }
 
             if (totalMonth != 0) {
                 User1TasksCompletedMonthProgressText = User1TasksCompletedMonthProgressValue + "%";
-
-                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser1);
-
-                /* Release monthly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
-                    if (releaseAmountMonthly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Monthly Funds: $" + releaseAmountMonthly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Monthly Funds",
-                                Cost = releaseAmountMonthly.ToString(),
-                                Category = "User1 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
-                                UserId = 1
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset monthly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountMonthly = 0;
-                    User1TasksCompletedMonthProgressText = "0%";
-                    User1TasksCompletedMonthProgressValue = 0;
-                }
             } else {
                 User1TasksCompletedMonthProgressText = "None";
             }
 
             if (totalQuarter != 0) {
                 User1TasksCompletedQuarterProgressText = User1TasksCompletedQuarterProgressValue + "%";
-
-                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser1);
-
-                /* Releasing quarterly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
-                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
-                        if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User1Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                            try {
-                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                    AddSub = "SUB",
-                                    Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonSettingsMaster.User1Name + "'s Quarterly Funds",
-                                    Cost = releaseAmountQuarterly.ToString(),
-                                    Category = "User1 Fund",
-                                    Details = "(Automatic)",
-                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
-                                    UserId = 1
-                                });
-                            } catch (Exception) {
-                                // ignore
-                            }
-                        }
-
-                        /* Reset quarter */
-                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1) {
-                            task.IsCompleted = false;
-                            task.DateCompleted = "";
-                        }
-
-                        releaseAmountQuarterly = 0;
-                        User1TasksCompletedQuarterProgressText = "0%";
-                        User1TasksCompletedQuarterProgressValue = 0;
-                    }
-                }
             } else {
                 User1TasksCompletedQuarterProgressText = "None";
             }
@@ -423,68 +245,6 @@ public class BehaviorVM : BaseViewModel {
             User1TasksCompletedWeekProgressColor = User1TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
             User1TasksCompletedMonthProgressColor = User1TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User1TasksCompletedQuarterProgressColor = User1TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-            int totalRelease = 0;
-            if (releaseAmountDaily > 0) {
-                totalRelease += releaseAmountDaily;
-            }
-
-            if (releaseAmountWeekly > 0 && DateTime.Today.DayOfWeek == DayOfWeek.Saturday) {
-                totalRelease += releaseAmountWeekly;
-            }
-
-            if (releaseAmountMonthly > 0 && DateTime.Today.Month != DateTime.Today.AddDays(1).Month) {
-                totalRelease += releaseAmountMonthly;
-            }
-
-            if (releaseAmountQuarterly > 0) {
-                switch (DateTime.Today.AddDays(1).Month) {
-                case 1:
-                case 4:
-                case 7:
-                case 10:
-                    totalRelease += releaseAmountQuarterly;
-                    break;
-                }
-            }
-
-            if (totalRelease > 0) {
-                User1CashReleased = "+ $" + totalRelease;
-            } else {
-                User1CashReleased = "";
-            }
-
-            int funds = 0;
-            try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
-                    if (financeBlock.Category == "User1 Fund") {
-                        try {
-                            if (financeBlock.AddSub == "SUB") {
-                                funds += int.Parse(financeBlock.Cost);
-                            } else {
-                                funds -= int.Parse(financeBlock.Cost);
-                            }
-                        } catch (Exception e) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "WARN",
-                                Module = "BehaviorVM",
-                                Description = e.ToString()
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                        }
-                    }
-                }
-            } catch (Exception) {
-                //blank
-            }
-
-            if (ReferenceValues.JsonSettingsMaster.User1Checked) {
-                User1CashAvailable = string.Format(culture, "{0:C}", funds);
-                User1CashAvailableColor = User1CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } else {
-                User1CashAvailable = "";
-            }
 
             ProgressBarUser1 = ReferenceValues.JsonBehaviorMaster.User1Progress;
 
@@ -497,7 +257,6 @@ public class BehaviorVM : BaseViewModel {
 
             break;
         case 2:
-            User2CashReleased = "";
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
                 totalDay++;
                 if (task.IsCompleted) {
@@ -556,93 +315,20 @@ public class BehaviorVM : BaseViewModel {
 
             if (totalDay != 0) {
                 User2TasksCompletedDayProgressText = User2TasksCompletedDayProgressValue + "%";
-
-                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser2);
-
-                /* Release daily funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
-                    if (releaseAmountDaily != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Daily Funds: $" + releaseAmountDaily
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Daily Funds",
-                                Cost = releaseAmountDaily.ToString(),
-                                Category = "User2 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
-                                UserId = 2
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset daily */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountDaily = 0;
-                    User2TasksCompletedDayProgressText = "0%";
-                    User2TasksCompletedDayProgressValue = 0;
+                /* Reset daily */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User2TasksCompletedDayProgressText = "0%";
+                User2TasksCompletedDayProgressValue = 0;
             } else {
                 User2TasksCompletedDayProgressText = "None";
             }
 
             if (totalWeek != 0) {
                 User2TasksCompletedWeekProgressText = User2TasksCompletedWeekProgressValue + "%";
-
-                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser2);
-
-                /* Release weekly funds */
-                if (d1 != d2) {
-                    if (releaseAmountWeekly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Weekly Funds: $" + releaseAmountWeekly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Weekly Funds",
-                                Cost = releaseAmountWeekly.ToString(),
-                                Category = "User2 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
-                                UserId = 2
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset weekly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountWeekly = 0;
-                    User2TasksCompletedWeekProgressText = "0%";
-                    User2TasksCompletedWeekProgressValue = 0;
-                }
             } else {
                 User2TasksCompletedWeekProgressText = "None";
             }
@@ -650,164 +336,23 @@ public class BehaviorVM : BaseViewModel {
             if (totalMonth != 0) {
                 User2TasksCompletedMonthProgressText = User2TasksCompletedMonthProgressValue + "%";
 
-                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser2);
-
-                /* Release monthly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
-                    if (releaseAmountMonthly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Monthly Funds: $" + releaseAmountMonthly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Monthly Funds",
-                                Cost = releaseAmountMonthly.ToString(),
-                                Category = "User2 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
-                                UserId = 2
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset monthly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountMonthly = 0;
-                    User2TasksCompletedMonthProgressText = "0%";
-                    User2TasksCompletedMonthProgressValue = 0;
+                /* Reset monthly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User2TasksCompletedMonthProgressText = "0%";
+                User2TasksCompletedMonthProgressValue = 0;
             } else {
                 User2TasksCompletedMonthProgressText = "None";
             }
 
-            if (totalQuarter != 0) {
-                User2TasksCompletedQuarterProgressText = User2TasksCompletedQuarterProgressValue + "%";
-
-                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser2);
-
-                /* Releasing quarterly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
-                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
-                        if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User2Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                            try {
-                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                    AddSub = "SUB",
-                                    Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonSettingsMaster.User2Name + "'s Quarterly Funds",
-                                    Cost = releaseAmountQuarterly.ToString(),
-                                    Category = "User2 Fund",
-                                    Details = "(Automatic)",
-                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
-                                    UserId = 2
-                                });
-                            } catch (Exception) {
-                                // ignore
-                            }
-                        }
-
-                        /* Reset quarterly */
-                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2) {
-                            task.IsCompleted = false;
-                            task.DateCompleted = "";
-                        }
-
-                        releaseAmountQuarterly = 0;
-                        User2TasksCompletedQuarterProgressText = "0%";
-                        User2TasksCompletedQuarterProgressValue = 0;
-                    }
-                }
-            } else {
-                User2TasksCompletedQuarterProgressText = "None";
-            }
-
+            User2TasksCompletedQuarterProgressText = User2TasksCompletedQuarterProgressValue + "%";
             User2TasksCompletedDayProgressColor = User2TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
             User2TasksCompletedWeekProgressColor = User2TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
             User2TasksCompletedMonthProgressColor = User2TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User2TasksCompletedQuarterProgressColor = User2TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-            totalRelease = 0;
-            if (releaseAmountDaily > 0) {
-                totalRelease += releaseAmountDaily;
-            }
-
-            if (releaseAmountWeekly > 0 && DateTime.Today.DayOfWeek == DayOfWeek.Saturday) {
-                totalRelease += releaseAmountWeekly;
-            }
-
-            if (releaseAmountMonthly > 0 && DateTime.Today.Month != DateTime.Today.AddDays(1).Month) {
-                totalRelease += releaseAmountMonthly;
-            }
-
-            if (releaseAmountQuarterly > 0) {
-                switch (DateTime.Today.AddDays(1).Month) {
-                case 1:
-                case 4:
-                case 7:
-                case 10:
-                    totalRelease += releaseAmountQuarterly;
-                    break;
-                }
-            }
-
-            if (totalRelease > 0) {
-                User2CashReleased = "+ $" + totalRelease;
-            } else {
-                User2CashReleased = "";
-            }
-
-            funds = 0;
-            try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
-                    if (financeBlock.Category == "User2 Fund") {
-                        try {
-                            if (financeBlock.AddSub == "SUB") {
-                                funds += int.Parse(financeBlock.Cost);
-                            } else {
-                                funds -= int.Parse(financeBlock.Cost);
-                            }
-                        } catch (Exception e) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "WARN",
-                                Module = "BehaviorVM",
-                                Description = e.ToString()
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                        }
-                    }
-                }
-            } catch (Exception) {
-                //blank
-            }
-
-            if (ReferenceValues.JsonSettingsMaster.User2Checked) {
-                User2CashAvailable = string.Format(culture, "{0:C}", funds);
-                User2CashAvailableColor = User2CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } else {
-                User2CashAvailable = "";
-            }
 
             ProgressBarUser2 = ReferenceValues.JsonBehaviorMaster.User2Progress;
 
@@ -820,7 +365,6 @@ public class BehaviorVM : BaseViewModel {
 
             break;
         case 3:
-            User3CashReleased = "";
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
                 totalDay++;
                 if (task.IsCompleted) {
@@ -880,46 +424,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalDay != 0) {
                 User3TasksCompletedDayProgressText = User3TasksCompletedDayProgressValue + "%";
 
-                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser3);
-
-                /* Release daily funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
-                    if (releaseAmountDaily != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Daily Funds: $" + releaseAmountDaily
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Daily Funds",
-                                Cost = releaseAmountDaily.ToString(),
-                                Category = "User3 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
-                                UserId = 3
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset daily */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountDaily = 0;
-                    User3TasksCompletedDayProgressText = "0%";
-                    User3TasksCompletedDayProgressValue = 0;
+                /* Reset daily */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User3TasksCompletedDayProgressText = "0%";
+                User3TasksCompletedDayProgressValue = 0;
             } else {
                 User3TasksCompletedDayProgressText = "None";
             }
@@ -927,46 +439,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalWeek != 0) {
                 User3TasksCompletedWeekProgressText = User3TasksCompletedWeekProgressValue + "%";
 
-                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser3);
-
-                /* Release weekly funds */
-                if (d1 != d2) {
-                    if (releaseAmountWeekly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Weekly Funds: $" + releaseAmountWeekly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Weekly Funds",
-                                Cost = releaseAmountWeekly.ToString(),
-                                Category = "User3 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
-                                UserId = 3
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset weekly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountWeekly = 0;
-                    User3TasksCompletedWeekProgressText = "0%";
-                    User3TasksCompletedWeekProgressValue = 0;
+                /* Reset weekly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User3TasksCompletedWeekProgressText = "0%";
+                User3TasksCompletedWeekProgressValue = 0;
             } else {
                 User3TasksCompletedWeekProgressText = "None";
             }
@@ -974,46 +454,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalMonth != 0) {
                 User3TasksCompletedMonthProgressText = User3TasksCompletedMonthProgressValue + "%";
 
-                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser3);
-
-                /* Release monthly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
-                    if (releaseAmountMonthly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Monthly Funds: $" + releaseAmountMonthly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Monthly Funds",
-                                Cost = releaseAmountMonthly.ToString(),
-                                Category = "User3 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
-                                UserId = 3
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset monthly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountMonthly = 0;
-                    User3TasksCompletedMonthProgressText = "0%";
-                    User3TasksCompletedMonthProgressValue = 0;
+                /* Reset monthly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User3TasksCompletedMonthProgressText = "0%";
+                User3TasksCompletedMonthProgressValue = 0;
             } else {
                 User3TasksCompletedMonthProgressText = "None";
             }
@@ -1021,118 +469,22 @@ public class BehaviorVM : BaseViewModel {
             if (totalQuarter != 0) {
                 User3TasksCompletedQuarterProgressText = User3TasksCompletedQuarterProgressValue + "%";
 
-                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser3);
-
-                /* Releasing quarterly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
-                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
-                        if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User3Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                            try {
-                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                    AddSub = "SUB",
-                                    Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonSettingsMaster.User3Name + "'s Quarterly Funds",
-                                    Cost = releaseAmountQuarterly.ToString(),
-                                    Category = "User3 Fund",
-                                    Details = "(Automatic)",
-                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
-                                    UserId = 3
-                                });
-                            } catch (Exception) {
-                                // ignore
-                            }
-                        }
-
-                        /* Reset quarterly */
-                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3) {
-                            task.IsCompleted = false;
-                            task.DateCompleted = "";
-                        }
-
-                        releaseAmountQuarterly = 0;
-                        User3TasksCompletedQuarterProgressText = "0%";
-                        User3TasksCompletedQuarterProgressValue = 0;
-                    }
+                /* Reset quarterly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User3TasksCompletedQuarterProgressText = "0%";
+                User3TasksCompletedQuarterProgressValue = 0;
             } else {
                 User3TasksCompletedQuarterProgressText = "None";
-            }
-
-            totalRelease = 0;
-            if (releaseAmountDaily > 0) {
-                totalRelease += releaseAmountDaily;
-            }
-
-            if (releaseAmountWeekly > 0 && DateTime.Today.DayOfWeek == DayOfWeek.Saturday) {
-                totalRelease += releaseAmountWeekly;
-            }
-
-            if (releaseAmountMonthly > 0 && DateTime.Today.Month != DateTime.Today.AddDays(1).Month) {
-                totalRelease += releaseAmountMonthly;
-            }
-
-            if (releaseAmountQuarterly > 0) {
-                switch (DateTime.Today.AddDays(1).Month) {
-                case 1:
-                case 4:
-                case 7:
-                case 10:
-                    totalRelease += releaseAmountQuarterly;
-                    break;
-                }
-            }
-
-            if (totalRelease > 0) {
-                User3CashReleased = "+ $" + totalRelease;
-            } else {
-                User3CashReleased = "";
             }
 
             User3TasksCompletedDayProgressColor = User3TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
             User3TasksCompletedWeekProgressColor = User3TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
             User3TasksCompletedMonthProgressColor = User3TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User3TasksCompletedQuarterProgressColor = User3TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-            funds = 0;
-            try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
-                    if (financeBlock.Category == "User3 Fund") {
-                        try {
-                            if (financeBlock.AddSub == "SUB") {
-                                funds += int.Parse(financeBlock.Cost);
-                            } else {
-                                funds -= int.Parse(financeBlock.Cost);
-                            }
-                        } catch (Exception e) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "WARN",
-                                Module = "BehaviorVM",
-                                Description = e.ToString()
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                        }
-                    }
-                }
-            } catch (Exception) {
-                //blank
-            }
-
-            if (ReferenceValues.JsonSettingsMaster.User3Checked) {
-                User3CashAvailable = string.Format(culture, "{0:C}", funds);
-                User3CashAvailableColor = User3CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } else {
-                User3CashAvailable = "";
-            }
 
             ProgressBarUser3 = ReferenceValues.JsonBehaviorMaster.User3Progress;
 
@@ -1145,7 +497,6 @@ public class BehaviorVM : BaseViewModel {
 
             break;
         case 4:
-            User4CashReleased = "";
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
                 totalDay++;
                 if (task.IsCompleted) {
@@ -1205,46 +556,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalDay != 0) {
                 User4TasksCompletedDayProgressText = User4TasksCompletedDayProgressValue + "%";
 
-                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser4);
-
-                /* Release daily funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
-                    if (releaseAmountDaily != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Daily Funds: $" + releaseAmountDaily
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Daily Funds",
-                                Cost = releaseAmountDaily.ToString(),
-                                Category = "User4 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
-                                UserId = 4
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset daily */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountDaily = 0;
-                    User4TasksCompletedDayProgressText = "0%";
-                    User4TasksCompletedDayProgressValue = 0;
+                /* Reset daily */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User4TasksCompletedDayProgressText = "0%";
+                User4TasksCompletedDayProgressValue = 0;
             } else {
                 User4TasksCompletedDayProgressText = "None";
             }
@@ -1252,46 +571,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalWeek != 0) {
                 User4TasksCompletedWeekProgressText = User4TasksCompletedWeekProgressValue + "%";
 
-                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser4);
-
-                /* Release weekly funds */
-                if (d1 != d2) {
-                    if (releaseAmountWeekly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Weekly Funds: $" + releaseAmountWeekly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Weekly Funds",
-                                Cost = releaseAmountWeekly.ToString(),
-                                Category = "User4 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
-                                UserId = 4
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset weekly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountWeekly = 0;
-                    User4TasksCompletedWeekProgressText = "0%";
-                    User4TasksCompletedWeekProgressValue = 0;
+                /* Reset weekly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User4TasksCompletedWeekProgressText = "0%";
+                User4TasksCompletedWeekProgressValue = 0;
             } else {
                 User4TasksCompletedWeekProgressText = "None";
             }
@@ -1299,46 +586,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalMonth != 0) {
                 User4TasksCompletedMonthProgressText = User4TasksCompletedMonthProgressValue + "%";
 
-                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser4);
-
-                /* Release monthly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
-                    if (releaseAmountMonthly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Monthly Funds: $" + releaseAmountMonthly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Monthly Funds",
-                                Cost = releaseAmountMonthly.ToString(),
-                                Category = "User4 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
-                                UserId = 4
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset monthly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountMonthly = 0;
-                    User4TasksCompletedMonthProgressText = "0%";
-                    User4TasksCompletedMonthProgressValue = 0;
+                /* Reset monthly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User4TasksCompletedMonthProgressText = "0%";
+                User4TasksCompletedMonthProgressValue = 0;
             } else {
                 User4TasksCompletedMonthProgressText = "None";
             }
@@ -1346,48 +601,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalQuarter != 0) {
                 User4TasksCompletedQuarterProgressText = User4TasksCompletedQuarterProgressValue + "%";
 
-                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser4);
-
-                /* Releasing quarterly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
-                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
-                        if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User4Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                            try {
-                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                    AddSub = "SUB",
-                                    Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonSettingsMaster.User4Name + "'s Quarterly Funds",
-                                    Cost = releaseAmountQuarterly.ToString(),
-                                    Category = "User4 Fund",
-                                    Details = "(Automatic)",
-                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
-                                    UserId = 4
-                                });
-                            } catch (Exception) {
-                                // ignore
-                            }
-                        }
-
-                        /* Reset quarterly */
-                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4) {
-                            task.IsCompleted = false;
-                            task.DateCompleted = "";
-                        }
-
-                        releaseAmountQuarterly = 0;
-                        User4TasksCompletedQuarterProgressText = "0%";
-                        User4TasksCompletedQuarterProgressValue = 0;
-                    }
+                /* Reset quarterly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User4TasksCompletedQuarterProgressText = "0%";
+                User4TasksCompletedQuarterProgressValue = 0;
             } else {
                 User4TasksCompletedQuarterProgressText = "None";
             }
@@ -1396,68 +617,6 @@ public class BehaviorVM : BaseViewModel {
             User4TasksCompletedWeekProgressColor = User4TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
             User4TasksCompletedMonthProgressColor = User4TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User4TasksCompletedQuarterProgressColor = User4TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-            totalRelease = 0;
-            if (releaseAmountDaily > 0) {
-                totalRelease += releaseAmountDaily;
-            }
-
-            if (releaseAmountWeekly > 0 && DateTime.Today.DayOfWeek == DayOfWeek.Saturday) {
-                totalRelease += releaseAmountWeekly;
-            }
-
-            if (releaseAmountMonthly > 0 && DateTime.Today.Month != DateTime.Today.AddDays(1).Month) {
-                totalRelease += releaseAmountMonthly;
-            }
-
-            if (releaseAmountQuarterly > 0) {
-                switch (DateTime.Today.AddDays(1).Month) {
-                case 1:
-                case 4:
-                case 7:
-                case 10:
-                    totalRelease += releaseAmountQuarterly;
-                    break;
-                }
-            }
-
-            if (totalRelease > 0) {
-                User4CashReleased = "+ $" + totalRelease;
-            } else {
-                User4CashReleased = "";
-            }
-
-            funds = 0;
-            try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
-                    if (financeBlock.Category == "User4 Fund") {
-                        try {
-                            if (financeBlock.AddSub == "SUB") {
-                                funds += int.Parse(financeBlock.Cost);
-                            } else {
-                                funds -= int.Parse(financeBlock.Cost);
-                            }
-                        } catch (Exception e) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "WARN",
-                                Module = "BehaviorVM",
-                                Description = e.ToString()
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                        }
-                    }
-                }
-            } catch (Exception) {
-                //blank
-            }
-
-            if (ReferenceValues.JsonSettingsMaster.User4Checked) {
-                User4CashAvailable = string.Format(culture, "{0:C}", funds);
-                User4CashAvailableColor = User4CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } else {
-                User4CashAvailable = "";
-            }
 
             ProgressBarUser4 = ReferenceValues.JsonBehaviorMaster.User4Progress;
 
@@ -1470,7 +629,6 @@ public class BehaviorVM : BaseViewModel {
 
             break;
         case 5:
-            User5CashReleased = "";
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
                 totalDay++;
                 if (task.IsCompleted) {
@@ -1530,46 +688,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalDay != 0) {
                 User5TasksCompletedDayProgressText = User5TasksCompletedDayProgressValue + "%";
 
-                math = Convert.ToDouble(completedDay) / Convert.ToDouble(totalDay);
-                releaseAmountDaily = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksDaily.FundsDailyUser5);
-
-                /* Release daily funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
-                    if (releaseAmountDaily != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Daily Funds: $" + releaseAmountDaily
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Daily Funds",
-                                Cost = releaseAmountDaily.ToString(),
-                                Category = "User5 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                                UserId = 5
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset daily */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountDaily = 0;
-                    User5TasksCompletedDayProgressText = "0%";
-                    User5TasksCompletedDayProgressValue = 0;
+                /* Reset daily */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User5TasksCompletedDayProgressText = "0%";
+                User5TasksCompletedDayProgressValue = 0;
             } else {
                 User5TasksCompletedDayProgressText = "None";
             }
@@ -1577,46 +703,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalWeek != 0) {
                 User5TasksCompletedWeekProgressText = User5TasksCompletedWeekProgressValue + "%";
 
-                math = Convert.ToDouble(completedWeek) / Convert.ToDouble(totalWeek);
-                releaseAmountWeekly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksWeekly.FundsWeeklyUser5);
-
-                /* Release weekly funds */
-                if (d1 != d2) {
-                    if (releaseAmountWeekly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Weekly Funds: $" + releaseAmountWeekly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Weekly Funds",
-                                Cost = releaseAmountWeekly.ToString(),
-                                Category = "User5 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                                UserId = 5
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset weekly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountWeekly = 0;
-                    User5TasksCompletedWeekProgressText = "0%";
-                    User5TasksCompletedWeekProgressValue = 0;
+                /* Reset weekly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User5TasksCompletedWeekProgressText = "0%";
+                User5TasksCompletedWeekProgressValue = 0;
             } else {
                 User5TasksCompletedWeekProgressText = "None";
             }
@@ -1624,46 +718,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalMonth != 0) {
                 User5TasksCompletedMonthProgressText = User5TasksCompletedMonthProgressValue + "%";
 
-                math = Convert.ToDouble(completedMonth) / Convert.ToDouble(totalMonth);
-                releaseAmountMonthly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksMonthly.FundsMonthlyUser5);
-
-                /* Release monthly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
-                    if (releaseAmountMonthly != 0) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "BehaviorVM",
-                            Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Monthly Funds: $" + releaseAmountMonthly
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                        try {
-                            ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                AddSub = "SUB",
-                                Date = DateTime.Now.ToShortDateString(),
-                                Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Monthly Funds",
-                                Cost = releaseAmountMonthly.ToString(),
-                                Category = "User5 Fund",
-                                Details = "(Automatic)",
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                                UserId = 5
-                            });
-                        } catch (Exception) {
-                            // ignore
-                        }
-                    }
-
-                    /* Reset monthly */
-                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5) {
-                        task.IsCompleted = false;
-                        task.DateCompleted = "";
-                    }
-
-                    releaseAmountMonthly = 0;
-                    User5TasksCompletedMonthProgressText = "0%";
-                    User5TasksCompletedMonthProgressValue = 0;
+                /* Reset monthly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User5TasksCompletedMonthProgressText = "0%";
+                User5TasksCompletedMonthProgressValue = 0;
             } else {
                 User5TasksCompletedMonthProgressText = "None";
             }
@@ -1671,48 +733,14 @@ public class BehaviorVM : BaseViewModel {
             if (totalQuarter != 0) {
                 User5TasksCompletedQuarterProgressText = User5TasksCompletedQuarterProgressValue + "%";
 
-                math = Convert.ToDouble(completedQuarter) / Convert.ToDouble(totalQuarter);
-                releaseAmountQuarterly = (int)(math * ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser5);
-
-                /* Releasing quarterly funds */
-                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
-                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
-                        if (releaseAmountQuarterly != 0) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "BehaviorVM",
-                                Description = "Releasing " + ReferenceValues.JsonSettingsMaster.User5Name + "'s Quarterly Funds: $" + releaseAmountQuarterly
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                            try {
-                                ReferenceValues.JsonFinanceMaster.financeList.Add(new FinanceBlock {
-                                    AddSub = "SUB",
-                                    Date = DateTime.Now.ToShortDateString(),
-                                    Item = ReferenceValues.JsonSettingsMaster.User5Name + "'s Quarterly Funds",
-                                    Cost = releaseAmountQuarterly.ToString(),
-                                    Category = "User5 Fund",
-                                    Details = "(Automatic)",
-                                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png",
-                                    UserId = 5
-                                });
-                            } catch (Exception) {
-                                // ignore
-                            }
-                        }
-
-                        /* Reset quarterly */
-                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5) {
-                            task.IsCompleted = false;
-                            task.DateCompleted = "";
-                        }
-
-                        releaseAmountQuarterly = 0;
-                        User5TasksCompletedQuarterProgressText = "0%";
-                        User5TasksCompletedQuarterProgressValue = 0;
-                    }
+                /* Reset quarterly */
+                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5) {
+                    task.IsCompleted = false;
+                    task.DateCompleted = "";
                 }
+
+                User5TasksCompletedQuarterProgressText = "0%";
+                User5TasksCompletedQuarterProgressValue = 0;
             } else {
                 User5TasksCompletedQuarterProgressText = "None";
             }
@@ -1721,68 +749,6 @@ public class BehaviorVM : BaseViewModel {
             User5TasksCompletedWeekProgressColor = User5TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
             User5TasksCompletedMonthProgressColor = User5TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User5TasksCompletedQuarterProgressColor = User5TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-            totalRelease = 0;
-            if (releaseAmountDaily > 0) {
-                totalRelease += releaseAmountDaily;
-            }
-
-            if (releaseAmountWeekly > 0 && DateTime.Today.DayOfWeek == DayOfWeek.Saturday) {
-                totalRelease += releaseAmountWeekly;
-            }
-
-            if (releaseAmountMonthly > 0 && DateTime.Today.Month != DateTime.Today.AddDays(1).Month) {
-                totalRelease += releaseAmountMonthly;
-            }
-
-            if (releaseAmountQuarterly > 0) {
-                switch (DateTime.Today.AddDays(1).Month) {
-                case 1:
-                case 4:
-                case 7:
-                case 10:
-                    totalRelease += releaseAmountQuarterly;
-                    break;
-                }
-            }
-
-            if (totalRelease > 0) {
-                User5CashReleased = "+ $" + totalRelease;
-            } else {
-                User5CashReleased = "";
-            }
-
-            funds = 0;
-            try {
-                foreach (FinanceBlock financeBlock in ReferenceValues.JsonFinanceMaster.financeList) {
-                    if (financeBlock.Category == "User5 Fund") {
-                        try {
-                            if (financeBlock.AddSub == "SUB") {
-                                funds += int.Parse(financeBlock.Cost);
-                            } else {
-                                funds -= int.Parse(financeBlock.Cost);
-                            }
-                        } catch (Exception e) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "WARN",
-                                Module = "BehaviorVM",
-                                Description = e.ToString()
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                        }
-                    }
-                }
-            } catch (Exception) {
-                //blank
-            }
-
-            if (ReferenceValues.JsonSettingsMaster.User5Checked) {
-                User5CashAvailable = string.Format(culture, "{0:C}", funds);
-                User5CashAvailableColor = User5CashAvailable.StartsWith("-") ? "Red" : "CornflowerBlue";
-            } else {
-                User5CashAvailable = "";
-            }
 
             ProgressBarUser5 = ReferenceValues.JsonBehaviorMaster.User5Progress;
 
@@ -2908,22 +1874,6 @@ public class BehaviorVM : BaseViewModel {
         }
     }
 
-    public string User1CashAvailable {
-        get => _user1CashAvailable;
-        set {
-            _user1CashAvailable = value;
-            RaisePropertyChangedEvent("User1CashAvailable");
-        }
-    }
-
-    public string User1CashAvailableColor {
-        get => _user1CashAvailableColor;
-        set {
-            _user1CashAvailableColor = value;
-            RaisePropertyChangedEvent("User1CashAvailableColor");
-        }
-    }
-
     public int User1TasksCompletedDayProgressValue {
         get => _user1TasksCompletedDayProgressValue;
         set {
@@ -2985,22 +1935,6 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user1TasksCompletedQuarterProgressText = value;
             RaisePropertyChangedEvent("User1TasksCompletedQuarterProgressText");
-        }
-    }
-
-    public string User2CashAvailable {
-        get => _user2CashAvailable;
-        set {
-            _user2CashAvailable = value;
-            RaisePropertyChangedEvent("User2CashAvailable");
-        }
-    }
-
-    public string User2CashAvailableColor {
-        get => _user2CashAvailableColor;
-        set {
-            _user2CashAvailableColor = value;
-            RaisePropertyChangedEvent("User2CashAvailableColor");
         }
     }
 
@@ -3068,22 +2002,6 @@ public class BehaviorVM : BaseViewModel {
         }
     }
 
-    public string User3CashAvailable {
-        get => _user3CashAvailable;
-        set {
-            _user3CashAvailable = value;
-            RaisePropertyChangedEvent("User3CashAvailable");
-        }
-    }
-
-    public string User3CashAvailableColor {
-        get => _user3CashAvailableColor;
-        set {
-            _user3CashAvailableColor = value;
-            RaisePropertyChangedEvent("User3CashAvailableColor");
-        }
-    }
-
     public int User3TasksCompletedDayProgressValue {
         get => _user3TasksCompletedDayProgressValue;
         set {
@@ -3148,22 +2066,6 @@ public class BehaviorVM : BaseViewModel {
         }
     }
 
-    public string User4CashAvailableColor {
-        get => _user4CashAvailableColor;
-        set {
-            _user4CashAvailableColor = value;
-            RaisePropertyChangedEvent("User4CashAvailableColor");
-        }
-    }
-
-    public string User4CashAvailable {
-        get => _user4CashAvailable;
-        set {
-            _user4CashAvailable = value;
-            RaisePropertyChangedEvent("User4CashAvailable");
-        }
-    }
-
     public int User4TasksCompletedDayProgressValue {
         get => _user4TasksCompletedDayProgressValue;
         set {
@@ -3225,22 +2127,6 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user4TasksCompletedQuarterProgressText = value;
             RaisePropertyChangedEvent("User4TasksCompletedQuarterProgressText");
-        }
-    }
-
-    public string User5CashAvailable {
-        get => _user5CashAvailable;
-        set {
-            _user5CashAvailable = value;
-            RaisePropertyChangedEvent("User5CashAvailable");
-        }
-    }
-
-    public string User5CashAvailableColor {
-        get => _user5CashAvailableColor;
-        set {
-            _user5CashAvailableColor = value;
-            RaisePropertyChangedEvent("User5CashAvailableColor");
         }
     }
 
@@ -3505,46 +2391,6 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5TasksCompletedQuarterProgressColor = value;
             RaisePropertyChangedEvent("User5TasksCompletedQuarterProgressColor");
-        }
-    }
-
-    public string User1CashReleased {
-        get => _user1CashReleased;
-        set {
-            _user1CashReleased = value;
-            RaisePropertyChangedEvent("User1CashReleased");
-        }
-    }
-
-    public string User2CashReleased {
-        get => _user2CashReleased;
-        set {
-            _user2CashReleased = value;
-            RaisePropertyChangedEvent("User2CashReleased");
-        }
-    }
-
-    public string User3CashReleased {
-        get => _user3CashReleased;
-        set {
-            _user3CashReleased = value;
-            RaisePropertyChangedEvent("User3CashReleased");
-        }
-    }
-
-    public string User4CashReleased {
-        get => _user4CashReleased;
-        set {
-            _user4CashReleased = value;
-            RaisePropertyChangedEvent("User4CashReleased");
-        }
-    }
-
-    public string User5CashReleased {
-        get => _user5CashReleased;
-        set {
-            _user5CashReleased = value;
-            RaisePropertyChangedEvent("User5CashReleased");
         }
     }
 

@@ -29,58 +29,14 @@ public static class ReferenceValues {
 
     public static readonly List<string> CategorySpendingList = new() {
         "Alcohol",
-        "Animals/Pets",
-        "Billing",
-        "Carry Over",
         "Child Care",
-        "Coffee",
-        "Electric Bill",
         "Entertainment",
-        "Firearms",
-        "Gas Bill",
-        "Government",
         "Grocery",
         "Health",
-        "Home Improvement",
-        "Insurance",
-        "Interest",
-        "Internet Bill",
-        "Mortgage/Rent",
-        "Personal Care",
         "Petrol",
-        "Phone Bill",
         "Restaurant/Takeout",
-        "Services",
         "Shopping",
-        "Streaming Service",
-        "Stupid/Dumb",
-        "Trash Bill",
-        "Travel",
-        "Vehicle Payment",
-        "Water Bill",
-        "User1 Fund",
-        "User2 Fund",
-        "User3 Fund",
-        "User4 Fund",
-        "User5 Fund"
-    };
-
-    public static readonly List<string> CategoryProfitList = new() {
-        "Child Support",
-        "Gift",
-        "Government",
-        "Paycheck",
-        "Investment",
-        "Selling Assets",
-        "Other"
-    };
-
-    public static readonly List<string> CategoryTaskList = new() {
-        "User1 Fund",
-        "User2 Fund",
-        "User3 Fund",
-        "User4 Fund",
-        "User5 Fund"
+        "Travel"
     };
 
     public static readonly string DOCUMENTS_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";

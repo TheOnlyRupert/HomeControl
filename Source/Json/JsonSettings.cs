@@ -66,4 +66,12 @@ public class JsonSettings {
     public int GridY { get; set; }
     public string WeatherLocation { get; set; }
     public string GridId { get; set; }
+    public string FinanceBlock1 { get; set; }
+    public string FinanceBlock2 { get; set; }
+    public string FinanceBlock3 { get; set; }
+    public string FinanceBlock4 { get; set; }
+    public string FinanceBlock5 { get; set; }
+    public string FinanceBlock6 { get; set; }
+    public string FinanceBlock7 { get; set; }
+    public string FinanceBlock8 { get; set; }
 }

@@ -16,7 +16,7 @@ public class TasksQuarterlyVM : BaseViewModel {
         _room7TaskSelectedIndex, _room8TaskSelectedIndex, _room9TaskSelectedIndex, _room10TaskSelectedIndex, _room11TaskSelectedIndex, _room12TaskSelectedIndex,
         _room13TaskSelectedIndex, _room14TaskSelectedIndex, _room15TaskSelectedIndex, _room16TaskSelectedIndex, _roomSelectedIndex;
 
-    private string _taskHeaderText, _taskName, _imageSelected, _editVisibility, _fundAmount;
+    private string _taskHeaderText, _taskName, _imageSelected, _editVisibility;
 
     private ObservableCollection<Task> _taskList, _room1TaskList, _room2TaskList, _room3TaskList, _room4TaskList, _room5TaskList, _room6TaskList, _room7TaskList, _room8TaskList,
         _room9TaskList, _room10TaskList, _room11TaskList, _room12TaskList, _room13TaskList, _room14TaskList, _room15TaskList, _room16TaskList;
@@ -76,27 +76,22 @@ public class TasksQuarterlyVM : BaseViewModel {
             case 1:
                 TaskHeaderText = ReferenceValues.JsonSettingsMaster.User1Name + "'s " + currentQuarterText + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser1.ToString();
                 break;
             case 2:
                 TaskHeaderText = ReferenceValues.JsonSettingsMaster.User2Name + "'s " + currentQuarterText + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser2.ToString();
                 break;
             case 3:
                 TaskHeaderText = ReferenceValues.JsonSettingsMaster.User3Name + "'s " + currentQuarterText + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser3.ToString();
                 break;
             case 4:
                 TaskHeaderText = ReferenceValues.JsonSettingsMaster.User4Name + "'s " + currentQuarterText + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser4.ToString();
                 break;
             case 5:
                 TaskHeaderText = ReferenceValues.JsonSettingsMaster.User5Name + "'s " + currentQuarterText + " Tasks";
                 TaskList = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5;
-                FundAmount = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser5.ToString();
                 break;
             }
         } catch (Exception) {
@@ -318,88 +313,6 @@ public class TasksQuarterlyVM : BaseViewModel {
                 }
             } catch (Exception) {
                 // ignored
-            }
-
-            break;
-        case "saveFunds":
-            if (ReferenceValues.JsonSettingsMaster.DebugMode) {
-                switch (ReferenceValues.ActiveBehaviorUser) {
-                case 1:
-                    try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser1 = Convert.ToInt32(FundAmount);
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "TasksQuarterlyVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    break;
-                case 2:
-                    try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser2 = Convert.ToInt32(FundAmount);
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "TasksQuarterlyVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    break;
-                case 3:
-                    try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser3 = Convert.ToInt32(FundAmount);
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "TasksQuarterlyVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    break;
-                case 4:
-                    try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser4 = Convert.ToInt32(FundAmount);
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "TasksQuarterlyVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    break;
-                case 5:
-                    try {
-                        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.FundsQuarterlyUser5 = Convert.ToInt32(FundAmount);
-                    } catch (Exception e) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "WARN",
-                            Module = "TasksQuarterlyVM",
-                            Description = e.ToString()
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                    }
-
-                    break;
-                }
-
-                SaveJson();
-            } else {
-                ReferenceValues.SoundToPlay = "unable";
-                SoundDispatcher.PlaySound();
             }
 
             break;
@@ -1334,14 +1247,6 @@ public class TasksQuarterlyVM : BaseViewModel {
             RaisePropertyChangedEvent("Room14TaskSelectedIndex");
             RaisePropertyChangedEvent("Room15TaskSelectedIndex");
             RaisePropertyChangedEvent("Room16TaskSelectedIndex");
-        }
-    }
-
-    public string FundAmount {
-        get => _fundAmount;
-        set {
-            _fundAmount = VerifyInput.VerifyTextNumeric(value);
-            RaisePropertyChangedEvent("FundAmount");
         }
     }
 
