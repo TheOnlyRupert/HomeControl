@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Ports;
 using HomeControl.Source.Control;
@@ -26,18 +25,6 @@ public static class ReferenceValues {
     public const string VERSION_BRANCH = "release";
 
     public const bool EnableWeather = true;
-
-    public static readonly List<string> CategorySpendingList = new() {
-        "Alcohol",
-        "Child Care",
-        "Entertainment",
-        "Grocery",
-        "Health",
-        "Petrol",
-        "Restaurant/Takeout",
-        "Shopping",
-        "Travel"
-    };
 
     public static readonly string DOCUMENTS_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 

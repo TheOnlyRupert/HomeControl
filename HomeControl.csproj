@@ -95,9 +95,6 @@
         <Compile Include="Source\Modules\Behavior\TasksWeekly.xaml.cs">
             <DependentUpon>TasksWeekly.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\ButtonStackBottom.xaml.cs">
-            <DependentUpon>ButtonStackBottom.xaml</DependentUpon>
-        </Compile>
         <Compile Include="Source\Modules\Calendar\EditFilter.xaml.cs">
             <DependentUpon>EditFilter.xaml</DependentUpon>
         </Compile>
@@ -155,8 +152,8 @@
         <Compile Include="Source\Modules\Calendar\EditCalendar.xaml.cs">
             <DependentUpon>EditCalendar.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Source\Modules\ButtonStackTop.xaml.cs">
-            <DependentUpon>ButtonStackTop.xaml</DependentUpon>
+        <Compile Include="Source\Modules\ButtonStack.xaml.cs">
+            <DependentUpon>ButtonStack.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Settings.xaml.cs">
             <DependentUpon>Settings.xaml</DependentUpon>
@@ -184,7 +181,7 @@
         <Compile Include="Source\ViewModel\Behavior\TasksQuarterlyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksWeeklyVM.cs"/>
         <Compile Include="Source\ViewModel\BloodPressureVM.cs"/>
-        <Compile Include="Source\ViewModel\ButtonStackBottomVM.cs"/>
+        <Compile Include="Source\ViewModel\ButtonStackVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditFilterVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
         <Compile Include="Source\ViewModel\ChristmasVM.cs"/>
@@ -213,7 +210,6 @@
         <Compile Include="Source\ViewModel\Games\PictionaryVM.cs"/>
         <Compile Include="Source\ViewModel\Games\WordList.cs"/>
         <Compile Include="Source\ViewModel\MainWindowVM.cs"/>
-        <Compile Include="Source\ViewModel\ButtonStackTopVM.cs"/>
         <Compile Include="Source\ViewModel\SettingsVM.cs"/>
         <Compile Include="Source\ViewModel\WeatherVM.cs"/>
         <Compile Include="Source\ViewModel\Exercise\EditExerciseVM.cs"/>
@@ -234,7 +230,6 @@
         <Page Include="Source\Modules\Behavior\TasksMonthly.xaml"/>
         <Page Include="Source\Modules\Behavior\TasksQuarterly.xaml"/>
         <Page Include="Source\Modules\Behavior\TasksWeekly.xaml"/>
-        <Page Include="Source\Modules\ButtonStackBottom.xaml"/>
         <Page Include="Source\Modules\Calendar\EditFilter.xaml"/>
         <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
         <Page Include="Source\Modules\Christmas.xaml"/>
@@ -254,7 +249,7 @@
         <Page Include="Source\Modules\Behavior\EditBehavior.xaml"/>
         <Page Include="Source\Modules\Calendar\Calendar.xaml"/>
         <Page Include="Source\Modules\Calendar\EditCalendar.xaml"/>
-        <Page Include="Source\Modules\ButtonStackTop.xaml"/>
+        <Page Include="Source\Modules\ButtonStack.xaml"/>
         <Page Include="Source\Modules\Settings.xaml"/>
         <Page Include="Source\Modules\Finances\Finances.xaml"/>
         <Page Include="Source\Modules\Finances\EditFinances.xaml"/>

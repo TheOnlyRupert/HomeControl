@@ -21,11 +21,11 @@ public class SettingsVM : BaseViewModel {
         _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
         _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected, _weatherLocation, _gridId, _financeBlock1, _financeBlock2, _financeBlock3,
-        _financeBlock4, _financeBlock5, _financeBlock6, _financeBlock7, _financeBlock8;
+        _financeBlock4, _financeBlock5, _financeBlock6, _financeBlock7, _financeBlock8, _financeBlock9;
 
     private double _weatherLat, _weatherLon;
 
-    private int gridX, gridY;
+    private int gridX, gridY, _financesTotal;
 
     public SettingsVM() {
         TrashDayList = new List<string>(new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "DISABLED" });
@@ -103,6 +103,8 @@ public class SettingsVM : BaseViewModel {
         FinanceBlock6 = ReferenceValues.JsonSettingsMaster.FinanceBlock6;
         FinanceBlock7 = ReferenceValues.JsonSettingsMaster.FinanceBlock7;
         FinanceBlock8 = ReferenceValues.JsonSettingsMaster.FinanceBlock8;
+        FinanceBlock9 = ReferenceValues.JsonSettingsMaster.FinanceBlock9;
+        FinancesTotal = ReferenceValues.JsonSettingsMaster.FinancesTotal;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -182,6 +184,7 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.FinanceBlock6 = FinanceBlock6;
             ReferenceValues.JsonSettingsMaster.FinanceBlock7 = FinanceBlock7;
             ReferenceValues.JsonSettingsMaster.FinanceBlock8 = FinanceBlock8;
+            ReferenceValues.JsonSettingsMaster.FinanceBlock9 = FinanceBlock9;
 
             try {
                 FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster), true);
@@ -817,6 +820,22 @@ public class SettingsVM : BaseViewModel {
         set {
             _financeBlock8 = value;
             RaisePropertyChangedEvent("FinanceBlock8");
+        }
+    }
+
+    public string FinanceBlock9 {
+        get => _financeBlock9;
+        set {
+            _financeBlock9 = value;
+            RaisePropertyChangedEvent("FinanceBlock9");
+        }
+    }
+
+    public int FinancesTotal {
+        get => _financesTotal;
+        set {
+            _financesTotal = value;
+            RaisePropertyChangedEvent("FinancesTotal");
         }
     }
 

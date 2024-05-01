@@ -94,6 +94,8 @@
 
                 <TextBlock Grid.Row="0" Text="Add/Edit Finance" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
+                <Frame Grid.Row="1" Source="../../../Source/Modules/Finances/Finances.xaml" Focusable="False"/>
+
                 <StackPanel Grid.Row="2">
                     <TextBlock Text="Location/Business Name" FontSize="24" Foreground="White"/>
                     <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
@@ -106,7 +108,7 @@
 
                 <StackPanel Grid.Row="4">
                     <TextBlock Text="Category" FontSize="24" Foreground="White"/>
-                    <ComboBox FontSize="24" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CategorySelected}" control:SelectTextOnFocus.Active="True"/>
+                    <ComboBox FontSize="24" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CategorySelected}" SelectedIndex="{Binding CategoryID}" control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
                 <Grid Grid.Row="5">

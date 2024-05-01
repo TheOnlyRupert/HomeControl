@@ -20,23 +20,8 @@
                         <ColumnDefinition Width="Auto" MinWidth="96"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Column="0" Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Frame Grid.Column="1" Source="Source/Modules/ButtonStackTop.xaml" Focusable="False"/>
-                    </Grid>
-
-                    <Frame Grid.Column="0" Grid.Row="1" Source="Source/Modules/ButtonStackBottom.xaml" Focusable="False"/>
-
-                    <Frame Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
+                    <Frame Grid.Column="0" Source="Source/Modules/ButtonStack.xaml" Focusable="False"/>
+                    <Frame Grid.Column="1" Source="Source/Modules/Timer/Timer.xaml" Focusable="False"/>
                 </Grid>
 
                 <Frame Grid.Column="0" Grid.Row="1" Source="Source/Modules/Calendar/Calendar.xaml" Focusable="False"/>
@@ -62,7 +47,25 @@
                         </Grid.RowDefinitions>
 
                         <Frame Grid.Row="0" Source="Source/Modules/Christmas.xaml" Focusable="False" Visibility="{Binding ChristmasVisibility}"/>
-                        <Frame Grid.Row="1" Source="Source/Modules/Finances/Finances.xaml" Focusable="False"/>
+
+                        <Frame Grid.Row="1" Source="Source/Modules/Finances/Finances.xaml" Focusable="False" Margin="4 4 4 0"/>
+                        <Button Grid.Row="1" Command="{Binding ButtonCommand}" CommandParameter="finances" Margin="4 4 4 0">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
+                                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </Grid>
 
                     <Frame Grid.Column="1" Grid.Row="0" Source="Source/Modules/Hvac/Hvac.xaml" Focusable="False"/>

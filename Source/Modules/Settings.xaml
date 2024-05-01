@@ -2,403 +2,277 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control"
         mc:Ignorable="d" Height="1000" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
         FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
-    <Grid Margin="8 4">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <ScrollViewer>
+        <Grid Margin="8 4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0">
-            <TextBlock Text="User 1 Legal Name" Foreground="White"/>
-            <TextBox Name="MainFocusItem" Text="{Binding User1NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBlock Text="User 1 Nickname" Foreground="White"/>
-            <TextBox Text="{Binding User1Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="0">
-            <TextBlock Text="User 1 Phone (main)" Foreground="White"/>
-            <TextBox Text="{Binding User1Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="3" Grid.Row="0">
-            <TextBlock Text="User 1 Phone (alt)" Foreground="White"/>
-            <TextBox Text="{Binding User1Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="1">
-            <TextBlock Text="User 2 Legal Name" Foreground="White"/>
-            <TextBox Text="{Binding User2NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBlock Text="User 2 Nickname" Foreground="White"/>
-            <TextBox Text="{Binding User2Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="User 2 Phone (main)" Foreground="White"/>
-            <TextBox Text="{Binding User2Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="3" Grid.Row="1">
-            <TextBlock Text="User 2 Phone (alt)" Foreground="White"/>
-            <TextBox Text="{Binding User2Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="2">
-            <TextBlock Text="Child 1 Legal Name" Foreground="White"/>
-            <TextBox Text="{Binding User3NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="2">
-            <TextBlock Text="Child 2 Legal Name" Foreground="White"/>
-            <TextBox Text="{Binding User4NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="2">
-            <TextBlock Text="Child 3 Legal Name" Foreground="White"/>
-            <TextBox Text="{Binding User5NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="3">
-            <TextBlock Text="Child 1 Nickname" Foreground="White"/>
-            <TextBox Text="{Binding User3Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="3">
-            <TextBlock Text="Child 2 Nickname" Foreground="White"/>
-            <TextBox Text="{Binding User4Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="3">
-            <TextBlock Text="Child 3 Nickname" Foreground="White"/>
-            <TextBox Text="{Binding User5Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
-            <TextBlock Text="Pet Names" Foreground="White"/>
-            <TextBox Text="{Binding PetNames, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="5">
-            <TextBlock Text="Neighbor 1 Location" Foreground="White"/>
-            <TextBox Text="{Binding Neighbor1Location, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="5">
-            <TextBlock Text="Neighbor 1 Name" Foreground="White"/>
-            <TextBox Text="{Binding Neighbor1Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="5">
-            <TextBlock Text="Neighbor 1 Phone (main)" Foreground="White"/>
-            <TextBox Text="{Binding Neighbor1Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="3" Grid.Row="5">
-            <TextBlock Text="Neighbor 1 Phone (alt)" Foreground="White"/>
-            <TextBox Text="{Binding Neighbor1Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="6">
-            <TextBlock Text="Neighbor 2 Location" Foreground="White"/>
-            <TextBox Text="{Binding Neighbor2Location, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="6">
-            <TextBlock Text="Neighbor 2 Name" Foreground="White"/>
-            <TextBox Text="{Binding Neighbor2Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="6">
-            <TextBlock Text="Neighbor 2 Phone (main)" Foreground="White"/>
-            <TextBox Text="{Binding Neighbor2Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="3" Grid.Row="6">
-            <TextBlock Text="Neighbor 2 Phone (alt)" Foreground="White"/>
-            <TextBox Text="{Binding Neighbor2Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="7">
-            <TextBlock Text="Address Line 1" Foreground="White"/>
-            <TextBox Text="{Binding AddressLine1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="7">
-            <TextBlock Text="Address Line 2" Foreground="White"/>
-            <TextBox Text="{Binding AddressLine2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2">
-            <TextBlock Text="Fire Extinguisher Location" Foreground="White"/>
-            <TextBox Text="{Binding FireExtinguisherLocation, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="8">
-            <TextBlock Text="Alarm Code" Foreground="White"/>
-            <TextBox Text="{Binding AlarmCode, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="9">
-            <TextBlock Text="Hospital Address Line 1" Foreground="White"/>
-            <TextBox Text="{Binding HospitalAddressLine1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="9">
-            <TextBlock Text="Hospital Address Line 2" Foreground="White"/>
-            <TextBox Text="{Binding HospitalAddressLine2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="10">
-            <TextBlock Text="Wifi Guest Name" Foreground="White"/>
-            <TextBox Text="{Binding WifiGuestName, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="10">
-            <TextBlock Text="Wifi Guest Password" Foreground="White"/>
-            <TextBox Text="{Binding WifiGuestPassword, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="11">
-            <TextBlock Text="Wifi Private Name" Foreground="White"/>
-            <TextBox Text="{Binding WifiPrivateName, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="11">
-            <TextBlock Text="Wifi Private Password" Foreground="White"/>
-            <TextBox Text="{Binding WifiPrivatePassword, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="12">
-            <TextBlock Text="Police Name" Foreground="White"/>
-            <TextBox Text="{Binding PoliceName, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="12">
-            <TextBlock Text="Police Phone" Foreground="White"/>
-            <TextBox Text="{Binding PolicePhone, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="13">
-            <TextBlock Text="Emergency Contact 1 Name" Foreground="White"/>
-            <TextBox Text="{Binding EmergencyContact1Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="13">
-            <TextBlock Text="Emergency Contact 1 Phone (main)" Foreground="White"/>
-            <TextBox Text="{Binding EmergencyContact1Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="13">
-            <TextBlock Text="Emergency Contact 1 Phone (alt)" Foreground="White"/>
-            <TextBox Text="{Binding EmergencyContact1Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="14">
-            <TextBlock Text="Emergency Contact 2 Name" Foreground="White"/>
-            <TextBox Text="{Binding EmergencyContact2Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="14">
-            <TextBlock Text="Emergency Contact 2 Phone (main)" Foreground="White"/>
-            <TextBox Text="{Binding EmergencyContact2Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="14">
-            <TextBlock Text="Emergency Contact 2 Phone (alt)" Foreground="White"/>
-            <TextBox Text="{Binding EmergencyContact2Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="15">
-            <TextBlock Text="HVAC ComPort" Foreground="White"/>
-            <TextBox Text="{Binding ComPort, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="16">
-            <TextBlock Text="Trash Pickup Night" Foreground="White"/>
-            <ComboBox ItemsSource="{Binding TrashDayList}" SelectedItem="{Binding TrashDaySelected, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="15" Grid.RowSpan="2">
-            <CheckBox Content="Debug Mode" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsDebugModeChecked}"/>
-            <CheckBox Content="Use Metric Units" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsMetricUnitsChecked}"/>
-            <CheckBox Content="Use Easter Eggs" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsEasterEggsChecked}"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="15" Grid.RowSpan="2">
-            <CheckBox Content="Trash Day Holidays" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding UseTrashDayHolidays}"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2">
-            <TextBlock Text="National Weather Forcast User Agent (Email)" Foreground="White"/>
-            <TextBox Text="{Binding UserAgent, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <Button Grid.Column="0" Grid.Row="18" Content="Current Location" Command="{Binding ButtonCommand}" CommandParameter="location" Margin="0 0 4 0">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-
-        <StackPanel Grid.Column="1" Grid.Row="18">
-            <TextBlock Text="Weather Latitude" Foreground="White"/>
-            <TextBox Text="{Binding WeatherLat, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="18">
-            <TextBlock Text="Weather Longitude" Foreground="White"/>
-            <TextBox Text="{Binding WeatherLon, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <Button Grid.Column="3" Grid.Row="18" Content="Generate" Command="{Binding ButtonCommand}" CommandParameter="generate" Margin="4 0 0 0">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
-
-        <StackPanel Grid.Column="0" Grid.Row="19">
-            <TextBlock Text="GridX (automatic/override)" Foreground="White"/>
-            <TextBox Text="{Binding GridX, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="20">
-            <TextBlock Text="Finance Block 1" Foreground="White"/>
-            <TextBox Text="{Binding FinanceBlock1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="20">
-            <TextBlock Text="Finance Block 2" Foreground="White"/>
-            <TextBox Text="{Binding FinanceBlock2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="20">
-            <TextBlock Text="Finance Block 3" Foreground="White"/>
-            <TextBox Text="{Binding FinanceBlock3, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="3" Grid.Row="21">
-            <TextBlock Text="Finance Block 4" Foreground="White"/>
-            <TextBox Text="{Binding FinanceBlock4, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="21">
-            <TextBlock Text="Finance Block 5" Foreground="White"/>
-            <TextBox Text="{Binding FinanceBlock5, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="21">
-            <TextBlock Text="Finance Block 6" Foreground="White"/>
-            <TextBox Text="{Binding FinanceBlock6, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="21">
-            <TextBlock Text="Finance Block 7" Foreground="White"/>
-            <TextBox Text="{Binding FinanceBlock7, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="3" Grid.Row="21">
-            <TextBlock Text="Finance Block 8" Foreground="White"/>
-            <TextBox Text="{Binding FinanceBlock8, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="22">
-            <TextBlock Text="GridY (automatic/override)" Foreground="White"/>
-            <TextBox Text="{Binding GridY, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Grid.Row="22">
-            <TextBlock Text="GridID (automatic/override)" Foreground="White"/>
-            <TextBox Text="{Binding GridId, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="3" Grid.Row="22">
-            <TextBlock Text="Location (automatic/override)" Foreground="White"/>
-            <TextBox Text="{Binding WeatherLocation, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="23" Grid.ColumnSpan="4" Orientation="Horizontal">
-            <CheckBox Content="User1 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User1Checked}"/>
-            <CheckBox Content="User2 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User2Checked}"/>
-            <CheckBox Content="User3 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User3Checked}"/>
-            <CheckBox Content="User4 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User4Checked}"/>
-            <CheckBox Content="User5 Funds" Foreground="White" FontSize="16" Margin="0 4 0 0" IsChecked="{Binding User5Checked}"/>
-        </StackPanel>
-
-        <StackPanel Grid.Column="0" Grid.Row="24" Grid.ColumnSpan="4" Orientation="Horizontal">
-            <CheckBox Content="User1 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User1BehaviorChecked}"/>
-            <CheckBox Content="User2 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User2BehaviorChecked}"/>
-            <CheckBox Content="User3 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User3BehaviorChecked}"/>
-            <CheckBox Content="User4 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User4BehaviorChecked}"/>
-            <CheckBox Content="User5 Behavior" Foreground="White" FontSize="16" Margin="0 4 0 0" IsChecked="{Binding User5BehaviorChecked}"/>
-        </StackPanel>
-
-        <Grid Grid.Column="0" Grid.Row="25" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Save" MinWidth="128" FontSize="24" Command="{Binding ButtonCommand}" CommandParameter="save">
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="User 1 Legal Name" Foreground="White"/>
+                <TextBox Name="MainFocusItem" Text="{Binding User1NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <TextBlock Text="User 1 Nickname" Foreground="White"/>
+                <TextBox Text="{Binding User1Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="0">
+                <TextBlock Text="User 1 Phone (main)" Foreground="White"/>
+                <TextBox Text="{Binding User1Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="0">
+                <TextBlock Text="User 1 Phone (alt)" Foreground="White"/>
+                <TextBox Text="{Binding User1Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="1">
+                <TextBlock Text="User 2 Legal Name" Foreground="White"/>
+                <TextBox Text="{Binding User2NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <TextBlock Text="User 2 Nickname" Foreground="White"/>
+                <TextBox Text="{Binding User2Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="1">
+                <TextBlock Text="User 2 Phone (main)" Foreground="White"/>
+                <TextBox Text="{Binding User2Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="1">
+                <TextBlock Text="User 2 Phone (alt)" Foreground="White"/>
+                <TextBox Text="{Binding User2Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="2">
+                <TextBlock Text="Child 1 Legal Name" Foreground="White"/>
+                <TextBox Text="{Binding User3NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="2">
+                <TextBlock Text="Child 2 Legal Name" Foreground="White"/>
+                <TextBox Text="{Binding User4NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="2">
+                <TextBlock Text="Child 3 Legal Name" Foreground="White"/>
+                <TextBox Text="{Binding User5NameLegal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="3">
+                <TextBlock Text="Child 1 Nickname" Foreground="White"/>
+                <TextBox Text="{Binding User3Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="3">
+                <TextBlock Text="Child 2 Nickname" Foreground="White"/>
+                <TextBox Text="{Binding User4Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="3">
+                <TextBlock Text="Child 3 Nickname" Foreground="White"/>
+                <TextBox Text="{Binding User5Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
+                <TextBlock Text="Pet Names" Foreground="White"/>
+                <TextBox Text="{Binding PetNames, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="5">
+                <TextBlock Text="Neighbor 1 Location" Foreground="White"/>
+                <TextBox Text="{Binding Neighbor1Location, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="5">
+                <TextBlock Text="Neighbor 1 Name" Foreground="White"/>
+                <TextBox Text="{Binding Neighbor1Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="5">
+                <TextBlock Text="Neighbor 1 Phone (main)" Foreground="White"/>
+                <TextBox Text="{Binding Neighbor1Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="5">
+                <TextBlock Text="Neighbor 1 Phone (alt)" Foreground="White"/>
+                <TextBox Text="{Binding Neighbor1Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="6">
+                <TextBlock Text="Neighbor 2 Location" Foreground="White"/>
+                <TextBox Text="{Binding Neighbor2Location, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="6">
+                <TextBlock Text="Neighbor 2 Name" Foreground="White"/>
+                <TextBox Text="{Binding Neighbor2Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="6">
+                <TextBlock Text="Neighbor 2 Phone (main)" Foreground="White"/>
+                <TextBox Text="{Binding Neighbor2Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="6">
+                <TextBlock Text="Neighbor 2 Phone (alt)" Foreground="White"/>
+                <TextBox Text="{Binding Neighbor2Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="7">
+                <TextBlock Text="Address Line 1" Foreground="White"/>
+                <TextBox Text="{Binding AddressLine1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="7">
+                <TextBlock Text="Address Line 2" Foreground="White"/>
+                <TextBox Text="{Binding AddressLine2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2">
+                <TextBlock Text="Fire Extinguisher Location" Foreground="White"/>
+                <TextBox Text="{Binding FireExtinguisherLocation, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="8">
+                <TextBlock Text="Alarm Code" Foreground="White"/>
+                <TextBox Text="{Binding AlarmCode, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="9">
+                <TextBlock Text="Hospital Address Line 1" Foreground="White"/>
+                <TextBox Text="{Binding HospitalAddressLine1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="9">
+                <TextBlock Text="Hospital Address Line 2" Foreground="White"/>
+                <TextBox Text="{Binding HospitalAddressLine2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="10">
+                <TextBlock Text="Wifi Guest Name" Foreground="White"/>
+                <TextBox Text="{Binding WifiGuestName, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="10">
+                <TextBlock Text="Wifi Guest Password" Foreground="White"/>
+                <TextBox Text="{Binding WifiGuestPassword, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="11">
+                <TextBlock Text="Wifi Private Name" Foreground="White"/>
+                <TextBox Text="{Binding WifiPrivateName, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="11">
+                <TextBlock Text="Wifi Private Password" Foreground="White"/>
+                <TextBox Text="{Binding WifiPrivatePassword, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="12">
+                <TextBlock Text="Police Name" Foreground="White"/>
+                <TextBox Text="{Binding PoliceName, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="12">
+                <TextBlock Text="Police Phone" Foreground="White"/>
+                <TextBox Text="{Binding PolicePhone, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="13">
+                <TextBlock Text="Emergency Contact 1 Name" Foreground="White"/>
+                <TextBox Text="{Binding EmergencyContact1Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="13">
+                <TextBlock Text="Emergency Contact 1 Phone (main)" Foreground="White"/>
+                <TextBox Text="{Binding EmergencyContact1Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="13">
+                <TextBlock Text="Emergency Contact 1 Phone (alt)" Foreground="White"/>
+                <TextBox Text="{Binding EmergencyContact1Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="14">
+                <TextBlock Text="Emergency Contact 2 Name" Foreground="White"/>
+                <TextBox Text="{Binding EmergencyContact2Name, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="14">
+                <TextBlock Text="Emergency Contact 2 Phone (main)" Foreground="White"/>
+                <TextBox Text="{Binding EmergencyContact2Phone1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="14">
+                <TextBlock Text="Emergency Contact 2 Phone (alt)" Foreground="White"/>
+                <TextBox Text="{Binding EmergencyContact2Phone2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="15">
+                <TextBlock Text="HVAC ComPort" Foreground="White"/>
+                <TextBox Text="{Binding ComPort, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="16">
+                <TextBlock Text="Trash Pickup Night" Foreground="White"/>
+                <ComboBox ItemsSource="{Binding TrashDayList}" SelectedItem="{Binding TrashDaySelected, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="15" Grid.RowSpan="2">
+                <CheckBox Content="Debug Mode" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsDebugModeChecked}"/>
+                <CheckBox Content="Use Metric Units" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsMetricUnitsChecked}"/>
+                <CheckBox Content="Use Easter Eggs" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding IsEasterEggsChecked}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="15" Grid.RowSpan="2">
+                <CheckBox Content="Trash Day Holidays" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding UseTrashDayHolidays}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2">
+                <TextBlock Text="National Weather Forcast User Agent (Email)" Foreground="White"/>
+                <TextBox Text="{Binding UserAgent, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <Button Grid.Column="0" Grid.Row="18" Content="Current Location" Command="{Binding ButtonCommand}" CommandParameter="location" Margin="0 0 4 0">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -406,7 +280,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
@@ -416,7 +290,17 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Column="2" Content="Exit" FontSize="24" MinWidth="128" IsCancel="True">
+            <StackPanel Grid.Column="1" Grid.Row="18">
+                <TextBlock Text="Weather Latitude" Foreground="White"/>
+                <TextBox Text="{Binding WeatherLat, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="18">
+                <TextBlock Text="Weather Longitude" Foreground="White"/>
+                <TextBox Text="{Binding WeatherLon, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <Button Grid.Column="3" Grid.Row="18" Content="Generate" Command="{Binding ButtonCommand}" CommandParameter="generate" Margin="4 0 0 0">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -424,7 +308,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1">
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
@@ -433,6 +317,136 @@
                     </Style>
                 </Button.Style>
             </Button>
+
+            <StackPanel Grid.Column="0" Grid.Row="19">
+                <TextBlock Text="GridX (automatic/override)" Foreground="White"/>
+                <TextBox Text="{Binding GridX, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="19">
+                <TextBlock Text="GridY (automatic/override)" Foreground="White"/>
+                <TextBox Text="{Binding GridY, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="19">
+                <TextBlock Text="GridID (automatic/override)" Foreground="White"/>
+                <TextBox Text="{Binding GridId, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="19">
+                <TextBlock Text="Location (automatic/override)" Foreground="White"/>
+                <TextBox Text="{Binding WeatherLocation, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="20">
+                <TextBlock Text="Finance Block 1" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock1, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="20">
+                <TextBlock Text="Finance Block 2" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock2, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="20">
+                <TextBlock Text="Finance Block 3" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock3, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="20">
+                <TextBlock Text="Finance Block 4" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock4, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="21">
+                <TextBlock Text="Finance Block 5" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock5, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="21">
+                <TextBlock Text="Finance Block 6" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock6, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="21">
+                <TextBlock Text="Finance Block 7" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock7, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Grid.Row="21">
+                <TextBlock Text="Finance Block 8" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock8, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="22">
+                <TextBlock Text="Finance Block 9" Foreground="White"/>
+                <TextBox Text="{Binding FinanceBlock9, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="22">
+                <TextBlock Text="Finances Total (Monthly)" Foreground="White"/>
+                <TextBox Text="{Binding FinancesTotal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="24" Grid.ColumnSpan="4" Orientation="Horizontal">
+                <CheckBox Content="User1 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User1Checked}"/>
+                <CheckBox Content="User2 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User2Checked}"/>
+                <CheckBox Content="User3 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User3Checked}"/>
+                <CheckBox Content="User4 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User4Checked}"/>
+                <CheckBox Content="User5 Funds" Foreground="White" FontSize="16" Margin="0 4 0 0" IsChecked="{Binding User5Checked}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="0" Grid.Row="25" Grid.ColumnSpan="4" Orientation="Horizontal">
+                <CheckBox Content="User1 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User1BehaviorChecked}"/>
+                <CheckBox Content="User2 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User2BehaviorChecked}"/>
+                <CheckBox Content="User3 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User3BehaviorChecked}"/>
+                <CheckBox Content="User4 Behavior" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User4BehaviorChecked}"/>
+                <CheckBox Content="User5 Behavior" Foreground="White" FontSize="16" Margin="0 4 0 0" IsChecked="{Binding User5BehaviorChecked}"/>
+            </StackPanel>
+
+            <Grid Grid.Column="0" Grid.Row="26" Grid.ColumnSpan="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Save" MinWidth="128" FontSize="24" Command="{Binding ButtonCommand}" CommandParameter="save">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Grid.Column="2" Content="Exit" FontSize="24" MinWidth="128" IsCancel="True">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </Window>

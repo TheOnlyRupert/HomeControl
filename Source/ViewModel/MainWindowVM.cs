@@ -9,11 +9,13 @@ using System.Net;
 using System.Reflection;
 using System.Resources;
 using System.Text.Json;
+using System.Windows.Input;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
+using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Games.Tamagotchi;
 using HomeControl.Source.ViewModel.Hvac;
@@ -125,6 +127,25 @@ public class MainWindowVM : BaseViewModel {
         void activityTimer_OnActive(object sender, EventArgs e) {
             simpleMessenger.PushMessage("ScreenSaverOff", null);
             ReferenceValues.ScreensaverMaster.Stop();
+        }
+    }
+
+    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+
+    private void ButtonCommandLogic(object param) {
+        if (!ReferenceValues.LockUI) {
+            switch (param) {
+            case "finances":
+                EditFinances editFinances = new();
+                editFinances.ShowDialog();
+                editFinances.Close();
+
+                simpleMessenger.PushMessage("RefreshFinances", null);
+                break;
+            }
+        } else {
+            ReferenceValues.SoundToPlay = "locked";
+            SoundDispatcher.PlaySound();
         }
     }
 

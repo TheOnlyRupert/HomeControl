@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Text.Json;
-using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
-using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Finances;
 
 public class FinancesVM : BaseViewModel {
     private readonly CrossViewMessenger simpleMessenger;
-    private string _textBlock1, _textBlock2, _textBlock3, _textBlock4, _textBlock5, _textBlock6, _textBlock7, _textBlock8;
+
+    private int _financesTotal;
+    private double _progressTotal, _progressBlock1, _progressBlock2, _progressBlock3, _progressBlock4, _progressBlock5, _progressBlock6, _progressBlock7, _progressBlock8, _progressBlock9;
+
+    private string _textBlock1, _textBlock2, _textBlock3, _textBlock4, _textBlock5, _textBlock6, _textBlock7, _textBlock8, _textBlock9, _progressTotalText, _progressBlockText1, _progressBlockText2,
+        _progressBlockText3, _progressBlockText4, _progressBlockText5, _progressBlockText6, _progressBlockText7, _progressBlockText8, _progressBlockText9;
 
     public FinancesVM() {
         try {
@@ -32,35 +35,48 @@ public class FinancesVM : BaseViewModel {
         TextBlock6 = ReferenceValues.JsonSettingsMaster.FinanceBlock6;
         TextBlock7 = ReferenceValues.JsonSettingsMaster.FinanceBlock7;
         TextBlock8 = ReferenceValues.JsonSettingsMaster.FinanceBlock8;
+        TextBlock9 = ReferenceValues.JsonSettingsMaster.FinanceBlock9;
+
+        RefreshFinances();
 
         simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
-
-    private void ButtonCommandLogic(object param) {
-        if (!ReferenceValues.LockUI) {
-            switch (param) {
-            case "edit":
-                EditFinances editFinances = new();
-                editFinances.ShowDialog();
-                editFinances.Close();
-
-                simpleMessenger.PushMessage("RefreshFinances", null);
-                break;
-            }
-        } else {
-            ReferenceValues.SoundToPlay = "locked";
-            SoundDispatcher.PlaySound();
-        }
-    }
-
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
         case "RefreshFinances":
+            RefreshFinances();
+
             break;
         }
+    }
+
+    private void RefreshFinances() {
+        ProgressTotalText = "$" + (ReferenceValues.JsonSettingsMaster.FinancesTotal - ReferenceValues.JsonFinanceMaster.Category1Total - ReferenceValues.JsonFinanceMaster.Category2Total -
+                                   ReferenceValues.JsonFinanceMaster.Category3Total - ReferenceValues.JsonFinanceMaster.Category4Total - ReferenceValues.JsonFinanceMaster.Category5Total -
+                                   ReferenceValues.JsonFinanceMaster.Category6Total - ReferenceValues.JsonFinanceMaster.Category7Total - ReferenceValues.JsonFinanceMaster.Category8Total -
+                                   ReferenceValues.JsonFinanceMaster.Category9Total);
+        ProgressTotal = 25;
+
+        ProgressBlock1 = ReferenceValues.JsonFinanceMaster.Category1Percentage;
+        ProgressBlockText1 = "$" + ReferenceValues.JsonFinanceMaster.Category1Total;
+        ProgressBlock2 = ReferenceValues.JsonFinanceMaster.Category2Percentage;
+        ProgressBlockText2 = "$" + ReferenceValues.JsonFinanceMaster.Category2Total;
+        ProgressBlock3 = ReferenceValues.JsonFinanceMaster.Category3Percentage;
+        ProgressBlockText3 = "$" + ReferenceValues.JsonFinanceMaster.Category3Total;
+        ProgressBlock4 = ReferenceValues.JsonFinanceMaster.Category4Percentage;
+        ProgressBlockText4 = "$" + ReferenceValues.JsonFinanceMaster.Category4Total;
+        ProgressBlock5 = ReferenceValues.JsonFinanceMaster.Category5Percentage;
+        ProgressBlockText5 = "$" + ReferenceValues.JsonFinanceMaster.Category5Total;
+        ProgressBlock6 = ReferenceValues.JsonFinanceMaster.Category6Percentage;
+        ProgressBlockText6 = "$" + ReferenceValues.JsonFinanceMaster.Category6Total;
+        ProgressBlock7 = ReferenceValues.JsonFinanceMaster.Category7Percentage;
+        ProgressBlockText7 = "$" + ReferenceValues.JsonFinanceMaster.Category7Total;
+        ProgressBlock8 = ReferenceValues.JsonFinanceMaster.Category8Percentage;
+        ProgressBlockText8 = "$" + ReferenceValues.JsonFinanceMaster.Category8Total;
+        ProgressBlock9 = ReferenceValues.JsonFinanceMaster.Category9Percentage;
+        ProgressBlockText9 = "$" + ReferenceValues.JsonFinanceMaster.Category9Total;
     }
 
     #region Fields
@@ -126,6 +142,182 @@ public class FinancesVM : BaseViewModel {
         set {
             _textBlock8 = value;
             RaisePropertyChangedEvent("TextBlock8");
+        }
+    }
+
+    public string TextBlock9 {
+        get => _textBlock9;
+        set {
+            _textBlock9 = value;
+            RaisePropertyChangedEvent("TextBlock9");
+        }
+    }
+
+    public int FinancesTotal {
+        get => _financesTotal;
+        set {
+            _financesTotal = value;
+            RaisePropertyChangedEvent("FinancesTotal");
+        }
+    }
+
+    public double ProgressTotal {
+        get => _progressTotal;
+        set {
+            _progressTotal = value;
+            RaisePropertyChangedEvent("ProgressTotal");
+        }
+    }
+
+    public string ProgressTotalText {
+        get => _progressTotalText;
+        set {
+            _progressTotalText = value;
+            RaisePropertyChangedEvent("ProgressTotalText");
+        }
+    }
+
+    public double ProgressBlock1 {
+        get => _progressBlock1;
+        set {
+            _progressBlock1 = value;
+            RaisePropertyChangedEvent("ProgressBlock1");
+        }
+    }
+
+    public string ProgressBlockText1 {
+        get => _progressBlockText1;
+        set {
+            _progressBlockText1 = value;
+            RaisePropertyChangedEvent("ProgressBlockText1");
+        }
+    }
+
+    public double ProgressBlock2 {
+        get => _progressBlock2;
+        set {
+            _progressBlock2 = value;
+            RaisePropertyChangedEvent("ProgressBlock2");
+        }
+    }
+
+    public string ProgressBlockText2 {
+        get => _progressBlockText2;
+        set {
+            _progressBlockText2 = value;
+            RaisePropertyChangedEvent("ProgressBlockText2");
+        }
+    }
+
+    public double ProgressBlock3 {
+        get => _progressBlock3;
+        set {
+            _progressBlock3 = value;
+            RaisePropertyChangedEvent("ProgressBlock3");
+        }
+    }
+
+    public string ProgressBlockText3 {
+        get => _progressBlockText3;
+        set {
+            _progressBlockText3 = value;
+            RaisePropertyChangedEvent("ProgressBlockText3");
+        }
+    }
+
+    public double ProgressBlock4 {
+        get => _progressBlock4;
+        set {
+            _progressBlock4 = value;
+            RaisePropertyChangedEvent("ProgressBlock4");
+        }
+    }
+
+    public string ProgressBlockText4 {
+        get => _progressBlockText4;
+        set {
+            _progressBlockText4 = value;
+            RaisePropertyChangedEvent("ProgressBlockText4");
+        }
+    }
+
+    public double ProgressBlock5 {
+        get => _progressBlock5;
+        set {
+            _progressBlock5 = value;
+            RaisePropertyChangedEvent("ProgressBlock5");
+        }
+    }
+
+    public string ProgressBlockText5 {
+        get => _progressBlockText5;
+        set {
+            _progressBlockText5 = value;
+            RaisePropertyChangedEvent("ProgressBlockText5");
+        }
+    }
+
+    public double ProgressBlock6 {
+        get => _progressBlock6;
+        set {
+            _progressBlock6 = value;
+            RaisePropertyChangedEvent("ProgressBlock6");
+        }
+    }
+
+    public string ProgressBlockText6 {
+        get => _progressBlockText6;
+        set {
+            _progressBlockText6 = value;
+            RaisePropertyChangedEvent("ProgressBlockText6");
+        }
+    }
+
+    public double ProgressBlock7 {
+        get => _progressBlock7;
+        set {
+            _progressBlock7 = value;
+            RaisePropertyChangedEvent("ProgressBlock7");
+        }
+    }
+
+    public string ProgressBlockText7 {
+        get => _progressBlockText7;
+        set {
+            _progressBlockText7 = value;
+            RaisePropertyChangedEvent("ProgressBlockText7");
+        }
+    }
+
+    public double ProgressBlock8 {
+        get => _progressBlock8;
+        set {
+            _progressBlock8 = value;
+            RaisePropertyChangedEvent("ProgressBlock8");
+        }
+    }
+
+    public string ProgressBlockText8 {
+        get => _progressBlockText8;
+        set {
+            _progressBlockText8 = value;
+            RaisePropertyChangedEvent("ProgressBlockText8");
+        }
+    }
+
+    public double ProgressBlock9 {
+        get => _progressBlock9;
+        set {
+            _progressBlock9 = value;
+            RaisePropertyChangedEvent("ProgressBlock9");
+        }
+    }
+
+    public string ProgressBlockText9 {
+        get => _progressBlockText9;
+        set {
+            _progressBlockText9 = value;
+            RaisePropertyChangedEvent("ProgressBlockText9");
         }
     }
 
