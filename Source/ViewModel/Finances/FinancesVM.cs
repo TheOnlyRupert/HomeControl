@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Text.Json;
-using HomeControl.Source.Helpers;
-using HomeControl.Source.Json;
+﻿using System.Globalization;
 using HomeControl.Source.ViewModel.Base;
 
 namespace HomeControl.Source.ViewModel.Finances;
@@ -10,23 +6,12 @@ namespace HomeControl.Source.ViewModel.Finances;
 public class FinancesVM : BaseViewModel {
     private readonly CrossViewMessenger simpleMessenger;
 
-    private int _financesTotal;
     private double _progressTotal, _progressBlock1, _progressBlock2, _progressBlock3, _progressBlock4, _progressBlock5, _progressBlock6, _progressBlock7, _progressBlock8, _progressBlock9;
 
     private string _textBlock1, _textBlock2, _textBlock3, _textBlock4, _textBlock5, _textBlock6, _textBlock7, _textBlock8, _textBlock9, _progressTotalText, _progressBlockText1, _progressBlockText2,
-        _progressBlockText3, _progressBlockText4, _progressBlockText5, _progressBlockText6, _progressBlockText7, _progressBlockText8, _progressBlockText9;
+        _progressBlockText3, _progressBlockText4, _progressBlockText5, _progressBlockText6, _progressBlockText7, _progressBlockText8, _progressBlockText9, _progressTotalColor;
 
     public FinancesVM() {
-        try {
-            ReferenceValues.JsonFinanceMaster = JsonSerializer.Deserialize<JsonFinances>(FileHelpers.LoadFileText("finances", true));
-        } catch (Exception) {
-            ReferenceValues.JsonFinanceMaster = new JsonFinances {
-                financeList = new ObservableCollection<FinanceBlock>()
-            };
-
-            FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster), true);
-        }
-
         TextBlock1 = ReferenceValues.JsonSettingsMaster.FinanceBlock1;
         TextBlock2 = ReferenceValues.JsonSettingsMaster.FinanceBlock2;
         TextBlock3 = ReferenceValues.JsonSettingsMaster.FinanceBlock3;
@@ -37,7 +22,7 @@ public class FinancesVM : BaseViewModel {
         TextBlock8 = ReferenceValues.JsonSettingsMaster.FinanceBlock8;
         TextBlock9 = ReferenceValues.JsonSettingsMaster.FinanceBlock9;
 
-        RefreshFinances();
+        RefreshFinanceView();
 
         simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -46,19 +31,13 @@ public class FinancesVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
         case "RefreshFinances":
-            RefreshFinances();
+            RefreshFinanceView();
 
             break;
         }
     }
 
-    private void RefreshFinances() {
-        ProgressTotalText = "$" + (ReferenceValues.JsonSettingsMaster.FinancesTotal - ReferenceValues.JsonFinanceMaster.Category1Total - ReferenceValues.JsonFinanceMaster.Category2Total -
-                                   ReferenceValues.JsonFinanceMaster.Category3Total - ReferenceValues.JsonFinanceMaster.Category4Total - ReferenceValues.JsonFinanceMaster.Category5Total -
-                                   ReferenceValues.JsonFinanceMaster.Category6Total - ReferenceValues.JsonFinanceMaster.Category7Total - ReferenceValues.JsonFinanceMaster.Category8Total -
-                                   ReferenceValues.JsonFinanceMaster.Category9Total);
-        ProgressTotal = 25;
-
+    private void RefreshFinanceView() {
         ProgressBlock1 = ReferenceValues.JsonFinanceMaster.Category1Percentage;
         ProgressBlockText1 = "$" + ReferenceValues.JsonFinanceMaster.Category1Total;
         ProgressBlock2 = ReferenceValues.JsonFinanceMaster.Category2Percentage;
@@ -77,6 +56,20 @@ public class FinancesVM : BaseViewModel {
         ProgressBlockText8 = "$" + ReferenceValues.JsonFinanceMaster.Category8Total;
         ProgressBlock9 = ReferenceValues.JsonFinanceMaster.Category9Percentage;
         ProgressBlockText9 = "$" + ReferenceValues.JsonFinanceMaster.Category9Total;
+
+        ProgressTotalColor = ProgressTotal switch {
+            <= 75 => "CornflowerBlue",
+            > 75 and < 85 => "Orange",
+            _ => "Red"
+        };
+
+        ProgressTotalText = "Remaining:  $" + ReferenceValues.JsonFinanceMaster.TotalAmount;
+        ProgressTotal = ReferenceValues.JsonFinanceMaster.TotalPercentage;
+
+        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        culture.NumberFormat.CurrencyNegativePattern = 1;
+        string amount = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMaster.TotalAmount);
+        ProgressTotalText = "Remaining:  " + amount;
     }
 
     #region Fields
@@ -150,14 +143,6 @@ public class FinancesVM : BaseViewModel {
         set {
             _textBlock9 = value;
             RaisePropertyChangedEvent("TextBlock9");
-        }
-    }
-
-    public int FinancesTotal {
-        get => _financesTotal;
-        set {
-            _financesTotal = value;
-            RaisePropertyChangedEvent("FinancesTotal");
         }
     }
 
@@ -318,6 +303,14 @@ public class FinancesVM : BaseViewModel {
         set {
             _progressBlockText9 = value;
             RaisePropertyChangedEvent("ProgressBlockText9");
+        }
+    }
+
+    public string ProgressTotalColor {
+        get => _progressTotalColor;
+        set {
+            _progressTotalColor = value;
+            RaisePropertyChangedEvent("ProgressTotalColor");
         }
     }
 

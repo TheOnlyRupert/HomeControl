@@ -188,6 +188,7 @@
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\EditRecurringVM.cs"/>
+        <Compile Include="Source\ViewModel\Finances\FinanceMaths.cs"/>
         <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
         <Compile Include="Source\ViewModel\Games\NhieVM.cs"/>
         <Compile Include="Source\ViewModel\Games\Tamagotchi\TamagotchiLogic.cs"/>

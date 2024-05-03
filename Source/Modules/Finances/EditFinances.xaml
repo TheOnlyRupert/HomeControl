@@ -368,11 +368,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="64"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Spending Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding DetailedFinanceBlock}" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
+                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding FinanceListDetailed}" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
                                         Focusable="False" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 4 0" BorderThickness="2">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
@@ -395,6 +396,30 @@
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
+
+                <Grid Grid.Row="2" Visibility="{Binding EditCashVisibility}">
+                    <StackPanel Margin="8 8 8 0">
+                        <TextBlock Text="Total Monthly Amount ($)" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding TotalMonthlyAmount, UpdateSourceTrigger=PropertyChanged}" MaxLength="64" FontSize="24" Margin="0 0 0 8" control:SelectTextOnFocus.Active="True"/>
+                        <Button Content="Save Monthly Amount" FontSize="24" Command="{Binding ButtonCommand}" Margin="0 0 0 32" CommandParameter="saveMonthlyAmount">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Grid>
 

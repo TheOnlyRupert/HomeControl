@@ -9,6 +9,7 @@ using System.Net;
 using System.Reflection;
 using System.Resources;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Input;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
@@ -17,6 +18,7 @@ using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
+using HomeControl.Source.ViewModel.Finances;
 using HomeControl.Source.ViewModel.Games.Tamagotchi;
 using HomeControl.Source.ViewModel.Hvac;
 using Task = System.Threading.Tasks.Task;
@@ -69,6 +71,21 @@ public class MainWindowVM : BaseViewModel {
 
             FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster), true);
         }
+
+        /* Get Finances */
+        try {
+            ReferenceValues.JsonFinanceMaster = JsonSerializer.Deserialize<JsonFinances>(FileHelpers.LoadFileText("finances", true));
+        } catch (Exception) {
+            ReferenceValues.JsonFinanceMaster = new JsonFinances {
+                FinanceList = new ObservableCollection<FinanceBlock>(),
+                FinanceListDetailed = new ObservableCollection<FinanceBlockDetailed>(),
+                TotalMonthlyAmount = 0
+            };
+
+            FileHelpers.SaveFileText("finances", JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster), true);
+        }
+
+        FinanceMaths.RefreshFinances();
 
         /* Set Version */
         JsonVersion jsonVersion = new() {
@@ -275,7 +292,8 @@ public class MainWindowVM : BaseViewModel {
 
     private async Task ApiStatus() {
         JsonSerializerOptions options = new() {
-            IncludeFields = true
+            IncludeFields = true,
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
         };
 
         try {

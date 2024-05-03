@@ -75,5 +75,4 @@ public class JsonSettings {
     public string FinanceBlock7 { get; set; }
     public string FinanceBlock8 { get; set; }
     public string FinanceBlock9 { get; set; }
-    public int FinancesTotal { get; set; }
 }

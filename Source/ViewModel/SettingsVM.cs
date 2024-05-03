@@ -25,7 +25,7 @@ public class SettingsVM : BaseViewModel {
 
     private double _weatherLat, _weatherLon;
 
-    private int gridX, gridY, _financesTotal;
+    private int gridX, gridY;
 
     public SettingsVM() {
         TrashDayList = new List<string>(new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "DISABLED" });
@@ -104,7 +104,6 @@ public class SettingsVM : BaseViewModel {
         FinanceBlock7 = ReferenceValues.JsonSettingsMaster.FinanceBlock7;
         FinanceBlock8 = ReferenceValues.JsonSettingsMaster.FinanceBlock8;
         FinanceBlock9 = ReferenceValues.JsonSettingsMaster.FinanceBlock9;
-        FinancesTotal = ReferenceValues.JsonSettingsMaster.FinancesTotal;
     }
 
     public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
@@ -828,14 +827,6 @@ public class SettingsVM : BaseViewModel {
         set {
             _financeBlock9 = value;
             RaisePropertyChangedEvent("FinanceBlock9");
-        }
-    }
-
-    public int FinancesTotal {
-        get => _financesTotal;
-        set {
-            _financesTotal = value;
-            RaisePropertyChangedEvent("FinancesTotal");
         }
     }
 

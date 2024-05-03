@@ -18,9 +18,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ProgressBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Value="{Binding ProgressTotal}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent"
+        <ProgressBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Value="{Binding ProgressTotal}" IsIndeterminate="False" Foreground="{Binding ProgressTotalColor}" Background="Transparent"
                      BorderBrush="DarkSlateGray" BorderThickness="1"/>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ProgressTotalText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding ProgressTotalText}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Total Remaining" Foreground="White" HorizontalAlignment="Center"/>
 
         <ProgressBar Grid.Row="2" Grid.Column="0" Value="{Binding ProgressBlock1}" IsIndeterminate="False" Foreground="CornflowerBlue" Background="Transparent" BorderBrush="DarkSlateGray"

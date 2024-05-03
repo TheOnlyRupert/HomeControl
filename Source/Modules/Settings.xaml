@@ -383,11 +383,6 @@
                 <TextBox Text="{Binding FinanceBlock9, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="22">
-                <TextBlock Text="Finances Total (Monthly)" Foreground="White"/>
-                <TextBox Text="{Binding FinancesTotal, UpdateSourceTrigger=PropertyChanged}" control:SelectTextOnFocus.Active="True"/>
-            </StackPanel>
-
             <StackPanel Grid.Column="0" Grid.Row="24" Grid.ColumnSpan="4" Orientation="Horizontal">
                 <CheckBox Content="User1 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User1Checked}"/>
                 <CheckBox Content="User2 Funds" Foreground="White" FontSize="16" Margin="0 4 4 0" IsChecked="{Binding User2Checked}"/>
