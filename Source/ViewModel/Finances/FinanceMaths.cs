@@ -240,8 +240,8 @@ public static class FinanceMaths {
         view.SortDescriptions.Add(new SortDescription("Amount", ListSortDirection.Descending));
         view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
 
-        ReferenceValues.JsonFinanceMaster.TotalAmount = ReferenceValues.JsonFinanceMaster.TotalMonthlyAmount - totalCategory1 + totalCategory2 + totalCategory3 + totalCategory4 + totalCategory5 +
-                                                        totalCategory6 + totalCategory7 + totalCategory8 + totalCategory9;
+        ReferenceValues.JsonFinanceMaster.TotalAmount = ReferenceValues.JsonFinanceMaster.TotalMonthlyAmount - totalCategory1 - totalCategory2 - totalCategory3 - totalCategory4 - totalCategory5 -
+                                                        totalCategory6 - totalCategory7 - totalCategory8 - totalCategory9;
 
         try {
             double math = Convert.ToDouble(totalCategory1 + totalCategory2 + totalCategory3 + totalCategory4 + totalCategory5 + totalCategory6 + totalCategory7 + totalCategory8 + totalCategory9) /

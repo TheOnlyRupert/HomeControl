@@ -41,7 +41,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp1}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp1}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance1}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -73,7 +73,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp2}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp2}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance2}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -105,7 +105,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp3}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp3}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance3}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -137,7 +137,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp4}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp4}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance4}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -169,7 +169,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp5}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp5}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance5}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -201,7 +201,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp6}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp6}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance6}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -233,7 +233,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp7}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp7}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance7}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -265,7 +265,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp8}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp8}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance8}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -297,7 +297,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp9}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp9}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance9}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -329,7 +329,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp10}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp10}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance10}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -361,7 +361,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp11}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp11}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance11}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -393,7 +393,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp12}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp12}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance12}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -425,7 +425,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp13}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp13}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance13}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>
@@ -457,7 +457,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp14}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SevenDayForecastTemp14}" Foreground="Yellow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold"/>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Image Source="../../../Resources/Images/weather/raindrop.gif" Height="16" VerticalAlignment="Center" Margin="-20"/>
                             <TextBlock Text="{Binding SevenDayForecastRainChance14}" VerticalAlignment="Center" Foreground="White" Margin="4 0 0 0"/>

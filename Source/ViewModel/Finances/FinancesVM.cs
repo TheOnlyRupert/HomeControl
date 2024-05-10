@@ -57,14 +57,14 @@ public class FinancesVM : BaseViewModel {
         ProgressBlock9 = ReferenceValues.JsonFinanceMaster.Category9Percentage;
         ProgressBlockText9 = "$" + ReferenceValues.JsonFinanceMaster.Category9Total;
 
-        ProgressTotalColor = ProgressTotal switch {
+        ProgressTotalColor = ReferenceValues.JsonFinanceMaster.TotalPercentage switch {
             <= 75 => "CornflowerBlue",
             > 75 and < 85 => "Orange",
             _ => "Red"
         };
 
         ProgressTotalText = "Remaining:  $" + ReferenceValues.JsonFinanceMaster.TotalAmount;
-        ProgressTotal = ReferenceValues.JsonFinanceMaster.TotalPercentage;
+        ProgressTotal = 100 - ReferenceValues.JsonFinanceMaster.TotalPercentage;
 
         CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
         culture.NumberFormat.CurrencyNegativePattern = 1;

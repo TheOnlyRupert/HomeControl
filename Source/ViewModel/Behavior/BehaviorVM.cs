@@ -159,6 +159,20 @@ public class BehaviorVM : BaseViewModel {
         int totalDay = 0, totalWeek = 0, totalMonth = 0, totalQuarter = 0, completedDay = 0, completedWeek = 0, completedMonth = 0, completedQuarter = 0;
         double math;
 
+        CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        culture.NumberFormat.CurrencyNegativePattern = 1;
+        System.Globalization.Calendar cal = DateTimeFormatInfo.CurrentInfo.Calendar;
+
+        DateTime d1 = DateTime.Today;
+
+        try {
+            d1 = ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.AddDays(-1 * (int)cal.GetDayOfWeek(ReferenceValues.JsonTasksMaster.UpdatedDateTime));
+        } catch (Exception) {
+            // ignore?
+        }
+
+        DateTime d2 = DateTime.Today.Date.AddDays(-1 * (int)cal.GetDayOfWeek(DateTime.Today));
+
         switch (UserID) {
         case 1:
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
@@ -219,24 +233,70 @@ public class BehaviorVM : BaseViewModel {
 
             if (totalDay != 0) {
                 User1TasksCompletedDayProgressText = User1TasksCompletedDayProgressValue + "%";
+
+                /* Reset daily */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
+
+                    User1TasksCompletedDayProgressText = "0%";
+                    User1TasksCompletedDayProgressValue = 0;
+                }
             } else {
                 User1TasksCompletedDayProgressText = "None";
             }
 
             if (totalWeek != 0) {
                 User1TasksCompletedWeekProgressText = User1TasksCompletedWeekProgressValue + "%";
+
+                /* Reset weekly */
+                if (d1 != d2) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
+
+                    User1TasksCompletedWeekProgressText = "0%";
+                    User1TasksCompletedWeekProgressValue = 0;
+                }
             } else {
                 User1TasksCompletedWeekProgressText = "None";
             }
 
             if (totalMonth != 0) {
                 User1TasksCompletedMonthProgressText = User1TasksCompletedMonthProgressValue + "%";
+
+                /* Reset monthly */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
+
+                    User1TasksCompletedMonthProgressText = "0%";
+                    User1TasksCompletedMonthProgressValue = 0;
+                }
             } else {
                 User1TasksCompletedMonthProgressText = "None";
             }
 
             if (totalQuarter != 0) {
                 User1TasksCompletedQuarterProgressText = User1TasksCompletedQuarterProgressValue + "%";
+
+                /* Reset quarterly */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User1TasksCompletedQuarterProgressText = "0%";
+                        User1TasksCompletedQuarterProgressValue = 0;
+                    }
+                }
             } else {
                 User1TasksCompletedQuarterProgressText = "None";
             }
@@ -315,20 +375,34 @@ public class BehaviorVM : BaseViewModel {
 
             if (totalDay != 0) {
                 User2TasksCompletedDayProgressText = User2TasksCompletedDayProgressValue + "%";
-                /* Reset daily */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
 
-                User2TasksCompletedDayProgressText = "0%";
-                User2TasksCompletedDayProgressValue = 0;
+                /* Reset daily */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
+
+                    User2TasksCompletedDayProgressText = "0%";
+                    User2TasksCompletedDayProgressValue = 0;
+                }
             } else {
                 User2TasksCompletedDayProgressText = "None";
             }
 
             if (totalWeek != 0) {
                 User2TasksCompletedWeekProgressText = User2TasksCompletedWeekProgressValue + "%";
+
+                /* Reset weekly */
+                if (d1 != d2) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
+
+                    User2TasksCompletedWeekProgressText = "0%";
+                    User2TasksCompletedWeekProgressValue = 0;
+                }
             } else {
                 User2TasksCompletedWeekProgressText = "None";
             }
@@ -337,18 +411,38 @@ public class BehaviorVM : BaseViewModel {
                 User2TasksCompletedMonthProgressText = User2TasksCompletedMonthProgressValue + "%";
 
                 /* Reset monthly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User2TasksCompletedMonthProgressText = "0%";
-                User2TasksCompletedMonthProgressValue = 0;
+                    User2TasksCompletedMonthProgressText = "0%";
+                    User2TasksCompletedMonthProgressValue = 0;
+                }
             } else {
                 User2TasksCompletedMonthProgressText = "None";
             }
 
-            User2TasksCompletedQuarterProgressText = User2TasksCompletedQuarterProgressValue + "%";
+            if (totalQuarter != 0) {
+                User2TasksCompletedQuarterProgressText = User2TasksCompletedQuarterProgressValue + "%";
+
+                /* Reset quarterly */
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
+
+                        User2TasksCompletedQuarterProgressText = "0%";
+                        User2TasksCompletedQuarterProgressValue = 0;
+                    }
+                }
+            } else {
+                User2TasksCompletedQuarterProgressText = "None";
+            }
+
             User2TasksCompletedDayProgressColor = User2TasksCompletedDayProgressValue == 100 ? "Green" : "CornflowerBlue";
             User2TasksCompletedWeekProgressColor = User2TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
             User2TasksCompletedMonthProgressColor = User2TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
@@ -425,13 +519,15 @@ public class BehaviorVM : BaseViewModel {
                 User3TasksCompletedDayProgressText = User3TasksCompletedDayProgressValue + "%";
 
                 /* Reset daily */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User3TasksCompletedDayProgressText = "0%";
-                User3TasksCompletedDayProgressValue = 0;
+                    User3TasksCompletedDayProgressText = "0%";
+                    User3TasksCompletedDayProgressValue = 0;
+                }
             } else {
                 User3TasksCompletedDayProgressText = "None";
             }
@@ -440,13 +536,15 @@ public class BehaviorVM : BaseViewModel {
                 User3TasksCompletedWeekProgressText = User3TasksCompletedWeekProgressValue + "%";
 
                 /* Reset weekly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (d1 != d2) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User3TasksCompletedWeekProgressText = "0%";
-                User3TasksCompletedWeekProgressValue = 0;
+                    User3TasksCompletedWeekProgressText = "0%";
+                    User3TasksCompletedWeekProgressValue = 0;
+                }
             } else {
                 User3TasksCompletedWeekProgressText = "None";
             }
@@ -455,13 +553,15 @@ public class BehaviorVM : BaseViewModel {
                 User3TasksCompletedMonthProgressText = User3TasksCompletedMonthProgressValue + "%";
 
                 /* Reset monthly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User3TasksCompletedMonthProgressText = "0%";
-                User3TasksCompletedMonthProgressValue = 0;
+                    User3TasksCompletedMonthProgressText = "0%";
+                    User3TasksCompletedMonthProgressValue = 0;
+                }
             } else {
                 User3TasksCompletedMonthProgressText = "None";
             }
@@ -470,13 +570,17 @@ public class BehaviorVM : BaseViewModel {
                 User3TasksCompletedQuarterProgressText = User3TasksCompletedQuarterProgressValue + "%";
 
                 /* Reset quarterly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
 
-                User3TasksCompletedQuarterProgressText = "0%";
-                User3TasksCompletedQuarterProgressValue = 0;
+                        User3TasksCompletedQuarterProgressText = "0%";
+                        User3TasksCompletedQuarterProgressValue = 0;
+                    }
+                }
             } else {
                 User3TasksCompletedQuarterProgressText = "None";
             }
@@ -557,13 +661,15 @@ public class BehaviorVM : BaseViewModel {
                 User4TasksCompletedDayProgressText = User4TasksCompletedDayProgressValue + "%";
 
                 /* Reset daily */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User4TasksCompletedDayProgressText = "0%";
-                User4TasksCompletedDayProgressValue = 0;
+                    User4TasksCompletedDayProgressText = "0%";
+                    User4TasksCompletedDayProgressValue = 0;
+                }
             } else {
                 User4TasksCompletedDayProgressText = "None";
             }
@@ -572,13 +678,15 @@ public class BehaviorVM : BaseViewModel {
                 User4TasksCompletedWeekProgressText = User4TasksCompletedWeekProgressValue + "%";
 
                 /* Reset weekly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (d1 != d2) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User4TasksCompletedWeekProgressText = "0%";
-                User4TasksCompletedWeekProgressValue = 0;
+                    User4TasksCompletedWeekProgressText = "0%";
+                    User4TasksCompletedWeekProgressValue = 0;
+                }
             } else {
                 User4TasksCompletedWeekProgressText = "None";
             }
@@ -587,13 +695,15 @@ public class BehaviorVM : BaseViewModel {
                 User4TasksCompletedMonthProgressText = User4TasksCompletedMonthProgressValue + "%";
 
                 /* Reset monthly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User4TasksCompletedMonthProgressText = "0%";
-                User4TasksCompletedMonthProgressValue = 0;
+                    User4TasksCompletedMonthProgressText = "0%";
+                    User4TasksCompletedMonthProgressValue = 0;
+                }
             } else {
                 User4TasksCompletedMonthProgressText = "None";
             }
@@ -602,13 +712,17 @@ public class BehaviorVM : BaseViewModel {
                 User4TasksCompletedQuarterProgressText = User4TasksCompletedQuarterProgressValue + "%";
 
                 /* Reset quarterly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
 
-                User4TasksCompletedQuarterProgressText = "0%";
-                User4TasksCompletedQuarterProgressValue = 0;
+                        User4TasksCompletedQuarterProgressText = "0%";
+                        User4TasksCompletedQuarterProgressValue = 0;
+                    }
+                }
             } else {
                 User4TasksCompletedQuarterProgressText = "None";
             }
@@ -689,9 +803,11 @@ public class BehaviorVM : BaseViewModel {
                 User5TasksCompletedDayProgressText = User5TasksCompletedDayProgressValue + "%";
 
                 /* Reset daily */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Date.Day != DateTime.Today.Day) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
                 }
 
                 User5TasksCompletedDayProgressText = "0%";
@@ -704,13 +820,15 @@ public class BehaviorVM : BaseViewModel {
                 User5TasksCompletedWeekProgressText = User5TasksCompletedWeekProgressValue + "%";
 
                 /* Reset weekly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (d1 != d2) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User5TasksCompletedWeekProgressText = "0%";
-                User5TasksCompletedWeekProgressValue = 0;
+                    User5TasksCompletedWeekProgressText = "0%";
+                    User5TasksCompletedWeekProgressValue = 0;
+                }
             } else {
                 User5TasksCompletedWeekProgressText = "None";
             }
@@ -719,13 +837,15 @@ public class BehaviorVM : BaseViewModel {
                 User5TasksCompletedMonthProgressText = User5TasksCompletedMonthProgressValue + "%";
 
                 /* Reset monthly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Now.Month) {
+                    foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5) {
+                        task.IsCompleted = false;
+                        task.DateCompleted = "";
+                    }
 
-                User5TasksCompletedMonthProgressText = "0%";
-                User5TasksCompletedMonthProgressValue = 0;
+                    User5TasksCompletedMonthProgressText = "0%";
+                    User5TasksCompletedMonthProgressValue = 0;
+                }
             } else {
                 User5TasksCompletedMonthProgressText = "None";
             }
@@ -734,13 +854,17 @@ public class BehaviorVM : BaseViewModel {
                 User5TasksCompletedQuarterProgressText = User5TasksCompletedQuarterProgressValue + "%";
 
                 /* Reset quarterly */
-                foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5) {
-                    task.IsCompleted = false;
-                    task.DateCompleted = "";
-                }
+                if (ReferenceValues.JsonTasksMaster.UpdatedDateTime.Month != DateTime.Today.Month) {
+                    if (DateTime.Today.Month == 1 || DateTime.Today.Month == 4 || DateTime.Today.Month == 7 || DateTime.Today.Month == 10) {
+                        foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5) {
+                            task.IsCompleted = false;
+                            task.DateCompleted = "";
+                        }
 
-                User5TasksCompletedQuarterProgressText = "0%";
-                User5TasksCompletedQuarterProgressValue = 0;
+                        User5TasksCompletedQuarterProgressText = "0%";
+                        User5TasksCompletedQuarterProgressValue = 0;
+                    }
+                }
             } else {
                 User5TasksCompletedQuarterProgressText = "None";
             }
