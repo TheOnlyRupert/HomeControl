@@ -201,7 +201,7 @@ public class MainWindowVM : BaseViewModel {
             }
 
             /* Trash Night Sound */
-            if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.AdjustedTrashDay && DateTime.Now.Hour > 11) {
+            if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 16) {
                 trashInt = 10;
             }
         }

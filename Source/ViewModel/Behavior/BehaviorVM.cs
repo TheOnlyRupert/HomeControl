@@ -1386,39 +1386,27 @@ public class BehaviorVM : BaseViewModel {
         CurrentMonthText = DateTime.Now.ToString("MMMM");
         CurrentWeekText = "Week " + calendar.GetWeekOfYear(DateTime.Now, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
 
-        switch (DateTime.Now.Month) {
-        case 1:
-        case 2:
-        case 3:
-            CurrentQuarterText = "Quarter 1";
-            break;
-        case 4:
-        case 5:
-        case 6:
-            CurrentQuarterText = "Quarter 2";
-            break;
-        case 7:
-        case 8:
-        case 9:
-            CurrentQuarterText = "Quarter 3";
-            break;
-        case 10:
-        case 11:
-        case 12:
-            CurrentQuarterText = "Quarter 4";
-            break;
-        }
+        CurrentQuarterText = DateTime.Now.Month switch {
+            1 or 2 or 3 => "Quarter 1",
+            4 or 5 or 6 => "Quarter 2",
+            7 or 8 or 9 => "Quarter 3",
+            10 or 11 or 12 => "Quarter 4",
+            _ => CurrentQuarterText
+        };
 
         /* Day */
         DateTime dateNext = DateTime.Now;
         RemainingDay = (TimeSpan.FromHours(24) - dateNext.TimeOfDay).Hours + " Hours";
 
-        if (RemainingDay == "1 Hours") {
+        switch (RemainingDay) {
+        case "1 Hours":
             blinkDay = true;
             RemainingDay = "1 Hour";
-        } else if (RemainingDay == "0 Hours") {
+            break;
+        case "0 Hours":
             blinkDay = true;
             RemainingDay = "< 1 Hour";
+            break;
         }
 
         RemainingDayColor = "White";
@@ -1442,11 +1430,11 @@ public class BehaviorVM : BaseViewModel {
             RemainingWeek = timeSpan.Hours + " Hours";
         }
 
-        if (RemainingWeek == "1 Hours") {
-            RemainingWeek = "1 Hour";
-        } else if (RemainingWeek == "0 Hours") {
-            RemainingWeek = "< 1 Hour";
-        }
+        RemainingWeek = RemainingWeek switch {
+            "1 Hours" => "1 Hour",
+            "0 Hours" => "< 1 Hour",
+            _ => RemainingWeek
+        };
 
         RemainingWeekColor = "White";
 
@@ -1465,11 +1453,11 @@ public class BehaviorVM : BaseViewModel {
             RemainingMonth = timeSpan.Hours + " Hours";
         }
 
-        if (RemainingMonth == "1 Hours") {
-            RemainingMonth = "1 Hour";
-        } else if (RemainingMonth == "0 Hours") {
-            RemainingMonth = "< 1 Hour";
-        }
+        RemainingMonth = RemainingMonth switch {
+            "1 Hours" => "1 Hour",
+            "0 Hours" => "< 1 Hour",
+            _ => RemainingMonth
+        };
 
         RemainingMonthColor = "White";
 
@@ -1519,11 +1507,11 @@ public class BehaviorVM : BaseViewModel {
             RemainingQuarter = timeSpan.Hours + " Hours";
         }
 
-        if (RemainingQuarter == "1 Hours") {
-            RemainingQuarter = "1 Hour";
-        } else if (RemainingQuarter == "0 Hours") {
-            RemainingQuarter = "< 1 Hour";
-        }
+        RemainingQuarter = RemainingQuarter switch {
+            "1 Hours" => "1 Hour",
+            "0 Hours" => "< 1 Hour",
+            _ => RemainingQuarter
+        };
 
         RemainingQuarterColor = "White";
 
@@ -1542,61 +1530,17 @@ public class BehaviorVM : BaseViewModel {
             RemainingYear = timeSpan.Hours + " Hours";
         }
 
-        if (RemainingYear == "1 Hours") {
-            RemainingYear = "1 Hour";
-        } else if (RemainingYear == "0 Hours") {
-            RemainingYear = "< 1 Hour";
-        }
+        RemainingYear = RemainingYear switch {
+            "1 Hours" => "1 Hour",
+            "0 Hours" => "< 1 Hour",
+            _ => RemainingYear
+        };
 
         RemainingYearColor = "White";
     }
 
     private void TrashDayLogic() {
-        if (ReferenceValues.JsonSettingsMaster.UseTrashDayHolidays) {
-            if (ReferenceValues.JsonSettingsMaster.TrashDay == "DISABLED") {
-                return;
-            }
-
-            bool breakout = false;
-            DateTime date = DateTime.Now;
-            DayOfWeek trashDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), ReferenceValues.JsonSettingsMaster.TrashDay);
-
-            if (date.DayOfWeek > trashDay) {
-                TrashDayVisibility = "HIDDEN";
-                return;
-            }
-
-            ReferenceValues.AdjustedTrashDay = ReferenceValues.JsonSettingsMaster.TrashDay;
-
-            while (date.DayOfWeek <= trashDay) {
-                foreach (Holidays.HolidayBlock holiday in Holidays.GetHolidays(date.Year)) {
-                    if (!breakout) {
-                        if (holiday.Holiday == "New Year's" || holiday.Holiday == "Memorial" || holiday.Holiday == "Independence" || holiday.Holiday == "Labor" || holiday.Holiday == "Thanksgiving" ||
-                            holiday.Holiday == "Christmas") {
-                            if (date.Month == holiday.Date.Month && date.Day == holiday.Date.Day) {
-                                /* Add one day to trash day */
-                                trashDay++;
-                                ReferenceValues.AdjustedTrashDay = trashDay.ToString();
-                                breakout = true;
-
-                                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                    Date = DateTime.Now,
-                                    Level = "INFO",
-                                    Module = "BehaviorVM",
-                                    Description = "Adjusting trash day to " + trashDay + " because of " + holiday.Holiday
-                                });
-                                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                            }
-                        }
-                    }
-                }
-
-                /* Subtract a day */
-                date = date.AddDays(-1);
-            }
-        }
-
-        if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.AdjustedTrashDay && DateTime.Now.Hour > 11) {
+        if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 16) {
             TrashDayVisibility = "VISIBLE";
         } else {
             TrashDayVisibility = "HIDDEN";
