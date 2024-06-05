@@ -14,7 +14,7 @@ public class EditFinancesVM : BaseViewModel {
     private ObservableCollection<string> _categoryList;
 
     private string _dateText, _costText, _detailsText, _categorySelected, _descriptionText, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor, _user5BorderColor,
-        _homeBorderColor, _editCashVisibility;
+        _homeBorderColor, _editCashVisibility, _totalMonthlyAmount;
 
     private ObservableCollection<FinanceBlock> _financeList;
     private ObservableCollection<FinanceBlockDetailed> _financeListDetailed;
@@ -23,7 +23,7 @@ public class EditFinancesVM : BaseViewModel {
 
     private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5, _imageHome;
 
-    private int _user1BorderThickness, _user2BorderThickness, _user3BorderThickness, _user4BorderThickness, _user5BorderThickness, _homeBorderThickness, user, _categoryID, _totalMonthlyAmount;
+    private int _user1BorderThickness, _user2BorderThickness, _user3BorderThickness, _user4BorderThickness, _user5BorderThickness, _homeBorderThickness, user, _categoryID;
 
     public EditFinancesVM() {
         DescriptionText = "";
@@ -32,7 +32,7 @@ public class EditFinancesVM : BaseViewModel {
 
         FinanceList = ReferenceValues.JsonFinanceMaster.FinanceList;
         FinanceListDetailed = ReferenceValues.JsonFinanceMaster.FinanceListDetailed;
-        TotalMonthlyAmount = ReferenceValues.JsonFinanceMaster.TotalMonthlyAmount;
+        TotalMonthlyAmount = ReferenceValues.JsonFinanceMaster.TotalMonthlyAmount.ToString();
 
         EditCashVisibility = ReferenceValues.JsonSettingsMaster.DebugMode ? "VISIBLE" : "HIDDEN";
 
@@ -316,6 +316,23 @@ public class EditFinancesVM : BaseViewModel {
             }
 
             break;
+        case "reset":
+            confirmation = MessageBox.Show("Are you sure you want to remove all finances?", "Confirmation", MessageBoxButton.YesNo);
+            if (confirmation == MessageBoxResult.Yes) {
+                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                    Date = DateTime.Now,
+                    Level = "INFO",
+                    Module = "EditFinancesVM",
+                    Description = "Removing all finances for next month"
+                });
+                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+
+                ReferenceValues.JsonFinanceMaster.FinanceList.Clear();
+                FinanceList.Clear();
+                FinanceMaths.RefreshFinances();
+            }
+
+            break;
 
         case "user1":
             UserLogic(1);
@@ -365,7 +382,10 @@ public class EditFinancesVM : BaseViewModel {
             break;
 
         case "saveMonthlyAmount":
-            ReferenceValues.JsonFinanceMaster.TotalMonthlyAmount = TotalMonthlyAmount;
+            if (string.IsNullOrWhiteSpace(TotalMonthlyAmount)) {
+                TotalMonthlyAmount = "0";
+            }
+            ReferenceValues.JsonFinanceMaster.TotalMonthlyAmount = int.Parse(TotalMonthlyAmount);
             FinanceMaths.RefreshFinances();
 
             break;
@@ -620,10 +640,10 @@ public class EditFinancesVM : BaseViewModel {
         }
     }
 
-    public int TotalMonthlyAmount {
+    public string TotalMonthlyAmount {
         get => _totalMonthlyAmount;
         set {
-            _totalMonthlyAmount = value;
+            _totalMonthlyAmount = VerifyInput.VerifyTextNumeric(value);
             RaisePropertyChangedEvent("TotalMonthlyAmount");
         }
     }

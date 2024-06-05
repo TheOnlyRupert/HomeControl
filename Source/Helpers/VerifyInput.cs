@@ -26,4 +26,8 @@ public static class VerifyInput {
 
         return value;
     }
+
+    public static bool HasValue(this double value) {
+        return !double.IsNaN(value) && !double.IsInfinity(value);
+    }
 }

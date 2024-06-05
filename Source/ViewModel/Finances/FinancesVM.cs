@@ -66,9 +66,13 @@ public class FinancesVM : BaseViewModel {
         ProgressTotalText = "Remaining:  $" + ReferenceValues.JsonFinanceMaster.TotalAmount;
         ProgressTotal = 100 - ReferenceValues.JsonFinanceMaster.TotalPercentage;
 
+        if (ReferenceValues.JsonFinanceMaster.TotalMonthlyAmount == 0) {
+            ProgressTotal = 0;
+        }
+
         CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
         culture.NumberFormat.CurrencyNegativePattern = 1;
-        string amount = string.Format(culture, "{0:C}", ReferenceValues.JsonFinanceMaster.TotalAmount);
+        string amount = string.Format(culture, "{0:C0}", ReferenceValues.JsonFinanceMaster.TotalAmount);
         ProgressTotalText = "Remaining:  " + amount;
     }
 

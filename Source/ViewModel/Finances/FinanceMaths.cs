@@ -177,6 +177,43 @@ public static class FinanceMaths {
         ReferenceValues.JsonFinanceMaster.Category7Total = totalCategory7;
         ReferenceValues.JsonFinanceMaster.Category8Total = totalCategory8;
         ReferenceValues.JsonFinanceMaster.Category9Total = totalCategory9;
+
+        if (!totalPercentageCategory1.HasValue()) {
+            totalPercentageCategory1 = 0;
+        }
+
+        if (!totalPercentageCategory2.HasValue()) {
+            totalPercentageCategory2 = 0;
+        }
+
+        if (!totalPercentageCategory3.HasValue()) {
+            totalPercentageCategory3 = 0;
+        }
+
+        if (!totalPercentageCategory4.HasValue()) {
+            totalPercentageCategory4 = 0;
+        }
+
+        if (!totalPercentageCategory5.HasValue()) {
+            totalPercentageCategory5 = 0;
+        }
+
+        if (!totalPercentageCategory6.HasValue()) {
+            totalPercentageCategory6 = 0;
+        }
+
+        if (!totalPercentageCategory7.HasValue()) {
+            totalPercentageCategory7 = 0;
+        }
+
+        if (!totalPercentageCategory8.HasValue()) {
+            totalPercentageCategory8 = 0;
+        }
+
+        if (!totalPercentageCategory9.HasValue()) {
+            totalPercentageCategory9 = 0;
+        }
+
         ReferenceValues.JsonFinanceMaster.Category1Percentage = totalPercentageCategory1;
         ReferenceValues.JsonFinanceMaster.Category2Percentage = totalPercentageCategory2;
         ReferenceValues.JsonFinanceMaster.Category3Percentage = totalPercentageCategory3;

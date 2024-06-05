@@ -67,8 +67,7 @@ public class Screensaver {
                 "pack://application:,,,/Resources/Images/monthly/sun/sun4.png",
                 "pack://application:,,,/Resources/Images/monthly/sun/sun5.png",
                 "pack://application:,,,/Resources/Images/monthly/sun/sun6.png",
-                "pack://application:,,,/Resources/Images/monthly/sun/sun7.png",
-                "pack://application:,,,/Resources/Images/monthly/sun/sun8.png"
+                "pack://application:,,,/Resources/Images/monthly/sun/sun7.png"
             };
 
             break;

@@ -311,14 +311,6 @@
 
                         <Style TargetType="ListViewItem">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding AddSub}" Value="ADD">
-                                    <Setter Property="Foreground" Value="CornflowerBlue"/>
-                                </DataTrigger>
-
-                                <DataTrigger Binding="{Binding AddSub}" Value="NA">
-                                    <Setter Property="Foreground" Value="GreenYellow"/>
-                                </DataTrigger>
-
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsSelected" Value="True"/>
@@ -353,7 +345,6 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=AddSub}" Header="+/-" Width="Auto" control:GridViewSort.PropertyName="AddSub"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="Auto" control:GridViewSort.PropertyName="Cost"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Description" Width="Auto" control:GridViewSort.PropertyName="Item"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto" control:GridViewSort.PropertyName="Date"/>
@@ -428,6 +419,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
@@ -467,6 +459,23 @@
                 </Button.Style>
             </Button>
             <Button Grid.Column="2" Content="Update Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="8" CommandParameter="update">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Grid.Column="3" Content="Reset Next Month" FontSize="24" Command="{Binding ButtonCommand}" Margin="8" CommandParameter="reset" Foreground="Red">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent"/>
