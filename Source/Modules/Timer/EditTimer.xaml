@@ -1,46 +1,105 @@
-﻿<Window x:Class="HomeControl.Source.Modules.Timer.EditTimer" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="600" Width="800"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
+﻿<Window
+    x:Class="HomeControl.Source.Modules.Timer.EditTimer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    Height="600"
+    Width="800"
+    WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize"
+    Background="Black"
+    WindowStyle="None"
+    BorderBrush="CornflowerBlue"
+    BorderThickness="4">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="64"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="64"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition
+                Width="*"/>
+            <ColumnDefinition
+                Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Focusable="False">
+        <Grid
+            Grid.Column="0"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Focusable="False">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Timer 1" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="24"/>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Text="Timer 1"
+                Foreground="White"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                FontSize="24"/>
 
-            <Button Grid.Row="1" Grid.Column="1" Content="+10" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer1Add10">
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="+10"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer1Add10">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -49,16 +108,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="2" Content="+5" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer1Add5">
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Content="+5"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer1Add5">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -67,16 +147,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="3" Content="+1" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer1Add1">
+            <Button
+                Grid.Row="1"
+                Grid.Column="3"
+                Content="+1"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer1Add1">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -85,17 +186,38 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Column="0" Grid.Row="2" Content="⏹" Background="Transparent" Foreground="DarkGray" FontSize="36" Focusable="False" Command="{Binding ButtonCommand}"
-                    CommandParameter="timer1Stop">
+            <Button
+                Grid.Column="0"
+                Grid.Row="2"
+                Content="⏹"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="36"
+                Focusable="False"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer1Stop">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -104,20 +226,48 @@
                 </Button.Style>
             </Button>
 
-            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Timer1Text}" FontSize="48" Background="Transparent" Foreground="{Binding Timer1Color}"
-                       HorizontalAlignment="Center"/>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Text="{Binding Timer1Text}"
+                FontSize="48"
+                Background="Transparent"
+                Foreground="{Binding Timer1Color}"
+                HorizontalAlignment="Center"/>
 
-            <Button Grid.Column="4" Grid.Row="2" Content="⏯" Background="Transparent" Foreground="DarkGray" FontSize="36" Focusable="False" Command="{Binding ButtonCommand}"
-                    CommandParameter="timer1PlayPause">
+            <Button
+                Grid.Column="4"
+                Grid.Row="2"
+                Content="⏯"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="36"
+                Focusable="False"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer1PlayPause">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -126,16 +276,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="1" Content="-10" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer1Sub10">
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                Content="-10"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer1Sub10">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -144,16 +315,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="2" Content="-5" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer1Sub5">
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Content="-5"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer1Sub5">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -162,16 +354,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="3" Content="-1" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer1Sub1">
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Content="-1"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer1Sub1">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -181,34 +394,76 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Focusable="False">
+        <Grid
+            Grid.Column="1"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Focusable="False">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Timer 2" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="24"/>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Text="Timer 2"
+                Foreground="White"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                FontSize="24"/>
 
-            <Button Grid.Row="1" Grid.Column="1" Content="+10" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer2Add10">
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="+10"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer2Add10">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -217,16 +472,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="2" Content="+5" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer2Add5">
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Content="+5"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer2Add5">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -235,16 +511,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="3" Content="+1" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer2Add1">
+            <Button
+                Grid.Row="1"
+                Grid.Column="3"
+                Content="+1"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer2Add1">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -253,17 +550,38 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Column="0" Grid.Row="2" Content="⏹" Background="Transparent" Foreground="DarkGray" FontSize="36" Focusable="False" Command="{Binding ButtonCommand}"
-                    CommandParameter="timer2Stop">
+            <Button
+                Grid.Column="0"
+                Grid.Row="2"
+                Content="⏹"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="36"
+                Focusable="False"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer2Stop">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -272,20 +590,48 @@
                 </Button.Style>
             </Button>
 
-            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Timer2Text}" FontSize="48" Background="Transparent" Foreground="{Binding Timer2Color}"
-                       HorizontalAlignment="Center"/>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Text="{Binding Timer2Text}"
+                FontSize="48"
+                Background="Transparent"
+                Foreground="{Binding Timer2Color}"
+                HorizontalAlignment="Center"/>
 
-            <Button Grid.Column="4" Grid.Row="2" Content="⏯" Background="Transparent" Foreground="DarkGray" FontSize="36" Focusable="False" Command="{Binding ButtonCommand}"
-                    CommandParameter="timer2PlayPause">
+            <Button
+                Grid.Column="4"
+                Grid.Row="2"
+                Content="⏯"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="36"
+                Focusable="False"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer2PlayPause">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -294,16 +640,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="1" Content="-10" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer2Sub10">
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                Content="-10"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer2Sub10">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -312,16 +679,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="2" Content="-5" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer2Sub5">
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Content="-5"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer2Sub5">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -330,16 +718,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="3" Content="-1" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer2Sub1">
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Content="-1"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer2Sub1">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -349,34 +758,76 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Focusable="False">
+        <Grid
+            Grid.Column="0"
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Focusable="False">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Timer 3" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="24"/>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Text="Timer 3"
+                Foreground="White"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                FontSize="24"/>
 
-            <Button Grid.Row="1" Grid.Column="1" Content="+10" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer3Add10">
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="+10"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer3Add10">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -385,16 +836,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="2" Content="+5" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer3Add5">
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Content="+5"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer3Add5">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -403,16 +875,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="3" Content="+1" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer3Add1">
+            <Button
+                Grid.Row="1"
+                Grid.Column="3"
+                Content="+1"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer3Add1">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -421,17 +914,38 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Column="0" Grid.Row="2" Content="⏹" Background="Transparent" Foreground="DarkGray" FontSize="36" Focusable="False" Command="{Binding ButtonCommand}"
-                    CommandParameter="timer3Stop">
+            <Button
+                Grid.Column="0"
+                Grid.Row="2"
+                Content="⏹"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="36"
+                Focusable="False"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer3Stop">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -440,20 +954,48 @@
                 </Button.Style>
             </Button>
 
-            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Timer3Text}" FontSize="48" Background="Transparent" Foreground="{Binding Timer3Color}"
-                       HorizontalAlignment="Center"/>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Text="{Binding Timer3Text}"
+                FontSize="48"
+                Background="Transparent"
+                Foreground="{Binding Timer3Color}"
+                HorizontalAlignment="Center"/>
 
-            <Button Grid.Column="4" Grid.Row="2" Content="⏯" Background="Transparent" Foreground="DarkGray" FontSize="36" Focusable="False" Command="{Binding ButtonCommand}"
-                    CommandParameter="timer3PlayPause">
+            <Button
+                Grid.Column="4"
+                Grid.Row="2"
+                Content="⏯"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="36"
+                Focusable="False"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer3PlayPause">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -462,16 +1004,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="1" Content="-10" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer3Sub10">
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                Content="-10"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer3Sub10">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -480,16 +1043,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="2" Content="-5" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer3Sub5">
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Content="-5"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer3Sub5">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -498,16 +1082,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="3" Content="-1" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer3Sub1">
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Content="-1"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer3Sub1">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -517,34 +1122,76 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Focusable="False">
+        <Grid
+            Grid.Column="1"
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Focusable="False">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
+                <RowDefinition
+                    Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
-                <ColumnDefinition Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
+                <ColumnDefinition
+                    Width="72"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Timer 4" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="24"/>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Text="Timer 4"
+                Foreground="White"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                FontSize="24"/>
 
-            <Button Grid.Row="1" Grid.Column="1" Content="+10" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer4Add10">
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Content="+10"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer4Add10">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -553,16 +1200,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="2" Content="+5" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer4Add5">
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Content="+5"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer4Add5">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -571,16 +1239,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="3" Content="+1" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer4Add1">
+            <Button
+                Grid.Row="1"
+                Grid.Column="3"
+                Content="+1"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer4Add1">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -589,17 +1278,38 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Column="0" Grid.Row="2" Content="⏹" Background="Transparent" Foreground="DarkGray" FontSize="36" Focusable="False" Command="{Binding ButtonCommand}"
-                    CommandParameter="timer4Stop">
+            <Button
+                Grid.Column="0"
+                Grid.Row="2"
+                Content="⏹"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="36"
+                Focusable="False"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer4Stop">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -608,20 +1318,48 @@
                 </Button.Style>
             </Button>
 
-            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Timer4Text}" FontSize="48" Background="Transparent" Foreground="{Binding Timer4Color}"
-                       HorizontalAlignment="Center"/>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Text="{Binding Timer4Text}"
+                FontSize="48"
+                Background="Transparent"
+                Foreground="{Binding Timer4Color}"
+                HorizontalAlignment="Center"/>
 
-            <Button Grid.Column="4" Grid.Row="2" Content="⏯" Background="Transparent" Foreground="DarkGray" FontSize="36" Focusable="False" Command="{Binding ButtonCommand}"
-                    CommandParameter="timer4PlayPause">
+            <Button
+                Grid.Column="4"
+                Grid.Row="2"
+                Content="⏯"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="36"
+                Focusable="False"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer4PlayPause">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -630,16 +1368,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="1" Content="-10" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer4Sub10">
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                Content="-10"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer4Sub10">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -648,16 +1407,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="2" Content="-5" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer4Sub5">
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Content="-5"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer4Sub5">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -666,16 +1446,37 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="3" Content="-1" Background="Transparent" Foreground="DarkGray" FontSize="32" Command="{Binding ButtonCommand}" CommandParameter="timer4Sub1">
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Content="-1"
+                Background="Transparent"
+                Foreground="DarkGray"
+                FontSize="32"
+                Command="{Binding ButtonCommand}"
+                CommandParameter="timer4Sub1">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="DarkSlateGray" BorderThickness="1" Padding="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="DarkSlateGray"
+                                        BorderThickness="1"
+                                        Padding="4">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -685,16 +1486,39 @@
             </Button>
         </Grid>
 
-        <Button Grid.Column="1" Grid.Row="2" Content="Exit" FontSize="24" Foreground="White" Background="Transparent" HorizontalAlignment="Right" MinWidth="128" Margin="8" IsCancel="True">
+        <Button
+            Grid.Column="1"
+            Grid.Row="2"
+            Content="Exit"
+            FontSize="24"
+            Foreground="White"
+            Background="Transparent"
+            HorizontalAlignment="Right"
+            MinWidth="128"
+            Margin="8"
+            IsCancel="True">
             <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Template">
+                <Style
+                    TargetType="{x:Type Button}">
+                    <Setter
+                        Property="Background"
+                        Value="Transparent"/>
+                    <Setter
+                        Property="Foreground"
+                        Value="White"/>
+                    <Setter
+                        Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ControlTemplate
+                                TargetType="{x:Type Button}">
+                                <Border
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="White"
+                                    BorderThickness="1"
+                                    Padding="16 8">
+                                    <ContentPresenter
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

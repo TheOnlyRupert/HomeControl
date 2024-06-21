@@ -1,66 +1,139 @@
-﻿<Window x:Class="HomeControl.Source.Modules.Finances.EditFinances" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:control="clr-namespace:HomeControl.Source.Control"
-        mc:Ignorable="d" Height="800" Width="1664" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
-        FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
+﻿<Window
+    x:Class="HomeControl.Source.Modules.Finances.EditFinances"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:control="clr-namespace:HomeControl.Source.Control"
+    mc:Ignorable="d"
+    Height="800"
+    Width="1664"
+    WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize"
+    Background="Black"
+    WindowStyle="None"
+    BorderBrush="CornflowerBlue"
+    BorderThickness="4"
+    FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
     <Window.Resources>
-        <Style x:Key="styleCalendar" TargetType="Calendar"/>
+        <Style
+            x:Key="styleCalendar"
+            TargetType="Calendar"/>
 
-        <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
-            <Setter Property="SnapsToDevicePixels" Value="true"/>
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="IsTabStop" Value="false"/>
-            <Setter Property="Focusable" Value="false"/>
-            <Setter Property="Template">
+        <Style
+            x:Key="SliderButtonStyle"
+            TargetType="{x:Type RepeatButton}">
+            <Setter
+                Property="SnapsToDevicePixels"
+                Value="true"/>
+            <Setter
+                Property="OverridesDefaultStyle"
+                Value="true"/>
+            <Setter
+                Property="IsTabStop"
+                Value="false"/>
+            <Setter
+                Property="Focusable"
+                Value="false"/>
+            <Setter
+                Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                        <Border Background="Transparent"/>
+                    <ControlTemplate
+                        TargetType="{x:Type RepeatButton}">
+                        <Border
+                            Background="Transparent"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
-            <Setter Property="SnapsToDevicePixels" Value="true"/>
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
-            <Setter Property="Template">
+        <Style
+            x:Key="SliderThumbStyle"
+            TargetType="{x:Type Thumb}">
+            <Setter
+                Property="SnapsToDevicePixels"
+                Value="true"/>
+            <Setter
+                Property="OverridesDefaultStyle"
+                Value="true"/>
+            <Setter
+                Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border BorderThickness="0" CornerRadius="8" Background="Gray"/>
+                    <ControlTemplate
+                        TargetType="{x:Type Thumb}">
+                        <Border
+                            BorderThickness="0"
+                            CornerRadius="8"
+                            Background="Gray"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+        <ControlTemplate
+            x:Key="VerticalScrollBar"
+            TargetType="{x:Type ScrollBar}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding MinWidth}"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition
+                        Width="Auto"/>
+                    <ColumnDefinition
+                        Width="Auto"
+                        MinWidth="{TemplateBinding MinWidth}"/>
+                    <ColumnDefinition
+                        Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TickBar Grid.Column="0" x:Name="TopTick" SnapsToDevicePixels="True" Placement="Left" Width="4" Visibility="Collapsed"/>
+                <TickBar
+                    Grid.Column="0"
+                    x:Name="TopTick"
+                    SnapsToDevicePixels="True"
+                    Placement="Left"
+                    Width="4"
+                    Visibility="Collapsed"/>
 
-                <Track Grid.Column="1" x:Name="PART_Track">
+                <Track
+                    Grid.Column="1"
+                    x:Name="PART_Track">
                     <Track.DecreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource SliderButtonStyle}" Command="Slider.DecreaseLarge"/>
+                        <RepeatButton
+                            Style="{StaticResource SliderButtonStyle}"
+                            Command="Slider.DecreaseLarge"/>
                     </Track.DecreaseRepeatButton>
                     <Track.Thumb>
-                        <Thumb Style="{StaticResource SliderThumbStyle}"/>
+                        <Thumb
+                            Style="{StaticResource SliderThumbStyle}"/>
                     </Track.Thumb>
                 </Track>
 
-                <TickBar x:Name="BottomTick" SnapsToDevicePixels="True" Grid.Column="2" Placement="Right" Width="4" Visibility="Collapsed"/>
+                <TickBar
+                    x:Name="BottomTick"
+                    SnapsToDevicePixels="True"
+                    Grid.Column="2"
+                    Placement="Right"
+                    Width="4"
+                    Visibility="Collapsed"/>
             </Grid>
         </ControlTemplate>
 
-        <Style TargetType="{x:Type ScrollBar}">
-            <Setter Property="SnapsToDevicePixels" Value="true"/>
-            <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Style
+            TargetType="{x:Type ScrollBar}">
+            <Setter
+                Property="SnapsToDevicePixels"
+                Value="true"/>
+            <Setter
+                Property="OverridesDefaultStyle"
+                Value="true"/>
             <Style.Triggers>
-                <Trigger Property="Orientation" Value="Vertical">
-                    <Setter Property="MinWidth" Value="8"/>
-                    <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
+                <Trigger
+                    Property="Orientation"
+                    Value="Vertical">
+                    <Setter
+                        Property="MinWidth"
+                        Value="8"/>
+                    <Setter
+                        Property="Template"
+                        Value="{StaticResource VerticalScrollBar}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -68,66 +141,143 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="64"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="64"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid
+            Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition
+                    Width="1.5*"/>
+                <ColumnDefinition
+                    Width="2*"/>
+                <ColumnDefinition
+                    Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Margin="8 0 8 0">
+            <Grid
+                Grid.Column="0"
+                Margin="8 0 8 0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="64"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition
+                        Height="64"/>
+                    <RowDefinition
+                        Height="*"/>
+                    <RowDefinition
+                        Height="Auto"/>
+                    <RowDefinition
+                        Height="Auto"/>
+                    <RowDefinition
+                        Height="Auto"/>
+                    <RowDefinition
+                        Height="Auto"/>
+                    <RowDefinition
+                        Height="Auto"/>
+                    <RowDefinition
+                        Height="Auto"/>
+                    <RowDefinition
+                        Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Add/Edit Finance" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock
+                    Grid.Row="0"
+                    Text="Add/Edit Finance"
+                    Margin="8 8 0 0"
+                    Foreground="White"
+                    FontSize="24"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
 
-                <Frame Grid.Row="1" Source="../../../Source/Modules/Finances/Finances.xaml" Focusable="False"/>
+                <Frame
+                    Grid.Row="1"
+                    Source="../../../Source/Modules/Finances/Finances.xaml"
+                    Focusable="False"/>
 
-                <StackPanel Grid.Row="2">
-                    <TextBlock Text="Location/Business Name" FontSize="24" Foreground="White"/>
-                    <TextBox Name="MainFocusItem" Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}" FontSize="24" MaxLength="64" control:SelectTextOnFocus.Active="True"/>
+                <StackPanel
+                    Grid.Row="2">
+                    <TextBlock
+                        Text="Location/Business Name"
+                        FontSize="24"
+                        Foreground="White"/>
+                    <TextBox
+                        Name="MainFocusItem"
+                        Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="24"
+                        MaxLength="64"
+                        control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="3">
-                    <TextBlock Text="Amount ($)" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" FontSize="24" control:SelectTextOnFocus.Active="True"/>
+                <StackPanel
+                    Grid.Row="3">
+                    <TextBlock
+                        Text="Amount ($)"
+                        FontSize="24"
+                        Foreground="White"/>
+                    <TextBox
+                        Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}"
+                        MaxLength="4"
+                        FontSize="24"
+                        control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="4">
-                    <TextBlock Text="Category" FontSize="24" Foreground="White"/>
-                    <ComboBox FontSize="24" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CategorySelected}" SelectedIndex="{Binding CategoryID}" control:SelectTextOnFocus.Active="True"/>
+                <StackPanel
+                    Grid.Row="4">
+                    <TextBlock
+                        Text="Category"
+                        FontSize="24"
+                        Foreground="White"/>
+                    <ComboBox
+                        FontSize="24"
+                        ItemsSource="{Binding CategoryList}"
+                        SelectedItem="{Binding CategorySelected}"
+                        SelectedIndex="{Binding CategoryID}"
+                        control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <Grid Grid.Row="5">
+                <Grid
+                    Grid.Row="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition
+                            Width="Auto"/>
+                        <ColumnDefinition
+                            Width="Auto"/>
+                        <ColumnDefinition
+                            Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="&lt;" Command="{Binding ButtonCommand}" CommandParameter="subDay" FontSize="32" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                    <Button
+                        Grid.Column="0"
+                        Content="&lt;"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="subDay"
+                        FontSize="32"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center">
                         <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="Template">
+                            <Style
+                                TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White"/>
+                                <Setter
+                                    Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 0">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <ControlTemplate
+                                            TargetType="{x:Type Button}">
+                                            <Border
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="White"
+                                                BorderThickness="1"
+                                                Padding="16 0">
+                                                <ContentPresenter
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -136,20 +286,48 @@
                         </Button.Style>
                     </Button>
 
-                    <Viewbox Grid.Column="1" Height="48" Margin="16 8" HorizontalAlignment="Left">
-                        <DatePicker CalendarStyle="{StaticResource styleCalendar}" SelectedDate="{Binding DateText}" IsTodayHighlighted="True" DisplayDateStart="2023-01-01"/>
+                    <Viewbox
+                        Grid.Column="1"
+                        Height="48"
+                        Margin="16 8"
+                        HorizontalAlignment="Left">
+                        <DatePicker
+                            CalendarStyle="{StaticResource styleCalendar}"
+                            SelectedDate="{Binding DateText}"
+                            IsTodayHighlighted="True"
+                            DisplayDateStart="2023-01-01"/>
                     </Viewbox>
 
-                    <Button Grid.Column="2" Content="&gt;" Command="{Binding ButtonCommand}" CommandParameter="addDay" FontSize="32" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                    <Button
+                        Grid.Column="2"
+                        Content="&gt;"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="addDay"
+                        FontSize="32"
+                        VerticalAlignment="Center"
+                        VerticalContentAlignment="Center">
                         <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="Template">
+                            <Style
+                                TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White"/>
+                                <Setter
+                                    Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 0">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <ControlTemplate
+                                            TargetType="{x:Type Button}">
+                                            <Border
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="White"
+                                                BorderThickness="1"
+                                                Padding="16 0">
+                                                <ContentPresenter
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -159,176 +337,334 @@
                     </Button>
                 </Grid>
 
-                <StackPanel Grid.Row="6">
-                    <TextBlock Text="More Detailed Info  (optional)" FontSize="24" Foreground="White"/>
-                    <TextBox Text="{Binding DetailsText, UpdateSourceTrigger=PropertyChanged}" MaxLength="64" FontSize="24" Margin="0 0 0 8" control:SelectTextOnFocus.Active="True"/>
+                <StackPanel
+                    Grid.Row="6">
+                    <TextBlock
+                        Text="More Detailed Info  (optional)"
+                        FontSize="24"
+                        Foreground="White"/>
+                    <TextBox
+                        Text="{Binding DetailsText, UpdateSourceTrigger=PropertyChanged}"
+                        MaxLength="64"
+                        FontSize="24"
+                        Margin="0 0 0 8"
+                        control:SelectTextOnFocus.Active="True"/>
                 </StackPanel>
 
-                <Grid Grid.Row="7">
+                <Grid
+                    Grid.Row="7">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition
+                            Width="*"/>
+                        <ColumnDefinition
+                            Width="*"/>
+                        <ColumnDefinition
+                            Width="*"/>
+                        <ColumnDefinition
+                            Width="*"/>
+                        <ColumnDefinition
+                            Width="*"/>
+                        <ColumnDefinition
+                            Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Command="{Binding ButtonCommand}" CommandParameter="user0">
+                    <Button
+                        Grid.Column="0"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="user0">
                         <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="Template">
+                            <Style
+                                TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White"/>
+                                <Setter
+                                    Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="{Binding HomeBorderColor}" BorderThickness="{Binding HomeBorderThickness}">
-                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <ControlTemplate
+                                            TargetType="{x:Type Button}">
+                                            <Border
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{Binding HomeBorderColor}"
+                                                BorderThickness="{Binding HomeBorderThickness}">
+                                                <ContentPresenter
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <Image Source="{Binding ImageHome}"/>
+                        <Image
+                            Source="{Binding ImageHome}"/>
                     </Button>
 
-                    <Button Grid.Column="1" Command="{Binding ButtonCommand}" CommandParameter="user1">
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="user1">
                         <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="Template">
+                            <Style
+                                TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White"/>
+                                <Setter
+                                    Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="{Binding User1BorderColor}" BorderThickness="{Binding User1BorderThickness}">
-                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <ControlTemplate
+                                            TargetType="{x:Type Button}">
+                                            <Border
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{Binding User1BorderColor}"
+                                                BorderThickness="{Binding User1BorderThickness}">
+                                                <ContentPresenter
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <Image Source="{Binding ImageUser1}"/>
+                        <Image
+                            Source="{Binding ImageUser1}"/>
                     </Button>
 
-                    <Button Grid.Column="2" Command="{Binding ButtonCommand}" CommandParameter="user2">
+                    <Button
+                        Grid.Column="2"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="user2">
                         <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="Template">
+                            <Style
+                                TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White"/>
+                                <Setter
+                                    Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="{Binding User2BorderColor}" BorderThickness="{Binding User2BorderThickness}">
-                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <ControlTemplate
+                                            TargetType="{x:Type Button}">
+                                            <Border
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{Binding User2BorderColor}"
+                                                BorderThickness="{Binding User2BorderThickness}">
+                                                <ContentPresenter
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <Image Source="{Binding ImageUser2}"/>
+                        <Image
+                            Source="{Binding ImageUser2}"/>
                     </Button>
 
-                    <Button Grid.Column="3" Command="{Binding ButtonCommand}" CommandParameter="user3">
+                    <Button
+                        Grid.Column="3"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="user3">
                         <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="Template">
+                            <Style
+                                TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White"/>
+                                <Setter
+                                    Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="{Binding User3BorderColor}" BorderThickness="{Binding User3BorderThickness}">
-                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <ControlTemplate
+                                            TargetType="{x:Type Button}">
+                                            <Border
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{Binding User3BorderColor}"
+                                                BorderThickness="{Binding User3BorderThickness}">
+                                                <ContentPresenter
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <Image Source="{Binding ImageUser3}"/>
+                        <Image
+                            Source="{Binding ImageUser3}"/>
                     </Button>
 
-                    <Button Grid.Column="4" Command="{Binding ButtonCommand}" CommandParameter="user4">
+                    <Button
+                        Grid.Column="4"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="user4">
                         <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="Template">
+                            <Style
+                                TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White"/>
+                                <Setter
+                                    Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="{Binding User4BorderColor}" BorderThickness="{Binding User4BorderThickness}">
-                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <ControlTemplate
+                                            TargetType="{x:Type Button}">
+                                            <Border
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{Binding User4BorderColor}"
+                                                BorderThickness="{Binding User4BorderThickness}">
+                                                <ContentPresenter
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <Image Source="{Binding ImageUser4}"/>
+                        <Image
+                            Source="{Binding ImageUser4}"/>
                     </Button>
 
-                    <Button Grid.Column="5" Command="{Binding ButtonCommand}" CommandParameter="user5">
+                    <Button
+                        Grid.Column="5"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="user5">
                         <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="Template">
+                            <Style
+                                TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White"/>
+                                <Setter
+                                    Property="Template">
                                     <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}" BorderBrush="{Binding User5BorderColor}" BorderThickness="{Binding User5BorderThickness}">
-                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <ControlTemplate
+                                            TargetType="{x:Type Button}">
+                                            <Border
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{Binding User5BorderColor}"
+                                                BorderThickness="{Binding User5BorderThickness}">
+                                                <ContentPresenter
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <Image Source="{Binding ImageUser5}"/>
+                        <Image
+                            Source="{Binding ImageUser5}"/>
                     </Button>
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="1">
+            <Grid
+                Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="64"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition
+                        Height="64"/>
+                    <RowDefinition
+                        Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Finance List" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock
+                    Grid.Row="0"
+                    Text="Finance List"
+                    Margin="8 8 0 0"
+                    Foreground="White"
+                    FontSize="24"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
 
-                <control:CustomListView x:Name="CustomListView" Loaded="CustomListLoaded" Grid.Row="1" ItemsSource="{Binding FinanceList}" Foreground="White" SelectedItem="{Binding FinanceSelected}"
-                                        SelectionMode="Single" Background="Transparent" BorderBrush="DarkSlateGray" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True"
-                                        BorderThickness="2">
+                <control:CustomListView
+                    x:Name="CustomListView"
+                    Loaded="CustomListLoaded"
+                    Grid.Row="1"
+                    ItemsSource="{Binding FinanceList}"
+                    Foreground="White"
+                    SelectedItem="{Binding FinanceSelected}"
+                    SelectionMode="Single"
+                    Background="Transparent"
+                    BorderBrush="DarkSlateGray"
+                    IsSynchronizedWithCurrentItem="False"
+                    control:GridViewSort.AutoSort="True"
+                    BorderThickness="2">
                     <ListView.Resources>
-                        <Style TargetType="GridViewColumnHeader">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
-                            <Setter Property="BorderBrush" Value="White"/>
+                        <Style
+                            TargetType="GridViewColumnHeader">
+                            <Setter
+                                Property="Background"
+                                Value="Transparent"/>
+                            <Setter
+                                Property="Foreground"
+                                Value="White"/>
+                            <Setter
+                                Property="BorderThickness"
+                                Value="0 0 0 1"/>
+                            <Setter
+                                Property="BorderBrush"
+                                Value="White"/>
                         </Style>
 
-                        <Style TargetType="ListViewItem">
+                        <Style
+                            TargetType="ListViewItem">
                             <Style.Triggers>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="IsSelected" Value="True"/>
+                                        <Condition
+                                            Property="IsSelected"
+                                            Value="True"/>
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Yellow"/>
-                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter
+                                            Property="Background"
+                                            Value="Transparent"/>
+                                        <Setter
+                                            Property="BorderBrush"
+                                            Value="Yellow"/>
+                                        <Setter
+                                            Property="Foreground"
+                                            Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition
+                                            Property="IsMouseOver"
+                                            Value="True"/>
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="Transparent"/>
-                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter
+                                            Property="Background"
+                                            Value="Transparent"/>
+                                        <Setter
+                                            Property="BorderBrush"
+                                            Value="Transparent"/>
+                                        <Setter
+                                            Property="Foreground"
+                                            Value="White"/>
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
                             </Style.Triggers>
@@ -336,72 +672,169 @@
                     </ListView.Resources>
 
                     <ListView.View>
-                        <GridView AllowsColumnReorder="false">
-                            <GridViewColumn Width="48">
+                        <GridView
+                            AllowsColumnReorder="false">
+                            <GridViewColumn
+                                Width="48">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Source="{Binding Image}" Width="32" Margin="-4"/>
+                                        <Image
+                                            Source="{Binding Image}"
+                                            Width="32"
+                                            Margin="-4"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Cost}" Header="Cost" Width="Auto" control:GridViewSort.PropertyName="Cost"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Item}" Header="Description" Width="Auto" control:GridViewSort.PropertyName="Item"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Header="Date" Width="Auto" control:GridViewSort.PropertyName="Date"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Details}" Header="More Detailed Info" Width="Auto" control:GridViewSort.PropertyName="Details"/>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Path=Cost}"
+                                Header="Cost"
+                                Width="Auto"
+                                control:GridViewSort.PropertyName="Cost"/>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Path=Item}"
+                                Header="Description"
+                                Width="Auto"
+                                control:GridViewSort.PropertyName="Item"/>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Path=Date}"
+                                Header="Date"
+                                Width="Auto"
+                                control:GridViewSort.PropertyName="Date"/>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Path=Category}"
+                                Header="Category"
+                                Width="Auto"
+                                control:GridViewSort.PropertyName="Category"/>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Path=Details}"
+                                Header="More Detailed Info"
+                                Width="Auto"
+                                control:GridViewSort.PropertyName="Details"/>
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
             </Grid>
 
-            <Grid Grid.Column="2">
+            <Grid
+                Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="64"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition
+                        Height="64"/>
+                    <RowDefinition
+                        Height="*"/>
+                    <RowDefinition
+                        Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Spending Breakdown" Margin="8 8 0 0" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock
+                    Grid.Row="0"
+                    Text="Spending Breakdown"
+                    Margin="8 8 0 0"
+                    Foreground="White"
+                    FontSize="24"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
 
-                <control:CustomListView Grid.Row="1" Loaded="CustomListLoaded" ItemsSource="{Binding FinanceListDetailed}" Foreground="White" Background="Transparent" BorderBrush="DarkSlateGray"
-                                        Focusable="False" IsSynchronizedWithCurrentItem="False" control:GridViewSort.AutoSort="True" Margin="8 0 4 0" BorderThickness="2">
+                <control:CustomListView
+                    Grid.Row="1"
+                    Loaded="CustomListLoaded"
+                    ItemsSource="{Binding FinanceListDetailed}"
+                    Foreground="White"
+                    Background="Transparent"
+                    BorderBrush="DarkSlateGray"
+                    Focusable="False"
+                    IsSynchronizedWithCurrentItem="False"
+                    control:GridViewSort.AutoSort="True"
+                    Margin="8 0 4 0"
+                    BorderThickness="2">
                     <ListBox.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="Focusable" Value="False"/>
+                        <Style
+                            TargetType="{x:Type ListBoxItem}">
+                            <Setter
+                                Property="Focusable"
+                                Value="False"/>
                         </Style>
                     </ListBox.ItemContainerStyle>
 
                     <ListView.Resources>
-                        <Style TargetType="GridViewColumnHeader">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Foreground" Value="White"/>
+                        <Style
+                            TargetType="GridViewColumnHeader">
+                            <Setter
+                                Property="Background"
+                                Value="Transparent"/>
+                            <Setter
+                                Property="Foreground"
+                                Value="White"/>
                         </Style>
                     </ListView.Resources>
 
                     <ListView.View>
-                        <GridView AllowsColumnReorder="false">
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category}" Header="Category" Width="Auto" control:GridViewSort.PropertyName="Category"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Percentage}" Header="Percentage" Width="Auto" control:GridViewSort.PropertyName="Percentage"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Amount" Width="Auto" control:GridViewSort.PropertyName="Amount"/>
+                        <GridView
+                            AllowsColumnReorder="false">
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Path=Category}"
+                                Header="Category"
+                                Width="Auto"
+                                control:GridViewSort.PropertyName="Category"/>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Path=Percentage}"
+                                Header="Percentage"
+                                Width="Auto"
+                                control:GridViewSort.PropertyName="Percentage"/>
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Path=Amount}"
+                                Header="Amount"
+                                Width="Auto"
+                                control:GridViewSort.PropertyName="Amount"/>
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
 
-                <Grid Grid.Row="2" Visibility="{Binding EditCashVisibility}">
-                    <StackPanel Margin="8 8 8 0">
-                        <TextBlock Text="Total Monthly Amount ($)" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
-                        <TextBox Text="{Binding TotalMonthlyAmount, UpdateSourceTrigger=PropertyChanged}" MaxLength="64" FontSize="24" Margin="0 0 0 8" control:SelectTextOnFocus.Active="True"/>
-                        <Button Content="Save Monthly Amount" FontSize="24" Command="{Binding ButtonCommand}" Margin="0 0 0 32" CommandParameter="saveMonthlyAmount">
+                <Grid
+                    Grid.Row="2"
+                    Visibility="{Binding EditCashVisibility}">
+                    <StackPanel
+                        Margin="8 8 8 0">
+                        <TextBlock
+                            Text="Total Monthly Amount ($)"
+                            FontSize="24"
+                            Foreground="White"
+                            HorizontalAlignment="Center"/>
+                        <TextBox
+                            Text="{Binding TotalMonthlyAmount, UpdateSourceTrigger=PropertyChanged}"
+                            MaxLength="64"
+                            FontSize="24"
+                            Margin="0 0 0 8"
+                            control:SelectTextOnFocus.Active="True"/>
+                        <Button
+                            Content="Save Monthly Amount"
+                            FontSize="24"
+                            Command="{Binding ButtonCommand}"
+                            Margin="0 0 0 32"
+                            CommandParameter="saveMonthlyAmount">
                             <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                    <Setter Property="Template">
+                                <Style
+                                    TargetType="{x:Type Button}">
+                                    <Setter
+                                        Property="Background"
+                                        Value="Transparent"/>
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="White"/>
+                                    <Setter
+                                        Property="Template">
                                         <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <ControlTemplate
+                                                TargetType="{x:Type Button}">
+                                                <Border
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="White"
+                                                    BorderThickness="1"
+                                                    Padding="16 8">
+                                                    <ContentPresenter
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"/>
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -414,26 +847,52 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid
+            Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition
+                    Width="Auto"/>
+                <ColumnDefinition
+                    Width="Auto"/>
+                <ColumnDefinition
+                    Width="Auto"/>
+                <ColumnDefinition
+                    Width="Auto"/>
+                <ColumnDefinition
+                    Width="*"/>
+                <ColumnDefinition
+                    Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Add Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="8" CommandParameter="add">
+            <Button
+                Grid.Column="0"
+                Content="Add Charge"
+                FontSize="24"
+                Command="{Binding ButtonCommand}"
+                Margin="8"
+                CommandParameter="add">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="White"
+                                        BorderThickness="1"
+                                        Padding="16 8">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -441,16 +900,35 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Grid.Column="1" Content="Delete Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="0 8" CommandParameter="delete">
+            <Button
+                Grid.Column="1"
+                Content="Delete Charge"
+                FontSize="24"
+                Command="{Binding ButtonCommand}"
+                Margin="0 8"
+                CommandParameter="delete">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="White"
+                                        BorderThickness="1"
+                                        Padding="16 8">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -458,16 +936,35 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Grid.Column="2" Content="Update Charge" FontSize="24" Command="{Binding ButtonCommand}" Margin="8" CommandParameter="update">
+            <Button
+                Grid.Column="2"
+                Content="Update Charge"
+                FontSize="24"
+                Command="{Binding ButtonCommand}"
+                Margin="8"
+                CommandParameter="update">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="White"
+                                        BorderThickness="1"
+                                        Padding="16 8">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -475,16 +972,36 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Grid.Column="3" Content="Reset Next Month" FontSize="24" Command="{Binding ButtonCommand}" Margin="8" CommandParameter="reset" Foreground="Red">
+            <Button
+                Grid.Column="3"
+                Content="Reset Next Month"
+                FontSize="24"
+                Command="{Binding ButtonCommand}"
+                Margin="8"
+                CommandParameter="reset"
+                Foreground="Red">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="White"
+                                        BorderThickness="1"
+                                        Padding="16 8">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -493,16 +1010,36 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Column="4" Content="Exit" FontSize="24" IsCancel="True" Margin="8" MinWidth="128" HorizontalAlignment="Right">
+            <Button
+                Grid.Column="4"
+                Content="Exit"
+                FontSize="24"
+                IsCancel="True"
+                Margin="8"
+                MinWidth="128"
+                HorizontalAlignment="Right">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="White"
+                                        BorderThickness="1"
+                                        Padding="16 8">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>

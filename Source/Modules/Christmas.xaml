@@ -1,22 +1,52 @@
-﻿<Page x:Class="HomeControl.Source.Modules.Christmas" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d">
-    <Grid Margin="4 4 4 0">
+﻿<Page
+    x:Class="HomeControl.Source.Modules.Christmas"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d">
+    <Grid
+        Margin="4 4 4 0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition
+                Height="Auto"/>
+            <RowDefinition
+                Height="*"/>
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Grid.RowSpan="2" Source="../../Resources/Images/monthly/christmas/christmas.png" Opacity="0.8"/>
+        <Image
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Source="../../Resources/Images/monthly/christmas/christmas.png"
+            Opacity="0.8"/>
 
-        <TextBlock Grid.Row="0" Text="CHRISTMAS COUNTDOWN" HorizontalAlignment="Center" Foreground="Red" FontSize="24" FontFamily="Ravie" TextWrapping="Wrap">
+        <TextBlock
+            Grid.Row="0"
+            Text="CHRISTMAS COUNTDOWN"
+            HorizontalAlignment="Center"
+            Foreground="Red"
+            FontSize="24"
+            FontFamily="Ravie"
+            TextWrapping="Wrap">
             <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="4" RenderingBias="Performance"/>
+                <DropShadowEffect
+                    ShadowDepth="4"
+                    RenderingBias="Performance"/>
             </TextBlock.Effect>
         </TextBlock>
 
-        <TextBlock Grid.Row="1" Text="{Binding Countdown}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Green" FontSize="32" FontFamily="Ravie">
+        <TextBlock
+            Grid.Row="1"
+            Text="{Binding Countdown}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Foreground="Green"
+            FontSize="32"
+            FontFamily="Ravie">
             <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="2" RenderingBias="Performance"/>
+                <DropShadowEffect
+                    ShadowDepth="2"
+                    RenderingBias="Performance"/>
             </TextBlock.Effect>
         </TextBlock>
     </Grid>

@@ -1,141 +1,413 @@
-﻿<Window x:Class="HomeControl.Source.Modules.Contacts" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="800" Width="1000"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4">
-    <Grid Focusable="False">
+﻿<Window
+    x:Class="HomeControl.Source.Modules.Contacts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    Height="800"
+    Width="1000"
+    WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize"
+    Background="Black"
+    WindowStyle="None"
+    BorderBrush="CornflowerBlue"
+    BorderThickness="4">
+    <Grid
+        Focusable="False">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition
+                Width="*"/>
+            <ColumnDefinition
+                Width="*"/>
+            <ColumnDefinition
+                Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="1.7*"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="1.7*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="Household" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="Household"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding User1Name}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding User1Phone1}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding User1Phone2}" Foreground="White" FontSize="18" Margin="0 0 0 14"/>
+                <TextBlock
+                    Text="{Binding User1Name}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding User1Phone1}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding User1Phone2}"
+                    Foreground="White"
+                    FontSize="18"
+                    Margin="0 0 0 14"/>
 
-                <TextBlock Text="{Binding User2Name}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding User2Phone1}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding User2Phone1}" Foreground="White" FontSize="18" Margin="0 0 0 14"/>
+                <TextBlock
+                    Text="{Binding User2Name}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding User2Phone1}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding User2Phone1}"
+                    Foreground="White"
+                    FontSize="18"
+                    Margin="0 0 0 14"/>
 
-                <TextBlock Text="Children:" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding ChildrenNames}" Foreground="White" TextWrapping="Wrap" FontSize="18" Margin="0 0 0 14"/>
+                <TextBlock
+                    Text="Children:"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding ChildrenNames}"
+                    Foreground="White"
+                    TextWrapping="Wrap"
+                    FontSize="18"
+                    Margin="0 0 0 14"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="Neighbors" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="0"
+            Grid.Row="3"
+            Grid.RowSpan="3"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="Neighbors"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding Neighbor1Location}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding Neighbor1Name}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding Neighbor1Phone1}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding Neighbor1Phone2}" Foreground="White" FontSize="18" Margin="0 0 0 14"/>
-                <TextBlock Text="{Binding Neighbor2Location}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding Neighbor2Name}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding Neighbor2Phone1}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding Neighbor2Phone2}" Foreground="White" FontSize="18"/>
+                <TextBlock
+                    Text="{Binding Neighbor1Location}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding Neighbor1Name}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding Neighbor1Phone1}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding Neighbor1Phone2}"
+                    Foreground="White"
+                    FontSize="18"
+                    Margin="0 0 0 14"/>
+                <TextBlock
+                    Text="{Binding Neighbor2Location}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding Neighbor2Name}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding Neighbor2Phone1}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding Neighbor2Phone2}"
+                    Foreground="White"
+                    FontSize="18"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="0" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="In an emergency, call" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="1"
+            Grid.Row="0"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="In an emergency, call"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="911" Foreground="White" FontSize="48" HorizontalAlignment="Center"/>
+                <TextBlock
+                    Text="911"
+                    Foreground="White"
+                    FontSize="48"
+                    HorizontalAlignment="Center"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="1" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="This address" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="This address"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding AddressLine1}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding AddressLine2}" Foreground="White" FontSize="18"/>
+                <TextBlock
+                    Text="{Binding AddressLine1}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding AddressLine2}"
+                    Foreground="White"
+                    FontSize="18"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="2" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="Fire Extinguisher" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="1"
+            Grid.Row="2"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="Fire Extinguisher"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding FireExtinguisherLocation}" TextWrapping="Wrap" Foreground="White" FontSize="18"/>
+                <TextBlock
+                    Text="{Binding FireExtinguisherLocation}"
+                    TextWrapping="Wrap"
+                    Foreground="White"
+                    FontSize="18"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="3" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="Hospital" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="1"
+            Grid.Row="3"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="Hospital"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding HospitalAddressLine1}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding HospitalAddressLine2}" Foreground="White" FontSize="18"/>
+                <TextBlock
+                    Text="{Binding HospitalAddressLine1}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding HospitalAddressLine2}"
+                    Foreground="White"
+                    FontSize="18"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="4" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="Alarm Code" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="1"
+            Grid.Row="4"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="Alarm Code"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding AlarmCode}" Foreground="White" FontSize="32"/>
+                <TextBlock
+                    Text="{Binding AlarmCode}"
+                    Foreground="White"
+                    FontSize="32"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="5" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="Guest WiFi" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="1"
+            Grid.Row="5"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="Guest WiFi"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding WifiGuestName}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding WifiGuestPassword}" Foreground="White" FontSize="18" Margin="0 0 0 14"/>
-                <TextBlock Text="Private/Household WiFi" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+                <TextBlock
+                    Text="{Binding WifiGuestName}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding WifiGuestPassword}"
+                    Foreground="White"
+                    FontSize="18"
+                    Margin="0 0 0 14"/>
+                <TextBlock
+                    Text="Private/Household WiFi"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding WifiPrivateName}" Foreground="White" FontSize="18" Visibility="{Binding PrivateWifiVisibility}"/>
-                <TextBlock Text="{Binding WifiPrivatePassword}" Foreground="White" FontSize="18" Margin="0 0 0 14" Visibility="{Binding PrivateWifiVisibility}"/>
+                <TextBlock
+                    Text="{Binding WifiPrivateName}"
+                    Foreground="White"
+                    FontSize="18"
+                    Visibility="{Binding PrivateWifiVisibility}"/>
+                <TextBlock
+                    Text="{Binding WifiPrivatePassword}"
+                    Foreground="White"
+                    FontSize="18"
+                    Margin="0 0 0 14"
+                    Visibility="{Binding PrivateWifiVisibility}"/>
             </StackPanel>
         </Border>
-        <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="Emergency Contacts" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="2"
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="Emergency Contacts"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding PoliceName}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding PolicePhone}" Foreground="White" FontSize="18" Margin="0 0 0 14"/>
-                <TextBlock Text="{Binding EmergencyContact1Name}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding EmergencyContact1Phone1}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding EmergencyContact1Phone2}" Foreground="White" FontSize="18" Margin="0 0 0 14"/>
-                <TextBlock Text="{Binding EmergencyContact2Name}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding EmergencyContact2Phone1}" Foreground="White" FontSize="18"/>
-                <TextBlock Text="{Binding EmergencyContact2Phone2}" Foreground="White" FontSize="18"/>
+                <TextBlock
+                    Text="{Binding PoliceName}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding PolicePhone}"
+                    Foreground="White"
+                    FontSize="18"
+                    Margin="0 0 0 14"/>
+                <TextBlock
+                    Text="{Binding EmergencyContact1Name}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding EmergencyContact1Phone1}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding EmergencyContact1Phone2}"
+                    Foreground="White"
+                    FontSize="18"
+                    Margin="0 0 0 14"/>
+                <TextBlock
+                    Text="{Binding EmergencyContact2Name}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding EmergencyContact2Phone1}"
+                    Foreground="White"
+                    FontSize="18"/>
+                <TextBlock
+                    Text="{Binding EmergencyContact2Phone2}"
+                    Foreground="White"
+                    FontSize="18"/>
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="2" Grid.Row="3" Margin="8" BorderBrush="White" BorderThickness="2">
-            <StackPanel Margin="8">
-                <TextBlock Text="Pets" Foreground="White" HorizontalAlignment="Center" FontSize="16"/>
+        <Border
+            Grid.Column="2"
+            Grid.Row="3"
+            Margin="8"
+            BorderBrush="White"
+            BorderThickness="2">
+            <StackPanel
+                Margin="8">
+                <TextBlock
+                    Text="Pets"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    FontSize="16"/>
                 <Separator/>
-                <TextBlock Text="{Binding PetNames}" Foreground="White" FontSize="18"/>
+                <TextBlock
+                    Text="{Binding PetNames}"
+                    Foreground="White"
+                    FontSize="18"/>
             </StackPanel>
         </Border>
 
-        <Button Grid.Column="2" Grid.Row="5" Content="Exit" MinWidth="128" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsCancel="True" FontSize="24" Margin="8">
+        <Button
+            Grid.Column="2"
+            Grid.Row="5"
+            Content="Exit"
+            MinWidth="128"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            IsCancel="True"
+            FontSize="24"
+            Margin="8">
             <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Template">
+                <Style
+                    TargetType="{x:Type Button}">
+                    <Setter
+                        Property="Background"
+                        Value="Transparent"/>
+                    <Setter
+                        Property="Foreground"
+                        Value="White"/>
+                    <Setter
+                        Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ControlTemplate
+                                TargetType="{x:Type Button}">
+                                <Border
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="White"
+                                    BorderThickness="1"
+                                    Padding="16 8">
+                                    <ContentPresenter
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

@@ -7,8 +7,6 @@ using HomeControl.Source.Json;
 namespace HomeControl.Source;
 
 public static class ReferenceValues {
-    #region Enums
-
     public enum HvacStates {
         Off,
         Running,
@@ -16,9 +14,7 @@ public static class ReferenceValues {
         Purging
     }
 
-    #endregion
-
-    public const string COPYRIGHT = "Copyright © 2022-2023  Robert Higgins";
+    public const string COPYRIGHT = "Copyright © 2022-2024  Robert Higgins";
     public const int VERSION_MAJOR = 1;
     public const int VERSION_MINOR = 5;
     public const int VERSION_PATCH = 0;

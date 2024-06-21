@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -19,7 +20,8 @@ public class GridViewSort {
                         if (!GetAutoSort(listView)) // Don't change click handler if AutoSort enabled
                         {
                             if (e is { OldValue: not null, NewValue: null }) {
-                                listView.RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
+                                listView.RemoveHandler(ButtonBase.ClickEvent,
+                                    new RoutedEventHandler(ColumnHeader_Click));
                             }
 
                             if (e.OldValue == null && e.NewValue != null) {
@@ -42,7 +44,8 @@ public class GridViewSort {
                             bool oldValue = (bool)e.OldValue;
                             bool newValue = (bool)e.NewValue;
                             if (oldValue && !newValue) {
-                                listView.RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
+                                listView.RemoveHandler(ButtonBase.ClickEvent,
+                                    new RoutedEventHandler(ColumnHeader_Click));
                             }
 
                             if (!oldValue && newValue) {
@@ -84,21 +87,25 @@ public class GridViewSort {
     }
 
     private static void ColumnHeader_Click(object sender, RoutedEventArgs e) {
-        if (e.OriginalSource is GridViewColumnHeader headerClicked) {
-            string propertyName = GetPropertyName(headerClicked.Column);
-            if (!string.IsNullOrEmpty(propertyName)) {
-                ListView listView = GetAncestor<ListView>(headerClicked);
-                if (listView != null) {
-                    ICommand command = GetCommand(listView);
-                    if (command != null) {
-                        if (command.CanExecute(propertyName)) {
-                            command.Execute(propertyName);
+        try {
+            if (e.OriginalSource is GridViewColumnHeader headerClicked) {
+                string propertyName = GetPropertyName(headerClicked.Column);
+                if (!string.IsNullOrEmpty(propertyName)) {
+                    ListView listView = GetAncestor<ListView>(headerClicked);
+                    if (listView != null) {
+                        ICommand command = GetCommand(listView);
+                        if (command != null) {
+                            if (command.CanExecute(propertyName)) {
+                                command.Execute(propertyName);
+                            }
+                        } else if (GetAutoSort(listView)) {
+                            ApplySort(listView.Items, propertyName);
                         }
-                    } else if (GetAutoSort(listView)) {
-                        ApplySort(listView.Items, propertyName);
                     }
                 }
             }
+        } catch (Exception) {
+            //ignore
         }
     }
 
@@ -118,7 +125,9 @@ public class GridViewSort {
         if (view.SortDescriptions.Count > 0) {
             SortDescription currentSort = view.SortDescriptions[0];
             if (currentSort.PropertyName == propertyName) {
-                direction = currentSort.Direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                direction = currentSort.Direction == ListSortDirection.Ascending
+                    ? ListSortDirection.Descending
+                    : ListSortDirection.Ascending;
             }
 
             view.SortDescriptions.Clear();

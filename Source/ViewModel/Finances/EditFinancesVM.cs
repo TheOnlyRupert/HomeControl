@@ -190,10 +190,7 @@ public class EditFinancesVM : BaseViewModel {
         MessageBoxResult confirmation;
         switch (param) {
         case "add":
-            if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                ReferenceValues.SoundToPlay = "missing_info";
-                SoundDispatcher.PlaySound();
-            } else if (string.IsNullOrWhiteSpace(CostText)) {
+            if (string.IsNullOrWhiteSpace(DescriptionText) || string.IsNullOrWhiteSpace(CostText)) {
                 ReferenceValues.SoundToPlay = "missing_info";
                 SoundDispatcher.PlaySound();
             } else {
@@ -229,90 +226,71 @@ public class EditFinancesVM : BaseViewModel {
 
             break;
         case "update":
-            try {
-                if (FinanceSelected.Item != null) {
-                    if (string.IsNullOrWhiteSpace(DescriptionText)) {
-                        ReferenceValues.SoundToPlay = "missing_info";
-                        SoundDispatcher.PlaySound();
-                    } else if (string.IsNullOrWhiteSpace(CostText)) {
-                        ReferenceValues.SoundToPlay = "missing_info";
-                        SoundDispatcher.PlaySound();
-                    } else {
-                        confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
-                        if (confirmation == MessageBoxResult.Yes) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "EditFinancesVM",
-                                Description = "Updating finance: User" + user + ", " + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText +
-                                              ", " + CategorySelected + ", " + DetailsText
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
-                            FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
-                                Date = DateTime.Parse(DateText).ToShortDateString(),
-                                Item = DescriptionText,
-                                Cost = CostText,
-                                Category = CategorySelected,
-                                CategoryID = CategoryID,
-                                Details = DetailsText,
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png",
-                                UserId = user
-                            });
-
-                            ReferenceValues.SoundToPlay = "cash";
-                            SoundDispatcher.PlaySound();
-                            FinanceList.Remove(FinanceSelected);
-                            DescriptionText = "";
-                            DetailsText = "";
-                            CostText = "";
-
-                            ReferenceValues.JsonFinanceMaster.FinanceList = FinanceList;
-                            FinanceMaths.RefreshFinances();
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditFinancesVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-            }
-
-            break;
-        case "delete":
-            try {
-                if (FinanceSelected.Item != null) {
-                    confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
+            if (FinanceSelected != null) {
+                if (string.IsNullOrWhiteSpace(DescriptionText) || string.IsNullOrWhiteSpace(CostText)) {
+                    ReferenceValues.SoundToPlay = "missing_info";
+                    SoundDispatcher.PlaySound();
+                } else {
+                    confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
                         ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
                             Module = "EditFinancesVM",
-                            Description = "Removing finance: User" + user + ", " + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
-                                          CategorySelected + ", " + DetailsText
+                            Description = "Updating finance: User" + user + ", " + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText +
+                                          ", " + CategorySelected + ", " + DetailsText
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+
+                        FinanceList.Insert(FinanceList.IndexOf(FinanceSelected), new FinanceBlock {
+                            Date = DateTime.Parse(DateText).ToShortDateString(),
+                            Item = DescriptionText,
+                            Cost = CostText,
+                            Category = CategorySelected,
+                            CategoryID = CategoryID,
+                            Details = DetailsText,
+                            Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png",
+                            UserId = user
+                        });
 
                         ReferenceValues.SoundToPlay = "cash";
                         SoundDispatcher.PlaySound();
                         FinanceList.Remove(FinanceSelected);
+                        DescriptionText = "";
+                        DetailsText = "";
+                        CostText = "";
 
                         ReferenceValues.JsonFinanceMaster.FinanceList = FinanceList;
                         FinanceMaths.RefreshFinances();
+
+                        FinanceSelected = null;
                     }
                 }
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditFinancesVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            }
+
+            break;
+        case "delete":
+            if (FinanceSelected != null) {
+                confirmation = MessageBox.Show("Are you sure you want to delete charge?", "Confirmation", MessageBoxButton.YesNo);
+                if (confirmation == MessageBoxResult.Yes) {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "INFO",
+                        Module = "EditFinancesVM",
+                        Description = "Removing finance: User" + user + ", " + ", " + DateTime.Parse(DateText).ToShortDateString() + ", " + DescriptionText + ", " + CostText + ", " +
+                                      CategorySelected + ", " + DetailsText
+                    });
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+
+                    ReferenceValues.SoundToPlay = "cash";
+                    SoundDispatcher.PlaySound();
+                    FinanceList.Remove(FinanceSelected);
+
+                    ReferenceValues.JsonFinanceMaster.FinanceList = FinanceList;
+                    FinanceMaths.RefreshFinances();
+
+                    FinanceSelected = null;
+                }
             }
 
             break;
@@ -355,28 +333,16 @@ public class EditFinancesVM : BaseViewModel {
         case "subDay":
             try {
                 DateText = Convert.ToDateTime(DateText).AddDays(-1).ToShortDateString();
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditFinancesVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            } catch (Exception) {
+                //ignore
             }
 
             break;
         case "addDay":
             try {
                 DateText = Convert.ToDateTime(DateText).AddDays(1).ToShortDateString();
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditFinancesVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            } catch (Exception) {
+                //ignore
             }
 
             break;
@@ -385,6 +351,7 @@ public class EditFinancesVM : BaseViewModel {
             if (string.IsNullOrWhiteSpace(TotalMonthlyAmount)) {
                 TotalMonthlyAmount = "0";
             }
+
             ReferenceValues.JsonFinanceMaster.TotalMonthlyAmount = int.Parse(TotalMonthlyAmount);
             FinanceMaths.RefreshFinances();
 
@@ -393,12 +360,14 @@ public class EditFinancesVM : BaseViewModel {
     }
 
     private void PopulateDetailedView(FinanceBlock value) {
-        DescriptionText = value.Item;
-        DateText = value.Date;
-        CostText = value.Cost;
-        DetailsText = value.Details;
-        CategorySelected = value.Category;
-        UserLogic(value.UserId);
+        if (FinanceSelected != null) {
+            DescriptionText = value.Item;
+            DateText = value.Date;
+            CostText = value.Cost;
+            DetailsText = value.Details;
+            CategorySelected = value.Category;
+            UserLogic(value.UserId);
+        }
     }
 
     #region Fields

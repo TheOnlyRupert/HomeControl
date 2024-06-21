@@ -1,34 +1,84 @@
-﻿<Window x:Class="HomeControl.Source.Modules.Games.CoinFlip" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" Height="640" Width="640"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Black" WindowStyle="None" BorderBrush="CornflowerBlue" BorderThickness="4"
-        FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
+﻿<Window
+    x:Class="HomeControl.Source.Modules.Games.CoinFlip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    Height="640"
+    Width="640"
+    WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize"
+    Background="Black"
+    WindowStyle="None"
+    BorderBrush="CornflowerBlue"
+    BorderThickness="4"
+    FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition
+                Height="*"/>
+            <RowDefinition
+                Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Image Grid.Row="0" Source="{Binding ImageSource}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="64"/>
+        <Image
+            Grid.Row="0"
+            Source="{Binding ImageSource}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="64"/>
 
-        <TextBlock Grid.Row="0" Text="{Binding GameStats}" Foreground="White" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="4"/>
+        <TextBlock
+            Grid.Row="0"
+            Text="{Binding GameStats}"
+            Foreground="White"
+            FontSize="18"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="4"/>
 
-        <Grid Grid.Row="1">
+        <Grid
+            Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition
+                    Width="Auto"/>
+                <ColumnDefinition
+                    Width="*"/>
+                <ColumnDefinition
+                    Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Name="MainFocusItem" Content="Flip Coin" FontSize="24" Command="{Binding ButtonCommand}" Margin="8" CommandParameter="flip">
+            <Button
+                Grid.Column="0"
+                Name="MainFocusItem"
+                Content="Flip Coin"
+                FontSize="24"
+                Command="{Binding ButtonCommand}"
+                Margin="8"
+                CommandParameter="flip">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="White"
+                                        BorderThickness="1"
+                                        Padding="16 8">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -37,16 +87,36 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Column="2" Content="Exit" FontSize="24" IsCancel="True" Margin="8" MinWidth="128" HorizontalAlignment="Right">
+            <Button
+                Grid.Column="2"
+                Content="Exit"
+                FontSize="24"
+                IsCancel="True"
+                Margin="8"
+                MinWidth="128"
+                HorizontalAlignment="Right">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Template">
+                    <Style
+                        TargetType="{x:Type Button}">
+                        <Setter
+                            Property="Background"
+                            Value="Transparent"/>
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                        <Setter
+                            Property="Template">
                             <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="White" BorderThickness="1" Padding="16 8">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ControlTemplate
+                                    TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="White"
+                                        BorderThickness="1"
+                                        Padding="16 8">
+                                        <ContentPresenter
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
