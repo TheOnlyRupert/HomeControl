@@ -15,7 +15,8 @@
                   stroke="#e6effc" stroke-miterlimit="10" stroke-width="6" fill="url(#a)"/>
         </symbol>
         <symbol id="f" viewBox="0 0 168 212" overflow="visible">
-            <circle cx="86" cy="186" r="24" stroke="#afb4bc" stroke-miterlimit="10" stroke-width="4" fill="url(#b)" opacity="0">
+            <circle cx="86" cy="186" r="24" stroke="#afb4bc" stroke-miterlimit="10" stroke-width="4" fill="url(#b)"
+                    opacity="0">
                 <animateTransform
                         id="x1"
                         attributeName="transform"
@@ -40,7 +41,8 @@
                         dur="2.25s"
                         keyTimes="0; .17; .83; 1"/>
             </circle>
-            <circle cx="86" cy="186" r="24" stroke="#afb4bc" stroke-miterlimit="10" stroke-width="4" fill="url(#b)" opacity="0">
+            <circle cx="86" cy="186" r="24" stroke="#afb4bc" stroke-miterlimit="10" stroke-width="4" fill="url(#b)"
+                    opacity="0">
                 <animateTransform
                         id="x2"
                         attributeName="transform"
@@ -65,7 +67,8 @@
                         dur="2.25s"
                         keyTimes="0; .17; .83; 1"/>
             </circle>
-            <circle cx="86" cy="186" r="24" stroke="#afb4bc" stroke-miterlimit="10" stroke-width="4" fill="url(#b)" opacity="0">
+            <circle cx="86" cy="186" r="24" stroke="#afb4bc" stroke-miterlimit="10" stroke-width="4" fill="url(#b)"
+                    opacity="0">
                 <animateTransform
                         id="x3"
                         attributeName="transform"

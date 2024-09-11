@@ -28,7 +28,9 @@ public class HvacVM : BaseViewModel {
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
     private async void UpdateWeather() {
         if (ReferenceValues.EnableWeather) {

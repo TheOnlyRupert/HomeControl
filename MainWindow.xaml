@@ -19,18 +19,18 @@
             Background="Black">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid
                 Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                 </Grid.RowDefinitions>
 
                 <Grid
@@ -38,69 +38,69 @@
                     Grid.Column="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
                             Width="Auto"
-                            MinWidth="96"/>
+                            MinWidth="96" />
                     </Grid.ColumnDefinitions>
 
                     <Frame
                         Grid.Column="0"
                         Source="Source/Modules/ButtonStack.xaml"
-                        Focusable="False"/>
+                        Focusable="False" />
                     <Frame
                         Grid.Column="1"
                         Source="Source/Modules/Timer/Timer.xaml"
-                        Focusable="False"/>
+                        Focusable="False" />
                 </Grid>
 
                 <Frame
                     Grid.Column="0"
                     Grid.Row="1"
                     Source="Source/Modules/Calendar/Calendar.xaml"
-                    Focusable="False"/>
+                    Focusable="False" />
             </Grid>
 
             <Grid
                 Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="2*"/>
+                        Height="2*" />
                     <RowDefinition
-                        Height="4*"/>
+                        Height="4*" />
                     <RowDefinition
-                        Height="3*"/>
+                        Height="3*" />
                 </Grid.RowDefinitions>
 
                 <Grid
                     Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="2*"/>
+                            Width="2*" />
                     </Grid.ColumnDefinitions>
 
                     <Grid
                         Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="*"/>
+                                Height="*" />
                         </Grid.RowDefinitions>
 
                         <Frame
                             Grid.Row="0"
                             Source="Source/Modules/Christmas.xaml"
                             Focusable="False"
-                            Visibility="{Binding ChristmasVisibility}"/>
+                            Visibility="{Binding ChristmasVisibility}" />
 
                         <Frame
                             Grid.Row="1"
                             Source="Source/Modules/Finances/Finances.xaml"
                             Focusable="False"
-                            Margin="4 4 4 0"/>
+                            Margin="4 4 4 0" />
                         <Button
                             Grid.Row="1"
                             Command="{Binding ButtonCommand}"
@@ -111,10 +111,10 @@
                                     TargetType="{x:Type Button}">
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                     <Setter
                                         Property="Template">
                                         <Setter.Value>
@@ -127,7 +127,7 @@
                                                     Padding="4">
                                                     <ContentPresenter
                                                         HorizontalAlignment="Stretch"
-                                                        VerticalAlignment="Stretch"/>
+                                                        VerticalAlignment="Stretch" />
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -141,17 +141,17 @@
                         Grid.Column="1"
                         Grid.Row="0"
                         Source="Source/Modules/Hvac/Hvac.xaml"
-                        Focusable="False"/>
+                        Focusable="False" />
                 </Grid>
 
                 <Frame
                     Grid.Row="1"
                     Source="Source/Modules/Weather.xaml"
-                    Focusable="False"/>
+                    Focusable="False" />
                 <Frame
                     Grid.Row="2"
                     Source="Source/Modules/Behavior/Behavior.xaml"
-                    Focusable="False"/>
+                    Focusable="False" />
             </Grid>
 
             <Canvas
@@ -159,7 +159,7 @@
                 Grid.ColumnSpan="2"
                 Name="canvas"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"/>
+                VerticalAlignment="Stretch" />
         </Grid>
     </Border>
 </Window>

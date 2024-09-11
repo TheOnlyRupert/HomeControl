@@ -6,7 +6,8 @@
             <stop offset="1" stop-color="#f59e0b"/>
         </linearGradient>
         <clipPath id="b">
-            <path d="M512,306H296.08a21.5,21.5,0,0,0-14.16,5.32L256,334l-25.92-22.68A21.5,21.5,0,0,0,215.92,306H0V0H512Z" fill="none"/>
+            <path d="M512,306H296.08a21.5,21.5,0,0,0-14.16,5.32L256,334l-25.92-22.68A21.5,21.5,0,0,0,215.92,306H0V0H512Z"
+                  fill="none"/>
         </clipPath>
         <symbol id="c" viewBox="0 0 384 384">
             <!-- sun-core -->
@@ -28,5 +29,6 @@
     <g clip-path="url(#b)">
         <use width="384" height="384" transform="translate(64 100)" xlink:href="#c"/>
     </g>
-    <polyline points="128 332 216 332 256 368 296 332 384 332" fill="none" stroke="#374151" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"/>
+    <polyline points="128 332 216 332 256 368 296 332 384 332" fill="none" stroke="#374151" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="18"/>
 </svg>

@@ -50,7 +50,9 @@ public class EditHvacScheduleVM : BaseViewModel {
         TemperatureDisplay();
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
     private void TemperatureDisplay() {
         double f = temp * 1.8 + 32;

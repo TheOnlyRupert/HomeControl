@@ -19,10 +19,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -35,7 +35,7 @@
                                     Padding="4">
                                     <ContentPresenter
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -46,13 +46,13 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
@@ -61,28 +61,28 @@
                     FontSize="18"
                     Margin="0 2"
                     Foreground="{Binding Timer1Color}"
-                    TextAlignment="Center"/>
+                    TextAlignment="Center" />
                 <TextBlock
                     Grid.Row="1"
                     Text="{Binding Timer2Text}"
                     FontSize="18"
                     Margin="0 1"
                     Foreground="{Binding Timer2Color}"
-                    TextAlignment="Center"/>
+                    TextAlignment="Center" />
                 <TextBlock
                     Grid.Row="2"
                     Text="{Binding Timer3Text}"
                     FontSize="18"
                     Margin="0 1"
                     Foreground="{Binding Timer3Color}"
-                    TextAlignment="Center"/>
+                    TextAlignment="Center" />
                 <TextBlock
                     Grid.Row="3"
                     Text="{Binding Timer4Text}"
                     FontSize="18"
                     Margin="0 2"
                     Foreground="{Binding Timer4Color}"
-                    TextAlignment="Center"/>
+                    TextAlignment="Center" />
             </Grid>
         </Button>
     </Border>

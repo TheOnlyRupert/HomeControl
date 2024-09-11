@@ -19,7 +19,9 @@ public class CoinFlipVM : BaseViewModel {
         RefreshStats();
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonCommandLogic, true);
+    }
 
     private void RefreshStats() {
         try {

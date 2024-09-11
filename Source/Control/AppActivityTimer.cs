@@ -48,7 +48,7 @@ public class AppActivityTimer {
                     mea.XButton1 == MouseButtonState.Released &&
                     mea.XButton2 == MouseButtonState.Released &&
                     (_MonitorMousePosition == false ||
-                     (_MonitorMousePosition && _inactiveMousePosition == mea.GetPosition(Application.Current.MainWindow)))) {
+                     _MonitorMousePosition && _inactiveMousePosition == mea.GetPosition(Application.Current.MainWindow))) {
                     return;
                 }
             }

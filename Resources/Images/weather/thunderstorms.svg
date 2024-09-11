@@ -16,7 +16,8 @@
         </symbol>
         <symbol id="d" viewBox="0 0 102.66 186.75">
             <!-- lightning-bolt -->
-            <polygon points="34.77 2 2.77 98 34.77 98 18.77 178 98.78 66 50.77 66 82.78 2 34.77 2" stroke="#f6a823" stroke-miterlimit="10" stroke-width="4" fill="url(#b)">
+            <polygon points="34.77 2 2.77 98 34.77 98 18.77 178 98.78 66 50.77 66 82.78 2 34.77 2" stroke="#f6a823"
+                     stroke-miterlimit="10" stroke-width="4" fill="url(#b)">
                 <animate
                         id="x1"
                         attributeName="opacity"

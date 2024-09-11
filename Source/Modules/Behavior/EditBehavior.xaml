@@ -17,18 +17,18 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="64"/>
+                Height="64" />
         </Grid.RowDefinitions>
 
         <Grid
             Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid
@@ -36,28 +36,26 @@
                 Focusable="False">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="128"/>
+                        Height="128" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="*"/>
-                    <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition
-                        Width="*"/>
+                        Width="*" />
                     <ColumnDefinition
-                        Width="2*"/>
+                        Width="2*" />
                     <ColumnDefinition
-                        Width="*"/>
+                        Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock
@@ -69,7 +67,7 @@
                     Foreground="White"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Focusable="False"/>
+                    Focusable="False" />
 
                 <Image
                     Grid.Column="0"
@@ -77,114 +75,12 @@
                     Grid.ColumnSpan="3"
                     Source="{Binding ImageUser}"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
-
-                <Grid
-                    Grid.Row="2"
-                    Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*"/>
-                        <ColumnDefinition
-                            Width="*"/>
-                        <ColumnDefinition
-                            Width="*"/>
-                        <ColumnDefinition
-                            Width="*"/>
-                        <ColumnDefinition
-                            Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image
-                        Grid.Column="0"
-                        Source="{Binding ChildStar1}"
-                        Height="48"/>
-                    <Image
-                        Grid.Column="1"
-                        Source="{Binding ChildStar2}"
-                        Height="48"/>
-                    <Image
-                        Grid.Column="2"
-                        Source="{Binding ChildStar3}"
-                        Height="48"/>
-                    <Image
-                        Grid.Column="3"
-                        Source="{Binding ChildStar4}"
-                        Height="48"/>
-                    <Image
-                        Grid.Column="4"
-                        Source="{Binding ChildStar5}"
-                        Height="48"/>
-                </Grid>
-
-                <Grid
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Margin="0 16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*"/>
-                        <ColumnDefinition
-                            Width="*"/>
-                        <ColumnDefinition
-                            Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Image
-                        Grid.Column="0"
-                        Source="{Binding ChildStrike1}"
-                        Height="48"/>
-                    <Image
-                        Grid.Column="1"
-                        Source="{Binding ChildStrike2}"
-                        Height="48"/>
-                    <Image
-                        Grid.Column="2"
-                        Source="{Binding ChildStrike3}"
-                        Height="48"/>
-                </Grid>
-
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="2"
-                    Content="𝕏"
-                    Command="{Binding ButtonCommand}"
-                    FontSize="24"
-                    CommandParameter="addStrike"
-                    Margin="16">
-                    <Button.Style>
-                        <Style
-                            TargetType="{x:Type Button}">
-                            <Setter
-                                Property="Background"
-                                Value="Transparent"/>
-                            <Setter
-                                Property="Foreground"
-                                Value="White"/>
-                            <Setter
-                                Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate
-                                        TargetType="{x:Type Button}">
-                                        <Border
-                                            Background="{TemplateBinding Background}"
-                                            BorderBrush="White"
-                                            BorderThickness="1">
-                                            <ContentPresenter
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                    VerticalAlignment="Center" />
 
                 <Button
                     Grid.Column="0"
-                    Grid.Row="4"
-                    Content="-1"
+                    Grid.Row="2"
+                    Content="-☆"
                     Command="{Binding ButtonCommand}"
                     FontSize="24"
                     Margin="16"
@@ -194,10 +90,10 @@
                             TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="Template">
                                 <Setter.Value>
@@ -209,7 +105,7 @@
                                             BorderThickness="1">
                                             <ContentPresenter
                                                 HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -218,20 +114,50 @@
                     </Button.Style>
                 </Button>
 
-                <TextBlock
+
+                <Grid
+                    Grid.Row="2"
                     Grid.Column="1"
-                    Grid.Row="4"
-                    Text="{Binding ProgressBarChildValueText}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="24"
-                    Foreground="GreenYellow"
-                    Focusable="False"/>
+                    Margin="0 16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image
+                        Grid.Column="0"
+                        Source="{Binding ChildStar1}"
+                        Height="48" />
+                    <Image
+                        Grid.Column="1"
+                        Source="{Binding ChildStar2}"
+                        Height="48" />
+                    <Image
+                        Grid.Column="2"
+                        Source="{Binding ChildStar3}"
+                        Height="48" />
+                    <Image
+                        Grid.Column="3"
+                        Source="{Binding ChildStar4}"
+                        Height="48" />
+                    <Image
+                        Grid.Column="4"
+                        Source="{Binding ChildStar5}"
+                        Height="48" />
+                </Grid>
 
                 <Button
                     Grid.Column="2"
-                    Grid.Row="4"
-                    Content="+1"
+                    Grid.Row="2"
+                    Content="+☆"
                     Command="{Binding ButtonCommand}"
                     FontSize="24"
                     Margin="16"
@@ -241,10 +167,10 @@
                             TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="Template">
                                 <Setter.Value>
@@ -256,7 +182,71 @@
                                             BorderThickness="1">
                                             <ContentPresenter
                                                 HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Grid
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="0 16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image
+                        Grid.Column="0"
+                        Source="{Binding ChildStrike1}"
+                        Height="48" />
+                    <Image
+                        Grid.Column="1"
+                        Source="{Binding ChildStrike2}"
+                        Height="48" />
+                    <Image
+                        Grid.Column="2"
+                        Source="{Binding ChildStrike3}"
+                        Height="48" />
+                </Grid>
+
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Content="+ X"
+                    Command="{Binding ButtonCommand}"
+                    FontSize="24"
+                    CommandParameter="addStrike"
+                    Margin="16">
+                    <Button.Style>
+                        <Style
+                            TargetType="{x:Type Button}">
+                            <Setter
+                                Property="Background"
+                                Value="Transparent" />
+                            <Setter
+                                Property="Foreground"
+                                Value="White" />
+                            <Setter
+                                Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate
+                                        TargetType="{x:Type Button}">
+                                        <Border
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="White"
+                                            BorderThickness="1">
+                                            <ContentPresenter
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -266,7 +256,7 @@
                 </Button>
 
                 <Button
-                    Grid.Row="5"
+                    Grid.Row="4"
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
                     FontSize="64"
@@ -280,10 +270,10 @@
                             TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="Template">
                                 <Setter.Value>
@@ -295,7 +285,7 @@
                                             BorderThickness="1">
                                             <ContentPresenter
                                                 HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -304,7 +294,7 @@
                     </Button.Style>
                     <Image
                         Source="../../../Resources/Images/behavior/reward.png"
-                        Stretch="Fill"/>
+                        Stretch="Fill" />
                 </Button>
             </Grid>
 
@@ -312,17 +302,17 @@
                 Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="64"/>
+                        Height="64" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
@@ -331,7 +321,7 @@
                     Foreground="White"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    FontSize="24"/>
+                    FontSize="24" />
 
                 <Button
                     Grid.Row="1"
@@ -344,10 +334,10 @@
                             TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="Template">
                                 <Setter.Value>
@@ -360,7 +350,7 @@
                                             Padding="0 16">
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -370,11 +360,11 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <TextBlock
@@ -382,14 +372,14 @@
                             Text="{Binding CurrentDayText}"
                             Foreground="White"
                             FontSize="16"
-                            HorizontalAlignment="Center"/>
+                            HorizontalAlignment="Center" />
                         <TextBlock
                             Grid.Row="1"
                             Text="{Binding TasksCompletedDay}"
                             Foreground="White"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"/>
+                            FontSize="16" />
                         <ProgressBar
                             Grid.Row="2"
                             Value="{Binding TasksCompletedDayProgressValue}"
@@ -399,14 +389,14 @@
                             BorderBrush="DarkSlateGray"
                             BorderThickness="1"
                             Maximum="100"
-                            FontSize="16"/>
+                            FontSize="16" />
                         <TextBlock
                             Grid.Row="2"
                             Text="{Binding TasksCompletedDayProgressText}"
                             Foreground="White"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"/>
+                            FontSize="16" />
                     </Grid>
                 </Button>
 
@@ -421,10 +411,10 @@
                             TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="Template">
                                 <Setter.Value>
@@ -437,7 +427,7 @@
                                             Padding="0 16">
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -447,11 +437,11 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <TextBlock
@@ -459,14 +449,14 @@
                             Text="{Binding CurrentWeekText}"
                             HorizontalAlignment="Center"
                             Foreground="White"
-                            FontSize="16"/>
+                            FontSize="16" />
                         <TextBlock
                             Grid.Row="1"
                             Text="{Binding TasksCompletedWeek}"
                             Foreground="White"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"/>
+                            FontSize="16" />
                         <ProgressBar
                             Grid.Row="2"
                             Value="{Binding TasksCompletedWeekProgressValue}"
@@ -475,14 +465,14 @@
                             Background="Transparent"
                             BorderBrush="DarkSlateGray"
                             BorderThickness="1"
-                            FontSize="16"/>
+                            FontSize="16" />
                         <TextBlock
                             Grid.Row="2"
                             Text="{Binding TasksCompletedWeekProgressText}"
                             Foreground="White"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"/>
+                            FontSize="16" />
                     </Grid>
                 </Button>
 
@@ -497,10 +487,10 @@
                             TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="Template">
                                 <Setter.Value>
@@ -513,7 +503,7 @@
                                             Padding="0 16">
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -523,11 +513,11 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <TextBlock
@@ -535,14 +525,14 @@
                             Text="{Binding CurrentMonthText}"
                             FontSize="16"
                             Foreground="White"
-                            HorizontalAlignment="Center"/>
+                            HorizontalAlignment="Center" />
                         <TextBlock
                             Grid.Row="1"
                             Text="{Binding TasksCompletedMonth}"
                             Foreground="White"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"/>
+                            FontSize="16" />
                         <ProgressBar
                             Grid.Row="2"
                             Value="{Binding TasksCompletedMonthProgressValue}"
@@ -551,14 +541,14 @@
                             Background="Transparent"
                             BorderBrush="DarkSlateGray"
                             BorderThickness="1"
-                            FontSize="16"/>
+                            FontSize="16" />
                         <TextBlock
                             Grid.Row="2"
                             Text="{Binding TasksCompletedMonthProgressText}"
                             Foreground="White"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"/>
+                            FontSize="16" />
                     </Grid>
                 </Button>
 
@@ -573,10 +563,10 @@
                             TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="Template">
                                 <Setter.Value>
@@ -589,7 +579,7 @@
                                             Padding="0 16">
                                             <ContentPresenter
                                                 HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -599,11 +589,11 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                             <RowDefinition
-                                Height="Auto"/>
+                                Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <TextBlock
@@ -611,14 +601,14 @@
                             Text="{Binding CurrentQuarterText}"
                             FontSize="16"
                             Foreground="White"
-                            HorizontalAlignment="Center"/>
+                            HorizontalAlignment="Center" />
                         <TextBlock
                             Grid.Row="1"
                             Text="{Binding TasksCompletedQuarter}"
                             Foreground="White"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"/>
+                            FontSize="16" />
                         <ProgressBar
                             Grid.Row="2"
                             Value="{Binding TasksCompletedQuarterProgressValue}"
@@ -627,14 +617,14 @@
                             Foreground="{Binding TasksCompletedQuarterProgressColor}"
                             Background="Transparent"
                             BorderBrush="DarkSlateGray"
-                            BorderThickness="1"/>
+                            BorderThickness="1" />
                         <TextBlock
                             Grid.Row="2"
                             Text="{Binding TasksCompletedQuarterProgressText}"
                             Foreground="White"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="16"/>
+                            FontSize="16" />
                     </Grid>
                 </Button>
 
@@ -651,10 +641,10 @@
                             TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="Template">
                                 <Setter.Value>
@@ -667,7 +657,7 @@
                                             Padding="0 4">
                                             <ContentPresenter
                                                 HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
+                                                VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -682,15 +672,15 @@
             Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button
@@ -706,10 +696,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -722,7 +712,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>

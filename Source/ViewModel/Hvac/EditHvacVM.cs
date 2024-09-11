@@ -14,7 +14,9 @@ public class EditHvacVM : BaseViewModel {
         GetButtonColors();
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
     private void TemperatureDisplay() {
         double f = ReferenceValues.TemperatureSet * 1.8 + 32;

@@ -16,11 +16,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="64"/>
+                Height="64" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="Auto"/>
+                Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid
@@ -29,20 +29,20 @@
             Margin="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="32"/>
+                    Width="32" />
                 <ColumnDefinition
-                    Width="64"/>
+                    Width="64" />
                 <ColumnDefinition
-                    Width="32"/>
+                    Width="32" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
             </Grid.RowDefinitions>
 
             <Button
@@ -57,10 +57,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="{Binding QuestionsNormalColor}"/>
+                            Value="{Binding QuestionsNormalColor}" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -73,7 +73,7 @@
                                         Padding="8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -94,10 +94,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="{Binding QuestionsAdultColor}"/>
+                            Value="{Binding QuestionsAdultColor}" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -110,7 +110,7 @@
                                         Padding="8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -128,19 +128,19 @@
             VerticalAlignment="Center"
             Foreground="White"
             Visibility="{Binding GameVisibility}"
-            TextAlignment="Center"/>
+            TextAlignment="Center" />
 
         <Grid
             Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button
@@ -158,10 +158,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -174,7 +174,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -197,10 +197,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -213,7 +213,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -236,10 +236,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -252,7 +252,7 @@
                                         Padding="8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>

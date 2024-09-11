@@ -61,7 +61,9 @@ public class EditCalendarVM : BaseViewModel {
         PopulateEvent();
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
     private void PopulateEvent() {
         EventDateWeekday = ReferenceValues.CalendarEventDate.ToString("dddd");

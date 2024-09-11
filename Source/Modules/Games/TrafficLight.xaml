@@ -22,10 +22,10 @@
             BorderThickness="1"
             Visibility="{Binding ProgressBarVisibility}"
             BorderBrush="DarkSlateGray"
-            Maximum="100"/>
+            Maximum="100" />
 
         <Grid
-            Background="{Binding GameColor}"/>
+            Background="{Binding GameColor}" />
 
         <Label
             Content="PAUSED"
@@ -35,7 +35,7 @@
             Foreground="White"
             Background="Black"
             Visibility="{Binding GamePausedVisibility}"
-            HorizontalContentAlignment="Center"/>
+            HorizontalContentAlignment="Center" />
 
         <TextBlock
             Text="{Binding GameLevelText}"
@@ -44,6 +44,6 @@
             VerticalAlignment="Bottom"
             FontSize="24"
             Foreground="White"
-            Visibility="{Binding LevelTextVisibility}"/>
+            Visibility="{Binding LevelTextVisibility}" />
     </Grid>
 </Window>

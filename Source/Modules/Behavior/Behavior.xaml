@@ -4,133 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:gif="http://wpfanimatedgif.codeplex.com"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
-            <ColumnDefinition
-                Width="Auto"/>
+                Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto"/>
-            <RowDefinition
-                Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Grid
-            HorizontalAlignment="Center"
-            Grid.Row="0"
-            Grid.RowSpan="2"
-            Grid.Column="5"
-            Margin="2 0 4 0">
-            <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="Auto"/>
-                <RowDefinition
-                    Height="*"/>
-            </Grid.RowDefinitions>
-
-            <TextBlock
-                Grid.Row="0"
-                Text="Remaining Day"
-                HorizontalAlignment="Center"
-                Foreground="White"/>
-            <TextBlock
-                Grid.Row="1"
-                Text="{Binding RemainingDay}"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Foreground="{Binding RemainingDayColor}"/>
-            <TextBlock
-                Grid.Row="2"
-                Text="Remaining Week"
-                HorizontalAlignment="Center"
-                Foreground="White"
-                Margin="0 16 0 0"/>
-            <TextBlock
-                Grid.Row="3"
-                Text="{Binding RemainingWeek}"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Foreground="{Binding RemainingWeekColor}"/>
-            <TextBlock
-                Grid.Row="4"
-                Text="Remaining Month"
-                HorizontalAlignment="Center"
-                Foreground="White"
-                Margin="0 16 0 0"/>
-            <TextBlock
-                Grid.Row="5"
-                Text="{Binding RemainingMonth}"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Foreground="{Binding RemainingMonthColor}"/>
-            <TextBlock
-                Grid.Row="6"
-                Text="Remaining Quarter"
-                HorizontalAlignment="Center"
-                Foreground="White"
-                Margin="0 16 0 0"/>
-            <TextBlock
-                Grid.Row="7"
-                Text="{Binding RemainingQuarter}"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Foreground="{Binding RemainingQuarterColor}"/>
-            <TextBlock
-                Grid.Row="8"
-                Text="Remaining Year"
-                HorizontalAlignment="Center"
-                Foreground="White"
-                Margin="0 16 0 0"/>
-            <TextBlock
-                Grid.Row="9"
-                Text="{Binding RemainingYear}"
-                HorizontalAlignment="Center"
-                FontSize="18"
-                Foreground="{Binding RemainingYearColor}"/>
-
-            <Image
-                Grid.Row="10"
-                VerticalAlignment="Center"
-                Height="64"
-                HorizontalAlignment="Center"
-                Visibility="{Binding TrashDayVisibility}"
-                gif:ImageBehavior.AnimatedSource="../../../Resources/Images/icons/trash.gif"/>
-        </Grid>
-
         <Button
-            Grid.Row="1"
             Grid.Column="0"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
@@ -144,10 +33,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -159,7 +48,7 @@
                                     BorderThickness="1">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -169,63 +58,63 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Image
                     Grid.Row="0"
                     Source="{Binding ImageUser1}"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <Grid
                     Grid.Row="1"
                     Visibility="{Binding User1BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
                         Source="{Binding User1Star1}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="1"
                         Source="{Binding User1Star2}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="2"
                         Source="{Binding User1Star3}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="3"
                         Source="{Binding User1Star4}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="4"
                         Source="{Binding User1Star5}"
-                        Height="32"/>
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -233,22 +122,25 @@
                     Visibility="{Binding User1BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
-                        Source="{Binding User1Strike1}"/>
+                        Source="{Binding User1Strike1}"
+                        Height="32" />
                     <Image
                         Grid.Column="1"
-                        Source="{Binding User1Strike2}"/>
+                        Source="{Binding User1Strike2}"
+                        Height="32" />
                     <Image
                         Grid.Column="2"
-                        Source="{Binding User1Strike3}"/>
+                        Source="{Binding User1Strike3}"
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -262,13 +154,13 @@
                         Foreground="{Binding User1TasksCompletedDayProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User1TasksCompletedDayProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -282,13 +174,13 @@
                         Foreground="{Binding User1TasksCompletedWeekProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User1TasksCompletedWeekProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -302,13 +194,13 @@
                         Foreground="{Binding User1TasksCompletedMonthProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User1TasksCompletedMonthProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -322,19 +214,18 @@
                         Foreground="{Binding User1TasksCompletedQuarterProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User1TasksCompletedQuarterProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
             </Grid>
         </Button>
 
         <Button
-            Grid.Row="1"
             Grid.Column="1"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
@@ -348,10 +239,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -363,7 +254,7 @@
                                     BorderThickness="1">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -373,63 +264,63 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Image
                     Grid.Row="0"
                     Source="{Binding ImageUser2}"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <Grid
                     Grid.Row="1"
                     Visibility="{Binding User2BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
                         Source="{Binding User2Star1}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="1"
                         Source="{Binding User2Star2}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="2"
                         Source="{Binding User2Star3}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="3"
                         Source="{Binding User2Star4}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="4"
                         Source="{Binding User2Star5}"
-                        Height="32"/>
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -437,22 +328,25 @@
                     Visibility="{Binding User2BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
-                        Source="{Binding User2Strike1}"/>
+                        Source="{Binding User2Strike1}"
+                        Height="32" />
                     <Image
                         Grid.Column="1"
-                        Source="{Binding User2Strike2}"/>
+                        Source="{Binding User2Strike2}"
+                        Height="32" />
                     <Image
                         Grid.Column="2"
-                        Source="{Binding User2Strike3}"/>
+                        Source="{Binding User2Strike3}"
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -466,13 +360,13 @@
                         Foreground="{Binding User2TasksCompletedDayProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User2TasksCompletedDayProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -486,13 +380,13 @@
                         Foreground="{Binding User2TasksCompletedWeekProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User2TasksCompletedWeekProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -506,13 +400,13 @@
                         Foreground="{Binding User2TasksCompletedMonthProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User2TasksCompletedMonthProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -526,19 +420,18 @@
                         Foreground="{Binding User2TasksCompletedQuarterProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User2TasksCompletedQuarterProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
             </Grid>
         </Button>
 
         <Button
-            Grid.Row="1"
             Grid.Column="2"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
@@ -552,10 +445,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -567,7 +460,7 @@
                                     BorderThickness="1">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -577,63 +470,63 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Image
                     Grid.Row="0"
                     Source="{Binding ImageUser3}"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <Grid
                     Grid.Row="1"
                     Visibility="{Binding User3BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
                         Source="{Binding User3Star1}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="1"
                         Source="{Binding User3Star2}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="2"
                         Source="{Binding User3Star3}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="3"
                         Source="{Binding User3Star4}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="4"
                         Source="{Binding User3Star5}"
-                        Height="32"/>
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -641,22 +534,25 @@
                     Visibility="{Binding User3BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
-                        Source="{Binding User3Strike1}"/>
+                        Source="{Binding User3Strike1}"
+                        Height="32" />
                     <Image
                         Grid.Column="1"
-                        Source="{Binding User3Strike2}"/>
+                        Source="{Binding User3Strike2}"
+                        Height="32" />
                     <Image
                         Grid.Column="2"
-                        Source="{Binding User3Strike3}"/>
+                        Source="{Binding User3Strike3}"
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -670,13 +566,13 @@
                         Foreground="{Binding User3TasksCompletedDayProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User3TasksCompletedDayProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -690,13 +586,13 @@
                         Foreground="{Binding User3TasksCompletedWeekProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User3TasksCompletedWeekProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -710,13 +606,13 @@
                         Foreground="{Binding User3TasksCompletedMonthProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User3TasksCompletedMonthProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -730,19 +626,18 @@
                         Foreground="{Binding User3TasksCompletedQuarterProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User3TasksCompletedQuarterProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
             </Grid>
         </Button>
 
         <Button
-            Grid.Row="1"
             Grid.Column="3"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
@@ -756,10 +651,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -771,7 +666,7 @@
                                     BorderThickness="1">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -781,63 +676,63 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Image
                     Grid.Row="0"
                     Source="{Binding ImageUser4}"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <Grid
                     Grid.Row="1"
                     Visibility="{Binding User4BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
                         Source="{Binding User4Star1}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="1"
                         Source="{Binding User4Star2}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="2"
                         Source="{Binding User4Star3}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="3"
                         Source="{Binding User4Star4}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="4"
                         Source="{Binding User4Star5}"
-                        Height="32"/>
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -845,22 +740,25 @@
                     Visibility="{Binding User4BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
-                        Source="{Binding User4Strike1}"/>
+                        Source="{Binding User4Strike1}"
+                        Height="32" />
                     <Image
                         Grid.Column="1"
-                        Source="{Binding User4Strike2}"/>
+                        Source="{Binding User4Strike2}"
+                        Height="32" />
                     <Image
                         Grid.Column="2"
-                        Source="{Binding User4Strike3}"/>
+                        Source="{Binding User4Strike3}"
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -874,13 +772,13 @@
                         Foreground="{Binding User4TasksCompletedDayProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User4TasksCompletedDayProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -894,13 +792,13 @@
                         Foreground="{Binding User4TasksCompletedWeekProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User4TasksCompletedWeekProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -914,13 +812,13 @@
                         Foreground="{Binding User4TasksCompletedMonthProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User4TasksCompletedMonthProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -934,19 +832,18 @@
                         Foreground="{Binding User5TasksCompletedQuarterProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User4TasksCompletedQuarterProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
             </Grid>
         </Button>
 
         <Button
-            Grid.Row="1"
             Grid.Column="4"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
@@ -960,10 +857,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -975,7 +872,7 @@
                                     BorderThickness="1">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -985,63 +882,63 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Image
                     Grid.Row="0"
                     Source="{Binding ImageUser5}"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <Grid
                     Grid.Row="1"
                     Visibility="{Binding User5BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
                         Source="{Binding User5Star1}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="1"
                         Source="{Binding User5Star2}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="2"
                         Source="{Binding User5Star3}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="3"
                         Source="{Binding User5Star4}"
-                        Height="32"/>
+                        Height="32" />
                     <Image
                         Grid.Column="4"
                         Source="{Binding User5Star5}"
-                        Height="32"/>
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -1049,22 +946,25 @@
                     Visibility="{Binding User5BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Image
                         Grid.Column="0"
-                        Source="{Binding User5Strike1}"/>
+                        Source="{Binding User5Strike1}"
+                        Height="32" />
                     <Image
                         Grid.Column="1"
-                        Source="{Binding User5Strike2}"/>
+                        Source="{Binding User5Strike2}"
+                        Height="32" />
                     <Image
                         Grid.Column="2"
-                        Source="{Binding User5Strike3}"/>
+                        Source="{Binding User5Strike3}"
+                        Height="32" />
                 </Grid>
 
                 <Grid
@@ -1078,13 +978,13 @@
                         Foreground="{Binding User5TasksCompletedDayProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User5TasksCompletedDayProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -1098,13 +998,13 @@
                         Foreground="{Binding User5TasksCompletedWeekProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User5TasksCompletedWeekProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -1118,13 +1018,13 @@
                         Foreground="{Binding User5TasksCompletedMonthProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User5TasksCompletedMonthProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
 
                 <Grid
@@ -1138,13 +1038,13 @@
                         Foreground="{Binding User5TasksCompletedQuarterProgressColor}"
                         Background="Transparent"
                         BorderBrush="DarkSlateGray"
-                        BorderThickness="1"/>
+                        BorderThickness="1" />
                     <TextBlock
                         Grid.Row="0"
                         Text="{Binding User5TasksCompletedQuarterProgressText}"
                         Foreground="White"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
                 </Grid>
             </Grid>
         </Button>

@@ -45,7 +45,9 @@ public class EditFilterVM : BaseViewModel {
         UserLogic(5);
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
     private void ButtonLogic(object param) {
         switch (param) {

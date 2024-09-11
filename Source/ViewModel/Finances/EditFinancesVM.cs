@@ -93,7 +93,9 @@ public class EditFinancesVM : BaseViewModel {
         CategorySelected = ReferenceValues.JsonSettingsMaster.FinanceBlock1;
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonCommandLogic, true);
+    }
 
     private void UserLogic(int button) {
         user = button;

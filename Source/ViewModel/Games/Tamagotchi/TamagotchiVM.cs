@@ -83,7 +83,9 @@ public class TamagotchiVM : BaseViewModel {
         NameText = ReferenceValues.TamagotchiMaster.Name;
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonCommandLogic, true);
+    }
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {

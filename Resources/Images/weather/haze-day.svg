@@ -36,9 +36,12 @@
         </symbol>
         <symbol id="j" viewBox="0 0 264 72" overflow="visible">
             <g>
-                <line x1="12" y1="60" x2="42" y2="60" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24" stroke="url(#a)"/>
-                <line x1="102" y1="60" x2="192" y2="60" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24" stroke-dasharray="60 60" stroke="url(#b)"/>
-                <line x1="222" y1="60" x2="252" y2="60" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24" stroke="url(#c)"/>
+                <line x1="12" y1="60" x2="42" y2="60" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                      stroke-width="24" stroke="url(#a)"/>
+                <line x1="102" y1="60" x2="192" y2="60" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                      stroke-width="24" stroke-dasharray="60 60" stroke="url(#b)"/>
+                <line x1="222" y1="60" x2="252" y2="60" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                      stroke-width="24" stroke="url(#c)"/>
 
                 <animateTransform
                         attributeName="transform"
@@ -49,9 +52,12 @@
                         repeatCount="indefinite"/>
             </g>
             <g>
-                <line x1="12" y1="12" x2="42" y2="12" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24" stroke="url(#d)"/>
-                <line x1="102" y1="12" x2="192" y2="12" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24" stroke-dasharray="60 60" stroke="url(#e)"/>
-                <line x1="222" y1="12" x2="252" y2="12" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24" stroke="url(#f)"/>
+                <line x1="12" y1="12" x2="42" y2="12" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                      stroke-width="24" stroke="url(#d)"/>
+                <line x1="102" y1="12" x2="192" y2="12" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                      stroke-width="24" stroke-dasharray="60 60" stroke="url(#e)"/>
+                <line x1="222" y1="12" x2="252" y2="12" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                      stroke-width="24" stroke="url(#f)"/>
 
                 <animateTransform
                         attributeName="transform"

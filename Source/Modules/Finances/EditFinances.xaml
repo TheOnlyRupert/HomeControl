@@ -18,30 +18,30 @@
     <Window.Resources>
         <Style
             x:Key="styleCalendar"
-            TargetType="Calendar"/>
+            TargetType="Calendar" />
 
         <Style
             x:Key="SliderButtonStyle"
             TargetType="{x:Type RepeatButton}">
             <Setter
                 Property="SnapsToDevicePixels"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="OverridesDefaultStyle"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="IsTabStop"
-                Value="false"/>
+                Value="false" />
             <Setter
                 Property="Focusable"
-                Value="false"/>
+                Value="false" />
             <Setter
                 Property="Template">
                 <Setter.Value>
                     <ControlTemplate
                         TargetType="{x:Type RepeatButton}">
                         <Border
-                            Background="Transparent"/>
+                            Background="Transparent" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -52,10 +52,10 @@
             TargetType="{x:Type Thumb}">
             <Setter
                 Property="SnapsToDevicePixels"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="OverridesDefaultStyle"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="Template">
                 <Setter.Value>
@@ -64,7 +64,7 @@
                         <Border
                             BorderThickness="0"
                             CornerRadius="8"
-                            Background="Gray"/>
+                            Background="Gray" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -76,12 +76,12 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition
-                        Width="Auto"/>
+                        Width="Auto" />
                     <ColumnDefinition
                         Width="Auto"
-                        MinWidth="{TemplateBinding MinWidth}"/>
+                        MinWidth="{TemplateBinding MinWidth}" />
                     <ColumnDefinition
-                        Width="Auto"/>
+                        Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <TickBar
@@ -90,7 +90,7 @@
                     SnapsToDevicePixels="True"
                     Placement="Left"
                     Width="4"
-                    Visibility="Collapsed"/>
+                    Visibility="Collapsed" />
 
                 <Track
                     Grid.Column="1"
@@ -98,11 +98,11 @@
                     <Track.DecreaseRepeatButton>
                         <RepeatButton
                             Style="{StaticResource SliderButtonStyle}"
-                            Command="Slider.DecreaseLarge"/>
+                            Command="Slider.DecreaseLarge" />
                     </Track.DecreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb
-                            Style="{StaticResource SliderThumbStyle}"/>
+                            Style="{StaticResource SliderThumbStyle}" />
                     </Track.Thumb>
                 </Track>
 
@@ -112,7 +112,7 @@
                     Grid.Column="2"
                     Placement="Right"
                     Width="4"
-                    Visibility="Collapsed"/>
+                    Visibility="Collapsed" />
             </Grid>
         </ControlTemplate>
 
@@ -120,20 +120,20 @@
             TargetType="{x:Type ScrollBar}">
             <Setter
                 Property="SnapsToDevicePixels"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="OverridesDefaultStyle"
-                Value="true"/>
+                Value="true" />
             <Style.Triggers>
                 <Trigger
                     Property="Orientation"
                     Value="Vertical">
                     <Setter
                         Property="MinWidth"
-                        Value="8"/>
+                        Value="8" />
                     <Setter
                         Property="Template"
-                        Value="{StaticResource VerticalScrollBar}"/>
+                        Value="{StaticResource VerticalScrollBar}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -142,20 +142,20 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="64"/>
+                Height="64" />
         </Grid.RowDefinitions>
 
         <Grid
             Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="1.5*"/>
+                    Width="1.5*" />
                 <ColumnDefinition
-                    Width="2*"/>
+                    Width="2*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid
@@ -163,23 +163,23 @@
                 Margin="8 0 8 0">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="64"/>
+                        Height="64" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
@@ -189,25 +189,25 @@
                     Foreground="White"
                     FontSize="24"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <Frame
                     Grid.Row="1"
                     Source="../../../Source/Modules/Finances/Finances.xaml"
-                    Focusable="False"/>
+                    Focusable="False" />
 
                 <StackPanel
                     Grid.Row="2">
                     <TextBlock
                         Text="Location/Business Name"
                         FontSize="24"
-                        Foreground="White"/>
+                        Foreground="White" />
                     <TextBox
                         Name="MainFocusItem"
                         Text="{Binding DescriptionText, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="24"
                         MaxLength="64"
-                        control:SelectTextOnFocus.Active="True"/>
+                        control:SelectTextOnFocus.Active="True" />
                 </StackPanel>
 
                 <StackPanel
@@ -215,12 +215,12 @@
                     <TextBlock
                         Text="Amount ($)"
                         FontSize="24"
-                        Foreground="White"/>
+                        Foreground="White" />
                     <TextBox
                         Text="{Binding CostText, UpdateSourceTrigger=PropertyChanged}"
                         MaxLength="4"
                         FontSize="24"
-                        control:SelectTextOnFocus.Active="True"/>
+                        control:SelectTextOnFocus.Active="True" />
                 </StackPanel>
 
                 <StackPanel
@@ -228,24 +228,24 @@
                     <TextBlock
                         Text="Category"
                         FontSize="24"
-                        Foreground="White"/>
+                        Foreground="White" />
                     <ComboBox
                         FontSize="24"
                         ItemsSource="{Binding CategoryList}"
                         SelectedItem="{Binding CategorySelected}"
                         SelectedIndex="{Binding CategoryID}"
-                        control:SelectTextOnFocus.Active="True"/>
+                        control:SelectTextOnFocus.Active="True" />
                 </StackPanel>
 
                 <Grid
                     Grid.Row="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="Auto"/>
+                            Width="Auto" />
                         <ColumnDefinition
-                            Width="Auto"/>
+                            Width="Auto" />
                         <ColumnDefinition
-                            Width="Auto"/>
+                            Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Button
@@ -261,10 +261,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -277,7 +277,7 @@
                                                 Padding="16 0">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -295,7 +295,7 @@
                             CalendarStyle="{StaticResource styleCalendar}"
                             SelectedDate="{Binding DateText}"
                             IsTodayHighlighted="True"
-                            DisplayDateStart="2023-01-01"/>
+                            DisplayDateStart="2023-01-01" />
                     </Viewbox>
 
                     <Button
@@ -311,10 +311,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -327,7 +327,7 @@
                                                 Padding="16 0">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -342,30 +342,30 @@
                     <TextBlock
                         Text="More Detailed Info  (optional)"
                         FontSize="24"
-                        Foreground="White"/>
+                        Foreground="White" />
                     <TextBox
                         Text="{Binding DetailsText, UpdateSourceTrigger=PropertyChanged}"
                         MaxLength="64"
                         FontSize="24"
                         Margin="0 0 0 8"
-                        control:SelectTextOnFocus.Active="True"/>
+                        control:SelectTextOnFocus.Active="True" />
                 </StackPanel>
 
                 <Grid
                     Grid.Row="7">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Button
@@ -377,10 +377,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -392,7 +392,7 @@
                                                 BorderThickness="{Binding HomeBorderThickness}">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Stretch"
-                                                    VerticalAlignment="Stretch"/>
+                                                    VerticalAlignment="Stretch" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -400,7 +400,7 @@
                             </Style>
                         </Button.Style>
                         <Image
-                            Source="{Binding ImageHome}"/>
+                            Source="{Binding ImageHome}" />
                     </Button>
 
                     <Button
@@ -412,10 +412,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -427,7 +427,7 @@
                                                 BorderThickness="{Binding User1BorderThickness}">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Stretch"
-                                                    VerticalAlignment="Stretch"/>
+                                                    VerticalAlignment="Stretch" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -435,7 +435,7 @@
                             </Style>
                         </Button.Style>
                         <Image
-                            Source="{Binding ImageUser1}"/>
+                            Source="{Binding ImageUser1}" />
                     </Button>
 
                     <Button
@@ -447,10 +447,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -462,7 +462,7 @@
                                                 BorderThickness="{Binding User2BorderThickness}">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Stretch"
-                                                    VerticalAlignment="Stretch"/>
+                                                    VerticalAlignment="Stretch" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -470,7 +470,7 @@
                             </Style>
                         </Button.Style>
                         <Image
-                            Source="{Binding ImageUser2}"/>
+                            Source="{Binding ImageUser2}" />
                     </Button>
 
                     <Button
@@ -482,10 +482,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -497,7 +497,7 @@
                                                 BorderThickness="{Binding User3BorderThickness}">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Stretch"
-                                                    VerticalAlignment="Stretch"/>
+                                                    VerticalAlignment="Stretch" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -505,7 +505,7 @@
                             </Style>
                         </Button.Style>
                         <Image
-                            Source="{Binding ImageUser3}"/>
+                            Source="{Binding ImageUser3}" />
                     </Button>
 
                     <Button
@@ -517,10 +517,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -532,7 +532,7 @@
                                                 BorderThickness="{Binding User4BorderThickness}">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Stretch"
-                                                    VerticalAlignment="Stretch"/>
+                                                    VerticalAlignment="Stretch" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -540,7 +540,7 @@
                             </Style>
                         </Button.Style>
                         <Image
-                            Source="{Binding ImageUser4}"/>
+                            Source="{Binding ImageUser4}" />
                     </Button>
 
                     <Button
@@ -552,10 +552,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -567,7 +567,7 @@
                                                 BorderThickness="{Binding User5BorderThickness}">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Stretch"
-                                                    VerticalAlignment="Stretch"/>
+                                                    VerticalAlignment="Stretch" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -575,7 +575,7 @@
                             </Style>
                         </Button.Style>
                         <Image
-                            Source="{Binding ImageUser5}"/>
+                            Source="{Binding ImageUser5}" />
                     </Button>
                 </Grid>
             </Grid>
@@ -584,9 +584,9 @@
                 Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="64"/>
+                        Height="64" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
@@ -596,7 +596,7 @@
                     Foreground="White"
                     FontSize="24"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <control:CustomListView
                     x:Name="CustomListView"
@@ -616,16 +616,16 @@
                             TargetType="GridViewColumnHeader">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="BorderThickness"
-                                Value="0 0 0 1"/>
+                                Value="0 0 0 1" />
                             <Setter
                                 Property="BorderBrush"
-                                Value="White"/>
+                                Value="White" />
                         </Style>
 
                         <Style
@@ -635,36 +635,36 @@
                                     <MultiTrigger.Conditions>
                                         <Condition
                                             Property="IsSelected"
-                                            Value="True"/>
+                                            Value="True" />
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter
                                             Property="Background"
-                                            Value="Transparent"/>
+                                            Value="Transparent" />
                                         <Setter
                                             Property="BorderBrush"
-                                            Value="Yellow"/>
+                                            Value="Yellow" />
                                         <Setter
                                             Property="Foreground"
-                                            Value="White"/>
+                                            Value="White" />
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition
                                             Property="IsMouseOver"
-                                            Value="True"/>
+                                            Value="True" />
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter
                                             Property="Background"
-                                            Value="Transparent"/>
+                                            Value="Transparent" />
                                         <Setter
                                             Property="BorderBrush"
-                                            Value="Transparent"/>
+                                            Value="Transparent" />
                                         <Setter
                                             Property="Foreground"
-                                            Value="White"/>
+                                            Value="White" />
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
                             </Style.Triggers>
@@ -681,7 +681,7 @@
                                         <Image
                                             Source="{Binding Image}"
                                             Width="32"
-                                            Margin="-4"/>
+                                            Margin="-4" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -690,27 +690,27 @@
                                 DisplayMemberBinding="{Binding Path=Cost}"
                                 Header="Cost"
                                 Width="Auto"
-                                control:GridViewSort.PropertyName="Cost"/>
+                                control:GridViewSort.PropertyName="Cost" />
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=Item}"
                                 Header="Description"
                                 Width="Auto"
-                                control:GridViewSort.PropertyName="Item"/>
+                                control:GridViewSort.PropertyName="Item" />
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=Date}"
                                 Header="Date"
                                 Width="Auto"
-                                control:GridViewSort.PropertyName="Date"/>
+                                control:GridViewSort.PropertyName="Date" />
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=Category}"
                                 Header="Category"
                                 Width="Auto"
-                                control:GridViewSort.PropertyName="Category"/>
+                                control:GridViewSort.PropertyName="Category" />
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=Details}"
                                 Header="More Detailed Info"
                                 Width="Auto"
-                                control:GridViewSort.PropertyName="Details"/>
+                                control:GridViewSort.PropertyName="Details" />
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
@@ -720,11 +720,11 @@
                 Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="64"/>
+                        Height="64" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
@@ -734,7 +734,7 @@
                     Foreground="White"
                     FontSize="24"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <control:CustomListView
                     Grid.Row="1"
@@ -753,7 +753,7 @@
                             TargetType="{x:Type ListBoxItem}">
                             <Setter
                                 Property="Focusable"
-                                Value="False"/>
+                                Value="False" />
                         </Style>
                     </ListBox.ItemContainerStyle>
 
@@ -762,10 +762,10 @@
                             TargetType="GridViewColumnHeader">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                         </Style>
                     </ListView.Resources>
 
@@ -776,17 +776,17 @@
                                 DisplayMemberBinding="{Binding Path=Category}"
                                 Header="Category"
                                 Width="Auto"
-                                control:GridViewSort.PropertyName="Category"/>
+                                control:GridViewSort.PropertyName="Category" />
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=Percentage}"
                                 Header="Percentage"
                                 Width="Auto"
-                                control:GridViewSort.PropertyName="Percentage"/>
+                                control:GridViewSort.PropertyName="Percentage" />
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=Amount}"
                                 Header="Amount"
                                 Width="Auto"
-                                control:GridViewSort.PropertyName="Amount"/>
+                                control:GridViewSort.PropertyName="Amount" />
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
@@ -800,13 +800,13 @@
                             Text="Total Monthly Amount ($)"
                             FontSize="24"
                             Foreground="White"
-                            HorizontalAlignment="Center"/>
+                            HorizontalAlignment="Center" />
                         <TextBox
                             Text="{Binding TotalMonthlyAmount, UpdateSourceTrigger=PropertyChanged}"
                             MaxLength="64"
                             FontSize="24"
                             Margin="0 0 0 8"
-                            control:SelectTextOnFocus.Active="True"/>
+                            control:SelectTextOnFocus.Active="True" />
                         <Button
                             Content="Save Monthly Amount"
                             FontSize="24"
@@ -818,10 +818,10 @@
                                     TargetType="{x:Type Button}">
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                     <Setter
                                         Property="Template">
                                         <Setter.Value>
@@ -834,7 +834,7 @@
                                                     Padding="16 8">
                                                     <ContentPresenter
                                                         HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"/>
+                                                        VerticalAlignment="Center" />
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -851,17 +851,17 @@
             Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button
@@ -876,10 +876,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -892,7 +892,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -912,10 +912,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -928,7 +928,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -948,10 +948,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -964,7 +964,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -985,10 +985,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -1001,7 +1001,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -1023,10 +1023,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -1039,7 +1039,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>

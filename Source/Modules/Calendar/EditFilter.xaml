@@ -17,24 +17,24 @@
         Margin="4">
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="1.5*"/>
+                Height="1.5*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
         </Grid.ColumnDefinitions>
 
         <Button
@@ -47,10 +47,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -62,7 +62,7 @@
                                     BorderThickness="{Binding User0BorderThickness}">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -70,7 +70,7 @@
                 </Style>
             </Button.Style>
             <Image
-                Source="{Binding ImageUser0}"/>
+                Source="{Binding ImageUser0}" />
         </Button>
 
         <Button
@@ -83,10 +83,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -98,7 +98,7 @@
                                     BorderThickness="{Binding User1BorderThickness}">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -106,7 +106,7 @@
                 </Style>
             </Button.Style>
             <Image
-                Source="{Binding ImageUser1}"/>
+                Source="{Binding ImageUser1}" />
         </Button>
 
         <Button
@@ -119,10 +119,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -134,7 +134,7 @@
                                     BorderThickness="{Binding User2BorderThickness}">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -142,7 +142,7 @@
                 </Style>
             </Button.Style>
             <Image
-                Source="{Binding ImageUser2}"/>
+                Source="{Binding ImageUser2}" />
         </Button>
 
         <Button
@@ -155,10 +155,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -170,7 +170,7 @@
                                     BorderThickness="{Binding User3BorderThickness}">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -178,7 +178,7 @@
                 </Style>
             </Button.Style>
             <Image
-                Source="{Binding ImageUser3}"/>
+                Source="{Binding ImageUser3}" />
         </Button>
 
         <Button
@@ -191,10 +191,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -206,7 +206,7 @@
                                     BorderThickness="{Binding User4BorderThickness}">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -214,7 +214,7 @@
                 </Style>
             </Button.Style>
             <Image
-                Source="{Binding ImageUser4}"/>
+                Source="{Binding ImageUser4}" />
         </Button>
 
         <Button
@@ -227,10 +227,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -242,7 +242,7 @@
                                     BorderThickness="{Binding User5BorderThickness}">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -250,7 +250,7 @@
                 </Style>
             </Button.Style>
             <Image
-                Source="{Binding ImageUser5}"/>
+                Source="{Binding ImageUser5}" />
         </Button>
 
         <Button
@@ -268,10 +268,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -284,7 +284,7 @@
                                     Padding="16 8">
                                     <ContentPresenter
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -307,10 +307,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -323,7 +323,7 @@
                                     Padding="16 8">
                                     <ContentPresenter
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

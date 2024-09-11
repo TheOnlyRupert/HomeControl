@@ -18,16 +18,16 @@
         Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="64"/>
+                Height="64" />
         </Grid.RowDefinitions>
 
         <Grid
@@ -38,34 +38,34 @@
                 <TextBlock
                     Text="Exercise Name:"
                     FontSize="18"
-                    Foreground="White"/>
+                    Foreground="White" />
                 <TextBox
                     Text="{Binding ExerciseName, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="64"
-                    control:SelectTextOnFocus.Active="True"/>
+                    control:SelectTextOnFocus.Active="True" />
 
                 <TextBlock
                     Text="Min Time:"
                     FontSize="18"
                     Foreground="White"
-                    Margin="0 8 0 0"/>
+                    Margin="0 8 0 0" />
                 <TextBox
                     Text="{Binding MinTime, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="4"
-                    control:SelectTextOnFocus.Active="True"/>
+                    control:SelectTextOnFocus.Active="True" />
 
                 <TextBlock
                     Text="Max Time:"
                     FontSize="18"
                     Foreground="White"
-                    Margin="0 8 0 0"/>
+                    Margin="0 8 0 0" />
                 <TextBox
                     Text="{Binding MaxTime, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="4"
-                    control:SelectTextOnFocus.Active="True"/>
+                    control:SelectTextOnFocus.Active="True" />
 
                 <CheckBox
                     Content="Can Hold"
@@ -73,29 +73,29 @@
                     Foreground="White"
                     Margin="0 8 0 0"
                     VerticalContentAlignment="Center"
-                    IsChecked="{Binding CanHold}"/>
+                    IsChecked="{Binding CanHold}" />
 
                 <TextBlock
                     Text="Hold Min Time:"
                     FontSize="18"
                     Foreground="White"
-                    Margin="0 8 0 0"/>
+                    Margin="0 8 0 0" />
                 <TextBox
                     Text="{Binding HoldMinTime, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="4"
-                    control:SelectTextOnFocus.Active="True"/>
+                    control:SelectTextOnFocus.Active="True" />
 
                 <TextBlock
                     Text="Hold Max Time:"
                     FontSize="18"
                     Foreground="White"
-                    Margin="0 8 0 0"/>
+                    Margin="0 8 0 0" />
                 <TextBox
                     Text="{Binding HoldMaxTime, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="4"
-                    control:SelectTextOnFocus.Active="True"/>
+                    control:SelectTextOnFocus.Active="True" />
 
                 <CheckBox
                     Content="Needs Equipment"
@@ -103,39 +103,39 @@
                     Foreground="White"
                     Margin="0 8 0 0"
                     VerticalContentAlignment="Center"
-                    IsChecked="{Binding NeedsEquipment}"/>
+                    IsChecked="{Binding NeedsEquipment}" />
 
                 <TextBlock
                     Text="Difficulty (0 - 5):"
                     FontSize="18"
                     Foreground="White"
-                    Margin="0 8 0 0"/>
+                    Margin="0 8 0 0" />
                 <TextBox
                     Text="{Binding Difficulty, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="64"
-                    control:SelectTextOnFocus.Active="True"/>
+                    control:SelectTextOnFocus.Active="True" />
 
                 <TextBlock
                     Text="Image:"
                     FontSize="18"
                     Foreground="White"
-                    Margin="0 8 0 0"/>
+                    Margin="0 8 0 0" />
                 <ComboBox
                     ItemsSource="{Binding ImageList}"
                     SelectedItem="{Binding ImageSelected}"
-                    FontSize="18"/>
+                    FontSize="18" />
 
                 <TextBlock
                     Text="Muscle Group:"
                     FontSize="18"
                     Foreground="White"
-                    Margin="0 8 0 0"/>
+                    Margin="0 8 0 0" />
                 <ComboBox
                     ItemsSource="{Binding MuscleGroupList}"
                     SelectedItem="{Binding MuscleGroupSelected}"
                     SelectedIndex="{Binding MuscleGroupSelectedIndex}"
-                    FontSize="18"/>
+                    FontSize="18" />
             </StackPanel>
 
             <StackPanel
@@ -145,17 +145,17 @@
                     Content="Add Exercise"
                     FontSize="18"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="add"/>
+                    CommandParameter="add" />
                 <Button
                     Content="Delete Exercise"
                     FontSize="18"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="delete"/>
+                    CommandParameter="delete" />
                 <Button
                     Content="Update Exercise"
                     FontSize="18"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="update"/>
+                    CommandParameter="update" />
             </StackPanel>
         </Grid>
 
@@ -164,22 +164,22 @@
             Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="*"/>
+                    Height="*" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="*"/>
+                    Height="*" />
             </Grid.RowDefinitions>
 
             <TextBlock
@@ -188,7 +188,7 @@
                 Text="Chest"
                 Foreground="White"
                 FontSize="16"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center" />
 
             <ListView
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -208,7 +208,7 @@
                             Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
                             ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
                             MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                            ItemHeight="32"/>
+                            ItemHeight="32" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
@@ -217,7 +217,7 @@
                         TargetType="GridViewColumnHeader">
                         <Setter
                             Property="Visibility"
-                            Value="Collapsed"/>
+                            Value="Collapsed" />
                     </Style>
 
                     <Style
@@ -227,36 +227,36 @@
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsSelected"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsMouseOver"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                         </Style.Triggers>
@@ -268,7 +268,7 @@
                         AllowsColumnReorder="false">
                         <GridViewColumn
                             DisplayMemberBinding="{Binding Path=Name}"
-                            Width="256"/>
+                            Width="256" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -279,7 +279,7 @@
                 Text="Shoulders"
                 Foreground="White"
                 FontSize="16"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center" />
 
             <ListView
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -300,7 +300,7 @@
                             Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
                             ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
                             MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                            ItemHeight="32"/>
+                            ItemHeight="32" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
@@ -309,7 +309,7 @@
                         TargetType="GridViewColumnHeader">
                         <Setter
                             Property="Visibility"
-                            Value="Collapsed"/>
+                            Value="Collapsed" />
                     </Style>
 
                     <Style
@@ -319,36 +319,36 @@
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsSelected"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsMouseOver"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                         </Style.Triggers>
@@ -360,7 +360,7 @@
                         AllowsColumnReorder="false">
                         <GridViewColumn
                             DisplayMemberBinding="{Binding Path=Name}"
-                            Width="256"/>
+                            Width="256" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -371,7 +371,7 @@
                 Text="Arms"
                 Foreground="White"
                 FontSize="16"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center" />
 
             <ListView
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -391,7 +391,7 @@
                             Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
                             ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
                             MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                            ItemHeight="32"/>
+                            ItemHeight="32" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
@@ -400,7 +400,7 @@
                         TargetType="GridViewColumnHeader">
                         <Setter
                             Property="Visibility"
-                            Value="Collapsed"/>
+                            Value="Collapsed" />
                     </Style>
 
                     <Style
@@ -410,36 +410,36 @@
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsSelected"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsMouseOver"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                         </Style.Triggers>
@@ -451,7 +451,7 @@
                         AllowsColumnReorder="false">
                         <GridViewColumn
                             DisplayMemberBinding="{Binding Path=Name}"
-                            Width="256"/>
+                            Width="256" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -462,7 +462,7 @@
                 Text="Back"
                 Foreground="White"
                 FontSize="16"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center" />
 
             <ListView
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -482,7 +482,7 @@
                             Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
                             ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
                             MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                            ItemHeight="32"/>
+                            ItemHeight="32" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
@@ -491,7 +491,7 @@
                         TargetType="GridViewColumnHeader">
                         <Setter
                             Property="Visibility"
-                            Value="Collapsed"/>
+                            Value="Collapsed" />
                     </Style>
 
                     <Style
@@ -501,36 +501,36 @@
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsSelected"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsMouseOver"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                         </Style.Triggers>
@@ -542,7 +542,7 @@
                         AllowsColumnReorder="false">
                         <GridViewColumn
                             DisplayMemberBinding="{Binding Path=Name}"
-                            Width="256"/>
+                            Width="256" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -553,7 +553,7 @@
                 Text="Abdominal"
                 Foreground="White"
                 FontSize="16"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center" />
 
             <ListView
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -573,7 +573,7 @@
                             Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
                             ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
                             MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                            ItemHeight="32"/>
+                            ItemHeight="32" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
@@ -582,7 +582,7 @@
                         TargetType="GridViewColumnHeader">
                         <Setter
                             Property="Visibility"
-                            Value="Collapsed"/>
+                            Value="Collapsed" />
                     </Style>
 
                     <Style
@@ -592,36 +592,36 @@
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsSelected"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsMouseOver"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                         </Style.Triggers>
@@ -633,7 +633,7 @@
                         AllowsColumnReorder="false">
                         <GridViewColumn
                             DisplayMemberBinding="{Binding Path=Name}"
-                            Width="256"/>
+                            Width="256" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -644,7 +644,7 @@
                 Text="Legs and Glutes"
                 Foreground="White"
                 FontSize="16"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center" />
 
             <ListView
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -664,7 +664,7 @@
                             Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
                             ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
                             MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                            ItemHeight="32"/>
+                            ItemHeight="32" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
@@ -673,7 +673,7 @@
                         TargetType="GridViewColumnHeader">
                         <Setter
                             Property="Visibility"
-                            Value="Collapsed"/>
+                            Value="Collapsed" />
                     </Style>
 
                     <Style
@@ -683,36 +683,36 @@
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsSelected"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsMouseOver"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                         </Style.Triggers>
@@ -724,7 +724,7 @@
                         AllowsColumnReorder="false">
                         <GridViewColumn
                             DisplayMemberBinding="{Binding Path=Name}"
-                            Width="44"/>
+                            Width="44" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -744,10 +744,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -760,7 +760,7 @@
                                     Padding="16 8">
                                     <ContentPresenter
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

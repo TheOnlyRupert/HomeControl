@@ -24,7 +24,9 @@ public class EditRecurringVM : BaseViewModel {
         ImageSelected = "bathtub";
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
     private void ButtonLogic(object param) {
         MessageBoxResult confirmation;

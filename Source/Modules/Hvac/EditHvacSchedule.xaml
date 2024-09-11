@@ -18,16 +18,16 @@
         Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="64"/>
+                Height="64" />
         </Grid.RowDefinitions>
 
         <Grid
@@ -39,16 +39,16 @@
                     Text="At This Time:"
                     FontSize="24"
                     HorizontalAlignment="Center"
-                    Foreground="White"/>
+                    Foreground="White" />
 
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="4*"/>
+                            Width="4*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Button
@@ -66,10 +66,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -82,7 +82,7 @@
                                                 Padding="20 8">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -97,7 +97,7 @@
                         Foreground="Yellow"
                         FontSize="24"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
 
                     <Button
                         Grid.Column="2"
@@ -113,10 +113,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -129,7 +129,7 @@
                                                 Padding=" 20 8">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -144,16 +144,16 @@
                     FontSize="24"
                     HorizontalAlignment="Center"
                     Foreground="White"
-                    Margin="0 32 0 0"/>
+                    Margin="0 32 0 0" />
 
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="4*"/>
+                            Width="4*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Button
@@ -171,10 +171,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -187,7 +187,7 @@
                                                 Padding="20 8">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -202,7 +202,7 @@
                         Foreground="Yellow"
                         FontSize="24"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
 
                     <Button
                         Grid.Column="2"
@@ -218,10 +218,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -234,7 +234,7 @@
                                                 Padding=" 20 8">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -249,16 +249,16 @@
                     FontSize="24"
                     HorizontalAlignment="Center"
                     Foreground="White"
-                    Margin="0 32 0 0"/>
+                    Margin="0 32 0 0" />
 
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                         <ColumnDefinition
-                            Width="4*"/>
+                            Width="4*" />
                         <ColumnDefinition
-                            Width="*"/>
+                            Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <Button
@@ -276,10 +276,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -292,7 +292,7 @@
                                                 Padding="20 8">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -307,7 +307,7 @@
                         Foreground="Yellow"
                         FontSize="24"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center" />
 
                     <Button
                         Grid.Column="2"
@@ -323,10 +323,10 @@
                                 TargetType="{x:Type Button}">
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                                 <Setter
                                     Property="Template">
                                     <Setter.Value>
@@ -339,7 +339,7 @@
                                                 Padding=" 20 8">
                                                 <ContentPresenter
                                                     HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"/>
+                                                    VerticalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -374,7 +374,7 @@
                             Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
                             ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
                             MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                            ItemHeight="64"/>
+                            ItemHeight="64" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
 
@@ -383,53 +383,53 @@
                         TargetType="GridViewColumnHeader">
                         <Setter
                             Property="Visibility"
-                            Value="Collapsed"/>
+                            Value="Collapsed" />
                     </Style>
 
                     <Style
                         TargetType="ListViewItem">
                         <Setter
                             Property="BorderBrush"
-                            Value="DarkSlateGray"/>
+                            Value="DarkSlateGray" />
                         <Setter
                             Property="BorderThickness"
-                            Value="1"/>
+                            Value="1" />
 
                         <Style.Triggers>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsSelected"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Yellow"/>
+                                        Value="Yellow" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition
                                         Property="IsMouseOver"
-                                        Value="True"/>
+                                        Value="True" />
                                 </MultiTrigger.Conditions>
                                 <MultiTrigger.Setters>
                                     <Setter
                                         Property="Background"
-                                        Value="Transparent"/>
+                                        Value="Transparent" />
                                     <Setter
                                         Property="BorderBrush"
-                                        Value="Yellow"/>
+                                        Value="Yellow" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="White"/>
+                                        Value="White" />
                                 </MultiTrigger.Setters>
                             </MultiTrigger>
                         </Style.Triggers>
@@ -440,12 +440,12 @@
                     <GridView
                         AllowsColumnReorder="false">
                         <GridViewColumn
-                            DisplayMemberBinding="{Binding Path=EventTime, StringFormat=HH:mm}"/>
+                            DisplayMemberBinding="{Binding Path=EventTime, StringFormat=HH:mm}" />
                         <GridViewColumn
                             DisplayMemberBinding="{Binding Path=EventDayOfWeek}"
-                            Width="64"/>
+                            Width="64" />
                         <GridViewColumn
-                            DisplayMemberBinding="{Binding Path=EventTemp, StringFormat={}{0}°C}"/>
+                            DisplayMemberBinding="{Binding Path=EventTemp, StringFormat={}{0}°C}" />
                     </GridView>
                 </ListView.View>
             </control:CustomListView>
@@ -457,13 +457,13 @@
             Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button
@@ -478,10 +478,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -494,7 +494,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -515,10 +515,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -531,7 +531,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -553,10 +553,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -569,7 +569,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>

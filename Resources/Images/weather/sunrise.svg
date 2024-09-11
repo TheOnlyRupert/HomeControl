@@ -28,5 +28,6 @@
     <g clip-path="url(#b)">
         <use width="384" height="384" transform="translate(64 100)" xlink:href="#c"/>
     </g>
-    <polyline points="128 332 216 332 256 296 296 332 384 332" fill="none" stroke="#374151" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"/>
+    <polyline points="128 332 216 332 256 296 296 332 384 332" fill="none" stroke="#374151" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="18"/>
 </svg>

@@ -357,7 +357,14 @@
         <Resource Include="Resources\Images\icons\cat.png"/>
         <Resource Include="Resources\Images\icons\cat2.png"/>
         <Resource Include="Resources\Images\icons\elf.png"/>
-        <Resource Include="Resources\Images\behavior\strike_black.png"/>
+        <Resource Include="Resources\Images\monthly\911\1.png"/>
+        <Resource Include="Resources\Images\monthly\911\2.png"/>
+        <Resource Include="Resources\Images\monthly\911\3.png"/>
+        <Resource Include="Resources\Images\monthly\911\4.png"/>
+        <Resource Include="Resources\Images\monthly\911\5.png"/>
+        <Resource Include="Resources\Images\monthly\911\6.png"/>
+        <Resource Include="Resources\Images\monthly\911\7.png"/>
+        <Resource Include="Resources\Images\monthly\911\8.png"/>
         <Content Include="Resources\Sounds\beep.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -662,7 +669,6 @@
         <Resource Include="Resources\Images\icons\meal.png"/>
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="Resources\Images\behavior\star_black.png"/>
         <Resource Include="Resources\Images\behavior\star_gold.png"/>
     </ItemGroup>
     <ItemGroup>

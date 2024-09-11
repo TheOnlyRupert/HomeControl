@@ -9,16 +9,16 @@
         Margin="4 4 4 0">
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="Auto"/>
+                Height="Auto" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
         </Grid.RowDefinitions>
 
         <Image
             Grid.Row="0"
             Grid.RowSpan="2"
             Source="../../Resources/Images/monthly/christmas/christmas.png"
-            Opacity="0.8"/>
+            Opacity="0.8" />
 
         <TextBlock
             Grid.Row="0"
@@ -31,7 +31,7 @@
             <TextBlock.Effect>
                 <DropShadowEffect
                     ShadowDepth="4"
-                    RenderingBias="Performance"/>
+                    RenderingBias="Performance" />
             </TextBlock.Effect>
         </TextBlock>
 
@@ -46,7 +46,7 @@
             <TextBlock.Effect>
                 <DropShadowEffect
                     ShadowDepth="2"
-                    RenderingBias="Performance"/>
+                    RenderingBias="Performance" />
             </TextBlock.Effect>
         </TextBlock>
     </Grid>

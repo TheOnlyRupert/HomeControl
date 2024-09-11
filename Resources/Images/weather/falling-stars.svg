@@ -32,10 +32,13 @@
 
     <!-- star-2 -->
     <g clip-path="url(#b)" opacity="0">
-        <line x1="332" y1="193.12" x2="326.63" y2="195.8" fill="none" stroke="#fcd34d" stroke-linecap="round" stroke-miterlimit="10" stroke-width="4"/>
-        <line x1="315.38" y1="201.42" x2="230.99" y2="243.62" fill="none" stroke="#fcd34d" stroke-linecap="round" stroke-miterlimit="10" stroke-width="4"
+        <line x1="332" y1="193.12" x2="326.63" y2="195.8" fill="none" stroke="#fcd34d" stroke-linecap="round"
+              stroke-miterlimit="10" stroke-width="4"/>
+        <line x1="315.38" y1="201.42" x2="230.99" y2="243.62" fill="none" stroke="#fcd34d" stroke-linecap="round"
+              stroke-miterlimit="10" stroke-width="4"
               stroke-dasharray="12.58 12.58"/>
-        <line x1="225.37" y1="246.43" x2="220" y2="249.12" fill="none" stroke="#fcd34d" stroke-linecap="round" stroke-miterlimit="10" stroke-width="4"/>
+        <line x1="225.37" y1="246.43" x2="220" y2="249.12" fill="none" stroke="#fcd34d" stroke-linecap="round"
+              stroke-miterlimit="10" stroke-width="4"/>
         <path d="M329.1,165.28l18,18.37a1.78,1.78,0,0,1,.46,1.71l-6.42,24.92a1.8,1.8,0,0,0,3,1.74l18.37-18a1.8,1.8,0,0,1,1.71-.46L389.17,200a1.8,1.8,0,0,0,1.73-3l-18-18.37a1.78,1.78,0,0,1-.46-1.71L378.84,152a1.8,1.8,0,0,0-3-1.74l-18.37,18a1.8,1.8,0,0,1-1.71.46l-24.93-6.43A1.8,1.8,0,0,0,329.1,165.28Z"
               stroke="#fcd34d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="url(#c)"/>
 

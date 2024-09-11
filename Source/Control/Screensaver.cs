@@ -12,18 +12,18 @@ using HomeControl.Source.Json;
 namespace HomeControl.Source.Control;
 
 public class Screensaver {
-    private const int maxHorizontalSpeed = 3;
+    private const int maxHorizontalSpeed = 2;
     private const int maxStartingSpeed = 10;
     private const int minHorizontalSpeed = 1;
-    private const int minRadius = 30;
-    private const int maxRadius = 60;
-    private const int minStartingSpeed = 3;
+    private const int minRadius = 54;
+    private const int maxRadius = 280;
+    private const int minStartingSpeed = 2;
     private const double verticalSpeedRatio = 0.1;
     private const double horizontalSpeedRatio = 0.08;
     private readonly Canvas canvas;
     private readonly ushort coverage;
     private readonly List<string> flakeImages;
-    private readonly List<SnowInfo> flakes = new();
+    private readonly List<SnowInfo> flakes = [];
     private bool isWorking;
     private int maxFlakes;
 
@@ -142,8 +142,21 @@ public class Screensaver {
             //    };
 
             //    break;
+            case "9/11":
+                flakeImages = [
+                    "pack://application:,,,/Resources/Images/monthly/911/1.png",
+                    "pack://application:,,,/Resources/Images/monthly/911/2.png",
+                    "pack://application:,,,/Resources/Images/monthly/911/3.png",
+                    "pack://application:,,,/Resources/Images/monthly/911/4.png",
+                    "pack://application:,,,/Resources/Images/monthly/911/5.png",
+                    "pack://application:,,,/Resources/Images/monthly/911/6.png",
+                    "pack://application:,,,/Resources/Images/monthly/911/7.png",
+                    "pack://application:,,,/Resources/Images/monthly/911/8.png"
+                ];
+
+                break;
             case "Veterans":
-                flakeImages = new List<string> {
+                flakeImages = [
                     "pack://application:,,,/Resources/Images/monthly/gun/gun1.png",
                     "pack://application:,,,/Resources/Images/monthly/gun/gun2.png",
                     "pack://application:,,,/Resources/Images/monthly/gun/gun3.png",
@@ -155,7 +168,7 @@ public class Screensaver {
                     "pack://application:,,,/Resources/Images/monthly/gun/gun9.png",
                     "pack://application:,,,/Resources/Images/monthly/gun/gun10.png",
                     "pack://application:,,,/Resources/Images/monthly/gun/gun11.png"
-                };
+                ];
 
                 //case "Halloween":
                 //    flakeImages = new List<string> {
@@ -164,7 +177,7 @@ public class Screensaver {
 
                 break;
             case "Thanksgiving":
-                flakeImages = new List<string> {
+                flakeImages = [
                     "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving1.png",
                     "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving2.png",
                     "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving3.png",
@@ -183,12 +196,12 @@ public class Screensaver {
                     "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving16.png",
                     "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving17.png",
                     "pack://application:,,,/Resources/Images/monthly/thanksgiving/thanksgiving18.png"
-                };
+                ];
 
                 break;
             case "Christmas":
             case "Christmas Eve":
-                flakeImages = new List<string> {
+                flakeImages = [
                     "pack://application:,,,/Resources/Images/monthly/christmas/christmas1.png",
                     "pack://application:,,,/Resources/Images/monthly/christmas/christmas2.png",
                     "pack://application:,,,/Resources/Images/monthly/christmas/christmas3.png",
@@ -199,7 +212,7 @@ public class Screensaver {
                     "pack://application:,,,/Resources/Images/monthly/christmas/christmas8.png",
                     "pack://application:,,,/Resources/Images/monthly/christmas/christmas9.png",
                     "pack://application:,,,/Resources/Images/monthly/christmas/christmas10.png"
-                };
+                ];
 
                 break;
             }

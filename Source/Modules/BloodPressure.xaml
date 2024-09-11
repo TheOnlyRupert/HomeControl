@@ -18,18 +18,18 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="64"/>
+                Height="64" />
         </Grid.RowDefinitions>
 
         <Grid
             Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="2*"/>
+                    Width="2*" />
                 <ColumnDefinition
-                    Width="3*"/>
+                    Width="3*" />
             </Grid.ColumnDefinitions>
 
             <Grid
@@ -52,16 +52,16 @@
                             TargetType="GridViewColumnHeader">
                             <Setter
                                 Property="Background"
-                                Value="Transparent"/>
+                                Value="Transparent" />
                             <Setter
                                 Property="Foreground"
-                                Value="White"/>
+                                Value="White" />
                             <Setter
                                 Property="BorderThickness"
-                                Value="0 0 0 1"/>
+                                Value="0 0 0 1" />
                             <Setter
                                 Property="BorderBrush"
-                                Value="White"/>
+                                Value="White" />
                         </Style>
 
                         <Style
@@ -71,36 +71,36 @@
                                     <MultiTrigger.Conditions>
                                         <Condition
                                             Property="IsSelected"
-                                            Value="True"/>
+                                            Value="True" />
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter
                                             Property="Background"
-                                            Value="Transparent"/>
+                                            Value="Transparent" />
                                         <Setter
                                             Property="BorderBrush"
-                                            Value="Yellow"/>
+                                            Value="Yellow" />
                                         <Setter
                                             Property="Foreground"
-                                            Value="White"/>
+                                            Value="White" />
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition
                                             Property="IsMouseOver"
-                                            Value="True"/>
+                                            Value="True" />
                                     </MultiTrigger.Conditions>
                                     <MultiTrigger.Setters>
                                         <Setter
                                             Property="Background"
-                                            Value="Transparent"/>
+                                            Value="Transparent" />
                                         <Setter
                                             Property="BorderBrush"
-                                            Value="Transparent"/>
+                                            Value="Transparent" />
                                         <Setter
                                             Property="Foreground"
-                                            Value="White"/>
+                                            Value="White" />
                                     </MultiTrigger.Setters>
                                 </MultiTrigger>
                             </Style.Triggers>
@@ -112,15 +112,15 @@
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=Date}"
                                 Header="Date"
-                                Width="Auto"/>
+                                Width="Auto" />
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=PressureText}"
                                 Header="Blood Pressure"
-                                Width="Auto"/>
+                                Width="Auto" />
                             <GridViewColumn
                                 DisplayMemberBinding="{Binding Path=NoteText}"
                                 Header="Notes"
-                                Width="Auto"/>
+                                Width="Auto" />
                         </GridView>
                     </ListView.View>
                 </control:CustomListView>
@@ -131,15 +131,15 @@
                 Margin="8 8 8 2">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="*"/>
+                        Height="*" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                     <RowDefinition
-                        Height="Auto"/>
+                        Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock
@@ -148,19 +148,19 @@
                     FontSize="24"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"/>
+                    VerticalAlignment="Center" />
 
                 <StackPanel
                     Grid.Row="2">
                     <TextBlock
                         Text="Pressure"
                         FontSize="24"
-                        Foreground="White"/>
+                        Foreground="White" />
                     <TextBox
                         Text="{Binding PressureText, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="24"
                         MaxLength="32"
-                        control:SelectTextOnFocus.Active="True"/>
+                        control:SelectTextOnFocus.Active="True" />
                 </StackPanel>
 
                 <StackPanel
@@ -168,12 +168,12 @@
                     <TextBlock
                         Text="Notes"
                         FontSize="24"
-                        Foreground="White"/>
+                        Foreground="White" />
                     <TextBox
                         Text="{Binding NoteText, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="24"
                         MaxLength="32"
-                        control:SelectTextOnFocus.Active="True"/>
+                        control:SelectTextOnFocus.Active="True" />
                 </StackPanel>
             </Grid>
         </Grid>
@@ -181,15 +181,15 @@
             Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button
@@ -204,10 +204,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -220,7 +220,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -242,10 +242,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -258,7 +258,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -280,10 +280,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -295,7 +295,7 @@
                                         BorderThickness="1">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>

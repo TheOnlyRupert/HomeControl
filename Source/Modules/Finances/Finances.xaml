@@ -9,30 +9,30 @@
         Margin="8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
         </Grid.RowDefinitions>
 
         <ProgressBar
@@ -44,7 +44,7 @@
             Foreground="{Binding ProgressTotalColor}"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
@@ -53,14 +53,14 @@
             Foreground="White"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontWeight="Bold"/>
+            FontWeight="Bold" />
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Text="Total Remaining"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="2"
@@ -70,20 +70,20 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="2"
             Grid.Column="0"
             Text="{Binding ProgressBlockText1}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="3"
             Grid.Column="0"
             Text="{Binding TextBlock1}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="2"
@@ -93,20 +93,20 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="2"
             Grid.Column="1"
             Text="{Binding ProgressBlockText2}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="3"
             Grid.Column="1"
             Text="{Binding TextBlock2}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="2"
@@ -116,20 +116,20 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="2"
             Grid.Column="2"
             Text="{Binding ProgressBlockText3}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="3"
             Grid.Column="2"
             Text="{Binding TextBlock3}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="4"
@@ -139,20 +139,20 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="4"
             Grid.Column="0"
             Text="{Binding ProgressBlockText4}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="5"
             Grid.Column="0"
             Text="{Binding TextBlock4}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="4"
@@ -162,20 +162,20 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="4"
             Grid.Column="1"
             Text="{Binding ProgressBlockText5}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="5"
             Grid.Column="1"
             Text="{Binding TextBlock5}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="4"
@@ -185,20 +185,20 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="4"
             Grid.Column="2"
             Text="{Binding ProgressBlockText6}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="5"
             Grid.Column="2"
             Text="{Binding TextBlock6}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="6"
@@ -208,20 +208,20 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="6"
             Grid.Column="0"
             Text="{Binding ProgressBlockText7}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="7"
             Grid.Column="0"
             Text="{Binding TextBlock7}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="6"
@@ -231,20 +231,20 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="6"
             Grid.Column="1"
             Text="{Binding ProgressBlockText8}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="7"
             Grid.Column="1"
             Text="{Binding TextBlock8}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="6"
@@ -254,19 +254,19 @@
             Foreground="CornflowerBlue"
             Background="Transparent"
             BorderBrush="DarkSlateGray"
-            BorderThickness="1"/>
+            BorderThickness="1" />
         <TextBlock
             Grid.Row="6"
             Grid.Column="2"
             Text="{Binding ProgressBlockText9}"
             Foreground="White"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" />
         <TextBlock
             Grid.Row="7"
             Grid.Column="2"
             Text="{Binding TextBlock9}"
             Foreground="White"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
     </Grid>
 </Page>

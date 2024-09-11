@@ -17,26 +17,26 @@
         Focusable="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="1.7*"/>
+                Height="1.7*" />
         </Grid.RowDefinitions>
 
         <Border
@@ -52,46 +52,46 @@
                     Text="Household"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding User1Name}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding User1Phone1}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding User1Phone2}"
                     Foreground="White"
                     FontSize="18"
-                    Margin="0 0 0 14"/>
+                    Margin="0 0 0 14" />
 
                 <TextBlock
                     Text="{Binding User2Name}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding User2Phone1}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding User2Phone1}"
                     Foreground="White"
                     FontSize="18"
-                    Margin="0 0 0 14"/>
+                    Margin="0 0 0 14" />
 
                 <TextBlock
                     Text="Children:"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding ChildrenNames}"
                     Foreground="White"
                     TextWrapping="Wrap"
                     FontSize="18"
-                    Margin="0 0 0 14"/>
+                    Margin="0 0 0 14" />
             </StackPanel>
         </Border>
 
@@ -108,41 +108,41 @@
                     Text="Neighbors"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding Neighbor1Location}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding Neighbor1Name}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding Neighbor1Phone1}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding Neighbor1Phone2}"
                     Foreground="White"
                     FontSize="18"
-                    Margin="0 0 0 14"/>
+                    Margin="0 0 0 14" />
                 <TextBlock
                     Text="{Binding Neighbor2Location}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding Neighbor2Name}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding Neighbor2Phone1}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding Neighbor2Phone2}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
             </StackPanel>
         </Border>
 
@@ -158,13 +158,13 @@
                     Text="In an emergency, call"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="911"
                     Foreground="White"
                     FontSize="48"
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center" />
             </StackPanel>
         </Border>
 
@@ -180,16 +180,16 @@
                     Text="This address"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding AddressLine1}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding AddressLine2}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
             </StackPanel>
         </Border>
 
@@ -205,13 +205,13 @@
                     Text="Fire Extinguisher"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding FireExtinguisherLocation}"
                     TextWrapping="Wrap"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
             </StackPanel>
         </Border>
 
@@ -227,16 +227,16 @@
                     Text="Hospital"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding HospitalAddressLine1}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding HospitalAddressLine2}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
             </StackPanel>
         </Border>
 
@@ -252,12 +252,12 @@
                     Text="Alarm Code"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding AlarmCode}"
                     Foreground="White"
-                    FontSize="32"/>
+                    FontSize="32" />
             </StackPanel>
         </Border>
 
@@ -273,34 +273,34 @@
                     Text="Guest WiFi"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding WifiGuestName}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding WifiGuestPassword}"
                     Foreground="White"
                     FontSize="18"
-                    Margin="0 0 0 14"/>
+                    Margin="0 0 0 14" />
                 <TextBlock
                     Text="Private/Household WiFi"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding WifiPrivateName}"
                     Foreground="White"
                     FontSize="18"
-                    Visibility="{Binding PrivateWifiVisibility}"/>
+                    Visibility="{Binding PrivateWifiVisibility}" />
                 <TextBlock
                     Text="{Binding WifiPrivatePassword}"
                     Foreground="White"
                     FontSize="18"
                     Margin="0 0 0 14"
-                    Visibility="{Binding PrivateWifiVisibility}"/>
+                    Visibility="{Binding PrivateWifiVisibility}" />
             </StackPanel>
         </Border>
         <Border
@@ -316,42 +316,42 @@
                     Text="Emergency Contacts"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding PoliceName}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding PolicePhone}"
                     Foreground="White"
                     FontSize="18"
-                    Margin="0 0 0 14"/>
+                    Margin="0 0 0 14" />
                 <TextBlock
                     Text="{Binding EmergencyContact1Name}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding EmergencyContact1Phone1}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding EmergencyContact1Phone2}"
                     Foreground="White"
                     FontSize="18"
-                    Margin="0 0 0 14"/>
+                    Margin="0 0 0 14" />
                 <TextBlock
                     Text="{Binding EmergencyContact2Name}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding EmergencyContact2Phone1}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
                 <TextBlock
                     Text="{Binding EmergencyContact2Phone2}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
             </StackPanel>
         </Border>
 
@@ -367,12 +367,12 @@
                     Text="Pets"
                     Foreground="White"
                     HorizontalAlignment="Center"
-                    FontSize="16"/>
-                <Separator/>
+                    FontSize="16" />
+                <Separator />
                 <TextBlock
                     Text="{Binding PetNames}"
                     Foreground="White"
-                    FontSize="18"/>
+                    FontSize="18" />
             </StackPanel>
         </Border>
 
@@ -391,10 +391,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -407,7 +407,7 @@
                                     Padding="16 8">
                                     <ContentPresenter
                                         HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

@@ -17,31 +17,25 @@ public class BehaviorVM : BaseViewModel {
     private string _user1Star1, _user1Star2, _user1Star3, _user1Star4, _user1Star5, _user2Star1, _user2Star2, _user2Star3, _user2Star4, _user2Star5, _user3Star1, _user3Star2, _user3Star3, _user3Star4,
         _user3Star5, _user4Star1, _user4Star2, _user4Star3, _user4Star4, _user4Star5, _user5Star1, _user5Star2, _user5Star3, _user5Star4, _user5Star5, _user1Strike1, _user1Strike2, _user1Strike3,
         _user2Strike1, _user2Strike2, _user2Strike3, _user3Strike1, _user3Strike2, _user3Strike3, _user4Strike1, _user4Strike2, _user4Strike3, _user5Strike1, _user5Strike2, _user5Strike3,
-        _user1TasksCompletedDayProgressColor, _user1TasksCompletedWeekProgressColor, _user1TasksCompletedMonthProgressColor, _user1TasksCompletedQuarterProgressColor,
-        _user2TasksCompletedDayProgressColor, _user2TasksCompletedWeekProgressColor, _user2TasksCompletedMonthProgressColor, _user2TasksCompletedQuarterProgressColor,
-        _user3TasksCompletedDayProgressColor, _user3TasksCompletedWeekProgressColor, _user3TasksCompletedMonthProgressColor, _user3TasksCompletedQuarterProgressColor,
-        _user4TasksCompletedDayProgressColor, _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor, _user4TasksCompletedQuarterProgressColor,
-        _user5TasksCompletedDayProgressColor, _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor, _user5TasksCompletedQuarterProgressColor, _currentMonthText,
-        _currentWeekText, _currentDayText, _currentQuarterText,
-        _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText, _user1TasksCompletedQuarterProgressText,
-        _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText, _user2TasksCompletedQuarterProgressText,
-        _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText,
-        _user4TasksCompletedWeekProgressText, _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText,
-        _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText, _user5TasksCompletedMonthProgressText, _user5TasksCompletedQuarterProgressText, _remainingDay,
-        _remainingWeek, _remainingMonth, _remainingQuarter, _remainingYear, _user1DayVisibility,
-        _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility, _user1WeekVisibility, _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility,
-        _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility, _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility,
-        _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility, _user2BehaviorVisibility, _user3BehaviorVisibility, _user4BehaviorVisibility,
-        _user5BehaviorVisibility, _trashDayVisibility, _user1BackgroundColor, _user2BackgroundColor, _user3BackgroundColor, _user4BackgroundColor, _user5BackgroundColor, _remainingDayColor,
-        _remainingWeekColor, _remainingMonthColor, _remainingQuarterColor, _remainingYearColor, _user1Visibility, _user2Visibility, _user3Visibility, _user4Visibility, _user5Visibility;
+        _user1TasksCompletedDayProgressColor, _user1TasksCompletedWeekProgressColor, _user1TasksCompletedMonthProgressColor, _user1TasksCompletedQuarterProgressColor, _user2TasksCompletedDayProgressColor,
+        _user2TasksCompletedWeekProgressColor, _user2TasksCompletedMonthProgressColor, _user2TasksCompletedQuarterProgressColor, _user3TasksCompletedDayProgressColor, _user3TasksCompletedWeekProgressColor,
+        _user3TasksCompletedMonthProgressColor, _user3TasksCompletedQuarterProgressColor, _user4TasksCompletedDayProgressColor, _user4TasksCompletedWeekProgressColor, _user4TasksCompletedMonthProgressColor,
+        _user4TasksCompletedQuarterProgressColor, _user5TasksCompletedDayProgressColor, _user5TasksCompletedWeekProgressColor, _user5TasksCompletedMonthProgressColor, _user5TasksCompletedQuarterProgressColor,
+        _currentMonthText, _currentWeekText, _currentDayText, _currentQuarterText, _user1TasksCompletedWeekProgressText, _user1TasksCompletedDayProgressText, _user1TasksCompletedMonthProgressText,
+        _user1TasksCompletedQuarterProgressText, _user2TasksCompletedWeekProgressText, _user2TasksCompletedDayProgressText, _user2TasksCompletedMonthProgressText, _user2TasksCompletedQuarterProgressText,
+        _user3TasksCompletedWeekProgressText, _user3TasksCompletedDayProgressText, _user3TasksCompletedMonthProgressText, _user3TasksCompletedQuarterProgressText, _user4TasksCompletedWeekProgressText,
+        _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText, _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText,
+        _user5TasksCompletedMonthProgressText, _user5TasksCompletedQuarterProgressText, _user1DayVisibility, _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility,
+        _user1WeekVisibility, _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility, _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility,
+        _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility, _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility, _user2BehaviorVisibility,
+        _user3BehaviorVisibility, _user4BehaviorVisibility, _user5BehaviorVisibility, _trashDayVisibility, _user1BackgroundColor, _user2BackgroundColor, _user3BackgroundColor, _user4BackgroundColor,
+        _user5BackgroundColor, _user1Visibility, _user2Visibility, _user3Visibility, _user4Visibility, _user5Visibility;
 
     private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
         _user3TasksCompletedDayProgressValue, _user3TasksCompletedWeekProgressValue, _user3TasksCompletedMonthProgressValue, _user3TasksCompletedQuarterProgressValue,
         _user4TasksCompletedDayProgressValue, _user4TasksCompletedWeekProgressValue, _user4TasksCompletedMonthProgressValue, _user4TasksCompletedQuarterProgressValue,
         _user5TasksCompletedDayProgressValue, _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue;
-
-    private bool blinkDay, blinkWeek, blinkMonth, blinkQuarter, blinkYear;
 
     public BehaviorVM() {
         try {
@@ -146,15 +140,15 @@ public class BehaviorVM : BaseViewModel {
         RefreshTasks(3);
         RefreshTasks(4);
         RefreshTasks(5);
-        RefreshCountdown();
         RefreshBlinking();
-        TrashDayLogic();
         SaveJsons();
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
-    private void RefreshTasks(int UserID) {
+    private void RefreshTasks(int userId) {
         int totalDay = 0, totalWeek = 0, totalMonth = 0, totalQuarter = 0, completedDay = 0, completedWeek = 0, completedMonth = 0, completedQuarter = 0;
         double math;
 
@@ -172,7 +166,7 @@ public class BehaviorVM : BaseViewModel {
 
         DateTime d2 = DateTime.Today.Date.AddDays(-1 * (int)cal.GetDayOfWeek(DateTime.Today));
 
-        switch (UserID) {
+        switch (userId) {
         case 1:
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1) {
                 totalDay++;
@@ -906,47 +900,47 @@ public class BehaviorVM : BaseViewModel {
 
     private void RefreshBehavior() {
         ReferenceValues.JsonBehaviorMaster.Date = DateTime.Now;
-        User1Star1 = "../../../Resources/Images/behavior/star_black.png";
-        User1Star2 = "../../../Resources/Images/behavior/star_black.png";
-        User1Star3 = "../../../Resources/Images/behavior/star_black.png";
-        User1Star4 = "../../../Resources/Images/behavior/star_black.png";
-        User1Star5 = "../../../Resources/Images/behavior/star_black.png";
-        User2Star1 = "../../../Resources/Images/behavior/star_black.png";
-        User2Star2 = "../../../Resources/Images/behavior/star_black.png";
-        User2Star3 = "../../../Resources/Images/behavior/star_black.png";
-        User2Star4 = "../../../Resources/Images/behavior/star_black.png";
-        User2Star5 = "../../../Resources/Images/behavior/star_black.png";
-        User3Star1 = "../../../Resources/Images/behavior/star_black.png";
-        User3Star2 = "../../../Resources/Images/behavior/star_black.png";
-        User3Star3 = "../../../Resources/Images/behavior/star_black.png";
-        User3Star4 = "../../../Resources/Images/behavior/star_black.png";
-        User3Star5 = "../../../Resources/Images/behavior/star_black.png";
-        User4Star1 = "../../../Resources/Images/behavior/star_black.png";
-        User4Star2 = "../../../Resources/Images/behavior/star_black.png";
-        User4Star3 = "../../../Resources/Images/behavior/star_black.png";
-        User4Star4 = "../../../Resources/Images/behavior/star_black.png";
-        User4Star5 = "../../../Resources/Images/behavior/star_black.png";
-        User5Star1 = "../../../Resources/Images/behavior/star_black.png";
-        User5Star2 = "../../../Resources/Images/behavior/star_black.png";
-        User5Star3 = "../../../Resources/Images/behavior/star_black.png";
-        User5Star4 = "../../../Resources/Images/behavior/star_black.png";
-        User5Star5 = "../../../Resources/Images/behavior/star_black.png";
+        User1Star1 = "";
+        User1Star2 = "";
+        User1Star3 = "";
+        User1Star4 = "";
+        User1Star5 = "";
+        User2Star1 = "";
+        User2Star2 = "";
+        User2Star3 = "";
+        User2Star4 = "";
+        User2Star5 = "";
+        User3Star1 = "";
+        User3Star2 = "";
+        User3Star3 = "";
+        User3Star4 = "";
+        User3Star5 = "";
+        User4Star1 = "";
+        User4Star2 = "";
+        User4Star3 = "";
+        User4Star4 = "";
+        User4Star5 = "";
+        User5Star1 = "";
+        User5Star2 = "";
+        User5Star3 = "";
+        User5Star4 = "";
+        User5Star5 = "";
 
-        User1Strike1 = "../../../Resources/Images/behavior/strike_black.png";
-        User1Strike2 = "../../../Resources/Images/behavior/strike_black.png";
-        User1Strike3 = "../../../Resources/Images/behavior/strike_black.png";
-        User2Strike1 = "../../../Resources/Images/behavior/strike_black.png";
-        User2Strike2 = "../../../Resources/Images/behavior/strike_black.png";
-        User2Strike3 = "../../../Resources/Images/behavior/strike_black.png";
-        User3Strike1 = "../../../Resources/Images/behavior/strike_black.png";
-        User3Strike2 = "../../../Resources/Images/behavior/strike_black.png";
-        User3Strike3 = "../../../Resources/Images/behavior/strike_black.png";
-        User4Strike1 = "../../../Resources/Images/behavior/strike_black.png";
-        User4Strike2 = "../../../Resources/Images/behavior/strike_black.png";
-        User4Strike3 = "../../../Resources/Images/behavior/strike_black.png";
-        User5Strike1 = "../../../Resources/Images/behavior/strike_black.png";
-        User5Strike2 = "../../../Resources/Images/behavior/strike_black.png";
-        User5Strike3 = "../../../Resources/Images/behavior/strike_black.png";
+        User1Strike1 = "";
+        User1Strike2 = "";
+        User1Strike3 = "";
+        User2Strike1 = "";
+        User2Strike2 = "";
+        User2Strike3 = "";
+        User3Strike1 = "";
+        User3Strike2 = "";
+        User3Strike3 = "";
+        User4Strike1 = "";
+        User4Strike2 = "";
+        User4Strike3 = "";
+        User5Strike1 = "";
+        User5Strike2 = "";
+        User5Strike3 = "";
 
         switch (ReferenceValues.JsonBehaviorMaster.User1Stars) {
         case 1:
@@ -1173,19 +1167,15 @@ public class BehaviorVM : BaseViewModel {
             ReferenceValues.JsonBehaviorMaster.User4Strikes = 0;
             ReferenceValues.JsonBehaviorMaster.User5Strikes = 0;
             RefreshBehavior();
-            RefreshCountdown();
             RefreshTasks(1);
             RefreshTasks(2);
             RefreshTasks(3);
             RefreshTasks(4);
             RefreshTasks(5);
-            TrashDayLogic();
             SaveJsons();
             break;
         case "HourChanged":
-            RefreshCountdown();
             RefreshBlinking();
-            TrashDayLogic();
             break;
         case "RefreshFinances":
             RefreshTasks(1);
@@ -1213,26 +1203,6 @@ public class BehaviorVM : BaseViewModel {
 
             if (ReferenceValues.JsonTasksMaster.User5Blink) {
                 User5BackgroundColor = User5BackgroundColor == "Transparent" ? "Yellow" : "Transparent";
-            }
-
-            if (blinkDay) {
-                RemainingDayColor = RemainingDayColor != "Yellow" ? "Yellow" : "Red";
-            }
-
-            if (blinkWeek) {
-                RemainingWeekColor = RemainingWeekColor != "Yellow" ? "Yellow" : "Red";
-            }
-
-            if (blinkMonth) {
-                RemainingMonthColor = RemainingMonthColor != "Yellow" ? "Yellow" : "Red";
-            }
-
-            if (blinkQuarter) {
-                RemainingQuarterColor = RemainingQuarterColor != "Yellow" ? "Yellow" : "Red";
-            }
-
-            if (blinkYear) {
-                RemainingYearColor = RemainingYearColor != "Yellow" ? "Yellow" : "Red";
             }
 
             break;
@@ -1341,186 +1311,6 @@ public class BehaviorVM : BaseViewModel {
         } else {
             ReferenceValues.SoundToPlay = "locked";
             SoundDispatcher.PlaySound();
-        }
-    }
-
-    private void RefreshCountdown() {
-        blinkDay = false;
-        blinkWeek = false;
-        blinkMonth = false;
-        blinkQuarter = false;
-        blinkYear = false;
-
-        DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
-        System.Globalization.Calendar calendar = dateTimeFormatInfo.Calendar;
-
-        ReferenceValues.TaskWeekStartDate = DateTime.Now;
-        while (ReferenceValues.TaskWeekStartDate.DayOfWeek != DayOfWeek.Sunday) {
-            ReferenceValues.TaskWeekStartDate = ReferenceValues.TaskWeekStartDate.AddDays(-1);
-        }
-
-        CurrentDayText = DateTime.Now.ToString("dddd");
-        CurrentMonthText = DateTime.Now.ToString("MMMM");
-        CurrentWeekText = "Week " + calendar.GetWeekOfYear(DateTime.Now, dateTimeFormatInfo.CalendarWeekRule, dateTimeFormatInfo.FirstDayOfWeek);
-
-        CurrentQuarterText = DateTime.Now.Month switch {
-            1 or 2 or 3 => "Quarter 1",
-            4 or 5 or 6 => "Quarter 2",
-            7 or 8 or 9 => "Quarter 3",
-            10 or 11 or 12 => "Quarter 4",
-            _ => CurrentQuarterText
-        };
-
-        /* Day */
-        DateTime dateNext = DateTime.Now;
-        RemainingDay = (TimeSpan.FromHours(24) - dateNext.TimeOfDay).Hours + " Hours";
-
-        switch (RemainingDay) {
-        case "1 Hours":
-            blinkDay = true;
-            RemainingDay = "1 Hour";
-            break;
-        case "0 Hours":
-            blinkDay = true;
-            RemainingDay = "< 1 Hour";
-            break;
-        }
-
-        RemainingDayColor = "White";
-
-        /* Week */
-        dateNext = DateTime.Now;
-        if (dateNext.DayOfWeek == DayOfWeek.Sunday) {
-            dateNext = dateNext.AddDays(1);
-        }
-
-        while (dateNext.DayOfWeek != DayOfWeek.Sunday) {
-            dateNext = dateNext.AddDays(1);
-        }
-
-        RemainingWeek = (dateNext.Date - DateTime.Now.Date).Days + " Days";
-
-        if (RemainingWeek == "1 Days") {
-            blinkWeek = true;
-
-            TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
-            RemainingWeek = timeSpan.Hours + " Hours";
-        }
-
-        RemainingWeek = RemainingWeek switch {
-            "1 Hours" => "1 Hour",
-            "0 Hours" => "< 1 Hour",
-            _ => RemainingWeek
-        };
-
-        RemainingWeekColor = "White";
-
-        /* Month */
-        dateNext = DateTime.Now;
-        while (DateTime.Now.Month == dateNext.Month) {
-            dateNext = dateNext.AddDays(1);
-        }
-
-        RemainingMonth = (dateNext.Date - DateTime.Now.Date).Days + " Days";
-
-        if (RemainingMonth == "1 Days") {
-            blinkMonth = true;
-
-            TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
-            RemainingMonth = timeSpan.Hours + " Hours";
-        }
-
-        RemainingMonth = RemainingMonth switch {
-            "1 Hours" => "1 Hour",
-            "0 Hours" => "< 1 Hour",
-            _ => RemainingMonth
-        };
-
-        RemainingMonthColor = "White";
-
-        /* Quarter */
-        dateNext = DateTime.Now;
-        switch (dateNext.Month) {
-        case 1:
-        case 2:
-        case 3:
-            while (dateNext.Month != 4) {
-                dateNext = dateNext.AddDays(1);
-            }
-
-            break;
-        case 4:
-        case 5:
-        case 6:
-            while (dateNext.Month != 7) {
-                dateNext = dateNext.AddDays(1);
-            }
-
-            break;
-        case 7:
-        case 8:
-        case 9:
-            while (dateNext.Month != 10) {
-                dateNext = dateNext.AddDays(1);
-            }
-
-            break;
-        case 10:
-        case 11:
-        case 12:
-            while (dateNext.Month != 1) {
-                dateNext = dateNext.AddDays(1);
-            }
-
-            break;
-        }
-
-        RemainingQuarter = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
-
-        if (RemainingQuarter == "1 Days") {
-            blinkQuarter = true;
-
-            TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
-            RemainingQuarter = timeSpan.Hours + " Hours";
-        }
-
-        RemainingQuarter = RemainingQuarter switch {
-            "1 Hours" => "1 Hour",
-            "0 Hours" => "< 1 Hour",
-            _ => RemainingQuarter
-        };
-
-        RemainingQuarterColor = "White";
-
-        /* Year */
-        dateNext = DateTime.Now;
-        while (dateNext.Year == DateTime.Now.Year) {
-            dateNext = dateNext.AddDays(1);
-        }
-
-        RemainingYear = (dateNext.Date - DateTime.Now.Date).TotalDays + " Days";
-
-        if (RemainingYear == "1 Days") {
-            blinkYear = true;
-
-            TimeSpan timeSpan = TimeSpan.FromHours(24) - DateTime.Now.TimeOfDay;
-            RemainingYear = timeSpan.Hours + " Hours";
-        }
-
-        RemainingYear = RemainingYear switch {
-            "1 Hours" => "1 Hour",
-            "0 Hours" => "< 1 Hour",
-            _ => RemainingYear
-        };
-
-        RemainingYearColor = "White";
-    }
-
-    private void TrashDayLogic() {
-        if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 16) {
-            TrashDayVisibility = "VISIBLE";
-        } else {
-            TrashDayVisibility = "HIDDEN";
         }
     }
 
@@ -2239,46 +2029,6 @@ public class BehaviorVM : BaseViewModel {
         }
     }
 
-    public string RemainingDay {
-        get => _remainingDay;
-        set {
-            _remainingDay = value;
-            RaisePropertyChangedEvent("RemainingDay");
-        }
-    }
-
-    public string RemainingWeek {
-        get => _remainingWeek;
-        set {
-            _remainingWeek = value;
-            RaisePropertyChangedEvent("RemainingWeek");
-        }
-    }
-
-    public string RemainingMonth {
-        get => _remainingMonth;
-        set {
-            _remainingMonth = value;
-            RaisePropertyChangedEvent("RemainingMonth");
-        }
-    }
-
-    public string RemainingQuarter {
-        get => _remainingQuarter;
-        set {
-            _remainingQuarter = value;
-            RaisePropertyChangedEvent("RemainingQuarter");
-        }
-    }
-
-    public string RemainingYear {
-        get => _remainingYear;
-        set {
-            _remainingYear = value;
-            RaisePropertyChangedEvent("RemainingYear");
-        }
-    }
-
     public string User1TasksCompletedDayProgressColor {
         get => _user1TasksCompletedDayProgressColor;
         set {
@@ -2684,46 +2434,6 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5BackgroundColor = value;
             RaisePropertyChangedEvent("User5BackgroundColor");
-        }
-    }
-
-    public string RemainingDayColor {
-        get => _remainingDayColor;
-        set {
-            _remainingDayColor = value;
-            RaisePropertyChangedEvent("RemainingDayColor");
-        }
-    }
-
-    public string RemainingWeekColor {
-        get => _remainingWeekColor;
-        set {
-            _remainingWeekColor = value;
-            RaisePropertyChangedEvent("RemainingWeekColor");
-        }
-    }
-
-    public string RemainingMonthColor {
-        get => _remainingMonthColor;
-        set {
-            _remainingMonthColor = value;
-            RaisePropertyChangedEvent("RemainingMonthColor");
-        }
-    }
-
-    public string RemainingQuarterColor {
-        get => _remainingQuarterColor;
-        set {
-            _remainingQuarterColor = value;
-            RaisePropertyChangedEvent("RemainingQuarterColor");
-        }
-    }
-
-    public string RemainingYearColor {
-        get => _remainingYearColor;
-        set {
-            _remainingYearColor = value;
-            RaisePropertyChangedEvent("RemainingYearColor");
         }
     }
 

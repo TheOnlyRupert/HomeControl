@@ -31,7 +31,8 @@
             </path>
         </symbol>
         <symbol id="f" viewBox="0 0 264 72" overflow="visible">
-            <line x1="12" y1="60" x2="252" y2="60" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24" stroke="url(#a)">
+            <line x1="12" y1="60" x2="252" y2="60" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                  stroke-width="24" stroke="url(#a)">
                 <animateTransform
                         attributeName="transform"
                         additive="sum"
@@ -40,7 +41,8 @@
                         dur="6s"
                         repeatCount="indefinite"/>
             </line>
-            <line x1="12" y1="12" x2="252" y2="12" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="24" stroke="url(#b)">
+            <line x1="12" y1="12" x2="252" y2="12" fill="none" stroke-linecap="round" stroke-miterlimit="10"
+                  stroke-width="24" stroke="url(#b)">
                 <animateTransform
                         attributeName="transform"
                         additive="sum"

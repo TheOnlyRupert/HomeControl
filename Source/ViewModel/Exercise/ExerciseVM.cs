@@ -19,7 +19,9 @@ public class ExerciseVM : BaseViewModel {
         }
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonCommandLogic, true);
+    }
 
     private void ButtonCommandLogic(object param) {
         switch (param) {

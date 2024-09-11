@@ -4,7 +4,10 @@ namespace HomeControl.Source.ViewModel.Base;
 
 public class CrossViewMessenger {
     private static CrossViewMessenger _instance;
-    public static CrossViewMessenger Instance => _instance ??= new CrossViewMessenger();
+
+    public static CrossViewMessenger Instance {
+        get => _instance ??= new CrossViewMessenger();
+    }
 
     public event EventHandler<MessageValueChangedEventArgs> MessageValueChanged;
 

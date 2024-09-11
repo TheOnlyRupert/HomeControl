@@ -122,6 +122,13 @@ public static class Holidays {
             Holiday = "Labor"
         });
 
+        // 9/11 -- September 11th
+        DateTime nineEleven = new(year, 9, 11);
+        holidays.Add(new HolidayBlock {
+            Date = nineEleven,
+            Holiday = "9/11"
+        });
+
         // Veterans Day -- November 11th
         DateTime veteransDay = new(year, 11, 11);
         holidays.Add(new HolidayBlock {

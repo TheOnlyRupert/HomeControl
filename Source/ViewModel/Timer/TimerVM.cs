@@ -20,7 +20,9 @@ public class TimerVM : BaseViewModel {
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         if (e.PropertyName == "RefreshTimer") {

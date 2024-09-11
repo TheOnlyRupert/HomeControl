@@ -5,7 +5,8 @@
             <stop offset="0.45" stop-color="#f3f7fe"/>
             <stop offset="1" stop-color="#deeafb"/>
         </linearGradient>
-        <linearGradient id="b" x1="1314.78" y1="-739.91" x2="1324.24" y2="-715.27" gradientTransform="translate(-989.44 1287.05) rotate(-9)" gradientUnits="userSpaceOnUse">
+        <linearGradient id="b" x1="1314.78" y1="-739.91" x2="1324.24" y2="-715.27"
+                        gradientTransform="translate(-989.44 1287.05) rotate(-9)" gradientUnits="userSpaceOnUse">
             <stop offset="0" stop-color="#0b65ed"/>
             <stop offset="0.45" stop-color="#0a5ad4"/>
             <stop offset="1" stop-color="#0950bc"/>
@@ -22,7 +23,8 @@
     <use width="350" height="222" transform="translate(81 145)" xlink:href="#e"/>
 
     <!-- raindrop-1 -->
-    <path d="M200,376a8,8,0,0,1-8-8V356a8,8,0,0,1,16,0v12A8,8,0,0,1,200,376Z" stroke="#0a5ad4" stroke-miterlimit="10" fill="url(#b)" opacity="0">
+    <path d="M200,376a8,8,0,0,1-8-8V356a8,8,0,0,1,16,0v12A8,8,0,0,1,200,376Z" stroke="#0a5ad4" stroke-miterlimit="10"
+          fill="url(#b)" opacity="0">
         <animateTransform
                 id="x1"
                 attributeName="transform"
@@ -43,7 +45,8 @@
     </path>
 
     <!-- raindrop-2 -->
-    <path d="M256,376a8,8,0,0,1-8-8V356a8,8,0,0,1,16,0v12A8,8,0,0,1,256,376Z" stroke="#0a5ad4" stroke-miterlimit="10" fill="url(#c)" opacity="0">
+    <path d="M256,376a8,8,0,0,1-8-8V356a8,8,0,0,1,16,0v12A8,8,0,0,1,256,376Z" stroke="#0a5ad4" stroke-miterlimit="10"
+          fill="url(#c)" opacity="0">
         <animateTransform
                 id="x2"
                 attributeName="transform"
@@ -64,7 +67,8 @@
     </path>
 
     <!-- raindrop-3 -->
-    <path d="M312,376a8,8,0,0,1-8-8V356a8,8,0,0,1,16,0v12A8,8,0,0,1,312,376Z" stroke="#0a5ad4" stroke-miterlimit="10" fill="url(#d)" opacity="0">
+    <path d="M312,376a8,8,0,0,1-8-8V356a8,8,0,0,1,16,0v12A8,8,0,0,1,312,376Z" stroke="#0a5ad4" stroke-miterlimit="10"
+          fill="url(#d)" opacity="0">
         <animateTransform
                 id="x3"
                 attributeName="transform"

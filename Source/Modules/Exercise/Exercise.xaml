@@ -16,9 +16,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="64"/>
+                Height="64" />
         </Grid.RowDefinitions>
 
         <Grid
@@ -27,14 +27,14 @@
                 Text="{Binding WorkoutName}"
                 FontSize="48"
                 Foreground="White"
-                Margin="8"/>
+                Margin="8" />
             <TextBlock
                 Text="{Binding MainTimer}"
                 FontSize="48"
                 Foreground="White"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="8"/>
+                Margin="8" />
             <ProgressBar
                 Value="{Binding ProgressBarValue}"
                 IsIndeterminate="False"
@@ -42,20 +42,20 @@
                 Background="Transparent"
                 BorderThickness="0"
                 HorizontalAlignment="Right"
-                Margin="8"/>
+                Margin="8" />
         </Grid>
 
         <Grid
             Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button
@@ -73,10 +73,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -89,7 +89,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -112,10 +112,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -128,7 +128,7 @@
                                         Padding="8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>

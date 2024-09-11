@@ -53,7 +53,9 @@ public class EditExerciseVM : BaseViewModel {
         ListToMuscleGroup();
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonCommandLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonCommandLogic, true);
+    }
 
     private void PopulateDetailedView(Json.Exercise value) {
         ExerciseName = value.Name;

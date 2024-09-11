@@ -16,66 +16,66 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="64"/>
+                Height="64" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="Auto"/>
+                Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid
             Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Button
                 Grid.Column="0"
                 Content="Food"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="food"/>
+                CommandParameter="food" />
             <Button
                 Grid.Column="1"
                 Content="Toilet"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="toilet"/>
+                CommandParameter="toilet" />
             <Button
                 Grid.Column="2"
                 Content="Trash"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="trash"/>
+                CommandParameter="trash" />
             <Button
                 Grid.Column="3"
                 Content="Light"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="light"/>
+                CommandParameter="light" />
             <Button
                 Grid.Column="4"
                 Content="Medicine"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="medicine"/>
+                CommandParameter="medicine" />
             <Button
                 Grid.Column="5"
                 Content="Play"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="play"/>
+                CommandParameter="play" />
         </Grid>
 
         <Image
             Grid.Row="1"
             Source="../../../../Resources/Images/games/tamagotchi/egg1.png"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center" />
 
         <ProgressBar
             Grid.Row="1"
@@ -88,45 +88,45 @@
             Foreground="CornflowerBlue"
             IsIndeterminate="True"
             Margin="0 8"
-            Visibility="{Binding IsBusyVisibility}"/>
+            Visibility="{Binding IsBusyVisibility}" />
 
         <TextBlock
             Grid.Row="2"
             Text="{Binding NameText}"
             Foreground="White"
             HorizontalAlignment="Center"
-            FontSize="16"/>
+            FontSize="16" />
 
         <Grid
             Grid.Row="1"
             Visibility="{Binding DebugVisibility}">
             <Grid.RowDefinitions>
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
                 <RowDefinition
-                    Height="Auto"/>
+                    Height="Auto" />
             </Grid.RowDefinitions>
 
             <StackPanel
@@ -135,15 +135,15 @@
                 <TextBlock
                     Text="{Binding DebugAgeOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugAgeText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugAge"/>
+                    CommandParameter="debugAge" />
             </StackPanel>
 
             <StackPanel
@@ -152,15 +152,15 @@
                 <TextBlock
                     Text="{Binding DebugHealthOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugHealthText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugHealth"/>
+                    CommandParameter="debugHealth" />
             </StackPanel>
 
             <StackPanel
@@ -169,15 +169,15 @@
                 <TextBlock
                     Text="{Binding DebugHungerOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugHungerText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugHunger"/>
+                    CommandParameter="debugHunger" />
             </StackPanel>
 
             <StackPanel
@@ -186,15 +186,15 @@
                 <TextBlock
                     Text="{Binding DebugHappinessOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugHappinessText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugHappiness"/>
+                    CommandParameter="debugHappiness" />
             </StackPanel>
 
             <StackPanel
@@ -203,15 +203,15 @@
                 <TextBlock
                     Text="{Binding DebugFatigueOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugFatigueText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugFatigue"/>
+                    CommandParameter="debugFatigue" />
             </StackPanel>
 
             <StackPanel
@@ -220,15 +220,15 @@
                 <TextBlock
                     Text="{Binding DebugAnxietyOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugAnxietyText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugAnxiety"/>
+                    CommandParameter="debugAnxiety" />
             </StackPanel>
 
             <StackPanel
@@ -237,15 +237,15 @@
                 <TextBlock
                     Text="{Binding DebugBladderOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugBladderText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugBladder"/>
+                    CommandParameter="debugBladder" />
             </StackPanel>
 
             <StackPanel
@@ -254,15 +254,15 @@
                 <TextBlock
                     Text="{Binding DebugWeightOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugWeightText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugWeight"/>
+                    CommandParameter="debugWeight" />
             </StackPanel>
 
             <StackPanel
@@ -271,15 +271,15 @@
                 <TextBlock
                     Text="{Binding DebugCleanlinessOutput}"
                     Foreground="White"
-                    Width="192"/>
+                    Width="192" />
                 <TextBox
                     Text="{Binding DebugCleanlinessText}"
-                    Width="64"/>
+                    Width="64" />
                 <Button
                     Content="Set"
                     Width="92"
                     Command="{Binding ButtonCommand}"
-                    CommandParameter="debugCleanliness"/>
+                    CommandParameter="debugCleanliness" />
             </StackPanel>
 
             <Button
@@ -289,7 +289,7 @@
                 HorizontalAlignment="Left"
                 Margin="256 0 0 0"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="debugIsMale"/>
+                CommandParameter="debugIsMale" />
             <Button
                 Grid.Row="10"
                 Content="{Binding IsLightOnText}"
@@ -297,7 +297,7 @@
                 HorizontalAlignment="Left"
                 Margin="256 0 0 0"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="debugIsLightOn"/>
+                CommandParameter="debugIsLightOn" />
             <Button
                 Grid.Row="11"
                 Content="{Binding IsSleepingText}"
@@ -305,7 +305,7 @@
                 HorizontalAlignment="Left"
                 Margin="256 0 0 0"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="debugIsSleeping"/>
+                CommandParameter="debugIsSleeping" />
             <Button
                 Grid.Row="12"
                 Content="{Binding IsBusyText}"
@@ -313,7 +313,7 @@
                 HorizontalAlignment="Left"
                 Margin="256 0 0 0"
                 Command="{Binding ButtonCommand}"
-                CommandParameter="debugIsBusy"/>
+                CommandParameter="debugIsBusy" />
         </Grid>
     </Grid>
 </Window>

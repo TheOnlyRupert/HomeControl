@@ -152,7 +152,9 @@ public class EditBehaviorVM : BaseViewModel {
         RefreshTasks();
     }
 
-    public ICommand ButtonCommand => new DelegateCommand(ButtonLogic, true);
+    public ICommand ButtonCommand {
+        get => new DelegateCommand(ButtonLogic, true);
+    }
 
     private void RefreshTasks() {
         int totalDay = 0, totalWeek = 0, totalMonth = 0, totalQuarter = 0;
@@ -377,14 +379,14 @@ public class EditBehaviorVM : BaseViewModel {
 
     private void RefreshBehavior() {
         ReferenceValues.JsonBehaviorMaster.Date = DateTime.Now;
-        ChildStar1 = "../../../Resources/Images/behavior/star_black.png";
-        ChildStar2 = "../../../Resources/Images/behavior/star_black.png";
-        ChildStar3 = "../../../Resources/Images/behavior/star_black.png";
-        ChildStar4 = "../../../Resources/Images/behavior/star_black.png";
-        ChildStar5 = "../../../Resources/Images/behavior/star_black.png";
-        ChildStrike1 = "../../../Resources/Images/behavior/strike_black.png";
-        ChildStrike2 = "../../../Resources/Images/behavior/strike_black.png";
-        ChildStrike3 = "../../../Resources/Images/behavior/strike_black.png";
+        ChildStar1 = "";
+        ChildStar2 = "";
+        ChildStar3 = "";
+        ChildStar4 = "";
+        ChildStar5 = "";
+        ChildStrike1 = "";
+        ChildStrike2 = "";
+        ChildStrike3 = "";
 
         switch (stars) {
         case 1:

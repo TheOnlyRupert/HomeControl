@@ -8,32 +8,32 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
             <ColumnDefinition
-                Width="*"/>
+                Width="*" />
             <ColumnDefinition
-                Width="Auto"/>
+                Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="*"/>
+                Height="*" />
         </Grid.RowDefinitions>
 
         <Button
@@ -47,10 +47,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -63,7 +63,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -74,7 +74,7 @@
             <Image
                 Source="../../../Resources/Images/icons/todo.png"
                 Width="48"
-                Height="48"/>
+                Height="48" />
         </Button>
 
         <Button
@@ -88,10 +88,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -104,7 +104,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -115,7 +115,7 @@
             <Image
                 Source="../../../Resources/Images/icons/contact.png"
                 Width="48"
-                Height="48"/>
+                Height="48" />
         </Button>
 
         <Button
@@ -129,10 +129,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -145,7 +145,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -156,7 +156,7 @@
             <Image
                 Source="../../../Resources/Images/icons/workout.png"
                 Width="48"
-                Height="48"/>
+                Height="48" />
         </Button>
 
         <Button
@@ -171,10 +171,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -187,7 +187,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -198,7 +198,7 @@
             <Image
                 Source="../../../Resources/Images/icons/coin_flip.png"
                 Width="48"
-                Height="48"/>
+                Height="48" />
         </Button>
 
         <Button
@@ -213,10 +213,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -229,7 +229,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -240,7 +240,7 @@
             <Image
                 Source="../../../Resources/Images/icons/tamagotchi.png"
                 Width="48"
-                Height="48"/>
+                Height="48" />
         </Button>
 
         <Button
@@ -255,10 +255,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -271,7 +271,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -282,7 +282,7 @@
             <Image
                 Source="../../../Resources/Images/icons/pictionary.png"
                 Width="48"
-                Height="48"/>
+                Height="48" />
         </Button>
 
         <Button
@@ -297,10 +297,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -313,7 +313,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -324,7 +324,7 @@
             <Image
                 Source="../../../Resources/Images/icons/nhie.png"
                 Width="48"
-                Height="48"/>
+                Height="48" />
         </Button>
 
         <Button
@@ -339,10 +339,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -355,7 +355,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Center"/>
+                                        VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -366,7 +366,7 @@
             <Image
                 Source="../../../Resources/Images/icons/trafficLight.png"
                 Width="48"
-                Height="48"/>
+                Height="48" />
         </Button>
 
         <Button
@@ -382,10 +382,10 @@
                     TargetType="{x:Type Button}">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="Template">
                         <Setter.Value>
@@ -398,7 +398,7 @@
                                     Padding="4 0">
                                     <ContentPresenter
                                         HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"/>
+                                        VerticalAlignment="Stretch" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -409,7 +409,7 @@
             <Image
                 Source="{Binding LockedImage}"
                 Height="96"
-                Width="96"/>
+                Width="96" />
         </Button>
     </Grid>
 </Page>

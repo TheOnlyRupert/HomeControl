@@ -34,8 +34,11 @@
             </path>
         </symbol>
     </defs>
-    <path d="M82,310c0-79.53,66.26-144,148-144s148,64.47,148,144" fill="none" stroke-miterlimit="10" stroke-width="24" stroke="url(#b)"/>
-    <path d="M106,310c0-66.27,55.52-120,124-120s124,53.73,124,120" fill="none" stroke-miterlimit="10" stroke-width="24" stroke="url(#c)"/>
-    <path d="M130,310c0-53,44.77-96,100-96s100,43,100,96" fill="none" stroke-miterlimit="10" stroke-width="24" stroke="url(#d)"/>
+    <path d="M82,310c0-79.53,66.26-144,148-144s148,64.47,148,144" fill="none" stroke-miterlimit="10" stroke-width="24"
+          stroke="url(#b)"/>
+    <path d="M106,310c0-66.27,55.52-120,124-120s124,53.73,124,120" fill="none" stroke-miterlimit="10" stroke-width="24"
+          stroke="url(#c)"/>
+    <path d="M130,310c0-53,44.77-96,100-96s100,43,100,96" fill="none" stroke-miterlimit="10" stroke-width="24"
+          stroke="url(#d)"/>
     <use width="189.48" height="120.47" transform="translate(239.94 223.59)" xlink:href="#e"/>
 </svg>

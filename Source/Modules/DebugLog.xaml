@@ -20,23 +20,23 @@
             TargetType="{x:Type RepeatButton}">
             <Setter
                 Property="SnapsToDevicePixels"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="OverridesDefaultStyle"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="IsTabStop"
-                Value="false"/>
+                Value="false" />
             <Setter
                 Property="Focusable"
-                Value="false"/>
+                Value="false" />
             <Setter
                 Property="Template">
                 <Setter.Value>
                     <ControlTemplate
                         TargetType="{x:Type RepeatButton}">
                         <Border
-                            Background="Transparent"/>
+                            Background="Transparent" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -47,10 +47,10 @@
             TargetType="{x:Type Thumb}">
             <Setter
                 Property="SnapsToDevicePixels"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="OverridesDefaultStyle"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="Template">
                 <Setter.Value>
@@ -59,7 +59,7 @@
                         <Border
                             BorderThickness="0"
                             CornerRadius="8"
-                            Background="Gray"/>
+                            Background="Gray" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -71,12 +71,12 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition
-                        Width="Auto"/>
+                        Width="Auto" />
                     <ColumnDefinition
                         Width="Auto"
-                        MinWidth="{TemplateBinding MinWidth}"/>
+                        MinWidth="{TemplateBinding MinWidth}" />
                     <ColumnDefinition
-                        Width="Auto"/>
+                        Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <TickBar
@@ -85,7 +85,7 @@
                     SnapsToDevicePixels="True"
                     Placement="Left"
                     Width="4"
-                    Visibility="Collapsed"/>
+                    Visibility="Collapsed" />
 
                 <Track
                     Grid.Column="1"
@@ -93,11 +93,11 @@
                     <Track.DecreaseRepeatButton>
                         <RepeatButton
                             Style="{StaticResource SliderButtonStyle}"
-                            Command="Slider.DecreaseLarge"/>
+                            Command="Slider.DecreaseLarge" />
                     </Track.DecreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb
-                            Style="{StaticResource SliderThumbStyle}"/>
+                            Style="{StaticResource SliderThumbStyle}" />
                     </Track.Thumb>
                 </Track>
 
@@ -107,7 +107,7 @@
                     Grid.Column="2"
                     Placement="Right"
                     Width="4"
-                    Visibility="Collapsed"/>
+                    Visibility="Collapsed" />
             </Grid>
         </ControlTemplate>
 
@@ -115,20 +115,20 @@
             TargetType="{x:Type ScrollBar}">
             <Setter
                 Property="SnapsToDevicePixels"
-                Value="true"/>
+                Value="true" />
             <Setter
                 Property="OverridesDefaultStyle"
-                Value="true"/>
+                Value="true" />
             <Style.Triggers>
                 <Trigger
                     Property="Orientation"
                     Value="Vertical">
                     <Setter
                         Property="MinWidth"
-                        Value="8"/>
+                        Value="8" />
                     <Setter
                         Property="Template"
-                        Value="{StaticResource VerticalScrollBar}"/>
+                        Value="{StaticResource VerticalScrollBar}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -138,11 +138,11 @@
         Focusable="False">
         <Grid.RowDefinitions>
             <RowDefinition
-                Height="*"/>
+                Height="*" />
             <RowDefinition
-                Height="Auto"/>
+                Height="Auto" />
             <RowDefinition
-                Height="64"/>
+                Height="64" />
         </Grid.RowDefinitions>
 
         <control:CustomListView
@@ -162,16 +162,16 @@
                     TargetType="GridViewColumnHeader">
                     <Setter
                         Property="Background"
-                        Value="Transparent"/>
+                        Value="Transparent" />
                     <Setter
                         Property="Foreground"
-                        Value="White"/>
+                        Value="White" />
                     <Setter
                         Property="BorderThickness"
-                        Value="0 0 0 1"/>
+                        Value="0 0 0 1" />
                     <Setter
                         Property="BorderBrush"
-                        Value="White"/>
+                        Value="White" />
                 </Style>
 
                 <Style
@@ -181,36 +181,36 @@
                             <MultiTrigger.Conditions>
                                 <Condition
                                     Property="IsSelected"
-                                    Value="True"/>
+                                    Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter
                                     Property="Background"
-                                    Value="Black"/>
+                                    Value="Black" />
                                 <Setter
                                     Property="BorderBrush"
-                                    Value="Black"/>
+                                    Value="Black" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition
                                     Property="IsMouseOver"
-                                    Value="True"/>
+                                    Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter
                                     Property="Background"
-                                    Value="Transparent"/>
+                                    Value="Transparent" />
                                 <Setter
                                     Property="BorderBrush"
-                                    Value="Black"/>
+                                    Value="Black" />
                                 <Setter
                                     Property="Foreground"
-                                    Value="White"/>
+                                    Value="White" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </Style.Triggers>
@@ -224,17 +224,17 @@
                         DisplayMemberBinding="{Binding Path=Date}"
                         Header="Date"
                         Width="Auto"
-                        control:GridViewSort.PropertyName="Date"/>
+                        control:GridViewSort.PropertyName="Date" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Path=Level}"
                         Header="Level"
                         Width="Auto"
-                        control:GridViewSort.PropertyName="Level"/>
+                        control:GridViewSort.PropertyName="Level" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding Path=Module}"
                         Header="Module"
                         Width="Auto"
-                        control:GridViewSort.PropertyName="Module"/>
+                        control:GridViewSort.PropertyName="Module" />
 
                     <GridViewColumn
                         Width="580"
@@ -244,7 +244,7 @@
                             <DataTemplate>
                                 <TextBlock
                                     Text="{Binding Description}"
-                                    TextWrapping="Wrap"/>
+                                    TextWrapping="Wrap" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -257,19 +257,19 @@
             Text="{Binding CopyrightText}"
             HorizontalAlignment="Right"
             FontSize="12"
-            Foreground="Red"/>
+            Foreground="Red" />
 
         <Grid
             Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
                 <ColumnDefinition
-                    Width="*"/>
+                    Width="*" />
                 <ColumnDefinition
-                    Width="Auto"/>
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Button
@@ -284,10 +284,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -300,7 +300,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -322,10 +322,10 @@
                         TargetType="{x:Type Button}">
                         <Setter
                             Property="Background"
-                            Value="Transparent"/>
+                            Value="Transparent" />
                         <Setter
                             Property="Foreground"
-                            Value="White"/>
+                            Value="White" />
                         <Setter
                             Property="Template">
                             <Setter.Value>
@@ -338,7 +338,7 @@
                                         Padding="16 8">
                                         <ContentPresenter
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
