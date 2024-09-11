@@ -30,7 +30,7 @@ public class MainWindowVM : BaseViewModel {
     private string _iconImage, _onlineColor, _christmasVisibility;
     private bool changeDate, internetMessage;
     private DateTime currentDate;
-    private int trashInt;
+    private int trashInt, hourInt;
 
     public MainWindowVM() {
         IconImage = "../../Resources/Images/icons/behavior.png";
@@ -200,9 +200,11 @@ public class MainWindowVM : BaseViewModel {
                 SoundDispatcher.PlaySound();
             }
 
+            hourInt = 10;
+
             /* Trash Night Sound */
             if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 16) {
-                trashInt = 10;
+                trashInt = 12;
             }
         }
 
@@ -275,6 +277,14 @@ public class MainWindowVM : BaseViewModel {
             trashInt--;
             if (trashInt == 0) {
                 ReferenceValues.SoundToPlay = "trash";
+                SoundDispatcher.PlaySound();
+            }
+        }
+
+        if (hourInt > 0) {
+            hourInt--;
+            if (hourInt == 0) {
+                ReferenceValues.SoundToPlay = "hour" + DateTime.Now.Hour;
                 SoundDispatcher.PlaySound();
             }
         }

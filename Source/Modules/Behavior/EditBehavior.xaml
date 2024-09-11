@@ -218,21 +218,6 @@
                     </Button.Style>
                 </Button>
 
-                <ProgressBar
-                    Grid.Column="1"
-                    Grid.Row="4"
-                    Margin="0 16"
-                    FontSize="16"
-                    HorizontalAlignment="Stretch"
-                    Value="{Binding ProgressBarChildValue}"
-                    IsIndeterminate="False"
-                    Foreground="CornflowerBlue"
-                    Maximum="5"
-                    Background="Transparent"
-                    BorderThickness="1"
-                    BorderBrush="DarkSlateGray"
-                    HorizontalContentAlignment="Stretch"/>
-
                 <TextBlock
                     Grid.Column="1"
                     Grid.Row="4"
@@ -242,7 +227,6 @@
                     FontSize="24"
                     Foreground="GreenYellow"
                     Focusable="False"/>
-
 
                 <Button
                     Grid.Column="2"

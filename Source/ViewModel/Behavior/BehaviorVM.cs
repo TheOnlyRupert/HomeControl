@@ -39,8 +39,7 @@ public class BehaviorVM : BaseViewModel {
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
         _user3TasksCompletedDayProgressValue, _user3TasksCompletedWeekProgressValue, _user3TasksCompletedMonthProgressValue, _user3TasksCompletedQuarterProgressValue,
         _user4TasksCompletedDayProgressValue, _user4TasksCompletedWeekProgressValue, _user4TasksCompletedMonthProgressValue, _user4TasksCompletedQuarterProgressValue,
-        _user5TasksCompletedDayProgressValue, _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue,
-        _progressBarUser1, _progressBarUser2, _progressBarUser3, _progressBarUser4, _progressBarUser5;
+        _user5TasksCompletedDayProgressValue, _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue;
 
     private bool blinkDay, blinkWeek, blinkMonth, blinkQuarter, blinkYear;
 
@@ -306,8 +305,6 @@ public class BehaviorVM : BaseViewModel {
             User1TasksCompletedMonthProgressColor = User1TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User1TasksCompletedQuarterProgressColor = User1TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
 
-            ProgressBarUser1 = ReferenceValues.JsonBehaviorMaster.User1Progress;
-
             User1DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
             User1WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
             User1MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
@@ -447,8 +444,6 @@ public class BehaviorVM : BaseViewModel {
             User2TasksCompletedWeekProgressColor = User2TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
             User2TasksCompletedMonthProgressColor = User2TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User2TasksCompletedQuarterProgressColor = User2TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-            ProgressBarUser2 = ReferenceValues.JsonBehaviorMaster.User2Progress;
 
             User2DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
             User2WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
@@ -590,8 +585,6 @@ public class BehaviorVM : BaseViewModel {
             User3TasksCompletedMonthProgressColor = User3TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User3TasksCompletedQuarterProgressColor = User3TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
 
-            ProgressBarUser3 = ReferenceValues.JsonBehaviorMaster.User3Progress;
-
             User3DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
             User3WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
             User3MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
@@ -732,8 +725,6 @@ public class BehaviorVM : BaseViewModel {
             User4TasksCompletedMonthProgressColor = User4TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User4TasksCompletedQuarterProgressColor = User4TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
 
-            ProgressBarUser4 = ReferenceValues.JsonBehaviorMaster.User4Progress;
-
             User4DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
             User4WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
             User4MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
@@ -873,8 +864,6 @@ public class BehaviorVM : BaseViewModel {
             User5TasksCompletedWeekProgressColor = User5TasksCompletedWeekProgressValue == 100 ? "Green" : "CornflowerBlue";
             User5TasksCompletedMonthProgressColor = User5TasksCompletedMonthProgressValue == 100 ? "Green" : "CornflowerBlue";
             User5TasksCompletedQuarterProgressColor = User5TasksCompletedQuarterProgressValue == 100 ? "Green" : "CornflowerBlue";
-
-            ProgressBarUser5 = ReferenceValues.JsonBehaviorMaster.User5Progress;
 
             User5DayVisibility = ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
             User5WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
@@ -2447,46 +2436,6 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5TasksCompletedQuarterProgressColor = value;
             RaisePropertyChangedEvent("User5TasksCompletedQuarterProgressColor");
-        }
-    }
-
-    public int ProgressBarUser1 {
-        get => _progressBarUser1;
-        set {
-            _progressBarUser1 = value;
-            RaisePropertyChangedEvent("ProgressBarUser1");
-        }
-    }
-
-    public int ProgressBarUser2 {
-        get => _progressBarUser2;
-        set {
-            _progressBarUser2 = value;
-            RaisePropertyChangedEvent("ProgressBarUser2");
-        }
-    }
-
-    public int ProgressBarUser3 {
-        get => _progressBarUser3;
-        set {
-            _progressBarUser3 = value;
-            RaisePropertyChangedEvent("ProgressBarUser3");
-        }
-    }
-
-    public int ProgressBarUser4 {
-        get => _progressBarUser4;
-        set {
-            _progressBarUser4 = value;
-            RaisePropertyChangedEvent("ProgressBarUser4");
-        }
-    }
-
-    public int ProgressBarUser5 {
-        get => _progressBarUser5;
-        set {
-            _progressBarUser5 = value;
-            RaisePropertyChangedEvent("ProgressBarUser5");
         }
     }
 

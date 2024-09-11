@@ -171,8 +171,6 @@
                     <RowDefinition
                         Height="*"/>
                     <RowDefinition
-                        Height="8"/>
-                    <RowDefinition
                         Height="Auto"/>
                     <RowDefinition
                         Height="Auto"/>
@@ -192,21 +190,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"/>
 
-                <ProgressBar
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    Value="{Binding ProgressBarUser1}"
-                    IsIndeterminate="False"
-                    Foreground="CornflowerBlue"
-                    Maximum="5"
-                    Background="Transparent"
-                    BorderThickness="1"
-                    BorderBrush="DarkSlateGray"
-                    HorizontalContentAlignment="Stretch"
-                    Visibility="{Binding User1BehaviorVisibility}"/>
-
                 <Grid
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Visibility="{Binding User1BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -244,7 +229,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Visibility="{Binding User1BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -267,7 +252,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Margin="4"
                     Visibility="{Binding User1DayVisibility}">
                     <ProgressBar
@@ -287,7 +272,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="5"
+                    Grid.Row="4"
                     Margin="4"
                     Visibility="{Binding User1WeekVisibility}">
                     <ProgressBar
@@ -307,7 +292,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Margin="4"
                     Visibility="{Binding User1MonthVisibility}">
                     <ProgressBar
@@ -327,7 +312,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="7"
+                    Grid.Row="6"
                     Margin="4"
                     Visibility="{Binding User1QuarterVisibility}">
                     <ProgressBar
@@ -390,8 +375,6 @@
                     <RowDefinition
                         Height="*"/>
                     <RowDefinition
-                        Height="8"/>
-                    <RowDefinition
                         Height="Auto"/>
                     <RowDefinition
                         Height="Auto"/>
@@ -411,21 +394,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"/>
 
-                <ProgressBar
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    Value="{Binding ProgressBarUser2}"
-                    IsIndeterminate="False"
-                    Foreground="CornflowerBlue"
-                    Maximum="5"
-                    Background="Transparent"
-                    BorderThickness="1"
-                    BorderBrush="DarkSlateGray"
-                    HorizontalContentAlignment="Stretch"
-                    Visibility="{Binding User2BehaviorVisibility}"/>
-
                 <Grid
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Visibility="{Binding User2BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -463,7 +433,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Visibility="{Binding User2BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -486,7 +456,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Margin="4"
                     Visibility="{Binding User2DayVisibility}">
                     <ProgressBar
@@ -506,7 +476,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="5"
+                    Grid.Row="4"
                     Margin="4"
                     Visibility="{Binding User2WeekVisibility}">
                     <ProgressBar
@@ -526,7 +496,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Margin="4"
                     Visibility="{Binding User2MonthVisibility}">
                     <ProgressBar
@@ -546,7 +516,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="7"
+                    Grid.Row="6"
                     Margin="4"
                     Visibility="{Binding User2QuarterVisibility}">
                     <ProgressBar
@@ -609,8 +579,6 @@
                     <RowDefinition
                         Height="*"/>
                     <RowDefinition
-                        Height="8"/>
-                    <RowDefinition
                         Height="Auto"/>
                     <RowDefinition
                         Height="Auto"/>
@@ -630,21 +598,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"/>
 
-                <ProgressBar
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    Value="{Binding ProgressBarUser3}"
-                    IsIndeterminate="False"
-                    Foreground="CornflowerBlue"
-                    Maximum="5"
-                    Background="Transparent"
-                    BorderThickness="1"
-                    BorderBrush="DarkSlateGray"
-                    HorizontalContentAlignment="Stretch"
-                    Visibility="{Binding User3BehaviorVisibility}"/>
-
                 <Grid
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Visibility="{Binding User3BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -682,7 +637,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Visibility="{Binding User3BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -705,7 +660,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Margin="4"
                     Visibility="{Binding User3DayVisibility}">
                     <ProgressBar
@@ -725,7 +680,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="5"
+                    Grid.Row="4"
                     Margin="4"
                     Visibility="{Binding User3WeekVisibility}">
                     <ProgressBar
@@ -745,7 +700,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Margin="4"
                     Visibility="{Binding User3MonthVisibility}">
                     <ProgressBar
@@ -765,7 +720,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="7"
+                    Grid.Row="6"
                     Margin="4"
                     Visibility="{Binding User3QuarterVisibility}">
                     <ProgressBar
@@ -828,8 +783,6 @@
                     <RowDefinition
                         Height="*"/>
                     <RowDefinition
-                        Height="8"/>
-                    <RowDefinition
                         Height="Auto"/>
                     <RowDefinition
                         Height="Auto"/>
@@ -849,21 +802,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"/>
 
-                <ProgressBar
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    Value="{Binding ProgressBarUser4}"
-                    IsIndeterminate="False"
-                    Foreground="CornflowerBlue"
-                    Maximum="5"
-                    Background="Transparent"
-                    BorderThickness="1"
-                    BorderBrush="DarkSlateGray"
-                    HorizontalContentAlignment="Stretch"
-                    Visibility="{Binding User4BehaviorVisibility}"/>
-
                 <Grid
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Visibility="{Binding User4BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -901,7 +841,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Visibility="{Binding User4BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -924,7 +864,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Margin="4"
                     Visibility="{Binding User4DayVisibility}">
                     <ProgressBar
@@ -944,7 +884,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="5"
+                    Grid.Row="4"
                     Margin="4"
                     Visibility="{Binding User4WeekVisibility}">
                     <ProgressBar
@@ -964,7 +904,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Margin="4"
                     Visibility="{Binding User4MonthVisibility}">
                     <ProgressBar
@@ -984,7 +924,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="7"
+                    Grid.Row="6"
                     Margin="4"
                     Visibility="{Binding User4QuarterVisibility}">
                     <ProgressBar
@@ -1047,8 +987,6 @@
                     <RowDefinition
                         Height="*"/>
                     <RowDefinition
-                        Height="8"/>
-                    <RowDefinition
                         Height="Auto"/>
                     <RowDefinition
                         Height="Auto"/>
@@ -1068,21 +1006,8 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"/>
 
-                <ProgressBar
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    Value="{Binding ProgressBarUser5}"
-                    IsIndeterminate="False"
-                    Foreground="CornflowerBlue"
-                    Maximum="5"
-                    Background="Transparent"
-                    BorderThickness="1"
-                    BorderBrush="DarkSlateGray"
-                    HorizontalContentAlignment="Stretch"
-                    Visibility="{Binding User5BehaviorVisibility}"/>
-
                 <Grid
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Visibility="{Binding User5BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -1120,7 +1045,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Visibility="{Binding User5BehaviorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -1143,7 +1068,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Margin="4"
                     Visibility="{Binding User5DayVisibility}">
                     <ProgressBar
@@ -1163,7 +1088,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="5"
+                    Grid.Row="4"
                     Margin="4"
                     Visibility="{Binding User5WeekVisibility}">
                     <ProgressBar
@@ -1183,7 +1108,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Margin="4"
                     Visibility="{Binding User5MonthVisibility}">
                     <ProgressBar
@@ -1203,7 +1128,7 @@
                 </Grid>
 
                 <Grid
-                    Grid.Row="7"
+                    Grid.Row="6"
                     Margin="4"
                     Visibility="{Binding User5QuarterVisibility}">
                     <ProgressBar
