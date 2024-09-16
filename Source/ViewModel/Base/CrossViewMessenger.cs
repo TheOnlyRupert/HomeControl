@@ -12,7 +12,10 @@ public class CrossViewMessenger {
     public event EventHandler<MessageValueChangedEventArgs> MessageValueChanged;
 
     public void PushMessage(string propertyName, string value) {
-        MessageValueChanged?.Invoke(this, new MessageValueChangedEventArgs { PropertyName = propertyName, Value = value });
+        MessageValueChanged?.Invoke(this, new MessageValueChangedEventArgs {
+            PropertyName = propertyName,
+            Value = value
+        });
     }
 }
 

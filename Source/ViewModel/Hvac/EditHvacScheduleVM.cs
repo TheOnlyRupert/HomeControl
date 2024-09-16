@@ -9,16 +9,16 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public class EditHvacScheduleVM : BaseViewModel {
-    private readonly ObservableCollection<string> daysOfWeek;
+    private readonly ObservableCollection<string> _daysOfWeek;
+
+    private DateTime _dateTime;
     private ObservableCollection<HvacEvent> _eventList;
     private HvacEvent _eventSelected;
     private string _eventTime, _eventDayOfWeek, _eventTemp;
-
-    private DateTime dateTime;
-    private int temp, dayOfWeekIndex;
+    private int _temp, _dayOfWeekIndex;
 
     public EditHvacScheduleVM() {
-        daysOfWeek = new ObservableCollection<string> {
+        _daysOfWeek = [
             "ANY",
             "SUNDAY",
             "MONDAY",
@@ -27,25 +27,25 @@ public class EditHvacScheduleVM : BaseViewModel {
             "THURSDAY",
             "FRIDAY",
             "SATURDAY"
-        };
+        ];
 
-        EventList = new ObservableCollection<HvacEvent>();
+        EventList = [];
 
         try {
             EventList = ReferenceValues.JsonHvacMaster.HvacEvents;
         } catch (Exception) {
             ReferenceValues.JsonHvacMaster = new JsonHvac {
-                HvacEvents = new ObservableCollection<HvacEvent>()
+                HvacEvents = []
             };
         }
 
-        dateTime = new DateTime(2023, 1, 1, 6, 0, 0, 0);
-        EventTime = dateTime.ToString("HH:mm");
+        _dateTime = new DateTime(2023, 1, 1, 6, 0, 0, 0);
+        EventTime = _dateTime.ToString("HH:mm");
 
-        dayOfWeekIndex = 0;
-        EventDayOfWeek = daysOfWeek[dayOfWeekIndex];
+        _dayOfWeekIndex = 0;
+        EventDayOfWeek = _daysOfWeek[_dayOfWeekIndex];
 
-        temp = 22;
+        _temp = 22;
 
         TemperatureDisplay();
     }
@@ -55,53 +55,53 @@ public class EditHvacScheduleVM : BaseViewModel {
     }
 
     private void TemperatureDisplay() {
-        double f = temp * 1.8 + 32;
-        EventTemp = temp + "°C  or  " + (int)f + "°F";
+        double f = _temp * 1.8 + 32;
+        EventTemp = _temp + "°C  or  " + (int)f + "°F";
     }
 
     private void ButtonLogic(object param) {
         switch (param) {
         case "subTime":
-            dateTime = dateTime.AddHours(-1);
-            EventTime = dateTime.ToString("HH:mm");
+            _dateTime = _dateTime.AddHours(-1);
+            EventTime = _dateTime.ToString("HH:mm");
 
             break;
         case "addTime":
-            dateTime = dateTime.AddHours(1);
-            EventTime = dateTime.ToString("HH:mm");
+            _dateTime = _dateTime.AddHours(1);
+            EventTime = _dateTime.ToString("HH:mm");
 
             break;
         case "subDayOfWeek":
-            dayOfWeekIndex--;
+            _dayOfWeekIndex--;
 
-            if (dayOfWeekIndex < 0) {
-                dayOfWeekIndex = 7;
+            if (_dayOfWeekIndex < 0) {
+                _dayOfWeekIndex = 7;
             }
 
-            EventDayOfWeek = daysOfWeek[dayOfWeekIndex];
+            EventDayOfWeek = _daysOfWeek[_dayOfWeekIndex];
 
             break;
         case "addDayOfWeek":
-            dayOfWeekIndex++;
+            _dayOfWeekIndex++;
 
-            if (dayOfWeekIndex > 7) {
-                dayOfWeekIndex = 0;
+            if (_dayOfWeekIndex > 7) {
+                _dayOfWeekIndex = 0;
             }
 
-            EventDayOfWeek = daysOfWeek[dayOfWeekIndex];
+            EventDayOfWeek = _daysOfWeek[_dayOfWeekIndex];
 
             break;
         case "subTemp":
-            if (temp > 15) {
-                temp--;
+            if (_temp > 15) {
+                _temp--;
             }
 
             TemperatureDisplay();
 
             break;
         case "addTemp":
-            if (temp < 30) {
-                temp++;
+            if (_temp < 30) {
+                _temp++;
             }
 
             TemperatureDisplay();
@@ -117,9 +117,9 @@ public class EditHvacScheduleVM : BaseViewModel {
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
             EventList.Add(new HvacEvent {
-                EventTime = dateTime,
+                EventTime = _dateTime,
                 EventDayOfWeek = EventDayOfWeek,
-                EventTemp = temp
+                EventTemp = _temp
             });
 
             ReferenceValues.SoundToPlay = "newTask";
@@ -181,13 +181,13 @@ public class EditHvacScheduleVM : BaseViewModel {
     }
 
     private void PopulateDetailedView(HvacEvent value) {
-        dateTime = value.EventTime;
-        EventTime = dateTime.ToString("HH:mm");
+        _dateTime = value.EventTime;
+        EventTime = _dateTime.ToString("HH:mm");
 
         EventDayOfWeek = value.EventDayOfWeek;
-        EventDayOfWeek = daysOfWeek[dayOfWeekIndex];
+        EventDayOfWeek = _daysOfWeek[_dayOfWeekIndex];
 
-        temp = value.EventTemp;
+        _temp = value.EventTemp;
         TemperatureDisplay();
     }
 

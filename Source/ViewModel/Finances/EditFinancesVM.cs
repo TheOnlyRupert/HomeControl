@@ -40,12 +40,12 @@ public class EditFinancesVM : BaseViewModel {
         if (ReferenceValues.JsonSettingsMaster.DebugMode) {
             foreach (FinanceBlock block in ReferenceValues.JsonFinanceMaster.FinanceList) {
                 block.Image = block.UserId switch {
-                    0 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user0.png",
-                    1 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png",
-                    2 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png",
-                    3 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png",
-                    4 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png",
-                    5 => ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png"
+                    0 => ReferenceValues.DocumentsDirectory + "icons/user0.png",
+                    1 => ReferenceValues.DocumentsDirectory + "icons/user1.png",
+                    2 => ReferenceValues.DocumentsDirectory + "icons/user2.png",
+                    3 => ReferenceValues.DocumentsDirectory + "icons/user3.png",
+                    4 => ReferenceValues.DocumentsDirectory + "icons/user4.png",
+                    5 => ReferenceValues.DocumentsDirectory + "icons/user5.png"
                 };
             }
         }
@@ -53,17 +53,17 @@ public class EditFinancesVM : BaseViewModel {
         UserLogic(0);
 
         try {
-            Uri uri = new(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+            Uri uri = new(ReferenceValues.DocumentsDirectory + "icons/user1.png", UriKind.RelativeOrAbsolute);
             ImageUser1 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user2.png", UriKind.RelativeOrAbsolute);
             ImageUser2 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user3.png", UriKind.RelativeOrAbsolute);
             ImageUser3 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user4.png", UriKind.RelativeOrAbsolute);
             ImageUser4 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageUser5 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user0.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user0.png", UriKind.RelativeOrAbsolute);
             ImageHome = new BitmapImage(uri);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -212,7 +212,7 @@ public class EditFinancesVM : BaseViewModel {
                     Category = CategorySelected,
                     CategoryID = CategoryID,
                     Details = DetailsText,
-                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png",
+                    Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png",
                     UserId = user
                 });
 
@@ -251,7 +251,7 @@ public class EditFinancesVM : BaseViewModel {
                             Category = CategorySelected,
                             CategoryID = CategoryID,
                             Details = DetailsText,
-                            Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png",
+                            Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png",
                             UserId = user
                         });
 

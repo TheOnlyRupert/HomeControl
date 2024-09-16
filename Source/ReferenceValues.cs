@@ -3,29 +3,21 @@ using System.Collections.ObjectModel;
 using System.IO.Ports;
 using HomeControl.Source.Control;
 using HomeControl.Source.Json;
+using HomeControl.Source.Server;
+using RedCorona.Net;
 
 namespace HomeControl.Source;
 
 public static class ReferenceValues {
-    public enum HvacStates {
-        Off,
-        Running,
-        Standby,
-        Purging
-    }
+    public const string Copyright = "Copyright © 2022-2024  Robert Higgins";
+    public const int VersionMajor = 1;
+    public const int VersionMinor = 5;
+    public const int VersionPatch = 0;
+    public const string VersionBranch = "release";
 
-    public const string COPYRIGHT = "Copyright © 2022-2024  Robert Higgins";
-    public const int VERSION_MAJOR = 1;
-    public const int VERSION_MINOR = 5;
-    public const int VERSION_PATCH = 0;
-    public const string VERSION_BRANCH = "release";
+    public static readonly string DocumentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
 
-    public const bool EnableWeather = true;
-
-    public static readonly string DOCUMENTS_DIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/TheOnlyRupert/HomeControl/";
-
-    public static bool LockUI;
-
+    public static bool LockUi;
     public static Screensaver ScreensaverMaster;
 
     public static SerialPort SerialPort { get; set; }
@@ -37,8 +29,6 @@ public static class ReferenceValues {
     public static JsonBehavior JsonBehaviorMaster { get; set; }
     public static JsonHvac JsonHvacMaster { get; set; }
 
-    public static DateTime TaskWeekStartDate { get; set; }
-
     public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonSettingsMaster { get; set; }
 
@@ -47,10 +37,9 @@ public static class ReferenceValues {
 
     public static HvacStates HvacState { get; set; }
 
-    /* Ranges from 15°C / 59°F to 30°C / 86°F */
+    /* Ranges from 15°C (59°F) to 30°C (86°F) */
     public static double TemperatureSet { get; set; }
 
-    /* On or auto... No other option */
     public static bool IsFanAuto { get; set; }
     public static bool IsHeatingMode { get; set; }
     public static bool UseSchedule { get; set; }
@@ -81,4 +70,15 @@ public static class ReferenceValues {
     public static JsonWeather ForecastHourly { get; set; }
 
     public static bool[] CalendarFilterList { get; set; }
+
+    /* Server Stuff */
+    public static ObservableCollection<ConnectedClientsStruct> ConnectedClients { get; set; }
+    public static SimpleServer SimpleServer { get; set; }
+    public static RedCorona.Net.Server ServerCustom { get; set; }
+    public static ClientInfo ClientInfo { get; set; }
+    public static string ClientName { get; set; }
+    public static string LocalIp { get; set; }
+    public static string PublicIp { get; set; }
+
+    public static bool IsWeatherApiOnline { get; set; }
 }

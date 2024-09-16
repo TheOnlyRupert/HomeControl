@@ -11,8 +11,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
-    private bool _isDebugModeChecked, _isMetricUnitsChecked, _isEasterEggsChecked, _user1Checked, _user2Checked, _user3Checked, _user4Checked,
-        _user5Checked, _user1BehaviorChecked, _user2BehaviorChecked, _user3BehaviorChecked, _user4BehaviorChecked, _user5BehaviorChecked;
+    private bool _isDebugModeChecked, _isMetricUnitsChecked, _isEasterEggsChecked, _isOffModeChecked, _isClientModeChecked, _isServerModeChecked;
 
     private List<string> _trashDayList;
 
@@ -21,14 +20,18 @@ public class SettingsVM : BaseViewModel {
         _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
         _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected, _weatherLocation, _gridId, _financeBlock1, _financeBlock2, _financeBlock3,
-        _financeBlock4, _financeBlock5, _financeBlock6, _financeBlock7, _financeBlock8, _financeBlock9;
+        _financeBlock4, _financeBlock5, _financeBlock6, _financeBlock7, _financeBlock8, _financeBlock9, _ipAddress, _port;
 
     private double _weatherLat, _weatherLon;
 
     private int gridX, gridY;
 
     public SettingsVM() {
-        TrashDayList = new List<string>(new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "DISABLED" });
+        TrashDayList = [
+            ..new[] {
+                "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "DISABLED"
+            }
+        ];
         TrashDaySelected = "Wednesday";
 
         UserAgent = ReferenceValues.JsonSettingsMaster.UserAgent;
@@ -78,16 +81,6 @@ public class SettingsVM : BaseViewModel {
         IsMetricUnitsChecked = ReferenceValues.JsonSettingsMaster.useMetricUnits;
         IsEasterEggsChecked = ReferenceValues.JsonSettingsMaster.useEasterEggs;
         TrashDaySelected = ReferenceValues.JsonSettingsMaster.TrashDay;
-        User1Checked = ReferenceValues.JsonSettingsMaster.User1Checked;
-        User2Checked = ReferenceValues.JsonSettingsMaster.User2Checked;
-        User3Checked = ReferenceValues.JsonSettingsMaster.User3Checked;
-        User4Checked = ReferenceValues.JsonSettingsMaster.User4Checked;
-        User5Checked = ReferenceValues.JsonSettingsMaster.User5Checked;
-        User1BehaviorChecked = ReferenceValues.JsonSettingsMaster.User1BehaviorChecked;
-        User2BehaviorChecked = ReferenceValues.JsonSettingsMaster.User2BehaviorChecked;
-        User3BehaviorChecked = ReferenceValues.JsonSettingsMaster.User3BehaviorChecked;
-        User4BehaviorChecked = ReferenceValues.JsonSettingsMaster.User4BehaviorChecked;
-        User5BehaviorChecked = ReferenceValues.JsonSettingsMaster.User5BehaviorChecked;
         WeatherLat = ReferenceValues.JsonSettingsMaster.WeatherLat;
         WeatherLon = ReferenceValues.JsonSettingsMaster.WeatherLon;
         GridX = ReferenceValues.JsonSettingsMaster.GridX;
@@ -103,6 +96,16 @@ public class SettingsVM : BaseViewModel {
         FinanceBlock7 = ReferenceValues.JsonSettingsMaster.FinanceBlock7;
         FinanceBlock8 = ReferenceValues.JsonSettingsMaster.FinanceBlock8;
         FinanceBlock9 = ReferenceValues.JsonSettingsMaster.FinanceBlock9;
+        IsOffModeChecked = ReferenceValues.JsonSettingsMaster.IsOff;
+        IsClientModeChecked = ReferenceValues.JsonSettingsMaster.IsClient;
+        IsServerModeChecked = ReferenceValues.JsonSettingsMaster.IsServer;
+        IpAddress = ReferenceValues.JsonSettingsMaster.IpAddress;
+        Port = ReferenceValues.JsonSettingsMaster.Port;
+
+        if (!IsOffModeChecked && !IsClientModeChecked && !IsServerModeChecked) {
+            IsOffModeChecked = true;
+            ReferenceValues.JsonSettingsMaster.IsOff = true;
+        }
     }
 
     public ICommand ButtonCommand {
@@ -159,16 +162,6 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.useMetricUnits = IsMetricUnitsChecked;
             ReferenceValues.JsonSettingsMaster.useEasterEggs = IsEasterEggsChecked;
             ReferenceValues.JsonSettingsMaster.TrashDay = TrashDaySelected;
-            ReferenceValues.JsonSettingsMaster.User1Checked = User1Checked;
-            ReferenceValues.JsonSettingsMaster.User2Checked = User2Checked;
-            ReferenceValues.JsonSettingsMaster.User3Checked = User3Checked;
-            ReferenceValues.JsonSettingsMaster.User4Checked = User4Checked;
-            ReferenceValues.JsonSettingsMaster.User5Checked = User5Checked;
-            ReferenceValues.JsonSettingsMaster.User1BehaviorChecked = User1BehaviorChecked;
-            ReferenceValues.JsonSettingsMaster.User2BehaviorChecked = User2BehaviorChecked;
-            ReferenceValues.JsonSettingsMaster.User3BehaviorChecked = User3BehaviorChecked;
-            ReferenceValues.JsonSettingsMaster.User4BehaviorChecked = User4BehaviorChecked;
-            ReferenceValues.JsonSettingsMaster.User5BehaviorChecked = User5BehaviorChecked;
             ReferenceValues.JsonSettingsMaster.WeatherLat = WeatherLat;
             ReferenceValues.JsonSettingsMaster.WeatherLon = WeatherLon;
             ReferenceValues.JsonSettingsMaster.GridX = GridX;
@@ -184,6 +177,11 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.FinanceBlock7 = FinanceBlock7;
             ReferenceValues.JsonSettingsMaster.FinanceBlock8 = FinanceBlock8;
             ReferenceValues.JsonSettingsMaster.FinanceBlock9 = FinanceBlock9;
+            ReferenceValues.JsonSettingsMaster.IsOff = IsOffModeChecked;
+            ReferenceValues.JsonSettingsMaster.IsClient = IsClientModeChecked;
+            ReferenceValues.JsonSettingsMaster.IsServer = IsServerModeChecked;
+            ReferenceValues.JsonSettingsMaster.IpAddress = IpAddress;
+            ReferenceValues.JsonSettingsMaster.Port = Port;
 
             try {
                 FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster), true);
@@ -622,86 +620,6 @@ public class SettingsVM : BaseViewModel {
         }
     }
 
-    public bool User1Checked {
-        get => _user1Checked;
-        set {
-            _user1Checked = value;
-            RaisePropertyChangedEvent("User1Checked");
-        }
-    }
-
-    public bool User2Checked {
-        get => _user2Checked;
-        set {
-            _user2Checked = value;
-            RaisePropertyChangedEvent("User2Checked");
-        }
-    }
-
-    public bool User3Checked {
-        get => _user3Checked;
-        set {
-            _user3Checked = value;
-            RaisePropertyChangedEvent("User3Checked");
-        }
-    }
-
-    public bool User4Checked {
-        get => _user4Checked;
-        set {
-            _user4Checked = value;
-            RaisePropertyChangedEvent("User4Checked");
-        }
-    }
-
-    public bool User5Checked {
-        get => _user5Checked;
-        set {
-            _user5Checked = value;
-            RaisePropertyChangedEvent("User5Checked");
-        }
-    }
-
-    public bool User1BehaviorChecked {
-        get => _user1BehaviorChecked;
-        set {
-            _user1BehaviorChecked = value;
-            RaisePropertyChangedEvent("User1BehaviorChecked");
-        }
-    }
-
-    public bool User2BehaviorChecked {
-        get => _user2BehaviorChecked;
-        set {
-            _user2BehaviorChecked = value;
-            RaisePropertyChangedEvent("User2BehaviorChecked");
-        }
-    }
-
-    public bool User3BehaviorChecked {
-        get => _user3BehaviorChecked;
-        set {
-            _user3BehaviorChecked = value;
-            RaisePropertyChangedEvent("User3BehaviorChecked");
-        }
-    }
-
-    public bool User4BehaviorChecked {
-        get => _user4BehaviorChecked;
-        set {
-            _user4BehaviorChecked = value;
-            RaisePropertyChangedEvent("User4BehaviorChecked");
-        }
-    }
-
-    public bool User5BehaviorChecked {
-        get => _user5BehaviorChecked;
-        set {
-            _user5BehaviorChecked = value;
-            RaisePropertyChangedEvent("User5BehaviorChecked");
-        }
-    }
-
     public double WeatherLat {
         get => _weatherLat;
         set {
@@ -819,6 +737,46 @@ public class SettingsVM : BaseViewModel {
         set {
             _financeBlock9 = value;
             RaisePropertyChangedEvent("FinanceBlock9");
+        }
+    }
+
+    public bool IsOffModeChecked {
+        get => _isOffModeChecked;
+        set {
+            _isOffModeChecked = value;
+            RaisePropertyChangedEvent("IsOffModeChecked");
+        }
+    }
+
+    public bool IsClientModeChecked {
+        get => _isClientModeChecked;
+        set {
+            _isClientModeChecked = value;
+            RaisePropertyChangedEvent("IsClientModeChecked");
+        }
+    }
+
+    public bool IsServerModeChecked {
+        get => _isServerModeChecked;
+        set {
+            _isServerModeChecked = value;
+            RaisePropertyChangedEvent("IsServerModeChecked");
+        }
+    }
+
+    public string IpAddress {
+        get => _ipAddress;
+        set {
+            _ipAddress = value;
+            RaisePropertyChangedEvent("IpAddress");
+        }
+    }
+
+    public string Port {
+        get => _port;
+        set {
+            _port = VerifyInput.VerifyTextNumeric(value);
+            RaisePropertyChangedEvent("Port");
         }
     }
 

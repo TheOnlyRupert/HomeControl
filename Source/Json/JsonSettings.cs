@@ -48,17 +48,6 @@ public class JsonSettings {
     public bool useEasterEggs { get; set; }
     public bool DebugMode { get; set; }
     public string TrashDay { get; set; }
-    public bool User1Checked { get; set; }
-    public bool User2Checked { get; set; }
-    public bool User3Checked { get; set; }
-    public bool User4Checked { get; set; }
-    public bool User5Checked { get; set; }
-    public bool User1BehaviorChecked { get; set; }
-    public bool User2BehaviorChecked { get; set; }
-    public bool User3BehaviorChecked { get; set; }
-    public bool User4BehaviorChecked { get; set; }
-    public bool User5BehaviorChecked { get; set; }
-
     public double WeatherLat { get; set; }
     public double WeatherLon { get; set; }
     public int GridX { get; set; }
@@ -74,4 +63,9 @@ public class JsonSettings {
     public string FinanceBlock7 { get; set; }
     public string FinanceBlock8 { get; set; }
     public string FinanceBlock9 { get; set; }
+    public bool IsOff { get; set; }
+    public bool IsClient { get; set; }
+    public bool IsServer { get; set; }
+    public string IpAddress { get; set; }
+    public string Port { get; set; }
 }

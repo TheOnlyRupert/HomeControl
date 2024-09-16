@@ -9,7 +9,7 @@ public static class FileHelpers {
     public static string LoadFileText(string fileName, bool isDocumentsFolder) {
         try {
             StreamReader streamReader = isDocumentsFolder
-                ? new StreamReader(ReferenceValues.DOCUMENTS_DIRECTORY + fileName + ".json")
+                ? new StreamReader(ReferenceValues.DocumentsDirectory + fileName + ".json")
                 : new StreamReader(ReferenceValues.AppDirectory + fileName + ".json");
 
             string fileText = null;
@@ -37,7 +37,7 @@ public static class FileHelpers {
         if (isDocumentsFolder) {
             GC.Collect();
             GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.DOCUMENTS_DIRECTORY + fileName + ".json", fileText);
+            File.WriteAllText(ReferenceValues.DocumentsDirectory + fileName + ".json", fileText);
         } else {
             GC.Collect();
             GC.WaitForPendingFinalizers();

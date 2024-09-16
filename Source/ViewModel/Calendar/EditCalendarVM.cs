@@ -36,17 +36,17 @@ public class EditCalendarVM : BaseViewModel {
         UserLogic(0);
 
         try {
-            Uri uri = new(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+            Uri uri = new(ReferenceValues.DocumentsDirectory + "icons/user1.png", UriKind.RelativeOrAbsolute);
             ImageUser1 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user2.png", UriKind.RelativeOrAbsolute);
             ImageUser2 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user3.png", UriKind.RelativeOrAbsolute);
             ImageUser3 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user4.png", UriKind.RelativeOrAbsolute);
             ImageUser4 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageUser5 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user0.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user0.png", UriKind.RelativeOrAbsolute);
             ImageHome = new BitmapImage(uri);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -78,22 +78,22 @@ public class EditCalendarVM : BaseViewModel {
                     foreach (CalendarEvents events in dates.EventsList) {
                         switch (events.UserId) {
                         case 0:
-                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user0.png";
+                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user0.png";
                             break;
                         case 1:
-                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png";
+                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user1.png";
                             break;
                         case 2:
-                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png";
+                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user2.png";
                             break;
                         case 3:
-                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png";
+                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user3.png";
                             break;
                         case 4:
-                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png";
+                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user4.png";
                             break;
                         case 5:
-                            events.Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png";
+                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user5.png";
                             break;
                         }
                     }
@@ -299,7 +299,7 @@ public class EditCalendarVM : BaseViewModel {
                     EndTime = EndTimeText,
                     Priority = priority,
                     UserId = user,
-                    Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png"
+                    Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png"
                 });
 
                 ReferenceValues.SoundToPlay = "scribble1";
@@ -341,7 +341,7 @@ public class EditCalendarVM : BaseViewModel {
                                 EndTime = EndTimeText,
                                 Priority = priority,
                                 UserId = user,
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png"
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png"
                             });
                             EventList.Remove(CalendarEventSelected);
 
@@ -427,7 +427,7 @@ public class EditCalendarVM : BaseViewModel {
                         EndTime = EndTimeText,
                         Priority = priority,
                         UserId = user,
-                        Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + user + ".png"
+                        Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png"
                     };
                 }
             }

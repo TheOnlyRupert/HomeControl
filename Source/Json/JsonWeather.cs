@@ -66,3 +66,10 @@ public class JsonWeatherLocation {
         public Properties properties { get; set; }
     }
 }
+
+public enum HvacStates {
+    Off,
+    Running,
+    Standby,
+    Purging
+}

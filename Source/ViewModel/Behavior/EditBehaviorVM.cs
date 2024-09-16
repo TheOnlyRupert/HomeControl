@@ -61,7 +61,7 @@ public class EditBehaviorVM : BaseViewModel {
             Uri uri;
 
             try {
-                uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+                uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user1.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -79,7 +79,7 @@ public class EditBehaviorVM : BaseViewModel {
             stars = ReferenceValues.JsonBehaviorMaster.User2Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User2Strikes;
             try {
-                uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+                uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user2.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -97,7 +97,7 @@ public class EditBehaviorVM : BaseViewModel {
             stars = ReferenceValues.JsonBehaviorMaster.User3Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User3Strikes;
             try {
-                uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+                uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user3.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -115,7 +115,7 @@ public class EditBehaviorVM : BaseViewModel {
             stars = ReferenceValues.JsonBehaviorMaster.User4Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User4Strikes;
             try {
-                uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+                uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user4.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -133,7 +133,7 @@ public class EditBehaviorVM : BaseViewModel {
             stars = ReferenceValues.JsonBehaviorMaster.User5Stars;
             strikes = ReferenceValues.JsonBehaviorMaster.User5Strikes;
             try {
-                uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+                uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user5.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {

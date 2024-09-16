@@ -9,7 +9,7 @@ public class ContactsVM : BaseViewModel {
         _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _privateWifiVisibility;
 
     public ContactsVM() {
-        PrivateWifiVisibility = ReferenceValues.LockUI ? "HIDDEN" : "VISIBLE";
+        PrivateWifiVisibility = ReferenceValues.LockUi ? "HIDDEN" : "VISIBLE";
         User1Name = ReferenceValues.JsonSettingsMaster.User1NameLegal;
         User2Name = ReferenceValues.JsonSettingsMaster.User2NameLegal;
 

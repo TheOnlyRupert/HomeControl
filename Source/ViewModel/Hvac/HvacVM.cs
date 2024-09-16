@@ -33,54 +33,51 @@ public class HvacVM : BaseViewModel {
     }
 
     private async void UpdateWeather() {
-        if (ReferenceValues.EnableWeather) {
-            JsonSerializerOptions options = new() {
-                IncludeFields = true
-            };
+        JsonSerializerOptions options = new() {
+            IncludeFields = true
+        };
 
-            try {
-                Uri weatherForecastHourlyURL =
-                    new(
-                        $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
+        try {
+            Uri weatherForecastHourlyUrl =
+                new($"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
 
-                using WebClient client = new();
-                client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
-                string weatherForecastHourly = await client.DownloadStringTaskAsync(weatherForecastHourlyURL);
-                ReferenceValues.ForecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
+            using WebClient client = new();
+            client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
+            string weatherForecastHourly = await client.DownloadStringTaskAsync(weatherForecastHourlyUrl);
+            ReferenceValues.ForecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
 
-                for (int i = 0; i < ReferenceValues.ForecastHourly.properties.periods.Count; i++) {
-                    if (ReferenceValues.ForecastHourly.properties.periods[i].startTime < DateTime.Now) {
-                        ReferenceValues.ForecastHourly.properties.periods.RemoveAt(i);
-                    }
+            for (int i = 0; i < ReferenceValues.ForecastHourly.properties.periods.Count; i++) {
+                if (ReferenceValues.ForecastHourly.properties.periods[i].startTime < DateTime.Now) {
+                    ReferenceValues.ForecastHourly.properties.periods.RemoveAt(i);
                 }
-
-                CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastHourly.properties.periods[0].windDirection);
-                CurrentWindSpeedText = ReferenceValues.ForecastHourly.properties.periods[0].windSpeed;
-                CurrentRainChanceText = ReferenceValues.ForecastHourly.properties.periods[0].probabilityOfPrecipitation.value + "%";
-                CurrentWeatherDescription = ReferenceValues.ForecastHourly.properties.periods[0].shortForecast;
-                CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(ReferenceValues.ForecastHourly.properties.periods[0].shortForecast,
-                    ReferenceValues.ForecastHourly.properties.periods[0].isDaytime,
-                    ReferenceValues.ForecastHourly.properties.periods[0].temperature, ReferenceValues.ForecastHourly.properties.periods[0].windSpeed);
-
-                if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
-                    double c = (ReferenceValues.ForecastHourly.properties.periods[0].temperature - 32) * 0.556;
-                    TemperatureOutside = (int)c + "°";
-                } else {
-                    TemperatureOutside = ReferenceValues.ForecastHourly.properties.periods[0].temperature + "°";
-                }
-
-                TemperatureOutsideColor = "Yellow";
-
-                HumidityOutside = ReferenceValues.ForecastHourly.properties.periods[0].relativeHumidity.value + "%";
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "WeatherVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             }
+
+            CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastHourly.properties.periods[0].windDirection);
+            CurrentWindSpeedText = ReferenceValues.ForecastHourly.properties.periods[0].windSpeed;
+            CurrentRainChanceText = ReferenceValues.ForecastHourly.properties.periods[0].probabilityOfPrecipitation.value + "%";
+            CurrentWeatherDescription = ReferenceValues.ForecastHourly.properties.periods[0].shortForecast;
+            CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(ReferenceValues.ForecastHourly.properties.periods[0].shortForecast,
+                ReferenceValues.ForecastHourly.properties.periods[0].isDaytime,
+                ReferenceValues.ForecastHourly.properties.periods[0].temperature, ReferenceValues.ForecastHourly.properties.periods[0].windSpeed);
+
+            if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
+                double c = (ReferenceValues.ForecastHourly.properties.periods[0].temperature - 32) * 0.556;
+                TemperatureOutside = (int)c + "°";
+            } else {
+                TemperatureOutside = ReferenceValues.ForecastHourly.properties.periods[0].temperature + "°";
+            }
+
+            TemperatureOutsideColor = "Yellow";
+
+            HumidityOutside = ReferenceValues.ForecastHourly.properties.periods[0].relativeHumidity.value + "%";
+        } catch (Exception e) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
     }
 
@@ -175,7 +172,7 @@ public class HvacVM : BaseViewModel {
 
         if (ReferenceValues.IsHeatingMode) {
             switch (ReferenceValues.HvacState) {
-            case ReferenceValues.HvacStates.Off:
+            case HvacStates.Off:
                 ProgramStatus = "Off";
                 ProgramStatusColor = "White";
                 HeatingCoolingStatus = "Heating";
@@ -183,7 +180,7 @@ public class HvacVM : BaseViewModel {
                 HeatingCoolingText = "Heating To";
 
                 break;
-            case ReferenceValues.HvacStates.Running:
+            case HvacStates.Running:
                 ProgramStatus = "Running";
                 ProgramStatusColor = "Green";
                 HeatingCoolingStatus = "Heating";
@@ -191,7 +188,7 @@ public class HvacVM : BaseViewModel {
                 HeatingCoolingText = "Heating To";
 
                 break;
-            case ReferenceValues.HvacStates.Standby:
+            case HvacStates.Standby:
                 ProgramStatus = "Standby";
                 ProgramStatusColor = "Yellow";
                 HeatingCoolingStatus = "Heating";
@@ -199,7 +196,7 @@ public class HvacVM : BaseViewModel {
                 HeatingCoolingText = "Heating To";
 
                 break;
-            case ReferenceValues.HvacStates.Purging:
+            case HvacStates.Purging:
                 ProgramStatus = "Purging";
                 ProgramStatusColor = "Yellow";
                 HeatingCoolingStatus = "Heating";
@@ -210,7 +207,7 @@ public class HvacVM : BaseViewModel {
             }
         } else {
             switch (ReferenceValues.HvacState) {
-            case ReferenceValues.HvacStates.Off:
+            case HvacStates.Off:
                 ProgramStatus = "Off";
                 ProgramStatusColor = "White";
                 HeatingCoolingStatus = "Cooling";
@@ -218,7 +215,7 @@ public class HvacVM : BaseViewModel {
                 HeatingCoolingText = "Cooling To";
 
                 break;
-            case ReferenceValues.HvacStates.Running:
+            case HvacStates.Running:
                 ProgramStatus = "Running";
                 ProgramStatusColor = "Green";
                 HeatingCoolingStatus = "Cooling";
@@ -226,7 +223,7 @@ public class HvacVM : BaseViewModel {
                 HeatingCoolingText = "Cooling To";
 
                 break;
-            case ReferenceValues.HvacStates.Standby:
+            case HvacStates.Standby:
                 ProgramStatus = "Standby";
                 ProgramStatusColor = "Yellow";
                 HeatingCoolingStatus = "Cooling";
@@ -234,7 +231,7 @@ public class HvacVM : BaseViewModel {
                 HeatingCoolingText = "Cooling To";
 
                 break;
-            case ReferenceValues.HvacStates.Purging:
+            case HvacStates.Purging:
                 ProgramStatus = "Purging";
                 ProgramStatusColor = "Yellow";
                 HeatingCoolingStatus = "Cooling";
@@ -253,12 +250,12 @@ public class HvacVM : BaseViewModel {
     private void ButtonLogic(object param) {
         switch (param) {
         case "hvac":
-            if (ReferenceValues.LockUI) {
+            if (ReferenceValues.LockUi) {
                 ReferenceValues.SoundToPlay = "locked";
                 SoundDispatcher.PlaySound();
             } else if (ReferenceValues.IsHvacComEstablished || ReferenceValues.JsonSettingsMaster.DebugMode) {
                 /* Save current state before editing. Only update if state changes */
-                bool IsProgramRunningOld = ReferenceValues.IsProgramRunning;
+                bool isProgramRunningOld = ReferenceValues.IsProgramRunning;
                 bool isHeatingModeOld = ReferenceValues.IsHeatingMode;
                 bool isFanAutoOld = ReferenceValues.IsFanAuto;
                 double tempOld = ReferenceValues.TemperatureSet;
@@ -297,7 +294,7 @@ public class HvacVM : BaseViewModel {
                     }
                 }
 
-                if (IsProgramRunningOld != ReferenceValues.IsProgramRunning) {
+                if (isProgramRunningOld != ReferenceValues.IsProgramRunning) {
                     if (ReferenceValues.IsProgramRunning) {
                         /* 3 -> Program On */
                         try {
@@ -312,7 +309,7 @@ public class HvacVM : BaseViewModel {
                             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
 
-                        ReferenceValues.HvacState = ReferenceValues.HvacStates.Standby;
+                        ReferenceValues.HvacState = HvacStates.Standby;
                     } else {
                         /* 4 -> Program Off */
                         try {
@@ -327,7 +324,7 @@ public class HvacVM : BaseViewModel {
                             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                         }
 
-                        ReferenceValues.HvacState = ReferenceValues.HvacStates.Off;
+                        ReferenceValues.HvacState = HvacStates.Off;
                     }
                 }
 

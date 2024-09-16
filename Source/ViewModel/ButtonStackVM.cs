@@ -2,7 +2,6 @@
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Debug;
 using HomeControl.Source.Modules.Games;
@@ -12,19 +11,13 @@ using Tamagotchi = HomeControl.Source.Modules.Games.Tamagotchi.Tamagotchi;
 namespace HomeControl.Source.ViewModel;
 
 public class ButtonStackVM : BaseViewModel {
-    private string _lockedImage;
+    private string _lockedImage, _weatherStatus, _weatherColor, _serverStatus, _serverColor;
 
     public ButtonStackVM() {
-        ReferenceValues.LockUI = !ReferenceValues.JsonSettingsMaster.DebugMode;
-        LockedImage = ReferenceValues.LockUI ? "./../../Resources/Images/icons/key_locked.png" : "./../../Resources/Images/icons/key_unlocked.png";
+        ReferenceValues.LockUi = !ReferenceValues.JsonSettingsMaster.DebugMode;
+        LockedImage = ReferenceValues.LockUi ? "./../../Resources/Images/icons/key_locked.png" : "./../../Resources/Images/icons/key_unlocked.png";
 
-        try {
-            ReferenceValues.JsonGameStatsMaster = JsonSerializer.Deserialize<JsonGameStats>(FileHelpers.LoadFileText("gameStats", true));
-        } catch (Exception) {
-            ReferenceValues.JsonGameStatsMaster = new JsonGameStats();
-
-            FileHelpers.SaveFileText("gameStats", JsonSerializer.Serialize(ReferenceValues.JsonGameStatsMaster), true);
-        }
+        UpdateInternetStatus();
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
@@ -34,32 +27,52 @@ public class ButtonStackVM : BaseViewModel {
         get => new DelegateCommand(ButtonCommandLogic, true);
     }
 
-    #region Fields
+    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
+        switch (e.PropertyName) {
+        case "ScreenSaverOn":
+            LockedImage = "./../../Resources/Images/icons/key_locked.png";
+            break;
+        case "UpdateInternetStatus":
+            UpdateInternetStatus();
 
-    public string LockedImage {
-        get => _lockedImage;
-        set {
-            _lockedImage = value;
-            RaisePropertyChangedEvent("LockedImage");
+            break;
         }
     }
 
-    #endregion
+    private void UpdateInternetStatus() {
+        if (ReferenceValues.IsWeatherApiOnline) {
+            WeatherStatus = "Connected";
+            WeatherColor = "Green";
+        } else {
+            WeatherStatus = "Offline";
+            WeatherColor = "Red";
+        }
 
-    private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
-        if (e.PropertyName == "ScreenSaverOn") {
-            LockedImage = "./../../Resources/Images/icons/key_locked.png";
+        try {
+            if (ReferenceValues.JsonSettingsMaster.IsOff) {
+                ServerStatus = "Disabled In Settings";
+                ServerColor = "DarkSlateGray";
+            } else if (ReferenceValues.ClientInfo.Closed) {
+                ServerStatus = "Offline";
+                ServerColor = "Red";
+            } else {
+                ServerStatus = "Connected";
+                ServerColor = "Green";
+            }
+        } catch (Exception) {
+            ServerStatus = "Offline";
+            ServerColor = "Red";
         }
     }
 
     private void ButtonCommandLogic(object param) {
         switch (param) {
         case "lock":
-            if (!ReferenceValues.LockUI) {
-                ReferenceValues.LockUI = true;
+            if (!ReferenceValues.LockUi) {
+                ReferenceValues.LockUi = true;
                 LockedImage = "./../../Resources/Images/icons/key_locked.png";
             } else {
-                ReferenceValues.LockUI = false;
+                ReferenceValues.LockUi = false;
                 LockedImage = "./../../Resources/Images/icons/key_unlocked.png";
             }
 
@@ -68,7 +81,7 @@ public class ButtonStackVM : BaseViewModel {
 
             break;
         case "debug":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 DebugLog debugLog = new();
                 debugLog.ShowDialog();
                 debugLog.Close();
@@ -78,7 +91,6 @@ public class ButtonStackVM : BaseViewModel {
             }
 
             break;
-
         case "contacts":
             Contacts contacts = new();
             contacts.ShowDialog();
@@ -118,4 +130,48 @@ public class ButtonStackVM : BaseViewModel {
             break;
         }
     }
+
+    #region Fields
+
+    public string LockedImage {
+        get => _lockedImage;
+        set {
+            _lockedImage = value;
+            RaisePropertyChangedEvent("LockedImage");
+        }
+    }
+
+    public string WeatherStatus {
+        get => _weatherStatus;
+        set {
+            _weatherStatus = value;
+            RaisePropertyChangedEvent("WeatherStatus");
+        }
+    }
+
+    public string WeatherColor {
+        get => _weatherColor;
+        set {
+            _weatherColor = value;
+            RaisePropertyChangedEvent("WeatherColor");
+        }
+    }
+
+    public string ServerStatus {
+        get => _serverStatus;
+        set {
+            _serverStatus = value;
+            RaisePropertyChangedEvent("ServerStatus");
+        }
+    }
+
+    public string ServerColor {
+        get => _serverColor;
+        set {
+            _serverColor = value;
+            RaisePropertyChangedEvent("ServerColor");
+        }
+    }
+
+    #endregion
 }

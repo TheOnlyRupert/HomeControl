@@ -37,11 +37,8 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14, _tempMin, _tempMax;
 
     public WeatherVM() {
-        ForecastHourlyList = new ObservableCollection<WeatherHourlyBlock>();
-
-        if (ReferenceValues.EnableWeather) {
-            UpdateWeather();
-        }
+        ForecastHourlyList = [];
+        UpdateWeather();
 
         /* Show Elf on Dec 24rd (Christmas Eve) */
         if (ReferenceValues.JsonSettingsMaster.useEasterEggs && DateTime.Now.Month == 12 && DateTime.Now.Day == 24) {
@@ -59,10 +56,7 @@ public class WeatherVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
         case "MinChanged":
-            if (ReferenceValues.EnableWeather) {
-                UpdateWeather();
-            }
-
+            UpdateWeather();
             break;
         }
     }

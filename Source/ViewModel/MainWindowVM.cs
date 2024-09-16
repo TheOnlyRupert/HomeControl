@@ -17,30 +17,30 @@ using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Finances;
+using HomeControl.Source.Server;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Finances;
-using HomeControl.Source.ViewModel.Games.Tamagotchi;
 using HomeControl.Source.ViewModel.Hvac;
 using Task = System.Threading.Tasks.Task;
 
 namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
-    private readonly CrossViewMessenger simpleMessenger;
-    private string _iconImage, _onlineColor, _christmasVisibility;
-    private bool changeDate, internetMessage;
-    private DateTime currentDate;
-    private int trashInt, hourInt;
+    private readonly CrossViewMessenger _simpleMessenger;
+    private bool _changeDate, _internetMessage, _serverMessage;
+    private DateTime _currentDate;
+    private string _iconImage;
+    private int _trashInt, _hourInt;
 
     public MainWindowVM() {
         IconImage = "../../Resources/Images/icons/behavior.png";
-        simpleMessenger = CrossViewMessenger.Instance;
-        currentDate = DateTime.Now;
-        internetMessage = false;
-        OnlineColor = "Black";
+        _simpleMessenger = CrossViewMessenger.Instance;
+        _currentDate = DateTime.Now;
+        _internetMessage = false;
+        _serverMessage = false;
 
         /* Create Documents Directory */
-        Directory.CreateDirectory(ReferenceValues.DOCUMENTS_DIRECTORY);
+        Directory.CreateDirectory(ReferenceValues.DocumentsDirectory);
 
         /* Create App Directory */
         try {
@@ -57,7 +57,7 @@ public class MainWindowVM : BaseViewModel {
             ReferenceValues.JsonDebugMaster = JsonSerializer.Deserialize<JsonDebug>(FileHelpers.LoadFileText("debug", true));
         } catch (Exception) {
             ReferenceValues.JsonDebugMaster = new JsonDebug {
-                DebugBlockList = new ObservableCollection<DebugTextBlock>()
+                DebugBlockList = []
             };
 
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
@@ -77,8 +77,8 @@ public class MainWindowVM : BaseViewModel {
             ReferenceValues.JsonFinanceMaster = JsonSerializer.Deserialize<JsonFinances>(FileHelpers.LoadFileText("finances", true));
         } catch (Exception) {
             ReferenceValues.JsonFinanceMaster = new JsonFinances {
-                FinanceList = new ObservableCollection<FinanceBlock>(),
-                FinanceListDetailed = new ObservableCollection<FinanceBlockDetailed>(),
+                FinanceList = [],
+                FinanceListDetailed = [],
                 TotalMonthlyAmount = 0
             };
 
@@ -89,15 +89,15 @@ public class MainWindowVM : BaseViewModel {
 
         /* Set Version */
         JsonVersion jsonVersion = new() {
-            versionMajor = ReferenceValues.VERSION_MAJOR,
-            versionMinor = ReferenceValues.VERSION_MINOR,
-            versionPatch = ReferenceValues.VERSION_PATCH,
-            versionBranch = ReferenceValues.VERSION_BRANCH
+            versionMajor = ReferenceValues.VersionMajor,
+            versionMinor = ReferenceValues.VersionMinor,
+            versionPatch = ReferenceValues.VersionPatch,
+            versionBranch = ReferenceValues.VersionBranch
         };
 
         FileHelpers.SaveFileText("version", JsonSerializer.Serialize(jsonVersion), false);
 
-        ReferenceValues.IconImageList = new ObservableCollection<string>();
+        ReferenceValues.IconImageList = [];
         ResourceManager resourceManager = new("HomeControl.g", Assembly.GetExecutingAssembly());
         ResourceSet resources = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
         foreach (string key in from object res in resources select ((DictionaryEntry)res).Key.ToString() into key where key.Contains("resources/images/icons/") select key) {
@@ -112,14 +112,48 @@ public class MainWindowVM : BaseViewModel {
             settingsDialog.Close();
         }
 
-        ApiStatus();
+        /* Server/Client Logic */
+        ReferenceValues.ClientName = Dns.GetHostName() + '_' + Environment.UserName;
+        ReferenceValues.LocalIp = SocketHelpers.GetLocalIpAddress();
+        ReferenceValues.PublicIp = SocketHelpers.GetPublicIpAddress();
+        ReferenceValues.ConnectedClients = [];
 
+        if (string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.Port)) {
+            ReferenceValues.JsonSettingsMaster.Port = "10000";
+        }
+
+        if (ReferenceValues.JsonSettingsMaster.DebugMode) {
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "INFO",
+                Module = "MainWindowVM",
+                Description = " --- TCP/IP Info --- \nClientName: " + ReferenceValues.ClientName + "\nLocalIP: " + ReferenceValues.LocalIp + "\nPublicIP: " + ReferenceValues.PublicIp
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+        }
+
+        if (ReferenceValues.JsonSettingsMaster.IsServer) {
+            ReferenceValues.SimpleServer = new SimpleServer();
+            ReferenceValues.JsonSettingsMaster.IpAddress = "127.0.0.1";
+            SimpleServer.Start();
+        }
+
+        /* GameStats File */
+        try {
+            ReferenceValues.JsonGameStatsMaster = JsonSerializer.Deserialize<JsonGameStats>(FileHelpers.LoadFileText("gameStats", true));
+        } catch (Exception) {
+            ReferenceValues.JsonGameStatsMaster = new JsonGameStats();
+
+            FileHelpers.SaveFileText("gameStats", JsonSerializer.Serialize(ReferenceValues.JsonGameStatsMaster), true);
+        }
+
+        _ = ApiStatus();
+
+        /* COM Port */
         if (!string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.ComPort)) {
             ReferenceValues.SerialPort = new SerialPort(ReferenceValues.JsonSettingsMaster.ComPort, 9600);
             HvacCrossPlay.EstablishConnection();
         }
-
-        UpdateChristmasVisibility();
 
         /* Global DispatcherTimer */
         DispatcherTimer dispatcherTimer = new();
@@ -129,20 +163,20 @@ public class MainWindowVM : BaseViewModel {
 
         /* Screen Saver */
         AppActivityTimer activityTimer = new(60000, 60000, false);
-        activityTimer.OnInactive += activityTimer_OnInactive;
-        activityTimer.OnActive += activityTimer_OnActive;
+        activityTimer.OnInactive += ActivityTimerOnInactive;
+        activityTimer.OnActive += ActivityTimerOnActive;
         return;
 
-        void activityTimer_OnInactive(object sender, EventArgs e) {
+        void ActivityTimerOnInactive(object sender, EventArgs e) {
             if (!ReferenceValues.JsonSettingsMaster.DebugMode) {
-                simpleMessenger.PushMessage("ScreenSaverOn", null);
-                ReferenceValues.LockUI = true;
+                _simpleMessenger.PushMessage("ScreenSaverOn", null);
+                ReferenceValues.LockUi = true;
                 ReferenceValues.ScreensaverMaster.Start();
             }
         }
 
-        void activityTimer_OnActive(object sender, EventArgs e) {
-            simpleMessenger.PushMessage("ScreenSaverOff", null);
+        void ActivityTimerOnActive(object sender, EventArgs e) {
+            _simpleMessenger.PushMessage("ScreenSaverOff", null);
             ReferenceValues.ScreensaverMaster.Stop();
         }
     }
@@ -151,15 +185,27 @@ public class MainWindowVM : BaseViewModel {
         get => new DelegateCommand(ButtonCommandLogic, true);
     }
 
+    #region Fields
+
+    public string IconImage {
+        get => _iconImage;
+        set {
+            _iconImage = value;
+            RaisePropertyChangedEvent("IconImage");
+        }
+    }
+
+    #endregion
+
     private void ButtonCommandLogic(object param) {
-        if (!ReferenceValues.LockUI) {
+        if (!ReferenceValues.LockUi) {
             switch (param) {
             case "finances":
                 EditFinances editFinances = new();
                 editFinances.ShowDialog();
                 editFinances.Close();
 
-                simpleMessenger.PushMessage("RefreshFinances", null);
+                _simpleMessenger.PushMessage("RefreshFinances", null);
                 break;
             }
         } else {
@@ -169,12 +215,12 @@ public class MainWindowVM : BaseViewModel {
     }
 
     private void dispatcherTimer_Tick(object sender, EventArgs e) {
-        changeDate = false;
+        _changeDate = false;
         /* Min Changes */
-        if (!currentDate.Minute.Equals(DateTime.Now.Minute)) {
-            simpleMessenger.PushMessage("MinChanged", null);
+        if (!_currentDate.Minute.Equals(DateTime.Now.Minute)) {
+            _simpleMessenger.PushMessage("MinChanged", null);
 
-            ApiStatus();
+            _ = ApiStatus();
             if (!ReferenceValues.IsHvacComEstablished) {
                 HvacCrossPlay.EstablishConnection();
             }
@@ -185,47 +231,46 @@ public class MainWindowVM : BaseViewModel {
                 SoundDispatcher.PlaySound();
             }
 
-            changeDate = true;
+            _changeDate = true;
         }
 
         /* Hour Changes */
-        if (!currentDate.Hour.Equals(DateTime.Now.Hour)) {
-            simpleMessenger.PushMessage("HourChanged", null);
-            changeDate = true;
+        if (!_currentDate.Hour.Equals(DateTime.Now.Hour)) {
+            _simpleMessenger.PushMessage("HourChanged", null);
+            _changeDate = true;
 
             if (DateTime.Now.Month == 12) {
                 ReferenceValues.SoundToPlay = "jingle_bells";
-                SoundDispatcher.PlaySound();
             } else {
                 Random random = new();
                 ReferenceValues.SoundToPlay = "clock" + random.Next(1, 3);
-                SoundDispatcher.PlaySound();
             }
 
-            hourInt = 10;
+            SoundDispatcher.PlaySound();
+
+            _hourInt = 10;
 
             /* Trash Night Sound */
             if (DateTime.Now.DayOfWeek.ToString() == ReferenceValues.JsonSettingsMaster.TrashDay && DateTime.Now.Hour > 16) {
-                trashInt = 12;
+                _trashInt = 12;
             }
         }
 
         /* Date Changes */
-        if (!currentDate.Day.Equals(DateTime.Now.Day)) {
-            simpleMessenger.PushMessage("DateChanged", null);
-            changeDate = true;
-            UpdateChristmasVisibility();
+        if (!_currentDate.Day.Equals(DateTime.Now.Day)) {
+            _simpleMessenger.PushMessage("DateChanged", null);
+            _changeDate = true;
         }
 
         /* Month Changes */
-        if (!currentDate.Month.Equals(DateTime.Now.Month)) {
-            simpleMessenger.PushMessage("MonthChanged", null);
-            changeDate = true;
+        if (!_currentDate.Month.Equals(DateTime.Now.Month)) {
+            _simpleMessenger.PushMessage("MonthChanged", null);
+            _changeDate = true;
         }
 
-        if (changeDate) {
-            currentDate = DateTime.Now;
-            changeDate = false;
+        if (_changeDate) {
+            _currentDate = DateTime.Now;
+            _changeDate = false;
         }
 
         if (ReferenceValues.JsonTimerMaster.IsTimer1Running) {
@@ -262,7 +307,7 @@ public class MainWindowVM : BaseViewModel {
 
         if (ReferenceValues.JsonTimerMaster.IsTimer1Running || ReferenceValues.JsonTimerMaster.IsTimer2Running || ReferenceValues.JsonTimerMaster.IsTimer3Running ||
             ReferenceValues.JsonTimerMaster.IsTimer4Running) {
-            simpleMessenger.PushMessage("RefreshTimer", null);
+            _simpleMessenger.PushMessage("RefreshTimer", null);
         }
 
         if (ReferenceValues.JsonTimerMaster.IsAlarmSounding) {
@@ -270,36 +315,50 @@ public class MainWindowVM : BaseViewModel {
             SoundDispatcher.PlaySound();
         }
 
-        /* Tick Tamagotchi Every Second */
-        TamagotchiLogic.TickLogic();
+        /* HVAC Logic */
         ReferenceValues.HvacStateTime++;
 
+        /* Try to Connect to Server Every Second */
+        if (!ReferenceValues.JsonSettingsMaster.IsOff) {
+            if (ReferenceValues.ClientInfo == null || ReferenceValues.ClientInfo.Closed) {
+                try {
+                    SimpleClient.Start();
+                    _serverMessage = false;
+                    _simpleMessenger.PushMessage("UpdateInternetStatus", null);
+                } catch (Exception) {
+                    if (!_serverMessage) {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "MainWindowVM",
+                            Description = "Unable to connect to server on port " + ReferenceValues.JsonSettingsMaster.Port +
+                                          "\nWill automatically attempt to reconnect every second until connection is restored"
+                        });
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                        _serverMessage = true;
+                    }
+                }
+            }
+        }
+
         /* Check Trash */
-        if (trashInt > 0) {
-            trashInt--;
-            if (trashInt == 0) {
+        if (_trashInt > 0) {
+            _trashInt--;
+            if (_trashInt == 0) {
                 ReferenceValues.SoundToPlay = "trash";
                 SoundDispatcher.PlaySound();
             }
         }
 
-        if (hourInt > 0) {
-            hourInt--;
-            if (hourInt == 0) {
+        if (_hourInt > 0) {
+            _hourInt--;
+            if (_hourInt == 0) {
                 ReferenceValues.SoundToPlay = "hour" + DateTime.Now.Hour;
                 SoundDispatcher.PlaySound();
             }
         }
 
-        simpleMessenger.PushMessage("Refresh", null);
-    }
-
-    private void UpdateChristmasVisibility() {
-        if (DateTime.Now.Month == 12 && DateTime.Now.Day < 26) {
-            ChristmasVisibility = "VISIBLE";
-        } else {
-            ChristmasVisibility = "COLLAPSED";
-        }
+        _simpleMessenger.PushMessage("Refresh", null);
     }
 
     private async Task ApiStatus() {
@@ -317,7 +376,10 @@ public class MainWindowVM : BaseViewModel {
             ApiStatus apiStatus = JsonSerializer.Deserialize<ApiStatus>(apiStatusString, options);
 
             if (apiStatus is { status: "OK" }) {
-                if (internetMessage) {
+                ReferenceValues.IsWeatherApiOnline = true;
+                _simpleMessenger.PushMessage("UpdateInternetStatus", null);
+
+                if (_internetMessage) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "INFO",
@@ -327,8 +389,7 @@ public class MainWindowVM : BaseViewModel {
                     FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
-                internetMessage = false;
-                OnlineColor = "Black";
+                _internetMessage = false;
             } else {
                 LostInternet();
             }
@@ -338,7 +399,7 @@ public class MainWindowVM : BaseViewModel {
     }
 
     private void LostInternet() {
-        if (!internetMessage) {
+        if (!_internetMessage) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
                 Level = "INFO",
@@ -346,36 +407,9 @@ public class MainWindowVM : BaseViewModel {
                 Description = "Lost Internet Connection"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-            internetMessage = true;
-            OnlineColor = "Red";
+            _internetMessage = true;
+            ReferenceValues.IsWeatherApiOnline = false;
+            _simpleMessenger.PushMessage("UpdateInternetStatus", null);
         }
     }
-
-    #region Fields
-
-    public string IconImage {
-        get => _iconImage;
-        set {
-            _iconImage = value;
-            RaisePropertyChangedEvent("IconImage");
-        }
-    }
-
-    public string OnlineColor {
-        get => _onlineColor;
-        set {
-            _onlineColor = value;
-            RaisePropertyChangedEvent("OnlineColor");
-        }
-    }
-
-    public string ChristmasVisibility {
-        get => _christmasVisibility;
-        set {
-            _christmasVisibility = value;
-            RaisePropertyChangedEvent("ChristmasVisibility");
-        }
-    }
-
-    #endregion
 }

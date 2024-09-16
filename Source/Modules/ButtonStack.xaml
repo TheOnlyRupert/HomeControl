@@ -369,6 +369,29 @@
                 Height="48" />
         </Button>
 
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" Foreground="White"
+                       Text="WeatherAPI: " />
+            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" Foreground="White"
+                       Text="Server/Client: " />
+
+            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="24" HorizontalAlignment="Left"
+                       Foreground="{Binding WeatherColor}" Text="{Binding WeatherStatus}" />
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="24" HorizontalAlignment="Left"
+                       Foreground="{Binding ServerColor}" Text="{Binding ServerStatus}" />
+        </Grid>
+
         <Button
             Grid.Row="0"
             Grid.RowSpan="2"

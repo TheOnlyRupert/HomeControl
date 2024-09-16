@@ -55,7 +55,9 @@ public class CalendarVM : BaseViewModel {
             FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster), true);
         }
 
-        ReferenceValues.CalendarFilterList = new[] { true, true, true, true, true, true };
+        ReferenceValues.CalendarFilterList = new[] {
+            true, true, true, true, true, true
+        };
         FilterBackgroundColor = "Transparent";
 
         Button1EventList = new ObservableCollection<CalendarEventsCustom>();
@@ -123,7 +125,9 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "ScreenSaverOn":
-            ReferenceValues.CalendarFilterList = new[] { true, true, true, true, true, true };
+            ReferenceValues.CalendarFilterList = new[] {
+                true, true, true, true, true, true
+            };
             PopulateCalendar(calendarDate);
 
             break;
@@ -131,7 +135,7 @@ public class CalendarVM : BaseViewModel {
     }
 
     private static void BackupEvents() {
-        Directory.CreateDirectory(ReferenceValues.DOCUMENTS_DIRECTORY + "backups/");
+        Directory.CreateDirectory(ReferenceValues.DocumentsDirectory + "backups/");
 
         try {
             FileHelpers.SaveFileText("backups/calendar_backup_" + DateTime.Now.ToString("yyyy_MM_dd"), JsonSerializer.Serialize(ReferenceValues.JsonFinanceMaster), true);
@@ -171,7 +175,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "recurring":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 EditRecurring editRecurring = new();
                 editRecurring.ShowDialog();
                 editRecurring.Close();
@@ -183,7 +187,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button1":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime;
                 OpenEventDialog();
             } else {
@@ -193,7 +197,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button2":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(1);
                 OpenEventDialog();
             } else {
@@ -203,7 +207,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button3":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(2);
                 OpenEventDialog();
             } else {
@@ -213,7 +217,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button4":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(3);
                 OpenEventDialog();
             } else {
@@ -223,7 +227,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button5":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(4);
                 OpenEventDialog();
             } else {
@@ -233,7 +237,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button6":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(5);
                 OpenEventDialog();
             } else {
@@ -243,7 +247,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button7":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(6);
                 OpenEventDialog();
             } else {
@@ -253,7 +257,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button8":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(7);
                 OpenEventDialog();
             } else {
@@ -263,7 +267,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button9":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(8);
                 OpenEventDialog();
             } else {
@@ -273,7 +277,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button10":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(9);
                 OpenEventDialog();
             } else {
@@ -283,7 +287,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button11":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(10);
                 OpenEventDialog();
             } else {
@@ -293,7 +297,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button12":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(11);
                 OpenEventDialog();
             } else {
@@ -303,7 +307,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button13":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(12);
                 OpenEventDialog();
             } else {
@@ -313,7 +317,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button14":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(13);
                 OpenEventDialog();
             } else {
@@ -323,7 +327,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button15":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(14);
                 OpenEventDialog();
             } else {
@@ -333,7 +337,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button16":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(15);
                 OpenEventDialog();
             } else {
@@ -343,7 +347,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button17":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(16);
                 OpenEventDialog();
             } else {
@@ -353,7 +357,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button18":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(17);
                 OpenEventDialog();
             } else {
@@ -363,7 +367,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button19":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(18);
                 OpenEventDialog();
             } else {
@@ -373,7 +377,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button20":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(19);
                 OpenEventDialog();
             } else {
@@ -383,7 +387,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button21":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(20);
                 OpenEventDialog();
             } else {
@@ -393,7 +397,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button22":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(21);
                 OpenEventDialog();
             } else {
@@ -403,7 +407,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button23":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(22);
                 OpenEventDialog();
             } else {
@@ -413,7 +417,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button24":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(23);
                 OpenEventDialog();
             } else {
@@ -423,7 +427,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button25":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(24);
                 OpenEventDialog();
             } else {
@@ -433,7 +437,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button26":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(25);
                 OpenEventDialog();
             } else {
@@ -443,7 +447,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button27":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(26);
                 OpenEventDialog();
             } else {
@@ -453,7 +457,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button28":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(27);
                 OpenEventDialog();
             } else {
@@ -463,7 +467,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button29":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(28);
                 OpenEventDialog();
             } else {
@@ -473,7 +477,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button30":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(29);
                 OpenEventDialog();
             } else {
@@ -483,7 +487,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button31":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(30);
                 OpenEventDialog();
             } else {
@@ -493,7 +497,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button32":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(31);
                 OpenEventDialog();
             } else {
@@ -503,7 +507,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button33":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(32);
                 OpenEventDialog();
             } else {
@@ -513,7 +517,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button34":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(33);
                 OpenEventDialog();
             } else {
@@ -523,7 +527,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button35":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(34);
                 OpenEventDialog();
             } else {
@@ -533,7 +537,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button36":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(35);
                 OpenEventDialog();
             } else {
@@ -543,7 +547,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button37":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(36);
                 OpenEventDialog();
             } else {
@@ -553,7 +557,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button38":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(37);
                 OpenEventDialog();
             } else {
@@ -563,7 +567,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button39":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(38);
                 OpenEventDialog();
             } else {
@@ -573,7 +577,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button40":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(39);
                 OpenEventDialog();
             } else {
@@ -583,7 +587,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button41":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(40);
                 OpenEventDialog();
             } else {
@@ -593,7 +597,7 @@ public class CalendarVM : BaseViewModel {
 
             break;
         case "button42":
-            if (!ReferenceValues.LockUI) {
+            if (!ReferenceValues.LockUi) {
                 ReferenceValues.CalendarEventDate = button1DateTime.AddDays(41);
                 OpenEventDialog();
             } else {
@@ -1618,7 +1622,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button1EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1632,7 +1636,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button2EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1646,7 +1650,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button3EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1660,7 +1664,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button4EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1674,7 +1678,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button5EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1688,7 +1692,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button6EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1702,7 +1706,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button7EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1716,7 +1720,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button8EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1730,7 +1734,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button9EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1744,7 +1748,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button10EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1758,7 +1762,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button11EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1772,7 +1776,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button12EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1786,7 +1790,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button13EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1800,7 +1804,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button14EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1814,7 +1818,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button15EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1828,7 +1832,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button16EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1842,7 +1846,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button17EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1856,7 +1860,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button18EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1870,7 +1874,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button19EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1884,7 +1888,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button20EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1898,7 +1902,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button21EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1912,7 +1916,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button22EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1926,7 +1930,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button23EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1940,7 +1944,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button24EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1954,7 +1958,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button25EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1968,7 +1972,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button26EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1982,7 +1986,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button27EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -1996,7 +2000,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button28EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2010,7 +2014,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button29EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2024,7 +2028,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button30EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2038,7 +2042,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button31EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2052,7 +2056,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button32EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2066,7 +2070,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button33EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2080,7 +2084,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button34EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2094,7 +2098,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button35EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2108,7 +2112,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button36EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2122,7 +2126,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button37EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2136,7 +2140,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button38EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2150,7 +2154,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button39EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2164,7 +2168,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button40EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2178,7 +2182,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button41EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });
@@ -2192,7 +2196,7 @@ public class CalendarVM : BaseViewModel {
                     for (int i = 0; i < ReferenceValues.CalendarFilterList.Length; i++) {
                         if (ReferenceValues.CalendarFilterList[i] && events.UserId == i) {
                             Button42EventList.Add(new CalendarEventsCustom {
-                                Image = ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user" + events.UserId + ".png",
+                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + events.UserId + ".png",
                                 Description = events.StartTime + " - " + events.EndTime + "  " + events.EventName,
                                 Priority = events.Priority
                             });

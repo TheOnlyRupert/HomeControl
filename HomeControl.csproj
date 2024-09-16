@@ -43,6 +43,7 @@
         <Reference Include="System.Device"/>
         <Reference Include="System.Net"/>
         <Reference Include="System.Numerics"/>
+        <Reference Include="System.Windows.Forms"/>
         <Reference Include="System.Xml"/>
         <Reference Include="System.Xaml">
             <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -100,9 +101,6 @@
         </Compile>
         <Compile Include="Source\Modules\Calendar\EditRecurring.xaml.cs">
             <DependentUpon>EditRecurring.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Christmas.xaml.cs">
-            <DependentUpon>Christmas.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\Modules\Contacts.xaml.cs">
             <DependentUpon>Contacts.xaml</DependentUpon>
@@ -175,6 +173,10 @@
             <DependentUpon>Exercise.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\ReferenceValues.cs"/>
+        <Compile Include="Source\Server\SimpleClient.cs"/>
+        <Compile Include="Source\Server\SimpleServer.cs"/>
+        <Compile Include="Source\Server\SocketHelpers.cs"/>
+        <Compile Include="Source\Server\SocketCustom.cs"/>
         <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksDailyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksMonthlyVM.cs"/>
@@ -184,7 +186,6 @@
         <Compile Include="Source\ViewModel\ButtonStackVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditFilterVM.cs"/>
         <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
-        <Compile Include="Source\ViewModel\ChristmasVM.cs"/>
         <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
         <Compile Include="Source\ViewModel\ContactsVM.cs"/>
         <Compile Include="Source\ViewModel\EditRecurringVM.cs"/>
@@ -233,7 +234,6 @@
         <Page Include="Source\Modules\Behavior\TasksWeekly.xaml"/>
         <Page Include="Source\Modules\Calendar\EditFilter.xaml"/>
         <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
-        <Page Include="Source\Modules\Christmas.xaml"/>
         <Page Include="Source\Modules\Contacts.xaml"/>
         <Page Include="Source\Modules\DebugLog.xaml"/>
         <Page Include="Source\Modules\BloodPressure.xaml"/>
@@ -365,6 +365,7 @@
         <Resource Include="Resources\Images\monthly\911\6.png"/>
         <Resource Include="Resources\Images\monthly\911\7.png"/>
         <Resource Include="Resources\Images\monthly\911\8.png"/>
+        <Resource Include="Resources\Images\icons\server.png"/>
         <Content Include="Resources\Sounds\beep.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>

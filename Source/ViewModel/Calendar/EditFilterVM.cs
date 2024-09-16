@@ -15,17 +15,17 @@ public class EditFilterVM : BaseViewModel {
 
     public EditFilterVM() {
         try {
-            Uri uri = new(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user0.png", UriKind.RelativeOrAbsolute);
+            Uri uri = new(ReferenceValues.DocumentsDirectory + "icons/user0.png", UriKind.RelativeOrAbsolute);
             ImageUser0 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user1.png", UriKind.RelativeOrAbsolute);
             ImageUser1 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user2.png", UriKind.RelativeOrAbsolute);
             ImageUser2 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user3.png", UriKind.RelativeOrAbsolute);
             ImageUser3 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user4.png", UriKind.RelativeOrAbsolute);
             ImageUser4 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageUser5 = new BitmapImage(uri);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -82,7 +82,9 @@ public class EditFilterVM : BaseViewModel {
 
             break;
         case "reset":
-            ReferenceValues.CalendarFilterList = new[] { true, true, true, true, true, true };
+            ReferenceValues.CalendarFilterList = new[] {
+                true, true, true, true, true, true
+            };
             UserLogic(0);
             UserLogic(1);
             UserLogic(2);

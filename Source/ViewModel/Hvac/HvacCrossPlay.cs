@@ -9,8 +9,8 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public static class HvacCrossPlay {
-    private static bool comPortMessage, intMessageSent;
-    private static readonly CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+    private static bool _comPortMessage, _intMessageSent;
+    private static readonly CrossViewMessenger SimpleMessenger = CrossViewMessenger.Instance;
 
     public static async void EstablishConnection() {
         try {
@@ -27,8 +27,8 @@ public static class HvacCrossPlay {
             if (!ReferenceValues.SerialPort.IsOpen) {
                 ReferenceValues.SerialPort.Open();
                 ReferenceValues.IsHvacComEstablished = true;
-                comPortMessage = false;
-                intMessageSent = false;
+                _comPortMessage = false;
+                _intMessageSent = false;
 
                 ReferenceValues.SerialPort.ReadTimeout = 500;
                 ReferenceValues.SerialPort.WriteTimeout = 500;
@@ -36,7 +36,7 @@ public static class HvacCrossPlay {
                 ReferenceValues.SerialPort.Write("0");
             }
         } catch (Exception) {
-            if (!comPortMessage) {
+            if (!_comPortMessage) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "WARN",
@@ -44,7 +44,7 @@ public static class HvacCrossPlay {
                     Description = "Unable to open port: " + ReferenceValues.JsonSettingsMaster.ComPort
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                comPortMessage = true;
+                _comPortMessage = true;
             }
 
             ReferenceValues.IsHvacComEstablished = false;
@@ -75,7 +75,7 @@ public static class HvacCrossPlay {
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
                 ReferenceValues.IsHvacComEstablished = false;
-                simpleMessenger.PushMessage("HvacUpdated", null);
+                SimpleMessenger.PushMessage("HvacUpdated", null);
             }
         }
 
@@ -95,11 +95,11 @@ public static class HvacCrossPlay {
 
                 ReferenceValues.TemperatureInside = (int)float.Parse(parts[0].Trim());
                 ReferenceValues.HumidityInside = (int)float.Parse(parts[1].Trim());
-                intMessageSent = false;
+                _intMessageSent = false;
             } catch (FormatException) {
                 ReferenceValues.TemperatureInside = -99;
                 ReferenceValues.HumidityInside = -99;
-                if (!intMessageSent) {
+                if (!_intMessageSent) {
                     ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                         Date = DateTime.Now,
                         Level = "WARN",
@@ -109,7 +109,7 @@ public static class HvacCrossPlay {
                     FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
                 }
 
-                intMessageSent = true;
+                _intMessageSent = true;
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -140,7 +140,7 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_0>")) {
-            ReferenceValues.HvacState = ReferenceValues.HvacStates.Off;
+            ReferenceValues.HvacState = HvacStates.Off;
             ReferenceValues.IsProgramRunning = false;
             ReferenceValues.IsHeatingMode = false;
             ReferenceValues.HvacStateTime = 0;
@@ -153,7 +153,7 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_1>")) {
-            ReferenceValues.HvacState = ReferenceValues.HvacStates.Running;
+            ReferenceValues.HvacState = HvacStates.Running;
             ReferenceValues.IsHeatingMode = false;
             ReferenceValues.IsProgramRunning = true;
             ReferenceValues.HvacStateTime = 0;
@@ -166,7 +166,7 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_2>")) {
-            ReferenceValues.HvacState = ReferenceValues.HvacStates.Standby;
+            ReferenceValues.HvacState = HvacStates.Standby;
             ReferenceValues.IsHeatingMode = false;
             ReferenceValues.IsProgramRunning = true;
             ReferenceValues.HvacStateTime = 0;
@@ -179,7 +179,7 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_3>")) {
-            ReferenceValues.HvacState = ReferenceValues.HvacStates.Purging;
+            ReferenceValues.HvacState = HvacStates.Purging;
             ReferenceValues.IsHeatingMode = false;
             ReferenceValues.IsProgramRunning = true;
             ReferenceValues.HvacStateTime = 0;
@@ -192,7 +192,7 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_4>")) {
-            ReferenceValues.HvacState = ReferenceValues.HvacStates.Off;
+            ReferenceValues.HvacState = HvacStates.Off;
             ReferenceValues.IsHeatingMode = true;
             ReferenceValues.IsProgramRunning = false;
             ReferenceValues.HvacStateTime = 0;
@@ -205,7 +205,7 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_5>")) {
-            ReferenceValues.HvacState = ReferenceValues.HvacStates.Running;
+            ReferenceValues.HvacState = HvacStates.Running;
             ReferenceValues.IsHeatingMode = true;
             ReferenceValues.IsProgramRunning = true;
             ReferenceValues.HvacStateTime = 0;
@@ -218,7 +218,7 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_6>")) {
-            ReferenceValues.HvacState = ReferenceValues.HvacStates.Standby;
+            ReferenceValues.HvacState = HvacStates.Standby;
             ReferenceValues.IsHeatingMode = true;
             ReferenceValues.IsProgramRunning = true;
             ReferenceValues.HvacStateTime = 0;
@@ -231,7 +231,7 @@ public static class HvacCrossPlay {
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         } else if (data.Contains("<HvacState_7>")) {
-            ReferenceValues.HvacState = ReferenceValues.HvacStates.Purging;
+            ReferenceValues.HvacState = HvacStates.Purging;
             ReferenceValues.IsHeatingMode = true;
             ReferenceValues.IsProgramRunning = true;
             ReferenceValues.HvacStateTime = 0;
@@ -267,6 +267,6 @@ public static class HvacCrossPlay {
             }
         }
 
-        simpleMessenger.PushMessage("HvacUpdated", null);
+        SimpleMessenger.PushMessage("HvacUpdated", null);
     }
 }

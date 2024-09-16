@@ -9,157 +9,137 @@
     WindowStartupLocation="CenterScreen"
     ResizeMode="CanResize"
     WindowState="Maximized"
-    WindowStyle="None"
-    FocusManager.FocusedElement="{Binding ElementName=MainFocusItem}">
-    <Border
-        BorderBrush="{Binding OnlineColor}"
-        BorderThickness="4">
+    WindowStyle="None">
+    <Grid
+        Focusable="False"
+        Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="*" />
+        </Grid.ColumnDefinitions>
+
         <Grid
-            Focusable="False"
-            Background="Black">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="*" />
-            </Grid.ColumnDefinitions>
+            Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="*" />
+            </Grid.RowDefinitions>
 
             <Grid
+                Grid.Row="0"
                 Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="Auto" />
-                    <RowDefinition
-                        Height="*" />
-                </Grid.RowDefinitions>
-
-                <Grid
-                    Grid.Row="0"
-                    Grid.Column="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="Auto"
-                            MinWidth="96" />
-                    </Grid.ColumnDefinitions>
-
-                    <Frame
-                        Grid.Column="0"
-                        Source="Source/Modules/ButtonStack.xaml"
-                        Focusable="False" />
-                    <Frame
-                        Grid.Column="1"
-                        Source="Source/Modules/Timer/Timer.xaml"
-                        Focusable="False" />
-                </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="Auto"
+                        MinWidth="96" />
+                </Grid.ColumnDefinitions>
 
                 <Frame
                     Grid.Column="0"
-                    Grid.Row="1"
-                    Source="Source/Modules/Calendar/Calendar.xaml"
+                    Source="Source/Modules/ButtonStack.xaml"
+                    Focusable="False" />
+                <Frame
+                    Grid.Column="1"
+                    Source="Source/Modules/Timer/Timer.xaml"
                     Focusable="False" />
             </Grid>
+
+            <Frame
+                Grid.Column="0"
+                Grid.Row="1"
+                Source="Source/Modules/Calendar/Calendar.xaml"
+                Focusable="False" />
+        </Grid>
+
+        <Grid
+            Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="2*" />
+                <RowDefinition
+                    Height="4*" />
+                <RowDefinition
+                    Height="3*" />
+            </Grid.RowDefinitions>
 
             <Grid
-                Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="2*" />
-                    <RowDefinition
-                        Height="4*" />
-                    <RowDefinition
-                        Height="3*" />
-                </Grid.RowDefinitions>
-
-                <Grid
-                    Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="2*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid
-                        Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition
-                                Height="Auto" />
-                            <RowDefinition
-                                Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <Frame
-                            Grid.Row="0"
-                            Source="Source/Modules/Christmas.xaml"
-                            Focusable="False"
-                            Visibility="{Binding ChristmasVisibility}" />
-
-                        <Frame
-                            Grid.Row="1"
-                            Source="Source/Modules/Finances/Finances.xaml"
-                            Focusable="False"
-                            Margin="4 4 4 0" />
-                        <Button
-                            Grid.Row="1"
-                            Command="{Binding ButtonCommand}"
-                            CommandParameter="finances"
-                            Margin="4 4 4 0">
-                            <Button.Style>
-                                <Style
-                                    TargetType="{x:Type Button}">
-                                    <Setter
-                                        Property="Background"
-                                        Value="Transparent" />
-                                    <Setter
-                                        Property="Foreground"
-                                        Value="White" />
-                                    <Setter
-                                        Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate
-                                                TargetType="{x:Type Button}">
-                                                <Border
-                                                    Background="{TemplateBinding Background}"
-                                                    BorderBrush="DarkSlateGray"
-                                                    BorderThickness="1"
-                                                    Padding="4">
-                                                    <ContentPresenter
-                                                        HorizontalAlignment="Stretch"
-                                                        VerticalAlignment="Stretch" />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </Grid>
-
-                    <Frame
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        Source="Source/Modules/Hvac/Hvac.xaml"
-                        Focusable="False" />
-                </Grid>
+                Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="2*" />
+                </Grid.ColumnDefinitions>
 
                 <Frame
-                    Grid.Row="1"
-                    Source="Source/Modules/Weather.xaml"
-                    Focusable="False" />
+                    Grid.Column="0"
+                    Source="Source/Modules/Finances/Finances.xaml"
+                    Focusable="False"
+                    Margin="4 4 4 0" />
+
+                <Button
+                    Grid.Column="0"
+                    Command="{Binding ButtonCommand}"
+                    CommandParameter="finances"
+                    Margin="4 4 4 0">
+                    <Button.Style>
+                        <Style
+                            TargetType="{x:Type Button}">
+                            <Setter
+                                Property="Background"
+                                Value="Transparent" />
+                            <Setter
+                                Property="Foreground"
+                                Value="White" />
+                            <Setter
+                                Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate
+                                        TargetType="{x:Type Button}">
+                                        <Border
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="DarkSlateGray"
+                                            BorderThickness="1"
+                                            Padding="4">
+                                            <ContentPresenter
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
                 <Frame
-                    Grid.Row="2"
-                    Source="Source/Modules/Behavior/Behavior.xaml"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Source="Source/Modules/Hvac/Hvac.xaml"
                     Focusable="False" />
             </Grid>
 
-            <Canvas
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Name="canvas"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch" />
+            <Frame
+                Grid.Row="1"
+                Source="Source/Modules/Weather.xaml"
+                Focusable="False" />
+            <Frame
+                Grid.Row="2"
+                Source="Source/Modules/Behavior/Behavior.xaml"
+                Focusable="False" />
         </Grid>
-    </Border>
+
+        <Canvas
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Name="canvas"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" />
+    </Grid>
 </Window>

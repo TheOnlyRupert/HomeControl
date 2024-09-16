@@ -27,9 +27,8 @@ public class BehaviorVM : BaseViewModel {
         _user4TasksCompletedDayProgressText, _user4TasksCompletedMonthProgressText, _user4TasksCompletedQuarterProgressText, _user5TasksCompletedWeekProgressText, _user5TasksCompletedDayProgressText,
         _user5TasksCompletedMonthProgressText, _user5TasksCompletedQuarterProgressText, _user1DayVisibility, _user2DayVisibility, _user3DayVisibility, _user4DayVisibility, _user5DayVisibility,
         _user1WeekVisibility, _user2WeekVisibility, _user3WeekVisibility, _user4WeekVisibility, _user5WeekVisibility, _user1MonthVisibility, _user2MonthVisibility, _user3MonthVisibility, _user4MonthVisibility,
-        _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility, _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BehaviorVisibility, _user2BehaviorVisibility,
-        _user3BehaviorVisibility, _user4BehaviorVisibility, _user5BehaviorVisibility, _trashDayVisibility, _user1BackgroundColor, _user2BackgroundColor, _user3BackgroundColor, _user4BackgroundColor,
-        _user5BackgroundColor, _user1Visibility, _user2Visibility, _user3Visibility, _user4Visibility, _user5Visibility;
+        _user5MonthVisibility, _user1QuarterVisibility, _user2QuarterVisibility, _user3QuarterVisibility, _user4QuarterVisibility, _user5QuarterVisibility, _user1BackgroundColor, _user2BackgroundColor,
+        _user3BackgroundColor, _user4BackgroundColor, _user5BackgroundColor, _user1Visibility, _user2Visibility, _user3Visibility, _user4Visibility, _user5Visibility;
 
     private int _user1TasksCompletedDayProgressValue, _user1TasksCompletedWeekProgressValue, _user1TasksCompletedMonthProgressValue, _user1TasksCompletedQuarterProgressValue,
         _user2TasksCompletedDayProgressValue, _user2TasksCompletedWeekProgressValue, _user2TasksCompletedMonthProgressValue, _user2TasksCompletedQuarterProgressValue,
@@ -81,15 +80,15 @@ public class BehaviorVM : BaseViewModel {
         ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5 ??= new ObservableCollection<Task>();
 
         try {
-            Uri uri = new(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user1.png", UriKind.RelativeOrAbsolute);
+            Uri uri = new(ReferenceValues.DocumentsDirectory + "icons/user1.png", UriKind.RelativeOrAbsolute);
             ImageUser1 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user2.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user2.png", UriKind.RelativeOrAbsolute);
             ImageUser2 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user3.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user3.png", UriKind.RelativeOrAbsolute);
             ImageUser3 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user4.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user4.png", UriKind.RelativeOrAbsolute);
             ImageUser4 = new BitmapImage(uri);
-            uri = new Uri(ReferenceValues.DOCUMENTS_DIRECTORY + "icons/user5.png", UriKind.RelativeOrAbsolute);
+            uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageUser5 = new BitmapImage(uri);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -304,8 +303,6 @@ public class BehaviorVM : BaseViewModel {
             User1MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
             User1QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1.Count > 0 ? "VISIBLE" : "HIDDEN";
 
-            User1BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User1BehaviorChecked ? "VISIBLE" : "HIDDEN";
-
             break;
         case 2:
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2) {
@@ -443,8 +440,6 @@ public class BehaviorVM : BaseViewModel {
             User2WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
             User2MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
             User2QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2.Count > 0 ? "VISIBLE" : "HIDDEN";
-
-            User2BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User2BehaviorChecked ? "VISIBLE" : "HIDDEN";
 
             break;
         case 3:
@@ -584,8 +579,6 @@ public class BehaviorVM : BaseViewModel {
             User3MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
             User3QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3.Count > 0 ? "VISIBLE" : "HIDDEN";
 
-            User3BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User3BehaviorChecked ? "VISIBLE" : "HIDDEN";
-
             break;
         case 4:
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4) {
@@ -724,8 +717,6 @@ public class BehaviorVM : BaseViewModel {
             User4MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
             User4QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4.Count > 0 ? "VISIBLE" : "HIDDEN";
 
-            User4BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User4BehaviorChecked ? "VISIBLE" : "HIDDEN";
-
             break;
         case 5:
             foreach (Task task in ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5) {
@@ -863,8 +854,6 @@ public class BehaviorVM : BaseViewModel {
             User5WeekVisibility = ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
             User5MonthVisibility = ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
             User5QuarterVisibility = ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5.Count > 0 ? "VISIBLE" : "HIDDEN";
-
-            User5BehaviorVisibility = ReferenceValues.JsonSettingsMaster.User5BehaviorChecked ? "VISIBLE" : "HIDDEN";
 
             break;
         }
@@ -1253,7 +1242,7 @@ public class BehaviorVM : BaseViewModel {
     }
 
     private void ButtonLogic(object param) {
-        if (!ReferenceValues.LockUI) {
+        if (!ReferenceValues.LockUi) {
             switch (param) {
             case "user1":
                 ReferenceValues.ActiveBehaviorUser = 1;
@@ -2346,54 +2335,6 @@ public class BehaviorVM : BaseViewModel {
         set {
             _user5QuarterVisibility = value;
             RaisePropertyChangedEvent("User5QuarterVisibility");
-        }
-    }
-
-    public string User1BehaviorVisibility {
-        get => _user1BehaviorVisibility;
-        set {
-            _user1BehaviorVisibility = value;
-            RaisePropertyChangedEvent("User1BehaviorVisibility");
-        }
-    }
-
-    public string User2BehaviorVisibility {
-        get => _user2BehaviorVisibility;
-        set {
-            _user2BehaviorVisibility = value;
-            RaisePropertyChangedEvent("User2BehaviorVisibility");
-        }
-    }
-
-    public string User3BehaviorVisibility {
-        get => _user3BehaviorVisibility;
-        set {
-            _user3BehaviorVisibility = value;
-            RaisePropertyChangedEvent("User3BehaviorVisibility");
-        }
-    }
-
-    public string User4BehaviorVisibility {
-        get => _user4BehaviorVisibility;
-        set {
-            _user4BehaviorVisibility = value;
-            RaisePropertyChangedEvent("User4BehaviorVisibility");
-        }
-    }
-
-    public string User5BehaviorVisibility {
-        get => _user5BehaviorVisibility;
-        set {
-            _user5BehaviorVisibility = value;
-            RaisePropertyChangedEvent("User5BehaviorVisibility");
-        }
-    }
-
-    public string TrashDayVisibility {
-        get => _trashDayVisibility;
-        set {
-            _trashDayVisibility = value;
-            RaisePropertyChangedEvent("TrashDayVisibility");
         }
     }
 

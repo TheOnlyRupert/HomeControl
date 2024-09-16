@@ -13,8 +13,8 @@ public class DebugLogVM : BaseViewModel {
     public DebugLogVM() {
         DebugList = ReferenceValues.JsonDebugMaster.DebugBlockList;
 
-        CopyrightText = ReferenceValues.COPYRIGHT + "  v" + ReferenceValues.VERSION_MAJOR + "." + ReferenceValues.VERSION_MINOR + "." + ReferenceValues.VERSION_PATCH + "-" +
-                        ReferenceValues.VERSION_BRANCH;
+        CopyrightText = ReferenceValues.Copyright + "  v" + ReferenceValues.VersionMajor + "." + ReferenceValues.VersionMinor + "." + ReferenceValues.VersionPatch + "-" +
+                        ReferenceValues.VersionBranch;
     }
 
     public ICommand ButtonCommand {
