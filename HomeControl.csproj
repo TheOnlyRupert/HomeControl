@@ -441,7 +441,7 @@
         <Content Include="Resources\Sounds\jingle_bells.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Include="Resources\Sounds\locked2.wav">
+        <Content Include="Resources\Sounds\locked.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <Content Include="Resources\Sounds\very_good.wav">
@@ -772,7 +772,7 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="Resources\Sounds\locked.wav">
+        <Content Include="Resources\Sounds\hello.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <Content Include="Resources\Sounds\timerDone.wav">
@@ -791,16 +791,16 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94"/>
-        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0"/>
         <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0"/>
         <PackageReference Include="System.Buffers" Version="4.5.1"/>
         <PackageReference Include="System.Memory" Version="4.5.5"/>
         <PackageReference Include="System.Numerics.Vectors" Version="4.5.0"/>
         <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0"/>
-        <PackageReference Include="System.Security.AccessControl" Version="6.0.0"/>
+        <PackageReference Include="System.Security.AccessControl" Version="6.0.1"/>
         <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0"/>
-        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0"/>
-        <PackageReference Include="System.Text.Json" Version="7.0.3"/>
+        <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0"/>
+        <PackageReference Include="System.Text.Json" Version="8.0.5"/>
         <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4"/>
         <PackageReference Include="System.ValueTuple" Version="4.5.0"/>
         <PackageReference Include="TagLibSharp" Version="2.3.0"/>

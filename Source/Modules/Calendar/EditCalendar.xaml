@@ -803,7 +803,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Text="{Binding TemperatureHighLow}"
-                        FontSize="24"
+                        FontSize="20"
                         Foreground="White"
                         VerticalAlignment="Center" />
                     <TextBlock
@@ -811,7 +811,7 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Text="{Binding DetailedWeather}"
-                        FontSize="16"
+                        FontSize="12"
                         Foreground="White"
                         VerticalAlignment="Center"
                         TextWrapping="Wrap"

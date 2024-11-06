@@ -386,9 +386,9 @@
             <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" HorizontalAlignment="Right" Foreground="White"
                        Text="Server/Client: " />
 
-            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="24" HorizontalAlignment="Left"
+            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left"
                        Foreground="{Binding WeatherColor}" Text="{Binding WeatherStatus}" />
-            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="24" HorizontalAlignment="Left"
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" HorizontalAlignment="Left"
                        Foreground="{Binding ServerColor}" Text="{Binding ServerStatus}" />
         </Grid>
 
