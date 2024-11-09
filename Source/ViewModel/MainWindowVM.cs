@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -13,21 +16,22 @@ using System.Text.Json.Serialization;
 using System.Windows.Input;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
+using HomeControl.Source.Database;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Finances;
-using HomeControl.Source.Server;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Finances;
 using HomeControl.Source.ViewModel.Hvac;
+using MySql.Data.MySqlClient;
 using Task = System.Threading.Tasks.Task;
 
 namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
     private readonly CrossViewMessenger _simpleMessenger;
-    private bool _changeDate, _internetMessage, _serverMessage;
+    private bool _changeDate, _internetMessage;
     private DateTime _currentDate;
     private string _iconImage;
     private int _trashInt, _hourInt;
@@ -37,7 +41,6 @@ public class MainWindowVM : BaseViewModel {
         _simpleMessenger = CrossViewMessenger.Instance;
         _currentDate = DateTime.Now;
         _internetMessage = false;
-        _serverMessage = false;
 
         /* Create Documents Directory */
         Directory.CreateDirectory(ReferenceValues.DocumentsDirectory);
@@ -111,31 +114,12 @@ public class MainWindowVM : BaseViewModel {
             settingsDialog.ShowDialog();
             settingsDialog.Close();
         }
-
-        /* Server/Client Logic */
-        ReferenceValues.ClientName = Dns.GetHostName() + '_' + Environment.UserName;
-        ReferenceValues.LocalIp = SocketHelpers.GetLocalIpAddress();
-        ReferenceValues.PublicIp = SocketHelpers.GetPublicIpAddress();
-        ReferenceValues.ConnectedClients = [];
-
-        if (string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.Port)) {
-            ReferenceValues.JsonSettingsMaster.Port = "10000";
-        }
-
-        if (ReferenceValues.JsonSettingsMaster.DebugMode) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "MainWindowVM",
-                Description = " --- TCP/IP Info --- \nClientName: " + ReferenceValues.ClientName + "\nLocalIP: " + ReferenceValues.LocalIp + "\nPublicIP: " + ReferenceValues.PublicIp
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        }
-
-        if (ReferenceValues.JsonSettingsMaster.IsServer) {
-            ReferenceValues.SimpleServer = new SimpleServer();
-            ReferenceValues.JsonSettingsMaster.IpAddress = "127.0.0.1";
-            SimpleServer.Start();
+        
+        /* Database Connection */
+        if (ReferenceValues.JsonSettingsMaster.IsDatabaseHosted && !string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.DatabaseHost) 
+                                                                && !string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.DatabaseUsername) 
+                                                                && !string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.DatabasePassword)) {
+            _ = DatabaseLogic.GetTableByName("behavior");
         }
 
         /* GameStats File */
@@ -317,29 +301,6 @@ public class MainWindowVM : BaseViewModel {
 
         /* HVAC Logic */
         ReferenceValues.HvacStateTime++;
-
-        /* Try to Connect to Server Every Second */
-        if (!ReferenceValues.JsonSettingsMaster.IsOff) {
-            if (ReferenceValues.ClientInfo == null || ReferenceValues.ClientInfo.Closed) {
-                try {
-                    SimpleClient.Start();
-                    _serverMessage = false;
-                    _simpleMessenger.PushMessage("UpdateInternetStatus", null);
-                } catch (Exception) {
-                    if (!_serverMessage) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "MainWindowVM",
-                            Description = "Unable to connect to server on port " + ReferenceValues.JsonSettingsMaster.Port +
-                                          "\nWill automatically attempt to reconnect every second until connection is restored"
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                        _serverMessage = true;
-                    }
-                }
-            }
-        }
 
         /* Check Trash */
         if (_trashInt > 0) {

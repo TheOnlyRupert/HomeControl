@@ -3,8 +3,6 @@ using System.Collections.ObjectModel;
 using System.IO.Ports;
 using HomeControl.Source.Control;
 using HomeControl.Source.Json;
-using HomeControl.Source.Server;
-using RedCorona.Net;
 
 namespace HomeControl.Source;
 
@@ -70,15 +68,6 @@ public static class ReferenceValues {
     public static JsonWeather ForecastHourly { get; set; }
 
     public static bool[] CalendarFilterList { get; set; }
-
-    /* Server Stuff */
-    public static ObservableCollection<ConnectedClientsStruct> ConnectedClients { get; set; }
-    public static SimpleServer SimpleServer { get; set; }
-    public static RedCorona.Net.Server ServerCustom { get; set; }
-    public static ClientInfo ClientInfo { get; set; }
-    public static string ClientName { get; set; }
-    public static string LocalIp { get; set; }
-    public static string PublicIp { get; set; }
 
     public static bool IsWeatherApiOnline { get; set; }
 }

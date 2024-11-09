@@ -11,7 +11,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
-    private bool _isDebugModeChecked, _isMetricUnitsChecked, _isEasterEggsChecked, _isOffModeChecked, _isClientModeChecked, _isServerModeChecked;
+    private bool _isDebugModeChecked, _isMetricUnitsChecked, _isEasterEggsChecked, _isLocallyHosted, _isDatabaseHosted, _isIpEnabled;
 
     private List<string> _trashDayList;
 
@@ -20,11 +20,13 @@ public class SettingsVM : BaseViewModel {
         _neighbor2Name, _neighbor2Phone1, _neighbor2Phone2, _addressLine1, _addressLine2, _fireExtinguisherLocation, _hospitalAddressLine1, _hospitalAddressLine2, _wifiGuestName,
         _wifiGuestPassword, _wifiPrivateName, _wifiPrivatePassword, _policeName, _policePhone, _emergencyContact1Name, _emergencyContact1Phone1, _emergencyContact1Phone2,
         _emergencyContact2Name, _emergencyContact2Phone1, _emergencyContact2Phone2, _alarmCode, _comPort, _trashDaySelected, _weatherLocation, _gridId, _financeBlock1, _financeBlock2, _financeBlock3,
-        _financeBlock4, _financeBlock5, _financeBlock6, _financeBlock7, _financeBlock8, _financeBlock9, _ipAddress, _port;
+        _financeBlock4, _financeBlock5, _financeBlock6, _financeBlock7, _financeBlock8, _financeBlock9, _databaseHost, _databaseUsername;
 
     private double _weatherLat, _weatherLon;
 
     private int gridX, gridY;
+    
+    private string _databasePassword;
 
     public SettingsVM() {
         TrashDayList = [
@@ -78,8 +80,8 @@ public class SettingsVM : BaseViewModel {
         AlarmCode = ReferenceValues.JsonSettingsMaster.AlarmCode;
         ComPort = ReferenceValues.JsonSettingsMaster.ComPort;
         IsDebugModeChecked = ReferenceValues.JsonSettingsMaster.DebugMode;
-        IsMetricUnitsChecked = ReferenceValues.JsonSettingsMaster.useMetricUnits;
-        IsEasterEggsChecked = ReferenceValues.JsonSettingsMaster.useEasterEggs;
+        IsMetricUnitsChecked = ReferenceValues.JsonSettingsMaster.UseMetricUnits;
+        IsEasterEggsChecked = ReferenceValues.JsonSettingsMaster.EnableEasterEggs;
         TrashDaySelected = ReferenceValues.JsonSettingsMaster.TrashDay;
         WeatherLat = ReferenceValues.JsonSettingsMaster.WeatherLat;
         WeatherLon = ReferenceValues.JsonSettingsMaster.WeatherLon;
@@ -96,15 +98,16 @@ public class SettingsVM : BaseViewModel {
         FinanceBlock7 = ReferenceValues.JsonSettingsMaster.FinanceBlock7;
         FinanceBlock8 = ReferenceValues.JsonSettingsMaster.FinanceBlock8;
         FinanceBlock9 = ReferenceValues.JsonSettingsMaster.FinanceBlock9;
-        IsOffModeChecked = ReferenceValues.JsonSettingsMaster.IsOff;
-        IsClientModeChecked = ReferenceValues.JsonSettingsMaster.IsClient;
-        IsServerModeChecked = ReferenceValues.JsonSettingsMaster.IsServer;
-        IpAddress = ReferenceValues.JsonSettingsMaster.IpAddress;
-        Port = ReferenceValues.JsonSettingsMaster.Port;
+        DatabaseHost = ReferenceValues.JsonSettingsMaster.DatabaseHost;
+        DatabaseUsername = ReferenceValues.JsonSettingsMaster.DatabaseUsername;
+        DatabasePassword = ReferenceValues.JsonSettingsMaster.DatabasePassword;
 
-        if (!IsOffModeChecked && !IsClientModeChecked && !IsServerModeChecked) {
-            IsOffModeChecked = true;
-            ReferenceValues.JsonSettingsMaster.IsOff = true;
+        if (ReferenceValues.JsonSettingsMaster.IsDatabaseHosted) {
+            IsDatabaseHosted = true;
+            IsLocallyHosted = false;
+        } else {
+            IsDatabaseHosted = false;
+            IsLocallyHosted = true;
         }
     }
 
@@ -159,8 +162,8 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.AlarmCode = AlarmCode;
             ReferenceValues.JsonSettingsMaster.ComPort = ComPort;
             ReferenceValues.JsonSettingsMaster.DebugMode = IsDebugModeChecked;
-            ReferenceValues.JsonSettingsMaster.useMetricUnits = IsMetricUnitsChecked;
-            ReferenceValues.JsonSettingsMaster.useEasterEggs = IsEasterEggsChecked;
+            ReferenceValues.JsonSettingsMaster.UseMetricUnits = IsMetricUnitsChecked;
+            ReferenceValues.JsonSettingsMaster.EnableEasterEggs = IsEasterEggsChecked;
             ReferenceValues.JsonSettingsMaster.TrashDay = TrashDaySelected;
             ReferenceValues.JsonSettingsMaster.WeatherLat = WeatherLat;
             ReferenceValues.JsonSettingsMaster.WeatherLon = WeatherLon;
@@ -177,11 +180,18 @@ public class SettingsVM : BaseViewModel {
             ReferenceValues.JsonSettingsMaster.FinanceBlock7 = FinanceBlock7;
             ReferenceValues.JsonSettingsMaster.FinanceBlock8 = FinanceBlock8;
             ReferenceValues.JsonSettingsMaster.FinanceBlock9 = FinanceBlock9;
-            ReferenceValues.JsonSettingsMaster.IsOff = IsOffModeChecked;
-            ReferenceValues.JsonSettingsMaster.IsClient = IsClientModeChecked;
-            ReferenceValues.JsonSettingsMaster.IsServer = IsServerModeChecked;
-            ReferenceValues.JsonSettingsMaster.IpAddress = IpAddress;
-            ReferenceValues.JsonSettingsMaster.Port = Port;
+            ReferenceValues.JsonSettingsMaster.DatabaseHost = DatabaseHost;
+            ReferenceValues.JsonSettingsMaster.DatabaseUsername = DatabaseUsername;
+            ReferenceValues.JsonSettingsMaster.DatabasePassword = DatabasePassword;
+
+            if (IsLocallyHosted) {
+                ReferenceValues.JsonSettingsMaster.IsDatabaseHosted = false;
+                IsDatabaseHosted = false;
+            } else {
+                ReferenceValues.JsonSettingsMaster.IsDatabaseHosted = true;
+                IsDatabaseHosted = true;
+                IsLocallyHosted = false;
+            }
 
             try {
                 FileHelpers.SaveFileText("settings", JsonSerializer.Serialize(ReferenceValues.JsonSettingsMaster), true);
@@ -740,43 +750,57 @@ public class SettingsVM : BaseViewModel {
         }
     }
 
-    public bool IsOffModeChecked {
-        get => _isOffModeChecked;
+    public bool IsLocallyHosted {
+        get => _isLocallyHosted;
         set {
-            _isOffModeChecked = value;
-            RaisePropertyChangedEvent("IsOffModeChecked");
+            _isLocallyHosted = value;
+            if (value) {
+                IsIpEnabled = false;
+            }
+            RaisePropertyChangedEvent("IsLocallyHosted");
         }
     }
 
-    public bool IsClientModeChecked {
-        get => _isClientModeChecked;
+    public bool IsDatabaseHosted {
+        get => _isDatabaseHosted;
         set {
-            _isClientModeChecked = value;
-            RaisePropertyChangedEvent("IsClientModeChecked");
+            _isDatabaseHosted = value;
+            if (value) {
+                IsIpEnabled = true;
+            }
+            RaisePropertyChangedEvent("IsDatabaseHosted");
         }
     }
 
-    public bool IsServerModeChecked {
-        get => _isServerModeChecked;
+    public string DatabaseHost {
+        get => _databaseHost;
         set {
-            _isServerModeChecked = value;
-            RaisePropertyChangedEvent("IsServerModeChecked");
+            _databaseHost = value;
+            RaisePropertyChangedEvent("DatabaseHost");
         }
     }
 
-    public string IpAddress {
-        get => _ipAddress;
+    public string DatabaseUsername {
+        get => _databaseUsername;
         set {
-            _ipAddress = value;
-            RaisePropertyChangedEvent("IpAddress");
+            _databaseUsername = value;
+            RaisePropertyChangedEvent("DatabaseUsername");
         }
     }
 
-    public string Port {
-        get => _port;
+    public string DatabasePassword {
+        get => _databasePassword;
         set {
-            _port = VerifyInput.VerifyTextNumeric(value);
-            RaisePropertyChangedEvent("Port");
+            _databasePassword = value;
+            RaisePropertyChangedEvent("DatabasePassword");
+        }
+    }
+
+    public bool IsIpEnabled {
+        get => _isIpEnabled;
+        set {
+            _isIpEnabled = value;
+            RaisePropertyChangedEvent("IsIpEnabled");
         }
     }
 

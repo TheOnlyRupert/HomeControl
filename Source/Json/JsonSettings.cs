@@ -44,8 +44,8 @@ public class JsonSettings {
     public string EmergencyContact2Phone2 { get; set; }
     public string AlarmCode { get; set; }
     public string ComPort { get; set; }
-    public bool useMetricUnits { get; set; }
-    public bool useEasterEggs { get; set; }
+    public bool UseMetricUnits { get; set; }
+    public bool EnableEasterEggs { get; set; }
     public bool DebugMode { get; set; }
     public string TrashDay { get; set; }
     public double WeatherLat { get; set; }
@@ -63,9 +63,8 @@ public class JsonSettings {
     public string FinanceBlock7 { get; set; }
     public string FinanceBlock8 { get; set; }
     public string FinanceBlock9 { get; set; }
-    public bool IsOff { get; set; }
-    public bool IsClient { get; set; }
-    public bool IsServer { get; set; }
-    public string IpAddress { get; set; }
-    public string Port { get; set; }
+    public bool IsDatabaseHosted { get; set; }
+    public string DatabaseHost { get; set; }
+    public string DatabaseUsername { get; set; }
+    public string DatabasePassword { get; set; }
 }

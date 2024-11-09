@@ -11,37 +11,31 @@ namespace HomeControl.Source.ViewModel;
 public class WeatherVM : BaseViewModel {
     private ObservableCollection<WeatherHourlyBlock> _forecastHourlyList;
 
-    private string _sevenDayForecastDescription1, _sevenDayForecastWindSpeed1, _sevenDayForecastWeatherIcon1a,
-        _sevenDayForecastWeatherIcon1b, _sevenDayForecastTemp1, _sevenDayForecastName1, _sevenDayForecastDescription2, _sevenDayForecastWindSpeed2, _sevenDayForecastWeatherIcon2a,
-        _sevenDayForecastWeatherIcon2b, _sevenDayForecastTemp2, _sevenDayForecastName2, _sevenDayForecastDescription3, _sevenDayForecastWindSpeed3, _sevenDayForecastWeatherIcon3a,
-        _sevenDayForecastWeatherIcon3b, _sevenDayForecastTemp3, _sevenDayForecastName3, _sevenDayForecastDescription4, _sevenDayForecastWindSpeed4, _sevenDayForecastWeatherIcon4a,
-        _sevenDayForecastWeatherIcon4b, _sevenDayForecastTemp4, _sevenDayForecastName4, _sevenDayForecastDescription5, _sevenDayForecastWindSpeed5, _sevenDayForecastWeatherIcon5a,
-        _sevenDayForecastWeatherIcon5b, _sevenDayForecastTemp5, _sevenDayForecastName5, _sevenDayForecastDescription6, _sevenDayForecastWindSpeed6, _sevenDayForecastWeatherIcon6a,
-        _sevenDayForecastWeatherIcon6b, _sevenDayForecastTemp6, _sevenDayForecastName6, _sevenDayForecastDescription7, _sevenDayForecastWindSpeed7, _sevenDayForecastWeatherIcon7a,
-        _sevenDayForecastWeatherIcon7b, _sevenDayForecastTemp7, _sevenDayForecastName7, _sevenDayForecastDescription8, _sevenDayForecastWindSpeed8, _sevenDayForecastWeatherIcon8a,
-        _sevenDayForecastWeatherIcon8b, _sevenDayForecastTemp8, _sevenDayForecastName8, _sevenDayForecastDescription9, _sevenDayForecastWindSpeed9, _sevenDayForecastWeatherIcon9a,
-        _sevenDayForecastWeatherIcon9b, _sevenDayForecastTemp9, _sevenDayForecastName9, _sevenDayForecastDescription10, _sevenDayForecastWindSpeed10,
-        _sevenDayForecastWeatherIcon10a, _sevenDayForecastWeatherIcon10b, _sevenDayForecastTemp10, _sevenDayForecastName10, _sevenDayForecastDescription11,
-        _sevenDayForecastWindSpeed11, _sevenDayForecastWeatherIcon11a, _sevenDayForecastWeatherIcon11b, _sevenDayForecastTemp11, _sevenDayForecastName11,
-        _sevenDayForecastDescription12, _sevenDayForecastWindSpeed12, _sevenDayForecastWeatherIcon12a, _sevenDayForecastWeatherIcon12b, _sevenDayForecastTemp12,
-        _sevenDayForecastName12, _sevenDayForecastDescription13, _sevenDayForecastWindSpeed13, _sevenDayForecastWeatherIcon13a, _sevenDayForecastWeatherIcon13b,
-        _sevenDayForecastTemp13, _sevenDayForecastName13, _sevenDayForecastDescription14, _sevenDayForecastWindSpeed14, _sevenDayForecastWeatherIcon14a,
-        _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1,
-        _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6,
-        _sevenDayForecastRainChance7, _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11,
-        _sevenDayForecastRainChance12, _sevenDayForecastRainChance13, _sevenDayForecastRainChance14, _forecastHourlyVisibility, _easterEggVisibility;
+    private string _sevenDayForecastWindSpeed1, _sevenDayForecastWeatherIcon1a, _sevenDayForecastWeatherIcon1b, _sevenDayForecastTemp1, _sevenDayForecastName1, _sevenDayForecastWindSpeed2,
+        _sevenDayForecastWeatherIcon2a, _sevenDayForecastWeatherIcon2b, _sevenDayForecastTemp2, _sevenDayForecastName2, _sevenDayForecastWindSpeed3, _sevenDayForecastWeatherIcon3a,
+        _sevenDayForecastWeatherIcon3b, _sevenDayForecastTemp3, _sevenDayForecastName3, _sevenDayForecastWindSpeed4, _sevenDayForecastWeatherIcon4a, _sevenDayForecastWeatherIcon4b, _sevenDayForecastTemp4,
+        _sevenDayForecastName4, _sevenDayForecastWindSpeed5, _sevenDayForecastWeatherIcon5a, _sevenDayForecastWeatherIcon5b, _sevenDayForecastTemp5, _sevenDayForecastName5, _sevenDayForecastWindSpeed6,
+        _sevenDayForecastWeatherIcon6a, _sevenDayForecastWeatherIcon6b, _sevenDayForecastTemp6, _sevenDayForecastName6, _sevenDayForecastWindSpeed7, _sevenDayForecastWeatherIcon7a,
+        _sevenDayForecastWeatherIcon7b, _sevenDayForecastTemp7, _sevenDayForecastName7, _sevenDayForecastWindSpeed8, _sevenDayForecastWeatherIcon8a, _sevenDayForecastWeatherIcon8b, _sevenDayForecastTemp8,
+        _sevenDayForecastName8, _sevenDayForecastWindSpeed9, _sevenDayForecastWeatherIcon9a, _sevenDayForecastWeatherIcon9b, _sevenDayForecastTemp9, _sevenDayForecastName9, _sevenDayForecastWindSpeed10,
+        _sevenDayForecastWeatherIcon10a, _sevenDayForecastWeatherIcon10b, _sevenDayForecastTemp10, _sevenDayForecastName10, _sevenDayForecastWindSpeed11, _sevenDayForecastWeatherIcon11a,
+        _sevenDayForecastWeatherIcon11b, _sevenDayForecastTemp11, _sevenDayForecastName11, _sevenDayForecastWindSpeed12, _sevenDayForecastWeatherIcon12a, _sevenDayForecastWeatherIcon12b,
+        _sevenDayForecastTemp12, _sevenDayForecastName12, _sevenDayForecastWindSpeed13, _sevenDayForecastWeatherIcon13a, _sevenDayForecastWeatherIcon13b, _sevenDayForecastTemp13, _sevenDayForecastName13,
+        _sevenDayForecastWindSpeed14, _sevenDayForecastWeatherIcon14a, _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1,
+        _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6, _sevenDayForecastRainChance7,
+        _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11, _sevenDayForecastRainChance12, _sevenDayForecastRainChance13,
+        _sevenDayForecastRainChance14, _forecastHourlyVisibility, _easterEggVisibility;
 
-    private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3,
-        _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5, _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7,
-        _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10, _sevenDayForecastWindDirectionIcon11,
-        _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14, _tempMin, _tempMax;
+    private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3, _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5,
+        _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7, _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10,
+        _sevenDayForecastWindDirectionIcon11, _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14, _tempMin, _tempMax;
 
     public WeatherVM() {
         ForecastHourlyList = [];
         UpdateWeather();
 
         /* Show Elf on Dec 24rd (Christmas Eve) */
-        if (ReferenceValues.JsonSettingsMaster.useEasterEggs && DateTime.Now.Month == 12 && DateTime.Now.Day == 24) {
+        if (ReferenceValues.JsonSettingsMaster.EnableEasterEggs && DateTime.Now.Month == 12 && DateTime.Now.Day == 24) {
             EasterEggVisibility = "VISIBLE";
         } else {
             EasterEggVisibility = "HIDDEN";
@@ -100,7 +94,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon1 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[0].windDirection);
             SevenDayForecastWindSpeed1 = ReferenceValues.ForecastSevenDay.properties.periods[0].windSpeed;
-            SevenDayForecastDescription1 = ReferenceValues.ForecastSevenDay.properties.periods[0].shortForecast;
 
             SevenDayForecastName2 = ReferenceValues.ForecastSevenDay.properties.periods[1].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[1].startTime.ToString("MM/dd");
             SevenDayForecastTemp2 = ReferenceValues.ForecastSevenDay.properties.periods[1].temperature + "°";
@@ -127,7 +120,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon2 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[1].windDirection);
             SevenDayForecastWindSpeed2 = ReferenceValues.ForecastSevenDay.properties.periods[1].windSpeed;
-            SevenDayForecastDescription2 = ReferenceValues.ForecastSevenDay.properties.periods[1].shortForecast;
 
             SevenDayForecastName3 = ReferenceValues.ForecastSevenDay.properties.periods[2].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[2].startTime.ToString("MM/dd");
             SevenDayForecastTemp3 = ReferenceValues.ForecastSevenDay.properties.periods[2].temperature + "°";
@@ -154,7 +146,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon3 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[2].windDirection);
             SevenDayForecastWindSpeed3 = ReferenceValues.ForecastSevenDay.properties.periods[2].windSpeed;
-            SevenDayForecastDescription3 = ReferenceValues.ForecastSevenDay.properties.periods[2].shortForecast;
 
             SevenDayForecastName4 = ReferenceValues.ForecastSevenDay.properties.periods[3].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[3].startTime.ToString("MM/dd");
             SevenDayForecastTemp4 = ReferenceValues.ForecastSevenDay.properties.periods[3].temperature + "°";
@@ -180,7 +171,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon4 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[3].windDirection);
             SevenDayForecastWindSpeed4 = ReferenceValues.ForecastSevenDay.properties.periods[3].windSpeed;
-            SevenDayForecastDescription4 = ReferenceValues.ForecastSevenDay.properties.periods[3].shortForecast;
 
             SevenDayForecastName5 = ReferenceValues.ForecastSevenDay.properties.periods[4].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[4].startTime.ToString("MM/dd");
             SevenDayForecastTemp5 = ReferenceValues.ForecastSevenDay.properties.periods[4].temperature + "°";
@@ -207,7 +197,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon5 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[4].windDirection);
             SevenDayForecastWindSpeed5 = ReferenceValues.ForecastSevenDay.properties.periods[4].windSpeed;
-            SevenDayForecastDescription5 = ReferenceValues.ForecastSevenDay.properties.periods[4].shortForecast;
 
             SevenDayForecastName6 = ReferenceValues.ForecastSevenDay.properties.periods[5].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[5].startTime.ToString("MM/dd");
             SevenDayForecastTemp6 = ReferenceValues.ForecastSevenDay.properties.periods[5].temperature + "°";
@@ -234,7 +223,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon6 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[5].windDirection);
             SevenDayForecastWindSpeed6 = ReferenceValues.ForecastSevenDay.properties.periods[5].windSpeed;
-            SevenDayForecastDescription6 = ReferenceValues.ForecastSevenDay.properties.periods[5].shortForecast;
 
             SevenDayForecastName7 = ReferenceValues.ForecastSevenDay.properties.periods[6].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[6].startTime.ToString("MM/dd");
             SevenDayForecastTemp7 = ReferenceValues.ForecastSevenDay.properties.periods[6].temperature + "°";
@@ -261,7 +249,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon7 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[6].windDirection);
             SevenDayForecastWindSpeed7 = ReferenceValues.ForecastSevenDay.properties.periods[6].windSpeed;
-            SevenDayForecastDescription7 = ReferenceValues.ForecastSevenDay.properties.periods[6].shortForecast;
 
             SevenDayForecastName8 = ReferenceValues.ForecastSevenDay.properties.periods[7].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[7].startTime.ToString("MM/dd");
             SevenDayForecastTemp8 = ReferenceValues.ForecastSevenDay.properties.periods[7].temperature + "°";
@@ -288,7 +275,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon8 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[7].windDirection);
             SevenDayForecastWindSpeed8 = ReferenceValues.ForecastSevenDay.properties.periods[7].windSpeed;
-            SevenDayForecastDescription8 = ReferenceValues.ForecastSevenDay.properties.periods[7].shortForecast;
 
             SevenDayForecastName9 = ReferenceValues.ForecastSevenDay.properties.periods[8].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[8].startTime.ToString("MM/dd");
             SevenDayForecastTemp9 = ReferenceValues.ForecastSevenDay.properties.periods[8].temperature + "°";
@@ -315,7 +301,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon9 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[8].windDirection);
             SevenDayForecastWindSpeed9 = ReferenceValues.ForecastSevenDay.properties.periods[8].windSpeed;
-            SevenDayForecastDescription9 = ReferenceValues.ForecastSevenDay.properties.periods[8].shortForecast;
 
             SevenDayForecastName10 = ReferenceValues.ForecastSevenDay.properties.periods[9].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[9].startTime.ToString("MM/dd");
             SevenDayForecastTemp10 = ReferenceValues.ForecastSevenDay.properties.periods[9].temperature + "°";
@@ -341,7 +326,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon10 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[9].windDirection);
             SevenDayForecastWindSpeed10 = ReferenceValues.ForecastSevenDay.properties.periods[9].windSpeed;
-            SevenDayForecastDescription10 = ReferenceValues.ForecastSevenDay.properties.periods[9].shortForecast;
 
             SevenDayForecastName11 = ReferenceValues.ForecastSevenDay.properties.periods[10].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[10].startTime.ToString("MM/dd");
             SevenDayForecastTemp11 = ReferenceValues.ForecastSevenDay.properties.periods[10].temperature + "°";
@@ -367,7 +351,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon11 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[10].windDirection);
             SevenDayForecastWindSpeed11 = ReferenceValues.ForecastSevenDay.properties.periods[10].windSpeed;
-            SevenDayForecastDescription11 = ReferenceValues.ForecastSevenDay.properties.periods[10].shortForecast;
 
             SevenDayForecastName12 = ReferenceValues.ForecastSevenDay.properties.periods[11].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[11].startTime.ToString("MM/dd");
             SevenDayForecastTemp12 = ReferenceValues.ForecastSevenDay.properties.periods[11].temperature + "°";
@@ -394,7 +377,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon12 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[11].windDirection);
             SevenDayForecastWindSpeed12 = ReferenceValues.ForecastSevenDay.properties.periods[11].windSpeed;
-            SevenDayForecastDescription12 = ReferenceValues.ForecastSevenDay.properties.periods[11].shortForecast;
 
             SevenDayForecastName13 = ReferenceValues.ForecastSevenDay.properties.periods[12].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[12].startTime.ToString("MM/dd");
             SevenDayForecastTemp13 = ReferenceValues.ForecastSevenDay.properties.periods[12].temperature + "°";
@@ -420,7 +402,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon13 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[12].windDirection);
             SevenDayForecastWindSpeed13 = ReferenceValues.ForecastSevenDay.properties.periods[12].windSpeed;
-            SevenDayForecastDescription13 = ReferenceValues.ForecastSevenDay.properties.periods[12].shortForecast;
 
             SevenDayForecastName14 = ReferenceValues.ForecastSevenDay.properties.periods[13].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[13].startTime.ToString("MM/dd");
             SevenDayForecastTemp14 = ReferenceValues.ForecastSevenDay.properties.periods[13].temperature + "°";
@@ -446,7 +427,6 @@ public class WeatherVM : BaseViewModel {
 
             SevenDayForecastWindDirectionIcon14 = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastSevenDay.properties.periods[13].windDirection);
             SevenDayForecastWindSpeed14 = ReferenceValues.ForecastSevenDay.properties.periods[13].windSpeed;
-            SevenDayForecastDescription14 = ReferenceValues.ForecastSevenDay.properties.periods[13].shortForecast;
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -560,14 +540,6 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastDescription1 {
-        get => _sevenDayForecastDescription1;
-        set {
-            _sevenDayForecastDescription1 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription1");
-        }
-    }
-
     public string SevenDayForecastName2 {
         get => _sevenDayForecastName2;
         set {
@@ -605,14 +577,6 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindSpeed2 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed2");
-        }
-    }
-
-    public string SevenDayForecastDescription2 {
-        get => _sevenDayForecastDescription2;
-        set {
-            _sevenDayForecastDescription2 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription2");
         }
     }
 
@@ -656,14 +620,6 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastDescription3 {
-        get => _sevenDayForecastDescription3;
-        set {
-            _sevenDayForecastDescription3 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription3");
-        }
-    }
-
     public string SevenDayForecastName4 {
         get => _sevenDayForecastName4;
         set {
@@ -701,14 +657,6 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindSpeed4 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed4");
-        }
-    }
-
-    public string SevenDayForecastDescription4 {
-        get => _sevenDayForecastDescription4;
-        set {
-            _sevenDayForecastDescription4 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription4");
         }
     }
 
@@ -752,14 +700,6 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastDescription5 {
-        get => _sevenDayForecastDescription5;
-        set {
-            _sevenDayForecastDescription5 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription5");
-        }
-    }
-
     public string SevenDayForecastName6 {
         get => _sevenDayForecastName6;
         set {
@@ -797,14 +737,6 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindSpeed6 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed6");
-        }
-    }
-
-    public string SevenDayForecastDescription6 {
-        get => _sevenDayForecastDescription6;
-        set {
-            _sevenDayForecastDescription6 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription6");
         }
     }
 
@@ -848,14 +780,6 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastDescription7 {
-        get => _sevenDayForecastDescription7;
-        set {
-            _sevenDayForecastDescription7 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription7");
-        }
-    }
-
     public string SevenDayForecastName8 {
         get => _sevenDayForecastName8;
         set {
@@ -893,14 +817,6 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindSpeed8 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed8");
-        }
-    }
-
-    public string SevenDayForecastDescription8 {
-        get => _sevenDayForecastDescription8;
-        set {
-            _sevenDayForecastDescription8 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription8");
         }
     }
 
@@ -944,14 +860,6 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastDescription9 {
-        get => _sevenDayForecastDescription9;
-        set {
-            _sevenDayForecastDescription9 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription9");
-        }
-    }
-
     public string SevenDayForecastName10 {
         get => _sevenDayForecastName10;
         set {
@@ -991,15 +899,6 @@ public class WeatherVM : BaseViewModel {
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed10");
         }
     }
-
-    public string SevenDayForecastDescription10 {
-        get => _sevenDayForecastDescription10;
-        set {
-            _sevenDayForecastDescription10 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription10");
-        }
-    }
-
     public string SevenDayForecastName11 {
         get => _sevenDayForecastName11;
         set {
@@ -1037,14 +936,6 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindSpeed11 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed11");
-        }
-    }
-
-    public string SevenDayForecastDescription11 {
-        get => _sevenDayForecastDescription11;
-        set {
-            _sevenDayForecastDescription11 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription11");
         }
     }
 
@@ -1087,15 +978,7 @@ public class WeatherVM : BaseViewModel {
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed12");
         }
     }
-
-    public string SevenDayForecastDescription12 {
-        get => _sevenDayForecastDescription12;
-        set {
-            _sevenDayForecastDescription12 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription12");
-        }
-    }
-
+    
     public string SevenDayForecastName13 {
         get => _sevenDayForecastName13;
         set {
@@ -1136,14 +1019,6 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastDescription13 {
-        get => _sevenDayForecastDescription13;
-        set {
-            _sevenDayForecastDescription13 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription13");
-        }
-    }
-
     public string SevenDayForecastName14 {
         get => _sevenDayForecastName14;
         set {
@@ -1181,14 +1056,6 @@ public class WeatherVM : BaseViewModel {
         set {
             _sevenDayForecastWindSpeed14 = value;
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed14");
-        }
-    }
-
-    public string SevenDayForecastDescription14 {
-        get => _sevenDayForecastDescription14;
-        set {
-            _sevenDayForecastDescription14 = value;
-            RaisePropertyChangedEvent("SevenDayForecastDescription14");
         }
     }
 

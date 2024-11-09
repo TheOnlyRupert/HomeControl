@@ -62,6 +62,7 @@
         <Compile Include="Source\Control\GridViewSort.cs"/>
         <Compile Include="Source\Control\SelectTextOnFocus.cs"/>
         <Compile Include="Source\Control\Screensaver.cs"/>
+        <Compile Include="Source\Database\DatabaseLogic.cs"/>
         <Compile Include="Source\Helpers\FileHelpers.cs"/>
         <Compile Include="Source\Helpers\Holidays.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>
@@ -173,10 +174,6 @@
             <DependentUpon>Exercise.xaml</DependentUpon>
         </Compile>
         <Compile Include="Source\ReferenceValues.cs"/>
-        <Compile Include="Source\Server\SimpleClient.cs"/>
-        <Compile Include="Source\Server\SimpleServer.cs"/>
-        <Compile Include="Source\Server\SocketHelpers.cs"/>
-        <Compile Include="Source\Server\SocketCustom.cs"/>
         <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksDailyVM.cs"/>
         <Compile Include="Source\ViewModel\Behavior\TasksMonthlyVM.cs"/>
@@ -793,6 +790,7 @@
         <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94"/>
         <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0"/>
         <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0"/>
+        <PackageReference Include="MySql.Data" Version="9.1.0"/>
         <PackageReference Include="System.Buffers" Version="4.5.1"/>
         <PackageReference Include="System.Memory" Version="4.5.5"/>
         <PackageReference Include="System.Numerics.Vectors" Version="4.5.0"/>

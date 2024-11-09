@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:gif="http://wpfanimatedgif.codeplex.com"
     xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
     xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=DotNetProjects.DataVisualization.Toolkit"
     mc:Ignorable="d">
@@ -104,11 +105,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon1a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon1a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon1b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon1b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -176,11 +177,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon2a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon2a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon2b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon2b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -248,11 +249,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon3a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon3a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon3b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon3b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -320,11 +321,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon4a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon4a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon4b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon4b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -392,11 +393,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon5a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon5a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon5b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon5b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -464,11 +465,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon6a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon6a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon6b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon6b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -536,11 +537,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon7a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon7a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon7b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon7b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -608,11 +609,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon8a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon8a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon8b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon8b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -680,11 +681,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon9a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon9a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon9b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon9b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -752,11 +753,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon10a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon10a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon10b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon10b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -824,11 +825,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon11a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon11a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon11b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon11b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -896,11 +897,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon12a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon12a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon12b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon12b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -968,11 +969,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon13a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon13a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon13b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon13b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>
@@ -1040,11 +1041,11 @@
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon14a}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon14a}"
                             HorizontalAlignment="Center"
                             Margin="-8 -8 0 4" />
                         <Image
-                            Source="{Binding SevenDayForecastWeatherIcon14b}"
+                            gif:ImageBehavior.AnimatedSource="{Binding SevenDayForecastWeatherIcon14b}"
                             HorizontalAlignment="Center"
                             Margin="0 -8 -8 4" />
                     </StackPanel>

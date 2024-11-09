@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Modules;
@@ -17,8 +16,6 @@ public class ButtonStackVM : BaseViewModel {
         ReferenceValues.LockUi = !ReferenceValues.JsonSettingsMaster.DebugMode;
         LockedImage = ReferenceValues.LockUi ? "./../../Resources/Images/icons/key_locked.png" : "./../../Resources/Images/icons/key_unlocked.png";
 
-        UpdateInternetStatus();
-
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
@@ -32,36 +29,6 @@ public class ButtonStackVM : BaseViewModel {
         case "ScreenSaverOn":
             LockedImage = "./../../Resources/Images/icons/key_locked.png";
             break;
-        case "UpdateInternetStatus":
-            UpdateInternetStatus();
-
-            break;
-        }
-    }
-
-    private void UpdateInternetStatus() {
-        if (ReferenceValues.IsWeatherApiOnline) {
-            WeatherStatus = "Connected";
-            WeatherColor = "Green";
-        } else {
-            WeatherStatus = "Offline";
-            WeatherColor = "Red";
-        }
-
-        try {
-            if (ReferenceValues.JsonSettingsMaster.IsOff) {
-                ServerStatus = "Disabled In Settings";
-                ServerColor = "DarkSlateGray";
-            } else if (ReferenceValues.ClientInfo.Closed) {
-                ServerStatus = "Offline";
-                ServerColor = "Red";
-            } else {
-                ServerStatus = "Connected";
-                ServerColor = "Green";
-            }
-        } catch (Exception) {
-            ServerStatus = "Offline";
-            ServerColor = "Red";
         }
     }
 

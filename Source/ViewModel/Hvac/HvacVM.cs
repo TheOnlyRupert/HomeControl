@@ -60,7 +60,7 @@ public class HvacVM : BaseViewModel {
                 ReferenceValues.ForecastHourly.properties.periods[0].isDaytime,
                 ReferenceValues.ForecastHourly.properties.periods[0].temperature, ReferenceValues.ForecastHourly.properties.periods[0].windSpeed);
 
-            if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
+            if (ReferenceValues.JsonSettingsMaster.UseMetricUnits) {
                 double c = (ReferenceValues.ForecastHourly.properties.periods[0].temperature - 32) * 0.556;
                 TemperatureOutside = (int)c + "°";
             } else {
@@ -133,7 +133,7 @@ public class HvacVM : BaseViewModel {
             return;
         }
 
-        if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
+        if (ReferenceValues.JsonSettingsMaster.UseMetricUnits) {
             TemperatureAdjusted = ReferenceValues.TemperatureSet + "°";
         } else {
             double f = ReferenceValues.TemperatureSet * 1.8 + 32;
@@ -146,7 +146,7 @@ public class HvacVM : BaseViewModel {
             TemperatureInside = "??";
             TemperatureInsideColor = "Red";
         } else {
-            if (ReferenceValues.JsonSettingsMaster.useMetricUnits) {
+            if (ReferenceValues.JsonSettingsMaster.UseMetricUnits) {
                 TemperatureInside = ReferenceValues.TemperatureInside + "°";
             } else {
                 double f = ReferenceValues.TemperatureInside * 1.8 + 32;

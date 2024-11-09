@@ -845,7 +845,7 @@
                     Grid.Row="23"
                     Grid.ColumnSpan="4">
                     <TextBlock
-                        Text="Client/Server Mode  (Restart if making a change)"
+                        Text="Host Type"
                         Foreground="White" />
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -859,12 +859,10 @@
                                 Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <RadioButton Grid.Column="0" GroupName="Server" Content="Local Mode (Off)" Foreground="White"
-                                     IsChecked="{Binding IsOffModeChecked}" />
-                        <RadioButton Grid.Column="1" GroupName="Server" Content="Client Mode (Specify IP)"
-                                     Foreground="White" IsChecked="{Binding IsClientModeChecked}" />
-                        <RadioButton Grid.Column="2" GroupName="Server" Content="Server Mode (Auto Start)"
-                                     Foreground="White" IsChecked="{Binding IsServerModeChecked}" />
+                        <RadioButton Grid.Column="0" GroupName="Server" Content="Locally Hosted (Off)" Foreground="White"
+                                     IsChecked="{Binding IsLocallyHosted}" />
+                        <RadioButton Grid.Column="1" GroupName="Server" Content="Online Database (Specify IP)"
+                                     Foreground="White" IsChecked="{Binding IsDatabaseHosted}" />
                     </Grid>
                 </StackPanel>
 
@@ -872,20 +870,34 @@
                     Grid.Column="0"
                     Grid.Row="24">
                     <TextBlock
-                        Text="IP Address  (Defaults to localhost)"
+                        Text="Database Host"
                         Foreground="White" />
                     <TextBox
-                        Text="{Binding IpAddress, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding DatabaseHost, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="{Binding IsIpEnabled}"
                         control:SelectTextOnFocus.Active="True" />
                 </StackPanel>
                 <StackPanel
                     Grid.Column="1"
                     Grid.Row="24">
                     <TextBlock
-                        Text="Port  (Defaults to 1000)"
+                        Text="Database Username"
                         Foreground="White" />
                     <TextBox
-                        Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding DatabaseUsername, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="{Binding IsIpEnabled}"
+                        control:SelectTextOnFocus.Active="True" />
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="2"
+                    Grid.Row="24">
+                    <TextBlock
+                        Text="Database Password"
+                        Foreground="White" />
+                    <TextBox
+                        Text="{Binding DatabasePassword, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="White"
+                        IsEnabled="{Binding IsIpEnabled}"
                         control:SelectTextOnFocus.Active="True" />
                 </StackPanel>
             </Grid>
