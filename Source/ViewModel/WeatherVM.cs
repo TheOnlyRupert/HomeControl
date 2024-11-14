@@ -11,6 +11,10 @@ namespace HomeControl.Source.ViewModel;
 public class WeatherVM : BaseViewModel {
     private ObservableCollection<WeatherHourlyBlock> _forecastHourlyList;
 
+    private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3, _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5,
+        _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7, _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10,
+        _sevenDayForecastWindDirectionIcon11, _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14, _tempMin, _tempMax;
+
     private string _sevenDayForecastWindSpeed1, _sevenDayForecastWeatherIcon1a, _sevenDayForecastWeatherIcon1b, _sevenDayForecastTemp1, _sevenDayForecastName1, _sevenDayForecastWindSpeed2,
         _sevenDayForecastWeatherIcon2a, _sevenDayForecastWeatherIcon2b, _sevenDayForecastTemp2, _sevenDayForecastName2, _sevenDayForecastWindSpeed3, _sevenDayForecastWeatherIcon3a,
         _sevenDayForecastWeatherIcon3b, _sevenDayForecastTemp3, _sevenDayForecastName3, _sevenDayForecastWindSpeed4, _sevenDayForecastWeatherIcon4a, _sevenDayForecastWeatherIcon4b, _sevenDayForecastTemp4,
@@ -25,10 +29,6 @@ public class WeatherVM : BaseViewModel {
         _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6, _sevenDayForecastRainChance7,
         _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11, _sevenDayForecastRainChance12, _sevenDayForecastRainChance13,
         _sevenDayForecastRainChance14, _forecastHourlyVisibility, _easterEggVisibility;
-
-    private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3, _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5,
-        _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7, _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10,
-        _sevenDayForecastWindDirectionIcon11, _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14, _tempMin, _tempMax;
 
     public WeatherVM() {
         ForecastHourlyList = [];
@@ -899,6 +899,7 @@ public class WeatherVM : BaseViewModel {
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed10");
         }
     }
+
     public string SevenDayForecastName11 {
         get => _sevenDayForecastName11;
         set {
@@ -978,7 +979,7 @@ public class WeatherVM : BaseViewModel {
             RaisePropertyChangedEvent("SevenDayForecastWindSpeed12");
         }
     }
-    
+
     public string SevenDayForecastName13 {
         get => _sevenDayForecastName13;
         set {

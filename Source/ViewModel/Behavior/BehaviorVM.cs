@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text.Json;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using HomeControl.Source.Database;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.ViewModel.Base;
+using MySql.Data.MySqlClient;
 
 namespace HomeControl.Source.ViewModel.Behavior;
 
@@ -37,13 +38,19 @@ public class BehaviorVM : BaseViewModel {
         _user5TasksCompletedDayProgressValue, _user5TasksCompletedWeekProgressValue, _user5TasksCompletedMonthProgressValue, _user5TasksCompletedQuarterProgressValue;
 
     public BehaviorVM() {
-        try {
-            ReferenceValues.JsonBehaviorMaster = JsonSerializer.Deserialize<JsonBehavior>(FileHelpers.LoadFileText("behavior", true));
-        } catch (Exception) {
-            ReferenceValues.JsonBehaviorMaster = new JsonBehavior();
-
-            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster), true);
-        }
+        /* Do this here so I don't get null references in the future */
+        ReferenceValues.JsonBehaviorMaster = new JsonBehavior {
+            User1Strikes = 0,
+            User2Strikes = 0,
+            User3Strikes = 0,
+            User4Strikes = 0,
+            User5Strikes = 0,
+            User1Stars = 0,
+            User2Stars = 0,
+            User3Stars = 0,
+            User4Stars = 0,
+            User5Stars = 0
+        };
 
         try {
             ReferenceValues.JsonTasksMaster = JsonSerializer.Deserialize<JsonTasks>(FileHelpers.LoadFileText("tasks", true));
@@ -55,29 +62,29 @@ public class BehaviorVM : BaseViewModel {
 
         ReferenceValues.JsonTasksMaster ??= new JsonTasks();
         ReferenceValues.JsonTasksMaster.JsonTasksDaily ??= new JsonTasksDaily();
-        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser1 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser2 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser3 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser4 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksDaily.TaskListDailyUser5 ??= [];
         ReferenceValues.JsonTasksMaster.JsonTasksWeekly ??= new JsonTasksWeekly();
-        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser1 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser2 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser3 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser4 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksWeekly.TaskListWeeklyUser5 ??= [];
         ReferenceValues.JsonTasksMaster.JsonTasksMonthly ??= new JsonTasksMonthly();
-        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser1 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser2 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser3 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser4 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksMonthly.TaskListMonthlyUser5 ??= [];
         ReferenceValues.JsonTasksMaster.JsonTasksQuarterly ??= new JsonTasksQuarterly();
-        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4 ??= new ObservableCollection<Task>();
-        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5 ??= new ObservableCollection<Task>();
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser1 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser2 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser3 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser4 ??= [];
+        ReferenceValues.JsonTasksMaster.JsonTasksQuarterly.TaskListQuarterlyUser5 ??= [];
 
         try {
             Uri uri = new(ReferenceValues.DocumentsDirectory + "icons/user1.png", UriKind.RelativeOrAbsolute);
@@ -113,25 +120,6 @@ public class BehaviorVM : BaseViewModel {
 
         CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
         simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
-
-        /* Remove strikes if program was closed before midnight */
-        try {
-            if (!ReferenceValues.JsonBehaviorMaster.Date.Day.Equals(DateTime.Now.Day)) {
-                ReferenceValues.JsonBehaviorMaster.User1Strikes = 0;
-                ReferenceValues.JsonBehaviorMaster.User2Strikes = 0;
-                ReferenceValues.JsonBehaviorMaster.User3Strikes = 0;
-                ReferenceValues.JsonBehaviorMaster.User4Strikes = 0;
-                ReferenceValues.JsonBehaviorMaster.User5Strikes = 0;
-            }
-        } catch (Exception e) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "BehaviorVM",
-                Description = e.ToString()
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        }
 
         RefreshBehavior();
         RefreshTasks(1);
@@ -863,18 +851,6 @@ public class BehaviorVM : BaseViewModel {
         ReferenceValues.JsonTasksMaster.UpdatedDateTime = DateTime.Today;
 
         try {
-            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster), true);
-        } catch (Exception e) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "BehaviorVM",
-                Description = e.ToString()
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        }
-
-        try {
             FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -888,7 +864,6 @@ public class BehaviorVM : BaseViewModel {
     }
 
     private void RefreshBehavior() {
-        ReferenceValues.JsonBehaviorMaster.Date = DateTime.Now;
         User1Star1 = "";
         User1Star2 = "";
         User1Star3 = "";
@@ -1149,6 +1124,9 @@ public class BehaviorVM : BaseViewModel {
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
+        case "RefreshBehavior":
+            RefreshBehavior();
+            break;
         case "DateChanged":
             ReferenceValues.JsonBehaviorMaster.User1Strikes = 0;
             ReferenceValues.JsonBehaviorMaster.User2Strikes = 0;
@@ -1243,56 +1221,124 @@ public class BehaviorVM : BaseViewModel {
 
     private void ButtonLogic(object param) {
         if (!ReferenceValues.LockUi) {
+            byte strikes;
+            byte stars;
+
             switch (param) {
             case "user1":
+                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 1;
                 User1Visibility = "HIDDEN";
+
+                // Check to see if EditBehavior changed them
+                stars = ReferenceValues.JsonBehaviorMaster.User1Stars;
+                strikes = ReferenceValues.JsonBehaviorMaster.User1Strikes;
+
                 EditBehavior editBehavior = new();
                 editBehavior.ShowDialog();
                 editBehavior.Close();
+
+                if (stars != ReferenceValues.JsonBehaviorMaster.User1Stars || strikes != ReferenceValues.JsonBehaviorMaster.User1Strikes) {
+                    UpdateDatabase(1, ReferenceValues.JsonBehaviorMaster.User1Stars, ReferenceValues.JsonBehaviorMaster.User1Strikes);
+                }
+
                 User1Visibility = "VISIBLE";
                 RefreshTasks(1);
                 RefreshBlinking();
+
+                DatabasePolling.StartPolling();
                 break;
             case "user2":
+                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 2;
                 User2Visibility = "HIDDEN";
+
+                // Check to see if EditBehavior changed them
+                stars = ReferenceValues.JsonBehaviorMaster.User2Stars;
+                strikes = ReferenceValues.JsonBehaviorMaster.User2Strikes;
+
                 EditBehavior editBehavior2 = new();
                 editBehavior2.ShowDialog();
                 editBehavior2.Close();
+
+                if (stars != ReferenceValues.JsonBehaviorMaster.User2Stars || strikes != ReferenceValues.JsonBehaviorMaster.User2Strikes) {
+                    UpdateDatabase(2, ReferenceValues.JsonBehaviorMaster.User2Stars, ReferenceValues.JsonBehaviorMaster.User2Strikes);
+                }
+
                 User2Visibility = "VISIBLE";
                 RefreshTasks(2);
                 RefreshBlinking();
+
+                DatabasePolling.StartPolling();
                 break;
             case "user3":
+                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 3;
                 User3Visibility = "HIDDEN";
+
+                // Check to see if EditBehavior changed them
+                stars = ReferenceValues.JsonBehaviorMaster.User3Stars;
+                strikes = ReferenceValues.JsonBehaviorMaster.User3Strikes;
+
                 EditBehavior editBehavior3 = new();
                 editBehavior3.ShowDialog();
                 editBehavior3.Close();
+
+                if (stars != ReferenceValues.JsonBehaviorMaster.User3Stars || strikes != ReferenceValues.JsonBehaviorMaster.User3Strikes) {
+                    UpdateDatabase(3, ReferenceValues.JsonBehaviorMaster.User3Stars, ReferenceValues.JsonBehaviorMaster.User3Strikes);
+                }
+
                 User3Visibility = "VISIBLE";
                 RefreshTasks(3);
                 RefreshBlinking();
+
+                DatabasePolling.StartPolling();
                 break;
             case "user4":
+                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 4;
                 User4Visibility = "HIDDEN";
+
+                // Check to see if EditBehavior changed them
+                stars = ReferenceValues.JsonBehaviorMaster.User4Stars;
+                strikes = ReferenceValues.JsonBehaviorMaster.User4Strikes;
+
                 EditBehavior editBehavior4 = new();
                 editBehavior4.ShowDialog();
                 editBehavior4.Close();
+
+                if (stars != ReferenceValues.JsonBehaviorMaster.User4Stars || strikes != ReferenceValues.JsonBehaviorMaster.User4Strikes) {
+                    UpdateDatabase(4, ReferenceValues.JsonBehaviorMaster.User4Stars, ReferenceValues.JsonBehaviorMaster.User4Strikes);
+                }
+
                 User4Visibility = "VISIBLE";
                 RefreshTasks(4);
                 RefreshBlinking();
+
+                DatabasePolling.StartPolling();
                 break;
             case "user5":
+                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 5;
                 User5Visibility = "HIDDEN";
+
+                // Check to see if EditBehavior changed them
+                stars = ReferenceValues.JsonBehaviorMaster.User5Stars;
+                strikes = ReferenceValues.JsonBehaviorMaster.User5Strikes;
+
                 EditBehavior editBehavior5 = new();
                 editBehavior5.ShowDialog();
                 editBehavior5.Close();
+
+                if (stars != ReferenceValues.JsonBehaviorMaster.User5Stars || strikes != ReferenceValues.JsonBehaviorMaster.User5Strikes) {
+                    UpdateDatabase(5, ReferenceValues.JsonBehaviorMaster.User5Stars, ReferenceValues.JsonBehaviorMaster.User5Strikes);
+                }
+
                 User5Visibility = "VISIBLE";
                 RefreshTasks(5);
                 RefreshBlinking();
+
+                DatabasePolling.StartPolling();
                 break;
             }
 
@@ -1300,6 +1346,29 @@ public class BehaviorVM : BaseViewModel {
         } else {
             ReferenceValues.SoundToPlay = "locked";
             SoundDispatcher.PlaySound();
+        }
+    }
+
+    private static void UpdateDatabase(int id, int stars, int strikes) {
+        using MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString);
+        const string query = "UPDATE behavior SET stars = @stars, strikes = @strikes WHERE id = @id";
+        const string updateVersion = "UPDATE versions SET version = version + 1 WHERE id = 1";
+
+        try {
+            connection.Open();
+
+            using (MySqlCommand command = new(query, connection)) {
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@stars", stars);
+                command.Parameters.AddWithValue("@strikes", strikes);
+                command.ExecuteNonQuery();
+            }
+
+            using (MySqlCommand command = new(updateVersion, connection)) {
+                command.ExecuteNonQuery();
+            }
+        } catch (Exception) {
+            //todo: this
         }
     }
 

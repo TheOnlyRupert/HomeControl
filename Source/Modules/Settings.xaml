@@ -859,7 +859,8 @@
                                 Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <RadioButton Grid.Column="0" GroupName="Server" Content="Locally Hosted (Off)" Foreground="White"
+                        <RadioButton Grid.Column="0" GroupName="Server" Content="Locally Hosted (Off)"
+                                     Foreground="White"
                                      IsChecked="{Binding IsLocallyHosted}" />
                         <RadioButton Grid.Column="1" GroupName="Server" Content="Online Database (Specify IP)"
                                      Foreground="White" IsChecked="{Binding IsDatabaseHosted}" />

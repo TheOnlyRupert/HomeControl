@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -24,7 +21,6 @@ using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Finances;
 using HomeControl.Source.ViewModel.Hvac;
-using MySql.Data.MySqlClient;
 using Task = System.Threading.Tasks.Task;
 
 namespace HomeControl.Source.ViewModel;
@@ -114,13 +110,27 @@ public class MainWindowVM : BaseViewModel {
             settingsDialog.ShowDialog();
             settingsDialog.Close();
         }
-        
+
+        /* Do this here so I don't get null references in the future */
+        ReferenceValues.JsonBehaviorMaster = new JsonBehavior {
+            User1Strikes = 0,
+            User2Strikes = 0,
+            User3Strikes = 0,
+            User4Strikes = 0,
+            User5Strikes = 0,
+            User1Stars = 0,
+            User2Stars = 0,
+            User3Stars = 0,
+            User4Stars = 0,
+            User5Stars = 0
+        };
+
         /* Database Connection */
-        if (ReferenceValues.JsonSettingsMaster.IsDatabaseHosted && !string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.DatabaseHost) 
-                                                                && !string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.DatabaseUsername) 
-                                                                && !string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.DatabasePassword)) {
-            _ = DatabaseLogic.GetTableByName("behavior");
-        }
+        ReferenceValues.DatabaseConnectionString = @"Server=" + ReferenceValues.JsonSettingsMaster.DatabaseHost + @";Database=HomeControl;Uid=" + ReferenceValues.JsonSettingsMaster.DatabaseUsername +
+                                                   @";Pwd=" +
+                                                   ReferenceValues.JsonSettingsMaster.DatabasePassword;
+        DatabasePolling.StartPolling();
+        DatabasePolling.CheckForChanges(null, null);
 
         /* GameStats File */
         try {

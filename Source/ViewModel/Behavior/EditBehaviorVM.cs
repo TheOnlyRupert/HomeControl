@@ -20,8 +20,9 @@ public class EditBehaviorVM : BaseViewModel {
         _tasksCompletedMonth, _tasksCompletedQuarter, _tasksCompletedDayProgressColor, _tasksCompletedWeekProgressColor, _tasksCompletedMonthProgressColor,
         _tasksCompletedQuarterProgressColor, _tasksCompletedDayProgressText, _tasksCompletedWeekProgressText, _tasksCompletedMonthProgressText, _tasksCompletedQuarterProgressText;
 
-    private int stars, strikes, _tasksCompletedDayProgressValue, _tasksCompletedWeekProgressValue, _tasksCompletedMonthProgressValue,
-        _tasksCompletedQuarterProgressValue;
+    private byte _stars, _strikes;
+
+    private int _tasksCompletedDayProgressValue, _tasksCompletedWeekProgressValue, _tasksCompletedMonthProgressValue, _tasksCompletedQuarterProgressValue;
 
     public EditBehaviorVM() {
         DateTimeFormatInfo dateTimeFormatInfo = DateTimeFormatInfo.CurrentInfo;
@@ -56,8 +57,8 @@ public class EditBehaviorVM : BaseViewModel {
         switch (ReferenceValues.ActiveBehaviorUser) {
         case 1:
             ChildName = ReferenceValues.JsonSettingsMaster.User1Name;
-            stars = ReferenceValues.JsonBehaviorMaster.User1Stars;
-            strikes = ReferenceValues.JsonBehaviorMaster.User1Strikes;
+            _stars = ReferenceValues.JsonBehaviorMaster.User1Stars;
+            _strikes = ReferenceValues.JsonBehaviorMaster.User1Strikes;
             Uri uri;
 
             try {
@@ -76,8 +77,8 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         case 2:
             ChildName = ReferenceValues.JsonSettingsMaster.User2Name;
-            stars = ReferenceValues.JsonBehaviorMaster.User2Stars;
-            strikes = ReferenceValues.JsonBehaviorMaster.User2Strikes;
+            _stars = ReferenceValues.JsonBehaviorMaster.User2Stars;
+            _strikes = ReferenceValues.JsonBehaviorMaster.User2Strikes;
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user2.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
@@ -94,8 +95,8 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         case 3:
             ChildName = ReferenceValues.JsonSettingsMaster.User3Name;
-            stars = ReferenceValues.JsonBehaviorMaster.User3Stars;
-            strikes = ReferenceValues.JsonBehaviorMaster.User3Strikes;
+            _stars = ReferenceValues.JsonBehaviorMaster.User3Stars;
+            _strikes = ReferenceValues.JsonBehaviorMaster.User3Strikes;
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user3.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
@@ -112,8 +113,8 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         case 4:
             ChildName = ReferenceValues.JsonSettingsMaster.User4Name;
-            stars = ReferenceValues.JsonBehaviorMaster.User4Stars;
-            strikes = ReferenceValues.JsonBehaviorMaster.User4Strikes;
+            _stars = ReferenceValues.JsonBehaviorMaster.User4Stars;
+            _strikes = ReferenceValues.JsonBehaviorMaster.User4Strikes;
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user4.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
@@ -130,8 +131,8 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         case 5:
             ChildName = ReferenceValues.JsonSettingsMaster.User5Name;
-            stars = ReferenceValues.JsonBehaviorMaster.User5Stars;
-            strikes = ReferenceValues.JsonBehaviorMaster.User5Strikes;
+            _stars = ReferenceValues.JsonBehaviorMaster.User5Stars;
+            _strikes = ReferenceValues.JsonBehaviorMaster.User5Strikes;
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user5.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
@@ -378,7 +379,6 @@ public class EditBehaviorVM : BaseViewModel {
     }
 
     private void RefreshBehavior() {
-        ReferenceValues.JsonBehaviorMaster.Date = DateTime.Now;
         ChildStar1 = "";
         ChildStar2 = "";
         ChildStar3 = "";
@@ -388,7 +388,7 @@ public class EditBehaviorVM : BaseViewModel {
         ChildStrike2 = "";
         ChildStrike3 = "";
 
-        switch (stars) {
+        switch (_stars) {
         case 1:
             ChildStar1 = "../../../Resources/Images/behavior/star_gold.png";
             break;
@@ -416,7 +416,7 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         }
 
-        switch (strikes) {
+        switch (_strikes) {
         case 1:
             ChildStrike1 = "../../../Resources/Images/behavior/strike_red.png";
             break;
@@ -431,42 +431,35 @@ public class EditBehaviorVM : BaseViewModel {
             break;
         }
 
-        RewardButtonVisibility = stars == 5 ? "VISIBLE" : "HIDDEN";
+        RewardButtonVisibility = _stars == 5 ? "VISIBLE" : "HIDDEN";
 
         /* Save Progress */
         switch (ReferenceValues.ActiveBehaviorUser) {
         case 1:
-            ReferenceValues.JsonBehaviorMaster.User1Stars = stars;
-            ReferenceValues.JsonBehaviorMaster.User1Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.User1Stars = _stars;
+            ReferenceValues.JsonBehaviorMaster.User1Strikes = _strikes;
+
             break;
         case 2:
-            ReferenceValues.JsonBehaviorMaster.User2Stars = stars;
-            ReferenceValues.JsonBehaviorMaster.User2Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.User2Stars = _stars;
+            ReferenceValues.JsonBehaviorMaster.User2Strikes = _strikes;
+
             break;
         case 3:
-            ReferenceValues.JsonBehaviorMaster.User3Stars = stars;
-            ReferenceValues.JsonBehaviorMaster.User3Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.User3Stars = _stars;
+            ReferenceValues.JsonBehaviorMaster.User3Strikes = _strikes;
+
             break;
         case 4:
-            ReferenceValues.JsonBehaviorMaster.User4Stars = stars;
-            ReferenceValues.JsonBehaviorMaster.User4Strikes = strikes;
+            ReferenceValues.JsonBehaviorMaster.User4Stars = _stars;
+            ReferenceValues.JsonBehaviorMaster.User4Strikes = _strikes;
+
             break;
         case 5:
-            ReferenceValues.JsonBehaviorMaster.User5Stars = stars;
-            ReferenceValues.JsonBehaviorMaster.User5Strikes = strikes;
-            break;
-        }
+            ReferenceValues.JsonBehaviorMaster.User5Stars = _stars;
+            ReferenceValues.JsonBehaviorMaster.User5Strikes = _strikes;
 
-        try {
-            FileHelpers.SaveFileText("behavior", JsonSerializer.Serialize(ReferenceValues.JsonBehaviorMaster), true);
-        } catch (Exception e) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "EditBehaviorVM",
-                Description = e.ToString()
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            break;
         }
     }
 
@@ -474,12 +467,12 @@ public class EditBehaviorVM : BaseViewModel {
         switch (param) {
         case "addStrike":
             if (RewardButtonVisibility == "HIDDEN") {
-                if (strikes < 3) {
+                if (_strikes < 3) {
                     MessageBoxResult result = MessageBox.Show("Are you sure you want to add a strike?\nThis will reset all progress (but not stars)", "Confirmation",
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes) {
-                        strikes++;
+                        _strikes++;
                         ReferenceValues.SoundToPlay = "buzzer";
                         SoundDispatcher.PlaySound();
                         ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -490,10 +483,10 @@ public class EditBehaviorVM : BaseViewModel {
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
-                        if (strikes == 3) {
-                            stars--;
-                            if (stars < 0) {
-                                stars = 0;
+                        if (_strikes == 3) {
+                            _stars--;
+                            if (_stars < 0) {
+                                _stars = 0;
                             }
                         }
                     }
@@ -505,8 +498,8 @@ public class EditBehaviorVM : BaseViewModel {
 
             break;
         case "add1":
-            if (RewardButtonVisibility == "HIDDEN" && strikes != 3 && stars < 5) {
-                stars++;
+            if (RewardButtonVisibility == "HIDDEN" && _strikes != 3 && _stars < 5) {
+                _stars++;
 
                 ReferenceValues.SoundToPlay = "yay";
                 SoundDispatcher.PlaySound();
@@ -524,8 +517,8 @@ public class EditBehaviorVM : BaseViewModel {
 
             break;
         case "remove1":
-            if (RewardButtonVisibility == "HIDDEN" && strikes != 3 && stars > 0) {
-                stars--;
+            if (RewardButtonVisibility == "HIDDEN" && _strikes != 3 && _stars > 0) {
+                _stars--;
                 ReferenceValues.SoundToPlay = "aww";
                 SoundDispatcher.PlaySound();
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -549,7 +542,7 @@ public class EditBehaviorVM : BaseViewModel {
                 Description = ChildName + " claimed their reward!"
             });
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-            stars = 0;
+            _stars = 0;
             RewardButtonVisibility = "HIDDEN";
             ReferenceValues.SoundToPlay = "reward";
             SoundDispatcher.PlaySound();

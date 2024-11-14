@@ -11,6 +11,7 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class SettingsVM : BaseViewModel {
+    private string _databasePassword;
     private bool _isDebugModeChecked, _isMetricUnitsChecked, _isEasterEggsChecked, _isLocallyHosted, _isDatabaseHosted, _isIpEnabled;
 
     private List<string> _trashDayList;
@@ -25,8 +26,6 @@ public class SettingsVM : BaseViewModel {
     private double _weatherLat, _weatherLon;
 
     private int gridX, gridY;
-    
-    private string _databasePassword;
 
     public SettingsVM() {
         TrashDayList = [
@@ -757,6 +756,7 @@ public class SettingsVM : BaseViewModel {
             if (value) {
                 IsIpEnabled = false;
             }
+
             RaisePropertyChangedEvent("IsLocallyHosted");
         }
     }
@@ -768,6 +768,7 @@ public class SettingsVM : BaseViewModel {
             if (value) {
                 IsIpEnabled = true;
             }
+
             RaisePropertyChangedEvent("IsDatabaseHosted");
         }
     }

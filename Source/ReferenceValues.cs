@@ -70,4 +70,6 @@ public static class ReferenceValues {
     public static bool[] CalendarFilterList { get; set; }
 
     public static bool IsWeatherApiOnline { get; set; }
+    public static string DatabaseConnectionString { get; set; }
+    public static bool DisableBehaviorPolling { get; set; }
 }
