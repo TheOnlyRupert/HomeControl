@@ -7,47 +7,19 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel;
 
 public class DebugLogVM : BaseViewModel {
-    private string _copyrightText;
-    private ObservableCollection<DebugTextBlock> _debugList;
-
-    public DebugLogVM() {
-        DebugList = ReferenceValues.JsonDebugMaster.DebugBlockList;
-
-        CopyrightText = ReferenceValues.Copyright + "  v" + ReferenceValues.VersionMajor + "." + ReferenceValues.VersionMinor + "." + ReferenceValues.VersionPatch + "-" +
-                        ReferenceValues.VersionBranch;
-    }
-
+    // ReSharper disable UnusedMember.Global
     public ICommand ButtonCommand {
         get => new DelegateCommand(ButtonCommandLogic, true);
     }
 
-    private void ButtonCommandLogic(object param) {
-        switch (param) {
-        case "settings":
+    private static void ButtonCommandLogic(object param) {
+        if (param?.ToString() == "settings") {
             Settings settings = new();
             settings.ShowDialog();
             settings.Close();
-            break;
         }
     }
 
-    #region Fields
-
-    public ObservableCollection<DebugTextBlock> DebugList {
-        get => _debugList;
-        set {
-            _debugList = value;
-            RaisePropertyChangedEvent("DebugList");
-        }
-    }
-
-    public string CopyrightText {
-        get => _copyrightText;
-        set {
-            _copyrightText = value;
-            RaisePropertyChangedEvent("CopyrightText");
-        }
-    }
-
-    #endregion
+    public ObservableCollection<DebugTextBlock> DebugList { get; set; } = ReferenceValues.JsonDebugMaster.DebugBlockList;
+    public string CopyrightText { get; set; } = $"{ReferenceValues.Copyright} v{ReferenceValues.VersionMajor}.{ReferenceValues.VersionMinor}.{ReferenceValues.VersionPatch}-{ReferenceValues.VersionBranch}";
 }

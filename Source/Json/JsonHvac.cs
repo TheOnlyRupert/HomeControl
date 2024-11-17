@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 namespace HomeControl.Source.Json;
 
 public class JsonHvac {
-    public HvacStates HvacState { get; set; }
     public int HvacStateTime { get; set; }
     public ObservableCollection<HvacEvent> HvacEvents { get; set; }
 }

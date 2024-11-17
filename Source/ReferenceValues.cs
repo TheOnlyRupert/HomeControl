@@ -31,9 +31,9 @@ public static class ReferenceValues {
     public static JsonSettings JsonSettingsMaster { get; set; }
 
     public static double TemperatureInside { get; set; }
-    public static int HumidityInside { get; set; }
+    public static float HumidityInside { get; set; }
 
-    public static HvacStates HvacState { get; set; }
+    public static int HvacState { get; set; }
 
     /* Ranges from 15°C (59°F) to 30°C (86°F) */
     public static double TemperatureSet { get; set; }

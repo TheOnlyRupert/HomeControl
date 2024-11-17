@@ -13,7 +13,7 @@ public static class DatabasePolling {
     private static CrossViewMessenger _simpleMessenger;
 
     public static void StartPolling() {
-        _timer = new Timer(60000);
+        _timer = new Timer(10000);
         _timer.Elapsed += CheckForChanges;
         _timer.Start();
     }

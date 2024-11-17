@@ -20,7 +20,6 @@ using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Finances;
-using HomeControl.Source.ViewModel.Hvac;
 using Task = System.Threading.Tasks.Task;
 
 namespace HomeControl.Source.ViewModel;

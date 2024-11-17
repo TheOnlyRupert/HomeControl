@@ -6,28 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:gif="http://wpfanimatedgif.codeplex.com"
     mc:Ignorable="d">
+
     <Button
         Command="{Binding ButtonCommand}"
         CommandParameter="hvac"
         Margin="0 4 4 0">
         <Button.Style>
-            <Style
-                TargetType="{x:Type Button}">
-                <Setter
-                    Property="Background"
-                    Value="Transparent" />
-                <Setter
-                    Property="Template">
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate
-                            TargetType="{x:Type Button}">
-                            <Border
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="DarkSlateGray"
-                                BorderThickness="1">
-                                <ContentPresenter
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch" />
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="DarkSlateGray"
+                                    BorderThickness="1">
+                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch" />
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
@@ -37,258 +31,211 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="1.25*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.25*" />
             </Grid.ColumnDefinitions>
 
-            <Grid
-                Grid.Column="0">
+            <!-- Left Grid Column -->
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="Auto" />
-                    <RowDefinition
-                        Height="Auto" />
-                    <RowDefinition
-                        Height="*" />
-                    <RowDefinition
-                        Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock
-                    Grid.Row="0"
-                    Text="{Binding CurrentDateText}"
-                    HorizontalAlignment="Center"
-                    FontSize="24"
-                    Foreground="White"
-                    TextAlignment="Center" />
+                <TextBlock Grid.Row="0"
+                           Text="{Binding CurrentDateText}"
+                           HorizontalAlignment="Center"
+                           FontSize="24"
+                           Foreground="White"
+                           TextAlignment="Center" />
 
-                <StackPanel
-                    Grid.Row="1"
-                    Orientation="Horizontal"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
-                    <TextBlock
-                        Text="{Binding CurrentTimeText}"
-                        FontSize="48"
-                        Foreground="White" />
-                    <TextBlock
-                        Text="{Binding CurrentTimeSecondsText}"
-                        FontSize="24"
-                        Foreground="Gray"
-                        VerticalAlignment="Center" />
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="{Binding CurrentTimeText}"
+                               FontSize="48"
+                               Foreground="White" />
+                    <TextBlock Text="{Binding CurrentTimeSecondsText}"
+                               FontSize="24"
+                               Foreground="Gray"
+                               VerticalAlignment="Center" />
                 </StackPanel>
 
-                <Grid
-                    Grid.Row="2"
-                    HorizontalAlignment="Stretch">
+                <!-- Weather Data and Icon -->
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image
-                        Grid.Column="0"
-                        gif:ImageBehavior.AnimatedSource="{Binding CurrentWeatherCloudIcon}"
-                        Margin="-8"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center" />
+                    <Image Grid.Column="0"
+                           gif:ImageBehavior.AnimatedSource="{Binding CurrentWeatherCloudIcon}"
+                           Margin="-8"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center" />
 
-                    <Image
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        Source="../../../Resources/Images/weather/raindrop.gif"
-                        VerticalAlignment="Center"
-                        Width="64"
-                        Height="64"
-                        Opacity="0.8" />
-                    <TextBlock
-                        Grid.Column="1"
-                        Text="{Binding CurrentRainChanceText}"
-                        HorizontalAlignment="Center"
-                        FontSize="18"
-                        Foreground="White"
-                        VerticalAlignment="Center" />
+                    <Image Grid.Column="1"
+                           HorizontalAlignment="Center"
+                           Source="../../../Resources/Images/weather/raindrop.gif"
+                           Width="64"
+                           Height="64"
+                           Opacity="0.8" />
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding CurrentRainChanceText}"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               Foreground="White"
+                               VerticalAlignment="Center" />
 
-                    <Image
-                        Grid.Column="2"
-                        HorizontalAlignment="Center"
-                        Source="../../../Resources/Images/weather/wind.png"
-                        VerticalAlignment="Center"
-                        Width="32"
-                        Height="32"
-                        Opacity="0.8"
-                        RenderTransformOrigin="0.5, 0.5">
+                    <Image Grid.Column="2"
+                           HorizontalAlignment="Center"
+                           Source="../../../Resources/Images/weather/wind.png"
+                           Width="32"
+                           Height="32"
+                           Opacity="0.8">
                         <Image.RenderTransform>
-                            <RotateTransform
-                                Angle="{Binding CurrentWindDirectionRotation}" />
+                            <RotateTransform Angle="{Binding CurrentWindDirectionRotation}" />
                         </Image.RenderTransform>
                     </Image>
-
-                    <TextBlock
-                        Grid.Column="2"
-                        Text="{Binding CurrentWindSpeedText}"
-                        HorizontalAlignment="Center"
-                        FontSize="18"
-                        Foreground="White"
-                        VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2"
+                               Text="{Binding CurrentWindSpeedText}"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               Foreground="White"
+                               VerticalAlignment="Center" />
                 </Grid>
 
-                <TextBlock
-                    Grid.Row="3"
-                    Text="{Binding CurrentWeatherDescription}"
-                    FontSize="16"
-                    TextWrapping="Wrap"
-                    Foreground="White"
-                    HorizontalAlignment="Center" />
+                <TextBlock Grid.Row="3"
+                           Text="{Binding CurrentWeatherDescription}"
+                           FontSize="16"
+                           TextWrapping="Wrap"
+                           Foreground="White"
+                           HorizontalAlignment="Center" />
             </Grid>
 
-            <Grid
-                Grid.Column="1">
+            <!-- Right Grid Column -->
+            <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="Auto" />
-                    <RowDefinition
-                        Height="Auto" />
-                    <RowDefinition
-                        Height="Auto" />
-                    <RowDefinition
-                        Height="*" />
-                    <RowDefinition
-                        Height="*" />
-                    <RowDefinition
-                        Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    Grid.Column="0"
-                    Grid.Row="0"
-                    Text="{Binding TemperatureOutside}"
-                    HorizontalAlignment="Center"
-                    Foreground="{Binding TemperatureOutsideColor}"
-                    FontSize="48" />
-                <TextBlock
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    Text="Outside"
-                    HorizontalAlignment="Center"
-                    Foreground="White"
-                    FontSize="14" />
-                <TextBlock
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Text="{Binding HumidityOutside}"
-                    HorizontalAlignment="Center"
-                    Foreground="CornflowerBlue"
-                    FontSize="18" />
+                <!-- Temperature and Humidity Data -->
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           Text="{Binding TemperatureOutside}"
+                           HorizontalAlignment="Center"
+                           Foreground="{Binding TemperatureOutsideColor}"
+                           FontSize="48" />
+                <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                           Text="Outside"
+                           HorizontalAlignment="Center"
+                           Foreground="White"
+                           FontSize="14" />
+                <TextBlock Grid.Column="0"
+                           Grid.Row="2"
+                           Text="{Binding HumidityOutside}"
+                           HorizontalAlignment="Center"
+                           Foreground="CornflowerBlue"
+                           FontSize="18" />
 
-                <TextBlock
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    Text="{Binding TemperatureInside}"
-                    HorizontalAlignment="Center"
-                    Foreground="{Binding TemperatureInsideColor}"
-                    FontSize="48" />
-                <TextBlock
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Text="Inside"
-                    HorizontalAlignment="Center"
-                    Foreground="White"
-                    FontSize="14" />
-                <TextBlock
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Text="{Binding HumidityInside}"
-                    HorizontalAlignment="Center"
-                    Foreground="CornflowerBlue"
-                    FontSize="18" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="0"
+                           Text="{Binding TemperatureInside}"
+                           HorizontalAlignment="Center"
+                           Foreground="{Binding TemperatureInsideColor}"
+                           FontSize="48" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="Inside"
+                           HorizontalAlignment="Center"
+                           Foreground="White"
+                           FontSize="14" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                           Text="{Binding HumidityInside}"
+                           HorizontalAlignment="Center"
+                           Foreground="CornflowerBlue"
+                           FontSize="18" />
 
-                <TextBlock
-                    Grid.Column="2"
-                    Grid.Row="0"
-                    Text="{Binding TemperatureAdjusted}"
-                    HorizontalAlignment="Center"
-                    Foreground="{Binding TemperatureAdjustedColor}"
-                    FontSize="48" />
-                <TextBlock
-                    Grid.Column="2"
-                    Grid.Row="1"
-                    Text="{Binding HeatingCoolingText}"
-                    HorizontalAlignment="Center"
-                    Foreground="White"
-                    FontSize="14" />
+                <TextBlock Grid.Column="2"
+                           Grid.Row="0"
+                           Text="{Binding TemperatureAdjusted}"
+                           HorizontalAlignment="Center"
+                           Foreground="{Binding TemperatureAdjustedColor}"
+                           FontSize="48" />
+                <TextBlock Grid.Column="2"
+                           Grid.Row="1"
+                           Text="{Binding HeatingCoolingText}"
+                           HorizontalAlignment="Center"
+                           Foreground="White"
+                           FontSize="14" />
 
-                <TextBlock
-                    Grid.Column="0"
-                    Grid.Row="3"
-                    Text="Status"
-                    HorizontalAlignment="Center"
-                    Foreground="White"
-                    FontSize="14"
-                    VerticalAlignment="Bottom" />
-                <TextBlock
-                    Grid.Column="0"
-                    Grid.Row="4"
-                    Text="{Binding ProgramStatus}"
-                    Foreground="{Binding ProgramStatusColor}"
-                    HorizontalAlignment="Center"
-                    FontSize="18" />
+                <!-- Status, Fan, Program, Runtime -->
+                <TextBlock Grid.Column="0"
+                           Grid.Row="3"
+                           Text="Status"
+                           HorizontalAlignment="Center"
+                           Foreground="White"
+                           FontSize="14"
+                           VerticalAlignment="Bottom" />
+                <TextBlock Grid.Column="0"
+                           Grid.Row="4"
+                           Text="{Binding ProgramStatus}"
+                           Foreground="{Binding ProgramStatusColor}"
+                           HorizontalAlignment="Center"
+                           FontSize="18" />
 
-                <TextBlock
-                    Grid.Column="1"
-                    Grid.Row="3"
-                    Text="Fan"
-                    HorizontalAlignment="Center"
-                    Foreground="White"
-                    FontSize="14"
-                    VerticalAlignment="Bottom" />
-                <TextBlock
-                    Grid.Column="1"
-                    Grid.Row="4"
-                    Text="{Binding FanStatus}"
-                    Foreground="{Binding FanStatusColor}"
-                    HorizontalAlignment="Center"
-                    FontSize="18" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="3"
+                           Text="Fan"
+                           HorizontalAlignment="Center"
+                           Foreground="White"
+                           FontSize="14"
+                           VerticalAlignment="Bottom" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="4"
+                           Text="{Binding FanStatus}"
+                           Foreground="{Binding FanStatusColor}"
+                           HorizontalAlignment="Center"
+                           FontSize="18" />
 
-                <TextBlock
-                    Grid.Column="2"
-                    Grid.Row="3"
-                    Text="Program"
-                    HorizontalAlignment="Center"
-                    Foreground="White"
-                    FontSize="14"
-                    VerticalAlignment="Bottom" />
-                <TextBlock
-                    Grid.Column="2"
-                    Grid.Row="4"
-                    Text="{Binding HeatingCoolingStatus}"
-                    Foreground="{Binding HeatingCoolingStatusColor}"
-                    HorizontalAlignment="Center"
-                    FontSize="18" />
+                <TextBlock Grid.Column="2"
+                           Grid.Row="3"
+                           Text="Program"
+                           HorizontalAlignment="Center"
+                           Foreground="White"
+                           FontSize="14"
+                           VerticalAlignment="Bottom" />
+                <TextBlock Grid.Column="2"
+                           Grid.Row="4"
+                           Text="{Binding HeatingCoolingStatus}"
+                           Foreground="{Binding HeatingCoolingStatusColor}"
+                           HorizontalAlignment="Center"
+                           FontSize="18" />
 
-                <TextBlock
-                    Grid.Column="0"
-                    Grid.Row="5"
-                    Grid.ColumnSpan="3"
-                    Text="{Binding RunTime}"
-                    Foreground="White"
-                    HorizontalAlignment="Center"
-                    FontSize="16" />
+                <TextBlock Grid.Column="0"
+                           Grid.Row="5"
+                           Grid.ColumnSpan="3"
+                           Text="{Binding RunTime}"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           FontSize="16" />
             </Grid>
         </Grid>
     </Button>

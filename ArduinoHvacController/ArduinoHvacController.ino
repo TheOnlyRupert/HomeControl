@@ -19,23 +19,26 @@ enum
     hvac_heating_running,
     hvac_heating_standby,
     hvac_heating_purging
-}
-hvac_state = hvac_cooling_off;
+} hvac_state = hvac_cooling_off;
+
+unsigned long cool_down_timer; // Timer for cool-down period
 
 /* PINS: 4 -> Fan, 5 -> Cooling, 6 -> Heating, 8 -> Interior Temp Input */
 /* RELAYS: Relay 4 -> Fan, Relay 3 -> Cooling, Relay 2 -> Heating */
+
 void setup()
 {
     previous_millis_temp = 60000;
     previous_millis_hvac = 600000;
     is_fan_auto = true;
-    temp_set = 22.00; //70F
+    temp_set = 22.00; // 70°F
+    cool_down_timer = 0; // Initialize cool-down timer to 0
     Serial.begin(9600);
     dht_int.begin();
 
-    pinMode(4, OUTPUT);
-    pinMode(5, OUTPUT);
-    pinMode(6, OUTPUT);
+    pinMode(4, OUTPUT); // Fan
+    pinMode(5, OUTPUT); // Cooling
+    pinMode(6, OUTPUT); // Heating
 
     get_temps();
 }
@@ -62,33 +65,18 @@ void loop()
     {
         previous_millis_hvac = current_millis_hvac;
 
-        /* Check if purging */
-        switch (hvac_state)
+        /* Cool-down timer for fan to keep running for 10 minutes after cooling/heating */
+        if (cool_down_timer > 0 && current_millis_hvac - cool_down_timer >= 600000)
         {
-        case hvac_cooling_purging:
-            hvac_state = hvac_cooling_standby;
+            hvac_state = (hvac_state == hvac_cooling_running || hvac_state == hvac_heating_running) ? hvac_cooling_standby : hvac_state;
+            cool_down_timer = 0; // Reset timer
             Serial.print("<HvacState_2>");
-            digitalWrite(6, LOW);
             digitalWrite(5, LOW);
-
+            digitalWrite(6, LOW);
             if (is_fan_auto)
             {
-                digitalWrite(4, LOW);
+                digitalWrite(4, LOW); // Turn off fan if auto
             }
-
-            break;
-        case hvac_heating_purging:
-            hvac_state = hvac_heating_standby;
-            Serial.print("<HvacState_6>");
-            digitalWrite(6, LOW);
-            digitalWrite(5, LOW);
-
-            if (is_fan_auto)
-            {
-                digitalWrite(4, LOW);
-            }
-
-            break;
         }
 
         update_hvac_state();
@@ -96,170 +84,122 @@ void loop()
 
     while (Serial.available() > 0)
     {
-        switch (char read_wpf = Serial.read())
-        {
+        char read_wpf = Serial.read();
+
         /* Force Refresh */
-        case '0':
-            if (is_fan_auto)
-            {
-                Serial.print("<HvacFanAuto>");
-            }
-            else
-            {
-                Serial.print("<HvacFanOn>");
-            }
-
-            Serial.print("<HvacState_");
-            Serial.print(hvac_state);
-            Serial.print(">");
-
-            Serial.print("<TEMP_SET_");
-            Serial.print(temp_set);
-            Serial.print(">");
-            break;
-
-        /* Fan Mode: On */
-        case '1':
-            is_fan_auto = false;
-            Serial.print("<HvacFanOn>");
-            digitalWrite(4, HIGH);
-
-            break;
-        /* Fan Mode: Auto */
-        case '2':
-            is_fan_auto = true;
-            Serial.print("<HvacFanAuto>");
-
-        /* Keep safety checks in place */
-            switch (hvac_state)
-            {
-            case hvac_cooling_standby:
-            case hvac_cooling_off:
-            case hvac_heating_standby:
-            case hvac_heating_off:
-                digitalWrite(6, LOW);
-                digitalWrite(5, LOW);
-                digitalWrite(4, LOW);
-
-                break;
-            }
-
-            break;
-        /* Program On */
-        case '3':
-            switch (hvac_state)
-            {
-            case hvac_cooling_off:
-            case hvac_cooling_running:
-            case hvac_cooling_standby:
-            case hvac_cooling_purging:
-                Serial.print("<HvacState_2>");
-                hvac_state = hvac_cooling_standby;
-
-                break;
-            case hvac_heating_off:
-            case hvac_heating_running:
-            case hvac_heating_standby:
-            case hvac_heating_purging:
-                Serial.print("<HvacState_6>");
-                hvac_state = hvac_heating_standby;
-
-                break;
-            }
-
-            break;
-        /* Program Off */
-        case '4':
-            switch (hvac_state)
-            {
-            case hvac_cooling_off:
-            case hvac_cooling_running:
-            case hvac_cooling_standby:
-            case hvac_cooling_purging:
-                Serial.print("<HvacState_4>");
-                hvac_state = hvac_cooling_off;
-
-                break;
-            case hvac_heating_off:
-            case hvac_heating_running:
-            case hvac_heating_standby:
-            case hvac_heating_purging:
-                Serial.print("<HvacState_4>");
-                hvac_state = hvac_heating_off;
-
-                break;
-            }
-
-            digitalWrite(6, LOW);
-            digitalWrite(5, LOW);
-
-            if (is_fan_auto)
-            {
-                digitalWrite(4, LOW);
-            }
-
-            break;
-        /* Heating Mode */
-        case '5':
-            switch (hvac_state)
-            {
-            case hvac_cooling_off:
-                hvac_state = hvac_heating_off;
-
-                break;
-            case hvac_cooling_running:
-            case hvac_cooling_standby:
-            case hvac_cooling_purging:
-                hvac_state = hvac_heating_standby;
-
-                break;
-            }
-
-            break;
-        /* Cooling Mode */
-        case '6':
-            switch (hvac_state)
-            {
-            case hvac_heating_off:
-                hvac_state = hvac_cooling_off;
-
-                break;
-            case hvac_heating_running:
-            case hvac_heating_standby:
-            case hvac_heating_purging:
-                hvac_state = hvac_cooling_standby;
-
-                break;
-            }
-
-            break;
-        case 'A':
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-        case 'F':
-        case 'G':
-        case 'H':
-        case 'I':
-        case 'J':
-        case 'K':
-        case 'L':
-        case 'M':
-        case 'N':
-        case 'O':
-        case 'P':
-            temp_set = read_wpf - 50;
-            Serial.print("<TEMP_SET_");
-            Serial.print(read_wpf - 50);
-            Serial.print(".00>");
-
-            break;
-        default:
+        if (read_wpf == '0')
+        {
+            send_hvac_status();
             return;
         }
 
+        /* Handle Fan Modes */
+        if (read_wpf == '1')
+        {
+            set_fan_mode(false);
+            return;
+        }
+        if (read_wpf == '2')
+        {
+            set_fan_mode(true);
+            return;
+        }
+
+        /* Handle Heating and Cooling Modes */
+        handle_mode_changes(read_wpf);
         update_hvac_state();
+    }
+}
+
+void send_hvac_status()
+{
+    Serial.print(is_fan_auto ? "<HvacFanAuto>" : "<HvacFanOn>");
+    Serial.print("<HvacState_");
+    Serial.print(hvac_state);
+    Serial.print(">");
+    Serial.print("<TEMP_SET_");
+    Serial.print(temp_set);
+    Serial.print(">");
+}
+
+void set_fan_mode(bool auto_mode)
+{
+    is_fan_auto = auto_mode;
+    Serial.print(auto_mode ? "<HvacFanAuto>" : "<HvacFanOn>");
+    if (auto_mode)
+    {
+        handle_off_modes();
+    }
+    else
+    {
+        digitalWrite(4, HIGH); // Keep fan on
+    }
+}
+
+void handle_mode_changes(char mode)
+{
+    switch (mode)
+    {
+    case '3': // Program On
+        switch (hvac_state)
+        {
+        case hvac_cooling_off:
+        case hvac_heating_off:
+            hvac_state = (temp_int > temp_set) ? hvac_heating_standby : hvac_cooling_standby;
+            break;
+        }
+        break;
+    case '4': // Program Off
+        hvac_state = hvac_cooling_off;
+        digitalWrite(5, LOW);
+        digitalWrite(6, LOW);
+        if (is_fan_auto) digitalWrite(4, LOW); // Turn off fan if auto
+        break;
+    case '5': // Heating Mode
+        if (hvac_state != hvac_cooling_running && hvac_state != hvac_cooling_standby)
+            hvac_state = hvac_heating_standby;
+        break;
+    case '6': // Cooling Mode
+        if (hvac_state != hvac_heating_running && hvac_state != hvac_heating_standby)
+            hvac_state = hvac_cooling_standby;
+        break;
+    }
+}
+
+void update_hvac_state()
+{
+    switch (hvac_state)
+    {
+    case hvac_cooling_off:
+    case hvac_heating_off:
+        digitalWrite(5, LOW);
+        digitalWrite(6, LOW);
+        if (is_fan_auto)
+        {
+            digitalWrite(4, LOW);
+        }
+        break;
+    case hvac_cooling_running:
+    case hvac_heating_running:
+        if (temp_int >= temp_set || temp_int <= temp_set)
+        {
+            hvac_state = hvac_cooling_purging;
+            Serial.print("<HvacState_3>");
+            digitalWrite(5, LOW);
+            digitalWrite(6, LOW);
+            cool_down_timer = millis(); // Start the cool-down period
+        }
+        break;
+    case hvac_cooling_standby:
+    case hvac_heating_standby:
+        if ((temp_int - temp_set) > 2)
+        {
+            hvac_state = (hvac_state == hvac_cooling_standby) ? hvac_cooling_running : hvac_heating_running;
+            digitalWrite(5, HIGH);
+            digitalWrite(6, HIGH);
+            digitalWrite(4, HIGH);
+        }
+        break;
     }
 }
 
@@ -275,58 +215,9 @@ void get_temps()
     Serial.print(">");
 }
 
-void update_hvac_state()
+void handle_off_modes()
 {
-    switch (hvac_state)
-    {
-    case hvac_cooling_off:
-    case hvac_heating_off:
-        digitalWrite(5, LOW);
-        digitalWrite(6, LOW);
-
-        if (is_fan_auto)
-        {
-            digitalWrite(4, LOW);
-        }
-
-        break;
-    case hvac_cooling_running:
-        if (temp_int <= temp_set)
-        {
-            hvac_state = hvac_cooling_purging;
-            Serial.print("<HvacState_3>");
-            digitalWrite(5, LOW);
-        }
-
-        break;
-    case hvac_cooling_standby:
-        if (temp_int - temp_set > 2)
-        {
-            hvac_state = hvac_cooling_running;
-            Serial.print("<HvacState_1>");
-            digitalWrite(4, HIGH);
-            digitalWrite(5, HIGH);
-        }
-
-        break;
-    case hvac_heating_running:
-        if (temp_int >= temp_set)
-        {
-            hvac_state = hvac_heating_purging;
-            Serial.print("<HvacState_7>");
-            digitalWrite(6, LOW);
-        }
-
-        break;
-    case hvac_heating_standby:
-        if (temp_set - temp_int > 2)
-        {
-            hvac_state = hvac_heating_running;
-            Serial.print("<HvacState_5>");
-            digitalWrite(4, HIGH);
-            digitalWrite(6, HIGH);
-        }
-
-        break;
-    }
+    digitalWrite(5, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(4, LOW);
 }
