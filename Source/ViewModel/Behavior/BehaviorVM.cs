@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Text.Json;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using HomeControl.Source.Database;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Behavior;
@@ -1226,7 +1225,6 @@ public class BehaviorVM : BaseViewModel {
 
             switch (param) {
             case "user1":
-                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 1;
                 User1Visibility = "HIDDEN";
 
@@ -1245,11 +1243,8 @@ public class BehaviorVM : BaseViewModel {
                 User1Visibility = "VISIBLE";
                 RefreshTasks(1);
                 RefreshBlinking();
-
-                DatabasePolling.StartPolling();
                 break;
             case "user2":
-                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 2;
                 User2Visibility = "HIDDEN";
 
@@ -1268,11 +1263,8 @@ public class BehaviorVM : BaseViewModel {
                 User2Visibility = "VISIBLE";
                 RefreshTasks(2);
                 RefreshBlinking();
-
-                DatabasePolling.StartPolling();
                 break;
             case "user3":
-                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 3;
                 User3Visibility = "HIDDEN";
 
@@ -1291,11 +1283,8 @@ public class BehaviorVM : BaseViewModel {
                 User3Visibility = "VISIBLE";
                 RefreshTasks(3);
                 RefreshBlinking();
-
-                DatabasePolling.StartPolling();
                 break;
             case "user4":
-                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 4;
                 User4Visibility = "HIDDEN";
 
@@ -1314,11 +1303,8 @@ public class BehaviorVM : BaseViewModel {
                 User4Visibility = "VISIBLE";
                 RefreshTasks(4);
                 RefreshBlinking();
-
-                DatabasePolling.StartPolling();
                 break;
             case "user5":
-                DatabasePolling.StopPolling();
                 ReferenceValues.ActiveBehaviorUser = 5;
                 User5Visibility = "HIDDEN";
 
@@ -1337,8 +1323,6 @@ public class BehaviorVM : BaseViewModel {
                 User5Visibility = "VISIBLE";
                 RefreshTasks(5);
                 RefreshBlinking();
-
-                DatabasePolling.StartPolling();
                 break;
             }
 

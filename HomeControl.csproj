@@ -62,7 +62,6 @@
         <Compile Include="Source\Control\GridViewSort.cs"/>
         <Compile Include="Source\Control\SelectTextOnFocus.cs"/>
         <Compile Include="Source\Control\Screensaver.cs"/>
-        <Compile Include="Source\Database\DatabasePolling.cs"/>
         <Compile Include="Source\Helpers\FileHelpers.cs"/>
         <Compile Include="Source\Helpers\Holidays.cs"/>
         <Compile Include="Source\Helpers\ListHelpers.cs"/>

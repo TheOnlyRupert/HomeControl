@@ -2,7 +2,6 @@
 using System.Windows;
 using HomeControl.Source;
 using HomeControl.Source.Control;
-using HomeControl.Source.Database;
 using HomeControl.Source.ViewModel;
 
 namespace HomeControl;
@@ -20,8 +19,6 @@ public partial class MainWindow {
             MessageBoxImage.Warning, MessageBoxResult.No);
         if (messageBoxResult == MessageBoxResult.No) {
             e.Cancel = true;
-        } else {
-            DatabasePolling.StopPolling();
         }
     }
 }

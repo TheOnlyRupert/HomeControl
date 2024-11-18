@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Data.Common;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -13,22 +15,26 @@ using System.Text.Json.Serialization;
 using System.Windows.Input;
 using System.Windows.Threading;
 using HomeControl.Source.Control;
-using HomeControl.Source.Database;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Finances;
+using MySql.Data.MySqlClient;
 using Task = System.Threading.Tasks.Task;
 
 namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
+    private readonly MySqlConnection _connection;
     private readonly CrossViewMessenger _simpleMessenger;
-    private bool _changeDate, _internetMessage;
+    private bool _changeDate, _internetMessage, _isChecking;
     private DateTime _currentDate;
+    private readonly DateTime _lastChecked;
     private string _iconImage;
+
+    private bool _isDatabaseInitialized;
     private int _trashInt, _hourInt;
 
     public MainWindowVM() {
@@ -36,6 +42,7 @@ public class MainWindowVM : BaseViewModel {
         _simpleMessenger = CrossViewMessenger.Instance;
         _currentDate = DateTime.Now;
         _internetMessage = false;
+        _lastChecked = DateTime.UtcNow;
 
         /* Create Documents Directory */
         Directory.CreateDirectory(ReferenceValues.DocumentsDirectory);
@@ -128,8 +135,8 @@ public class MainWindowVM : BaseViewModel {
         ReferenceValues.DatabaseConnectionString = @"Server=" + ReferenceValues.JsonSettingsMaster.DatabaseHost + @";Database=HomeControl;Uid=" + ReferenceValues.JsonSettingsMaster.DatabaseUsername +
                                                    @";Pwd=" +
                                                    ReferenceValues.JsonSettingsMaster.DatabasePassword;
-        DatabasePolling.StartPolling();
-        DatabasePolling.CheckForChanges(null, null);
+        _connection = new MySqlConnection(ReferenceValues.DatabaseConnectionString);
+        InitializeDatabaseConnection();
 
         /* GameStats File */
         try {
@@ -190,6 +197,17 @@ public class MainWindowVM : BaseViewModel {
 
     #endregion
 
+    private async void InitializeDatabaseConnection() {
+        try {
+            await _connection.OpenAsync();
+            Console.WriteLine("Database connection established.");
+            _isDatabaseInitialized = true;
+        } catch (Exception ex) {
+            Console.WriteLine($"Error opening database connection: {ex}");
+            _isDatabaseInitialized = false;
+        }
+    }
+
     private void ButtonCommandLogic(object param) {
         if (!ReferenceValues.LockUi) {
             switch (param) {
@@ -207,7 +225,7 @@ public class MainWindowVM : BaseViewModel {
         }
     }
 
-    private void dispatcherTimer_Tick(object sender, EventArgs e) {
+    private async void dispatcherTimer_Tick(object sender, EventArgs e) {
         _changeDate = false;
         /* Min Changes */
         if (!_currentDate.Minute.Equals(DateTime.Now.Minute)) {
@@ -328,7 +346,65 @@ public class MainWindowVM : BaseViewModel {
             }
         }
 
+        /* Check Database Changes */
+        await CheckForDatabaseChanges();
+
         _simpleMessenger.PushMessage("Refresh", null);
+    }
+
+    private async Task CheckForDatabaseChanges() {
+        if (_isChecking || !_isDatabaseInitialized) {
+            return;
+        }
+
+        _isChecking = true;
+
+        if (_connection.State != ConnectionState.Open) {
+            Console.WriteLine("Database connection is null.");
+            return;
+        }
+
+        if (_connection == null) {
+            Console.WriteLine("Database connection is null.");
+            return;
+        }
+
+        const string query = @"SELECT id, table_name, action_type, affected_id, created_at FROM notifications WHERE created_at > @LastChecked ORDER BY created_at ASC";
+
+        try {
+            await using MySqlCommand command = new(query, _connection);
+            command.Parameters.AddWithValue("@LastChecked", _lastChecked);
+
+            using DbDataReader reader = await command.ExecuteReaderAsync();
+            if (reader == null) {
+                Console.WriteLine("No data returned from the query.");
+                return;
+            }
+
+            DateTime latestTimestamp = _lastChecked;
+
+            while (await reader.ReadAsync()) {
+                string tableName = reader.GetString(1);
+                string actionType = reader.GetString(2);
+                int affectedId = reader.GetInt32(3);
+                DateTime createdAt = reader.GetDateTime(4);
+
+                // Process the notification
+                Console.WriteLine($"Change detected: {tableName} - {actionType} on ID {affectedId}");
+
+                // Update the latest timestamp
+                if (createdAt > latestTimestamp) {
+                    latestTimestamp = createdAt;
+                }
+            }
+
+            //_lastChecked = latestTimestamp;
+        } catch (Exception ex) {
+            Console.WriteLine($"Error polling notifications: {ex}");
+        }
+        finally {
+            _isChecking = false;
+        }
     }
 
     private async Task ApiStatus() {
