@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO.Ports;
-using System.Threading.Tasks;
+﻿using System.IO.Ports;
 using HomeControl.Source;
 
 public static class HvacCrossPlay {

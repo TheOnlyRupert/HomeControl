@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
@@ -193,8 +192,7 @@ public class EditFinancesVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(DescriptionText) || string.IsNullOrWhiteSpace(CostText)) {
-                ReferenceValues.SoundToPlay = "missing_info";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("missing_info");
             } else {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -216,8 +214,7 @@ public class EditFinancesVM : BaseViewModel {
                     UserId = user
                 });
 
-                ReferenceValues.SoundToPlay = "cash";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("cash");
                 DescriptionText = "";
                 DetailsText = "";
                 CostText = "";
@@ -230,8 +227,7 @@ public class EditFinancesVM : BaseViewModel {
         case "update":
             if (FinanceSelected != null) {
                 if (string.IsNullOrWhiteSpace(DescriptionText) || string.IsNullOrWhiteSpace(CostText)) {
-                    ReferenceValues.SoundToPlay = "missing_info";
-                    SoundDispatcher.PlaySound();
+                    SoundDispatcher.PlaySound("missing_info");
                 } else {
                     confirmation = MessageBox.Show("Are you sure you want to update charge?", "Confirmation", MessageBoxButton.YesNo);
                     if (confirmation == MessageBoxResult.Yes) {
@@ -255,8 +251,7 @@ public class EditFinancesVM : BaseViewModel {
                             UserId = user
                         });
 
-                        ReferenceValues.SoundToPlay = "cash";
-                        SoundDispatcher.PlaySound();
+                        SoundDispatcher.PlaySound("cash");
                         FinanceList.Remove(FinanceSelected);
                         DescriptionText = "";
                         DetailsText = "";
@@ -284,8 +279,7 @@ public class EditFinancesVM : BaseViewModel {
                     });
                     FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
-                    ReferenceValues.SoundToPlay = "cash";
-                    SoundDispatcher.PlaySound();
+                    SoundDispatcher.PlaySound("cash");
                     FinanceList.Remove(FinanceSelected);
 
                     ReferenceValues.JsonFinanceMaster.FinanceList = FinanceList;

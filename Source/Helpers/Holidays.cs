@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace HomeControl.Source.Helpers;
+﻿namespace HomeControl.Source.Helpers;
 
 public static class Holidays {
     public static List<HolidayBlock> GetHolidays(int year) {

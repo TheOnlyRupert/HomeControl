@@ -1,19 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Media;
-
-namespace HomeControl.Source.Helpers;
+﻿using System.IO;
+using System.Media;
 
 public static class SoundDispatcher {
-    private static MediaPlayer mplayer;
-
-    public static void PlaySound() {
-        Task.Factory.StartNew(PlaySoundThreaded);
-    }
-
-    private static void PlaySoundThreaded() {
-        mplayer = new MediaPlayer();
-        mplayer.Open(new Uri("pack://siteoforigin:,,,/Resources/Sounds/" + ReferenceValues.SoundToPlay + ".wav"));
-        mplayer.Play();
+    public static void PlaySound(string soundFilePath) {
+        if (File.Exists(soundFilePath)) {
+            using SoundPlayer player = new("pack://siteoforigin:,,,/Resources/Sounds/" + soundFilePath + ".wav");
+            player.PlaySync();
+        } else {
+            Console.WriteLine($"Sound file not found: {soundFilePath}");
+        }
     }
 }

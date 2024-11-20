@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
@@ -136,13 +135,11 @@ public class BloodPressureVM : BaseViewModel {
     }
 
     private static void PlayMissingInfoSound() {
-        ReferenceValues.SoundToPlay = "missing_info";
-        SoundDispatcher.PlaySound();
+        SoundDispatcher.PlaySound("missing_info");
     }
 
     private static void PlayAddSound() {
-        ReferenceValues.SoundToPlay = "birthday";
-        SoundDispatcher.PlaySound();
+        SoundDispatcher.PlaySound("birthday");
     }
 
     private void ClearTextFields() {

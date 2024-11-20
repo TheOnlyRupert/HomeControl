@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
@@ -122,8 +121,7 @@ public class EditHvacScheduleVM : BaseViewModel {
                 EventTemp = _temp
             });
 
-            ReferenceValues.SoundToPlay = "newTask";
-            SoundDispatcher.PlaySound();
+            SoundDispatcher.PlaySound("newTask");
             SaveJson();
 
             break;

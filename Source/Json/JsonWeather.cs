@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HomeControl.Source.Json;
+﻿namespace HomeControl.Source.Json;
 
 public class JsonWeather {
     public Properties properties { get; set; }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.ViewModel.Base;
@@ -102,8 +101,7 @@ public class TamagotchiVM : BaseViewModel {
         switch (param) {
         case "food":
             if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
-                ReferenceValues.SoundToPlay = "eating";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("eating");
 
                 ReferenceValues.TamagotchiMaster.ReverseHunger = true;
                 ReferenceValues.TamagotchiMaster.IsBusy = true;
@@ -113,8 +111,7 @@ public class TamagotchiVM : BaseViewModel {
             break;
         case "toilet":
             if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
-                ReferenceValues.SoundToPlay = "flush";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("flush");
 
                 ReferenceValues.TamagotchiMaster.ReverseBladder = true;
                 ReferenceValues.TamagotchiMaster.IsBusy = true;
@@ -124,8 +121,7 @@ public class TamagotchiVM : BaseViewModel {
             break;
         case "trash":
             if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
-                ReferenceValues.SoundToPlay = "trash";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("trash");
 
                 ReferenceValues.TamagotchiMaster.ReverseCleanliness = true;
                 ReferenceValues.TamagotchiMaster.IsBusy = true;
@@ -134,15 +130,13 @@ public class TamagotchiVM : BaseViewModel {
 
             break;
         case "light":
-            ReferenceValues.SoundToPlay = "click";
-            SoundDispatcher.PlaySound();
+            SoundDispatcher.PlaySound("click");
 
             ReferenceValues.TamagotchiMaster.IsLightOn = !ReferenceValues.TamagotchiMaster.IsLightOn;
             break;
         case "medicine":
             if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
-                ReferenceValues.SoundToPlay = "medicine";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("medicine");
 
                 ReferenceValues.TamagotchiMaster.ReverseHealth = true;
                 ReferenceValues.TamagotchiMaster.IsBusy = true;
@@ -152,8 +146,7 @@ public class TamagotchiVM : BaseViewModel {
             break;
         case "play":
             if (!ReferenceValues.TamagotchiMaster.IsSleeping && !ReferenceValues.TamagotchiMaster.IsBusy && ReferenceValues.TamagotchiMaster.Age != 0) {
-                ReferenceValues.SoundToPlay = "fun";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("fun");
 
                 ReferenceValues.TamagotchiMaster.ReverseHappiness = true;
                 ReferenceValues.TamagotchiMaster.IsBusy = true;

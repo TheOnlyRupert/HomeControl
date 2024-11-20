@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
@@ -9,6 +8,7 @@ using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.ViewModel.Base;
 using BloodPressure = HomeControl.Source.Modules.BloodPressure;
+using Task = HomeControl.Source.Json.Task;
 
 namespace HomeControl.Source.ViewModel.Behavior;
 
@@ -473,8 +473,7 @@ public class EditBehaviorVM : BaseViewModel {
                         MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes) {
                         _strikes++;
-                        ReferenceValues.SoundToPlay = "buzzer";
-                        SoundDispatcher.PlaySound();
+                        SoundDispatcher.PlaySound("buzzer");
                         ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                             Date = DateTime.Now,
                             Level = "INFO",
@@ -491,8 +490,7 @@ public class EditBehaviorVM : BaseViewModel {
                         }
                     }
                 } else {
-                    ReferenceValues.SoundToPlay = "unable";
-                    SoundDispatcher.PlaySound();
+                    SoundDispatcher.PlaySound("unable");
                 }
             }
 
@@ -501,8 +499,7 @@ public class EditBehaviorVM : BaseViewModel {
             if (RewardButtonVisibility == "HIDDEN" && _strikes != 3 && _stars < 5) {
                 _stars++;
 
-                ReferenceValues.SoundToPlay = "yay";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("yay");
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "INFO",
@@ -511,16 +508,14 @@ public class EditBehaviorVM : BaseViewModel {
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             } else {
-                ReferenceValues.SoundToPlay = "unable";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("unable");
             }
 
             break;
         case "remove1":
             if (RewardButtonVisibility == "HIDDEN" && _strikes != 3 && _stars > 0) {
                 _stars--;
-                ReferenceValues.SoundToPlay = "aww";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("aww");
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
                     Level = "INFO",
@@ -529,8 +524,7 @@ public class EditBehaviorVM : BaseViewModel {
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             } else {
-                ReferenceValues.SoundToPlay = "unable";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("unable");
             }
 
             break;
@@ -544,8 +538,7 @@ public class EditBehaviorVM : BaseViewModel {
             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             _stars = 0;
             RewardButtonVisibility = "HIDDEN";
-            ReferenceValues.SoundToPlay = "reward";
-            SoundDispatcher.PlaySound();
+            SoundDispatcher.PlaySound("reward");
 
             break;
         case "daily":

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Text.Json;
 using System.Windows.Controls;
 using HomeControl.Source.Helpers;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
@@ -66,13 +64,11 @@ public class ButtonStackVM : BaseViewModel {
     }
 
     private void PlayUnlockSound() {
-        ReferenceValues.SoundToPlay = "unlock";
-        SoundDispatcher.PlaySound();
+        SoundDispatcher.PlaySound("unlock");
     }
 
     private void PlayLockedSound() {
-        ReferenceValues.SoundToPlay = "locked";
-        SoundDispatcher.PlaySound();
+        SoundDispatcher.PlaySound("locked");
     }
 
     private void OpenDialog(string command) {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.ViewModel.Base;
+using Task = HomeControl.Source.Json.Task;
 
 namespace HomeControl.Source.ViewModel.Behavior;
 
@@ -138,8 +138,7 @@ public class TasksQuarterlyVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(TaskName)) {
-                ReferenceValues.SoundToPlay = "missing_info";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("missing_info");
             } else {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -155,8 +154,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                     RoomNumber = RoomSelectedIndex
                 });
 
-                ReferenceValues.SoundToPlay = "newTask";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("newTask");
                 TaskName = "";
                 SaveJson();
 
@@ -168,8 +166,7 @@ public class TasksQuarterlyVM : BaseViewModel {
             try {
                 if (TaskSelected.TaskName != null) {
                     if (string.IsNullOrWhiteSpace(TaskName)) {
-                        ReferenceValues.SoundToPlay = "missing_info";
-                        SoundDispatcher.PlaySound();
+                        SoundDispatcher.PlaySound("missing_info");
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update task?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -219,8 +216,7 @@ public class TasksQuarterlyVM : BaseViewModel {
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
-                        ReferenceValues.SoundToPlay = "newTask";
-                        SoundDispatcher.PlaySound();
+                        SoundDispatcher.PlaySound("newTask");
                         TaskList.Remove(TaskSelected);
                         SaveJson();
 
@@ -241,8 +237,7 @@ public class TasksQuarterlyVM : BaseViewModel {
         case "complete":
             try {
                 if (!TaskSelected.IsCompleted) {
-                    ReferenceValues.SoundToPlay = "achievement1";
-                    SoundDispatcher.PlaySound();
+                    SoundDispatcher.PlaySound("achievement1");
 
                     TaskList.Insert(TaskList.IndexOf(TaskSelected), new Task {
                         TaskName = TaskName,

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO.Ports;
 using HomeControl.Source.Control;
 using HomeControl.Source.Json;
@@ -53,8 +52,6 @@ public static class ReferenceValues {
     public static JsonGameStats JsonGameStatsMaster { get; set; }
 
     public static JsonDebug JsonDebugMaster { get; set; }
-
-    public static string SoundToPlay { get; set; }
     public static JsonTasks JsonTasksMaster { get; set; }
     public static JsonExercise JsonExerciseMaster { get; set; }
     public static ObservableCollection<string> IconImageList { get; set; }

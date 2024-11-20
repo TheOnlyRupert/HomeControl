@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
@@ -34,8 +33,7 @@ public class EditRecurringVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(HolidayText)) {
-                ReferenceValues.SoundToPlay = "missing_info";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("missing_info");
             } else {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -51,8 +49,7 @@ public class EditRecurringVM : BaseViewModel {
                     Image = "../../../Resources/Images/icons/" + ImageSelected + ".png"
                 });
 
-                ReferenceValues.SoundToPlay = "birthday";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("birthday");
                 HolidayText = "";
 
                 SaveJson();
@@ -63,8 +60,7 @@ public class EditRecurringVM : BaseViewModel {
             try {
                 if (CalendarEventSelected.EventText != null) {
                     if (string.IsNullOrWhiteSpace(HolidayText)) {
-                        ReferenceValues.SoundToPlay = "missing_info";
-                        SoundDispatcher.PlaySound();
+                        SoundDispatcher.PlaySound("missing_info");
                     } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.EventText)) {
                         confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -83,8 +79,7 @@ public class EditRecurringVM : BaseViewModel {
                             });
                             EventList.Remove(CalendarEventSelected);
 
-                            ReferenceValues.SoundToPlay = "birthday";
-                            SoundDispatcher.PlaySound();
+                            SoundDispatcher.PlaySound("birthday");
                             HolidayText = "";
 
                             SaveJson();

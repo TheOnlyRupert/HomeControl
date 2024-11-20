@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HomeControl.Source.ViewModel.Games.Tamagotchi;
+﻿namespace HomeControl.Source.ViewModel.Games.Tamagotchi;
 
 public static class TamagotchiLogic {
     public static void TickLogic() {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
@@ -52,7 +51,7 @@ public class EditRecurringVM : BaseViewModel {
 
     private void AddEvent() {
         if (string.IsNullOrWhiteSpace(HolidayText)) {
-            PlaySound("missing_info");
+            SoundDispatcher.PlaySound("missing_info");
             return;
         }
 
@@ -64,14 +63,14 @@ public class EditRecurringVM : BaseViewModel {
             Image = $"../../../Resources/Images/icons/{ImageSelected}.png"
         });
 
-        PlaySound("birthday");
+        SoundDispatcher.PlaySound("birthday");
         HolidayText = string.Empty;
         SaveJson();
     }
 
     private void UpdateEvent() {
         if (CalendarEventSelected?.EventText == null || string.IsNullOrWhiteSpace(HolidayText)) {
-            PlaySound("missing_info");
+            SoundDispatcher.PlaySound("missing_info");
             return;
         }
 
@@ -89,7 +88,7 @@ public class EditRecurringVM : BaseViewModel {
         EventList.Insert(EventList.IndexOf(CalendarEventSelected), updatedEvent);
         EventList.Remove(CalendarEventSelected);
 
-        PlaySound("birthday");
+        SoundDispatcher.PlaySound("birthday");
         HolidayText = string.Empty;
         SaveJson();
     }
@@ -115,11 +114,6 @@ public class EditRecurringVM : BaseViewModel {
             Description = description
         });
         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-    }
-
-    private static void PlaySound(string soundName) {
-        ReferenceValues.SoundToPlay = soundName;
-        SoundDispatcher.PlaySound();
     }
 
     private void SaveJson() {

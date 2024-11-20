@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using HomeControl.Source.Helpers;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.Json;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -8,6 +7,7 @@ using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.ViewModel.Base;
 using MySql.Data.MySqlClient;
+using Task = HomeControl.Source.Json.Task;
 
 namespace HomeControl.Source.ViewModel.Behavior;
 
@@ -1328,8 +1328,7 @@ public class BehaviorVM : BaseViewModel {
 
             RefreshBehavior();
         } else {
-            ReferenceValues.SoundToPlay = "locked";
-            SoundDispatcher.PlaySound();
+            SoundDispatcher.PlaySound("locked");
         }
     }
 

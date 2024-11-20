@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Device.Location;
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.ViewModel.Base;
+//using System.Device.Location;
 
 namespace HomeControl.Source.ViewModel;
 
@@ -222,14 +220,13 @@ public class SettingsVM : BaseViewModel {
                 GridId = location.properties.gridId;
                 WeatherLocation = location.properties.relativeLocation.properties.city + ", " + location.properties.relativeLocation.properties.state;
             } catch (Exception) {
-                ReferenceValues.SoundToPlay = "unable";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("unable");
             }
 
             break;
         }
         case "location":
-            GeoCoordinateWatcher watcher = new();
+            /*GeoCoordinateWatcher watcher = new();
 
             watcher.PositionChanged += (_, e) => {
                 WeatherLat = e.Position.Location.Latitude;
@@ -237,7 +234,7 @@ public class SettingsVM : BaseViewModel {
             };
 
             watcher.MovementThreshold = 100;
-            watcher.Start();
+            watcher.Start();*/
 
             break;
         }

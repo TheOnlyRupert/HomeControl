@@ -1,810 +1,544 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{A8AAB6E4-8B96-4171-A46A-2650B7118841}</ProjectGuid>
         <OutputType>WinExe</OutputType>
-        <RootNamespace>HomeControl</RootNamespace>
-        <AssemblyName>HomeControl</AssemblyName>
-        <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-        <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-        <WarningLevel>4</WarningLevel>
-        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <LangVersion>default</LangVersion>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <Prefer32bit>false</Prefer32bit>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <Prefer32bit>false</Prefer32bit>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="mscorlib"/>
-        <Reference Include="System"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.Device"/>
-        <Reference Include="System.Net"/>
-        <Reference Include="System.Numerics"/>
-        <Reference Include="System.Windows.Forms"/>
-        <Reference Include="System.Xml"/>
-        <Reference Include="System.Xaml">
-            <RequiredTargetFramework>4.0</RequiredTargetFramework>
-        </Reference>
-        <Reference Include="WindowsBase"/>
-        <Reference Include="PresentationCore"/>
-        <Reference Include="PresentationFramework"/>
-    </ItemGroup>
-    <ItemGroup>
-        <ApplicationDefinition Include="App.xaml">
-            <Generator>MSBuild:Compile</Generator>
-            <SubType>Designer</SubType>
-        </ApplicationDefinition>
-        <Compile Include="Source\Control\AppActivityTimer.cs"/>
-        <Compile Include="Source\Control\GridViewScroll.cs"/>
-        <Compile Include="Source\Control\GridViewSort.cs"/>
-        <Compile Include="Source\Control\SelectTextOnFocus.cs"/>
-        <Compile Include="Source\Control\Screensaver.cs"/>
-        <Compile Include="Source\Helpers\FileHelpers.cs"/>
-        <Compile Include="Source\Helpers\Holidays.cs"/>
-        <Compile Include="Source\Helpers\ListHelpers.cs"/>
-        <Compile Include="Source\Helpers\SerialPortExtensions.cs"/>
-        <Compile Include="Source\Helpers\SoundDispatcher.cs"/>
-        <Compile Include="Source\Helpers\VerifyInput.cs"/>
-        <Compile Include="Source\Helpers\WeatherHelpers.cs"/>
-        <Compile Include="Source\Json\JsonBloodPressure.cs"/>
-        <Compile Include="Source\Json\JsonDebug.cs"/>
-        <Compile Include="Source\Json\JsonBehavior.cs"/>
-        <Compile Include="Source\Json\JsonCalendar.cs"/>
-        <Compile Include="Source\Json\JsonHvac.cs"/>
-        <Compile Include="Source\Json\JsonNames.cs"/>
-        <Compile Include="Source\Json\JsonTasks.cs"/>
-        <Compile Include="Source\Json\JsonFinances.cs"/>
-        <Compile Include="Source\Json\JsonGameStats.cs"/>
-        <Compile Include="Source\Json\JsonSettings.cs"/>
-        <Compile Include="Source\Json\JsonTamagotchi.cs"/>
-        <Compile Include="Source\Json\JsonTimer.cs"/>
-        <Compile Include="Source\Json\JsonVersion.cs"/>
-        <Compile Include="Source\Json\JsonWeather.cs"/>
-        <Compile Include="Source\Json\JsonExercise.cs"/>
-        <Compile Include="Source\Modules\Behavior\TasksDaily.xaml.cs">
-            <DependentUpon>TasksDaily.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Behavior\TasksMonthly.xaml.cs">
-            <DependentUpon>TasksMonthly.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Behavior\TasksQuarterly.xaml.cs">
-            <DependentUpon>TasksQuarterly.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Behavior\TasksWeekly.xaml.cs">
-            <DependentUpon>TasksWeekly.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Calendar\EditFilter.xaml.cs">
-            <DependentUpon>EditFilter.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Calendar\EditRecurring.xaml.cs">
-            <DependentUpon>EditRecurring.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Contacts.xaml.cs">
-            <DependentUpon>Contacts.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\DebugLog.xaml.cs">
-            <DependentUpon>DebugLog.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\BloodPressure.xaml.cs">
-            <DependentUpon>BloodPressure.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Games\CoinFlip.xaml.cs">
-            <DependentUpon>CoinFlip.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Games\Nhie.xaml.cs">
-            <DependentUpon>Nhie.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Games\Tamagotchi\Tamagotchi.xaml.cs">
-            <DependentUpon>Tamagotchi.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Games\TrafficLight.xaml.cs">
-            <DependentUpon>TrafficLight.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Hvac\EditHvac.xaml.cs">
-            <DependentUpon>EditHvac.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Hvac\EditHvacSchedule.xaml.cs">
-            <DependentUpon>EditHvacSchedule.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Hvac\Hvac.xaml.cs">
-            <DependentUpon>Hvac.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Timer\Timer.xaml.cs">
-            <DependentUpon>Timer.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Timer\EditTimer.xaml.cs">
-            <DependentUpon>EditTimer.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Behavior\Behavior.xaml.cs">
-            <DependentUpon>Behavior.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Behavior\EditBehavior.xaml.cs">
-            <DependentUpon>EditBehavior.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Calendar\Calendar.xaml.cs">
-            <DependentUpon>Calendar.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Calendar\EditCalendar.xaml.cs">
-            <DependentUpon>EditCalendar.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\ButtonStack.xaml.cs">
-            <DependentUpon>ButtonStack.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Settings.xaml.cs">
-            <DependentUpon>Settings.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Finances\Finances.xaml.cs">
-            <DependentUpon>Finances.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Finances\EditFinances.xaml.cs">
-            <DependentUpon>EditFinances.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Games\Pictionary.xaml.cs"/>
-        <Compile Include="Source\Modules\Weather.xaml.cs">
-            <DependentUpon>Weather.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Exercise\EditExercise.xaml.cs">
-            <DependentUpon>EditExercise.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\Modules\Exercise\Exercise.xaml.cs">
-            <DependentUpon>Exercise.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Source\ReferenceValues.cs"/>
-        <Compile Include="Source\ViewModel\Behavior\EditBehaviorVM.cs"/>
-        <Compile Include="Source\ViewModel\Behavior\TasksDailyVM.cs"/>
-        <Compile Include="Source\ViewModel\Behavior\TasksMonthlyVM.cs"/>
-        <Compile Include="Source\ViewModel\Behavior\TasksQuarterlyVM.cs"/>
-        <Compile Include="Source\ViewModel\Behavior\TasksWeeklyVM.cs"/>
-        <Compile Include="Source\ViewModel\BloodPressureVM.cs"/>
-        <Compile Include="Source\ViewModel\ButtonStackVM.cs"/>
-        <Compile Include="Source\ViewModel\Calendar\EditFilterVM.cs"/>
-        <Compile Include="Source\ViewModel\Calendar\EditRecurringVM.cs"/>
-        <Compile Include="Source\ViewModel\DebugLogVM.cs"/>
-        <Compile Include="Source\ViewModel\ContactsVM.cs"/>
-        <Compile Include="Source\ViewModel\EditRecurringVM.cs"/>
-        <Compile Include="Source\ViewModel\Finances\FinanceMaths.cs"/>
-        <Compile Include="Source\ViewModel\Games\CoinFlipVM.cs"/>
-        <Compile Include="Source\ViewModel\Games\NhieVM.cs"/>
-        <Compile Include="Source\ViewModel\Games\Tamagotchi\TamagotchiLogic.cs"/>
-        <Compile Include="Source\ViewModel\Games\Tamagotchi\TamagotchiVM.cs"/>
-        <Compile Include="Source\ViewModel\Games\TrafficLightVM.cs"/>
-        <Compile Include="Source\ViewModel\Hvac\EditHvacScheduleVM.cs"/>
-        <Compile Include="Source\ViewModel\Hvac\HvacCrossPlay.cs"/>
-        <Compile Include="Source\ViewModel\Hvac\EditHvacVM.cs"/>
-        <Compile Include="Source\ViewModel\Hvac\HvacVM.cs"/>
-        <Compile Include="Source\ViewModel\Timer\TimerVM.cs"/>
-        <Compile Include="Source\ViewModel\Timer\EditTimerVM.cs"/>
-        <Compile Include="Source\ViewModel\Base\BaseViewModel.cs"/>
-        <Compile Include="Source\ViewModel\Base\CrossViewMessenger.cs"/>
-        <Compile Include="Source\ViewModel\Base\DelegateCommand.cs"/>
-        <Compile Include="Source\ViewModel\Behavior\BehaviorVM.cs"/>
-        <Compile Include="Source\ViewModel\Calendar\EditCalendarVM.cs"/>
-        <Compile Include="Source\ViewModel\Calendar\CalendarVM.cs"/>
-        <Compile Include="Source\ViewModel\Finances\EditFinancesVM.cs"/>
-        <Compile Include="Source\ViewModel\Finances\FinancesVM.cs"/>
-        <Compile Include="Source\ViewModel\Games\PictionaryVM.cs"/>
-        <Compile Include="Source\ViewModel\Games\WordList.cs"/>
-        <Compile Include="Source\ViewModel\MainWindowVM.cs"/>
-        <Compile Include="Source\ViewModel\SettingsVM.cs"/>
-        <Compile Include="Source\ViewModel\WeatherVM.cs"/>
-        <Compile Include="Source\ViewModel\Exercise\EditExerciseVM.cs"/>
-        <Compile Include="Source\ViewModel\Exercise\ExerciseVM.cs"/>
-        <Page Include="MainWindow.xaml">
-            <Generator>MSBuild:Compile</Generator>
-            <SubType>Designer</SubType>
-        </Page>
-        <Compile Include="App.xaml.cs">
-            <DependentUpon>App.xaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Include="MainWindow.xaml.cs">
-            <DependentUpon>MainWindow.xaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Page Include="Source\Modules\Behavior\TasksDaily.xaml"/>
-        <Page Include="Source\Modules\Behavior\TasksMonthly.xaml"/>
-        <Page Include="Source\Modules\Behavior\TasksQuarterly.xaml"/>
-        <Page Include="Source\Modules\Behavior\TasksWeekly.xaml"/>
-        <Page Include="Source\Modules\Calendar\EditFilter.xaml"/>
-        <Page Include="Source\Modules\Calendar\EditRecurring.xaml"/>
-        <Page Include="Source\Modules\Contacts.xaml"/>
-        <Page Include="Source\Modules\DebugLog.xaml"/>
-        <Page Include="Source\Modules\BloodPressure.xaml"/>
-        <Page Include="Source\Modules\Games\CoinFlip.xaml"/>
-        <Page Include="Source\Modules\Games\Nhie.xaml"/>
-        <Page Include="Source\Modules\Games\Tamagotchi\Tamagotchi.xaml"/>
-        <Page Include="Source\Modules\Games\TrafficLight.xaml"/>
-        <Page Include="Source\Modules\Hvac\EditHvac.xaml"/>
-        <Page Include="Source\Modules\Hvac\EditHvacSchedule.xaml"/>
-        <Page Include="Source\Modules\Hvac\Hvac.xaml"/>
-        <Page Include="Source\Modules\Timer\Timer.xaml"/>
-        <Page Include="Source\Modules\Timer\EditTimer.xaml"/>
-        <Page Include="Source\Modules\Behavior\Behavior.xaml"/>
-        <Page Include="Source\Modules\Behavior\EditBehavior.xaml"/>
-        <Page Include="Source\Modules\Calendar\Calendar.xaml"/>
-        <Page Include="Source\Modules\Calendar\EditCalendar.xaml"/>
-        <Page Include="Source\Modules\ButtonStack.xaml"/>
-        <Page Include="Source\Modules\Settings.xaml"/>
-        <Page Include="Source\Modules\Finances\Finances.xaml"/>
-        <Page Include="Source\Modules\Finances\EditFinances.xaml"/>
-        <Page Include="Source\Modules\Games\Pictionary.xaml"/>
-        <Page Include="Source\Modules\Weather.xaml"/>
-        <Page Include="Source\Modules\Exercise\EditExercise.xaml"/>
-        <Page Include="Source\Modules\Exercise\Exercise.xaml"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Properties\AssemblyInfo.cs">
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Include="Properties\Resources.Designer.cs">
-            <AutoGen>True</AutoGen>
-            <DesignTime>True</DesignTime>
-            <DependentUpon>Resources.resx</DependentUpon>
-        </Compile>
-        <EmbeddedResource Include="Properties\Resources.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <None Include="App.config"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\alarms.png"/>
-        <Resource Include="Resources\Images\icons\calendar.png"/>
-        <Resource Include="Resources\Images\icons\chores.png"/>
-        <Resource Include="Resources\Images\icons\coin_flip.png"/>
-        <Resource Include="Resources\Images\icons\games.png"/>
-        <Resource Include="Resources\Images\icons\nhie.png"/>
-        <Resource Include="Resources\Images\icons\panic.png"/>
-        <Resource Include="Resources\Images\icons\tamagotchi.png"/>
-        <Resource Include="Resources\Images\icons\tic_tac_toe.png"/>
-        <Resource Include="Resources\Images\icons\trafficLight.png"/>
-        <Resource Include="Resources\Images\icons\wifi.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\weather\wind.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas1.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas10.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas2.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas3.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas4.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas5.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas6.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas7.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas8.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas9.png"/>
-        <Resource Include="Resources\Images\monthly\leaves\leaf1.png"/>
-        <Resource Include="Resources\Images\monthly\leaves\leaf2.png"/>
-        <Resource Include="Resources\Images\monthly\leaves\leaf3.png"/>
-        <Resource Include="Resources\Images\monthly\leaves\leaf4.png"/>
-        <Resource Include="Resources\Images\monthly\leaves\leaf5.png"/>
-        <Resource Include="Resources\Images\monthly\leaves\leaf6.png"/>
-        <Resource Include="Resources\Images\monthly\rain\rain1.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow1.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow2.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow3.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow4.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow5.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow6.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow7.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow8.png"/>
-        <Resource Include="Resources\Images\monthly\snowflakes\snow9.png"/>
-        <Resource Include="Resources\Images\monthly\sun\sun1.png"/>
-        <Resource Include="Resources\Images\monthly\sun\sun3.png"/>
-        <Resource Include="Resources\Images\monthly\sun\sun4.png"/>
-        <Resource Include="Resources\Images\monthly\sun\sun5.png"/>
-        <Resource Include="Resources\Images\monthly\sun\sun6.png"/>
-        <Resource Include="Resources\Images\monthly\sun\sun7.png"/>
-        <Resource Include="Resources\Images\monthly\sun\sun2.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun1.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun10.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun11.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun2.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun3.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun4.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun5.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun6.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun7.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun8.png"/>
-        <Resource Include="Resources\Images\monthly\gun\gun9.png"/>
-        <Resource Include="Resources\Images\monthly\christmas\christmas.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving1.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving10.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving11.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving12.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving13.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving14.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving15.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving16.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving17.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving18.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving2.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving3.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving4.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving5.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving6.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving7.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving8.png"/>
-        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving9.png"/>
-        <Resource Include="Resources\Images\icons\cat.png"/>
-        <Resource Include="Resources\Images\icons\cat2.png"/>
-        <Resource Include="Resources\Images\icons\elf.png"/>
-        <Resource Include="Resources\Images\monthly\911\1.png"/>
-        <Resource Include="Resources\Images\monthly\911\2.png"/>
-        <Resource Include="Resources\Images\monthly\911\3.png"/>
-        <Resource Include="Resources\Images\monthly\911\4.png"/>
-        <Resource Include="Resources\Images\monthly\911\5.png"/>
-        <Resource Include="Resources\Images\monthly\911\6.png"/>
-        <Resource Include="Resources\Images\monthly\911\7.png"/>
-        <Resource Include="Resources\Images\monthly\911\8.png"/>
-        <Resource Include="Resources\Images\icons\server.png"/>
-        <Content Include="Resources\Sounds\beep.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour0.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour1.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour10.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour11.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour12.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour13.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour14.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour15.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour16.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour17.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour18.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour19.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour2.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour20.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour21.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour22.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour23.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour3.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour5.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour6.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour7.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour8.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\hour9.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\jingle_bells.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\locked.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\very_good.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="version.json"/>
-        <Resource Include="Resources\Images\games\tamagotchi\egg1.png"/>
-        <Resource Include="Resources\Images\games\tamagotchi\egg2.png"/>
-        <Resource Include="Resources\Images\hvac\cooling.gif"/>
-        <Resource Include="Resources\Images\hvac\fan.gif"/>
-        <Resource Include="Resources\Images\hvac\heat.gif"/>
-        <Content Include="Resources\Sounds\bed.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\click.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\eating.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\flush.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\fun.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\medicine.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\sick.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\trash.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Resource Include="Resources\Images\icons\bathtub.png"/>
-        <Resource Include="Resources\Images\icons\bed.png"/>
-        <Resource Include="Resources\Images\icons\birthday.png"/>
-        <Resource Include="Resources\Images\icons\brushTeeth.png"/>
-        <Resource Include="Resources\Images\icons\chicken.png"/>
-        <Resource Include="Resources\Images\icons\chickenPen.png"/>
-        <Resource Include="Resources\Images\icons\couch.png"/>
-        <Resource Include="Resources\Images\icons\desk.png"/>
-        <Resource Include="Resources\Images\icons\dog.png"/>
-        <Resource Include="Resources\Images\icons\dryer.png"/>
-        <Resource Include="Resources\Images\icons\fan.png"/>
-        <Resource Include="Resources\Images\icons\food.png"/>
-        <Resource Include="Resources\Images\icons\fridge.png"/>
-        <Resource Include="Resources\Images\icons\laundry.png"/>
-        <Resource Include="Resources\Images\icons\lips.png"/>
-        <Resource Include="Resources\Images\icons\makeBed.png"/>
-        <Resource Include="Resources\Images\icons\medication.png"/>
-        <Resource Include="Resources\Images\icons\mop.png"/>
-        <Resource Include="Resources\Images\icons\shower.png"/>
-        <Resource Include="Resources\Images\icons\sink.png"/>
-        <Resource Include="Resources\Images\icons\stainlessSteel.png"/>
-        <Resource Include="Resources\Images\icons\sweep.png"/>
-        <Resource Include="Resources\Images\icons\table.png"/>
-        <Resource Include="Resources\Images\icons\toilet.png"/>
-        <Resource Include="Resources\Images\icons\toys.png"/>
-        <Resource Include="Resources\Images\icons\tv.png"/>
-        <Resource Include="Resources\Images\icons\vacuum.png"/>
-        <Resource Include="Resources\Images\icons\vehicle1.png"/>
-        <Resource Include="Resources\Images\icons\cabinet.png"/>
-        <Resource Include="Resources\Images\icons\can.png"/>
-        <Resource Include="Resources\Images\icons\shelf.png"/>
-        <Resource Include="Resources\Images\icons\sponge.png"/>
-        <Resource Include="Resources\Images\icons\dishes.png"/>
-        <Resource Include="Resources\Images\icons\freezer.png"/>
-        <Resource Include="Resources\Images\icons\microwave.png"/>
-        <Resource Include="Resources\Images\icons\washer.png"/>
-        <Content Include="Resources\Sounds\zoom.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Resource Include="Resources\Images\weather\clear-day.gif"/>
-        <Resource Include="Resources\Images\weather\clear-night.gif"/>
-        <Resource Include="Resources\Images\weather\cloudy.gif"/>
-        <Resource Include="Resources\Images\weather\clear-day.svg"/>
-        <Resource Include="Resources\Images\weather\clear-night.svg"/>
-        <Resource Include="Resources\Images\weather\cloudy.svg"/>
-        <Resource Include="Resources\Images\weather\drizzle.gif"/>
-        <Resource Include="Resources\Images\weather\drizzle.svg"/>
-        <Resource Include="Resources\Images\weather\dust-day.gif"/>
-        <Resource Include="Resources\Images\weather\dust-day.svg"/>
-        <Resource Include="Resources\Images\weather\dust-night.gif"/>
-        <Resource Include="Resources\Images\weather\dust-night.svg"/>
-        <Resource Include="Resources\Images\weather\dust-wind.gif"/>
-        <Resource Include="Resources\Images\weather\dust-wind.svg"/>
-        <Resource Include="Resources\Images\weather\dust.gif"/>
-        <Resource Include="Resources\Images\weather\dust.svg"/>
-        <Resource Include="Resources\Images\weather\falling-stars.gif"/>
-        <Resource Include="Resources\Images\weather\falling-stars.svg"/>
-        <Resource Include="Resources\Images\weather\fog-day.gif"/>
-        <Resource Include="Resources\Images\weather\fog-day.svg"/>
-        <Resource Include="Resources\Images\weather\fog-night.gif"/>
-        <Resource Include="Resources\Images\weather\fog-night.svg"/>
-        <Resource Include="Resources\Images\weather\fog.gif"/>
-        <Resource Include="Resources\Images\weather\fog.svg"/>
-        <Resource Include="Resources\Images\weather\hail.gif"/>
-        <Resource Include="Resources\Images\weather\hail.svg"/>
-        <Resource Include="Resources\Images\weather\haze-day.gif"/>
-        <Resource Include="Resources\Images\weather\haze-day.svg"/>
-        <Resource Include="Resources\Images\weather\haze-night.gif"/>
-        <Resource Include="Resources\Images\weather\haze-night.svg"/>
-        <Resource Include="Resources\Images\weather\haze.gif"/>
-        <Resource Include="Resources\Images\weather\haze.svg"/>
-        <Resource Include="Resources\Images\weather\hurricane.gif"/>
-        <Resource Include="Resources\Images\weather\hurricane.svg"/>
-        <Resource Include="Resources\Images\weather\lightning-bolt.gif"/>
-        <Resource Include="Resources\Images\weather\lightning-bolt.svg"/>
-        <Resource Include="Resources\Images\weather\mist.gif"/>
-        <Resource Include="Resources\Images\weather\mist.svg"/>
-        <Resource Include="Resources\Images\weather\not-available.svg"/>
-        <Resource Include="Resources\Images\weather\overcast.gif"/>
-        <Resource Include="Resources\Images\weather\overcast.svg"/>
-        <Resource Include="Resources\Images\weather\partly-cloudy-day.gif"/>
-        <Resource Include="Resources\Images\weather\partly-cloudy-day.svg"/>
-        <Resource Include="Resources\Images\weather\partly-cloudy-night.gif"/>
-        <Resource Include="Resources\Images\weather\partly-cloudy-night.svg"/>
-        <Resource Include="Resources\Images\weather\pollen-grass.gif"/>
-        <Resource Include="Resources\Images\weather\pollen-grass.svg"/>
-        <Resource Include="Resources\Images\weather\pollen-tree.gif"/>
-        <Resource Include="Resources\Images\weather\pollen-tree.svg"/>
-        <Resource Include="Resources\Images\weather\pollen.gif"/>
-        <Resource Include="Resources\Images\weather\pollen.svg"/>
-        <Resource Include="Resources\Images\weather\rain.gif"/>
-        <Resource Include="Resources\Images\weather\rain.svg"/>
-        <Resource Include="Resources\Images\weather\rainbow-clear.gif"/>
-        <Resource Include="Resources\Images\weather\rainbow-clear.svg"/>
-        <Resource Include="Resources\Images\weather\rainbow.gif"/>
-        <Resource Include="Resources\Images\weather\rainbow.svg"/>
-        <Resource Include="Resources\Images\weather\raindrop.gif"/>
-        <Resource Include="Resources\Images\weather\raindrop.svg"/>
-        <Resource Include="Resources\Images\weather\sleet.gif"/>
-        <Resource Include="Resources\Images\weather\sleet.svg"/>
-        <Resource Include="Resources\Images\weather\smoke.gif"/>
-        <Resource Include="Resources\Images\weather\smoke.svg"/>
-        <Resource Include="Resources\Images\weather\snow.gif"/>
-        <Resource Include="Resources\Images\weather\snow.svg"/>
-        <Resource Include="Resources\Images\weather\snowflake.gif"/>
-        <Resource Include="Resources\Images\weather\snowflake.svg"/>
-        <Resource Include="Resources\Images\weather\solar-eclipse.gif"/>
-        <Resource Include="Resources\Images\weather\solar-eclipse.svg"/>
-        <Resource Include="Resources\Images\weather\starry-night.gif"/>
-        <Resource Include="Resources\Images\weather\starry-night.svg"/>
-        <Resource Include="Resources\Images\weather\sun-hot.gif"/>
-        <Resource Include="Resources\Images\weather\sun-hot.svg"/>
-        <Resource Include="Resources\Images\weather\sunrise.gif"/>
-        <Resource Include="Resources\Images\weather\sunrise.svg"/>
-        <Resource Include="Resources\Images\weather\sunset.gif"/>
-        <Resource Include="Resources\Images\weather\sunset.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-day.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-day.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-night-snow.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-night-snow.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-rain.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-rain.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-snow.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-snow.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms.svg"/>
-        <Resource Include="Resources\Images\weather\tornado.gif"/>
-        <Resource Include="Resources\Images\weather\tornado.svg"/>
-        <Resource Include="Resources\Images\weather\wind-snow.gif"/>
-        <Resource Include="Resources\Images\weather\wind-snow.svg"/>
-        <Resource Include="Resources\Images\weather\wind.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-rain.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-rain.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-snow.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-snow.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-rain.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-rain.svg"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-snow.gif"/>
-        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-snow.svg"/>
-        <Resource Include="Resources\Images\icons\hvac.png"/>
-        <Resource Include="Resources\Images\behavior\crown.png"/>
-        <Resource Include="Resources\Images\icons\trash.gif"/>
-        <Content Include="Resources\Sounds\buzzer.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\clock1.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\clock2.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\coo_coo.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\ding.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\offline.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\tap.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\pictionary.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\notes.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\groceries.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\todo.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\recipes.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\contact.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\vacation.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\meal.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\behavior\star_gold.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\behavior.png"/>
-        <Resource Include="Resources\Images\icons\events.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\key_locked.png"/>
-        <Resource Include="Resources\Images\icons\key_unlocked.png"/>
-        <Resource Include="Resources\Images\icons\temp_cold.png"/>
-        <Resource Include="Resources\Images\icons\temp_hot.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\temp_burning.png"/>
-        <Resource Include="Resources\Images\icons\temp_cool.png"/>
-        <Resource Include="Resources\Images\icons\temp_freezing.png"/>
-        <Resource Include="Resources\Images\icons\temp_warm.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\open_tickets.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\behavior\strike_red.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\behavior\reward.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\workout.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\achievement1.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\achievement2.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\alarm1.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\alarm2.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\unable.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\unlock.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\yay.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\reward.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\aww.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\error.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\cash.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\scribble1.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\scribble2.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\scribble3.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\icons\clock.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Resource Include="Resources\Images\games\quarter_head.png"/>
-        <Resource Include="Resources\Images\games\quarter_tail.png"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\coin_flip.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\egg_hatch.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\hello.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-        <Content Include="Resources\Sounds\timerDone.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\missing_info.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="Resources\Sounds\birthday.wav">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
+
     <ItemGroup>
         <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94"/>
-        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0"/>
         <PackageReference Include="MySql.Data" Version="9.1.0"/>
-        <PackageReference Include="System.Buffers" Version="4.5.1"/>
-        <PackageReference Include="System.Memory" Version="4.5.5"/>
-        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0"/>
-        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0"/>
-        <PackageReference Include="System.Security.AccessControl" Version="6.0.1"/>
-        <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0"/>
-        <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0"/>
-        <PackageReference Include="System.Text.Json" Version="8.0.5"/>
-        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4"/>
-        <PackageReference Include="System.ValueTuple" Version="4.5.0"/>
-        <PackageReference Include="TagLibSharp" Version="2.3.0"/>
+        <PackageReference Include="System.IO.Ports" Version="9.0.0"/>
+        <PackageReference Include="System.Text.Json" Version="9.0.0"/>
         <PackageReference Include="WpfAnimatedGif" Version="2.0.2"/>
     </ItemGroup>
+
     <ItemGroup>
-        <ClCompile Include="ArduinoHvacController\ArduinoHvacController.ino"/>
+        <None Remove="Resources\Images\weather\clear-day.gif"/>
+        <Resource Include="Resources\Images\weather\clear-day.gif"/>
+        <None Remove="Resources\Images\weather\clear-day.svg"/>
+        <Resource Include="Resources\Images\weather\clear-day.svg"/>
+        <None Remove="Resources\Images\weather\clear-night.gif"/>
+        <Resource Include="Resources\Images\weather\clear-night.gif"/>
+        <None Remove="Resources\Images\weather\clear-night.svg"/>
+        <Resource Include="Resources\Images\weather\clear-night.svg"/>
+        <None Remove="Resources\Images\weather\cloudy.gif"/>
+        <Resource Include="Resources\Images\weather\cloudy.gif"/>
+        <None Remove="Resources\Images\weather\cloudy.svg"/>
+        <Resource Include="Resources\Images\weather\cloudy.svg"/>
+        <None Remove="Resources\Images\weather\drizzle.gif"/>
+        <Resource Include="Resources\Images\weather\drizzle.gif"/>
+        <None Remove="Resources\Images\weather\drizzle.svg"/>
+        <Resource Include="Resources\Images\weather\drizzle.svg"/>
+        <None Remove="Resources\Images\weather\dust.gif"/>
+        <Resource Include="Resources\Images\weather\dust.gif"/>
+        <None Remove="Resources\Images\weather\dust.svg"/>
+        <Resource Include="Resources\Images\weather\dust.svg"/>
+        <None Remove="Resources\Images\weather\dust-day.gif"/>
+        <Resource Include="Resources\Images\weather\dust-day.gif"/>
+        <None Remove="Resources\Images\weather\dust-day.svg"/>
+        <Resource Include="Resources\Images\weather\dust-day.svg"/>
+        <None Remove="Resources\Images\weather\dust-night.gif"/>
+        <Resource Include="Resources\Images\weather\dust-night.gif"/>
+        <None Remove="Resources\Images\weather\dust-night.svg"/>
+        <Resource Include="Resources\Images\weather\dust-night.svg"/>
+        <None Remove="Resources\Images\weather\dust-wind.gif"/>
+        <Resource Include="Resources\Images\weather\dust-wind.gif"/>
+        <None Remove="Resources\Images\weather\dust-wind.svg"/>
+        <Resource Include="Resources\Images\weather\dust-wind.svg"/>
+        <None Remove="Resources\Images\weather\falling-stars.gif"/>
+        <Resource Include="Resources\Images\weather\falling-stars.gif"/>
+        <None Remove="Resources\Images\weather\falling-stars.svg"/>
+        <Resource Include="Resources\Images\weather\falling-stars.svg"/>
+        <None Remove="Resources\Images\weather\fog.gif"/>
+        <Resource Include="Resources\Images\weather\fog.gif"/>
+        <None Remove="Resources\Images\weather\fog.svg"/>
+        <Resource Include="Resources\Images\weather\fog.svg"/>
+        <None Remove="Resources\Images\weather\fog-day.gif"/>
+        <Resource Include="Resources\Images\weather\fog-day.gif"/>
+        <None Remove="Resources\Images\weather\fog-day.svg"/>
+        <Resource Include="Resources\Images\weather\fog-day.svg"/>
+        <None Remove="Resources\Images\weather\fog-night.gif"/>
+        <Resource Include="Resources\Images\weather\fog-night.gif"/>
+        <None Remove="Resources\Images\weather\fog-night.svg"/>
+        <Resource Include="Resources\Images\weather\fog-night.svg"/>
+        <None Remove="Resources\Images\weather\hail.gif"/>
+        <Resource Include="Resources\Images\weather\hail.gif"/>
+        <None Remove="Resources\Images\weather\hail.svg"/>
+        <Resource Include="Resources\Images\weather\hail.svg"/>
+        <None Remove="Resources\Images\weather\haze.gif"/>
+        <Resource Include="Resources\Images\weather\haze.gif"/>
+        <None Remove="Resources\Images\weather\haze.svg"/>
+        <Resource Include="Resources\Images\weather\haze.svg"/>
+        <None Remove="Resources\Images\weather\haze-day.gif"/>
+        <Resource Include="Resources\Images\weather\haze-day.gif"/>
+        <None Remove="Resources\Images\weather\haze-day.svg"/>
+        <Resource Include="Resources\Images\weather\haze-day.svg"/>
+        <None Remove="Resources\Images\weather\haze-night.gif"/>
+        <Resource Include="Resources\Images\weather\haze-night.gif"/>
+        <None Remove="Resources\Images\weather\haze-night.svg"/>
+        <Resource Include="Resources\Images\weather\haze-night.svg"/>
+        <None Remove="Resources\Images\weather\hurricane.gif"/>
+        <Resource Include="Resources\Images\weather\hurricane.gif"/>
+        <None Remove="Resources\Images\weather\hurricane.svg"/>
+        <Resource Include="Resources\Images\weather\hurricane.svg"/>
+        <None Remove="Resources\Images\weather\lightning-bolt.gif"/>
+        <Resource Include="Resources\Images\weather\lightning-bolt.gif"/>
+        <None Remove="Resources\Images\weather\lightning-bolt.svg"/>
+        <Resource Include="Resources\Images\weather\lightning-bolt.svg"/>
+        <None Remove="Resources\Images\weather\mist.gif"/>
+        <Resource Include="Resources\Images\weather\mist.gif"/>
+        <None Remove="Resources\Images\weather\mist.svg"/>
+        <Resource Include="Resources\Images\weather\mist.svg"/>
+        <None Remove="Resources\Images\weather\not-available.svg"/>
+        <Resource Include="Resources\Images\weather\not-available.svg"/>
+        <None Remove="Resources\Images\weather\overcast.gif"/>
+        <Resource Include="Resources\Images\weather\overcast.gif"/>
+        <None Remove="Resources\Images\weather\overcast.svg"/>
+        <Resource Include="Resources\Images\weather\overcast.svg"/>
+        <None Remove="Resources\Images\weather\partly-cloudy-day.gif"/>
+        <Resource Include="Resources\Images\weather\partly-cloudy-day.gif"/>
+        <None Remove="Resources\Images\weather\partly-cloudy-day.svg"/>
+        <Resource Include="Resources\Images\weather\partly-cloudy-day.svg"/>
+        <None Remove="Resources\Images\weather\partly-cloudy-night.gif"/>
+        <Resource Include="Resources\Images\weather\partly-cloudy-night.gif"/>
+        <None Remove="Resources\Images\weather\partly-cloudy-night.svg"/>
+        <Resource Include="Resources\Images\weather\partly-cloudy-night.svg"/>
+        <None Remove="Resources\Images\weather\pollen.gif"/>
+        <Resource Include="Resources\Images\weather\pollen.gif"/>
+        <None Remove="Resources\Images\weather\pollen.svg"/>
+        <Resource Include="Resources\Images\weather\pollen.svg"/>
+        <None Remove="Resources\Images\weather\pollen-grass.gif"/>
+        <Resource Include="Resources\Images\weather\pollen-grass.gif"/>
+        <None Remove="Resources\Images\weather\pollen-grass.svg"/>
+        <Resource Include="Resources\Images\weather\pollen-grass.svg"/>
+        <None Remove="Resources\Images\weather\pollen-tree.gif"/>
+        <Resource Include="Resources\Images\weather\pollen-tree.gif"/>
+        <None Remove="Resources\Images\weather\pollen-tree.svg"/>
+        <Resource Include="Resources\Images\weather\pollen-tree.svg"/>
+        <None Remove="Resources\Images\weather\rain.gif"/>
+        <Resource Include="Resources\Images\weather\rain.gif"/>
+        <None Remove="Resources\Images\weather\rain.svg"/>
+        <Resource Include="Resources\Images\weather\rain.svg"/>
+        <None Remove="Resources\Images\weather\rainbow.gif"/>
+        <Resource Include="Resources\Images\weather\rainbow.gif"/>
+        <None Remove="Resources\Images\weather\rainbow.svg"/>
+        <Resource Include="Resources\Images\weather\rainbow.svg"/>
+        <None Remove="Resources\Images\weather\rainbow-clear.gif"/>
+        <Resource Include="Resources\Images\weather\rainbow-clear.gif"/>
+        <None Remove="Resources\Images\weather\rainbow-clear.svg"/>
+        <Resource Include="Resources\Images\weather\rainbow-clear.svg"/>
+        <None Remove="Resources\Images\weather\raindrop.gif"/>
+        <Resource Include="Resources\Images\weather\raindrop.gif"/>
+        <None Remove="Resources\Images\weather\raindrop.svg"/>
+        <Resource Include="Resources\Images\weather\raindrop.svg"/>
+        <None Remove="Resources\Images\weather\sleet.gif"/>
+        <Resource Include="Resources\Images\weather\sleet.gif"/>
+        <None Remove="Resources\Images\weather\sleet.svg"/>
+        <Resource Include="Resources\Images\weather\sleet.svg"/>
+        <None Remove="Resources\Images\weather\smoke.gif"/>
+        <Resource Include="Resources\Images\weather\smoke.gif"/>
+        <None Remove="Resources\Images\weather\smoke.svg"/>
+        <Resource Include="Resources\Images\weather\smoke.svg"/>
+        <None Remove="Resources\Images\weather\snow.gif"/>
+        <Resource Include="Resources\Images\weather\snow.gif"/>
+        <None Remove="Resources\Images\weather\snow.svg"/>
+        <Resource Include="Resources\Images\weather\snow.svg"/>
+        <None Remove="Resources\Images\weather\snowflake.gif"/>
+        <Resource Include="Resources\Images\weather\snowflake.gif"/>
+        <None Remove="Resources\Images\weather\snowflake.svg"/>
+        <Resource Include="Resources\Images\weather\snowflake.svg"/>
+        <None Remove="Resources\Images\weather\solar-eclipse.gif"/>
+        <Resource Include="Resources\Images\weather\solar-eclipse.gif"/>
+        <None Remove="Resources\Images\weather\solar-eclipse.svg"/>
+        <Resource Include="Resources\Images\weather\solar-eclipse.svg"/>
+        <None Remove="Resources\Images\weather\starry-night.gif"/>
+        <Resource Include="Resources\Images\weather\starry-night.gif"/>
+        <None Remove="Resources\Images\weather\starry-night.svg"/>
+        <Resource Include="Resources\Images\weather\starry-night.svg"/>
+        <None Remove="Resources\Images\weather\sun-hot.gif"/>
+        <Resource Include="Resources\Images\weather\sun-hot.gif"/>
+        <None Remove="Resources\Images\weather\sun-hot.svg"/>
+        <Resource Include="Resources\Images\weather\sun-hot.svg"/>
+        <None Remove="Resources\Images\weather\sunrise.gif"/>
+        <Resource Include="Resources\Images\weather\sunrise.gif"/>
+        <None Remove="Resources\Images\weather\sunrise.svg"/>
+        <Resource Include="Resources\Images\weather\sunrise.svg"/>
+        <None Remove="Resources\Images\weather\sunset.gif"/>
+        <Resource Include="Resources\Images\weather\sunset.gif"/>
+        <None Remove="Resources\Images\weather\sunset.svg"/>
+        <Resource Include="Resources\Images\weather\sunset.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-day.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-day.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-day-extreme.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-day-extreme.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-day-extreme-rain.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-rain.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-day-extreme-rain.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-rain.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-day-extreme-snow.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-snow.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-day-extreme-snow.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-day-extreme-snow.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-night-extreme.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-night-extreme.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-night-extreme-rain.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-rain.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-night-extreme-rain.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-rain.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-night-extreme-snow.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-snow.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-night-extreme-snow.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-extreme-snow.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-night-snow.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-snow.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-night-snow.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-night-snow.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-rain.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-rain.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-rain.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-rain.svg"/>
+        <None Remove="Resources\Images\weather\thunderstorms-snow.gif"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-snow.gif"/>
+        <None Remove="Resources\Images\weather\thunderstorms-snow.svg"/>
+        <Resource Include="Resources\Images\weather\thunderstorms-snow.svg"/>
+        <None Remove="Resources\Images\weather\tornado.gif"/>
+        <Resource Include="Resources\Images\weather\tornado.gif"/>
+        <None Remove="Resources\Images\weather\tornado.svg"/>
+        <Resource Include="Resources\Images\weather\tornado.svg"/>
+        <None Remove="Resources\Images\weather\wind.png"/>
+        <Resource Include="Resources\Images\weather\wind.png"/>
+        <None Remove="Resources\Images\weather\wind.svg"/>
+        <Resource Include="Resources\Images\weather\wind.svg"/>
+        <None Remove="Resources\Images\weather\wind-snow.gif"/>
+        <Resource Include="Resources\Images\weather\wind-snow.gif"/>
+        <None Remove="Resources\Images\weather\wind-snow.svg"/>
+        <Resource Include="Resources\Images\weather\wind-snow.svg"/>
+        <None Remove="Resources\Images\monthly\911\1.png"/>
+        <Resource Include="Resources\Images\monthly\911\1.png"/>
+        <None Remove="Resources\Images\monthly\911\2.png"/>
+        <Resource Include="Resources\Images\monthly\911\2.png"/>
+        <None Remove="Resources\Images\monthly\911\3.png"/>
+        <Resource Include="Resources\Images\monthly\911\3.png"/>
+        <None Remove="Resources\Images\monthly\911\4.png"/>
+        <Resource Include="Resources\Images\monthly\911\4.png"/>
+        <None Remove="Resources\Images\monthly\911\5.png"/>
+        <Resource Include="Resources\Images\monthly\911\5.png"/>
+        <None Remove="Resources\Images\monthly\911\6.png"/>
+        <Resource Include="Resources\Images\monthly\911\6.png"/>
+        <None Remove="Resources\Images\monthly\911\7.png"/>
+        <Resource Include="Resources\Images\monthly\911\7.png"/>
+        <None Remove="Resources\Images\monthly\911\8.png"/>
+        <Resource Include="Resources\Images\monthly\911\8.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas1.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas1.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas2.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas2.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas3.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas3.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas4.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas4.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas5.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas5.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas6.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas6.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas7.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas7.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas8.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas8.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas9.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas9.png"/>
+        <None Remove="Resources\Images\monthly\christmas\christmas10.png"/>
+        <Resource Include="Resources\Images\monthly\christmas\christmas10.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun1.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun1.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun2.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun2.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun3.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun3.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun4.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun4.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun5.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun5.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun6.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun6.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun7.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun7.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun8.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun8.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun9.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun9.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun10.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun10.png"/>
+        <None Remove="Resources\Images\monthly\gun\gun11.png"/>
+        <Resource Include="Resources\Images\monthly\gun\gun11.png"/>
+        <None Remove="Resources\Images\monthly\leaves\leaf1.png"/>
+        <Resource Include="Resources\Images\monthly\leaves\leaf1.png"/>
+        <None Remove="Resources\Images\monthly\leaves\leaf2.png"/>
+        <Resource Include="Resources\Images\monthly\leaves\leaf2.png"/>
+        <None Remove="Resources\Images\monthly\leaves\leaf3.png"/>
+        <Resource Include="Resources\Images\monthly\leaves\leaf3.png"/>
+        <None Remove="Resources\Images\monthly\leaves\leaf4.png"/>
+        <Resource Include="Resources\Images\monthly\leaves\leaf4.png"/>
+        <None Remove="Resources\Images\monthly\leaves\leaf5.png"/>
+        <Resource Include="Resources\Images\monthly\leaves\leaf5.png"/>
+        <None Remove="Resources\Images\monthly\leaves\leaf6.png"/>
+        <Resource Include="Resources\Images\monthly\leaves\leaf6.png"/>
+        <None Remove="Resources\Images\monthly\rain\rain1.png"/>
+        <Resource Include="Resources\Images\monthly\rain\rain1.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow1.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow1.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow2.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow2.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow3.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow3.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow4.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow4.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow5.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow5.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow6.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow6.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow7.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow7.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow8.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow8.png"/>
+        <None Remove="Resources\Images\monthly\snowflakes\snow9.png"/>
+        <Resource Include="Resources\Images\monthly\snowflakes\snow9.png"/>
+        <None Remove="Resources\Images\monthly\sun\sun1.png"/>
+        <Resource Include="Resources\Images\monthly\sun\sun1.png"/>
+        <None Remove="Resources\Images\monthly\sun\sun2.png"/>
+        <Resource Include="Resources\Images\monthly\sun\sun2.png"/>
+        <None Remove="Resources\Images\monthly\sun\sun3.png"/>
+        <Resource Include="Resources\Images\monthly\sun\sun3.png"/>
+        <None Remove="Resources\Images\monthly\sun\sun4.png"/>
+        <Resource Include="Resources\Images\monthly\sun\sun4.png"/>
+        <None Remove="Resources\Images\monthly\sun\sun5.png"/>
+        <Resource Include="Resources\Images\monthly\sun\sun5.png"/>
+        <None Remove="Resources\Images\monthly\sun\sun6.png"/>
+        <Resource Include="Resources\Images\monthly\sun\sun6.png"/>
+        <None Remove="Resources\Images\monthly\sun\sun7.png"/>
+        <Resource Include="Resources\Images\monthly\sun\sun7.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving1.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving1.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving2.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving2.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving3.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving3.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving4.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving4.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving5.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving5.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving6.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving6.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving7.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving7.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving8.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving8.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving9.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving9.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving10.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving10.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving11.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving11.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving12.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving12.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving13.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving13.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving14.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving14.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving15.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving15.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving16.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving16.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving17.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving17.png"/>
+        <None Remove="Resources\Images\monthly\thanksgiving\thanksgiving18.png"/>
+        <Resource Include="Resources\Images\monthly\thanksgiving\thanksgiving18.png"/>
+        <None Remove="Resources\Images\icons\alarms.png"/>
+        <Resource Include="Resources\Images\icons\alarms.png"/>
+        <None Remove="Resources\Images\icons\bathtub.png"/>
+        <Resource Include="Resources\Images\icons\bathtub.png"/>
+        <None Remove="Resources\Images\icons\bed.png"/>
+        <Resource Include="Resources\Images\icons\bed.png"/>
+        <None Remove="Resources\Images\icons\behavior.png"/>
+        <Resource Include="Resources\Images\icons\behavior.png"/>
+        <None Remove="Resources\Images\icons\birthday.png"/>
+        <Resource Include="Resources\Images\icons\birthday.png"/>
+        <None Remove="Resources\Images\icons\brushTeeth.png"/>
+        <Resource Include="Resources\Images\icons\brushTeeth.png"/>
+        <None Remove="Resources\Images\icons\cabinet.png"/>
+        <Resource Include="Resources\Images\icons\cabinet.png"/>
+        <None Remove="Resources\Images\icons\calendar.png"/>
+        <Resource Include="Resources\Images\icons\calendar.png"/>
+        <None Remove="Resources\Images\icons\can.png"/>
+        <Resource Include="Resources\Images\icons\can.png"/>
+        <None Remove="Resources\Images\icons\cat.png"/>
+        <Resource Include="Resources\Images\icons\cat.png"/>
+        <None Remove="Resources\Images\icons\cat2.png"/>
+        <Resource Include="Resources\Images\icons\cat2.png"/>
+        <None Remove="Resources\Images\icons\chicken.png"/>
+        <Resource Include="Resources\Images\icons\chicken.png"/>
+        <None Remove="Resources\Images\icons\chickenPen.png"/>
+        <Resource Include="Resources\Images\icons\chickenPen.png"/>
+        <None Remove="Resources\Images\icons\chores.png"/>
+        <Resource Include="Resources\Images\icons\chores.png"/>
+        <None Remove="Resources\Images\icons\clock.png"/>
+        <Resource Include="Resources\Images\icons\clock.png"/>
+        <None Remove="Resources\Images\icons\coin_flip.png"/>
+        <Resource Include="Resources\Images\icons\coin_flip.png"/>
+        <None Remove="Resources\Images\icons\contact.png"/>
+        <Resource Include="Resources\Images\icons\contact.png"/>
+        <None Remove="Resources\Images\icons\couch.png"/>
+        <Resource Include="Resources\Images\icons\couch.png"/>
+        <None Remove="Resources\Images\icons\desk.png"/>
+        <Resource Include="Resources\Images\icons\desk.png"/>
+        <None Remove="Resources\Images\icons\dishes.png"/>
+        <Resource Include="Resources\Images\icons\dishes.png"/>
+        <None Remove="Resources\Images\icons\dog.png"/>
+        <Resource Include="Resources\Images\icons\dog.png"/>
+        <None Remove="Resources\Images\icons\dryer.png"/>
+        <Resource Include="Resources\Images\icons\dryer.png"/>
+        <None Remove="Resources\Images\icons\elf.png"/>
+        <Resource Include="Resources\Images\icons\elf.png"/>
+        <None Remove="Resources\Images\icons\events.png"/>
+        <Resource Include="Resources\Images\icons\events.png"/>
+        <None Remove="Resources\Images\icons\fan.png"/>
+        <Resource Include="Resources\Images\icons\fan.png"/>
+        <None Remove="Resources\Images\icons\food.png"/>
+        <Resource Include="Resources\Images\icons\food.png"/>
+        <None Remove="Resources\Images\icons\freezer.png"/>
+        <Resource Include="Resources\Images\icons\freezer.png"/>
+        <None Remove="Resources\Images\icons\fridge.png"/>
+        <Resource Include="Resources\Images\icons\fridge.png"/>
+        <None Remove="Resources\Images\icons\games.png"/>
+        <Resource Include="Resources\Images\icons\games.png"/>
+        <None Remove="Resources\Images\icons\groceries.png"/>
+        <Resource Include="Resources\Images\icons\groceries.png"/>
+        <None Remove="Resources\Images\icons\hvac.png"/>
+        <Resource Include="Resources\Images\icons\hvac.png"/>
+        <None Remove="Resources\Images\icons\key_locked.png"/>
+        <Resource Include="Resources\Images\icons\key_locked.png"/>
+        <None Remove="Resources\Images\icons\key_unlocked.png"/>
+        <Resource Include="Resources\Images\icons\key_unlocked.png"/>
+        <None Remove="Resources\Images\icons\laundry.png"/>
+        <Resource Include="Resources\Images\icons\laundry.png"/>
+        <None Remove="Resources\Images\icons\lips.png"/>
+        <Resource Include="Resources\Images\icons\lips.png"/>
+        <None Remove="Resources\Images\icons\makeBed.png"/>
+        <Resource Include="Resources\Images\icons\makeBed.png"/>
+        <None Remove="Resources\Images\icons\meal.png"/>
+        <Resource Include="Resources\Images\icons\meal.png"/>
+        <None Remove="Resources\Images\icons\medication.png"/>
+        <Resource Include="Resources\Images\icons\medication.png"/>
+        <None Remove="Resources\Images\icons\microwave.png"/>
+        <Resource Include="Resources\Images\icons\microwave.png"/>
+        <None Remove="Resources\Images\icons\mop.png"/>
+        <Resource Include="Resources\Images\icons\mop.png"/>
+        <None Remove="Resources\Images\icons\nhie.png"/>
+        <Resource Include="Resources\Images\icons\nhie.png"/>
+        <None Remove="Resources\Images\icons\notes.png"/>
+        <Resource Include="Resources\Images\icons\notes.png"/>
+        <None Remove="Resources\Images\icons\open_tickets.png"/>
+        <Resource Include="Resources\Images\icons\open_tickets.png"/>
+        <None Remove="Resources\Images\icons\panic.png"/>
+        <Resource Include="Resources\Images\icons\panic.png"/>
+        <None Remove="Resources\Images\icons\pictionary.png"/>
+        <Resource Include="Resources\Images\icons\pictionary.png"/>
+        <None Remove="Resources\Images\icons\recipes.png"/>
+        <Resource Include="Resources\Images\icons\recipes.png"/>
+        <None Remove="Resources\Images\icons\server.png"/>
+        <Resource Include="Resources\Images\icons\server.png"/>
+        <None Remove="Resources\Images\icons\shelf.png"/>
+        <Resource Include="Resources\Images\icons\shelf.png"/>
+        <None Remove="Resources\Images\icons\shower.png"/>
+        <Resource Include="Resources\Images\icons\shower.png"/>
+        <None Remove="Resources\Images\icons\sink.png"/>
+        <Resource Include="Resources\Images\icons\sink.png"/>
+        <None Remove="Resources\Images\icons\sponge.png"/>
+        <Resource Include="Resources\Images\icons\sponge.png"/>
+        <None Remove="Resources\Images\icons\stainlessSteel.png"/>
+        <Resource Include="Resources\Images\icons\stainlessSteel.png"/>
+        <None Remove="Resources\Images\icons\sweep.png"/>
+        <Resource Include="Resources\Images\icons\sweep.png"/>
+        <None Remove="Resources\Images\icons\table.png"/>
+        <Resource Include="Resources\Images\icons\table.png"/>
+        <None Remove="Resources\Images\icons\tamagotchi.png"/>
+        <Resource Include="Resources\Images\icons\tamagotchi.png"/>
+        <None Remove="Resources\Images\icons\temp_burning.png"/>
+        <Resource Include="Resources\Images\icons\temp_burning.png"/>
+        <None Remove="Resources\Images\icons\temp_cold.png"/>
+        <Resource Include="Resources\Images\icons\temp_cold.png"/>
+        <None Remove="Resources\Images\icons\temp_cool.png"/>
+        <Resource Include="Resources\Images\icons\temp_cool.png"/>
+        <None Remove="Resources\Images\icons\temp_freezing.png"/>
+        <Resource Include="Resources\Images\icons\temp_freezing.png"/>
+        <None Remove="Resources\Images\icons\temp_hot.png"/>
+        <Resource Include="Resources\Images\icons\temp_hot.png"/>
+        <None Remove="Resources\Images\icons\temp_warm.png"/>
+        <Resource Include="Resources\Images\icons\temp_warm.png"/>
+        <None Remove="Resources\Images\icons\tic_tac_toe.png"/>
+        <Resource Include="Resources\Images\icons\tic_tac_toe.png"/>
+        <None Remove="Resources\Images\icons\todo.png"/>
+        <Resource Include="Resources\Images\icons\todo.png"/>
+        <None Remove="Resources\Images\icons\toilet.png"/>
+        <Resource Include="Resources\Images\icons\toilet.png"/>
+        <None Remove="Resources\Images\icons\toys.png"/>
+        <Resource Include="Resources\Images\icons\toys.png"/>
+        <None Remove="Resources\Images\icons\trafficLight.png"/>
+        <Resource Include="Resources\Images\icons\trafficLight.png"/>
+        <None Remove="Resources\Images\icons\trash.gif"/>
+        <Resource Include="Resources\Images\icons\trash.gif"/>
+        <None Remove="Resources\Images\icons\tv.png"/>
+        <Resource Include="Resources\Images\icons\tv.png"/>
+        <None Remove="Resources\Images\icons\vacation.png"/>
+        <Resource Include="Resources\Images\icons\vacation.png"/>
+        <None Remove="Resources\Images\icons\vacuum.png"/>
+        <Resource Include="Resources\Images\icons\vacuum.png"/>
+        <None Remove="Resources\Images\icons\vehicle1.png"/>
+        <Resource Include="Resources\Images\icons\vehicle1.png"/>
+        <None Remove="Resources\Images\icons\washer.png"/>
+        <Resource Include="Resources\Images\icons\washer.png"/>
+        <None Remove="Resources\Images\icons\wifi.png"/>
+        <Resource Include="Resources\Images\icons\wifi.png"/>
+        <None Remove="Resources\Images\icons\workout.png"/>
+        <Resource Include="Resources\Images\icons\workout.png"/>
+        <None Remove="Resources\Images\hvac\cooling.gif"/>
+        <Resource Include="Resources\Images\hvac\cooling.gif"/>
+        <None Remove="Resources\Images\hvac\fan.gif"/>
+        <Resource Include="Resources\Images\hvac\fan.gif"/>
+        <None Remove="Resources\Images\hvac\heat.gif"/>
+        <Resource Include="Resources\Images\hvac\heat.gif"/>
+        <None Remove="Resources\Images\games\tamagotchi\egg1.png"/>
+        <Resource Include="Resources\Images\games\tamagotchi\egg1.png"/>
+        <None Remove="Resources\Images\games\tamagotchi\egg2.png"/>
+        <Resource Include="Resources\Images\games\tamagotchi\egg2.png"/>
+        <None Remove="Resources\Images\games\quarter_head.png"/>
+        <Resource Include="Resources\Images\games\quarter_head.png"/>
+        <None Remove="Resources\Images\games\quarter_tail.png"/>
+        <Resource Include="Resources\Images\games\quarter_tail.png"/>
+        <None Remove="Resources\Images\behavior\crown.png"/>
+        <Resource Include="Resources\Images\behavior\crown.png"/>
+        <None Remove="Resources\Images\behavior\reward.png"/>
+        <Resource Include="Resources\Images\behavior\reward.png"/>
+        <None Remove="Resources\Images\behavior\star_gold.png"/>
+        <Resource Include="Resources\Images\behavior\star_gold.png"/>
+        <None Remove="Resources\Images\behavior\strike_red.png"/>
+        <Resource Include="Resources\Images\behavior\strike_red.png"/>
     </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+
 </Project>

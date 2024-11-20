@@ -1,5 +1,3 @@
-using System;
-
 namespace HomeControl.Source.ViewModel.Base;
 
 public class CrossViewMessenger {

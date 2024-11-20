@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace HomeControl.Source.Helpers;
+﻿namespace HomeControl.Source.Helpers;
 
 public static class ListHelpers {
     public static List<string> RandomizeList(List<string> list) {

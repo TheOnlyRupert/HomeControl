@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
@@ -12,8 +11,7 @@ public class CoinFlipVM : BaseViewModel {
     private string _imageSource, _gameStats;
 
     public CoinFlipVM() {
-        ReferenceValues.SoundToPlay = "coin_flip";
-        SoundDispatcher.PlaySound();
+        SoundDispatcher.PlaySound("coin_flip");
         _random = new Random();
         Flip();
         RefreshStats();
@@ -57,8 +55,7 @@ public class CoinFlipVM : BaseViewModel {
     }
 
     private void Flip() {
-        ReferenceValues.SoundToPlay = "coin_flip";
-        SoundDispatcher.PlaySound();
+        SoundDispatcher.PlaySound("coin_flip");
         int rand = _random.Next(0, 2);
 
         switch (rand) {

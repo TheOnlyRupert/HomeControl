@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
@@ -106,8 +105,7 @@ public class EditExerciseVM : BaseViewModel {
         switch (param) {
         case "add":
             if (string.IsNullOrWhiteSpace(ExerciseName)) {
-                ReferenceValues.SoundToPlay = "missing_info";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("missing_info");
             } else {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                     Date = DateTime.Now,
@@ -129,8 +127,7 @@ public class EditExerciseVM : BaseViewModel {
                     NeedsEquipment = NeedsEquipment
                 });
 
-                ReferenceValues.SoundToPlay = "newTask";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("newTask");
                 ExerciseName = "";
 
                 SaveJson();
@@ -142,8 +139,7 @@ public class EditExerciseVM : BaseViewModel {
             try {
                 if (ExerciseSelected.Name != null) {
                     if (string.IsNullOrWhiteSpace(ExerciseName)) {
-                        ReferenceValues.SoundToPlay = "missing_info";
-                        SoundDispatcher.PlaySound();
+                        SoundDispatcher.PlaySound("missing_info");
                     } else {
                         confirmation = MessageBox.Show("Are you sure you want to update exercise?", "Confirmation", MessageBoxButton.YesNo);
                         if (confirmation == MessageBoxResult.Yes) {
@@ -199,8 +195,7 @@ public class EditExerciseVM : BaseViewModel {
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
-                        ReferenceValues.SoundToPlay = "newTask";
-                        SoundDispatcher.PlaySound();
+                        SoundDispatcher.PlaySound("newTask");
                         ExerciseList.Remove(ExerciseSelected);
 
                         SaveJson();

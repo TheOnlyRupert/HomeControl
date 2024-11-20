@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Timer;
 using HomeControl.Source.ViewModel.Base;

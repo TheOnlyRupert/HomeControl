@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HomeControl.Source.ViewModel.Games;
+﻿namespace HomeControl.Source.ViewModel.Games;
 
 public static class WordList {
     public static readonly List<string> PictionaryEasyList = new() {

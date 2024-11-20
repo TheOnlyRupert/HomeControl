@@ -1,4 +1,3 @@
-using System;
 using System.Windows.Input;
 
 namespace HomeControl.Source.ViewModel.Base;

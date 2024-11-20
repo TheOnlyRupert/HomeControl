@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -6,7 +5,6 @@ using System.Data.Common;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Resources;
@@ -28,10 +26,10 @@ namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
     private readonly MySqlConnection _connection;
+    private readonly DateTime _lastChecked;
     private readonly CrossViewMessenger _simpleMessenger;
     private bool _changeDate, _internetMessage, _isChecking;
     private DateTime _currentDate;
-    private readonly DateTime _lastChecked;
     private string _iconImage;
 
     private bool _isDatabaseInitialized;
@@ -220,8 +218,7 @@ public class MainWindowVM : BaseViewModel {
                 break;
             }
         } else {
-            ReferenceValues.SoundToPlay = "locked";
-            SoundDispatcher.PlaySound();
+            SoundDispatcher.PlaySound("locked");
         }
     }
 
@@ -238,8 +235,7 @@ public class MainWindowVM : BaseViewModel {
 
             if (ReferenceValues.JsonTasksMaster.User1Blink || ReferenceValues.JsonTasksMaster.User2Blink || ReferenceValues.JsonTasksMaster.User3Blink || ReferenceValues.JsonTasksMaster.User4Blink
                 || ReferenceValues.JsonTasksMaster.User5Blink) {
-                ReferenceValues.SoundToPlay = "beep";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("beep");
             }
 
             _changeDate = true;
@@ -251,13 +247,11 @@ public class MainWindowVM : BaseViewModel {
             _changeDate = true;
 
             if (DateTime.Now.Month == 12) {
-                ReferenceValues.SoundToPlay = "jingle_bells";
+                SoundDispatcher.PlaySound("jingle_bells");
             } else {
                 Random random = new();
-                ReferenceValues.SoundToPlay = "clock" + random.Next(1, 3);
+                SoundDispatcher.PlaySound("clock" + random.Next(1, 3));
             }
-
-            SoundDispatcher.PlaySound();
 
             _hourInt = 10;
 
@@ -322,8 +316,7 @@ public class MainWindowVM : BaseViewModel {
         }
 
         if (ReferenceValues.JsonTimerMaster.IsAlarmSounding) {
-            ReferenceValues.SoundToPlay = "timerDone";
-            SoundDispatcher.PlaySound();
+            SoundDispatcher.PlaySound("timerDone");
         }
 
         /* HVAC Logic */
@@ -333,16 +326,14 @@ public class MainWindowVM : BaseViewModel {
         if (_trashInt > 0) {
             _trashInt--;
             if (_trashInt == 0) {
-                ReferenceValues.SoundToPlay = "trash";
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("trash");
             }
         }
 
         if (_hourInt > 0) {
             _hourInt--;
             if (_hourInt == 0) {
-                ReferenceValues.SoundToPlay = "hour" + DateTime.Now.Hour;
-                SoundDispatcher.PlaySound();
+                SoundDispatcher.PlaySound("hour" + DateTime.Now.Hour);
             }
         }
 
