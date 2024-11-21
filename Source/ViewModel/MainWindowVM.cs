@@ -19,6 +19,7 @@ using HomeControl.Source.Modules;
 using HomeControl.Source.Modules.Finances;
 using HomeControl.Source.ViewModel.Base;
 using HomeControl.Source.ViewModel.Finances;
+using HomeControl.Source.ViewModel.Hvac;
 using MySql.Data.MySqlClient;
 using Task = System.Threading.Tasks.Task;
 
@@ -165,7 +166,7 @@ public class MainWindowVM : BaseViewModel {
         activityTimer.OnActive += ActivityTimerOnActive;
         return;
 
-        void ActivityTimerOnInactive(object sender, EventArgs e) {
+        void ActivityTimerOnInactive(object? sender, EventArgs e) {
             if (!ReferenceValues.JsonSettingsMaster.DebugMode) {
                 _simpleMessenger.PushMessage("ScreenSaverOn", null);
                 ReferenceValues.LockUi = true;
@@ -198,10 +199,10 @@ public class MainWindowVM : BaseViewModel {
     private async void InitializeDatabaseConnection() {
         try {
             await _connection.OpenAsync();
-            Console.WriteLine("Database connection established.");
+            Console.WriteLine(@"Database connection established.");
             _isDatabaseInitialized = true;
         } catch (Exception ex) {
-            Console.WriteLine($"Error opening database connection: {ex}");
+            Console.WriteLine($@"Error opening database connection: {ex}");
             _isDatabaseInitialized = false;
         }
     }
@@ -222,7 +223,7 @@ public class MainWindowVM : BaseViewModel {
         }
     }
 
-    private async void dispatcherTimer_Tick(object sender, EventArgs e) {
+    private async void dispatcherTimer_Tick(object? sender, EventArgs e) {
         _changeDate = false;
         /* Min Changes */
         if (!_currentDate.Minute.Equals(DateTime.Now.Minute)) {
@@ -410,7 +411,7 @@ public class MainWindowVM : BaseViewModel {
             using WebClient client = new();
             client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
             string apiStatusString = await client.DownloadStringTaskAsync(api);
-            ApiStatus apiStatus = JsonSerializer.Deserialize<ApiStatus>(apiStatusString, options);
+            ApiStatus? apiStatus = JsonSerializer.Deserialize<ApiStatus>(apiStatusString, options);
 
             if (apiStatus is { status: "OK" }) {
                 ReferenceValues.IsWeatherApiOnline = true;

@@ -6,74 +6,73 @@ namespace HomeControl.Source.Control;
 
 public class AppActivityTimer {
     private readonly DispatcherTimer _inactivityTimer;
-    private readonly bool _MonitorMousePosition;
+    private readonly bool _monitorMousePosition;
     private readonly DispatcherTimer _timePassedTimer;
-    private Point _inactiveMousePosition = new(0, 0);
+    private Point _lastKnownMousePosition = new(0, 0);
 
-    public AppActivityTimer(int timePassedInMS, int IdleTimeInMS, bool WillMonitorMousePosition) {
-        _MonitorMousePosition = WillMonitorMousePosition;
+    public AppActivityTimer(int timePassedInMS, int idleTimeInMS, bool monitorMousePosition) {
+        _monitorMousePosition = monitorMousePosition;
+
         InputManager.Current.PreProcessInput += OnActivity;
 
         // Time Passed Timer
-        _timePassedTimer = new DispatcherTimer();
-        TimeSpan timePassed = TimeSpan.FromMilliseconds(timePassedInMS);
-        // Start the time passed timer
+        _timePassedTimer = new DispatcherTimer {
+            Interval = TimeSpan.FromMilliseconds(timePassedInMS),
+            IsEnabled = true
+        };
         _timePassedTimer.Tick += OnTimePassedHandler;
-        _timePassedTimer.Interval = timePassed;
-        _timePassedTimer.IsEnabled = true;
 
         // Inactivity Timer
-        _inactivityTimer = new DispatcherTimer();
-        InactivityThreshold = TimeSpan.FromMilliseconds(IdleTimeInMS);
-        // Start the inactivity timer
+        _inactivityTimer = new DispatcherTimer {
+            Interval = TimeSpan.FromMilliseconds(idleTimeInMS),
+            IsEnabled = true
+        };
         _inactivityTimer.Tick += OnInactivity;
-        _inactivityTimer.Interval = InactivityThreshold;
-        _inactivityTimer.IsEnabled = true;
     }
 
-    private TimeSpan InactivityThreshold { get; }
-    public event PreProcessInputEventHandler OnActive;
-    public event EventHandler OnInactive;
-    public event EventHandler OnTimePassed;
+    public event PreProcessInputEventHandler? OnActive;
+    public event EventHandler? OnInactive;
+    public event EventHandler? OnTimePassed;
 
     private void OnActivity(object sender, PreProcessInputEventArgs e) {
         InputEventArgs inputEventArgs = e.StagingItem.Input;
-        if (inputEventArgs is MouseEventArgs || inputEventArgs is KeyboardEventArgs) {
-            if (inputEventArgs is MouseEventArgs mea) {
-                // no button is pressed and the position is still the same as the application became inactive
-                if (mea.LeftButton == MouseButtonState.Released &&
-                    mea.RightButton == MouseButtonState.Released &&
-                    mea.MiddleButton == MouseButtonState.Released &&
-                    mea.XButton1 == MouseButtonState.Released &&
-                    mea.XButton2 == MouseButtonState.Released &&
-                    (_MonitorMousePosition == false ||
-                     _MonitorMousePosition && _inactiveMousePosition == mea.GetPosition(Application.Current.MainWindow))) {
+
+        // Check if the input is a mouse or keyboard event
+        if (inputEventArgs is MouseEventArgs mea || inputEventArgs is KeyboardEventArgs) {
+            if (inputEventArgs is MouseEventArgs mouseEventArgs) {
+                // Check if no button is pressed and optionally check for mouse movement
+                if (IsMouseIdle(mouseEventArgs)) {
                     return;
                 }
             }
 
-            // Reset idle timer
-            _inactivityTimer.IsEnabled = false;
-            _inactivityTimer.IsEnabled = true;
-            _inactivityTimer.Stop();
-            _inactivityTimer.Start();
-            if (OnActive != null) {
-                OnActive(sender, e);
-            }
+            // Reset and restart inactivity timer
+            ResetInactivityTimer();
+            OnActive?.Invoke(sender, e);
         }
+    }
+
+    private bool IsMouseIdle(MouseEventArgs mouseEventArgs) {
+        return mouseEventArgs.LeftButton == MouseButtonState.Released &&
+               mouseEventArgs.RightButton == MouseButtonState.Released &&
+               mouseEventArgs.MiddleButton == MouseButtonState.Released &&
+               mouseEventArgs.XButton1 == MouseButtonState.Released &&
+               mouseEventArgs.XButton2 == MouseButtonState.Released &&
+               (!_monitorMousePosition || _lastKnownMousePosition == mouseEventArgs.GetPosition(Application.Current.MainWindow));
+    }
+
+    private void ResetInactivityTimer() {
+        _inactivityTimer.Stop();
+        _inactivityTimer.Start();
     }
 
     private void OnInactivity(object sender, EventArgs e) {
-        _inactiveMousePosition = Mouse.GetPosition(Application.Current.MainWindow);
+        _lastKnownMousePosition = Mouse.GetPosition(Application.Current.MainWindow);
         _inactivityTimer.Stop();
-        if (OnInactive != null) {
-            OnInactive(sender, e);
-        }
+        OnInactive?.Invoke(sender, e);
     }
 
     private void OnTimePassedHandler(object sender, EventArgs e) {
-        if (OnTimePassed != null) {
-            OnTimePassed(sender, e);
-        }
+        OnTimePassed?.Invoke(sender, e);
     }
 }

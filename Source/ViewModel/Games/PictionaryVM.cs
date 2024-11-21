@@ -13,7 +13,7 @@ public class PictionaryVM : BaseViewModel {
 
     private int _timerAmount, _wordsAmount, timerMaster_sec;
 
-    private List<string> playableWords;
+    private List<string>? playableWords;
     private double progressBarAdditive, progressBarRate, _progressBarValue;
 
     public PictionaryVM() {

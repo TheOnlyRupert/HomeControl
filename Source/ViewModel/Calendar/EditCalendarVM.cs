@@ -11,12 +11,16 @@ namespace HomeControl.Source.ViewModel.Calendar;
 
 public class EditCalendarVM : BaseViewModel {
     private CalendarEvents _calendarEventSelected;
+    private string _detailedWeather, _temperatureHighLow, _eventDateWeekday;
 
     private string _eventDate, _eventText, _locationText, _descriptionText, _user1NameText, _user2NameText, _user3NameText, _user4NameText, _user5NameText, _startTimeText, _endTimeText,
         _dupeButtonBackgroundColor, _priority0BorderColor, _priority1BorderColor, _priority2BorderColor, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor,
-        _user5BorderColor, _homeBorderColor, _forecastWeatherIcon1, _forecastWeatherIcon2, _detailedWeather, _temperatureHighLow, _eventDateWeekday;
+        _user5BorderColor, _homeBorderColor;
 
     private ObservableCollection<CalendarEvents> _eventList;
+
+    private string? _forecastWeatherIcon1;
+    private string? _forecastWeatherIcon2;
 
     private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5, _imageHome;
 
@@ -110,7 +114,7 @@ public class EditCalendarVM : BaseViewModel {
         try {
             foreach (JsonWeather.Periods periods in ReferenceValues.ForecastSevenDay.properties.periods) {
                 if (periods.startTime.Date == ReferenceValues.CalendarEventDate.Date && periods.isDaytime) {
-                    string[] weatherIcons = WeatherHelpers.RegexWeatherForecast(periods.shortForecast);
+                    string?[] weatherIcons = WeatherHelpers.RegexWeatherForecast(periods.shortForecast);
                     ForecastWeatherIcon1 = WeatherHelpers.GetWeatherIcon(weatherIcons[0], periods.isDaytime, periods.temperature, periods.windSpeed);
                     if (weatherIcons.Length > 1) {
                         ForecastWeatherIcon2 = WeatherHelpers.GetWeatherIcon(weatherIcons[1], periods.isDaytime, periods.temperature, periods.windSpeed);
@@ -810,7 +814,7 @@ public class EditCalendarVM : BaseViewModel {
         }
     }
 
-    public string ForecastWeatherIcon1 {
+    public string? ForecastWeatherIcon1 {
         get => _forecastWeatherIcon1;
         set {
             _forecastWeatherIcon1 = value;
@@ -818,7 +822,7 @@ public class EditCalendarVM : BaseViewModel {
         }
     }
 
-    public string ForecastWeatherIcon2 {
+    public string? ForecastWeatherIcon2 {
         get => _forecastWeatherIcon2;
         set {
             _forecastWeatherIcon2 = value;

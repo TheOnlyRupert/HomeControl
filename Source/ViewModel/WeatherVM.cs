@@ -10,24 +10,116 @@ namespace HomeControl.Source.ViewModel;
 public class WeatherVM : BaseViewModel {
     private ObservableCollection<WeatherHourlyBlock> _forecastHourlyList;
 
+    private string _sevenDayForecastTemp1, _sevenDayForecastName1;
+
+    private string _sevenDayForecastTemp10, _sevenDayForecastName10;
+
+    private string _sevenDayForecastTemp11, _sevenDayForecastName11;
+
+    private string _sevenDayForecastTemp12, _sevenDayForecastName12;
+
+    private string _sevenDayForecastTemp13, _sevenDayForecastName13;
+
+    private string _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1,
+        _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6, _sevenDayForecastRainChance7,
+        _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11, _sevenDayForecastRainChance12, _sevenDayForecastRainChance13,
+        _sevenDayForecastRainChance14, _forecastHourlyVisibility, _easterEggVisibility;
+
+    private string _sevenDayForecastTemp2, _sevenDayForecastName2;
+
+    private string _sevenDayForecastTemp3, _sevenDayForecastName3;
+
+    private string _sevenDayForecastTemp4,
+        _sevenDayForecastName4;
+
+    private string _sevenDayForecastTemp5, _sevenDayForecastName5;
+
+    private string _sevenDayForecastTemp6, _sevenDayForecastName6;
+
+    private string _sevenDayForecastTemp7, _sevenDayForecastName7;
+
+    private string _sevenDayForecastTemp8,
+        _sevenDayForecastName8;
+
+    private string _sevenDayForecastTemp9, _sevenDayForecastName9;
+
+    private string? _sevenDayForecastWeatherIcon10a;
+
+    private string? _sevenDayForecastWeatherIcon10b;
+
+    private string? _sevenDayForecastWeatherIcon11a;
+
+    private string? _sevenDayForecastWeatherIcon11b;
+
+    private string? _sevenDayForecastWeatherIcon12a;
+
+    private string? _sevenDayForecastWeatherIcon12b;
+
+    private string? _sevenDayForecastWeatherIcon13a;
+
+    private string? _sevenDayForecastWeatherIcon13b;
+
+    private string? _sevenDayForecastWeatherIcon14a;
+
+    private string? _sevenDayForecastWeatherIcon14b;
+
+    private string? _sevenDayForecastWeatherIcon1a;
+
+    private string? _sevenDayForecastWeatherIcon1b;
+
+    private string? _sevenDayForecastWeatherIcon2a;
+
+    private string? _sevenDayForecastWeatherIcon2b;
+
+    private string? _sevenDayForecastWeatherIcon3a;
+
+    private string? _sevenDayForecastWeatherIcon3b;
+
+    private string? _sevenDayForecastWeatherIcon4a;
+
+    private string? _sevenDayForecastWeatherIcon4b;
+
+    private string? _sevenDayForecastWeatherIcon5a;
+
+    private string? _sevenDayForecastWeatherIcon5b;
+
+    private string? _sevenDayForecastWeatherIcon6a;
+
+    private string? _sevenDayForecastWeatherIcon6b;
+
+    private string? _sevenDayForecastWeatherIcon7a;
+
+    private string? _sevenDayForecastWeatherIcon7b;
+
+    private string? _sevenDayForecastWeatherIcon8a;
+
+    private string? _sevenDayForecastWeatherIcon8b;
+
+    private string? _sevenDayForecastWeatherIcon9a;
+
+    private string? _sevenDayForecastWeatherIcon9b;
+
     private int _sevenDayForecastWindDirectionIcon1, _sevenDayForecastWindDirectionIcon2, _sevenDayForecastWindDirectionIcon3, _sevenDayForecastWindDirectionIcon4, _sevenDayForecastWindDirectionIcon5,
         _sevenDayForecastWindDirectionIcon6, _sevenDayForecastWindDirectionIcon7, _sevenDayForecastWindDirectionIcon8, _sevenDayForecastWindDirectionIcon9, _sevenDayForecastWindDirectionIcon10,
         _sevenDayForecastWindDirectionIcon11, _sevenDayForecastWindDirectionIcon12, _sevenDayForecastWindDirectionIcon13, _sevenDayForecastWindDirectionIcon14, _tempMin, _tempMax;
 
-    private string _sevenDayForecastWindSpeed1, _sevenDayForecastWeatherIcon1a, _sevenDayForecastWeatherIcon1b, _sevenDayForecastTemp1, _sevenDayForecastName1, _sevenDayForecastWindSpeed2,
-        _sevenDayForecastWeatherIcon2a, _sevenDayForecastWeatherIcon2b, _sevenDayForecastTemp2, _sevenDayForecastName2, _sevenDayForecastWindSpeed3, _sevenDayForecastWeatherIcon3a,
-        _sevenDayForecastWeatherIcon3b, _sevenDayForecastTemp3, _sevenDayForecastName3, _sevenDayForecastWindSpeed4, _sevenDayForecastWeatherIcon4a, _sevenDayForecastWeatherIcon4b, _sevenDayForecastTemp4,
-        _sevenDayForecastName4, _sevenDayForecastWindSpeed5, _sevenDayForecastWeatherIcon5a, _sevenDayForecastWeatherIcon5b, _sevenDayForecastTemp5, _sevenDayForecastName5, _sevenDayForecastWindSpeed6,
-        _sevenDayForecastWeatherIcon6a, _sevenDayForecastWeatherIcon6b, _sevenDayForecastTemp6, _sevenDayForecastName6, _sevenDayForecastWindSpeed7, _sevenDayForecastWeatherIcon7a,
-        _sevenDayForecastWeatherIcon7b, _sevenDayForecastTemp7, _sevenDayForecastName7, _sevenDayForecastWindSpeed8, _sevenDayForecastWeatherIcon8a, _sevenDayForecastWeatherIcon8b, _sevenDayForecastTemp8,
-        _sevenDayForecastName8, _sevenDayForecastWindSpeed9, _sevenDayForecastWeatherIcon9a, _sevenDayForecastWeatherIcon9b, _sevenDayForecastTemp9, _sevenDayForecastName9, _sevenDayForecastWindSpeed10,
-        _sevenDayForecastWeatherIcon10a, _sevenDayForecastWeatherIcon10b, _sevenDayForecastTemp10, _sevenDayForecastName10, _sevenDayForecastWindSpeed11, _sevenDayForecastWeatherIcon11a,
-        _sevenDayForecastWeatherIcon11b, _sevenDayForecastTemp11, _sevenDayForecastName11, _sevenDayForecastWindSpeed12, _sevenDayForecastWeatherIcon12a, _sevenDayForecastWeatherIcon12b,
-        _sevenDayForecastTemp12, _sevenDayForecastName12, _sevenDayForecastWindSpeed13, _sevenDayForecastWeatherIcon13a, _sevenDayForecastWeatherIcon13b, _sevenDayForecastTemp13, _sevenDayForecastName13,
-        _sevenDayForecastWindSpeed14, _sevenDayForecastWeatherIcon14a, _sevenDayForecastWeatherIcon14b, _sevenDayForecastTemp14, _sevenDayForecastName14, _sevenDayForecastRainChance1,
-        _sevenDayForecastRainChance2, _sevenDayForecastRainChance3, _sevenDayForecastRainChance4, _sevenDayForecastRainChance5, _sevenDayForecastRainChance6, _sevenDayForecastRainChance7,
-        _sevenDayForecastRainChance8, _sevenDayForecastRainChance9, _sevenDayForecastRainChance10, _sevenDayForecastRainChance11, _sevenDayForecastRainChance12, _sevenDayForecastRainChance13,
-        _sevenDayForecastRainChance14, _forecastHourlyVisibility, _easterEggVisibility;
+    private string? _sevenDayForecastWindSpeed1;
+    private string? _sevenDayForecastWindSpeed10;
+    private string? _sevenDayForecastWindSpeed11;
+    private string? _sevenDayForecastWindSpeed12;
+    private string? _sevenDayForecastWindSpeed13;
+
+    private string? _sevenDayForecastWindSpeed14;
+    private string? _sevenDayForecastWindSpeed2;
+    private string? _sevenDayForecastWindSpeed3;
+    private string? _sevenDayForecastWindSpeed4;
+
+    private string? _sevenDayForecastWindSpeed5;
+    private string? _sevenDayForecastWindSpeed6;
+    private string? _sevenDayForecastWindSpeed7;
+    private string? _sevenDayForecastWindSpeed8;
+
+    private string? _sevenDayForecastWindSpeed9;
 
     public WeatherVM() {
         ForecastHourlyList = [];
@@ -71,7 +163,7 @@ public class WeatherVM : BaseViewModel {
             SevenDayForecastName1 = ReferenceValues.ForecastSevenDay.properties.periods[0].name + "    " + ReferenceValues.ForecastSevenDay.properties.periods[0].startTime.ToString("MM/dd");
             SevenDayForecastTemp1 = ReferenceValues.ForecastSevenDay.properties.periods[0].temperature + "°";
 
-            string[] weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[0].shortForecast);
+            string?[] weatherIcons = WeatherHelpers.RegexWeatherForecast(ReferenceValues.ForecastSevenDay.properties.periods[0].shortForecast);
             SevenDayForecastWeatherIcon1a = WeatherHelpers.GetWeatherIcon(weatherIcons[0], ReferenceValues.ForecastSevenDay.properties.periods[0].isDaytime,
                 ReferenceValues.ForecastSevenDay.properties.periods[0].temperature,
                 ReferenceValues.ForecastSevenDay.properties.periods[0].windSpeed);
@@ -515,7 +607,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon1a {
+    public string? SevenDayForecastWeatherIcon1a {
         get => _sevenDayForecastWeatherIcon1a;
         set {
             _sevenDayForecastWeatherIcon1a = value;
@@ -523,7 +615,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon1b {
+    public string? SevenDayForecastWeatherIcon1b {
         get => _sevenDayForecastWeatherIcon1b;
         set {
             _sevenDayForecastWeatherIcon1b = value;
@@ -531,7 +623,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed1 {
+    public string? SevenDayForecastWindSpeed1 {
         get => _sevenDayForecastWindSpeed1;
         set {
             _sevenDayForecastWindSpeed1 = value;
@@ -555,7 +647,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon2a {
+    public string? SevenDayForecastWeatherIcon2a {
         get => _sevenDayForecastWeatherIcon2a;
         set {
             _sevenDayForecastWeatherIcon2a = value;
@@ -563,7 +655,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon2b {
+    public string? SevenDayForecastWeatherIcon2b {
         get => _sevenDayForecastWeatherIcon2b;
         set {
             _sevenDayForecastWeatherIcon2b = value;
@@ -571,7 +663,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed2 {
+    public string? SevenDayForecastWindSpeed2 {
         get => _sevenDayForecastWindSpeed2;
         set {
             _sevenDayForecastWindSpeed2 = value;
@@ -595,7 +687,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon3a {
+    public string? SevenDayForecastWeatherIcon3a {
         get => _sevenDayForecastWeatherIcon3a;
         set {
             _sevenDayForecastWeatherIcon3a = value;
@@ -603,7 +695,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon3b {
+    public string? SevenDayForecastWeatherIcon3b {
         get => _sevenDayForecastWeatherIcon3b;
         set {
             _sevenDayForecastWeatherIcon3b = value;
@@ -611,7 +703,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed3 {
+    public string? SevenDayForecastWindSpeed3 {
         get => _sevenDayForecastWindSpeed3;
         set {
             _sevenDayForecastWindSpeed3 = value;
@@ -635,7 +727,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon4a {
+    public string? SevenDayForecastWeatherIcon4a {
         get => _sevenDayForecastWeatherIcon4a;
         set {
             _sevenDayForecastWeatherIcon4a = value;
@@ -643,7 +735,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon4b {
+    public string? SevenDayForecastWeatherIcon4b {
         get => _sevenDayForecastWeatherIcon4b;
         set {
             _sevenDayForecastWeatherIcon4b = value;
@@ -651,7 +743,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed4 {
+    public string? SevenDayForecastWindSpeed4 {
         get => _sevenDayForecastWindSpeed4;
         set {
             _sevenDayForecastWindSpeed4 = value;
@@ -675,7 +767,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon5a {
+    public string? SevenDayForecastWeatherIcon5a {
         get => _sevenDayForecastWeatherIcon5a;
         set {
             _sevenDayForecastWeatherIcon5a = value;
@@ -683,7 +775,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon5b {
+    public string? SevenDayForecastWeatherIcon5b {
         get => _sevenDayForecastWeatherIcon5b;
         set {
             _sevenDayForecastWeatherIcon5b = value;
@@ -691,7 +783,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed5 {
+    public string? SevenDayForecastWindSpeed5 {
         get => _sevenDayForecastWindSpeed5;
         set {
             _sevenDayForecastWindSpeed5 = value;
@@ -715,7 +807,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon6a {
+    public string? SevenDayForecastWeatherIcon6a {
         get => _sevenDayForecastWeatherIcon6a;
         set {
             _sevenDayForecastWeatherIcon6a = value;
@@ -723,7 +815,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon6b {
+    public string? SevenDayForecastWeatherIcon6b {
         get => _sevenDayForecastWeatherIcon6b;
         set {
             _sevenDayForecastWeatherIcon6b = value;
@@ -731,7 +823,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed6 {
+    public string? SevenDayForecastWindSpeed6 {
         get => _sevenDayForecastWindSpeed6;
         set {
             _sevenDayForecastWindSpeed6 = value;
@@ -755,7 +847,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon7a {
+    public string? SevenDayForecastWeatherIcon7a {
         get => _sevenDayForecastWeatherIcon7a;
         set {
             _sevenDayForecastWeatherIcon7a = value;
@@ -763,7 +855,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon7b {
+    public string? SevenDayForecastWeatherIcon7b {
         get => _sevenDayForecastWeatherIcon7b;
         set {
             _sevenDayForecastWeatherIcon7b = value;
@@ -771,7 +863,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed7 {
+    public string? SevenDayForecastWindSpeed7 {
         get => _sevenDayForecastWindSpeed7;
         set {
             _sevenDayForecastWindSpeed7 = value;
@@ -795,7 +887,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon8a {
+    public string? SevenDayForecastWeatherIcon8a {
         get => _sevenDayForecastWeatherIcon8a;
         set {
             _sevenDayForecastWeatherIcon8a = value;
@@ -803,7 +895,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon8b {
+    public string? SevenDayForecastWeatherIcon8b {
         get => _sevenDayForecastWeatherIcon8b;
         set {
             _sevenDayForecastWeatherIcon8b = value;
@@ -811,7 +903,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed8 {
+    public string? SevenDayForecastWindSpeed8 {
         get => _sevenDayForecastWindSpeed8;
         set {
             _sevenDayForecastWindSpeed8 = value;
@@ -835,7 +927,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon9a {
+    public string? SevenDayForecastWeatherIcon9a {
         get => _sevenDayForecastWeatherIcon9a;
         set {
             _sevenDayForecastWeatherIcon9a = value;
@@ -843,7 +935,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon9b {
+    public string? SevenDayForecastWeatherIcon9b {
         get => _sevenDayForecastWeatherIcon9b;
         set {
             _sevenDayForecastWeatherIcon9b = value;
@@ -851,7 +943,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed9 {
+    public string? SevenDayForecastWindSpeed9 {
         get => _sevenDayForecastWindSpeed9;
         set {
             _sevenDayForecastWindSpeed9 = value;
@@ -875,7 +967,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon10a {
+    public string? SevenDayForecastWeatherIcon10a {
         get => _sevenDayForecastWeatherIcon10a;
         set {
             _sevenDayForecastWeatherIcon10a = value;
@@ -883,7 +975,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon10b {
+    public string? SevenDayForecastWeatherIcon10b {
         get => _sevenDayForecastWeatherIcon10b;
         set {
             _sevenDayForecastWeatherIcon10b = value;
@@ -891,7 +983,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed10 {
+    public string? SevenDayForecastWindSpeed10 {
         get => _sevenDayForecastWindSpeed10;
         set {
             _sevenDayForecastWindSpeed10 = value;
@@ -915,7 +1007,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon11a {
+    public string? SevenDayForecastWeatherIcon11a {
         get => _sevenDayForecastWeatherIcon11a;
         set {
             _sevenDayForecastWeatherIcon11a = value;
@@ -923,7 +1015,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon11b {
+    public string? SevenDayForecastWeatherIcon11b {
         get => _sevenDayForecastWeatherIcon11b;
         set {
             _sevenDayForecastWeatherIcon11b = value;
@@ -931,7 +1023,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed11 {
+    public string? SevenDayForecastWindSpeed11 {
         get => _sevenDayForecastWindSpeed11;
         set {
             _sevenDayForecastWindSpeed11 = value;
@@ -955,7 +1047,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon12a {
+    public string? SevenDayForecastWeatherIcon12a {
         get => _sevenDayForecastWeatherIcon12a;
         set {
             _sevenDayForecastWeatherIcon12a = value;
@@ -963,7 +1055,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon12b {
+    public string? SevenDayForecastWeatherIcon12b {
         get => _sevenDayForecastWeatherIcon12b;
         set {
             _sevenDayForecastWeatherIcon12b = value;
@@ -971,7 +1063,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed12 {
+    public string? SevenDayForecastWindSpeed12 {
         get => _sevenDayForecastWindSpeed12;
         set {
             _sevenDayForecastWindSpeed12 = value;
@@ -995,7 +1087,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon13a {
+    public string? SevenDayForecastWeatherIcon13a {
         get => _sevenDayForecastWeatherIcon13a;
         set {
             _sevenDayForecastWeatherIcon13a = value;
@@ -1003,7 +1095,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon13b {
+    public string? SevenDayForecastWeatherIcon13b {
         get => _sevenDayForecastWeatherIcon13b;
         set {
             _sevenDayForecastWeatherIcon13b = value;
@@ -1011,7 +1103,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed13 {
+    public string? SevenDayForecastWindSpeed13 {
         get => _sevenDayForecastWindSpeed13;
         set {
             _sevenDayForecastWindSpeed13 = value;
@@ -1035,7 +1127,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon14a {
+    public string? SevenDayForecastWeatherIcon14a {
         get => _sevenDayForecastWeatherIcon14a;
         set {
             _sevenDayForecastWeatherIcon14a = value;
@@ -1043,7 +1135,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWeatherIcon14b {
+    public string? SevenDayForecastWeatherIcon14b {
         get => _sevenDayForecastWeatherIcon14b;
         set {
             _sevenDayForecastWeatherIcon14b = value;
@@ -1051,7 +1143,7 @@ public class WeatherVM : BaseViewModel {
         }
     }
 
-    public string SevenDayForecastWindSpeed14 {
+    public string? SevenDayForecastWindSpeed14 {
         get => _sevenDayForecastWindSpeed14;
         set {
             _sevenDayForecastWindSpeed14 = value;

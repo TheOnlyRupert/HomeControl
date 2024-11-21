@@ -6,41 +6,55 @@ namespace HomeControl.Source.Helpers;
 
 public static class FileHelpers {
     public static string LoadFileText(string fileName, bool isDocumentsFolder) {
-        try {
-            StreamReader streamReader = isDocumentsFolder
-                ? new StreamReader(ReferenceValues.DocumentsDirectory + fileName + ".json")
-                : new StreamReader(ReferenceValues.AppDirectory + fileName + ".json");
+        string filePath = GetFilePath(fileName, isDocumentsFolder);
 
-            string fileText = null;
-            while (!streamReader.EndOfStream) {
-                fileText = streamReader.ReadToEnd();
+        try {
+            if (!File.Exists(filePath)) {
+                LogWarning($"File not found: {filePath}");
+                return null;
             }
 
-            streamReader.Close();
-
-            return fileText;
+            // Read all text at once for simplicity
+            return File.ReadAllText(filePath);
         } catch (Exception e) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "FileHelpers",
-                Description = e.ToString()
-            });
-            SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-
+            LogWarning($"Error reading file: {filePath}\n{e}");
             return null;
         }
     }
 
     public static void SaveFileText(string fileName, string fileText, bool isDocumentsFolder) {
-        if (isDocumentsFolder) {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.DocumentsDirectory + fileName + ".json", fileText);
-        } else {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            File.WriteAllText(ReferenceValues.AppDirectory + fileName + ".json", fileText);
+        string filePath = GetFilePath(fileName, isDocumentsFolder);
+
+        try {
+            // Write all text at once
+            File.WriteAllText(filePath, fileText);
+        } catch (Exception e) {
+            LogWarning($"Error saving file: {filePath}\n{e}");
+        }
+    }
+
+    private static string GetFilePath(string fileName, bool isDocumentsFolder) {
+        string baseDirectory = isDocumentsFolder
+            ? ReferenceValues.DocumentsDirectory
+            : ReferenceValues.AppDirectory;
+
+        return Path.Combine(baseDirectory, $"{fileName}.json");
+    }
+
+    private static void LogWarning(string message) {
+        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+            Date = DateTime.Now,
+            Level = "WARN",
+            Module = nameof(FileHelpers),
+            Description = message
+        });
+
+        // Save updated debug log
+        try {
+            string debugFilePath = Path.Combine(ReferenceValues.DocumentsDirectory, "debug.json");
+            File.WriteAllText(debugFilePath, JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
+        } catch {
+            // Fail silently if the debug log cannot be saved
         }
     }
 }

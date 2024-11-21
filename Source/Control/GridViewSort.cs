@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -8,60 +9,20 @@ using System.Windows.Media;
 namespace HomeControl.Source.Control;
 
 public class GridViewSort {
-    // Using a DependencyProperty as the backing store for Command.  This enables animation, styling, binding, etc...
+    // Dependency Property for Command
     public static readonly DependencyProperty CommandProperty =
-        DependencyProperty.RegisterAttached("Command",
-            typeof(ICommand),
-            typeof(GridViewSort),
-            new UIPropertyMetadata(null,
-                (o, e) => {
-                    if (o is ItemsControl listView) {
-                        if (!GetAutoSort(listView)) // Don't change click handler if AutoSort enabled
-                        {
-                            if (e is { OldValue: not null, NewValue: null }) {
-                                listView.RemoveHandler(ButtonBase.ClickEvent,
-                                    new RoutedEventHandler(ColumnHeader_Click));
-                            }
+        DependencyProperty.RegisterAttached("Command", typeof(ICommand), typeof(GridViewSort), new UIPropertyMetadata(null, OnCommandChanged));
 
-                            if (e.OldValue == null && e.NewValue != null) {
-                                listView.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
-                            }
-                        }
-                    }
-                }));
-
-    // Using a DependencyProperty as the backing store for AutoSort.  This enables animation, styling, binding, etc...
+    // Dependency Property for AutoSort
     public static readonly DependencyProperty AutoSortProperty =
-        DependencyProperty.RegisterAttached("AutoSort",
-            typeof(bool),
-            typeof(GridViewSort),
-            new UIPropertyMetadata(false,
-                (o, e) => {
-                    if (o is ListView listView) {
-                        if (GetCommand(listView) == null) // Don't change click handler if a command is set
-                        {
-                            bool oldValue = (bool)e.OldValue;
-                            bool newValue = (bool)e.NewValue;
-                            if (oldValue && !newValue) {
-                                listView.RemoveHandler(ButtonBase.ClickEvent,
-                                    new RoutedEventHandler(ColumnHeader_Click));
-                            }
+        DependencyProperty.RegisterAttached("AutoSort", typeof(bool), typeof(GridViewSort), new UIPropertyMetadata(false, OnAutoSortChanged));
 
-                            if (!oldValue && newValue) {
-                                listView.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
-                            }
-                        }
-                    }
-                }));
-
-    // Using a DependencyProperty as the backing store for PropertyName.  This enables animation, styling, binding, etc...
+    // Dependency Property for PropertyName
     public static readonly DependencyProperty PropertyNameProperty =
-        DependencyProperty.RegisterAttached("PropertyName",
-            typeof(string),
-            typeof(GridViewSort),
-            new UIPropertyMetadata(null));
+        DependencyProperty.RegisterAttached("PropertyName", typeof(string), typeof(GridViewSort), new UIPropertyMetadata(null));
 
-    private static ICommand GetCommand(DependencyObject obj) {
+    // Command Dependency Property Getter and Setter
+    public static ICommand GetCommand(DependencyObject obj) {
         return (ICommand)obj.GetValue(CommandProperty);
     }
 
@@ -69,6 +30,7 @@ public class GridViewSort {
         obj.SetValue(CommandProperty, value);
     }
 
+    // AutoSort Dependency Property Getter and Setter
     public static bool GetAutoSort(DependencyObject obj) {
         return (bool)obj.GetValue(AutoSortProperty);
     }
@@ -77,6 +39,7 @@ public class GridViewSort {
         obj.SetValue(AutoSortProperty, value);
     }
 
+    // PropertyName Dependency Property Getter and Setter
     public static string GetPropertyName(DependencyObject obj) {
         return (string)obj.GetValue(PropertyNameProperty);
     }
@@ -85,6 +48,38 @@ public class GridViewSort {
         obj.SetValue(PropertyNameProperty, value);
     }
 
+    // Event handler for Command Dependency Property changes
+    private static void OnCommandChanged(DependencyObject o, DependencyPropertyChangedEventArgs e) {
+        if (o is ItemsControl listView && GetAutoSort(listView) == false) // Don't change click handler if AutoSort enabled
+        {
+            if (e.OldValue != null && e.NewValue == null) {
+                listView.RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
+            }
+
+            if (e.OldValue == null && e.NewValue != null) {
+                listView.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
+            }
+        }
+    }
+
+    // Event handler for AutoSort Dependency Property changes
+    private static void OnAutoSortChanged(DependencyObject o, DependencyPropertyChangedEventArgs e) {
+        if (o is ListView listView && GetCommand(listView) == null) // Don't change click handler if a command is set
+        {
+            bool oldValue = (bool)e.OldValue;
+            bool newValue = (bool)e.NewValue;
+
+            if (oldValue && !newValue) {
+                listView.RemoveHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
+            }
+
+            if (!oldValue && newValue) {
+                listView.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ColumnHeader_Click));
+            }
+        }
+    }
+
+    // Column header click handler to initiate sorting
     private static void ColumnHeader_Click(object sender, RoutedEventArgs e) {
         try {
             if (e.OriginalSource is GridViewColumnHeader headerClicked) {
@@ -93,41 +88,38 @@ public class GridViewSort {
                     ListView listView = GetAncestor<ListView>(headerClicked);
                     if (listView != null) {
                         ICommand command = GetCommand(listView);
-                        if (command != null) {
-                            if (command.CanExecute(propertyName)) {
-                                command.Execute(propertyName);
-                            }
+                        if (command != null && command.CanExecute(propertyName)) {
+                            command.Execute(propertyName);
                         } else if (GetAutoSort(listView)) {
                             ApplySort(listView.Items, propertyName);
                         }
                     }
                 }
             }
-        } catch (Exception) {
-            //ignore
+        } catch (Exception ex) {
+            // Log exception with more context
+            LogError("Error in ColumnHeader_Click", ex);
         }
     }
 
+    // Helper method to find the ancestor of a specific type in the visual tree
     private static T GetAncestor<T>(DependencyObject reference) where T : DependencyObject {
         DependencyObject parent = VisualTreeHelper.GetParent(reference);
-        while (!(parent is T)) {
-            if (parent != null) {
-                parent = VisualTreeHelper.GetParent(parent);
-            }
+        while (parent != null && !(parent is T)) {
+            parent = VisualTreeHelper.GetParent(parent);
         }
 
         return (T)parent;
     }
 
+    // Helper method to apply sorting to a collection view
     private static void ApplySort(ICollectionView view, string propertyName) {
         ListSortDirection direction = ListSortDirection.Ascending;
         if (view.SortDescriptions.Count > 0) {
             SortDescription currentSort = view.SortDescriptions[0];
-            if (currentSort.PropertyName == propertyName) {
-                direction = currentSort.Direction == ListSortDirection.Ascending
-                    ? ListSortDirection.Descending
-                    : ListSortDirection.Ascending;
-            }
+            direction = currentSort.PropertyName == propertyName && currentSort.Direction == ListSortDirection.Ascending
+                ? ListSortDirection.Descending
+                : ListSortDirection.Ascending;
 
             view.SortDescriptions.Clear();
         }
@@ -135,5 +127,12 @@ public class GridViewSort {
         if (!string.IsNullOrEmpty(propertyName)) {
             view.SortDescriptions.Add(new SortDescription(propertyName, direction));
         }
+    }
+
+    // Helper method to log errors with additional context
+    private static void LogError(string message, Exception ex) {
+        // Implement proper logging mechanism here
+        // Example: log to a file, or an external logging service
+        Debug.WriteLine($"{message}: {ex.Message}");
     }
 }

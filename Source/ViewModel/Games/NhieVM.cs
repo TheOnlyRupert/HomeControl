@@ -10,7 +10,7 @@ public class NhieVM : BaseViewModel {
 
     private string _menuVisibility, _questionsNormalColor, _questionsAdultColor, _gameVisibility, _outputText, _button1Text, _button2Text;
 
-    private List<string> playableQuestions;
+    private List<string>? playableQuestions;
 
     public NhieVM() {
         MenuVisibility = "VISIBLE";

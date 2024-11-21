@@ -2,6 +2,7 @@
 using System.IO.Ports;
 using HomeControl.Source.Control;
 using HomeControl.Source.Json;
+using HvacStates = HomeControl.Source.Json.HvacStates;
 
 namespace HomeControl.Source;
 
@@ -24,7 +25,7 @@ public static class ReferenceValues {
     public static JsonCalendar JsonCalendarMaster { get; set; }
     public static JsonFinances JsonFinanceMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
-    public static JsonHvac JsonHvacMaster { get; set; }
+    public static JsonHvac? JsonHvacMaster { get; set; }
 
     public static int ActiveBehaviorUser { get; set; }
     public static JsonSettings JsonSettingsMaster { get; set; }
@@ -32,7 +33,7 @@ public static class ReferenceValues {
     public static double TemperatureInside { get; set; }
     public static float HumidityInside { get; set; }
 
-    public static int HvacState { get; set; }
+    public static HvacStates HvacState { get; set; }
 
     /* Ranges from 15°C (59°F) to 30°C (86°F) */
     public static double TemperatureSet { get; set; }
@@ -62,7 +63,7 @@ public static class ReferenceValues {
     public static Tamagotchi TamagotchiMaster { get; set; }
 
     public static JsonWeather ForecastSevenDay { get; set; }
-    public static JsonWeather ForecastHourly { get; set; }
+    public static JsonWeather? ForecastHourly { get; set; }
 
     public static bool[] CalendarFilterList { get; set; }
 

@@ -6,39 +6,36 @@ using System.Windows.Media;
 namespace HomeControl.Source.Control;
 
 public class SelectTextOnFocus : DependencyObject {
-    public static readonly DependencyProperty ActiveProperty = DependencyProperty.RegisterAttached("Active",
+    public static readonly DependencyProperty ActiveProperty = DependencyProperty.RegisterAttached(
+        "Active",
         typeof(bool),
         typeof(SelectTextOnFocus),
-        new PropertyMetadata(false, ActivePropertyChanged));
+        new PropertyMetadata(false, ActivePropertyChanged)
+    );
 
     private static void ActivePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
-        if (d is TextBox textBox) {
-            if ((e.NewValue as bool?).GetValueOrDefault(false)) {
-                textBox.GotKeyboardFocus += OnKeyboardFocusSelectText;
-                textBox.PreviewMouseLeftButtonDown += OnMouseLeftButtonDown;
-            } else {
-                textBox.GotKeyboardFocus -= OnKeyboardFocusSelectText;
-                textBox.PreviewMouseLeftButtonDown -= OnMouseLeftButtonDown;
-            }
+        if (d is not TextBox textBox)
+            return;
+
+        if (e.NewValue is bool isActive && isActive) {
+            textBox.GotKeyboardFocus += OnKeyboardFocusSelectText;
+            textBox.PreviewMouseLeftButtonDown += OnMouseLeftButtonDown;
+        } else {
+            textBox.GotKeyboardFocus -= OnKeyboardFocusSelectText;
+            textBox.PreviewMouseLeftButtonDown -= OnMouseLeftButtonDown;
         }
     }
 
     private static void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-        DependencyObject dependencyObject = GetParentFromVisualTree(e.OriginalSource);
+        TextBox? textBox = GetParentFromVisualTree(e.OriginalSource) as TextBox;
+        if (textBox == null || textBox.IsKeyboardFocusWithin) return;
 
-        if (dependencyObject == null) {
-            return;
-        }
-
-        TextBox textBox = (TextBox)dependencyObject;
-        if (!textBox.IsKeyboardFocusWithin) {
-            textBox.Focus();
-            e.Handled = true;
-        }
+        textBox.Focus();
+        e.Handled = true;
     }
 
     private static DependencyObject GetParentFromVisualTree(object source) {
-        DependencyObject parent = source as UIElement;
+        DependencyObject parent = source as DependencyObject;
         while (parent != null && parent is not TextBox) {
             parent = VisualTreeHelper.GetParent(parent);
         }

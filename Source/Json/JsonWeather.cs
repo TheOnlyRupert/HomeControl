@@ -13,9 +13,9 @@ public class JsonWeather {
         public DateTime startTime { get; set; }
         public bool isDaytime { get; set; }
         public int temperature { get; set; }
-        public string windSpeed { get; set; }
+        public string? windSpeed { get; set; }
         public string windDirection { get; set; }
-        public string shortForecast { get; set; }
+        public string? shortForecast { get; set; }
         public string detailedForecast { get; set; }
         public RelativeHumidity relativeHumidity { get; set; }
         public ProbabilityOfPrecipitation probabilityOfPrecipitation { get; set; }
@@ -37,14 +37,14 @@ public class ApiStatus {
 public class WeatherHourlyBlock {
     public int Number { get; set; }
     public DateTime Time { get; set; }
-    public string WeatherIcon { get; set; }
+    public string? WeatherIcon { get; set; }
     public int Temp { get; set; }
     public string RainIcon { get; set; }
     public int RainChance { get; set; }
-    public string WindSpeed { get; set; }
+    public string? WindSpeed { get; set; }
     public int WindDirectionIcon { get; set; }
     public int Humidity { get; set; }
-    public string ShortForecast { get; set; }
+    public string? ShortForecast { get; set; }
 }
 
 public class JsonWeatherLocation {

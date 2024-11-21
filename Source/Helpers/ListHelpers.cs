@@ -1,13 +1,22 @@
 ﻿namespace HomeControl.Source.Helpers;
 
 public static class ListHelpers {
-    public static List<string> RandomizeList(List<string> list) {
-        Random rand = new();
+    private static readonly Random Rand = new();
+
+    public static List<string>? RandomizeList(List<string>? list) {
+        if (list == null || list.Count < 2) {
+            return list;
+        }
+
         int n = list.Count;
-        while (n > 1) {
-            n--;
-            int k = rand.Next(n + 1);
-            (list[k], list[n]) = (list[n], list[k]);
+
+        // Fisher-Yates shuffle (Durstenfeld version)
+        for (int i = n - 1; i > 0; i--) {
+            // Randomly pick an index from 0 to i
+            int j = Rand.Next(i + 1);
+
+            // Swap elements at i and j
+            (list[i], list[j]) = (list[j], list[i]);
         }
 
         return list;

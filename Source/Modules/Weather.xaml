@@ -1060,7 +1060,8 @@
                 MinHeight="256"
                 Foreground="White"
                 Margin="-28 -32 -8 0"
-                BorderThickness="0">
+                BorderThickness="0"
+                Background="Transparent">
                 <chartingToolkit:Chart.LegendStyle>
                     <Style
                         TargetType="visualizationToolkit:Legend">

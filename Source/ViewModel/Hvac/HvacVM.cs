@@ -9,12 +9,11 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Hvac;
 
 public class HvacVM : BaseViewModel {
-    private readonly CrossViewMessenger _simpleMessenger;
     private int _currentWindDirectionRotation;
 
-    private string _temperatureInside, _heatingCoolingText, _temperatureAdjusted, _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _fanStatusColor,
-        _heatingCoolingStatusColor, _humidityInside, _temperatureOutside, _temperatureOutsideColor, _currentWindSpeedText, _currentWeatherDescription, _currentDateText, _currentTimeText,
-        _currentTimeSecondsText, _currentWeatherCloudIcon, _runTime, _currentRainChanceText, _humidityOutside, _temperatureAdjustedColor, _temperatureInsideColor;
+    private string _temperatureInside, _heatingCoolingText, _temperatureAdjusted, _programStatus, _fanStatus, _heatingCoolingStatus, _programStatusColor, _humidityOutside, _temperatureInsideColor,
+        _temperatureAdjustedColor, _fanStatusColor, _heatingCoolingStatusColor, _humidityInsideInside, _temperatureOutside, _temperatureOutsideColor, _currentWindSpeedText, _currentWeatherDescription,
+        _currentDateText, _currentTimeText, _currentTimeSecondsText, _currentWeatherCloudIcon, _runTime, _currentRainChanceText;
 
     public HvacVM() {
         CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
@@ -24,325 +23,556 @@ public class HvacVM : BaseViewModel {
         UpdateWeather();
         UpdateHvac();
 
-        _simpleMessenger = CrossViewMessenger.Instance;
-        CrossViewMessenger.Instance.MessageValueChanged += OnSimpleMessengerValueChanged;
+        CrossViewMessenger simpleMessenger = CrossViewMessenger.Instance;
+        simpleMessenger.MessageValueChanged += OnSimpleMessengerValueChanged;
     }
 
     public ICommand ButtonCommand {
         get => new DelegateCommand(ButtonLogic, true);
     }
 
-    public int CurrentWindDirectionRotation {
-        get => _currentWindDirectionRotation;
-        set => SetProperty(ref _currentWindDirectionRotation, value);
-    }
-
-    public string TemperatureInside {
-        get => _temperatureInside;
-        set => SetProperty(ref _temperatureInside, value);
-    }
-
-    public string HeatingCoolingText {
-        get => _heatingCoolingText;
-        set => SetProperty(ref _heatingCoolingText, value);
-    }
-
-    public string TemperatureAdjusted {
-        get => _temperatureAdjusted;
-        set => SetProperty(ref _temperatureAdjusted, value);
-    }
-
-    public string ProgramStatus {
-        get => _programStatus;
-        set => SetProperty(ref _programStatus, value);
-    }
-
-    public string FanStatus {
-        get => _fanStatus;
-        set => SetProperty(ref _fanStatus, value);
-    }
-
-    public string HeatingCoolingStatus {
-        get => _heatingCoolingStatus;
-        set => SetProperty(ref _heatingCoolingStatus, value);
-    }
-
-    public string ProgramStatusColor {
-        get => _programStatusColor;
-        set => SetProperty(ref _programStatusColor, value);
-    }
-
-    public string FanStatusColor {
-        get => _fanStatusColor;
-        set => SetProperty(ref _fanStatusColor, value);
-    }
-
-    public string HeatingCoolingStatusColor {
-        get => _heatingCoolingStatusColor;
-        set => SetProperty(ref _heatingCoolingStatusColor, value);
-    }
-
-    public string HumidityInside {
-        get => _humidityInside;
-        set => SetProperty(ref _humidityInside, value);
-    }
-
-    public string TemperatureOutside {
-        get => _temperatureOutside;
-        set => SetProperty(ref _temperatureOutside, value);
-    }
-
-    public string TemperatureOutsideColor {
-        get => _temperatureOutsideColor;
-        set => SetProperty(ref _temperatureOutsideColor, value);
-    }
-
-    public string CurrentWindSpeedText {
-        get => _currentWindSpeedText;
-        set => SetProperty(ref _currentWindSpeedText, value);
-    }
-
-    public string CurrentWeatherDescription {
-        get => _currentWeatherDescription;
-        set => SetProperty(ref _currentWeatherDescription, value);
-    }
-
-    public string CurrentDateText {
-        get => _currentDateText;
-        set => SetProperty(ref _currentDateText, value);
-    }
-
-    public string CurrentTimeText {
-        get => _currentTimeText;
-        set => SetProperty(ref _currentTimeText, value);
-    }
-
-    public string CurrentTimeSecondsText {
-        get => _currentTimeSecondsText;
-        set => SetProperty(ref _currentTimeSecondsText, value);
-    }
-
-    public string CurrentWeatherCloudIcon {
-        get => _currentWeatherCloudIcon;
-        set => SetProperty(ref _currentWeatherCloudIcon, value);
-    }
-
-    public string RunTime {
-        get => _runTime;
-        set => SetProperty(ref _runTime, value);
-    }
-
-    public string CurrentRainChanceText {
-        get => _currentRainChanceText;
-        set => SetProperty(ref _currentRainChanceText, value);
-    }
-
-    public string HumidityOutside {
-        get => _humidityOutside;
-        set => SetProperty(ref _humidityOutside, value);
-    }
-
-    public string TemperatureAdjustedColor {
-        get => _temperatureAdjustedColor;
-        set => SetProperty(ref _temperatureAdjustedColor, value);
-    }
-
-    public string TemperatureInsideColor {
-        get => _temperatureInsideColor;
-        set => SetProperty(ref _temperatureInsideColor, value);
-    }
-
     private async void UpdateWeather() {
+        JsonSerializerOptions options = new() {
+            IncludeFields = true
+        };
+
         try {
-            Uri weatherUrl = new(
-                $"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
+            Uri weatherForecastHourlyUrl =
+                new($"https://api.weather.gov/gridpoints/{ReferenceValues.JsonSettingsMaster.GridId}/{ReferenceValues.JsonSettingsMaster.GridX},{ReferenceValues.JsonSettingsMaster.GridY}/forecast/hourly");
+
             using WebClient client = new();
             client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
-            string weatherData = await client.DownloadStringTaskAsync(weatherUrl);
+            string weatherForecastHourly = await client.DownloadStringTaskAsync(weatherForecastHourlyUrl);
+            ReferenceValues.ForecastHourly = JsonSerializer.Deserialize<JsonWeather>(weatherForecastHourly, options);
 
-            JsonWeather forecast = JsonSerializer.Deserialize<JsonWeather>(weatherData, new JsonSerializerOptions {
-                IncludeFields = true
-            });
+            for (int i = 0; i < ReferenceValues.ForecastHourly.properties.periods.Count; i++) {
+                if (ReferenceValues.ForecastHourly.properties.periods[i].startTime < DateTime.Now) {
+                    ReferenceValues.ForecastHourly.properties.periods.RemoveAt(i);
+                }
+            }
 
-            ReferenceValues.ForecastHourly = forecast;
-            ReferenceValues.ForecastHourly.properties.periods.RemoveAll(p => p.startTime < DateTime.Now);
+            CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(ReferenceValues.ForecastHourly.properties.periods[0].windDirection);
+            CurrentWindSpeedText = ReferenceValues.ForecastHourly.properties.periods[0].windSpeed;
+            CurrentRainChanceText = ReferenceValues.ForecastHourly.properties.periods[0].probabilityOfPrecipitation.value + "%";
+            CurrentWeatherDescription = ReferenceValues.ForecastHourly.properties.periods[0].shortForecast;
+            CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(ReferenceValues.ForecastHourly.properties.periods[0].shortForecast,
+                ReferenceValues.ForecastHourly.properties.periods[0].isDaytime,
+                ReferenceValues.ForecastHourly.properties.periods[0].temperature, ReferenceValues.ForecastHourly.properties.periods[0].windSpeed);
 
-            JsonWeather.Periods firstPeriod = ReferenceValues.ForecastHourly.properties.periods[0];
-            SetWeatherProperties(firstPeriod);
+            if (ReferenceValues.JsonSettingsMaster.UseMetricUnits) {
+                double c = (ReferenceValues.ForecastHourly.properties.periods[0].temperature - 32) * 0.556;
+                TemperatureOutside = (int)c + "°";
+            } else {
+                TemperatureOutside = ReferenceValues.ForecastHourly.properties.periods[0].temperature + "°";
+            }
+
+            TemperatureOutsideColor = "Yellow";
+
+            HumidityOutside = ReferenceValues.ForecastHourly.properties.periods[0].relativeHumidity.value + "%";
         } catch (Exception e) {
-            LogError(e.ToString());
+            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                Date = DateTime.Now,
+                Level = "WARN",
+                Module = "WeatherVM",
+                Description = e.ToString()
+            });
+            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
-    }
-
-    private void SetWeatherProperties(JsonWeather.Periods firstPeriod) {
-        CurrentWindDirectionRotation = WeatherHelpers.GetWindRotation(firstPeriod.windDirection);
-        CurrentWindSpeedText = firstPeriod.windSpeed;
-        CurrentRainChanceText = $"{firstPeriod.probabilityOfPrecipitation.value}%";
-        CurrentWeatherDescription = firstPeriod.shortForecast;
-        CurrentWeatherCloudIcon = WeatherHelpers.GetWeatherIcon(firstPeriod.shortForecast, firstPeriod.isDaytime, firstPeriod.temperature, firstPeriod.windSpeed);
-
-        TemperatureOutside = ReferenceValues.JsonSettingsMaster.UseMetricUnits
-            ? $"{(int)((firstPeriod.temperature - 32) * 0.556)}°"
-            : $"{firstPeriod.temperature}°";
-
-        TemperatureOutsideColor = "Yellow";
-        HumidityOutside = $"{firstPeriod.relativeHumidity.value}%";
     }
 
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
         case "Refresh":
-            UpdateTimeAndRuntime();
+            CurrentTimeSecondsText = DateTime.Now.ToString("ss");
+            TimeSpan time = TimeSpan.FromSeconds(ReferenceValues.HvacStateTime);
+            RunTime = ReferenceValues.HvacState + ": " + time.ToString(@"hh\:mm\:ss");
+
             break;
         case "HvacUpdated":
             UpdateHvac();
+
             break;
         case "MinChanged":
-            UpdateDateTime();
+            CurrentDateText = DateTime.Now.DayOfWeek + "\n" + DateTime.Now.ToString("MMMM dd yyyy");
+            CurrentTimeText = DateTime.Now.ToString("HH:mm");
+            UpdateWeather();
+
             break;
         case "HourChanged":
-            UpdateSchedule();
+            //Check Schedule Logic
+            if (ReferenceValues.UseSchedule) {
+                foreach (HvacEvent hvacEvent in ReferenceValues.JsonHvacMaster.HvacEvents) {
+                    if (hvacEvent.EventTime.Hour == DateTime.Now.Hour) {
+                        ReferenceValues.TemperatureSet = hvacEvent.EventTemp;
+                    }
+                }
+
+                UpdateWeather();
+            }
+
             break;
         }
-    }
-
-    private void UpdateTimeAndRuntime() {
-        CurrentTimeSecondsText = DateTime.Now.ToString("ss");
-        RunTime = $"{ReferenceValues.HvacState}: {TimeSpan.FromSeconds(ReferenceValues.HvacStateTime):hh\\:mm\\:ss}";
-    }
-
-    private void UpdateDateTime() {
-        CurrentDateText = DateTime.Now.ToString("dddd\nMMMM dd yyyy");
-        CurrentTimeText = DateTime.Now.ToString("HH:mm");
-        UpdateWeather();
-    }
-
-    private void UpdateSchedule() {
-        if (ReferenceValues.UseSchedule) {
-            foreach (HvacEvent hvacEvent in ReferenceValues.JsonHvacMaster.HvacEvents) {
-                if (hvacEvent.EventTime.Hour == DateTime.Now.Hour) {
-                    ReferenceValues.TemperatureSet = hvacEvent.EventTemp;
-                }
-            }
-        }
-
-        UpdateWeather();
     }
 
     private void UpdateHvac() {
         if (!ReferenceValues.IsHvacComEstablished) {
-            ResetHvacState();
+            TemperatureAdjusted = "";
+            TemperatureAdjustedColor = "White";
+            TemperatureInside = "";
+            TemperatureInsideColor = "White";
+            ProgramStatus = "Offline";
+            ProgramStatusColor = "Red";
+            FanStatus = "Off";
+            FanStatusColor = "Red";
+            HeatingCoolingText = "Adjust To";
+            HeatingCoolingStatus = "Offline";
+            HeatingCoolingStatusColor = "Red";
+            HumidityInside = "Offline";
+
             return;
         }
 
-        TemperatureAdjusted = FormatTemperature(ReferenceValues.TemperatureSet);
-        TemperatureInside = FormatTemperature(ReferenceValues.TemperatureInside);
-        HumidityInside = ReferenceValues.HumidityInside > -99 ? $"{ReferenceValues.HumidityInside}%" : "??";
+        if (ReferenceValues.JsonSettingsMaster.UseMetricUnits) {
+            TemperatureAdjusted = ReferenceValues.TemperatureSet + "°";
+        } else {
+            double f = ReferenceValues.TemperatureSet * 1.8 + 32;
+            TemperatureAdjusted = (int)f + "°";
+        }
 
-        FanStatus = ReferenceValues.IsFanAuto ? "Auto" : "On";
-        FanStatusColor = ReferenceValues.IsFanAuto ? "White" : "Green";
-
-        UpdateHeatingCoolingStatus();
-    }
-
-    private static string FormatTemperature(double temperature) {
-        return ReferenceValues.JsonSettingsMaster.UseMetricUnits
-            ? $"{temperature}°"
-            : $"{(int)(temperature * 1.8 + 32)}°";
-    }
-
-    private void ResetHvacState() {
-        TemperatureAdjusted = "Offline";
         TemperatureAdjustedColor = "White";
-        TemperatureInside = "Offline";
-        TemperatureInsideColor = "White";
-        ProgramStatus = "Offline";
-        ProgramStatusColor = "Red";
-        FanStatus = "Off";
-        FanStatusColor = "Red";
-        HeatingCoolingText = "Adjust To";
-        HeatingCoolingStatus = "Offline";
-        HeatingCoolingStatusColor = "Red";
-        HumidityInside = "Offline";
-    }
 
-    private void UpdateHeatingCoolingStatus() {
-        string heatingCoolingColor = ReferenceValues.IsHeatingMode ? "Red" : "CornflowerBlue";
-        string statusText = ReferenceValues.IsHeatingMode ? "Heating" : "Cooling";
+        if (Math.Abs(ReferenceValues.TemperatureInside - -99) < 1) {
+            TemperatureInside = "??";
+            TemperatureInsideColor = "Red";
+        } else {
+            if (ReferenceValues.JsonSettingsMaster.UseMetricUnits) {
+                TemperatureInside = ReferenceValues.TemperatureInside + "°";
+            } else {
+                double f = ReferenceValues.TemperatureInside * 1.8 + 32;
+                TemperatureInside = (int)f + "°";
+            }
 
-        switch (ReferenceValues.HvacState) {
-        case 0: // Off
-            ProgramStatus = "Off";
-            ProgramStatusColor = "White";
-            HeatingCoolingStatus = statusText;
-            HeatingCoolingStatusColor = heatingCoolingColor;
-            HeatingCoolingText = $"{statusText} To";
-            break;
-        case 1: // Running
-            ProgramStatus = "Running";
-            ProgramStatusColor = "Green";
-            HeatingCoolingStatus = statusText;
-            HeatingCoolingStatusColor = heatingCoolingColor;
-            HeatingCoolingText = $"{statusText} To";
-            break;
-        case 2: // Standby
-            ProgramStatus = "Standby";
-            ProgramStatusColor = "Yellow";
-            HeatingCoolingStatus = statusText;
-            HeatingCoolingStatusColor = heatingCoolingColor;
-            HeatingCoolingText = $"{statusText} To";
-            break;
-        case 3: // Purging
-            ProgramStatus = "Purging";
-            ProgramStatusColor = "Yellow";
-            HeatingCoolingStatus = statusText;
-            HeatingCoolingStatusColor = heatingCoolingColor;
-            HeatingCoolingText = $"{statusText} To";
-            break;
+            TemperatureInsideColor = "White";
+        }
+
+        if (ReferenceValues.HumidityInside == -99) {
+            HumidityInside = "??";
+        } else {
+            HumidityInside = ReferenceValues.HumidityInside + "%";
+        }
+
+        if (ReferenceValues.IsFanAuto) {
+            FanStatus = "Auto";
+            FanStatusColor = "White";
+        } else {
+            FanStatus = "On";
+            FanStatusColor = "Green";
+        }
+
+        if (ReferenceValues.IsHeatingMode) {
+            switch (ReferenceValues.HvacState) {
+            case HvacStates.Off:
+                ProgramStatus = "Off";
+                ProgramStatusColor = "White";
+                HeatingCoolingStatus = "Heating";
+                HeatingCoolingStatusColor = "Red";
+                HeatingCoolingText = "Heating To";
+
+                break;
+            case HvacStates.Running:
+                ProgramStatus = "Running";
+                ProgramStatusColor = "Green";
+                HeatingCoolingStatus = "Heating";
+                HeatingCoolingStatusColor = "Red";
+                HeatingCoolingText = "Heating To";
+
+                break;
+            case HvacStates.Standby:
+                ProgramStatus = "Standby";
+                ProgramStatusColor = "Yellow";
+                HeatingCoolingStatus = "Heating";
+                HeatingCoolingStatusColor = "Red";
+                HeatingCoolingText = "Heating To";
+
+                break;
+            case HvacStates.Purging:
+                ProgramStatus = "Purging";
+                ProgramStatusColor = "Yellow";
+                HeatingCoolingStatus = "Heating";
+                HeatingCoolingStatusColor = "Red";
+                HeatingCoolingText = "Heating To";
+
+                break;
+            }
+        } else {
+            switch (ReferenceValues.HvacState) {
+            case HvacStates.Off:
+                ProgramStatus = "Off";
+                ProgramStatusColor = "White";
+                HeatingCoolingStatus = "Cooling";
+                HeatingCoolingStatusColor = "CornflowerBlue";
+                HeatingCoolingText = "Cooling To";
+
+                break;
+            case HvacStates.Running:
+                ProgramStatus = "Running";
+                ProgramStatusColor = "Green";
+                HeatingCoolingStatus = "Cooling";
+                HeatingCoolingStatusColor = "CornflowerBlue";
+                HeatingCoolingText = "Cooling To";
+
+                break;
+            case HvacStates.Standby:
+                ProgramStatus = "Standby";
+                ProgramStatusColor = "Yellow";
+                HeatingCoolingStatus = "Cooling";
+                HeatingCoolingStatusColor = "CornflowerBlue";
+                HeatingCoolingText = "Cooling To";
+
+                break;
+            case HvacStates.Purging:
+                ProgramStatus = "Purging";
+                ProgramStatusColor = "Yellow";
+                HeatingCoolingStatus = "Cooling";
+                HeatingCoolingStatusColor = "CornflowerBlue";
+                HeatingCoolingText = "Cooling To";
+
+                break;
+            }
         }
     }
 
-    private static void LogError(string errorDetails) {
-        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-            Date = DateTime.Now,
-            Level = "WARN",
-            Module = "WeatherVM",
-            Description = errorDetails
-        });
-        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-    }
-
+    /* 0 -> Force Refresh,
+     * 1 -> Fan On, 2 -> Fan Auto,
+     * 3 -> Program On, 4 -> Program Off,
+     * 5 -> Heating Mode, 6 -> Cooling Mode */
     private void ButtonLogic(object param) {
         switch (param) {
         case "hvac":
-            EditHvac editHvac = new();
-            editHvac.ShowDialog();
-            editHvac.Close();
-            ToggleHvacState();
-            break;
-        case "heating":
-            SetHeatingMode();
-            break;
-        case "cooling":
-            SetCoolingMode();
+            if (ReferenceValues.LockUi) {
+                SoundDispatcher.PlaySound("locked");
+            } else if (ReferenceValues.IsHvacComEstablished || ReferenceValues.JsonSettingsMaster.DebugMode) {
+                /* Save current state before editing. Only update if state changes */
+                bool isProgramRunningOld = ReferenceValues.IsProgramRunning;
+                bool isHeatingModeOld = ReferenceValues.IsHeatingMode;
+                bool isFanAutoOld = ReferenceValues.IsFanAuto;
+                double tempOld = ReferenceValues.TemperatureSet;
+
+                EditHvac editHvac = new();
+                editHvac.ShowDialog();
+                editHvac.Close();
+
+                if (isFanAutoOld != ReferenceValues.IsFanAuto) {
+                    if (ReferenceValues.IsFanAuto) {
+                        /* 2 -> Fan On */
+                        try {
+                            ReferenceValues.SerialPort.Write("2");
+                        } catch (Exception e) {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "HvacVM",
+                                Description = "Unable to change HVAC state\n" + e
+                            });
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                        }
+                    } else {
+                        /* 1 -> Fan Auto */
+                        try {
+                            ReferenceValues.SerialPort.Write("1");
+                        } catch (Exception e) {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "HvacVM",
+                                Description = "Unable to change HVAC state\n" + e
+                            });
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                        }
+                    }
+                }
+
+                if (isProgramRunningOld != ReferenceValues.IsProgramRunning) {
+                    if (ReferenceValues.IsProgramRunning) {
+                        /* 3 -> Program On */
+                        try {
+                            ReferenceValues.SerialPort.Write("3");
+                        } catch (Exception e) {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "HvacVM",
+                                Description = "Unable to change HVAC state\n" + e
+                            });
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                        }
+
+                        ReferenceValues.HvacState = HvacStates.Standby;
+                    } else {
+                        /* 4 -> Program Off */
+                        try {
+                            ReferenceValues.SerialPort.Write("4");
+                        } catch (Exception e) {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "HvacVM",
+                                Description = "Unable to change HVAC state\n" + e
+                            });
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                        }
+
+                        ReferenceValues.HvacState = HvacStates.Off;
+                    }
+                }
+
+                if (isHeatingModeOld != ReferenceValues.IsHeatingMode) {
+                    if (ReferenceValues.IsHeatingMode) {
+                        /* 3 -> Heating Mode */
+                        try {
+                            ReferenceValues.SerialPort.Write("5");
+                        } catch (Exception e) {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "HvacVM",
+                                Description = "Unable to change HVAC state\n" + e
+                            });
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                        }
+                    } else {
+                        /* 4 -> Cooling Mode */
+                        try {
+                            ReferenceValues.SerialPort.Write("6");
+                        } catch (Exception e) {
+                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                                Date = DateTime.Now,
+                                Level = "WARN",
+                                Module = "HvacVM",
+                                Description = "Unable to change HVAC state\n" + e
+                            });
+                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                        }
+                    }
+                }
+
+                if (Math.Abs(tempOld - ReferenceValues.TemperatureSet) > 0.2) {
+                    try {
+                        char c = (char)(ReferenceValues.TemperatureSet + 50);
+                        ReferenceValues.SerialPort.Write(c.ToString());
+                    } catch (Exception e) {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "WARN",
+                            Module = "HvacVM",
+                            Description = "Unable to change HVAC state\n" + e
+                        });
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                    }
+                }
+
+                UpdateHvac();
+            } else {
+                SoundDispatcher.PlaySound("offline");
+            }
+
             break;
         }
     }
 
-    private void ToggleHvacState() {
-        ReferenceValues.HvacState = ReferenceValues.HvacState == 0 ? 1 : 0;
-        _simpleMessenger.PushMessage("HvacUpdated", null);
+    #region Fields
+
+    public string TemperatureInside {
+        get => _temperatureInside;
+        set {
+            _temperatureInside = value;
+            RaisePropertyChangedEvent("TemperatureInside");
+        }
     }
 
-    private void SetHeatingMode() {
-        ReferenceValues.IsHeatingMode = true;
-        ReferenceValues.HvacState = 1;
-        _simpleMessenger.PushMessage("HvacUpdated", null);
+    public string TemperatureInsideColor {
+        get => _temperatureInsideColor;
+        set {
+            _temperatureInsideColor = value;
+            RaisePropertyChangedEvent("TemperatureInsideColor");
+        }
     }
 
-    private void SetCoolingMode() {
-        ReferenceValues.IsHeatingMode = false;
-        ReferenceValues.HvacState = 1;
-        _simpleMessenger.PushMessage("HvacUpdated", null);
+    public string TemperatureOutside {
+        get => _temperatureOutside;
+        set {
+            _temperatureOutside = value;
+            RaisePropertyChangedEvent("TemperatureOutside");
+        }
     }
+
+    public string TemperatureOutsideColor {
+        get => _temperatureOutsideColor;
+        set {
+            _temperatureOutsideColor = value;
+            RaisePropertyChangedEvent("TemperatureOutsideColor");
+        }
+    }
+
+    public string HeatingCoolingText {
+        get => _heatingCoolingText;
+        set {
+            _heatingCoolingText = value;
+            RaisePropertyChangedEvent("HeatingCoolingText");
+        }
+    }
+
+    public string TemperatureAdjusted {
+        get => _temperatureAdjusted;
+        set {
+            _temperatureAdjusted = value;
+            RaisePropertyChangedEvent("TemperatureAdjusted");
+        }
+    }
+
+    public string TemperatureAdjustedColor {
+        get => _temperatureAdjustedColor;
+        set {
+            _temperatureAdjustedColor = value;
+            RaisePropertyChangedEvent("TemperatureAdjustedColor");
+        }
+    }
+
+    public string ProgramStatus {
+        get => _programStatus;
+        set {
+            _programStatus = value;
+            RaisePropertyChangedEvent("ProgramStatus");
+        }
+    }
+
+    public string ProgramStatusColor {
+        get => _programStatusColor;
+        set {
+            _programStatusColor = value;
+            RaisePropertyChangedEvent("ProgramStatusColor");
+        }
+    }
+
+    public string FanStatus {
+        get => _fanStatus;
+        set {
+            _fanStatus = value;
+            RaisePropertyChangedEvent("FanStatus");
+        }
+    }
+
+    public string FanStatusColor {
+        get => _fanStatusColor;
+        set {
+            _fanStatusColor = value;
+            RaisePropertyChangedEvent("FanStatusColor");
+        }
+    }
+
+    public string HeatingCoolingStatus {
+        get => _heatingCoolingStatus;
+        set {
+            _heatingCoolingStatus = value;
+            RaisePropertyChangedEvent("HeatingCoolingStatus");
+        }
+    }
+
+    public string HeatingCoolingStatusColor {
+        get => _heatingCoolingStatusColor;
+        set {
+            _heatingCoolingStatusColor = value;
+            RaisePropertyChangedEvent("HeatingCoolingStatusColor");
+        }
+    }
+
+    public string HumidityInside {
+        get => _humidityInsideInside;
+        set {
+            _humidityInsideInside = value;
+            RaisePropertyChangedEvent("HumidityInside");
+        }
+    }
+
+    public string HumidityOutside {
+        get => _humidityOutside;
+        set {
+            _humidityOutside = value;
+            RaisePropertyChangedEvent("HumidityOutside");
+        }
+    }
+
+    public string CurrentDateText {
+        get => _currentDateText;
+        set {
+            _currentDateText = value;
+            RaisePropertyChangedEvent("CurrentDateText");
+        }
+    }
+
+    public string CurrentTimeText {
+        get => _currentTimeText;
+        set {
+            _currentTimeText = value;
+            RaisePropertyChangedEvent("CurrentTimeText");
+        }
+    }
+
+    public string CurrentTimeSecondsText {
+        get => _currentTimeSecondsText;
+        set {
+            _currentTimeSecondsText = value;
+            RaisePropertyChangedEvent("CurrentTimeSecondsText");
+        }
+    }
+
+    public string CurrentWeatherCloudIcon {
+        get => _currentWeatherCloudIcon;
+        set {
+            _currentWeatherCloudIcon = value;
+            RaisePropertyChangedEvent("CurrentWeatherCloudIcon");
+        }
+    }
+
+    public int CurrentWindDirectionRotation {
+        get => _currentWindDirectionRotation;
+        set {
+            _currentWindDirectionRotation = value;
+            RaisePropertyChangedEvent("CurrentWindDirectionRotation");
+        }
+    }
+
+    public string CurrentWindSpeedText {
+        get => _currentWindSpeedText;
+        set {
+            _currentWindSpeedText = value;
+            RaisePropertyChangedEvent("CurrentWindSpeedText");
+        }
+    }
+
+    public string CurrentWeatherDescription {
+        get => _currentWeatherDescription;
+        set {
+            _currentWeatherDescription = value;
+            RaisePropertyChangedEvent("CurrentWeatherDescription");
+        }
+    }
+
+    public string RunTime {
+        get => _runTime;
+        set {
+            _runTime = value;
+            RaisePropertyChangedEvent("RunTime");
+        }
+    }
+
+    public string CurrentRainChanceText {
+        get => _currentRainChanceText;
+        set {
+            _currentRainChanceText = value;
+            RaisePropertyChangedEvent("CurrentRainChanceText");
+        }
+    }
+
+    #endregion
 }

@@ -3,7 +3,7 @@
 namespace HomeControl.Source.Helpers;
 
 public static class WeatherHelpers {
-    public static string GetWeatherIcon(string weather, bool isDayTime, int temp, string windSpeed) {
+    public static string? GetWeatherIcon(string? weather, bool isDayTime, int temp, string? windSpeed) {
         switch (weather) {
         case "Sunny":
         case "Mostly Sunny":
@@ -147,7 +147,7 @@ public static class WeatherHelpers {
         };
     }
 
-    public static string GetRainIcon(string input) {
+    public static string GetRainIcon(string? input) {
         switch (input) {
         case "Snow Showers":
         case "Chance Snow Showers":
@@ -163,7 +163,7 @@ public static class WeatherHelpers {
         }
     }
 
-    public static string[] RegexWeatherForecast(string input) {
+    public static string?[] RegexWeatherForecast(string? input) {
         return input.Split(new[] {
             " then "
         }, StringSplitOptions.None);

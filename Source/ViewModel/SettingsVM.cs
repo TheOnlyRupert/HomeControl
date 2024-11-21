@@ -4,6 +4,7 @@ using System.Windows.Input;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.ViewModel.Base;
+
 //using System.Device.Location;
 
 namespace HomeControl.Source.ViewModel;
