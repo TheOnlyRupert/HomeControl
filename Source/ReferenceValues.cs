@@ -23,12 +23,12 @@ public static class ReferenceValues {
     public static DateTime CalendarEventDate { get; set; }
 
     public static JsonCalendar JsonCalendarMaster { get; set; }
-    public static JsonFinances JsonFinanceMaster { get; set; }
+    public static JsonFinances? JsonFinanceMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
     public static JsonHvac? JsonHvacMaster { get; set; }
 
     public static int ActiveBehaviorUser { get; set; }
-    public static JsonSettings JsonSettingsMaster { get; set; }
+    public static JsonSettings? JsonSettingsMaster { get; set; }
 
     public static double TemperatureInside { get; set; }
     public static float HumidityInside { get; set; }
@@ -50,11 +50,11 @@ public static class ReferenceValues {
 
     public static bool IsGameTimerRunning { get; set; }
 
-    public static JsonGameStats JsonGameStatsMaster { get; set; }
+    public static JsonGameStats? JsonGameStatsMaster { get; set; }
 
     public static JsonDebug JsonDebugMaster { get; set; }
     public static JsonTasks JsonTasksMaster { get; set; }
-    public static JsonExercise JsonExerciseMaster { get; set; }
+    public static JsonFitness JsonFitnessMaster { get; set; }
     public static ObservableCollection<string> IconImageList { get; set; }
 
     public static JsonTimer JsonTimerMaster { get; set; }

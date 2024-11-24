@@ -1124,6 +1124,7 @@ public class BehaviorVM : BaseViewModel {
     private void OnSimpleMessengerValueChanged(object sender, MessageValueChangedEventArgs e) {
         switch (e.PropertyName) {
         case "RefreshBehavior":
+        case "DatabaseUpdated":
             RefreshBehavior();
             break;
         case "DateChanged":
@@ -1335,21 +1336,15 @@ public class BehaviorVM : BaseViewModel {
     private static void UpdateDatabase(int id, int stars, int strikes) {
         using MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString);
         const string query = "UPDATE behavior SET stars = @stars, strikes = @strikes WHERE id = @id";
-        const string updateVersion = "UPDATE versions SET version = version + 1 WHERE id = 1";
 
         try {
             connection.Open();
 
-            using (MySqlCommand command = new(query, connection)) {
-                command.Parameters.AddWithValue("@id", id);
-                command.Parameters.AddWithValue("@stars", stars);
-                command.Parameters.AddWithValue("@strikes", strikes);
-                command.ExecuteNonQuery();
-            }
-
-            using (MySqlCommand command = new(updateVersion, connection)) {
-                command.ExecuteNonQuery();
-            }
+            using MySqlCommand command = new(query, connection);
+            command.Parameters.AddWithValue("@id", id);
+            command.Parameters.AddWithValue("@stars", stars);
+            command.Parameters.AddWithValue("@strikes", strikes);
+            command.ExecuteNonQuery();
         } catch (Exception) {
             //todo: this
         }

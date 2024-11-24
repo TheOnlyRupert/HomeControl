@@ -78,7 +78,7 @@ public class ButtonStackVM : BaseViewModel {
             }, {
                 "contacts", () => new Contacts().ShowDialogAndClose()
             }, {
-                "exercise", () => new Modules.Exercise.Exercise().ShowDialogAndClose()
+                "exercise", () => new Modules.Fitness.Fitness().ShowDialogAndClose()
             }, {
                 "pictionary", () => new Pictionary().ShowDialogAndClose()
             }, {

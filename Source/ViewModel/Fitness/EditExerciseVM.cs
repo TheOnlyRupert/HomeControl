@@ -9,45 +9,50 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Exercise;
 
 public class EditExerciseVM : BaseViewModel {
-    private int _chestSelectedIndex, _shouldersSelectedIndex, _armsSelectedIndex, _backSelectedIndex, _abdominalSelectedIndex, _legsSelectedIndex, _minTime, _maxTime, _minHoldTime, _maxHoldTime,
-        _difficulty, _exerciseSelectedIndex, _muscleGroupSelectedIndex;
+    private int _chestSelectedIndex, _shouldersSelectedIndex, _tricepsSelectedIndex, _bicepsSelectedIndex, _backSelectedIndex, _coreSelectedIndex, _legsSelectedIndex, _cardioSelectedIndex,
+        _minReps, _minSets, _minWeight, _exerciseSelectedIndex, _muscleGroupSelectedIndex;
 
-    private ObservableCollection<Json.Exercise> _exerciseList, _chestList, _shouldersList, _armsList, _backList, _abdominalList, _legsList;
+    private ObservableCollection<Exercises> _exerciseList, _chestList, _shouldersList, _tricepsList, _bicepsList, _backList, _coreList, _legsList, _cardioList;
 
-    private string _exerciseName, _imageSelected, _muscleGroupSelected;
-
-    private Json.Exercise _exerciseSelected;
+    private string _exerciseName, _imageSelected, _muscleGroupSelected, _chestSelected, _shouldersSelected, _tricepsSelected, _bicepsSelected, _backSelected, _coreSelected, _legsSelected, _cardioSelected;
+    private Exercises _exerciseSelected;
     private ObservableCollection<string> _imageList, _muscleGroupList;
 
-    private bool _needsEquipment, _canHold;
+    private bool _needsEquipment;
 
     public EditExerciseVM() {
-        MuscleGroupList = new ObservableCollection<string> {
+        MuscleGroupList = [
             "Chest",
             "Shoulders",
-            "Arms",
+            "Triceps",
+            "Biceps",
             "Back",
-            "Abdominal",
-            "Legs"
-        };
+            "Core",
+            "Legs",
+            "Cardio"
+        ];
 
         MuscleGroupSelectedIndex = 0;
         ExerciseSelectedIndex = 0;
         ChestSelectedIndex = -1;
         ShouldersSelectedIndex = -1;
-        ArmsSelectedIndex = -1;
+        TricepsSelectedIndex = -1;
+        BicepsSelectedIndex = -1;
         BackSelectedIndex = -1;
-        AbdominalSelectedIndex = -1;
+        CoreSelectedIndex = -1;
         LegsSelectedIndex = -1;
-        ExerciseList = ReferenceValues.JsonExerciseMaster.ExerciseList;
+        CardioSelectedIndex = -1;
+        ExerciseList = ReferenceValues.JsonFitnessMaster.Exercises;
 
-        ExerciseList ??= new ObservableCollection<Json.Exercise>();
-        ChestList ??= new ObservableCollection<Json.Exercise>();
-        ShouldersList ??= new ObservableCollection<Json.Exercise>();
-        BackList ??= new ObservableCollection<Json.Exercise>();
-        LegsList ??= new ObservableCollection<Json.Exercise>();
-        AbdominalList ??= new ObservableCollection<Json.Exercise>();
-        ArmsList ??= new ObservableCollection<Json.Exercise>();
+        ExerciseList ??= new ObservableCollection<Exercises>();
+        ChestList ??= new ObservableCollection<Exercises>();
+        ShouldersList ??= new ObservableCollection<Exercises>();
+        TricepsList ??= new ObservableCollection<Exercises>();
+        BicepsList ??= new ObservableCollection<Exercises>();
+        BackList ??= new ObservableCollection<Exercises>();
+        LegsList ??= new ObservableCollection<Exercises>();
+        CoreList ??= new ObservableCollection<Exercises>();
+        CardioList ??= new ObservableCollection<Exercises>();
 
         ListToMuscleGroup();
     }
@@ -56,27 +61,26 @@ public class EditExerciseVM : BaseViewModel {
         get => new DelegateCommand(ButtonCommandLogic, true);
     }
 
-    private void PopulateDetailedView(Json.Exercise value) {
+    private void PopulateDetailedView(Exercises value) {
         ExerciseName = value.Name;
-        Difficulty = value.Difficulty;
         MuscleGroupSelected = value.MuscleGroup;
-        MinTime = value.MinTime;
-        MaxTime = value.MaxTime;
-        MinHoldTime = value.MinHoldTime;
-        MaxHoldTime = value.MaxHoldTime;
-        CanHold = value.CanHold;
+        MinReps = value.MinReps;
+        MinSets = value.MinSets;
+        MinWeight = value.MinWeight;
         NeedsEquipment = value.NeedsEquipment;
     }
 
     private void ListToMuscleGroup() {
         ChestList.Clear();
         ShouldersList.Clear();
-        ArmsList.Clear();
+        TricepsList.Clear();
+        BicepsList.Clear();
         BackList.Clear();
-        AbdominalList.Clear();
+        CoreList.Clear();
         LegsList.Clear();
+        CardioList.Clear();
 
-        foreach (Json.Exercise exercise in ExerciseList) {
+        foreach (Exercises exercise in ExerciseList) {
             switch (exercise.MuscleGroup) {
             case "Chest":
                 ChestList.Add(exercise);
@@ -84,17 +88,23 @@ public class EditExerciseVM : BaseViewModel {
             case "Shoulders":
                 ShouldersList.Add(exercise);
                 break;
-            case "Arms":
-                ArmsList.Add(exercise);
+            case "Triceps":
+                TricepsList.Add(exercise);
+                break;
+            case "Biceps":
+                BicepsList.Add(exercise);
                 break;
             case "Back":
                 BackList.Add(exercise);
                 break;
             case "Abdominal":
-                AbdominalList.Add(exercise);
+                CoreList.Add(exercise);
                 break;
             case "Legs":
                 LegsList.Add(exercise);
+                break;
+            case "Cardio":
+                CardioList.Add(exercise);
                 break;
             }
         }
@@ -115,15 +125,12 @@ public class EditExerciseVM : BaseViewModel {
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
-                ExerciseList.Add(new Json.Exercise {
+                ExerciseList.Add(new Exercises {
                     Name = ExerciseName,
-                    Difficulty = Difficulty,
                     MuscleGroup = MuscleGroupSelected,
-                    MinTime = MinTime,
-                    MaxTime = MaxTime,
-                    MinHoldTime = MinHoldTime,
-                    MaxHoldTime = MaxHoldTime,
-                    CanHold = CanHold,
+                    MinReps = MinReps,
+                    MinSets = MinSets,
+                    MinWeight = MinWeight,
                     NeedsEquipment = NeedsEquipment
                 });
 
@@ -151,15 +158,12 @@ public class EditExerciseVM : BaseViewModel {
                             });
                             FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
-                            ExerciseList.Insert(ExerciseList.IndexOf(ExerciseSelected), new Json.Exercise {
+                            ExerciseList.Insert(ExerciseList.IndexOf(ExerciseSelected), new Exercises {
                                 Name = ExerciseName,
-                                Difficulty = Difficulty,
                                 MuscleGroup = MuscleGroupSelected,
-                                MinTime = MinTime,
-                                MaxTime = MaxTime,
-                                MinHoldTime = MinHoldTime,
-                                MaxHoldTime = MaxHoldTime,
-                                CanHold = CanHold,
+                                MinReps = MinReps,
+                                MinSets = MinSets,
+                                MinWeight = MinWeight,
                                 NeedsEquipment = NeedsEquipment
                             });
 
@@ -218,9 +222,9 @@ public class EditExerciseVM : BaseViewModel {
 
     private void SaveJson() {
         try {
-            ReferenceValues.JsonExerciseMaster.ExerciseList = ExerciseList;
+            ReferenceValues.JsonFitnessMaster.Exercises = ExerciseList;
 
-            FileHelpers.SaveFileText("exercise", JsonSerializer.Serialize(ReferenceValues.JsonExerciseMaster), true);
+            FileHelpers.SaveFileText("exercise", JsonSerializer.Serialize(ReferenceValues.JsonFitnessMaster), true);
         } catch (Exception e) {
             ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
                 Date = DateTime.Now,
@@ -234,7 +238,7 @@ public class EditExerciseVM : BaseViewModel {
 
     #region Fields
 
-    public ObservableCollection<Json.Exercise> ExerciseList {
+    public ObservableCollection<Exercises> Exercises {
         get => _exerciseList;
         set {
             _exerciseList = value;
@@ -274,43 +278,27 @@ public class EditExerciseVM : BaseViewModel {
         }
     }
 
-    public int Difficulty {
-        get => _difficulty;
+    public int MinReps {
+        get => _minReps;
         set {
-            _difficulty = value;
-            RaisePropertyChangedEvent("Difficulty");
+            _minReps = value;
+            RaisePropertyChangedEvent("MinReps");
         }
     }
 
-    public int MinTime {
-        get => _minTime;
+    public int MinSets {
+        get => _minSets;
         set {
-            _minTime = value;
-            RaisePropertyChangedEvent("MinTime");
+            _minSets = value;
+            RaisePropertyChangedEvent("MinSets");
         }
     }
 
-    public int MaxTime {
-        get => _maxTime;
+    public int MinWeight {
+        get => _minWeight;
         set {
-            _maxTime = value;
-            RaisePropertyChangedEvent("MaxTime");
-        }
-    }
-
-    public int MinHoldTime {
-        get => _minHoldTime;
-        set {
-            _minHoldTime = value;
-            RaisePropertyChangedEvent("MinHoldTime");
-        }
-    }
-
-    public int MaxHoldTime {
-        get => _maxHoldTime;
-        set {
-            _maxHoldTime = value;
-            RaisePropertyChangedEvent("MaxHoldTime");
+            _minWeight = value;
+            RaisePropertyChangedEvent("MinWeight");
         }
     }
 
@@ -319,14 +307,6 @@ public class EditExerciseVM : BaseViewModel {
         set {
             _needsEquipment = value;
             RaisePropertyChangedEvent("NeedsEquipment");
-        }
-    }
-
-    public bool CanHold {
-        get => _canHold;
-        set {
-            _canHold = value;
-            RaisePropertyChangedEvent("CanHold");
         }
     }
 
@@ -346,7 +326,15 @@ public class EditExerciseVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<Json.Exercise> ChestList {
+    public ObservableCollection<Exercises> ExerciseList {
+        get => _exerciseList;
+        set {
+            _exerciseList = value;
+            RaisePropertyChangedEvent("ExerciseList");
+        }
+    }
+
+    public ObservableCollection<Exercises> ChestList {
         get => _chestList;
         set {
             _chestList = value;
@@ -354,7 +342,7 @@ public class EditExerciseVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<Json.Exercise> ShouldersList {
+    public ObservableCollection<Exercises> ShouldersList {
         get => _shouldersList;
         set {
             _shouldersList = value;
@@ -362,7 +350,7 @@ public class EditExerciseVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<Json.Exercise> BackList {
+    public ObservableCollection<Exercises> BackList {
         get => _backList;
         set {
             _backList = value;
@@ -370,23 +358,31 @@ public class EditExerciseVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<Json.Exercise> ArmsList {
-        get => _armsList;
+    public ObservableCollection<Exercises> TricepsList {
+        get => _tricepsList;
         set {
-            _armsList = value;
-            RaisePropertyChangedEvent("ArmsList");
+            _tricepsList = value;
+            RaisePropertyChangedEvent("TricepsList");
         }
     }
 
-    public ObservableCollection<Json.Exercise> AbdominalList {
-        get => _abdominalList;
+    public ObservableCollection<Exercises> BicepsList {
+        get => _bicepsList;
         set {
-            _abdominalList = value;
-            RaisePropertyChangedEvent("AbdominalList");
+            _bicepsList = value;
+            RaisePropertyChangedEvent("BicepsList");
         }
     }
 
-    public ObservableCollection<Json.Exercise> LegsList {
+    public ObservableCollection<Exercises> CoreList {
+        get => _coreList;
+        set {
+            _coreList = value;
+            RaisePropertyChangedEvent("CoreList");
+        }
+    }
+
+    public ObservableCollection<Exercises> LegsList {
         get => _legsList;
         set {
             _legsList = value;
@@ -394,7 +390,15 @@ public class EditExerciseVM : BaseViewModel {
         }
     }
 
-    public Json.Exercise ExerciseSelected {
+    public ObservableCollection<Exercises> CardioList {
+        get => _cardioList;
+        set {
+            _cardioList = value;
+            RaisePropertyChangedEvent("CardioList");
+        }
+    }
+
+    public Exercises ExerciseSelected {
         get => _exerciseSelected;
         set {
             _exerciseSelected = value;
@@ -416,10 +420,12 @@ public class EditExerciseVM : BaseViewModel {
         set {
             _chestSelectedIndex = value;
             _shouldersSelectedIndex = -1;
-            _armsSelectedIndex = -1;
+            _tricepsSelectedIndex = -1;
+            _bicepsSelectedIndex = -1;
             _backSelectedIndex = -1;
-            _abdominalSelectedIndex = -1;
+            _coreSelectedIndex = -1;
             _legsSelectedIndex = -1;
+            _cardioSelectedIndex = -1;
             RaisePropertyChangedEvent("ChestSelectedIndex");
             RaisePropertyChangedEvent("ShouldersSelectedIndex");
             RaisePropertyChangedEvent("ArmsSelectedIndex");
@@ -434,10 +440,12 @@ public class EditExerciseVM : BaseViewModel {
         set {
             _chestSelectedIndex = -1;
             _shouldersSelectedIndex = value;
-            _armsSelectedIndex = -1;
+            _tricepsSelectedIndex = -1;
+            _bicepsSelectedIndex = -1;
             _backSelectedIndex = -1;
-            _abdominalSelectedIndex = -1;
+            _coreSelectedIndex = -1;
             _legsSelectedIndex = -1;
+            _cardioSelectedIndex = -1;
             RaisePropertyChangedEvent("ChestSelectedIndex");
             RaisePropertyChangedEvent("ShouldersSelectedIndex");
             RaisePropertyChangedEvent("ArmsSelectedIndex");
@@ -447,15 +455,37 @@ public class EditExerciseVM : BaseViewModel {
         }
     }
 
-    public int ArmsSelectedIndex {
-        get => _armsSelectedIndex;
+    public int TricepsSelectedIndex {
+        get => _tricepsSelectedIndex;
         set {
             _chestSelectedIndex = -1;
             _shouldersSelectedIndex = -1;
-            _armsSelectedIndex = value;
+            _tricepsSelectedIndex = value;
+            _bicepsSelectedIndex = -1;
             _backSelectedIndex = -1;
-            _abdominalSelectedIndex = -1;
+            _coreSelectedIndex = -1;
             _legsSelectedIndex = -1;
+            _cardioSelectedIndex = -1;
+            RaisePropertyChangedEvent("ChestSelectedIndex");
+            RaisePropertyChangedEvent("ShouldersSelectedIndex");
+            RaisePropertyChangedEvent("ArmsSelectedIndex");
+            RaisePropertyChangedEvent("BackSelectedIndex");
+            RaisePropertyChangedEvent("AbdominalSelectedIndex");
+            RaisePropertyChangedEvent("LegsSelectedIndex");
+        }
+    }
+
+    public int BicepsSelectedIndex {
+        get => _tricepsSelectedIndex;
+        set {
+            _chestSelectedIndex = -1;
+            _shouldersSelectedIndex = -1;
+            _tricepsSelectedIndex = -1;
+            _bicepsSelectedIndex = value;
+            _backSelectedIndex = -1;
+            _coreSelectedIndex = -1;
+            _legsSelectedIndex = -1;
+            _cardioSelectedIndex = -1;
             RaisePropertyChangedEvent("ChestSelectedIndex");
             RaisePropertyChangedEvent("ShouldersSelectedIndex");
             RaisePropertyChangedEvent("ArmsSelectedIndex");
@@ -470,10 +500,12 @@ public class EditExerciseVM : BaseViewModel {
         set {
             _chestSelectedIndex = -1;
             _shouldersSelectedIndex = -1;
-            _armsSelectedIndex = -1;
+            _tricepsSelectedIndex = -1;
+            _bicepsSelectedIndex = -1;
             _backSelectedIndex = value;
-            _abdominalSelectedIndex = -1;
+            _coreSelectedIndex = -1;
             _legsSelectedIndex = -1;
+            _cardioSelectedIndex = -1;
             RaisePropertyChangedEvent("ChestSelectedIndex");
             RaisePropertyChangedEvent("ShouldersSelectedIndex");
             RaisePropertyChangedEvent("ArmsSelectedIndex");
@@ -483,20 +515,22 @@ public class EditExerciseVM : BaseViewModel {
         }
     }
 
-    public int AbdominalSelectedIndex {
-        get => _abdominalSelectedIndex;
+    public int CoreSelectedIndex {
+        get => _coreSelectedIndex;
         set {
             _chestSelectedIndex = -1;
             _shouldersSelectedIndex = -1;
-            _armsSelectedIndex = -1;
+            _tricepsSelectedIndex = -1;
+            _bicepsSelectedIndex = -1;
             _backSelectedIndex = -1;
-            _abdominalSelectedIndex = value;
+            _coreSelectedIndex = value;
             _legsSelectedIndex = -1;
+            _cardioSelectedIndex = -1;
             RaisePropertyChangedEvent("ChestSelectedIndex");
             RaisePropertyChangedEvent("ShouldersSelectedIndex");
             RaisePropertyChangedEvent("ArmsSelectedIndex");
             RaisePropertyChangedEvent("BackSelectedIndex");
-            RaisePropertyChangedEvent("AbdominalSelectedIndex");
+            RaisePropertyChangedEvent("CoreSelectedIndex");
             RaisePropertyChangedEvent("LegsSelectedIndex");
         }
     }
@@ -506,16 +540,39 @@ public class EditExerciseVM : BaseViewModel {
         set {
             _chestSelectedIndex = -1;
             _shouldersSelectedIndex = -1;
-            _armsSelectedIndex = -1;
+            _tricepsSelectedIndex = -1;
+            _bicepsSelectedIndex = -1;
             _backSelectedIndex = -1;
-            _abdominalSelectedIndex = -1;
+            _coreSelectedIndex = -1;
             _legsSelectedIndex = value;
+            _cardioSelectedIndex = -1;
             RaisePropertyChangedEvent("ChestSelectedIndex");
             RaisePropertyChangedEvent("ShouldersSelectedIndex");
             RaisePropertyChangedEvent("ArmsSelectedIndex");
             RaisePropertyChangedEvent("BackSelectedIndex");
             RaisePropertyChangedEvent("AbdominalSelectedIndex");
             RaisePropertyChangedEvent("LegsSelectedIndex");
+        }
+    }
+
+    public int CardioSelectedIndex {
+        get => _legsSelectedIndex;
+        set {
+            _chestSelectedIndex = -1;
+            _shouldersSelectedIndex = -1;
+            _tricepsSelectedIndex = -1;
+            _bicepsSelectedIndex = -1;
+            _backSelectedIndex = -1;
+            _coreSelectedIndex = -1;
+            _legsSelectedIndex = -1;
+            _cardioSelectedIndex = value;
+            RaisePropertyChangedEvent("ChestSelectedIndex");
+            RaisePropertyChangedEvent("ShouldersSelectedIndex");
+            RaisePropertyChangedEvent("ArmsSelectedIndex");
+            RaisePropertyChangedEvent("BackSelectedIndex");
+            RaisePropertyChangedEvent("AbdominalSelectedIndex");
+            RaisePropertyChangedEvent("LegsSelectedIndex");
+            RaisePropertyChangedEvent("CardioSelectedIndex");
         }
     }
 

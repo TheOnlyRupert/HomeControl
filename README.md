@@ -30,7 +30,7 @@ I'm constantly adding more features and changing them for how our household oper
 1. ToDo Module.
 2. Recipes Module.
 3. Grocery List Module.
-4. Vaction Module.
+4. Vacation Module.
 5. Meal Prep Module.
 6. Open Tickets Module.
 7. Workout Module.
@@ -41,5 +41,4 @@ Download the latest release from [release page](https://github.com/TheOnlyRupert
 
 #### Requirements
 
-Microsoft [.NET Framework 4.7.2](http://go.microsoft.com/fwlink/?LinkId=863262 "Microsoft's download page").
-NOTE: This should already be included with Windows 10 October 2018 Update.
+[Microsoft .NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0 "Microsoft's download page").

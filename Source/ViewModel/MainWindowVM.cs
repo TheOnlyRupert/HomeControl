@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Data.Common;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -26,22 +24,17 @@ using Task = System.Threading.Tasks.Task;
 namespace HomeControl.Source.ViewModel;
 
 public class MainWindowVM : BaseViewModel {
-    private readonly MySqlConnection _connection;
-    private readonly DateTime _lastChecked;
     private readonly CrossViewMessenger _simpleMessenger;
     private bool _changeDate, _internetMessage, _isChecking;
     private DateTime _currentDate;
     private string _iconImage;
-
-    private bool _isDatabaseInitialized;
-    private int _trashInt, _hourInt;
+    private int _trashInt, _hourInt, _previousRowCount, _currentRowCount;
 
     public MainWindowVM() {
         IconImage = "../../Resources/Images/icons/behavior.png";
         _simpleMessenger = CrossViewMessenger.Instance;
         _currentDate = DateTime.Now;
         _internetMessage = false;
-        _lastChecked = DateTime.UtcNow;
 
         /* Create Documents Directory */
         Directory.CreateDirectory(ReferenceValues.DocumentsDirectory);
@@ -103,14 +96,14 @@ public class MainWindowVM : BaseViewModel {
 
         ReferenceValues.IconImageList = [];
         ResourceManager resourceManager = new("HomeControl.g", Assembly.GetExecutingAssembly());
-        ResourceSet resources = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+        ResourceSet? resources = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
         foreach (string key in from object res in resources select ((DictionaryEntry)res).Key.ToString() into key where key.Contains("resources/images/icons/") select key) {
             ReferenceValues.IconImageList.Add(key.Substring(23, key.Length - 27));
         }
 
         ReferenceValues.IconImageList = new ObservableCollection<string>(ReferenceValues.IconImageList.OrderBy(i => i));
 
-        if (string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster.UserAgent)) {
+        if (string.IsNullOrEmpty(ReferenceValues.JsonSettingsMaster?.UserAgent)) {
             Settings settingsDialog = new();
             settingsDialog.ShowDialog();
             settingsDialog.Close();
@@ -131,11 +124,9 @@ public class MainWindowVM : BaseViewModel {
         };
 
         /* Database Connection */
-        ReferenceValues.DatabaseConnectionString = @"Server=" + ReferenceValues.JsonSettingsMaster.DatabaseHost + @";Database=HomeControl;Uid=" + ReferenceValues.JsonSettingsMaster.DatabaseUsername +
+        ReferenceValues.DatabaseConnectionString = @"Server=" + ReferenceValues.JsonSettingsMaster?.DatabaseHost + @";Database=HomeControl;Uid=" + ReferenceValues.JsonSettingsMaster.DatabaseUsername +
                                                    @";Pwd=" +
                                                    ReferenceValues.JsonSettingsMaster.DatabasePassword;
-        _connection = new MySqlConnection(ReferenceValues.DatabaseConnectionString);
-        InitializeDatabaseConnection();
 
         /* GameStats File */
         try {
@@ -195,17 +186,6 @@ public class MainWindowVM : BaseViewModel {
     }
 
     #endregion
-
-    private async void InitializeDatabaseConnection() {
-        try {
-            await _connection.OpenAsync();
-            Console.WriteLine(@"Database connection established.");
-            _isDatabaseInitialized = true;
-        } catch (Exception ex) {
-            Console.WriteLine($@"Error opening database connection: {ex}");
-            _isDatabaseInitialized = false;
-        }
-    }
 
     private void ButtonCommandLogic(object param) {
         if (!ReferenceValues.LockUi) {
@@ -344,59 +324,72 @@ public class MainWindowVM : BaseViewModel {
         _simpleMessenger.PushMessage("Refresh", null);
     }
 
-    private async Task CheckForDatabaseChanges() {
-        if (_isChecking || !_isDatabaseInitialized) {
-            return;
+    private Task CheckForDatabaseChanges() {
+        if (_isChecking) {
+            return Task.CompletedTask;
         }
 
         _isChecking = true;
 
-        if (_connection.State != ConnectionState.Open) {
-            Console.WriteLine("Database connection is null.");
-            return;
-        }
-
-        if (_connection == null) {
-            Console.WriteLine("Database connection is null.");
-            return;
-        }
-
-        const string query = @"SELECT id, table_name, action_type, affected_id, created_at FROM notifications WHERE created_at > @LastChecked ORDER BY created_at ASC";
-
         try {
-            await using MySqlCommand command = new(query, _connection);
-            command.Parameters.AddWithValue("@LastChecked", _lastChecked);
+            const string query = "SELECT COUNT(*) FROM notifications";
 
-            using DbDataReader reader = await command.ExecuteReaderAsync();
-            if (reader == null) {
-                Console.WriteLine("No data returned from the query.");
-                return;
-            }
-
-            DateTime latestTimestamp = _lastChecked;
-
-            while (await reader.ReadAsync()) {
-                string tableName = reader.GetString(1);
-                string actionType = reader.GetString(2);
-                int affectedId = reader.GetInt32(3);
-                DateTime createdAt = reader.GetDateTime(4);
-
-                // Process the notification
-                Console.WriteLine($"Change detected: {tableName} - {actionType} on ID {affectedId}");
-
-                // Update the latest timestamp
-                if (createdAt > latestTimestamp) {
-                    latestTimestamp = createdAt;
+            // Open the connection and execute the query
+            using (MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString)) {
+                connection.Open();
+                using (MySqlCommand command = new(query, connection)) {
+                    _currentRowCount = Convert.ToInt32(command.ExecuteScalar());
                 }
-            }
 
-            //_lastChecked = latestTimestamp;
+
+                if (_currentRowCount > _previousRowCount) {
+                    Console.WriteLine("Database has been updated. Program will update with new data.");
+                    _previousRowCount = _currentRowCount;
+
+                    /* Behavior */
+                    const string behaviorQuery = "SELECT stars, strikes FROM behavior ORDER BY id ASC";
+                    using MySqlCommand command = new(behaviorQuery, connection);
+                    using MySqlDataReader reader = command.ExecuteReader();
+                    int userIndex = 1;
+
+                    while (reader.Read()) {
+                        switch (userIndex) {
+                        case 1:
+                            ReferenceValues.JsonBehaviorMaster.User1Stars = reader.GetByte(0);
+                            ReferenceValues.JsonBehaviorMaster.User1Strikes = reader.GetByte(1);
+                            break;
+                        case 2:
+                            ReferenceValues.JsonBehaviorMaster.User2Stars = reader.GetByte(0);
+                            ReferenceValues.JsonBehaviorMaster.User2Strikes = reader.GetByte(1);
+                            break;
+                        case 3:
+                            ReferenceValues.JsonBehaviorMaster.User3Stars = reader.GetByte(0);
+                            ReferenceValues.JsonBehaviorMaster.User3Strikes = reader.GetByte(1);
+                            break;
+                        case 4:
+                            ReferenceValues.JsonBehaviorMaster.User4Stars = reader.GetByte(0);
+                            ReferenceValues.JsonBehaviorMaster.User4Strikes = reader.GetByte(1);
+                            break;
+                        case 5:
+                            ReferenceValues.JsonBehaviorMaster.User5Stars = reader.GetByte(0);
+                            ReferenceValues.JsonBehaviorMaster.User5Strikes = reader.GetByte(1);
+                            break;
+                        }
+
+                        userIndex++;
+                    }
+                }
+
+                _simpleMessenger.PushMessage("DatabaseUpdated", null);
+            }
         } catch (Exception ex) {
             Console.WriteLine($"Error polling notifications: {ex}");
         }
         finally {
             _isChecking = false;
         }
+
+        return Task.CompletedTask;
     }
 
     private async Task ApiStatus() {

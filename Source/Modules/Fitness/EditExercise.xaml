@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="HomeControl.Source.Modules.Exercise.EditExercise"
+    x:Class="HomeControl.Source.Modules.Fitness.EditExercise"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -46,53 +46,45 @@
                     control:SelectTextOnFocus.Active="True" />
 
                 <TextBlock
-                    Text="Min Time:"
+                    Text="Muscle Group:"
+                    FontSize="18"
+                    Foreground="White"
+                    Margin="0 8 0 0" />
+                <ComboBox
+                    ItemsSource="{Binding MuscleGroupList}"
+                    SelectedItem="{Binding MuscleGroupSelected}"
+                    SelectedIndex="{Binding MuscleGroupSelectedIndex}"
+                    FontSize="18" />
+
+                <TextBlock
+                    Text="Min Reps/Time:"
                     FontSize="18"
                     Foreground="White"
                     Margin="0 8 0 0" />
                 <TextBox
-                    Text="{Binding MinTime, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding MinReps, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="4"
                     control:SelectTextOnFocus.Active="True" />
 
                 <TextBlock
-                    Text="Max Time:"
+                    Text="Min Sets:"
                     FontSize="18"
                     Foreground="White"
                     Margin="0 8 0 0" />
                 <TextBox
-                    Text="{Binding MaxTime, UpdateSourceTrigger=PropertyChanged}"
-                    FontSize="18"
-                    MaxLength="4"
-                    control:SelectTextOnFocus.Active="True" />
-
-                <CheckBox
-                    Content="Can Hold"
-                    FontSize="18"
-                    Foreground="White"
-                    Margin="0 8 0 0"
-                    VerticalContentAlignment="Center"
-                    IsChecked="{Binding CanHold}" />
-
-                <TextBlock
-                    Text="Hold Min Time:"
-                    FontSize="18"
-                    Foreground="White"
-                    Margin="0 8 0 0" />
-                <TextBox
-                    Text="{Binding HoldMinTime, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding MinSets, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="4"
                     control:SelectTextOnFocus.Active="True" />
 
                 <TextBlock
-                    Text="Hold Max Time:"
+                    Text="Min Weight:"
                     FontSize="18"
                     Foreground="White"
                     Margin="0 8 0 0" />
                 <TextBox
-                    Text="{Binding HoldMaxTime, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding MinSets, UpdateSourceTrigger=PropertyChanged}"
                     FontSize="18"
                     MaxLength="4"
                     control:SelectTextOnFocus.Active="True" />
@@ -106,17 +98,6 @@
                     IsChecked="{Binding NeedsEquipment}" />
 
                 <TextBlock
-                    Text="Difficulty (0 - 5):"
-                    FontSize="18"
-                    Foreground="White"
-                    Margin="0 8 0 0" />
-                <TextBox
-                    Text="{Binding Difficulty, UpdateSourceTrigger=PropertyChanged}"
-                    FontSize="18"
-                    MaxLength="64"
-                    control:SelectTextOnFocus.Active="True" />
-
-                <TextBlock
                     Text="Image:"
                     FontSize="18"
                     Foreground="White"
@@ -124,17 +105,6 @@
                 <ComboBox
                     ItemsSource="{Binding ImageList}"
                     SelectedItem="{Binding ImageSelected}"
-                    FontSize="18" />
-
-                <TextBlock
-                    Text="Muscle Group:"
-                    FontSize="18"
-                    Foreground="White"
-                    Margin="0 8 0 0" />
-                <ComboBox
-                    ItemsSource="{Binding MuscleGroupList}"
-                    SelectedItem="{Binding MuscleGroupSelected}"
-                    SelectedIndex="{Binding MuscleGroupSelectedIndex}"
                     FontSize="18" />
             </StackPanel>
 
@@ -169,6 +139,8 @@
                     Width="*" />
                 <ColumnDefinition
                     Width="*" />
+                <ColumnDefinition
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -185,7 +157,7 @@
             <TextBlock
                 Grid.Column="0"
                 Grid.Row="0"
-                Text="Chest"
+                Text="Chest (Push)"
                 Foreground="White"
                 FontSize="16"
                 HorizontalAlignment="Center" />
@@ -276,7 +248,7 @@
             <TextBlock
                 Grid.Column="1"
                 Grid.Row="0"
-                Text="Shoulders"
+                Text="Shoulders (Push)"
                 Foreground="White"
                 FontSize="16"
                 HorizontalAlignment="Center" />
@@ -368,7 +340,7 @@
             <TextBlock
                 Grid.Column="2"
                 Grid.Row="0"
-                Text="Arms"
+                Text="Triceps (Push)"
                 Foreground="White"
                 FontSize="16"
                 HorizontalAlignment="Center" />
@@ -377,10 +349,101 @@
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
                 Grid.Row="1"
                 Grid.Column="2"
-                ItemsSource="{Binding ArmsList}"
+                ItemsSource="{Binding TricepsList}"
                 Foreground="White"
                 SelectedItem="{Binding ExerciseSelected}"
-                SelectedIndex="{Binding ArmsSelectedIndex}"
+                SelectedIndex="{Binding TricepsSelectedIndex}"
+                SelectionMode="Single"
+                BorderBrush="DarkSlateGray"
+                Background="Transparent"
+                BorderThickness="1">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel
+                            Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                            ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                            MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                            ItemHeight="32" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+                <ListView.Resources>
+                    <Style
+                        TargetType="GridViewColumnHeader">
+                        <Setter
+                            Property="Visibility"
+                            Value="Collapsed" />
+                    </Style>
+
+                    <Style
+                        TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition
+                                        Property="IsSelected"
+                                        Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter
+                                        Property="Background"
+                                        Value="Transparent" />
+                                    <Setter
+                                        Property="BorderBrush"
+                                        Value="Transparent" />
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="White" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition
+                                        Property="IsMouseOver"
+                                        Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter
+                                        Property="Background"
+                                        Value="Transparent" />
+                                    <Setter
+                                        Property="BorderBrush"
+                                        Value="Transparent" />
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="White" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.Resources>
+
+                <ListView.View>
+                    <GridView
+                        AllowsColumnReorder="false">
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Path=Name}"
+                            Width="256" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <TextBlock
+                Grid.Column="3"
+                Grid.Row="0"
+                Text="Biceps (Pull)"
+                Foreground="White"
+                FontSize="16"
+                HorizontalAlignment="Center" />
+
+            <ListView
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                Grid.Row="1"
+                Grid.Column="3"
+                ItemsSource="{Binding BicepsList}"
+                Foreground="White"
+                SelectedItem="{Binding ExerciseSelected}"
+                SelectedIndex="{Binding BicepsSelectedIndex}"
                 SelectionMode="Single"
                 BorderBrush="DarkSlateGray"
                 Background="Transparent"
@@ -459,7 +522,7 @@
             <TextBlock
                 Grid.Column="0"
                 Grid.Row="2"
-                Text="Back"
+                Text="Back (Push)"
                 Foreground="White"
                 FontSize="16"
                 HorizontalAlignment="Center" />
@@ -550,7 +613,7 @@
             <TextBlock
                 Grid.Column="1"
                 Grid.Row="2"
-                Text="Abdominal"
+                Text="Core"
                 Foreground="White"
                 FontSize="16"
                 HorizontalAlignment="Center" />
@@ -559,10 +622,10 @@
                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
                 Grid.Row="3"
                 Grid.Column="1"
-                ItemsSource="{Binding AbdominalList}"
+                ItemsSource="{Binding CoreList}"
                 Foreground="White"
                 SelectedItem="{Binding ExerciseSelected}"
-                SelectedIndex="{Binding AbdominalSelectedIndex}"
+                SelectedIndex="{Binding CoreSelectedIndex}"
                 SelectionMode="Single"
                 BorderBrush="DarkSlateGray"
                 Background="Transparent"
@@ -641,7 +704,7 @@
             <TextBlock
                 Grid.Column="2"
                 Grid.Row="2"
-                Text="Legs and Glutes"
+                Text="Legs"
                 Foreground="White"
                 FontSize="16"
                 HorizontalAlignment="Center" />
@@ -654,6 +717,97 @@
                 Foreground="White"
                 SelectedItem="{Binding ExerciseSelected}"
                 SelectedIndex="{Binding LegsSelectedIndex}"
+                SelectionMode="Single"
+                BorderBrush="DarkSlateGray"
+                Background="Transparent"
+                BorderThickness="1">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel
+                            Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                            ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                            MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                            ItemHeight="32" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+                <ListView.Resources>
+                    <Style
+                        TargetType="GridViewColumnHeader">
+                        <Setter
+                            Property="Visibility"
+                            Value="Collapsed" />
+                    </Style>
+
+                    <Style
+                        TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition
+                                        Property="IsSelected"
+                                        Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter
+                                        Property="Background"
+                                        Value="Transparent" />
+                                    <Setter
+                                        Property="BorderBrush"
+                                        Value="Transparent" />
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="White" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition
+                                        Property="IsMouseOver"
+                                        Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter
+                                        Property="Background"
+                                        Value="Transparent" />
+                                    <Setter
+                                        Property="BorderBrush"
+                                        Value="Transparent" />
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="White" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.Resources>
+
+                <ListView.View>
+                    <GridView
+                        AllowsColumnReorder="false">
+                        <GridViewColumn
+                            DisplayMemberBinding="{Binding Path=Name}"
+                            Width="44" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <TextBlock
+                Grid.Column="3"
+                Grid.Row="2"
+                Text="Cardio"
+                Foreground="White"
+                FontSize="16"
+                HorizontalAlignment="Center" />
+
+            <ListView
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                Grid.Row="3"
+                Grid.Column="3"
+                ItemsSource="{Binding CardioList}"
+                Foreground="White"
+                SelectedItem="{Binding ExerciseSelected}"
+                SelectedIndex="{Binding CardioSelectedIndex}"
                 SelectionMode="Single"
                 BorderBrush="DarkSlateGray"
                 Background="Transparent"
