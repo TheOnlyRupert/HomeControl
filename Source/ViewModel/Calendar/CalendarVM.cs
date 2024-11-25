@@ -123,6 +123,10 @@ public class CalendarVM : BaseViewModel {
             PopulateCalendar(DateTime.Now);
 
             break;
+        case "DatabaseUpdated":
+            PopulateCalendar(calendarDate);
+            
+            break;
         }
     }
 

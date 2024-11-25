@@ -247,7 +247,7 @@
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="1"
-                        Text="{Binding EventDate}"
+                        Text="{Binding EventDate, StringFormat='{}{0:MMMM dd, yyyy}'}"
                         Foreground="White"
                         FontSize="24"
                         HorizontalAlignment="Center"

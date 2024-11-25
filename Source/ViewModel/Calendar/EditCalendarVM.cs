@@ -274,6 +274,14 @@ public class EditCalendarVM : BaseViewModel {
                 });
                 FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
+                EventText ??= "";
+                DescriptionText ??= "";
+                LocationText ??= "";
+                StartTimeText ??= "";
+                EndTimeText ??= "";
+                LocationText ??= "";
+                LocationText ??= "";
+                
                 EventList.Add(new CalendarEvents {
                     EventName = EventText,
                     Description = DescriptionText,
@@ -338,6 +346,14 @@ public class EditCalendarVM : BaseViewModel {
                         });
                         FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
+                        EventText ??= "";
+                        DescriptionText ??= "";
+                        LocationText ??= "";
+                        StartTimeText ??= "";
+                        EndTimeText ??= "";
+                        LocationText ??= "";
+                        LocationText ??= "";
+
                         EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
                             EventName = EventText,
                             Description = DescriptionText,
@@ -349,13 +365,6 @@ public class EditCalendarVM : BaseViewModel {
                             Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png"
                         });
                         EventList.Remove(CalendarEventSelected);
-
-                        SoundDispatcher.PlaySound("scribble2");
-                        EventText = "";
-                        DescriptionText = "";
-                        LocationText = "";
-                        StartTimeText = "";
-                        EndTimeText = "";
 
                         /* Update Database */
                         using MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString);
@@ -381,6 +390,13 @@ public class EditCalendarVM : BaseViewModel {
                         } catch (Exception) {
                             //todo: this
                         }
+                        
+                        SoundDispatcher.PlaySound("scribble2");
+                        EventText = "";
+                        DescriptionText = "";
+                        LocationText = "";
+                        StartTimeText = "";
+                        EndTimeText = "";
                     }
                 }
             } catch (Exception e) {
@@ -427,6 +443,13 @@ public class EditCalendarVM : BaseViewModel {
                     }
 
                     SoundDispatcher.PlaySound("scribble3");
+                    //EventText = "";
+                    //DescriptionText = "";
+                    //LocationText = "";
+                    //StartTimeText = "";
+                    //EndTimeText = "";
+                    //LocationText = "";
+                    //LocationText = "";
                 }
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
