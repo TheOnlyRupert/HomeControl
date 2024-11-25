@@ -22,7 +22,7 @@ public static class ReferenceValues {
 
     public static DateTime CalendarEventDate { get; set; }
 
-    public static JsonCalendar JsonCalendarMaster { get; set; }
+    public static JsonCalendar? JsonCalendarMaster { get; set; }
     public static JsonFinances? JsonFinanceMaster { get; set; }
     public static JsonBehavior JsonBehaviorMaster { get; set; }
     public static JsonHvac? JsonHvacMaster { get; set; }

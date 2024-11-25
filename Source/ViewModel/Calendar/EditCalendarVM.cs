@@ -6,6 +6,7 @@ using System.Windows.Media.Imaging;
 using HomeControl.Source.Helpers;
 using HomeControl.Source.Json;
 using HomeControl.Source.ViewModel.Base;
+using MySql.Data.MySqlClient;
 
 namespace HomeControl.Source.ViewModel.Calendar;
 
@@ -13,11 +14,13 @@ public class EditCalendarVM : BaseViewModel {
     private CalendarEvents _calendarEventSelected;
     private string _detailedWeather, _temperatureHighLow, _eventDateWeekday;
 
-    private string _eventDate, _eventText, _locationText, _descriptionText, _user1NameText, _user2NameText, _user3NameText, _user4NameText, _user5NameText, _startTimeText, _endTimeText,
-        _dupeButtonBackgroundColor, _priority0BorderColor, _priority1BorderColor, _priority2BorderColor, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor,
-        _user5BorderColor, _homeBorderColor;
+    private DateTime _eventDate;
 
     private ObservableCollection<CalendarEvents> _eventList;
+
+    private string _eventText, _locationText, _descriptionText, _user1NameText, _user2NameText, _user3NameText, _user4NameText, _user5NameText, _startTimeText, _endTimeText,
+        _dupeButtonBackgroundColor, _priority0BorderColor, _priority1BorderColor, _priority2BorderColor, _user1BorderColor, _user2BorderColor, _user3BorderColor, _user4BorderColor,
+        _user5BorderColor, _homeBorderColor;
 
     private string? _forecastWeatherIcon1;
     private string? _forecastWeatherIcon2;
@@ -25,7 +28,7 @@ public class EditCalendarVM : BaseViewModel {
     private BitmapImage _imageUser1, _imageUser2, _imageUser3, _imageUser4, _imageUser5, _imageHome;
 
     private int _priority0BorderThickness, _priority1BorderThickness, _priority2BorderThickness, _user1BorderThickness, _user2BorderThickness, _user3BorderThickness, _user4BorderThickness,
-        _user5BorderThickness, _homeBorderThickness, priority, user;
+        _user5BorderThickness, _homeBorderThickness, priority, user, _databaseId;
 
     public EditCalendarVM() {
         EventText = "";
@@ -69,41 +72,17 @@ public class EditCalendarVM : BaseViewModel {
 
     private void PopulateEvent() {
         EventDateWeekday = ReferenceValues.CalendarEventDate.ToString("dddd");
-        EventDate = ReferenceValues.CalendarEventDate.ToString("MMMM d yyyy");
-        EventList = new ObservableCollection<CalendarEvents>();
+        EventDate = ReferenceValues.CalendarEventDate;
+        EventList = [];
         CalendarEventSelected = new CalendarEvents();
 
-        foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
-            if (ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd") == dates.Date) {
-                /* DEBUG - Cross-platform safe. This fixes the issue with missing icons when transferring files */
-                if (ReferenceValues.JsonSettingsMaster.DebugMode) {
-                    foreach (CalendarEvents events in dates.EventsList) {
-                        switch (events.UserId) {
-                        case 0:
-                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user0.png";
-                            break;
-                        case 1:
-                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user1.png";
-                            break;
-                        case 2:
-                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user2.png";
-                            break;
-                        case 3:
-                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user3.png";
-                            break;
-                        case 4:
-                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user4.png";
-                            break;
-                        case 5:
-                            events.Image = ReferenceValues.DocumentsDirectory + "icons/user5.png";
-                            break;
-                        }
-                    }
-                }
-
-                EventList = dates.EventsList;
+        foreach (CalendarEvents calendarEvents in ReferenceValues.JsonCalendarMaster.EventsList) {
+            if (ReferenceValues.CalendarEventDate.Date == calendarEvents.Date) {
+                calendarEvents.Image = ReferenceValues.DocumentsDirectory + "icons/user" + calendarEvents.UserId + ".png";
+                EventList.Add(calendarEvents);
             }
         }
+
 
         /* Populate Weather */
         ForecastWeatherIcon1 = null;
@@ -265,14 +244,17 @@ public class EditCalendarVM : BaseViewModel {
     }
 
     private void PopulateDetailedView(CalendarEvents value) {
-        EventText = value.EventName;
-        LocationText = value.Location;
-        DescriptionText = value.Description;
-        StartTimeText = value.StartTime;
-        EndTimeText = value.EndTime;
+        if (value != null) {
+            EventText = value.EventName;
+            LocationText = value.Location;
+            DescriptionText = value.Description;
+            StartTimeText = value.StartTime;
+            EndTimeText = value.EndTime;
+            _databaseId = value.DatabaseID;
 
-        PriorityLogic(value.Priority);
-        UserLogic(value.UserId);
+            PriorityLogic(value.Priority);
+            UserLogic(value.UserId);
+        }
     }
 
     private void ButtonLogic(object param) {
@@ -303,55 +285,101 @@ public class EditCalendarVM : BaseViewModel {
                     Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png"
                 });
 
+                /* Add to Database */
+                using MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString);
+                const string query = "INSERT INTO calendar_events (event_name, event_date, start_time, end_time, description, location, user_id, priority) " +
+                                     "VALUES (@event_name, @event_date, @start_time, @end_time, @description, @location, @user_id, @priority)";
+
+                try {
+                    connection.Open();
+
+                    // Set up command and add parameters to prevent SQL injection
+                    using MySqlCommand command = new(query, connection);
+                    command.Parameters.AddWithValue("@event_name", EventText);
+                    command.Parameters.AddWithValue("@event_date", EventDate);
+                    command.Parameters.AddWithValue("@start_time", StartTimeText);
+                    command.Parameters.AddWithValue("@end_time", EndTimeText);
+                    command.Parameters.AddWithValue("@description", DescriptionText);
+                    command.Parameters.AddWithValue("@location", LocationText);
+                    command.Parameters.AddWithValue("@user_id", user);
+                    command.Parameters.AddWithValue("@priority", priority);
+
+                    // Execute the insert query
+                    command.ExecuteNonQuery();
+
+                    connection.Close();
+                } catch (Exception) {
+                    //todo: this
+                }
+
                 SoundDispatcher.PlaySound("scribble1");
                 EventText = "";
                 DescriptionText = "";
                 LocationText = "";
                 StartTimeText = "";
                 EndTimeText = "";
-
-                SaveJson();
             }
 
             break;
         case "update":
             try {
-                if (CalendarEventSelected.EventName != null) {
-                    if (string.IsNullOrWhiteSpace(EventText)) {
-                        SoundDispatcher.PlaySound("missing_info");
-                    } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.EventName)) {
-                        confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (confirmation == MessageBoxResult.Yes) {
-                            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                                Date = DateTime.Now,
-                                Level = "INFO",
-                                Module = "EditCalendarVM",
-                                Description = "Updating calendar event: User" + user + ", " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " +
-                                              DescriptionText + ", " +
-                                              LocationText + ", "
-                            });
-                            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                if (string.IsNullOrWhiteSpace(EventText)) {
+                    SoundDispatcher.PlaySound("missing_info");
+                } else if (!string.IsNullOrWhiteSpace(CalendarEventSelected.EventName)) {
+                    confirmation = MessageBox.Show("Are you sure you want to update event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (confirmation == MessageBoxResult.Yes) {
+                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                            Date = DateTime.Now,
+                            Level = "INFO",
+                            Module = "EditCalendarVM",
+                            Description = "Updating calendar event: User" + user + ", " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " +
+                                          DescriptionText + ", " +
+                                          LocationText + ", "
+                        });
+                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
-                            EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
-                                EventName = EventText,
-                                Description = DescriptionText,
-                                Location = LocationText,
-                                StartTime = StartTimeText,
-                                EndTime = EndTimeText,
-                                Priority = priority,
-                                UserId = user,
-                                Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png"
-                            });
-                            EventList.Remove(CalendarEventSelected);
+                        EventList.Insert(EventList.IndexOf(CalendarEventSelected), new CalendarEvents {
+                            EventName = EventText,
+                            Description = DescriptionText,
+                            Location = LocationText,
+                            StartTime = StartTimeText,
+                            EndTime = EndTimeText,
+                            Priority = priority,
+                            UserId = user,
+                            Image = ReferenceValues.DocumentsDirectory + "icons/user" + user + ".png"
+                        });
+                        EventList.Remove(CalendarEventSelected);
 
-                            SoundDispatcher.PlaySound("scribble2");
-                            EventText = "";
-                            DescriptionText = "";
-                            LocationText = "";
-                            StartTimeText = "";
-                            EndTimeText = "";
+                        SoundDispatcher.PlaySound("scribble2");
+                        EventText = "";
+                        DescriptionText = "";
+                        LocationText = "";
+                        StartTimeText = "";
+                        EndTimeText = "";
 
-                            SaveJson();
+                        /* Update Database */
+                        using MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString);
+                        const string query =
+                            "UPDATE calendar_events SET event_name = @event_name, event_date = @event_date, start_time = @start_time, end_time = @end_time, description = @description, location = @location, user_id = @user_id, priority = @priority WHERE id = @id";
+
+                        try {
+                            connection.Open();
+
+                            using MySqlCommand command = new(query, connection);
+                            command.Parameters.AddWithValue("@id", _databaseId);
+                            command.Parameters.AddWithValue("@event_name", EventText);
+                            command.Parameters.AddWithValue("@event_date", EventDate);
+                            command.Parameters.AddWithValue("@start_time", StartTimeText);
+                            command.Parameters.AddWithValue("@end_time", EndTimeText);
+                            command.Parameters.AddWithValue("@description", DescriptionText);
+                            command.Parameters.AddWithValue("@location", LocationText);
+                            command.Parameters.AddWithValue("@user_id", user);
+                            command.Parameters.AddWithValue("@priority", priority);
+                            command.ExecuteNonQuery();
+
+                            connection.Close();
+                        } catch (Exception) {
+                            //todo: this
                         }
                     }
                 }
@@ -368,24 +396,37 @@ public class EditCalendarVM : BaseViewModel {
             break;
         case "delete":
             try {
-                if (CalendarEventSelected.EventName != null) {
-                    confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (confirmation == MessageBoxResult.Yes) {
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "EditCalendarVM",
-                            Description = "Removing calendar event: User" + user + ", " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText +
-                                          ", " + LocationText + ", "
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                confirmation = MessageBox.Show("Are you sure you want to delete event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (confirmation == MessageBoxResult.Yes) {
+                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
+                        Date = DateTime.Now,
+                        Level = "INFO",
+                        Module = "EditCalendarVM",
+                        Description = "Removing calendar event: User" + user + ", " + EventDate + ", " + "(" + StartTimeText + "-" + EndTimeText + "), " + EventText + ", " + DescriptionText +
+                                      ", " + LocationText + ", "
+                    });
+                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
 
-                        EventList.Remove(CalendarEventSelected);
+                    EventList.Remove(CalendarEventSelected);
 
-                        SoundDispatcher.PlaySound("scribble3");
+                    /* Update Database */
+                    using MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString);
+                    const string query = "DELETE FROM calendar_events WHERE id = @id";
 
-                        SaveJson();
+                    try {
+                        connection.Open();
+
+                        using (MySqlCommand command = new(query, connection)) {
+                            command.Parameters.AddWithValue("@id", _databaseId);
+                            command.ExecuteNonQuery();
+                        }
+
+                        connection.Close();
+                    } catch (Exception) {
+                        //todo: this
                     }
+
+                    SoundDispatcher.PlaySound("scribble3");
                 }
             } catch (Exception e) {
                 ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
@@ -467,41 +508,9 @@ public class EditCalendarVM : BaseViewModel {
         }
     }
 
-    private void SaveJson() {
-        try {
-            IOrderedEnumerable<CalendarEvents> orderByResult = from s in EventList orderby s.StartTime select s;
-            EventList = new ObservableCollection<CalendarEvents>(orderByResult.ToList());
-
-            bool createNew = true;
-            foreach (CalendarDates dates in ReferenceValues.JsonCalendarMaster.DatesList) {
-                if (dates.Date == ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd")) {
-                    createNew = false;
-                    dates.EventsList = EventList;
-                }
-            }
-
-            if (createNew) {
-                ReferenceValues.JsonCalendarMaster.DatesList.Add(new CalendarDates {
-                    Date = ReferenceValues.CalendarEventDate.ToString("yyyy-MM-dd"),
-                    EventsList = EventList
-                });
-            }
-
-            FileHelpers.SaveFileText("calendar", JsonSerializer.Serialize(ReferenceValues.JsonCalendarMaster), true);
-        } catch (Exception e) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "EditCalendarVM",
-                Description = e.ToString()
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-        }
-    }
-
     #region Fields
 
-    public string EventDate {
+    public DateTime EventDate {
         get => _eventDate;
         set {
             _eventDate = value;

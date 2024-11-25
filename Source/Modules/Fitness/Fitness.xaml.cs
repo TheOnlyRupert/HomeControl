@@ -5,6 +5,6 @@ namespace HomeControl.Source.Modules.Fitness;
 public partial class Fitness {
     public Fitness() {
         InitializeComponent();
-        DataContext = new FitnessVM();
+        DataContext = new FitnessVm();
     }
 }

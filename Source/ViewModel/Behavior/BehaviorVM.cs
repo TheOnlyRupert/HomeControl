@@ -1345,6 +1345,8 @@ public class BehaviorVM : BaseViewModel {
             command.Parameters.AddWithValue("@stars", stars);
             command.Parameters.AddWithValue("@strikes", strikes);
             command.ExecuteNonQuery();
+
+            connection.Close();
         } catch (Exception) {
             //todo: this
         }

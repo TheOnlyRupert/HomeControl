@@ -9,15 +9,20 @@ using HomeControl.Source.ViewModel.Base;
 namespace HomeControl.Source.ViewModel.Exercise;
 
 public class EditDietVM : BaseViewModel {
+    private ObservableCollection<Exercises> _chestList, _shouldersList, _tricepsList, _bicepsList, _backList, _coreList, _legsList, _cardioList;
+    private string _chestSelected, _shouldersSelected, _tricepsSelected, _bicepsSelected, _backSelected, _coreSelected, _legsSelected, _cardioSelected;
+
     private int _chestSelectedIndex, _shouldersSelectedIndex, _tricepsSelectedIndex, _bicepsSelectedIndex, _backSelectedIndex, _coreSelectedIndex, _legsSelectedIndex, _cardioSelectedIndex,
         _minReps, _minSets, _minWeight, _exerciseSelectedIndex, _muscleGroupSelectedIndex;
 
-    private ObservableCollection<Exercises> _exerciseList, _chestList, _shouldersList, _tricepsList, _bicepsList, _backList, _coreList, _legsList, _cardioList;
+    private ObservableCollection<Exercises>? _exerciseList;
 
-    private string _exerciseName, _imageSelected, _muscleGroupSelected, _chestSelected, _shouldersSelected, _tricepsSelected, _bicepsSelected, _backSelected, _coreSelected, _legsSelected, _cardioSelected;
+    private string? _exerciseName;
 
     private Exercises _exerciseSelected;
     private ObservableCollection<string> _imageList, _muscleGroupList;
+    private string _imageSelected;
+    private string? _muscleGroupSelected;
 
     public EditDietVM() {
         MuscleGroupList = [
@@ -228,7 +233,7 @@ public class EditDietVM : BaseViewModel {
 
     #region Fields
 
-    public ObservableCollection<Exercises> Exercises {
+    public ObservableCollection<Exercises>? Exercises {
         get => _exerciseList;
         set {
             _exerciseList = value;
@@ -244,7 +249,7 @@ public class EditDietVM : BaseViewModel {
         }
     }
 
-    public string MuscleGroupSelected {
+    public string? MuscleGroupSelected {
         get => _muscleGroupSelected;
         set {
             _muscleGroupSelected = value;
@@ -260,7 +265,7 @@ public class EditDietVM : BaseViewModel {
         }
     }
 
-    public string ExerciseName {
+    public string? ExerciseName {
         get => _exerciseName;
         set {
             _exerciseName = value;
@@ -308,7 +313,7 @@ public class EditDietVM : BaseViewModel {
         }
     }
 
-    public ObservableCollection<Exercises> ExerciseList {
+    public ObservableCollection<Exercises>? ExerciseList {
         get => _exerciseList;
         set {
             _exerciseList = value;

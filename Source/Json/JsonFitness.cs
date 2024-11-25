@@ -4,7 +4,7 @@ namespace HomeControl.Source.Json;
 
 public class JsonFitness {
     public ObservableCollection<FitnessTracker> FitnessTracker { get; set; }
-    public ObservableCollection<Exercises> Exercises { get; set; }
+    public ObservableCollection<Exercises>? Exercises { get; set; }
     public ObservableCollection<ExerciseListTable> ExerciseListTable { get; set; }
     public ObservableCollection<MealListTable> MealListTable { get; set; }
     public ObservableCollection<Meals> Meals { get; set; }
@@ -18,8 +18,8 @@ public class ExerciseListTable {
 
 public class Exercises {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string MuscleGroup { get; set; }
+    public string? Name { get; set; }
+    public string? MuscleGroup { get; set; }
     public int MinReps { get; set; }
     public int MinSets { get; set; }
     public int MinWeight { get; set; }

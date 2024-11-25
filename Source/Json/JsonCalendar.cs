@@ -3,18 +3,14 @@
 namespace HomeControl.Source.Json;
 
 public class JsonCalendar {
-    public ObservableCollection<CalendarDates> DatesList { get; set; }
+    public ObservableCollection<CalendarEvents> EventsList { get; set; }
     public ObservableCollection<CalendarEventsRecurring> EventsListRecurring { get; set; }
 }
 
-public class CalendarDates {
-    /* Date in format: yyyy-MM-dd */
-    public string Date { get; set; }
-    public ObservableCollection<CalendarEvents> EventsList { get; set; }
-}
-
 public class CalendarEvents {
+    public int DatabaseID { get; set; }
     public string EventName { get; set; }
+    public DateTime Date { get; set; }
     public string StartTime { get; set; }
     public string EndTime { get; set; }
     public string Description { get; set; }

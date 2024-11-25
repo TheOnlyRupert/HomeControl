@@ -378,6 +378,31 @@ public class MainWindowVM : BaseViewModel {
 
                         userIndex++;
                     }
+
+                    reader.Close();
+
+                    /* Calendar */
+                    ReferenceValues.JsonCalendarMaster?.EventsList.Clear();
+
+                    string eventsQuery = "SELECT * FROM calendar_events;";
+                    using MySqlCommand eventsCommand = new(eventsQuery, connection);
+                    using MySqlDataReader? reader2 = eventsCommand.ExecuteReader();
+                    while (reader2.Read()) {
+                        CalendarEvents calendarEvent = new() {
+                            DatabaseID = reader2.GetInt32("id"),
+                            EventName = reader2.GetString("event_name"),
+                            Date = reader2.GetDateTime("event_date"),
+                            StartTime = reader2.GetString("start_time"),
+                            EndTime = reader2.GetString("end_time"),
+                            Description = reader2.GetString("description"),
+                            Location = reader2.GetString("location"),
+                            UserId = reader2.GetInt32("user_id"),
+                            Priority = reader2.GetInt32("priority")
+                        };
+                        ReferenceValues.JsonCalendarMaster?.EventsList.Add(calendarEvent);
+                    }
+
+                    reader2.Close();
                 }
 
                 _simpleMessenger.PushMessage("DatabaseUpdated", null);
