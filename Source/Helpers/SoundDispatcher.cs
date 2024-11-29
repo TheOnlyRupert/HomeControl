@@ -27,10 +27,10 @@ public abstract class SoundDispatcher {
                     memoryStream.Dispose();
                 };
             } catch (Exception ex) {
-                Console.WriteLine($"Error during playback: {ex.Message}");
+                FileHelpers.LogDebugMessage("WARN", "SoundDispatcher.PlaySound", $"An error occurred while playing sound:\n{ex.Message}");
             }
         } else {
-            Console.WriteLine($"Sound resource not found: {fullResourceName}");
+            FileHelpers.LogDebugMessage("WARN", "SoundDispatcher.PlaySound", $"Sound Resource not found: {fullResourceName}");
         }
     }
 }

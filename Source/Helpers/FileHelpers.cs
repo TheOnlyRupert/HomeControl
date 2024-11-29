@@ -1,23 +1,21 @@
 ﻿using System.IO;
-using System.Text.Json;
-using HomeControl.Source.Json;
+using MySql.Data.MySqlClient;
 
 namespace HomeControl.Source.Helpers;
 
 public static class FileHelpers {
-    public static string LoadFileText(string fileName, bool isDocumentsFolder) {
+    public static string? LoadFileText(string fileName, bool isDocumentsFolder) {
         string filePath = GetFilePath(fileName, isDocumentsFolder);
 
         try {
             if (!File.Exists(filePath)) {
-                LogWarning($"File not found: {filePath}");
+                LogDebugMessage("WARN", "FileHelpers.LoadFileText", $"File not found: {filePath}");
                 return null;
             }
 
-            // Read all text at once for simplicity
             return File.ReadAllText(filePath);
         } catch (Exception e) {
-            LogWarning($"Error reading file: {filePath}\n{e}");
+            LogDebugMessage("WARN", "FileHelpers.LoadFileText", $"Error loading file: {filePath}\n{e}");
             return null;
         }
     }
@@ -26,10 +24,9 @@ public static class FileHelpers {
         string filePath = GetFilePath(fileName, isDocumentsFolder);
 
         try {
-            // Write all text at once
             File.WriteAllText(filePath, fileText);
         } catch (Exception e) {
-            LogWarning($"Error saving file: {filePath}\n{e}");
+            LogDebugMessage("WARN", "FileHelpers.SaveFileText", $"Error saving file: {filePath}\n{e}");
         }
     }
 
@@ -41,20 +38,24 @@ public static class FileHelpers {
         return Path.Combine(baseDirectory, $"{fileName}.json");
     }
 
-    private static void LogWarning(string message) {
-        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-            Date = DateTime.Now,
-            Level = "WARN",
-            Module = nameof(FileHelpers),
-            Description = message
-        });
+    public static void LogDebugMessage(string logLevel, string module, string message) {
+        using MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString);
+        const string query = "INSERT INTO debug_log (log_level, module, message) VALUES (@logLevel, @module, @message)";
 
-        // Save updated debug log
         try {
-            string debugFilePath = Path.Combine(ReferenceValues.DocumentsDirectory, "debug.json");
-            File.WriteAllText(debugFilePath, JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster));
-        } catch {
-            // Fail silently if the debug log cannot be saved
+            connection.Open();
+
+            using (MySqlCommand command = new(query, connection)) {
+                command.Parameters.AddWithValue("@logLevel", logLevel);
+                command.Parameters.AddWithValue("@module", module);
+                command.Parameters.AddWithValue("@message", message);
+
+                command.ExecuteNonQuery();
+            }
+
+            connection.Close();
+        } catch (Exception) {
+            //todo: this
         }
     }
 }

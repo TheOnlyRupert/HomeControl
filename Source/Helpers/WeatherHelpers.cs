@@ -164,8 +164,8 @@ public static class WeatherHelpers {
     }
 
     public static string?[] RegexWeatherForecast(string? input) {
-        return input.Split(new[] {
+        return input.Split([
             " then "
-        }, StringSplitOptions.None);
+        ], StringSplitOptions.None);
     }
 }

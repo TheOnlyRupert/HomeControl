@@ -177,6 +177,40 @@
                 <Style
                     TargetType="ListViewItem">
                     <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Level}"
+                            Value="INFO">
+                            <Setter
+                                Property="Foreground"
+                                Value="White" />
+                            <Setter
+                                Property="Focusable"
+                                Value="False" />
+                        </DataTrigger>
+
+                        <DataTrigger
+                            Binding="{Binding Level}"
+                            Value="WARN">
+                            <Setter
+                                Property="Foreground"
+                                Value="Yellow" />
+                            <Setter
+                                Property="Focusable"
+                                Value="False" />
+                        </DataTrigger>
+
+                        <DataTrigger
+                            Binding="{Binding Level}"
+                            Value="ERROR">
+                            <Setter
+                                Property="Foreground"
+                                Value="Red" />
+                            <Setter
+                                Property="Focusable"
+                                Value="False" />
+                        </DataTrigger>
+
+
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition
@@ -190,9 +224,6 @@
                                 <Setter
                                     Property="BorderBrush"
                                     Value="Black" />
-                                <Setter
-                                    Property="Foreground"
-                                    Value="White" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <MultiTrigger>
@@ -208,9 +239,6 @@
                                 <Setter
                                     Property="BorderBrush"
                                     Value="Black" />
-                                <Setter
-                                    Property="Foreground"
-                                    Value="White" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </Style.Triggers>

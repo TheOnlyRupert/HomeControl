@@ -281,7 +281,7 @@ public class EditCalendarVM : BaseViewModel {
                 EndTimeText ??= "";
                 LocationText ??= "";
                 LocationText ??= "";
-                
+
                 EventList.Add(new CalendarEvents {
                     EventName = EventText,
                     Description = DescriptionText,
@@ -390,7 +390,7 @@ public class EditCalendarVM : BaseViewModel {
                         } catch (Exception) {
                             //todo: this
                         }
-                        
+
                         SoundDispatcher.PlaySound("scribble2");
                         EventText = "";
                         DescriptionText = "";

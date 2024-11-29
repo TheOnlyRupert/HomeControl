@@ -125,7 +125,7 @@ public class CalendarVM : BaseViewModel {
             break;
         case "DatabaseUpdated":
             PopulateCalendar(calendarDate);
-            
+
             break;
         }
     }

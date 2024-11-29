@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -28,9 +29,14 @@ public class MainWindowVM : BaseViewModel {
     private bool _changeDate, _internetMessage, _isChecking;
     private DateTime _currentDate;
     private string _iconImage;
+    private MySqlConnection _mySqlConnection;
     private int _trashInt, _hourInt, _previousRowCount, _currentRowCount;
 
     public MainWindowVM() {
+        ReferenceValues.JsonDebugMaster = new JsonDebug {
+            DebugBlockList = []
+        };
+
         IconImage = "../../Resources/Images/icons/behavior.png";
         _simpleMessenger = CrossViewMessenger.Instance;
         _currentDate = DateTime.Now;
@@ -47,17 +53,6 @@ public class MainWindowVM : BaseViewModel {
             }
         } catch (Exception) {
             ReferenceValues.AppDirectory = Environment.CurrentDirectory;
-        }
-
-        /* Get Debug (MAKE SURE THIS IS FIRST!) */
-        try {
-            ReferenceValues.JsonDebugMaster = JsonSerializer.Deserialize<JsonDebug>(FileHelpers.LoadFileText("debug", true));
-        } catch (Exception) {
-            ReferenceValues.JsonDebugMaster = new JsonDebug {
-                DebugBlockList = []
-            };
-
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
         }
 
         /* Get Settings */
@@ -127,6 +122,7 @@ public class MainWindowVM : BaseViewModel {
         ReferenceValues.DatabaseConnectionString = @"Server=" + ReferenceValues.JsonSettingsMaster?.DatabaseHost + @";Database=HomeControl;Uid=" + ReferenceValues.JsonSettingsMaster.DatabaseUsername +
                                                    @";Pwd=" +
                                                    ReferenceValues.JsonSettingsMaster.DatabasePassword;
+        OpenDatabaseConnection();
 
         /* GameStats File */
         try {
@@ -186,6 +182,11 @@ public class MainWindowVM : BaseViewModel {
     }
 
     #endregion
+
+    private void OpenDatabaseConnection() {
+        _mySqlConnection = new MySqlConnection(ReferenceValues.DatabaseConnectionString);
+        _mySqlConnection.Open();
+    }
 
     private void ButtonCommandLogic(object param) {
         if (!ReferenceValues.LockUi) {
@@ -318,7 +319,6 @@ public class MainWindowVM : BaseViewModel {
             }
         }
 
-        /* Check Database Changes */
         await CheckForDatabaseChanges();
 
         _simpleMessenger.PushMessage("Refresh", null);
@@ -329,86 +329,109 @@ public class MainWindowVM : BaseViewModel {
             return Task.CompletedTask;
         }
 
+        if (_mySqlConnection.State != ConnectionState.Open) {
+            if (_mySqlConnection.State == ConnectionState.Closed) {
+                OpenDatabaseConnection();
+            }
+
+            return Task.CompletedTask;
+        }
+
         _isChecking = true;
 
         try {
             const string query = "SELECT COUNT(*) FROM notifications";
 
-            // Open the connection and execute the query
-            using (MySqlConnection connection = new(ReferenceValues.DatabaseConnectionString)) {
-                connection.Open();
-                using (MySqlCommand command = new(query, connection)) {
-                    _currentRowCount = Convert.ToInt32(command.ExecuteScalar());
-                }
-
-
-                if (_currentRowCount > _previousRowCount) {
-                    Console.WriteLine("Database has been updated. Program will update with new data.");
-                    _previousRowCount = _currentRowCount;
-
-                    /* Behavior */
-                    const string behaviorQuery = "SELECT stars, strikes FROM behavior ORDER BY id ASC";
-                    using MySqlCommand command = new(behaviorQuery, connection);
-                    using MySqlDataReader reader = command.ExecuteReader();
-                    int userIndex = 1;
-
-                    while (reader.Read()) {
-                        switch (userIndex) {
-                        case 1:
-                            ReferenceValues.JsonBehaviorMaster.User1Stars = reader.GetByte(0);
-                            ReferenceValues.JsonBehaviorMaster.User1Strikes = reader.GetByte(1);
-                            break;
-                        case 2:
-                            ReferenceValues.JsonBehaviorMaster.User2Stars = reader.GetByte(0);
-                            ReferenceValues.JsonBehaviorMaster.User2Strikes = reader.GetByte(1);
-                            break;
-                        case 3:
-                            ReferenceValues.JsonBehaviorMaster.User3Stars = reader.GetByte(0);
-                            ReferenceValues.JsonBehaviorMaster.User3Strikes = reader.GetByte(1);
-                            break;
-                        case 4:
-                            ReferenceValues.JsonBehaviorMaster.User4Stars = reader.GetByte(0);
-                            ReferenceValues.JsonBehaviorMaster.User4Strikes = reader.GetByte(1);
-                            break;
-                        case 5:
-                            ReferenceValues.JsonBehaviorMaster.User5Stars = reader.GetByte(0);
-                            ReferenceValues.JsonBehaviorMaster.User5Strikes = reader.GetByte(1);
-                            break;
-                        }
-
-                        userIndex++;
-                    }
-
-                    reader.Close();
-
-                    /* Calendar */
-                    ReferenceValues.JsonCalendarMaster?.EventsList.Clear();
-
-                    string eventsQuery = "SELECT * FROM calendar_events;";
-                    using MySqlCommand eventsCommand = new(eventsQuery, connection);
-                    using MySqlDataReader? reader2 = eventsCommand.ExecuteReader();
-                    while (reader2.Read()) {
-                        CalendarEvents calendarEvent = new() {
-                            DatabaseID = reader2.GetInt32("id"),
-                            EventName = reader2.GetString("event_name"),
-                            Date = reader2.GetDateTime("event_date"),
-                            StartTime = reader2.GetString("start_time"),
-                            EndTime = reader2.GetString("end_time"),
-                            Description = reader2.GetString("description"),
-                            Location = reader2.GetString("location"),
-                            UserId = reader2.GetInt32("user_id"),
-                            Priority = reader2.GetInt32("priority")
-                        };
-                        ReferenceValues.JsonCalendarMaster?.EventsList.Add(calendarEvent);
-                    }
-
-                    reader2.Close();
-                }
-
-                _simpleMessenger.PushMessage("DatabaseUpdated", null);
+            /* Execute the query if connection is open */
+            using (MySqlCommand command = new(query, _mySqlConnection)) {
+                _currentRowCount = Convert.ToInt32(command.ExecuteScalar());
             }
+
+            if (_currentRowCount > _previousRowCount) {
+                FileHelpers.LogDebugMessage("INFO", "MainWindowVM.CheckForDatabaseChanges", "Database updated. Getting new updates.");
+                _previousRowCount = _currentRowCount;
+
+                /* DebugLog */
+                ReferenceValues.JsonCalendarMaster?.EventsList.Clear();
+
+                string debugQuery = "SELECT * FROM debug_log;";
+                using MySqlCommand debugCommand = new(debugQuery, _mySqlConnection);
+                using MySqlDataReader? reader3 = debugCommand.ExecuteReader();
+                while (reader3.Read()) {
+                    DebugTextBlock calendarEvent = new() {
+                        Id = reader3.GetInt32("id"),
+                        Date = reader3.GetDateTime("log_time").ToLocalTime(),
+                        Level = reader3.GetString("log_level"),
+                        Module = reader3.GetString("module"),
+                        Description = reader3.GetString("message")
+                    };
+                    ReferenceValues.JsonDebugMaster.DebugBlockList?.Add(calendarEvent);
+                }
+
+                reader3.Close();
+
+                /* Behavior */
+                const string behaviorQuery = "SELECT stars, strikes FROM behavior ORDER BY id ASC";
+                using MySqlCommand command = new(behaviorQuery, _mySqlConnection);
+                using MySqlDataReader reader = command.ExecuteReader();
+                int userIndex = 1;
+
+                while (reader.Read()) {
+                    switch (userIndex) {
+                    case 1:
+                        ReferenceValues.JsonBehaviorMaster.User1Stars = reader.GetByte(0);
+                        ReferenceValues.JsonBehaviorMaster.User1Strikes = reader.GetByte(1);
+                        break;
+                    case 2:
+                        ReferenceValues.JsonBehaviorMaster.User2Stars = reader.GetByte(0);
+                        ReferenceValues.JsonBehaviorMaster.User2Strikes = reader.GetByte(1);
+                        break;
+                    case 3:
+                        ReferenceValues.JsonBehaviorMaster.User3Stars = reader.GetByte(0);
+                        ReferenceValues.JsonBehaviorMaster.User3Strikes = reader.GetByte(1);
+                        break;
+                    case 4:
+                        ReferenceValues.JsonBehaviorMaster.User4Stars = reader.GetByte(0);
+                        ReferenceValues.JsonBehaviorMaster.User4Strikes = reader.GetByte(1);
+                        break;
+                    case 5:
+                        ReferenceValues.JsonBehaviorMaster.User5Stars = reader.GetByte(0);
+                        ReferenceValues.JsonBehaviorMaster.User5Strikes = reader.GetByte(1);
+                        break;
+                    }
+
+                    userIndex++;
+                }
+
+                reader.Close();
+
+                /* Calendar */
+                ReferenceValues.JsonCalendarMaster?.EventsList.Clear();
+
+                string eventsQuery = "SELECT * FROM calendar_events;";
+                using MySqlCommand eventsCommand = new(eventsQuery, _mySqlConnection);
+                using MySqlDataReader? reader2 = eventsCommand.ExecuteReader();
+                while (reader2.Read()) {
+                    CalendarEvents calendarEvent = new() {
+                        DatabaseID = reader2.GetInt32("id"),
+                        EventName = reader2.GetString("event_name"),
+                        Date = reader2.GetDateTime("event_date"),
+                        StartTime = reader2.GetString("start_time"),
+                        EndTime = reader2.GetString("end_time"),
+                        Description = reader2.GetString("description"),
+                        Location = reader2.GetString("location"),
+                        UserId = reader2.GetInt32("user_id"),
+                        Priority = reader2.GetInt32("priority")
+                    };
+                    ReferenceValues.JsonCalendarMaster?.EventsList.Add(calendarEvent);
+                }
+
+                reader2.Close();
+            }
+
+            _simpleMessenger.PushMessage("DatabaseUpdated", null);
         } catch (Exception ex) {
-            Console.WriteLine($"Error polling notifications: {ex}");
+            FileHelpers.LogDebugMessage("ERROR", "MainWindowVM.CheckForDatabaseChanges", $"Error polling notifications: \n{ex}");
         }
         finally {
             _isChecking = false;
@@ -427,24 +450,14 @@ public class MainWindowVM : BaseViewModel {
             Uri api = new("https://api.weather.gov/");
 
             using WebClient client = new();
-            client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster.UserAgent);
+            client.Headers.Add("User-Agent", "Home Control, " + ReferenceValues.JsonSettingsMaster?.UserAgent);
             string apiStatusString = await client.DownloadStringTaskAsync(api);
             ApiStatus? apiStatus = JsonSerializer.Deserialize<ApiStatus>(apiStatusString, options);
 
             if (apiStatus is { status: "OK" }) {
                 ReferenceValues.IsWeatherApiOnline = true;
                 _simpleMessenger.PushMessage("UpdateInternetStatus", null);
-
-                if (_internetMessage) {
-                    ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                        Date = DateTime.Now,
-                        Level = "INFO",
-                        Module = "MainWindowVM",
-                        Description = "Restored Internet Connection"
-                    });
-                    FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
-                }
-
+                FileHelpers.LogDebugMessage("INFO", "MainWindowVM.ApiStatus", "Restored connection to internet");
                 _internetMessage = false;
             } else {
                 LostInternet();
@@ -456,13 +469,8 @@ public class MainWindowVM : BaseViewModel {
 
     private void LostInternet() {
         if (!_internetMessage) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "MainWindowVM",
-                Description = "Lost Internet Connection"
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            FileHelpers.LogDebugMessage("WARN", "MainWindowVM.LostInternet", "Lost connection to internet");
+
             _internetMessage = true;
             ReferenceValues.IsWeatherApiOnline = false;
             _simpleMessenger.PushMessage("UpdateInternetStatus", null);

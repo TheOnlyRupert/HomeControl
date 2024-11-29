@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using HomeControl.Source.Helpers;
 
 namespace HomeControl.Source.Control;
 
@@ -97,8 +97,7 @@ public class GridViewSort {
                 }
             }
         } catch (Exception ex) {
-            // Log exception with more context
-            LogError("Error in ColumnHeader_Click", ex);
+            FileHelpers.LogDebugMessage("ERROR", "GridViewSort.ColumnHeader_Click", $"Error with clicking this item:\n{ex}");
         }
     }
 
@@ -127,12 +126,5 @@ public class GridViewSort {
         if (!string.IsNullOrEmpty(propertyName)) {
             view.SortDescriptions.Add(new SortDescription(propertyName, direction));
         }
-    }
-
-    // Helper method to log errors with additional context
-    private static void LogError(string message, Exception ex) {
-        // Implement proper logging mechanism here
-        // Example: log to a file, or an external logging service
-        Debug.WriteLine($"{message}: {ex.Message}");
     }
 }

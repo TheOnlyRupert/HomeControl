@@ -7,6 +7,7 @@ public class JsonDebug {
 }
 
 public class DebugTextBlock {
+    public int Id { get; set; }
     public DateTime Date { get; set; }
     public string Level { get; set; }
     public string Module { get; set; }

@@ -96,14 +96,8 @@ public class BehaviorVM : BaseViewModel {
             ImageUser4 = new BitmapImage(uri);
             uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user5.png", UriKind.RelativeOrAbsolute);
             ImageUser5 = new BitmapImage(uri);
-        } catch (Exception e) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "BehaviorVM",
-                Description = e.ToString()
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+        } catch (Exception ex) {
+            FileHelpers.LogDebugMessage("WARN", "BehaviorVM.BehaviorVM", $"An error occurred:\n{ex.Message}");
         }
 
         User1BackgroundColor = "Transparent";
@@ -851,16 +845,11 @@ public class BehaviorVM : BaseViewModel {
 
         try {
             FileHelpers.SaveFileText("tasks", JsonSerializer.Serialize(ReferenceValues.JsonTasksMaster), true);
-        } catch (Exception e) {
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "WARN",
-                Module = "BehaviorVM",
-                Description = e.ToString()
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+        } catch (Exception ex) {
+            FileHelpers.LogDebugMessage("WARN", "BehaviorVM.SaveJsons", $"An error occurred:\n{ex.Message}");
         }
     }
+
 
     private void RefreshBehavior() {
         User1Star1 = "";

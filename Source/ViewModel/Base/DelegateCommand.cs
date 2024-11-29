@@ -11,7 +11,7 @@ public class DelegateCommand : ICommand {
         _canExecute = canExecute;
     }
 
-    public event EventHandler CanExecuteChanged;
+    public event EventHandler? CanExecuteChanged;
 
     public void Execute(object parameter) {
         _action(parameter);

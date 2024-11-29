@@ -1,10 +1,8 @@
 ﻿using System.Globalization;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using HomeControl.Source.Helpers;
-using HomeControl.Source.Json;
 using HomeControl.Source.Modules.Behavior;
 using HomeControl.Source.ViewModel.Base;
 using BloodPressure = HomeControl.Source.Modules.BloodPressure;
@@ -64,14 +62,8 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user1.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditBehaviorVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            } catch (Exception ex) {
+                FileHelpers.LogDebugMessage("WARN", "EditBehaviorVM.EditBehaviorVM", $"An error occurred:\n{ex.Message}");
             }
 
             break;
@@ -82,14 +74,8 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user2.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditBehaviorVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            } catch (Exception ex) {
+                FileHelpers.LogDebugMessage("WARN", "EditBehaviorVM.EditBehaviorVM", $"An error occurred:\n{ex.Message}");
             }
 
             break;
@@ -100,14 +86,8 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user3.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditBehaviorVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            } catch (Exception ex) {
+                FileHelpers.LogDebugMessage("WARN", "EditBehaviorVM.EditBehaviorVM", $"An error occurred:\n{ex.Message}");
             }
 
             break;
@@ -118,14 +98,8 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user4.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditBehaviorVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            } catch (Exception ex) {
+                FileHelpers.LogDebugMessage("WARN", "EditBehaviorVM.EditBehaviorVM", $"An error occurred:\n{ex.Message}");
             }
 
             break;
@@ -136,14 +110,8 @@ public class EditBehaviorVM : BaseViewModel {
             try {
                 uri = new Uri(ReferenceValues.DocumentsDirectory + "icons/user5.png", UriKind.RelativeOrAbsolute);
                 ImageUser = new BitmapImage(uri);
-            } catch (Exception e) {
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "WARN",
-                    Module = "EditBehaviorVM",
-                    Description = e.ToString()
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+            } catch (Exception ex) {
+                FileHelpers.LogDebugMessage("WARN", "EditBehaviorVM.EditBehaviorVM", $"An error occurred:\n{ex.Message}");
             }
 
             break;
@@ -474,13 +442,7 @@ public class EditBehaviorVM : BaseViewModel {
                     if (result == MessageBoxResult.Yes) {
                         _strikes++;
                         SoundDispatcher.PlaySound("buzzer");
-                        ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                            Date = DateTime.Now,
-                            Level = "INFO",
-                            Module = "EditBehaviorVM",
-                            Description = "Adding strike to " + ChildName
-                        });
-                        FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                        FileHelpers.LogDebugMessage("INFO", "EditBehaviorVM.ButtonLogic", $"Adding strike to: {ChildName}.");
 
                         if (_strikes == 3) {
                             _stars--;
@@ -498,15 +460,8 @@ public class EditBehaviorVM : BaseViewModel {
         case "add1":
             if (RewardButtonVisibility == "HIDDEN" && _strikes != 3 && _stars < 5) {
                 _stars++;
-
                 SoundDispatcher.PlaySound("yay");
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "INFO",
-                    Module = "EditBehaviorVM",
-                    Description = "Adding star to " + ChildName
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                FileHelpers.LogDebugMessage("INFO", "EditBehaviorVM.ButtonLogic", $"Adding star to: {ChildName}.");
             } else {
                 SoundDispatcher.PlaySound("unable");
             }
@@ -516,29 +471,17 @@ public class EditBehaviorVM : BaseViewModel {
             if (RewardButtonVisibility == "HIDDEN" && _strikes != 3 && _stars > 0) {
                 _stars--;
                 SoundDispatcher.PlaySound("aww");
-                ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                    Date = DateTime.Now,
-                    Level = "INFO",
-                    Module = "EditBehaviorVM",
-                    Description = "Removing star from " + ChildName
-                });
-                FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
+                FileHelpers.LogDebugMessage("INFO", "EditBehaviorVM.ButtonLogic", $"Removing star from: {ChildName}.");
             } else {
                 SoundDispatcher.PlaySound("unable");
             }
 
             break;
         case "reward":
-            ReferenceValues.JsonDebugMaster.DebugBlockList.Add(new DebugTextBlock {
-                Date = DateTime.Now,
-                Level = "INFO",
-                Module = "EditBehaviorVM",
-                Description = ChildName + " claimed their reward!"
-            });
-            FileHelpers.SaveFileText("debug", JsonSerializer.Serialize(ReferenceValues.JsonDebugMaster), true);
             _stars = 0;
             RewardButtonVisibility = "HIDDEN";
             SoundDispatcher.PlaySound("reward");
+            FileHelpers.LogDebugMessage("INFO", "EditBehaviorVM.ButtonLogic", $"{ChildName} claimed their reward.");
 
             break;
         case "daily":
